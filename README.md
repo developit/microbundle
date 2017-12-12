@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://i.imgur.com/MNIzAyI.png" width="300" height="300" alt="microbundle">
+  <img src="https://cdn.rawgit.com/developit/de05e4e17963ce2a714c61ccc4fd3d97/raw/7e5e606ee3a781ef393bf4e070a57547c2ccb3f6/microbundle.svg" width="300" height="300" alt="microbundle">
   <br>
   <a href="https://www.npmjs.org/package/microbundle"><img src="https://img.shields.io/npm/v/microbundle.svg?style=flat" alt="npm"></a> <a href="https://travis-ci.org/developit/microbundle"><img src="https://travis-ci.org/developit/microbundle.svg?branch=master" alt="travis"></a>
 </p>
