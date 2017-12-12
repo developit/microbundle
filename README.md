@@ -8,6 +8,8 @@
 
 The **zero-configuration** bundler for _tiny modules_, powered by [Rollup].
 
+<img src="https://i.imgur.com/qOdddQJ.gif" width="334" height="96">
+
 ## ✨ Features:
 
 - Bundles your library using nothing but a `package.json`
