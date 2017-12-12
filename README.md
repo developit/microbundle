@@ -89,5 +89,5 @@ MIT
 
 
 [Rollup]: https://github.com/rollup/rollup
-[Bublé]: https://gitlab.com/Rich-Harris/buble
+[Bublé]: https://github.com/Rich-Harris/buble
 [Nodent]: https://github.com/MatAtBread/nodent-compiler
