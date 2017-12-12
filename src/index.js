@@ -116,7 +116,7 @@ function createConfig(options, entry, format) {
 	let { pkg } = options;
 
 	let external = ['dns', 'fs', 'path', 'url'].concat(
-		Object.keys(pkg.peerDepdendencies || {}),
+		Object.keys(pkg.peerDependencies || {}),
 		options.entries.filter( e => e!==entry )
 	);
 
