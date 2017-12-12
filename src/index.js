@@ -13,6 +13,7 @@ import replace from 'rollup-plugin-post-replace';
 import es3 from 'rollup-plugin-es3';
 import gzipSize from 'gzip-size';
 import prettyBytes from 'pretty-bytes';
+import shebangPlugin from 'rollup-plugin-preserve-shebang';
 
 const readFile = promisify(fs.readFile);
 const stat = promisify(fs.stat);
@@ -203,7 +204,8 @@ function createConfig(options, entry, format) {
 					ongenerate({ bundle }, { code }) {
 						config._code = bundle._code = code;
 					}
-				}
+				},
+				shebangPlugin()
 			].filter(Boolean)
 		},
 
