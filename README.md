@@ -48,6 +48,6 @@ Options:
                               strict"                           [default: false]
 ```
 
-## Liccense
+## License
 
 MIT
