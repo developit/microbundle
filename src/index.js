@@ -108,7 +108,7 @@ export default async function microbundle(options) {
 		return await getSizeInfo(bundle._code, outputOptions.file);
 	}));
 
-	return chalk.blue(`Build output to ${relative(cwd, dirname(options.output))}:`) + '\n   ' + out.join('\n   ');
+	return chalk.blue(`Build output to ${relative(cwd, dirname(options.output)) || '.'}:`) + '\n   ' + out.join('\n   ');
 }
 
 
