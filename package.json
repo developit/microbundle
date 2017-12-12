@@ -16,12 +16,14 @@
     "test": "npm run -s lint && npm run -s build && npm run -s test:build",
     "release": "npm run -s prepare && npm test && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish"
   },
+  "repo": "developit/microbundle",
   "eslintConfig": {
     "extends": "eslint-config-developit"
   },
   "keywords": [
     "bundle",
-    "rollup"
+    "rollup",
+    "micro library"
   ],
   "files": [
     "src",
