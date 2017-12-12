@@ -164,7 +164,7 @@ function createConfig(options, entry, format) {
 			input: entry,
 			external,
 			plugins: [
-				flow({all: true}),
+				flow({ all: true }),
 				nodent({
 					exclude: 'node_modules/**',
 					noRuntime: true,
