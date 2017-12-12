@@ -14,6 +14,7 @@ import es3 from 'rollup-plugin-es3';
 import gzipSize from 'gzip-size';
 import prettyBytes from 'pretty-bytes';
 import shebangPlugin from 'rollup-plugin-preserve-shebang';
+import flow from 'rollup-plugin-flow';
 
 const readFile = promisify(fs.readFile);
 const stat = promisify(fs.stat);
@@ -43,7 +44,7 @@ export default async function microbundle(options) {
 	options.input = [].concat(
 		options.entries && options.entries.length ? options.entries : options.pkg.source || (await isDir(resolve(cwd, 'src')) && 'src/index.js') || (await isFile(resolve(cwd, 'index.js')) && 'index.js') || options.pkg.module
 	).map( file => resolve(cwd, file) );
-	
+
 	let main = resolve(cwd, options.output || options.pkg.main || 'dist');
 	if (!main.match(/\.[a-z]+$/) || await isDir(main)) {
 		main = resolve(main, `${options.pkg.name}.js`);
@@ -163,6 +164,7 @@ function createConfig(options, entry, format) {
 			input: entry,
 			external,
 			plugins: [
+				flow({all: true}),
 				nodent({
 					exclude: 'node_modules/**',
 					noRuntime: true,
