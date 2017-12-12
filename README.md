@@ -6,17 +6,21 @@
 
 # Microbundle
 
-A **zero-configuration** bundler for _tiny modules_, powered by [Rollup].
+The **zero-configuration** bundler for _tiny modules_, powered by [Rollup].
+
+## ✨ Features:
 
 - Bundles your library using nothing but a `package.json`
-- Supports multiple entry modules (`cli.js` + `index.js`, etc)
-- Creates multiple output formats for each entry (CommonJS, UMD & ESM)
+- Support for ESnext & async/await _(via [Bublé] & [Nodent])_
+- Supports multiple entry modules _(`cli.js` + `index.js`, etc)_
+- Creates multiple output formats for each entry _(<abbr title="CommonJS (node)">CJS</abbr>, <abbr title="Universal Module Definition">UMD</abbr> & <abbr title="ECMAScript Modules">ESM</abbr>)_
+- Built-in Uglify compression & gzipped bundle size tracking
 
-## Installation
+## 🔧 Installation
 
 `npm i -D microbundle`
 
-... then add it as an npm script:
+... then add the scripts to your `package.json`:
 
 ```js
 {
@@ -27,8 +31,10 @@ A **zero-configuration** bundler for _tiny modules_, powered by [Rollup].
 }
 ```
 
-## Usage
 
+## 📦 Usage
+
+Microbundle includes two commands - `build` (the default) and `watch`. Neither require any options, but you can tailor things to suit your needs a bit if you like.
 
 ### `microbundle` / `microbundle build`
 
@@ -37,8 +43,9 @@ By default, microbundle will infer the location of your source entry file
 
 ### `microbundle watch`
 
-Watches source files and rebuilds on any change.
+Just like `microbundle build`, but watches your source files and rebuilds on any change.
 
+### All CLI Options
 
 ```
 microbundle [entries..]
@@ -65,9 +72,20 @@ Options:
                    strict"                           [default: false]
 ```
 
-## License
+
+## 🛣 Roadmap
+
+Here's what's coming up for Microbundle:
+
+- [TypeScript support](https://github.com/developit/microbundle/issues/5)
+- [Flowtype support](https://github.com/developit/microbundle/issues/5#issuecomment-351075881)
+
+
+## 🥂 License
 
 MIT
 
 
 [Rollup]: https://github.com/rollup/rollup
+[Bublé]: https://gitlab.com/Rich-Harris/buble
+[Nodent]: https://github.com/MatAtBread/nodent-compiler
