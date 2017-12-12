@@ -44,6 +44,7 @@
     "rollup-plugin-bundle-size": "^1.0.1",
     "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-es3": "^1.1.0",
+    "rollup-plugin-flow": "^1.1.1",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-nodent": "^0.1.3",
     "rollup-plugin-post-replace": "^1.0.0",
