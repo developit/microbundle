@@ -141,16 +141,20 @@ function createConfig(options, entry, format) {
 		return globals;
 	}, {});
 
+	function replaceName(filename, name) {
+		return resolve(dirname(filename), name + basename(filename).replace(/^[^.]+/, ''));
+	}
+
 	let mainNoExtension = options.output;
 	if (options.multipleEntries) {
-		let name = entry.match(/\/index\.js$/) ? mainNoExtension : entry;
+		let name = entry.match(/\/index(\.(umd|cjs|es|m))?\.js$/) ? mainNoExtension : entry;
 		mainNoExtension = resolve(dirname(mainNoExtension), basename(name));
 	}
 	mainNoExtension = mainNoExtension.replace(/(\.(umd|cjs|es|m))?\.js$/, '');
 
-	let moduleMain = pkg.module && !pkg.module.match(/src\//) ? pkg.module : pkg['jsnext:main'] || `${mainNoExtension}.m.js`;
-	let cjsMain = pkg['cjs:main'] || `${mainNoExtension}.js`;
-	let umdMain = pkg['umd:main'] || `${mainNoExtension}.umd.js`;
+	let moduleMain = replaceName(pkg.module && !pkg.module.match(/src\//) ? pkg.module : pkg['jsnext:main'] || 'x.m.js', mainNoExtension);
+	let cjsMain = replaceName(pkg['cjs:main'] || 'x.js', mainNoExtension);
+	let umdMain = replaceName(pkg['umd:main'] || 'x.umd.js', mainNoExtension);
 
 	let rollupName = safeVariableName(basename(entry).replace(/\.js$/, ''));
 
