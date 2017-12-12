@@ -23,6 +23,7 @@ yargs
 	})
 	.option('format', {
 		type: 'string',
+		alias: 'f',
 		description: 'Only build specified formats',
 		defaultDescription: 'es,cjs,umd'
 	})
