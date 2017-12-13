@@ -35,12 +35,17 @@ export default async function microbundle(options) {
 		options.pkg = JSON.parse(await readFile(resolve(cwd, 'package.json'), 'utf8'));
 	}
 	catch (err) {
-		console.warn(`Unable to find package.json:\n  ${err.message}`);
-		options.pkg = {
-			name: basename(options.cwd)
-		};
+		console.warn(chalk.yellow(`${chalk.yellow.inverse('WARN')} no package.json found.`));
+		let msg = String(err.message || err);
+		if (!msg.match(/ENOENT/)) console.warn(`  ${chalk.red.dim(msg)}`);
+		options.pkg = {};
 	}
 
+	if (!options.pkg.name) {
+		options.pkg.name = basename(options.cwd);
+		console.warn(chalk.yellow(`${chalk.yellow.inverse('WARN')} missing package.json "name" field. Assuming "${options.pkg.name}".`));
+	}
+	
 	options.input = [].concat(
 		options.entries && options.entries.length ? options.entries : options.pkg.source || (await isDir(resolve(cwd, 'src')) && 'src/index.js') || (await isFile(resolve(cwd, 'index.js')) && 'index.js') || options.pkg.module
 	).map( file => resolve(cwd, file) );
