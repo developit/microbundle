@@ -1,12 +1,4 @@
-interface Driveable {
-	drive(distance: number): boolean;
-}
-
-export default class Car implements Driveable {
-	public drive(distance: number): boolean {
-		return true;
-	}
-}
+import Car from './car.ts';
 
 let ferrari = new Car();
 ferrari.drive(100);
