@@ -45,7 +45,7 @@ export default async function microbundle(options) {
 		options.pkg.name = basename(options.cwd);
 		console.warn(chalk.yellow(`${chalk.yellow.inverse('WARN')} missing package.json "name" field. Assuming "${options.pkg.name}".`));
 	}
-	
+
 	options.input = [].concat(
 		options.entries && options.entries.length ? options.entries : options.pkg.source || (await isDir(resolve(cwd, 'src')) && 'src/index.js') || (await isFile(resolve(cwd, 'index.js')) && 'index.js') || options.pkg.module
 	).map( file => resolve(cwd, file) );
@@ -176,6 +176,11 @@ function createConfig(options, entry, format) {
 					promises: true,
 					transformations: {
 						forOf: false
+					},
+					parser: {
+						plugins: {
+							jsx: require('acorn-jsx')
+						}
 					}
 				}),
 				buble({
