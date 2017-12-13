@@ -36,6 +36,10 @@ yargs
 		description: 'Enforce undefined global context and add "use strict"',
 		default: false
 	})
+	.option('name', {
+		description: 'Specify name exposed in UMD builds',
+		default: false
+	})
 	.command(
 		['build [entries..]', '$0 [entries..]'],
 		'Build once and exit',
