@@ -9,7 +9,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import buble from 'rollup-plugin-buble';
 import uglify from 'rollup-plugin-uglify';
-import replace from 'rollup-plugin-post-replace';
+// import replace from 'rollup-plugin-post-replace';
 import es3 from 'rollup-plugin-es3';
 import gzipSize from 'gzip-size';
 import prettyBytes from 'pretty-bytes';
@@ -162,7 +162,7 @@ function createConfig(options, entry, format) {
 	let cjsMain = replaceName(pkg['cjs:main'] || 'x.js', mainNoExtension);
 	let umdMain = replaceName(pkg['umd:main'] || 'x.umd.js', mainNoExtension);
 
-	let rollupName = safeVariableName(basename(entry).replace(/\.js$/, ''));
+	// let rollupName = safeVariableName(basename(entry).replace(/\.js$/, ''));
 
 	let config = {
 		inputOptions: {
@@ -192,19 +192,20 @@ function createConfig(options, entry, format) {
 					jsnext: true
 				}),
 				es3(),
-				format==='cjs' && replace({
-					[`module.exports = ${rollupName};`]: '',
-					[`var ${rollupName} =`]: 'module.exports ='
-				}),
+				// We should upstream this to rollup
+				// format==='cjs' && replace({
+				// 	[`module.exports = ${rollupName};`]: '',
+				// 	[`var ${rollupName} =`]: 'module.exports ='
+				// }),
 				// This works for the general case, but could cause nasty scope bugs.
 				// format==='umd' && replace({
 				// 	[`return ${rollupName};`]: '',
 				// 	[`var ${rollupName} =`]: 'return'
 				// }),
-				format==='es' && replace({
-					[`export default ${rollupName};`]: '',
-					[`var ${rollupName} =`]: 'export default'
-				}),
+				// format==='es' && replace({
+				// 	[`export default ${rollupName};`]: '',
+				// 	[`var ${rollupName} =`]: 'export default'
+				// }),
 				format!=='es' && options.compress!==false && uglify({
 					output: { comments: false },
 					mangle: {
