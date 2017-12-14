@@ -37,6 +37,7 @@
     "babel-polyfill": "^6.26.0",
     "chalk": "^2.3.0",
     "es6-promisify": "^5.0.0",
+    "glob": "^7.1.2",
     "gzip-size": "^4.1.0",
     "pretty-bytes": "^4.0.2",
     "regenerator-runtime": "^0.11.1",
