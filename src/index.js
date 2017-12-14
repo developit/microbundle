@@ -195,7 +195,7 @@ function createConfig(options, entry, format) {
 					include: 'node_modules/**'
 				}),
 				useNodeResolve && nodeResolve({
-					modulesOnly: true,
+					module: true,
 					jsnext: true
 				}),
 				es3(),
