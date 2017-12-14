@@ -3,6 +3,7 @@ import { resolve, relative, dirname, basename } from 'path';
 import chalk from 'chalk';
 import { map, series } from 'asyncro';
 import promisify from 'es6-promisify';
+import glob from 'glob';
 import { rollup, watch } from 'rollup';
 import nodent from 'rollup-plugin-nodent';
 import commonjs from 'rollup-plugin-commonjs';
@@ -46,9 +47,10 @@ export default async function microbundle(options) {
 		console.warn(chalk.yellow(`${chalk.yellow.inverse('WARN')} missing package.json "name" field. Assuming "${options.pkg.name}".`));
 	}
 
-	options.input = [].concat(
+	options.input = [];
+	[].concat(
 		options.entries && options.entries.length ? options.entries : options.pkg.source || (await isDir(resolve(cwd, 'src')) && 'src/index.js') || (await isFile(resolve(cwd, 'index.js')) && 'index.js') || options.pkg.module
-	).map( file => resolve(cwd, file) );
+	).map( file => glob.sync(resolve(cwd, file)) ).forEach( file => options.input.push(...file) );
 
 	let main = resolve(cwd, options.output || options.pkg.main || 'dist');
 	if (!main.match(/\.[a-z]+$/) || await isDir(main)) {
@@ -153,7 +155,7 @@ function createConfig(options, entry, format) {
 
 	let mainNoExtension = options.output;
 	if (options.multipleEntries) {
-		let name = entry.match(/\/index(\.(umd|cjs|es|m))?\.js$/) ? mainNoExtension : entry;
+		let name = entry.match(/(\\|\/)index(\.(umd|cjs|es|m))?\.js$/) ? mainNoExtension : entry;
 		mainNoExtension = resolve(dirname(mainNoExtension), basename(name));
 	}
 	mainNoExtension = mainNoExtension.replace(/(\.(umd|cjs|es|m))?\.js$/, '');
