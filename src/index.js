@@ -16,12 +16,13 @@ import gzipSize from 'gzip-size';
 import prettyBytes from 'pretty-bytes';
 import shebangPlugin from 'rollup-plugin-preserve-shebang';
 import flow from 'rollup-plugin-flow';
+import camelCase from 'camelcase';
 
 const readFile = promisify(fs.readFile);
 const stat = promisify(fs.stat);
 const isDir = name => stat(name).then( stats => stats.isDirectory() ).catch( () => false );
 const isFile = name => stat(name).then( stats => stats.isFile() ).catch( () => false );
-const safeVariableName = name => name.replace(/(?:^[^a-z$_]|([^a-z0-9_$]+))/g, '_');
+const safeVariableName = name => camelCase(name.toLowerCase().replace(/((^[^a-zA-Z]+)|[^\w.-])|([^a-zA-Z0-9]+$)/g, ''));
 
 const FORMATS = ['es', 'cjs', 'umd'];
 
