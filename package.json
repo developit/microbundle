@@ -34,6 +34,7 @@
   "dependencies": {
     "acorn-jsx": "4.1.0",
     "asyncro": "^2.0.1",
+    "autoprefixer": "^7.2.3",
     "babel-polyfill": "^6.26.0",
     "camelcase": "^4.1.0",
     "chalk": "^2.3.0",
@@ -58,7 +59,6 @@
     "yargs": "^10.0.3"
   },
   "devDependencies": {
-    "autoprefixer": "^7.2.3",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "eslint": "^4.13.0",
