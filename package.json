@@ -1,6 +1,6 @@
 {
   "name": "microbundle",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Zero-configuration bundler for tiny JS libs, powered by Rollup.",
   "main": "dist/microbundle.js",
   "source": "src/index.js",
@@ -32,10 +32,13 @@
   "author": "Jason Miller <jason@developit.ca> (http://jasonformat.com)",
   "license": "MIT",
   "dependencies": {
+    "acorn-jsx": "4.1.0",
     "asyncro": "^2.0.1",
     "babel-polyfill": "^6.26.0",
+    "camelcase": "^4.1.0",
     "chalk": "^2.3.0",
     "es6-promisify": "^5.0.0",
+    "glob": "^7.1.2",
     "gzip-size": "^4.1.0",
     "pretty-bytes": "^4.0.2",
     "regenerator-runtime": "^0.11.1",
