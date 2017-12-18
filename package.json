@@ -50,12 +50,14 @@
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-nodent": "^0.1.3",
     "rollup-plugin-post-replace": "^1.0.0",
+    "rollup-plugin-postcss": "^0.5.5",
     "rollup-plugin-preserve-shebang": "^0.1.3",
     "rollup-plugin-sizes": "^0.4.2",
     "rollup-plugin-uglify": "^2.0.1",
     "yargs": "^10.0.3"
   },
   "devDependencies": {
+    "autoprefixer": "^7.2.3",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "eslint": "^4.13.0",
