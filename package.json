@@ -35,6 +35,7 @@
     "acorn-jsx": "4.1.0",
     "asyncro": "^2.0.1",
     "babel-polyfill": "^6.26.0",
+    "camelcase": "^4.1.0",
     "chalk": "^2.3.0",
     "es6-promisify": "^5.0.0",
     "glob": "^7.1.2",
