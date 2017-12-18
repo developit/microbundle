@@ -190,7 +190,7 @@ function createConfig(options, entry, format) {
 					exclude: 'node_modules/**',
 					jsx: options.jsx || 'h',
 					objectAssign: options.assign || 'Object.assign',
-					transforms: { dangerousForOf: true }
+					transforms: { dangerousForOf: true, dangerousTaggedTemplateString: true }
 				}),
 				useNodeResolve && commonjs({
 					include: 'node_modules/**'
