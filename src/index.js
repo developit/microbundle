@@ -4,12 +4,14 @@ import chalk from 'chalk';
 import { map, series } from 'asyncro';
 import promisify from 'es6-promisify';
 import glob from 'glob';
+import autoprefixer from 'autoprefixer';
 import { rollup, watch } from 'rollup';
 import nodent from 'rollup-plugin-nodent';
 import commonjs from 'rollup-plugin-commonjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import buble from 'rollup-plugin-buble';
 import uglify from 'rollup-plugin-uglify';
+import postcss from 'rollup-plugin-postcss';
 // import replace from 'rollup-plugin-post-replace';
 import es3 from 'rollup-plugin-es3';
 import gzipSize from 'gzip-size';
@@ -173,6 +175,12 @@ function createConfig(options, entry, format) {
 			input: entry,
 			external,
 			plugins: [
+				postcss({
+					plugins: [
+						autoprefixer()
+					],
+					extract: true
+				}),
 				extname(entry)==='ts' && typescript(),
 				flow({ all: true }),
 				nodent({
