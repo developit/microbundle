@@ -3,25 +3,29 @@ import { resolve, relative, dirname, basename, extname } from 'path';
 import chalk from 'chalk';
 import { map, series } from 'asyncro';
 import promisify from 'es6-promisify';
+import glob from 'glob';
+import autoprefixer from 'autoprefixer';
 import { rollup, watch } from 'rollup';
 import nodent from 'rollup-plugin-nodent';
 import commonjs from 'rollup-plugin-commonjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import buble from 'rollup-plugin-buble';
 import uglify from 'rollup-plugin-uglify';
-import replace from 'rollup-plugin-post-replace';
+import postcss from 'rollup-plugin-postcss';
+// import replace from 'rollup-plugin-post-replace';
 import es3 from 'rollup-plugin-es3';
 import gzipSize from 'gzip-size';
 import prettyBytes from 'pretty-bytes';
 import shebangPlugin from 'rollup-plugin-preserve-shebang';
 import flow from 'rollup-plugin-flow';
 import typescript from 'rollup-plugin-typescript2';
+import camelCase from 'camelcase';
 
 const readFile = promisify(fs.readFile);
 const stat = promisify(fs.stat);
 const isDir = name => stat(name).then( stats => stats.isDirectory() ).catch( () => false );
 const isFile = name => stat(name).then( stats => stats.isFile() ).catch( () => false );
-const safeVariableName = name => name.replace(/(?:^[^a-z$_]|([^a-z0-9_$]+))/g, '_');
+const safeVariableName = name => camelCase(name.toLowerCase().replace(/((^[^a-zA-Z]+)|[^\w.-])|([^a-zA-Z0-9]+$)/g, ''));
 
 const FORMATS = ['es', 'cjs', 'umd'];
 
@@ -36,15 +40,21 @@ export default async function microbundle(options) {
 		options.pkg = JSON.parse(await readFile(resolve(cwd, 'package.json'), 'utf8'));
 	}
 	catch (err) {
-		console.warn(`Unable to find package.json:\n  ${err.message}`);
-		options.pkg = {
-			name: basename(options.cwd)
-		};
+		console.warn(chalk.yellow(`${chalk.yellow.inverse('WARN')} no package.json found.`));
+		let msg = String(err.message || err);
+		if (!msg.match(/ENOENT/)) console.warn(`  ${chalk.red.dim(msg)}`);
+		options.pkg = {};
 	}
 
-	options.input = [].concat(
+	if (!options.pkg.name) {
+		options.pkg.name = basename(options.cwd);
+		console.warn(chalk.yellow(`${chalk.yellow.inverse('WARN')} missing package.json "name" field. Assuming "${options.pkg.name}".`));
+	}
+
+	options.input = [];
+	[].concat(
 		options.entries && options.entries.length ? options.entries : options.pkg.source || (await isDir(resolve(cwd, 'src')) && 'src/index.js') || (await isFile(resolve(cwd, 'index.js')) && 'index.js') || options.pkg.module
-	).map( file => resolve(cwd, file) );
+	).map( file => glob.sync(resolve(cwd, file)) ).forEach( file => options.input.push(...file) );
 
 	let main = resolve(cwd, options.output || options.pkg.main || 'dist');
 	if (!main.match(/\.[a-z]+$/) || await isDir(main)) {
@@ -149,7 +159,7 @@ function createConfig(options, entry, format) {
 
 	let mainNoExtension = options.output;
 	if (options.multipleEntries) {
-		let name = entry.match(/\/index(\.(umd|cjs|es|m))?\.js$/) ? mainNoExtension : entry;
+		let name = entry.match(/(\\|\/)index(\.(umd|cjs|es|m))?\.js$/) ? mainNoExtension : entry;
 		mainNoExtension = resolve(dirname(mainNoExtension), basename(name));
 	}
 	mainNoExtension = mainNoExtension.replace(/(\.(umd|cjs|es|m))?\.js$/, '');
@@ -158,13 +168,19 @@ function createConfig(options, entry, format) {
 	let cjsMain = replaceName(pkg['cjs:main'] || 'x.js', mainNoExtension);
 	let umdMain = replaceName(pkg['umd:main'] || 'x.umd.js', mainNoExtension);
 
-	let rollupName = safeVariableName(basename(entry).replace(/\.js$/, ''));
+	// let rollupName = safeVariableName(basename(entry).replace(/\.js$/, ''));
 
 	let config = {
 		inputOptions: {
 			input: entry,
 			external,
 			plugins: [
+				postcss({
+					plugins: [
+						autoprefixer()
+					],
+					extract: true
+				}),
 				extname(entry)==='ts' && typescript({
 					tsconfigOverride: {
 						compilerOptions: {
@@ -179,35 +195,41 @@ function createConfig(options, entry, format) {
 					promises: true,
 					transformations: {
 						forOf: false
+					},
+					parser: {
+						plugins: {
+							jsx: require('acorn-jsx')
+						}
 					}
 				}),
 				buble({
 					exclude: 'node_modules/**',
 					jsx: options.jsx || 'h',
 					objectAssign: options.assign || 'Object.assign',
-					transforms: { dangerousForOf: true }
+					transforms: { dangerousForOf: true, dangerousTaggedTemplateString: true }
 				}),
 				useNodeResolve && commonjs({
 					include: 'node_modules/**'
 				}),
 				useNodeResolve && nodeResolve({
-					modulesOnly: true,
+					module: true,
 					jsnext: true
 				}),
 				es3(),
-				format==='cjs' && replace({
-					[`module.exports = ${rollupName};`]: '',
-					[`var ${rollupName} =`]: 'module.exports ='
-				}),
+				// We should upstream this to rollup
+				// format==='cjs' && replace({
+				// 	[`module.exports = ${rollupName};`]: '',
+				// 	[`var ${rollupName} =`]: 'module.exports ='
+				// }),
 				// This works for the general case, but could cause nasty scope bugs.
 				// format==='umd' && replace({
 				// 	[`return ${rollupName};`]: '',
 				// 	[`var ${rollupName} =`]: 'return'
 				// }),
-				format==='es' && replace({
-					[`export default ${rollupName};`]: '',
-					[`var ${rollupName} =`]: 'export default'
-				}),
+				// format==='es' && replace({
+				// 	[`export default ${rollupName};`]: '',
+				// 	[`var ${rollupName} =`]: 'export default'
+				// }),
 				format!=='es' && options.compress!==false && uglify({
 					output: { comments: false },
 					mangle: {
