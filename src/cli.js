@@ -27,7 +27,13 @@ prog
 	.describe('Rebuilds on any change')
 	.action(opts => run(opts, true));
 
-prog.parse(process.argv);
+// Parse argv; add extra aliases
+prog.parse(process.argv, {
+	alias: {
+		o: ['output', 'd'],
+		i: ['entry', 'entries', 'e']
+	}
+});
 
 function run(options, watch) {
 	options.entries = options._;
