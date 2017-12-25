@@ -6,26 +6,28 @@ import microbundle from '.';
 let { version } = require('../package');
 let prog = sade('microbundle');
 
+let toArray = val => Array.isArray(val) ? val : val == null ? [] : [val];
+
 prog
 	.version(version)
-	.option('--cwd', 'Use an alternative working directory', '.')
 	.option('--entry, -i', 'Entry module(s)')
 	.option('--output, -o', 'Directory to place build files into')
 	.option('--format, -f', 'Only build specified formats', 'es,cjs,umd')
 	.option('--external', `Specify external dependencies, or 'all'`)
 	.option('--compress', 'Compress output using UglifyJS', true)
 	.option('--strict', 'Enforce undefined global context and add "use strict"')
-	.option('--name', 'Specify name exposed in UMD builds');
+	.option('--name', 'Specify name exposed in UMD builds')
+	.option('--cwd', 'Use an alternative working directory', '.');
 
 prog
-	.command('build [entries]', '', { default: true })
+	.command('build [...entries]', '', { default:true })
 	.describe('Build once and exit')
 	.action(run);
 
 prog
-	.command('watch [entries]')
+	.command('watch [...entries]')
 	.describe('Rebuilds on any change')
-	.action(opts => run(opts, true));
+	.action((str, opts) => run(str, opts, true));
 
 // Parse argv; add extra aliases
 prog.parse(process.argv, {
@@ -35,15 +37,13 @@ prog.parse(process.argv, {
 	}
 });
 
-function run(options, watch) {
-	options.entries = options._;
-	options.watch = watch===true;
-	microbundle(options)
+function run(str, opts, isWatch) {
+	opts.watch = !!isWatch;
+	opts.entries = toArray(str || opts.entry).concat(opts._);
+	microbundle(opts)
 		.then( output => {
 			if (output!=null) process.stdout.write(output + '\n');
-			if (!watch) {
-				process.exit(0);
-			}
+			if (!opts.watch) process.exit(0);
 		})
 		.catch(err => {
 			process.stderr.write(String(err) + '\n');

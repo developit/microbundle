@@ -7,7 +7,7 @@
   "bin": "dist/cli.js",
   "scripts": {
     "build": "npm run -s build:babel && npm run -s build:self",
-    "build:babel": "babel-node --presets env src/cli.js --external all --format cjs src/*.js",
+    "build:babel": "babel-node src/cli.js --external all --format cjs src/*.js --presets env",
     "build:self": "node dist/cli.js --external all --format cjs src/*.js",
     "prepare": "npm run -s build",
     "prepare:babel": "babel --presets env src/*.js -d dist && npm t",
