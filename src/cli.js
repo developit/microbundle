@@ -20,7 +20,7 @@ prog
 	.option('--cwd', 'Use an alternative working directory', '.');
 
 prog
-	.command('build [...entries]', '', { default:true })
+	.command('build [...entries]', '', { default: true })
 	.describe('Build once and exit')
 	.action(run);
 
