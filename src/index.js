@@ -139,7 +139,10 @@ function createConfig(options, entry, format) {
 	}
 
 	let useNodeResolve = true;
-	if (options.external==='all' || options.inline==='none') {
+	if (options.inline === 'all') {
+		useNodeResolve = true;
+	}
+	else if (options.external==='all' || options.inline==='none') {
 		useNodeResolve = false;
 		external = external.concat(Object.keys(pkg.dependencies));
 	}
