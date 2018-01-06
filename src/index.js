@@ -26,14 +26,12 @@ const isDir = name => stat(name).then( stats => stats.isDirectory() ).catch( () 
 const isFile = name => stat(name).then( stats => stats.isFile() ).catch( () => false );
 const safeVariableName = name => camelCase(name.toLowerCase().replace(/((^[^a-zA-Z]+)|[^\w.-])|([^a-zA-Z0-9]+$)/g, ''));
 
-const FORMATS = ['es', 'cjs', 'umd'];
-
 const WATCH_OPTS = {
 	exclude: 'node_modules/**'
 };
 
 export default async function microbundle(options) {
-	let cwd = options.cwd = resolve(process.cwd(), options.cwd || '.');
+	let cwd = options.cwd = resolve(process.cwd(), options.cwd);
 
 	try {
 		options.pkg = JSON.parse(await readFile(resolve(cwd, 'package.json'), 'utf8'));
@@ -73,7 +71,7 @@ export default async function microbundle(options) {
 
 	options.multipleEntries = entries.length>1;
 
-	let formats = [].concat(options.format || options.formats || FORMATS);
+	let formats = (options.format || options.formats).split(',');
 
 	let steps = [];
 	for (let i=0; i<entries.length; i++) {
