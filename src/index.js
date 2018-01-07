@@ -206,7 +206,8 @@ function createConfig(options, entry, format) {
 				}),
 				useNodeResolve && nodeResolve({
 					module: true,
-					jsnext: true
+					jsnext: true,
+					browser: options.target === 'browser'
 				}),
 				es3(),
 				// We should upstream this to rollup

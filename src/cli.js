@@ -13,6 +13,7 @@ prog
 	.option('--entry, -i', 'Entry module(s)')
 	.option('--output, -o', 'Directory to place build files into')
 	.option('--format, -f', 'Only build specified formats', 'es,cjs,umd')
+	.option('--target', 'Specify your target environment', 'node')
 	.option('--external', `Specify external dependencies, or 'all'`)
 	.option('--compress', 'Compress output using UglifyJS', true)
 	.option('--strict', 'Enforce undefined global context and add "use strict"')
