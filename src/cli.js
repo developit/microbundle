@@ -33,6 +33,7 @@ yargs
 		default: true
 	})
 	.option('strict', {
+		type: 'boolean',
 		description: 'Enforce undefined global context and add "use strict"',
 		default: false
 	})
