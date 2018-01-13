@@ -185,7 +185,9 @@ function createConfig(options, entry, format, writeMeta) {
 					plugins: [
 						autoprefixer()
 					],
-					extract: true
+					// only write out CSS for the first bundle (avoids pointless extra files):
+					inject: false,
+					extract: !!writeMeta
 				}),
 				flow({ all: true }),
 				nodent({
