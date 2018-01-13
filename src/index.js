@@ -20,6 +20,7 @@ import shebangPlugin from 'rollup-plugin-preserve-shebang';
 import flow from 'rollup-plugin-flow';
 import camelCase from 'camelcase';
 
+const interopRequire = m => m.default || m;
 const readFile = promisify(fs.readFile);
 const stat = promisify(fs.stat);
 const isDir = name => stat(name).then( stats => stats.isDirectory() ).catch( () => false );
@@ -72,11 +73,13 @@ export default async function microbundle(options) {
 	options.multipleEntries = entries.length>1;
 
 	let formats = (options.format || options.formats).split(',');
+	// always compile cjs first if it's there:
+	formats.sort( (a, b) => a==='cjs' ? -1 : a>b ? 1 : 0);
 
 	let steps = [];
 	for (let i=0; i<entries.length; i++) {
 		for (let j=0; j<formats.length; j++) {
-			steps.push(createConfig(options, entries[i], formats[j]));
+			steps.push(createConfig(options, entries[i], formats[j], i===0 && j===0));
 		}
 	}
 
@@ -121,7 +124,7 @@ export default async function microbundle(options) {
 }
 
 
-function createConfig(options, entry, format) {
+function createConfig(options, entry, format, writeMeta) {
 	let { pkg } = options;
 
 	let external = ['dns', 'fs', 'path', 'url'].concat(
@@ -170,11 +173,14 @@ function createConfig(options, entry, format) {
 
 	// let rollupName = safeVariableName(basename(entry).replace(/\.js$/, ''));
 
+	let nameCache = {};
+	let mangleOptions = options.pkg.mangle || false;
+
 	let config = {
 		inputOptions: {
 			input: entry,
 			external,
-			plugins: [
+			plugins: [].concat(
 				postcss({
 					plugins: [
 						autoprefixer()
@@ -199,7 +205,10 @@ function createConfig(options, entry, format) {
 					exclude: 'node_modules/**',
 					jsx: options.jsx || 'h',
 					objectAssign: options.assign || 'Object.assign',
-					transforms: { dangerousForOf: true, dangerousTaggedTemplateString: true }
+					transforms: {
+						dangerousForOf: true,
+						dangerousTaggedTemplateString: true
+					}
 				}),
 				useNodeResolve && commonjs({
 					include: 'node_modules/**'
@@ -224,19 +233,37 @@ function createConfig(options, entry, format) {
 				// 	[`export default ${rollupName};`]: '',
 				// 	[`var ${rollupName} =`]: 'export default'
 				// }),
-				format!=='es' && options.compress!==false && uglify({
+				options.compress!==false && uglify({
 					output: { comments: false },
 					mangle: {
-						toplevel: format==='cjs'
-					}
-				}),
-				{
-					ongenerate({ bundle }, { code }) {
-						config._code = bundle._code = code;
+						toplevel: format==='cjs' || format==='es',
+						properties: mangleOptions ? {
+							regex: mangleOptions.regex ? new RegExp(mangleOptions.regex) : null,
+							reserved: mangleOptions.reserved || []
+						} : false
+					},
+					nameCache
+				}, format==='es' ? interopRequire(require('uglify-es')).minify : undefined),
+				mangleOptions && {
+					// before hook
+					options() {
+						try {
+							nameCache = JSON.parse(fs.readFileSync(resolve(options.cwd, 'mangle.json'), 'utf8'));
+						}
+						catch (e) {}
+					},
+					// after hook
+					onwrite() {
+						if (writeMeta && nameCache) {
+							fs.writeFile(resolve(options.cwd, 'mangle.json'), JSON.stringify(nameCache, null, 2), Object);
+						}
 					}
 				},
+				{ ongenerate({ bundle }, { code }) {
+					config._code = bundle._code = code;
+				} },
 				shebangPlugin()
-			].filter(Boolean)
+			).filter(Boolean)
 		},
 
 		outputOptions: {
