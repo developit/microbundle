@@ -88,7 +88,7 @@ Here's what's coming up for Microbundle:
 
 ## 🥂 License
 
-MIT
+[MIT](https://oss.ninja/mit/developit/)
 
 
 [Rollup]: https://github.com/rollup/rollup
