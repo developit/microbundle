@@ -68,11 +68,13 @@ Options:
                                                 [string] [default: .]
   --format         Only build specified formats
                                        [string] [default: es,cjs,umd]
+  --target         Specify your target environment
+                                             [string] [default: node]
   --compress       Compress output using UglifyJS
                                             [boolean] [default: true]
   --strict         Enforce undefined global context and add "use
                    strict"                           [default: false]
-	--name					 Specify name exposed in UMD builds        [string]
+  --name           Specify name exposed in UMD builds        [string]
 ```
 
 
