@@ -12,8 +12,7 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 import buble from 'rollup-plugin-buble';
 import uglify from 'rollup-plugin-uglify';
 import postcss from 'rollup-plugin-postcss';
-// import replace from 'rollup-plugin-post-replace';
-import es3 from 'rollup-plugin-es3';
+import alias from 'rollup-plugin-strict-alias';
 import gzipSize from 'gzip-size';
 import prettyBytes from 'pretty-bytes';
 import shebangPlugin from 'rollup-plugin-preserve-shebang';
@@ -176,11 +175,25 @@ function createConfig(options, entry, format, writeMeta) {
 	let nameCache = {};
 	let mangleOptions = options.pkg.mangle || false;
 
+	let exportType;
+	if (format!='es') {
+		try {
+			let file = fs.readFileSync(entry, 'utf-8');
+			let hasDefault = /\bexport\s*default\s*[a-zA-Z_$]/.test(file);
+			let hasNamed = /\bexport\s*(let|const|var|async|function\*?)\s*[a-zA-Z_$*]/.test(file) || /^\s*export\s*\{/m.test(file);
+			if (hasDefault && hasNamed) exportType = 'default';
+		}
+		catch (e) {}
+	}
+
 	let config = {
 		inputOptions: {
-			input: entry,
+			input: exportType ? resolve(__dirname, '../src/lib/__entry__.js') : entry,
 			external,
 			plugins: [].concat(
+				alias({
+					__microbundle_entry__: entry
+				}),
 				postcss({
 					plugins: [
 						autoprefixer()
@@ -220,7 +233,6 @@ function createConfig(options, entry, format, writeMeta) {
 					jsnext: true,
 					browser: options.target!=='node'
 				}),
-				es3(),
 				// We should upstream this to rollup
 				// format==='cjs' && replace({
 				// 	[`module.exports = ${rollupName};`]: '',
@@ -269,10 +281,16 @@ function createConfig(options, entry, format, writeMeta) {
 		},
 
 		outputOptions: {
+			exports: exportType ? 'default' : undefined,
 			paths: aliases,
 			globals,
 			strict: options.strict===true,
+			legacy: true,
+			freeze: false,
 			sourcemap: true,
+			treeshake: {
+				propertyReadSideEffects: false
+			},
 			format,
 			name: options.name || pkg.amdName || safeVariableName(pkg.name),
 			file: resolve(options.cwd, (format==='es' && moduleMain) || (format==='umd' && umdMain) || cjsMain)
