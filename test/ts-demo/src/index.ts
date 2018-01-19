@@ -1,4 +1,5 @@
 import Car from './car';
 
-let ferrari = new Car();
-ferrari.drive(100);
+let Ferrari = new Car();
+
+export default Ferrari;

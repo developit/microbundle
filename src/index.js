@@ -18,7 +18,7 @@ import gzipSize from 'gzip-size';
 import prettyBytes from 'pretty-bytes';
 import shebangPlugin from 'rollup-plugin-preserve-shebang';
 import flow from 'rollup-plugin-flow';
-import typescript from 'rollup-plugin-typescript2';
+import typescript from 'rollup-plugin-typescript';
 import camelCase from 'camelcase';
 
 const readFile = promisify(fs.readFile);
@@ -181,13 +181,7 @@ function createConfig(options, entry, format) {
 					],
 					extract: true
 				}),
-				extname(entry)==='.ts' && typescript({
-					tsconfigOverride: {
-						compilerOptions: {
-							target: format==='es' ? 'es6' : 'es5'
-						}
-					}
-				}),
+				extname(entry)==='.ts' && typescript(),
 				extname(entry)!=='.ts' && flow({ all: true }),
 				nodent({
 					exclude: 'node_modules/**',
