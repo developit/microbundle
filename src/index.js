@@ -12,8 +12,7 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 import buble from 'rollup-plugin-buble';
 import uglify from 'rollup-plugin-uglify';
 import postcss from 'rollup-plugin-postcss';
-// import replace from 'rollup-plugin-post-replace';
-import es3 from 'rollup-plugin-es3';
+import alias from 'rollup-plugin-strict-alias';
 import gzipSize from 'gzip-size';
 import prettyBytes from 'pretty-bytes';
 import shebangPlugin from 'rollup-plugin-preserve-shebang';
@@ -21,20 +20,19 @@ import flow from 'rollup-plugin-flow';
 import typescript from 'rollup-plugin-typescript';
 import camelCase from 'camelcase';
 
+const interopRequire = m => m.default || m;
 const readFile = promisify(fs.readFile);
 const stat = promisify(fs.stat);
 const isDir = name => stat(name).then( stats => stats.isDirectory() ).catch( () => false );
 const isFile = name => stat(name).then( stats => stats.isFile() ).catch( () => false );
 const safeVariableName = name => camelCase(name.toLowerCase().replace(/((^[^a-zA-Z]+)|[^\w.-])|([^a-zA-Z0-9]+$)/g, ''));
 
-const FORMATS = ['es', 'cjs', 'umd'];
-
 const WATCH_OPTS = {
 	exclude: 'node_modules/**'
 };
 
 export default async function microbundle(options) {
-	let cwd = options.cwd = resolve(process.cwd(), options.cwd || '.');
+	let cwd = options.cwd = resolve(process.cwd(), options.cwd);
 
 	try {
 		options.pkg = JSON.parse(await readFile(resolve(cwd, 'package.json'), 'utf8'));
@@ -62,24 +60,26 @@ export default async function microbundle(options) {
 	}
 	options.output = main;
 
-	let entries = await map([].concat(options.input), async file => {
+	let entries = (await map([].concat(options.input), async file => {
 		file = resolve(cwd, file);
 		if (await isDir(file)) {
 			file = resolve(file, 'index.js');
 		}
 		return file;
-	});
+	})).filter( (item, i, arr) => arr.indexOf(item)===i );
 
 	options.entries = entries;
 
 	options.multipleEntries = entries.length>1;
 
-	let formats = [].concat(options.format || options.formats || FORMATS);
+	let formats = (options.format || options.formats).split(',');
+	// always compile cjs first if it's there:
+	formats.sort( (a, b) => a==='cjs' ? -1 : a>b ? 1 : 0);
 
 	let steps = [];
 	for (let i=0; i<entries.length; i++) {
 		for (let j=0; j<formats.length; j++) {
-			steps.push(createConfig(options, entries[i], formats[j]));
+			steps.push(createConfig(options, entries[i], formats[j], i===0 && j===0));
 		}
 	}
 
@@ -124,7 +124,7 @@ export default async function microbundle(options) {
 }
 
 
-function createConfig(options, entry, format) {
+function createConfig(options, entry, format, writeMeta) {
 	let { pkg } = options;
 
 	let external = ['dns', 'fs', 'path', 'url'].concat(
@@ -140,7 +140,10 @@ function createConfig(options, entry, format) {
 	}
 
 	let useNodeResolve = true;
-	if (options.external==='all' || options.inline==='none') {
+	if (options.inline === 'all') {
+		useNodeResolve = true;
+	}
+	else if (options.external==='all' || options.inline==='none') {
 		useNodeResolve = false;
 		external = external.concat(Object.keys(pkg.dependencies));
 	}
@@ -170,16 +173,35 @@ function createConfig(options, entry, format) {
 
 	// let rollupName = safeVariableName(basename(entry).replace(/\.js$/, ''));
 
+	let nameCache = {};
+	let mangleOptions = options.pkg.mangle || false;
+
+	let exportType;
+	if (format!='es') {
+		try {
+			let file = fs.readFileSync(entry, 'utf-8');
+			let hasDefault = /\bexport\s*default\s*[a-zA-Z_$]/.test(file);
+			let hasNamed = /\bexport\s*(let|const|var|async|function\*?)\s*[a-zA-Z_$*]/.test(file) || /^\s*export\s*\{/m.test(file);
+			if (hasDefault && hasNamed) exportType = 'default';
+		}
+		catch (e) {}
+	}
+
 	let config = {
 		inputOptions: {
-			input: entry,
+			input: exportType ? resolve(__dirname, '../src/lib/__entry__.js') : entry,
 			external,
-			plugins: [
+			plugins: [].concat(
+				alias({
+					__microbundle_entry__: entry
+				}),
 				postcss({
 					plugins: [
 						autoprefixer()
 					],
-					extract: true
+					// only write out CSS for the first bundle (avoids pointless extra files):
+					inject: false,
+					extract: !!writeMeta
 				}),
 				extname(entry)==='.ts' && typescript(),
 				extname(entry)!=='.ts' && flow({ all: true }),
@@ -200,16 +222,19 @@ function createConfig(options, entry, format) {
 					exclude: 'node_modules/**',
 					jsx: options.jsx || 'h',
 					objectAssign: options.assign || 'Object.assign',
-					transforms: { dangerousForOf: true, dangerousTaggedTemplateString: true }
+					transforms: {
+						dangerousForOf: true,
+						dangerousTaggedTemplateString: true
+					}
 				}),
 				useNodeResolve && commonjs({
 					include: 'node_modules/**'
 				}),
 				useNodeResolve && nodeResolve({
 					module: true,
-					jsnext: true
+					jsnext: true,
+					browser: options.target!=='node'
 				}),
-				es3(),
 				// We should upstream this to rollup
 				// format==='cjs' && replace({
 				// 	[`module.exports = ${rollupName};`]: '',
@@ -224,26 +249,50 @@ function createConfig(options, entry, format) {
 				// 	[`export default ${rollupName};`]: '',
 				// 	[`var ${rollupName} =`]: 'export default'
 				// }),
-				format!=='es' && options.compress!==false && uglify({
+				options.compress!==false && uglify({
 					output: { comments: false },
 					mangle: {
-						toplevel: format==='cjs'
-					}
-				}),
-				{
-					ongenerate({ bundle }, { code }) {
-						config._code = bundle._code = code;
+						toplevel: format==='cjs' || format==='es',
+						properties: mangleOptions ? {
+							regex: mangleOptions.regex ? new RegExp(mangleOptions.regex) : null,
+							reserved: mangleOptions.reserved || []
+						} : false
+					},
+					nameCache
+				}, format==='es' ? interopRequire(require('uglify-es')).minify : undefined),
+				mangleOptions && {
+					// before hook
+					options() {
+						try {
+							nameCache = JSON.parse(fs.readFileSync(resolve(options.cwd, 'mangle.json'), 'utf8'));
+						}
+						catch (e) {}
+					},
+					// after hook
+					onwrite() {
+						if (writeMeta && nameCache) {
+							fs.writeFile(resolve(options.cwd, 'mangle.json'), JSON.stringify(nameCache, null, 2), Object);
+						}
 					}
 				},
+				{ ongenerate({ bundle }, { code }) {
+					config._code = bundle._code = code;
+				} },
 				shebangPlugin()
-			].filter(Boolean)
+			).filter(Boolean)
 		},
 
 		outputOptions: {
+			exports: exportType ? 'default' : undefined,
 			paths: aliases,
 			globals,
 			strict: options.strict===true,
+			legacy: true,
+			freeze: false,
 			sourcemap: true,
+			treeshake: {
+				propertyReadSideEffects: false
+			},
 			format,
 			name: options.name || pkg.amdName || safeVariableName(pkg.name),
 			file: resolve(options.cwd, (format==='es' && moduleMain) || (format==='umd' && umdMain) || cjsMain)
