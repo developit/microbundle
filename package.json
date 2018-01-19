@@ -1,14 +1,14 @@
 {
   "name": "microbundle",
-  "version": "0.2.4",
+  "version": "0.3.1",
   "description": "Zero-configuration bundler for tiny JS libs, powered by Rollup.",
   "main": "dist/microbundle.js",
   "source": "src/index.js",
   "bin": "dist/cli.js",
   "scripts": {
     "build": "npm run -s build:babel && npm run -s build:self",
-    "build:babel": "babel-node --presets env src/cli.js --external all --format cjs src/*.js",
-    "build:self": "node dist/cli.js --no-compress --external all --format cjs src/*.js",
+    "build:babel": "babel-node src/cli.js --external all --format cjs src/*.js --presets env",
+    "build:self": "node dist/cli.js --external all --format cjs src/*.js",
     "prepare": "npm run -s build",
     "prepare:babel": "babel --presets env src/*.js -d dist && npm t",
     "lint": "eslint src",
@@ -35,7 +35,7 @@
   "dependencies": {
     "acorn-jsx": "4.1.0",
     "asyncro": "^2.0.1",
-    "autoprefixer": "^7.2.3",
+    "autoprefixer": "^7.2.5",
     "babel-polyfill": "^6.26.0",
     "camelcase": "^4.1.0",
     "chalk": "^2.3.0",
@@ -44,27 +44,28 @@
     "gzip-size": "^4.1.0",
     "pretty-bytes": "^4.0.2",
     "regenerator-runtime": "^0.11.1",
-    "rollup": "^0.52.1",
+    "rollup": "^0.54.0",
     "rollup-plugin-buble": "^0.18.0",
     "rollup-plugin-bundle-size": "^1.0.1",
     "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-es3": "^1.1.0",
     "rollup-plugin-flow": "^1.1.1",
-    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-node-resolve": "^3.0.2",
     "rollup-plugin-nodent": "^0.1.3",
-    "rollup-plugin-post-replace": "^1.0.0",
-    "rollup-plugin-postcss": "^0.5.5",
-    "rollup-plugin-preserve-shebang": "^0.1.3",
+    "rollup-plugin-postcss": "^1.1.0",
+    "rollup-plugin-preserve-shebang": "^0.1.4",
     "rollup-plugin-sizes": "^0.4.2",
     "rollup-plugin-typescript2": "^0.8.4",
+    "rollup-plugin-strict-alias": "^1.0.0",
     "rollup-plugin-uglify": "^2.0.1",
+    "sade": "^1.3.1",
     "typescript": "^2.6.2",
-    "yargs": "^10.0.3"
+    "uglify-es": "^3.3.6"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "eslint": "^4.13.0",
+    "eslint": "^4.15.0",
     "eslint-config-developit": "^1.1.1"
   }
 }
