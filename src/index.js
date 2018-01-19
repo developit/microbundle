@@ -181,14 +181,14 @@ function createConfig(options, entry, format) {
 					],
 					extract: true
 				}),
-				extname(entry)==='ts' && typescript({
+				extname(entry)==='.ts' && typescript({
 					tsconfigOverride: {
 						compilerOptions: {
 							target: format==='es' ? 'es6' : 'es5'
 						}
 					}
 				}),
-				flow({ all: true }),
+				extname(entry)!=='.ts' && flow({ all: true }),
 				nodent({
 					exclude: 'node_modules/**',
 					noRuntime: true,
