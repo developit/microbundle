@@ -187,6 +187,8 @@ function createConfig(options, entry, format, writeMeta) {
 		catch (e) {}
 	}
 
+	const useTypescript = extname(entry)==='.ts';
+
 	let config = {
 		inputOptions: {
 			input: exportType ? resolve(__dirname, '../src/lib/__entry__.js') : entry,
@@ -203,8 +205,8 @@ function createConfig(options, entry, format, writeMeta) {
 					inject: false,
 					extract: !!writeMeta
 				}),
-				extname(entry)==='.ts' && typescript(),
-				extname(entry)!=='.ts' && flow({ all: true }),
+				useTypescript && typescript(),
+				!useTypescript && flow({ all: true }),
 				nodent({
 					exclude: 'node_modules/**',
 					noRuntime: true,
@@ -218,7 +220,7 @@ function createConfig(options, entry, format, writeMeta) {
 						}
 					}
 				}),
-				buble({
+				!useTypescript && buble({
 					exclude: 'node_modules/**',
 					jsx: options.jsx || 'h',
 					objectAssign: options.assign || 'Object.assign',
