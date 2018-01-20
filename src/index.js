@@ -24,7 +24,8 @@ const readFile = promisify(fs.readFile);
 const stat = promisify(fs.stat);
 const isDir = name => stat(name).then( stats => stats.isDirectory() ).catch( () => false );
 const isFile = name => stat(name).then( stats => stats.isFile() ).catch( () => false );
-const safeVariableName = name => camelCase(name.toLowerCase().replace(/((^[^a-zA-Z]+)|[^\w.-])|([^a-zA-Z0-9]+$)/g, ''));
+const removeScope = name => name.replace(/^@.*\//, '');
+const safeVariableName = name => camelCase(removeScope(name).toLowerCase().replace(/((^[^a-zA-Z]+)|[^\w.-])|([^a-zA-Z0-9]+$)/g, ''));
 
 const WATCH_OPTS = {
 	exclude: 'node_modules/**'
@@ -55,7 +56,7 @@ export default async function microbundle(options) {
 
 	let main = resolve(cwd, options.output || options.pkg.main || 'dist');
 	if (!main.match(/\.[a-z]+$/) || await isDir(main)) {
-		main = resolve(main, `${options.pkg.name}.js`);
+		main = resolve(main, `${removeScope(options.pkg.name)}.js`);
 	}
 	options.output = main;
 
