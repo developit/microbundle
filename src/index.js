@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { resolve, relative, dirname, basename } from 'path';
+import { resolve, relative, dirname, basename, extname } from 'path';
 import chalk from 'chalk';
 import { map, series } from 'asyncro';
 import promisify from 'es6-promisify';
@@ -17,6 +17,7 @@ import gzipSize from 'gzip-size';
 import prettyBytes from 'pretty-bytes';
 import shebangPlugin from 'rollup-plugin-preserve-shebang';
 import flow from 'rollup-plugin-flow';
+import typescript from 'rollup-plugin-typescript';
 import camelCase from 'camelcase';
 
 const interopRequire = m => m.default || m;
@@ -186,6 +187,8 @@ function createConfig(options, entry, format, writeMeta) {
 		catch (e) {}
 	}
 
+	const useTypescript = extname(entry)==='.ts';
+
 	let config = {
 		inputOptions: {
 			input: exportType ? resolve(__dirname, '../src/lib/__entry__.js') : entry,
@@ -202,7 +205,8 @@ function createConfig(options, entry, format, writeMeta) {
 					inject: false,
 					extract: !!writeMeta
 				}),
-				flow({ all: true }),
+				useTypescript && typescript(),
+				!useTypescript && flow({ all: true }),
 				nodent({
 					exclude: 'node_modules/**',
 					noRuntime: true,
@@ -216,7 +220,7 @@ function createConfig(options, entry, format, writeMeta) {
 						}
 					}
 				}),
-				buble({
+				!useTypescript && buble({
 					exclude: 'node_modules/**',
 					jsx: options.jsx || 'h',
 					objectAssign: options.assign || 'Object.assign',

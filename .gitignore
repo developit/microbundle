@@ -1,6 +1,7 @@
 node_modules
 .DS_Store
 *.log
+.rpt2_cache
 build
 dist
 package-lock.json

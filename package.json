@@ -13,7 +13,8 @@
     "prepare:babel": "babel --presets env src/*.js -d dist && npm t",
     "lint": "eslint src",
     "test:build": "node dist/cli.js --no-compress --cwd test/demo",
-    "test": "npm run -s lint && npm run -s build && npm run -s test:build",
+    "test:build:ts": "node dist/cli.js --no-compress --cwd test/ts-demo --entry=src/index.ts",
+    "test": "npm run -s lint && npm run -s build && npm run -s test:build && npm run -s test:build:ts",
     "release": "npm run -s prepare && npm test && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish"
   },
   "repository": "developit/microbundle",
@@ -54,9 +55,11 @@
     "rollup-plugin-postcss": "^1.1.0",
     "rollup-plugin-preserve-shebang": "^0.1.4",
     "rollup-plugin-sizes": "^0.4.2",
+    "rollup-plugin-typescript": "^0.8.1",
     "rollup-plugin-strict-alias": "^1.0.0",
     "rollup-plugin-uglify": "^2.0.1",
     "sade": "^1.3.1",
+    "typescript": "^2.6.2",
     "uglify-es": "^3.3.6"
   },
   "devDependencies": {
