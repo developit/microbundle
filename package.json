@@ -34,7 +34,7 @@
   "license": "MIT",
   "dependencies": {
     "acorn-jsx": "4.1.0",
-    "asyncro": "^2.0.1",
+    "asyncro": "^3.0.0",
     "autoprefixer": "^7.2.5",
     "babel-polyfill": "^6.26.0",
     "camelcase": "^4.1.0",
