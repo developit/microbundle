@@ -6,6 +6,7 @@ import promisify from 'es6-promisify';
 import glob from 'glob';
 import autoprefixer from 'autoprefixer';
 import { rollup, watch } from 'rollup';
+import acornJsx from 'acorn-jsx';
 import nodent from 'rollup-plugin-nodent';
 import commonjs from 'rollup-plugin-commonjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
@@ -217,7 +218,7 @@ function createConfig(options, entry, format, writeMeta) {
 					},
 					parser: {
 						plugins: {
-							jsx: require('acorn-jsx')
+							jsx: acornJsx
 						}
 					}
 				}),
