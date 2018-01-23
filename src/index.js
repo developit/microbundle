@@ -34,21 +34,25 @@ const WATCH_OPTS = {
 };
 
 export default async function microbundle(options) {
-	let cwd = options.cwd = resolve(process.cwd(), options.cwd);
+	let cwd = options.cwd = resolve(process.cwd(), options.cwd),
+		hasPackageJson = true;
 
 	try {
 		options.pkg = JSON.parse(await readFile(resolve(cwd, 'package.json'), 'utf8'));
 	}
 	catch (err) {
-		console.warn(chalk.yellow(`${chalk.yellow.inverse('WARN')} no package.json found.`));
+		process.stderr.write(chalk.yellow(`${chalk.yellow.inverse('WARN')} no package.json found. Assuming a name of "${basename(options.cwd)}".`)+'\n');
 		let msg = String(err.message || err);
 		if (!msg.match(/ENOENT/)) console.warn(`  ${chalk.red.dim(msg)}`);
 		options.pkg = {};
+		hasPackageJson = false;
 	}
 
 	if (!options.pkg.name) {
 		options.pkg.name = basename(options.cwd);
-		console.warn(chalk.yellow(`${chalk.yellow.inverse('WARN')} missing package.json "name" field. Assuming "${options.pkg.name}".`));
+		if (hasPackageJson) {
+			process.stderr.write(chalk.yellow(`${chalk.yellow.inverse('WARN')} missing package.json "name" field. Assuming "${options.pkg.name}".`)+'\n');
+		}
 	}
 
 	options.input = [];
