@@ -6,6 +6,7 @@ import promisify from 'es6-promisify';
 import glob from 'glob';
 import autoprefixer from 'autoprefixer';
 import { rollup, watch } from 'rollup';
+import acornJsx from 'acorn-jsx';
 import nodent from 'rollup-plugin-nodent';
 import commonjs from 'rollup-plugin-commonjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
@@ -33,26 +34,32 @@ const WATCH_OPTS = {
 };
 
 export default async function microbundle(options) {
-	let cwd = options.cwd = resolve(process.cwd(), options.cwd);
+	let cwd = options.cwd = resolve(process.cwd(), options.cwd),
+		hasPackageJson = true;
 
 	try {
 		options.pkg = JSON.parse(await readFile(resolve(cwd, 'package.json'), 'utf8'));
 	}
 	catch (err) {
-		console.warn(chalk.yellow(`${chalk.yellow.inverse('WARN')} no package.json found.`));
+		process.stderr.write(chalk.yellow(`${chalk.yellow.inverse('WARN')} no package.json found. Assuming a name of "${basename(options.cwd)}".`)+'\n');
 		let msg = String(err.message || err);
 		if (!msg.match(/ENOENT/)) console.warn(`  ${chalk.red.dim(msg)}`);
 		options.pkg = {};
+		hasPackageJson = false;
 	}
 
 	if (!options.pkg.name) {
 		options.pkg.name = basename(options.cwd);
-		console.warn(chalk.yellow(`${chalk.yellow.inverse('WARN')} missing package.json "name" field. Assuming "${options.pkg.name}".`));
+		if (hasPackageJson) {
+			process.stderr.write(chalk.yellow(`${chalk.yellow.inverse('WARN')} missing package.json "name" field. Assuming "${options.pkg.name}".`)+'\n');
+		}
 	}
+
+	const jsOrTs = async filename => resolve(cwd, `${filename}${await isFile(resolve(cwd, filename+'.ts')) ? '.ts' : '.js'}`);
 
 	options.input = [];
 	[].concat(
-		options.entries && options.entries.length ? options.entries : options.pkg.source || (await isDir(resolve(cwd, 'src')) && 'src/index.js') || (await isFile(resolve(cwd, 'index.js')) && 'index.js') || options.pkg.module
+		options.entries && options.entries.length ? options.entries : options.pkg.source || (await isDir(resolve(cwd, 'src')) && await jsOrTs('src/index')) || await jsOrTs('index') || options.pkg.module
 	).map( file => glob.sync(resolve(cwd, file)) ).forEach( file => options.input.push(...file) );
 
 	let main = resolve(cwd, options.output || options.pkg.main || 'dist');
@@ -217,7 +224,7 @@ function createConfig(options, entry, format, writeMeta) {
 					},
 					parser: {
 						plugins: {
-							jsx: require('acorn-jsx')
+							jsx: acornJsx
 						}
 					}
 				}),
