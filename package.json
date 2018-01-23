@@ -12,14 +12,17 @@
     "prepare": "npm run -s build",
     "prepare:babel": "babel --presets env src/*.js -d dist && npm t",
     "lint": "eslint src",
-    "test:build": "node dist/cli.js --no-compress --cwd test/demo",
-    "test:build:ts": "node dist/cli.js --no-compress --cwd test/ts-demo --entry=src/index.ts",
-    "test": "npm run -s lint && npm run -s build && npm run -s test:build && npm run -s test:build:ts",
+    "test": "npm run -s lint && npm run -s build && jest",
     "release": "npm run -s prepare && npm test && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish"
   },
   "repository": "developit/microbundle",
   "eslintConfig": {
     "extends": "eslint-config-developit"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
   },
   "keywords": [
     "bundle",
@@ -66,6 +69,9 @@
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "eslint": "^4.15.0",
-    "eslint-config-developit": "^1.1.1"
+    "eslint-config-developit": "^1.1.1",
+    "fs-extra": "^5.0.0",
+    "jest": "^22.1.4",
+    "strip-ansi": "^4.0.0"
   }
 }
