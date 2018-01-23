@@ -55,9 +55,11 @@ export default async function microbundle(options) {
 		}
 	}
 
+	const jsOrTs = async filename => resolve(cwd, `${filename}${await isFile(resolve(cwd, filename+'.ts')) ? '.ts' : '.js'}`);
+
 	options.input = [];
 	[].concat(
-		options.entries && options.entries.length ? options.entries : options.pkg.source || (await isDir(resolve(cwd, 'src')) && 'src/index.js') || (await isFile(resolve(cwd, 'index.js')) && 'index.js') || options.pkg.module
+		options.entries && options.entries.length ? options.entries : options.pkg.source || (await isDir(resolve(cwd, 'src')) && await jsOrTs('src/index')) || await jsOrTs('index') || options.pkg.module
 	).map( file => glob.sync(resolve(cwd, file)) ).forEach( file => options.input.push(...file) );
 
 	let main = resolve(cwd, options.output || options.pkg.main || 'dist');
