@@ -213,7 +213,7 @@ function createConfig(options, entry, format, writeMeta) {
 					inject: false,
 					extract: !!writeMeta
 				}),
-				useTypescript && typescript(),
+				useTypescript && typescript({ target: format==='es' ? 'es6' : 'es5' }),
 				!useTypescript && flow({ all: true }),
 				nodent({
 					exclude: 'node_modules/**',
