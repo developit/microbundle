@@ -47,7 +47,7 @@ function run(str, opts, isWatch) {
 			if (!opts.watch) process.exit(0);
 		})
 		.catch(err => {
-			process.stderr.write(String(err && err.message || err) + '\n');
+			process.stderr.write(String(err) + '\n');
 			process.exit(err.code || 1);
 		});
 }
