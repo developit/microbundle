@@ -20,6 +20,24 @@ Build output to dist:
 295 B: demo.umd.js"
 `;
 
+exports[`fixtures jsx 1`] = `
+"jsx
+  dist
+    jsx.js
+    jsx.js.map
+    jsx.m.js
+    jsx.m.js.map
+    jsx.umd.js
+    jsx.umd.js.map
+  index.js
+
+
+Build output to dist:
+211 B: jsx.js
+212 B: jsx.m.js
+283 B: jsx.umd.js"
+`;
+
 exports[`fixtures ts-demo 1`] = `
 "ts-demo
   dist
