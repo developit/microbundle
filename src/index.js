@@ -1,3 +1,4 @@
+import 'acorn-jsx';
 import fs from 'fs';
 import { resolve, relative, dirname, basename, extname } from 'path';
 import chalk from 'chalk';
@@ -6,7 +7,6 @@ import promisify from 'es6-promisify';
 import glob from 'glob';
 import autoprefixer from 'autoprefixer';
 import { rollup, watch } from 'rollup';
-import acornJsx from 'acorn-jsx';
 import nodent from 'rollup-plugin-nodent';
 import commonjs from 'rollup-plugin-commonjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
@@ -19,12 +19,10 @@ import prettyBytes from 'pretty-bytes';
 import shebangPlugin from 'rollup-plugin-preserve-shebang';
 import typescript from 'rollup-plugin-typescript';
 import flow from './lib/flow-plugin';
-// import exorcist from 'exorcist';
 import camelCase from 'camelcase';
 
 const interopRequire = m => m.default || m;
 const readFile = promisify(fs.readFile);
-// const writeFile = promisify(fs.writeFile);
 const stat = promisify(fs.stat);
 const isDir = name => stat(name).then( stats => stats.isDirectory() ).catch( () => false );
 const isFile = name => stat(name).then( stats => stats.isFile() ).catch( () => false );
@@ -226,7 +224,7 @@ function createConfig(options, entry, format, writeMeta) {
 					},
 					parser: {
 						plugins: {
-							jsx: acornJsx
+							jsx: true
 						}
 					}
 				}),
