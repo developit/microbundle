@@ -17,12 +17,14 @@ import alias from 'rollup-plugin-strict-alias';
 import gzipSize from 'gzip-size';
 import prettyBytes from 'pretty-bytes';
 import shebangPlugin from 'rollup-plugin-preserve-shebang';
-import flow from 'rollup-plugin-flow';
 import typescript from 'rollup-plugin-typescript';
+import flow from './lib/flow-plugin';
+// import exorcist from 'exorcist';
 import camelCase from 'camelcase';
 
 const interopRequire = m => m.default || m;
 const readFile = promisify(fs.readFile);
+// const writeFile = promisify(fs.writeFile);
 const stat = promisify(fs.stat);
 const isDir = name => stat(name).then( stats => stats.isDirectory() ).catch( () => false );
 const isFile = name => stat(name).then( stats => stats.isFile() ).catch( () => false );
@@ -214,7 +216,7 @@ function createConfig(options, entry, format, writeMeta) {
 					extract: !!writeMeta
 				}),
 				useTypescript && typescript(),
-				!useTypescript && flow({ all: true }),
+				!useTypescript && flow({ all: true, pretty: true }),
 				nodent({
 					exclude: 'node_modules/**',
 					noRuntime: true,
