@@ -13,7 +13,7 @@ describe('ts-demo', () => {
 		expect(strip(output)).toEqual(strip(`
 			Build output to dist:
 			106 B: ts-demo.js
-			106 B: ts-demo.m.js
+			76 B: ts-demo.m.js
 			175 B: ts-demo.umd.js
 		`));
 
