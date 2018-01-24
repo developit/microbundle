@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fixtures demo 1`] = `
+"demo
+  dist
+    demo.js
+    demo.js.map
+    demo.m.js
+    demo.m.js.map
+    demo.umd.js
+    demo.umd.js.map
+  src
+    index.js
+    two.js
+
+
+Build output to dist:
+225 B: demo.js
+225 B: demo.m.js
+295 B: demo.umd.js"
+`;
+
+exports[`fixtures ts-demo 1`] = `
+"ts-demo
+  dist
+    ts-demo.js
+    ts-demo.js.map
+    ts-demo.m.js
+    ts-demo.m.js.map
+    ts-demo.umd.js
+    ts-demo.umd.js.map
+  src
+    car.ts
+    index.ts
+
+
+Build output to dist:
+106 B: ts-demo.js
+106 B: ts-demo.m.js
+175 B: ts-demo.umd.js"
+`;
