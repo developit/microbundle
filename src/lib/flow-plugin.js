@@ -5,7 +5,7 @@ export default function fixedFlow(options) {
 	return Object.assign({}, plugin, {
 		transform(code, id) {
 			let ret = plugin.transform(code, id);
-			if (ret.code===code) return null;
+			if (ret && ret.code===code) return null;
 			return ret;
 		}
 	});
