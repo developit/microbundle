@@ -1,0 +1,6 @@
+{
+  "name": "name-custom",
+  "scripts": {
+    "build": "microbundle --name nameCustomCli"
+  }
+}

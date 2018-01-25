@@ -3,7 +3,6 @@ import fs from 'fs';
 import { resolve, relative, dirname, basename, extname } from 'path';
 import chalk from 'chalk';
 import { map, series } from 'asyncro';
-import promisify from 'es6-promisify';
 import glob from 'glob';
 import autoprefixer from 'autoprefixer';
 import { rollup, watch } from 'rollup';
@@ -19,12 +18,9 @@ import prettyBytes from 'pretty-bytes';
 import shebangPlugin from 'rollup-plugin-preserve-shebang';
 import typescript from 'rollup-plugin-typescript2';
 import flow from './lib/flow-plugin';
+import { readFile, isDir, isFile } from './utils';
 import camelCase from 'camelcase';
 
-const readFile = promisify(fs.readFile);
-const stat = promisify(fs.stat);
-const isDir = name => stat(name).then( stats => stats.isDirectory() ).catch( () => false );
-const isFile = name => stat(name).then( stats => stats.isFile() ).catch( () => false );
 const removeScope = name => name.replace(/^@.*\//, '');
 const safeVariableName = name => camelCase(removeScope(name).toLowerCase().replace(/((^[^a-zA-Z]+)|[^\w.-])|([^a-zA-Z0-9]+$)/g, ''));
 
@@ -40,7 +36,7 @@ export default async function microbundle(options) {
 		options.pkg = JSON.parse(await readFile(resolve(cwd, 'package.json'), 'utf8'));
 	}
 	catch (err) {
-		process.stderr.write(chalk.yellow(`${chalk.yellow.inverse('WARN')} no package.json found. Assuming a name of "${basename(options.cwd)}".`)+'\n');
+		process.stderr.write(chalk.yellow(`${chalk.yellow.inverse('WARN')} no package.json found. Assuming a pkg.name of "${basename(options.cwd)}".`)+'\n');
 		let msg = String(err.message || err);
 		if (!msg.match(/ENOENT/)) console.warn(`  ${chalk.red.dim(msg)}`);
 		options.pkg = {};
@@ -53,6 +49,8 @@ export default async function microbundle(options) {
 			process.stderr.write(chalk.yellow(`${chalk.yellow.inverse('WARN')} missing package.json "name" field. Assuming "${options.pkg.name}".`)+'\n');
 		}
 	}
+
+	options.name = options.name || options.pkg.amdName || safeVariableName(options.pkg.name);
 
 	const jsOrTs = async filename => resolve(cwd, `${filename}${await isFile(resolve(cwd, filename+'.ts')) ? '.ts' : '.js'}`);
 
@@ -131,7 +129,7 @@ export default async function microbundle(options) {
 		return await getSizeInfo(bundle._code, outputOptions.file);
 	}));
 
-	return chalk.blue(`Build output to ${relative(cwd, dirname(options.output)) || '.'}:`) + '\n   ' + out.join('\n   ');
+	return chalk.blue(`Build "${options.name}" to ${relative(cwd, dirname(options.output)) || '.'}:`) + '\n   ' + out.join('\n   ');
 }
 
 
@@ -318,7 +316,7 @@ function createConfig(options, entry, format, writeMeta) {
 				propertyReadSideEffects: false
 			},
 			format,
-			name: options.name || pkg.amdName || safeVariableName(pkg.name),
+			name: options.name,
 			file: resolve(options.cwd, (format==='es' && moduleMain) || (format==='umd' && umdMain) || cjsMain)
 		}
 	};

@@ -1,27 +1,63 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`fixtures demo 1`] = `
-"demo
+exports[`fixtures basic 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+basic
   dist
-    demo.js
-    demo.js.map
-    demo.m.js
-    demo.m.js.map
-    demo.umd.js
-    demo.umd.js.map
+    basic-lib.js
+    basic-lib.js.map
+    basic-lib.m.js
+    basic-lib.m.js.map
+    basic-lib.umd.js
+    basic-lib.umd.js.map
+  package.json
   src
     index.js
     two.js
 
 
-Build output to dist:
-222 B: demo.js
-223 B: demo.m.js
-295 B: demo.umd.js"
+Build \\"basicLib\\" to dist:
+222 B: basic-lib.js
+223 B: basic-lib.m.js
+300 B: basic-lib.umd.js"
+`;
+
+exports[`fixtures basic-ts 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+basic-ts
+  dist
+    basic-lib-ts.js
+    basic-lib-ts.js.map
+    basic-lib-ts.m.js
+    basic-lib-ts.m.js.map
+    basic-lib-ts.umd.js
+    basic-lib-ts.umd.js.map
+    car.d.ts
+    index.d.ts
+  package.json
+  src
+    car.ts
+    index.ts
+
+
+Build \\"basicLibTs\\" to dist:
+104 B: basic-lib-ts.js
+97 B: basic-lib-ts.m.js
+180 B: basic-lib-ts.umd.js"
 `;
 
 exports[`fixtures jsx 1`] = `
-"jsx
+"Used script: microbundle
+
+Directory tree:
+
+jsx
   dist
     jsx.js
     jsx.js.map
@@ -30,32 +66,110 @@ exports[`fixtures jsx 1`] = `
     jsx.umd.js
     jsx.umd.js.map
   index.js
+  package.json
 
 
-Build output to dist:
+Build \\"jsx\\" to dist:
 211 B: jsx.js
 212 B: jsx.m.js
 283 B: jsx.umd.js"
 `;
 
-exports[`fixtures ts-demo 1`] = `
-"ts-demo
+exports[`fixtures name-custom-amd 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+name-custom-amd
   dist
-    car.d.ts
-    index.d.ts
-    ts-demo.js
-    ts-demo.js.map
-    ts-demo.m.js
-    ts-demo.m.js.map
-    ts-demo.umd.js
-    ts-demo.umd.js.map
+    name-custom-amd.js
+    name-custom-amd.js.map
+    name-custom-amd.m.js
+    name-custom-amd.m.js.map
+    name-custom-amd.umd.js
+    name-custom-amd.umd.js.map
+  package.json
   src
-    car.ts
-    index.ts
+    index.js
+    two.js
 
 
-Build output to dist:
-104 B: ts-demo.js
-97 B: ts-demo.m.js
-175 B: ts-demo.umd.js"
+Build \\"customNameAmd\\" to dist:
+222 B: name-custom-amd.js
+223 B: name-custom-amd.m.js
+304 B: name-custom-amd.umd.js"
+`;
+
+exports[`fixtures name-custom-cli 1`] = `
+"Used script: microbundle --name nameCustomCli
+
+Directory tree:
+
+name-custom-cli
+  dist
+    name-custom.js
+    name-custom.js.map
+    name-custom.m.js
+    name-custom.m.js.map
+    name-custom.umd.js
+    name-custom.umd.js.map
+  package.json
+  src
+    index.js
+    two.js
+
+
+Build \\"nameCustomCli\\" to dist:
+222 B: name-custom.js
+223 B: name-custom.m.js
+303 B: name-custom.umd.js"
+`;
+
+exports[`fixtures no-pkg 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+no-pkg
+  dist
+    no-pkg.js
+    no-pkg.js.map
+    no-pkg.m.js
+    no-pkg.m.js.map
+    no-pkg.umd.js
+    no-pkg.umd.js.map
+  src
+    index.js
+    two.js
+
+
+Build \\"noPkg\\" to dist:
+222 B: no-pkg.js
+223 B: no-pkg.m.js
+296 B: no-pkg.umd.js"
+`;
+
+exports[`fixtures no-pkg-name 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+no-pkg-name
+  dist
+    no-pkg-name.js
+    no-pkg-name.js.map
+    no-pkg-name.m.js
+    no-pkg-name.m.js.map
+    no-pkg-name.umd.js
+    no-pkg-name.umd.js.map
+  package.json
+  src
+    index.js
+    two.js
+
+
+Build \\"noPkgName\\" to dist:
+222 B: no-pkg-name.js
+223 B: no-pkg-name.m.js
+300 B: no-pkg-name.umd.js"
 `;
