@@ -82,8 +82,9 @@ Options:
 
 Here's what's coming up for Microbundle:
 
-- [TypeScript support](https://github.com/developit/microbundle/issues/5)
-- [Flowtype support](https://github.com/developit/microbundle/issues/5#issuecomment-351075881)
+- [ ] [Multiple separate inputs->outputs](https://github.com/developit/microbundle/issues/50)
+- [x] [TypeScript support](https://github.com/developit/microbundle/issues/5)
+- [x] [Flowtype support](https://github.com/developit/microbundle/issues/5#issuecomment-351075881)
 
 
 ## 🥂 License
