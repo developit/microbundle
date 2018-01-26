@@ -107,11 +107,11 @@ export default async function microbundle(options) {
 					output: options.outputOptions,
 					watch: WATCH_OPTS
 				}, options.inputOptions)).on('event', e => {
-					if (e.code==='ERROR' || e.code==='FATAL') {
-						return reject(e);
-					}
 					if (emitEvents) {
 						process.emit('event', e);
+					}
+					if (e.code==='ERROR' || e.code==='FATAL') {
+						return reject(e);
 					}
 					if (e.code==='END') {
 						getSizeInfo(options._code, options.outputOptions.file).then( text => {
