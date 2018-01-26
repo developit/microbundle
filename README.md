@@ -11,8 +11,9 @@
 
 ## ✨ Features:
 
-- Bundles your library using nothing but a `package.json`
+- **One dependency** to bundle your library using only a `package.json`
 - Support for ESnext & async/await _(via [Bublé] & [Nodent])_
+- Produces tiny, optimized code for all inputs
 - Supports multiple entry modules _(`cli.js` + `index.js`, etc)_
 - Creates multiple output formats for each entry _(<abbr title="CommonJS (node)">CJS</abbr>, <abbr title="Universal Module Definition">UMD</abbr> & <abbr title="ECMAScript Modules">ESM</abbr>)_
 - Built-in Uglify compression & gzipped bundle size tracking
