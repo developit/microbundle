@@ -99,7 +99,7 @@ export default async function microbundle(options) {
 	}
 
 	if (options.watch) {
-		const emitEvents = options.emit;
+		const emit = options.emit;
 		return new Promise( (resolve, reject) => {
 			process.stdout.write(chalk.blue(`Watching source, compiling to ${relative(cwd, dirname(options.output))}:\n`));
 			steps.map( options => {
@@ -107,7 +107,7 @@ export default async function microbundle(options) {
 					output: options.outputOptions,
 					watch: WATCH_OPTS
 				}, options.inputOptions)).on('event', e => {
-					if (emitEvents) {
+					if (emit) {
 						process.emit('event', e);
 					}
 					if (e.code==='ERROR' || e.code==='FATAL') {
