@@ -21,7 +21,6 @@ import typescript from 'rollup-plugin-typescript';
 import flow from './lib/flow-plugin';
 import camelCase from 'camelcase';
 
-const interopRequire = m => m.default || m;
 const readFile = promisify(fs.readFile);
 const stat = promisify(fs.stat);
 const isDir = name => stat(name).then( stats => stats.isDirectory() ).catch( () => false );
@@ -217,7 +216,7 @@ function createConfig(options, entry, format, writeMeta) {
 					inject: false,
 					extract: !!writeMeta
 				}),
-				useTypescript && typescript(),
+				useTypescript && typescript({ typescript: require('typescript') }),
 				!useTypescript && flow({ all: true, pretty: true }),
 				nodent({
 					exclude: 'node_modules/**',
@@ -263,32 +262,40 @@ function createConfig(options, entry, format, writeMeta) {
 				// 	[`export default ${rollupName};`]: '',
 				// 	[`var ${rollupName} =`]: 'export default'
 				// }),
-				options.compress!==false && uglify({
-					output: { comments: false },
-					mangle: {
+				options.compress!==false && [
+					uglify({
+						output: { comments: false },
+						compress: {
+							keep_infinity: true,
+							pure_getters: true
+						},
+						warnings: true,
+						ecma: 5,
 						toplevel: format==='cjs' || format==='es',
-						properties: mangleOptions ? {
-							regex: mangleOptions.regex ? new RegExp(mangleOptions.regex) : null,
-							reserved: mangleOptions.reserved || []
-						} : false
-					},
-					nameCache
-				}, format==='es' ? interopRequire(require('uglify-es')).minify : undefined),
-				mangleOptions && {
-					// before hook
-					options() {
-						try {
-							nameCache = JSON.parse(fs.readFileSync(resolve(options.cwd, 'mangle.json'), 'utf8'));
-						}
-						catch (e) {}
-					},
-					// after hook
-					onwrite() {
-						if (writeMeta && nameCache) {
-							fs.writeFile(resolve(options.cwd, 'mangle.json'), JSON.stringify(nameCache, null, 2), Object);
+						mangle: {
+							properties: mangleOptions ? {
+								regex: mangleOptions.regex ? new RegExp(mangleOptions.regex) : null,
+								reserved: mangleOptions.reserved || []
+							} : false
+						},
+						nameCache
+					}),
+					mangleOptions && {
+						// before hook
+						options() {
+							try {
+								nameCache = JSON.parse(fs.readFileSync(resolve(options.cwd, 'mangle.json'), 'utf8'));
+							}
+							catch (e) {}
+						},
+						// after hook
+						onwrite() {
+							if (writeMeta && nameCache) {
+								fs.writeFile(resolve(options.cwd, 'mangle.json'), JSON.stringify(nameCache, null, 2), Object);
+							}
 						}
 					}
-				},
+				],
 				{ ongenerate({ bundle }, { code }) {
 					config._code = bundle._code = code;
 				} },

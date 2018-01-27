@@ -15,8 +15,8 @@ exports[`fixtures demo 1`] = `
 
 
 Build output to dist:
-225 B: demo.js
-225 B: demo.m.js
+222 B: demo.js
+223 B: demo.m.js
 295 B: demo.umd.js"
 `;
 
@@ -53,7 +53,7 @@ exports[`fixtures ts-demo 1`] = `
 
 
 Build output to dist:
-106 B: ts-demo.js
-106 B: ts-demo.m.js
+104 B: ts-demo.js
+97 B: ts-demo.m.js
 175 B: ts-demo.umd.js"
 `;

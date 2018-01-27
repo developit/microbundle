@@ -1,19 +1,19 @@
 <p align="center">
-  <img src="https://cdn.rawgit.com/developit/de05e4e17963ce2a714c61ccc4fd3d97/raw/b1576a651361c8433b28965b33067e8090eaac2c/microbundle.svg" width="300" height="300" alt="microbundle">
-  <br>
-  <a href="https://www.npmjs.org/package/microbundle"><img src="https://img.shields.io/npm/v/microbundle.svg?style=flat" alt="npm"></a> <a href="https://travis-ci.org/developit/microbundle"><img src="https://travis-ci.org/developit/microbundle.svg?branch=master" alt="travis"></a>
+  <img src="https://i.imgur.com/LMEgZMh.gif" width="597" alt="microbundle">
 </p>
+<h1 align="center">
+	Microbundle
+	<a href="https://www.npmjs.org/package/microbundle"><img src="https://img.shields.io/npm/v/microbundle.svg?style=flat" alt="npm"></a> <a href="https://travis-ci.org/developit/microbundle"><img src="https://travis-ci.org/developit/microbundle.svg?branch=master" alt="travis"></a>
+</h1>
+<p align="center">The <strong>zero-configuration</strong> bundler for <em>tiny modules</em>, powered by <a href="https://github.com/rollup/rollup">Rollup</a>.</p>
 
-# Microbundle
-
-The **zero-configuration** bundler for _tiny modules_, powered by [Rollup].
-
-<img src="https://i.imgur.com/qOdddQJ.gif" width="334" height="96">
+---
 
 ## ✨ Features:
 
-- Bundles your library using nothing but a `package.json`
+- **One dependency** to bundle your library using only a `package.json`
 - Support for ESnext & async/await _(via [Bublé] & [Nodent])_
+- Produces tiny, optimized code for all inputs
 - Supports multiple entry modules _(`cli.js` + `index.js`, etc)_
 - Creates multiple output formats for each entry _(<abbr title="CommonJS (node)">CJS</abbr>, <abbr title="Universal Module Definition">UMD</abbr> & <abbr title="ECMAScript Modules">ESM</abbr>)_
 - Built-in Uglify compression & gzipped bundle size tracking
@@ -82,8 +82,9 @@ Options:
 
 Here's what's coming up for Microbundle:
 
-- [TypeScript support](https://github.com/developit/microbundle/issues/5)
-- [Flowtype support](https://github.com/developit/microbundle/issues/5#issuecomment-351075881)
+- [ ] [Multiple separate inputs->outputs](https://github.com/developit/microbundle/issues/50)
+- [x] [TypeScript support](https://github.com/developit/microbundle/issues/5)
+- [x] [Flowtype support](https://github.com/developit/microbundle/issues/5#issuecomment-351075881)
 
 
 ## 🥂 License
