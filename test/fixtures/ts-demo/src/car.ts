@@ -1,4 +1,4 @@
-interface Driveable {
+export interface Driveable {
 	drive(distance: number): boolean;
 }
 

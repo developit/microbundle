@@ -41,6 +41,8 @@ Build output to dist:
 exports[`fixtures ts-demo 1`] = `
 "ts-demo
   dist
+    car.d.ts
+    index.d.ts
     ts-demo.js
     ts-demo.js.map
     ts-demo.m.js
@@ -50,6 +52,7 @@ exports[`fixtures ts-demo 1`] = `
   src
     car.ts
     index.ts
+  tsconfig.json
 
 
 Build output to dist:

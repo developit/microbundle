@@ -17,7 +17,7 @@ import alias from 'rollup-plugin-strict-alias';
 import gzipSize from 'gzip-size';
 import prettyBytes from 'pretty-bytes';
 import shebangPlugin from 'rollup-plugin-preserve-shebang';
-import typescript from 'rollup-plugin-typescript';
+import typescript from 'rollup-plugin-typescript2';
 import flow from './lib/flow-plugin';
 import camelCase from 'camelcase';
 
