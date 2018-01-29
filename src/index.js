@@ -98,7 +98,7 @@ export default async function microbundle(options) {
 	}
 
 	if (options.watch) {
-		const emitEvents = options.emit;
+		const onBuild = options.onBuild;
 		return new Promise( (resolve, reject) => {
 			process.stdout.write(chalk.blue(`Watching source, compiling to ${relative(cwd, dirname(options.output))}:\n`));
 			steps.map( options => {
@@ -109,13 +109,13 @@ export default async function microbundle(options) {
 					if (e.code==='ERROR' || e.code==='FATAL') {
 						return reject(e);
 					}
-					if (emitEvents) {
-						process.emit('event', e);
-					}
 					if (e.code==='END') {
 						getSizeInfo(options._code, options.outputOptions.file).then( text => {
 							process.stdout.write(`Wrote ${text.trim()}\n`);
 						});
+						if (typeof onBuild=='function') {
+							onBuild(e);
+						}
 					}
 				});
 			});
