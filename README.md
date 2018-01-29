@@ -50,31 +50,29 @@ Just like `microbundle build`, but watches your source files and rebuilds on any
 ### All CLI Options
 
 ```
-microbundle [entries..]
+  Usage
+    $ microbundle <command> [options]
 
-Build once and exit
+  Available Commands
+    build    Build once and exit
+    watch    Rebuilds on any change
 
-Commands:
-  cli.js build [entries..]  Build once and exit             [default]
-  cli.js watch [entries..]  Rebuilds on any change
+  For more info, run any command with the `--help` flag
+    $ microbundle build --help
+    $ microbundle watch --help
 
-Options:
-  --version        Show version number                      [boolean]
-  --entry, -i      Entry module(s)
-                                 [string] [default: <package.module>]
-  --output, -o     Directory to place build files into
-                  [string] [default: <dirname(package.main), build/>]
-  --cwd            Use an alternative working directory
-                                                [string] [default: .]
-  --format         Only build specified formats
-                                       [string] [default: es,cjs,umd]
-  --target         Specify your target environment
-                                             [string] [default: node]
-  --compress       Compress output using UglifyJS
-                                            [boolean] [default: true]
-  --strict         Enforce undefined global context and add "use
-                   strict"                           [default: false]
-  --name           Specify name exposed in UMD builds        [string]
+  Options
+    -v, --version    Displays current version
+    -i, --entry      Entry module(s)
+    -o, --output     Directory to place build files into
+    -f, --format     Only build specified formats  (default es,cjs,umd)
+    --target         Specify your target environment  (default node)
+    --external       Specify external dependencies, or 'all'
+    --compress       Compress output using UglifyJS  (default true)
+    --strict         Enforce undefined global context and add "use strict"
+    --name           Specify name exposed in UMD builds
+    --cwd            Use an alternative working directory  (default .)
+    -h, --help       Displays this message
 ```
 
 
