@@ -54,7 +54,7 @@
     "rollup-plugin-es3": "^1.1.0",
     "rollup-plugin-flow": "^1.1.1",
     "rollup-plugin-node-resolve": "^3.0.2",
-    "rollup-plugin-nodent": "github:developit/rollup-plugin-nodent",
+    "rollup-plugin-nodent": "^0.2.2",
     "rollup-plugin-postcss": "^1.2.7",
     "rollup-plugin-preserve-shebang": "^0.1.6",
     "rollup-plugin-sizes": "^0.4.2",
