@@ -310,7 +310,7 @@ function createConfig(options, entry, format, writeMeta) {
 			strict: options.strict===true,
 			legacy: true,
 			freeze: false,
-			sourcemap: options.sourcemap===true || options.sourcemap===undefined,
+			sourcemap: options.sourcemap!==false,
 			treeshake: {
 				propertyReadSideEffects: false
 			},
