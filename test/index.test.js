@@ -28,8 +28,7 @@ describe('fixtures', () => {
 		it(fixtureDir, async () => {
 			const output = await microbundle({
 				cwd: path.resolve(fixturePath),
-				formats: 'es,cjs,umd',
-				sourceMap: true
+				formats: 'es,cjs,umd'
 			});
 
 			const printedDir = printTree([dirTree(fixturePath)]);
