@@ -156,7 +156,7 @@ function createConfig(options, entry, format, writeMeta) {
 	}
 	else if (options.external==='all' || options.inline==='none') {
 		useNodeResolve = false;
-		external = external.concat(Object.keys(pkg.dependencies));
+		external = external.concat(Object.keys(pkg.dependencies || {}));
 	}
 
 	let globals = external.reduce( (globals, name) => {
