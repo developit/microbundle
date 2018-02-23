@@ -86,6 +86,12 @@ Here's what's coming up for Microbundle:
 - [x] [Flowtype support](https://github.com/developit/microbundle/issues/5#issuecomment-351075881)
 
 
+## 🔨 Built with Microbundle
+
+- [Stockroom](https://github.com/developit/stockroom) Offload your store management to a worker easily.
+- [Microenvi](https://github.com/fwilkerson/microenvi) Bundle, serve, and hot reload with one command.
+
+
 ## 🥂 License
 
 [MIT](https://oss.ninja/mit/developit/)
