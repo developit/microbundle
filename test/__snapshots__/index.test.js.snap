@@ -41,6 +41,8 @@ Build output to dist:
 exports[`fixtures ts-demo 1`] = `
 "ts-demo
   dist
+    car.d.ts
+    index.d.ts
     ts-demo.js
     ts-demo.js.map
     ts-demo.m.js

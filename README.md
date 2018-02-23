@@ -72,6 +72,7 @@ Just like `microbundle build`, but watches your source files and rebuilds on any
     --strict         Enforce undefined global context and add "use strict"
     --name           Specify name exposed in UMD builds
     --cwd            Use an alternative working directory  (default .)
+    --sourcemap      Generate source map  (default true)
     -h, --help       Displays this message
 ```
 

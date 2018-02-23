@@ -17,7 +17,7 @@ import alias from 'rollup-plugin-strict-alias';
 import gzipSize from 'gzip-size';
 import prettyBytes from 'pretty-bytes';
 import shebangPlugin from 'rollup-plugin-preserve-shebang';
-import typescript from 'rollup-plugin-typescript';
+import typescript from 'rollup-plugin-typescript2';
 import flow from './lib/flow-plugin';
 import camelCase from 'camelcase';
 
@@ -156,7 +156,7 @@ function createConfig(options, entry, format, writeMeta) {
 	}
 	else if (options.external==='all' || options.inline==='none') {
 		useNodeResolve = false;
-		external = external.concat(Object.keys(pkg.dependencies));
+		external = external.concat(Object.keys(pkg.dependencies || {}));
 	}
 
 	let globals = external.reduce( (globals, name) => {
@@ -216,7 +216,10 @@ function createConfig(options, entry, format, writeMeta) {
 					inject: false,
 					extract: !!writeMeta
 				}),
-				useTypescript && typescript({ typescript: require('typescript') }),
+				useTypescript && typescript({
+					typescript: require('typescript'),
+					tsconfigDefaults: { compilerOptions: { declaration: true } }
+				}),
 				!useTypescript && flow({ all: true, pretty: true }),
 				nodent({
 					exclude: 'node_modules/**',
@@ -310,7 +313,7 @@ function createConfig(options, entry, format, writeMeta) {
 			strict: options.strict===true,
 			legacy: true,
 			freeze: false,
-			sourcemap: true,
+			sourcemap: options.sourcemap!==false,
 			treeshake: {
 				propertyReadSideEffects: false
 			},
