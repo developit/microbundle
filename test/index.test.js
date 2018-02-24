@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import fs from 'fs-extra';
-import promisify from 'es6-promisify';
+import { promisify } from 'es6-promisify';
 import dirTree from 'directory-tree';
 import shellQuote from 'shell-quote';
 import _rimraf from 'rimraf';
