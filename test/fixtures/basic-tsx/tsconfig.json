@@ -1,0 +1,7 @@
+{
+	"compilerOptions": {
+		"rootDir": "./src",
+		"jsxFactory": "h",
+		"jsx": "react"
+	}
+}

@@ -52,7 +52,8 @@ export default async function microbundle(options) {
 
 	options.name = options.name || options.pkg.amdName || safeVariableName(options.pkg.name);
 
-	const jsOrTs = async filename => resolve(cwd, `${filename}${await isFile(resolve(cwd, filename+'.ts')) ? '.ts' : '.js'}`);
+	const jsOrTs = async filename =>
+		resolve(cwd, `${filename}${await isFile(resolve(cwd, filename+'.ts')) ? '.ts' : await isFile(resolve(cwd, filename+'.tsx')) ? '.tsx' : '.js'}`);
 
 	options.input = [];
 	[].concat(
@@ -196,7 +197,7 @@ function createConfig(options, entry, format, writeMeta) {
 		catch (e) {}
 	}
 
-	const useTypescript = extname(entry)==='.ts';
+	const useTypescript = extname(entry)==='.ts' || extname(entry)==='.tsx';
 
 	let config = {
 		inputOptions: {

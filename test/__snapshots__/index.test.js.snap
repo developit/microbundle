@@ -44,12 +44,39 @@ basic-ts
   src
     car.ts
     index.ts
+  tsconfig.json
 
 
 Build \\"basicLibTs\\" to dist:
 104 B: basic-lib-ts.js
 97 B: basic-lib-ts.m.js
 180 B: basic-lib-ts.umd.js"
+`;
+
+exports[`fixtures basic-tsx 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+basic-tsx
+  dist
+    basic-lib-tsx.js
+    basic-lib-tsx.js.map
+    basic-lib-tsx.m.js
+    basic-lib-tsx.m.js.map
+    basic-lib-tsx.umd.js
+    basic-lib-tsx.umd.js.map
+    index.d.ts
+  package.json
+  src
+    index.tsx
+  tsconfig.json
+
+
+Build \\"basicLibTsx\\" to dist:
+221 B: basic-lib-tsx.js
+221 B: basic-lib-tsx.m.js
+295 B: basic-lib-tsx.umd.js"
 `;
 
 exports[`fixtures jsx 1`] = `
