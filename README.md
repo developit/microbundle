@@ -67,7 +67,7 @@ Just like `microbundle build`, but watches your source files and rebuilds on any
     -o, --output     Directory to place build files into
     -f, --format     Only build specified formats  (default es,cjs,umd)
     --target         Specify your target environment  (default node)
-    --external       Specify external dependencies, or 'all'
+    --external       Specify external dependencies, or 'none'
     --compress       Compress output using UglifyJS  (default true)
     --strict         Enforce undefined global context and add "use strict"
     --name           Specify name exposed in UMD builds

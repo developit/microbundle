@@ -138,7 +138,6 @@ function createConfig(options, entry, format, writeMeta) {
 	let { pkg } = options;
 
 	let external = ['dns', 'fs', 'path', 'url'].concat(
-		Object.keys(pkg.peerDependencies || {}),
 		options.entries.filter( e => e!==entry )
 	);
 
@@ -149,13 +148,18 @@ function createConfig(options, entry, format, writeMeta) {
 		external.push('.');
 	}
 
-	let useNodeResolve = true;
-	if (options.inline === 'all') {
+	let useNodeResolve;
+	const peerDeps = Object.keys(pkg.peerDependencies || {});
+	if (options.external==='none') {
 		useNodeResolve = true;
 	}
-	else if (options.external==='all' || options.inline==='none') {
+	else if (options.external) {
+		useNodeResolve = true;
+		external = external.concat(peerDeps).concat(options.external.split(','));
+	}
+	else {
 		useNodeResolve = false;
-		external = external.concat(Object.keys(pkg.dependencies || {}));
+		external = external.concat(peerDeps).concat(Object.keys(pkg.dependencies || {}));
 	}
 
 	let globals = external.reduce( (globals, name) => {

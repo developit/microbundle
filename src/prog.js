@@ -18,7 +18,7 @@ export default handler => {
 		.option('--output, -o', 'Directory to place build files into')
 		.option('--format, -f', 'Only build specified formats', 'es,cjs,umd')
 		.option('--target', 'Specify your target environment', 'node')
-		.option('--external', `Specify external dependencies, or 'all'`)
+		.option('--external', `Specify external dependencies, or 'none'`)
 		.option('--compress', 'Compress output using UglifyJS', true)
 		.option('--strict', 'Enforce undefined global context and add "use strict"')
 		.option('--name', 'Specify name exposed in UMD builds')
