@@ -5,7 +5,7 @@ const toArray = val => Array.isArray(val) ? val : val == null ? [] : [val];
 
 export default handler => {
 	const cmd = type => (str, opts) => {
-		opts.watch = type === 'watch';
+		opts.watch = opts.watch || type === 'watch';
 		opts.entries = toArray(str || opts.entry).concat(opts._);
 		handler(opts);
 	};
@@ -23,7 +23,8 @@ export default handler => {
 		.option('--strict', 'Enforce undefined global context and add "use strict"')
 		.option('--name', 'Specify name exposed in UMD builds')
 		.option('--cwd', 'Use an alternative working directory', '.')
-		.option('--sourcemap', 'Generate source map', true);
+		.option('--sourcemap', 'Generate source map', true)
+		.option('--watch, -w', 'Rebuilds on any change', false);
 
 	prog
 		.command('build [...entries]', '', { default: true })
@@ -39,7 +40,8 @@ export default handler => {
 	return argv => prog.parse(argv, {
 		alias: {
 			o: ['output', 'd'],
-			i: ['entry', 'entries', 'e']
+			i: ['entry', 'entries', 'e'],
+			w: ['watch']
 		}
 	});
 };
