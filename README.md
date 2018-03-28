@@ -66,6 +66,7 @@ Just like `microbundle build`, but watches your source files and rebuilds on any
     -i, --entry      Entry module(s)
     -o, --output     Directory to place build files into
     -f, --format     Only build specified formats  (default es,cjs,umd)
+    -w, --watch      Rebuilds on any change  (default false)
     --target         Specify your target environment  (default node)
     --external       Specify external dependencies, or 'all'
     --compress       Compress output using UglifyJS  (default true)
