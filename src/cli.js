@@ -13,7 +13,8 @@ const run = opts => {
 			if (typeof(err.code) === 'string') {
 				process.stderr.write('error ' + err.code);
 				process.exit(1);
-			} else {
+			}
+			else {
 				process.exit(err.code || 1);
 			}
 		});
