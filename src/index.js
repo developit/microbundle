@@ -22,7 +22,9 @@ import { readFile, isDir, isFile } from './utils';
 import camelCase from 'camelcase';
 
 const removeScope = name => name.replace(/^@.*\//, '');
-const safeVariableName = name => camelCase(removeScope(name).toLowerCase().replace(/((^[^a-zA-Z]+)|[^\w.-])|([^a-zA-Z0-9]+$)/g, ''));
+const safeVariableName = name => camelCase(removeScope(name)
+	.toLowerCase()
+	.replace(/((^[^a-zA-Z]+)|[^\w.-])|([^a-zA-Z0-9]+$)/g, ''));
 
 const WATCH_OPTS = {
 	exclude: 'node_modules/**'
@@ -36,7 +38,7 @@ export default async function microbundle(options) {
 		options.pkg = JSON.parse(await readFile(resolve(cwd, 'package.json'), 'utf8'));
 	}
 	catch (err) {
-		process.stderr.write(chalk.yellow(`${chalk.yellow.inverse('WARN')} no package.json found. Assuming a pkg.name of "${basename(options.cwd)}".`)+'\n');
+		process.stderr.write(chalk.yellow(`${chalk.yellow.inverse('WARN')} no package.json found. Assuming a pkg.name of "${basename(options.cwd)}".`) + '\n');
 		let msg = String(err.message || err);
 		if (!msg.match(/ENOENT/)) console.warn(`  ${chalk.red.dim(msg)}`);
 		options.pkg = {};
@@ -46,19 +48,21 @@ export default async function microbundle(options) {
 	if (!options.pkg.name) {
 		options.pkg.name = basename(options.cwd);
 		if (hasPackageJson) {
-			process.stderr.write(chalk.yellow(`${chalk.yellow.inverse('WARN')} missing package.json "name" field. Assuming "${options.pkg.name}".`)+'\n');
+			process.stderr.write(chalk.yellow(`${chalk.yellow.inverse('WARN')} missing package.json "name" field. Assuming "${options.pkg.name}".`) + '\n');
 		}
 	}
 
 	options.name = options.name || options.pkg.amdName || safeVariableName(options.pkg.name);
 
 	const jsOrTs = async filename =>
-		resolve(cwd, `${filename}${await isFile(resolve(cwd, filename+'.ts')) ? '.ts' : await isFile(resolve(cwd, filename+'.tsx')) ? '.tsx' : '.js'}`);
+		resolve(cwd, `${filename}${await isFile(resolve(cwd, filename + '.ts')) ? '.ts' : await isFile(resolve(cwd, filename + '.tsx')) ? '.tsx' : '.js'}`);
 
 	options.input = [];
 	[].concat(
 		options.entries && options.entries.length ? options.entries : options.pkg.source || (await isDir(resolve(cwd, 'src')) && await jsOrTs('src/index')) || await jsOrTs('index') || options.pkg.module
-	).map( file => glob.sync(resolve(cwd, file)) ).forEach( file => options.input.push(...file) );
+	)
+		.map(file => glob.sync(resolve(cwd, file)))
+		.forEach(file => options.input.push(...file));
 
 	let main = resolve(cwd, options.output || options.pkg.main || 'dist');
 	if (!main.match(/\.[a-z]+$/) || await isDir(main)) {
@@ -72,20 +76,20 @@ export default async function microbundle(options) {
 			file = resolve(file, 'index.js');
 		}
 		return file;
-	})).filter( (item, i, arr) => arr.indexOf(item)===i );
+	})).filter((item, i, arr) => arr.indexOf(item) === i);
 
 	options.entries = entries;
 
-	options.multipleEntries = entries.length>1;
+	options.multipleEntries = entries.length > 1;
 
 	let formats = (options.format || options.formats).split(',');
 	// always compile cjs first if it's there:
-	formats.sort( (a, b) => a==='cjs' ? -1 : a>b ? 1 : 0);
+	formats.sort((a, b) => a === 'cjs' ? -1 : a > b ? 1 : 0);
 
 	let steps = [];
-	for (let i=0; i<entries.length; i++) {
-		for (let j=0; j<formats.length; j++) {
-			steps.push(createConfig(options, entries[i], formats[j], i===0 && j===0));
+	for (let i = 0; i < entries.length; i++) {
+		for (let j = 0; j < formats.length; j++) {
+			steps.push(createConfig(options, entries[i], formats[j], i === 0 && j === 0));
 		}
 	}
 
@@ -93,26 +97,26 @@ export default async function microbundle(options) {
 		let size = await gzipSize(code);
 		let prettySize = prettyBytes(size);
 		let color = size < 5000 ? 'green' : size > 40000 ? 'red' : 'yellow';
-		return `${' '.repeat(10-prettySize.length)}${chalk[color](prettySize)}: ${chalk.white(basename(filename))}`;
+		return `${' '.repeat(10 - prettySize.length)}${chalk[color](prettySize)}: ${chalk.white(basename(filename))}`;
 	}
 
 	if (options.watch) {
 		const onBuild = options.onBuild;
-		return new Promise( (resolve, reject) => {
+		return new Promise((resolve, reject) => {
 			process.stdout.write(chalk.blue(`Watching source, compiling to ${relative(cwd, dirname(options.output))}:\n`));
-			steps.map( options => {
+			steps.map(options => {
 				watch(Object.assign({
 					output: options.outputOptions,
 					watch: WATCH_OPTS
 				}, options.inputOptions)).on('event', e => {
-					if (e.code==='ERROR' || e.code==='FATAL') {
+					if (e.code === 'ERROR' || e.code === 'FATAL') {
 						return reject(e);
 					}
-					if (e.code==='END') {
-						getSizeInfo(options._code, options.outputOptions.file).then( text => {
+					if (e.code === 'END') {
+						getSizeInfo(options._code, options.outputOptions.file).then(text => {
 							process.stdout.write(`Wrote ${text.trim()}\n`);
 						});
-						if (typeof onBuild=='function') {
+						if (typeof onBuild === 'function') {
 							onBuild(e);
 						}
 					}
@@ -122,7 +126,7 @@ export default async function microbundle(options) {
 	}
 
 	let cache;
-	let out = await series(steps.map( ({ inputOptions, outputOptions }) => async () => {
+	let out = await series(steps.map(({ inputOptions, outputOptions }) => async () => {
 		inputOptions.cache = cache;
 		let bundle = await rollup(inputOptions);
 		cache = bundle;
@@ -138,7 +142,7 @@ function createConfig(options, entry, format, writeMeta) {
 	let { pkg } = options;
 
 	let external = ['dns', 'fs', 'path', 'url'].concat(
-		options.entries.filter( e => e!==entry )
+		options.entries.filter(e => e !== entry)
 	);
 
 	let aliases = {};
@@ -150,7 +154,7 @@ function createConfig(options, entry, format, writeMeta) {
 
 	let useNodeResolve;
 	const peerDeps = Object.keys(pkg.peerDependencies || {});
-	if (options.external==='none') {
+	if (options.external === 'none') {
 		useNodeResolve = true;
 	}
 	else if (options.external) {
@@ -162,7 +166,7 @@ function createConfig(options, entry, format, writeMeta) {
 		external = external.concat(peerDeps).concat(Object.keys(pkg.dependencies || {}));
 	}
 
-	let globals = external.reduce( (globals, name) => {
+	let globals = external.reduce((globals, name) => {
 		// valid JS identifiers are usually library globals:
 		if (name.match(/^[a-z_$][a-z0-9_$]*$/)) {
 			globals[name] = name;
@@ -176,7 +180,7 @@ function createConfig(options, entry, format, writeMeta) {
 
 	let mainNoExtension = options.output;
 	if (options.multipleEntries) {
-		let name = entry.match(/(\\|\/)index(\.(umd|cjs|es|m))?\.js$/) ? mainNoExtension : entry;
+		let name = entry.match(/([\\/])index(\.(umd|cjs|es|m))?\.js$/) ? mainNoExtension : entry;
 		mainNoExtension = resolve(dirname(mainNoExtension), basename(name));
 	}
 	mainNoExtension = mainNoExtension.replace(/(\.(umd|cjs|es|m))?\.js$/, '');
@@ -191,17 +195,18 @@ function createConfig(options, entry, format, writeMeta) {
 	let mangleOptions = options.pkg.mangle || false;
 
 	let exportType;
-	if (format!='es') {
+	if (format !== 'es') {
 		try {
 			let file = fs.readFileSync(entry, 'utf-8');
 			let hasDefault = /\bexport\s*default\s*[a-zA-Z_$]/.test(file);
 			let hasNamed = /\bexport\s*(let|const|var|async|function\*?)\s*[a-zA-Z_$*]/.test(file) || /^\s*export\s*\{/m.test(file);
 			if (hasDefault && hasNamed) exportType = 'default';
 		}
-		catch (e) {}
+		catch (e) {
+		}
 	}
 
-	const useTypescript = extname(entry)==='.ts' || extname(entry)==='.tsx';
+	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
 
 	let config = {
 		inputOptions: {
@@ -252,7 +257,7 @@ function createConfig(options, entry, format, writeMeta) {
 				useNodeResolve && nodeResolve({
 					module: true,
 					jsnext: true,
-					browser: options.target!=='node'
+					browser: options.target !== 'node'
 				}),
 				// We should upstream this to rollup
 				// format==='cjs' && replace({
@@ -268,7 +273,7 @@ function createConfig(options, entry, format, writeMeta) {
 				// 	[`export default ${rollupName};`]: '',
 				// 	[`var ${rollupName} =`]: 'export default'
 				// }),
-				options.compress!==false && [
+				options.compress !== false && [
 					uglify({
 						output: { comments: false },
 						compress: {
@@ -277,7 +282,7 @@ function createConfig(options, entry, format, writeMeta) {
 						},
 						warnings: true,
 						ecma: 5,
-						toplevel: format==='cjs' || format==='es',
+						toplevel: format === 'cjs' || format === 'es',
 						mangle: {
 							properties: mangleOptions ? {
 								regex: mangleOptions.regex ? new RegExp(mangleOptions.regex) : null,
@@ -292,7 +297,8 @@ function createConfig(options, entry, format, writeMeta) {
 							try {
 								nameCache = JSON.parse(fs.readFileSync(resolve(options.cwd, 'mangle.json'), 'utf8'));
 							}
-							catch (e) {}
+							catch (e) {
+							}
 						},
 						// after hook
 						onwrite() {
@@ -302,9 +308,11 @@ function createConfig(options, entry, format, writeMeta) {
 						}
 					}
 				],
-				{ ongenerate({ bundle }, { code }) {
-					config._code = bundle._code = code;
-				} },
+				{
+					ongenerate({ bundle }, { code }) {
+						config._code = bundle._code = code;
+					}
+				},
 				shebangPlugin()
 			).filter(Boolean)
 		},
@@ -313,16 +321,16 @@ function createConfig(options, entry, format, writeMeta) {
 			exports: exportType ? 'default' : undefined,
 			paths: aliases,
 			globals,
-			strict: options.strict===true,
+			strict: options.strict === true,
 			legacy: true,
 			freeze: false,
-			sourcemap: options.sourcemap!==false,
+			sourcemap: options.sourcemap !== false,
 			treeshake: {
 				propertyReadSideEffects: false
 			},
 			format,
 			name: options.name,
-			file: resolve(options.cwd, (format==='es' && moduleMain) || (format==='umd' && umdMain) || cjsMain)
+			file: resolve(options.cwd, (format === 'es' && moduleMain) || (format === 'umd' && umdMain) || cjsMain)
 		}
 	};
 
