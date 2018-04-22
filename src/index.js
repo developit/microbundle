@@ -145,7 +145,6 @@ function createConfig(options, entry, format, writeMeta) {
 	// since we transform src/index.js, we need to rename imports for it:
 	if (options.multipleEntries) {
 		aliases['.'] = './' + basename(options.output);
-		external.push('.');
 	}
 
 	let useNodeResolve;
@@ -203,10 +202,18 @@ function createConfig(options, entry, format, writeMeta) {
 
 	const useTypescript = extname(entry)==='.ts' || extname(entry)==='.tsx';
 
+	const externalPredicate = new RegExp(`^(${ external.join('|') })($|/)`);
+	const externalTest = external.length === 0 ? () => false : id => externalPredicate.test(id);
+
 	let config = {
 		inputOptions: {
 			input: exportType ? resolve(__dirname, '../src/lib/__entry__.js') : entry,
-			external,
+			external: id => {
+				if (options.multipleEntries && id === '.') {
+					return true;
+				}
+				return externalTest(id);
+			},
 			plugins: [].concat(
 				alias({
 					__microbundle_entry__: entry
