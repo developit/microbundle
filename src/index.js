@@ -5,6 +5,7 @@ import chalk from 'chalk';
 import { map, series } from 'asyncro';
 import glob from 'glob';
 import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
 import { rollup, watch } from 'rollup';
 import nodent from 'rollup-plugin-nodent';
 import commonjs from 'rollup-plugin-commonjs';
@@ -220,8 +221,11 @@ function createConfig(options, entry, format, writeMeta) {
 				}),
 				postcss({
 					plugins: [
-						autoprefixer()
-					],
+						autoprefixer(),
+						options.compress!==false && cssnano({
+							preset: 'default'
+						})
+					].filter(Boolean),
 					// only write out CSS for the first bundle (avoids pointless extra files):
 					inject: false,
 					extract: !!writeMeta

@@ -25,6 +25,32 @@ Build \\"basicLib\\" to dist:
 300 B: basic-lib.umd.js"
 `;
 
+exports[`fixtures basic-css 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+basic-css
+  dist
+    basic-css.css
+    basic-css.js
+    basic-css.js.map
+    basic-css.m.js
+    basic-css.m.js.map
+    basic-css.umd.js
+    basic-css.umd.js.map
+  package.json
+  src
+    index.js
+    two.css
+
+
+Build \\"basicCss\\" to dist:
+107 B: basic-css.js
+107 B: basic-css.m.js
+188 B: basic-css.umd.js"
+`;
+
 exports[`fixtures basic-ts 1`] = `
 "Used script: microbundle
 
