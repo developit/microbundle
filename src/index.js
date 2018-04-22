@@ -227,7 +227,7 @@ function createConfig(options, entry, format, writeMeta) {
 				postcss({
 					plugins: [
 						autoprefixer(),
-						options.compress!==false && cssnano({
+						options.compress !== false && cssnano({
 							preset: 'default'
 						})
 					].filter(Boolean),
