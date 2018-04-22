@@ -3,7 +3,7 @@ import fs from 'fs';
 import { resolve, relative, dirname, basename, extname } from 'path';
 import chalk from 'chalk';
 import { map, series } from 'asyncro';
-import glob from 'glob';
+import glob from 'tiny-glob/sync';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import { rollup, watch } from 'rollup';
@@ -62,7 +62,7 @@ export default async function microbundle(options) {
 	[].concat(
 		options.entries && options.entries.length ? options.entries : options.pkg.source || (await isDir(resolve(cwd, 'src')) && await jsOrTs('src/index')) || await jsOrTs('index') || options.pkg.module
 	)
-		.map(file => glob.sync(resolve(cwd, file)))
+		.map(file => glob(file))
 		.forEach(file => options.input.push(...file));
 
 	let main = resolve(cwd, options.output || options.pkg.main || 'dist');
@@ -286,6 +286,7 @@ function createConfig(options, entry, format, writeMeta) {
 				// }),
 				options.compress !== false && [
 					uglify({
+						sourceMap: true,
 						output: { comments: false },
 						compress: {
 							keep_infinity: true,
