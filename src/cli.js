@@ -9,8 +9,14 @@ const run = opts => {
 			if (!opts.watch) process.exit(0);
 		})
 		.catch(err => {
-			process.stderr.write(String(err) + '\n');
-			process.exit(err.code || 1);
+			process.stderr.write(String(err.error || err) + '\n');
+			if (typeof(err.code) === 'string') {
+				process.stderr.write('error ' + err.code);
+				process.exit(1);
+			}
+			else {
+				process.exit(err.code || 1);
+			}
 		});
 };
 
