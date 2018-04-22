@@ -20,9 +20,9 @@ basic
 
 
 Build \\"basicLib\\" to dist:
-222 B: basic-lib.js
-223 B: basic-lib.m.js
-300 B: basic-lib.umd.js"
+211 B: basic-lib.js
+211 B: basic-lib.m.js
+292 B: basic-lib.umd.js"
 `;
 
 exports[`fixtures basic-css 1`] = `
@@ -148,9 +148,9 @@ name-custom-amd
 
 
 Build \\"customNameAmd\\" to dist:
-222 B: name-custom-amd.js
-223 B: name-custom-amd.m.js
-304 B: name-custom-amd.umd.js"
+211 B: name-custom-amd.js
+211 B: name-custom-amd.m.js
+295 B: name-custom-amd.umd.js"
 `;
 
 exports[`fixtures name-custom-cli 1`] = `
@@ -173,9 +173,9 @@ name-custom-cli
 
 
 Build \\"nameCustomCli\\" to dist:
-222 B: name-custom.js
-223 B: name-custom.m.js
-303 B: name-custom.umd.js"
+211 B: name-custom.js
+211 B: name-custom.m.js
+294 B: name-custom.umd.js"
 `;
 
 exports[`fixtures no-pkg 1`] = `
@@ -197,9 +197,9 @@ no-pkg
 
 
 Build \\"noPkg\\" to dist:
-222 B: no-pkg.js
-223 B: no-pkg.m.js
-296 B: no-pkg.umd.js"
+211 B: no-pkg.js
+211 B: no-pkg.m.js
+288 B: no-pkg.umd.js"
 `;
 
 exports[`fixtures no-pkg-name 1`] = `
@@ -222,7 +222,7 @@ no-pkg-name
 
 
 Build \\"noPkgName\\" to dist:
-222 B: no-pkg-name.js
-223 B: no-pkg-name.m.js
-300 B: no-pkg-name.umd.js"
+211 B: no-pkg-name.js
+211 B: no-pkg-name.m.js
+292 B: no-pkg-name.umd.js"
 `;
