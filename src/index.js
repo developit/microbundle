@@ -19,7 +19,7 @@ import prettyBytes from 'pretty-bytes';
 import shebangPlugin from 'rollup-plugin-preserve-shebang';
 import typescript from 'rollup-plugin-typescript2';
 import flow from './lib/flow-plugin';
-import { readFile, isDir, isFile } from './utils';
+import { readFile, isDir, isFile, stdout, stderr } from './utils';
 import camelCase from 'camelcase';
 
 const removeScope = name => name.replace(/^@.*\//, '');
@@ -39,9 +39,9 @@ export default async function microbundle(options) {
 		options.pkg = JSON.parse(await readFile(resolve(cwd, 'package.json'), 'utf8'));
 	}
 	catch (err) {
-		process.stderr.write(chalk.yellow(`${chalk.yellow.inverse('WARN')} no package.json found. Assuming a pkg.name of "${basename(options.cwd)}".`) + '\n');
+		stderr(chalk.yellow(`${chalk.yellow.inverse('WARN')} no package.json found. Assuming a pkg.name of "${basename(options.cwd)}".`));
 		let msg = String(err.message || err);
-		if (!msg.match(/ENOENT/)) console.warn(`  ${chalk.red.dim(msg)}`);
+		if (!msg.match(/ENOENT/)) stderr(`  ${chalk.red.dim(msg)}`);
 		options.pkg = {};
 		hasPackageJson = false;
 	}
@@ -49,7 +49,7 @@ export default async function microbundle(options) {
 	if (!options.pkg.name) {
 		options.pkg.name = basename(options.cwd);
 		if (hasPackageJson) {
-			process.stderr.write(chalk.yellow(`${chalk.yellow.inverse('WARN')} missing package.json "name" field. Assuming "${options.pkg.name}".`) + '\n');
+			stderr(chalk.yellow(`${chalk.yellow.inverse('WARN')} missing package.json "name" field. Assuming "${options.pkg.name}".`));
 		}
 	}
 
@@ -104,7 +104,7 @@ export default async function microbundle(options) {
 	if (options.watch) {
 		const onBuild = options.onBuild;
 		return new Promise((resolve, reject) => {
-			process.stdout.write(chalk.blue(`Watching source, compiling to ${relative(cwd, dirname(options.output))}:\n`));
+			stdout(chalk.blue(`Watching source, compiling to ${relative(cwd, dirname(options.output))}:`));
 			steps.map(options => {
 				watch(Object.assign({
 					output: options.outputOptions,
@@ -115,7 +115,7 @@ export default async function microbundle(options) {
 					}
 					if (e.code === 'END') {
 						getSizeInfo(options._code, options.outputOptions.file).then(text => {
-							process.stdout.write(`Wrote ${text.trim()}\n`);
+							stdout(`Wrote ${text.trim()}`);
 						});
 						if (typeof onBuild === 'function') {
 							onBuild(e);
