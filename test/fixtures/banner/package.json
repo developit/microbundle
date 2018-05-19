@@ -1,0 +1,15 @@
+{
+  "name": "banner",
+  "description": "Zero-configuration bundler for tiny JS libs, powered by Rollup.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Jason Miller",
+    "email": "jason@developit.ca",
+    "url": "http://jasonformat.com"
+  },
+  "homepage": "https://github.com/developit/microbundle",
+  "license": "MIT",
+  "scripts": {
+    "build": "microbundle --banner"
+  }
+}

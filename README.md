@@ -74,6 +74,7 @@ Just like `microbundle build`, but watches your source files and rebuilds on any
     --name           Specify name exposed in UMD builds
     --cwd            Use an alternative working directory  (default .)
     --sourcemap      Generate source map  (default true)
+		--banner         Prepend a banner  (default false)
     -h, --help       Displays this message
 ```
 ### Specifying builds in `package.json`

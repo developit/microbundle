@@ -21,6 +21,7 @@ import typescript from 'rollup-plugin-typescript2';
 import flow from './lib/flow-plugin';
 import { readFile, isDir, isFile, stdout, stderr } from './utils';
 import camelCase from 'camelcase';
+import stringifyAuthor from 'stringify-author';
 
 const removeScope = name => name.replace(/^@.*\//, '');
 const safeVariableName = name => camelCase(removeScope(name)
@@ -208,7 +209,7 @@ function createConfig(options, entry, format, writeMeta) {
 
 	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
 
-	const externalPredicate = new RegExp(`^(${ external.join('|') })($|/)`);
+	const externalPredicate = new RegExp(`^(${external.join('|')})($|/)`);
 	const externalTest = external.length === 0 ? () => false : id => externalPredicate.test(id);
 
 	let config = {
@@ -287,7 +288,7 @@ function createConfig(options, entry, format, writeMeta) {
 				options.compress !== false && [
 					uglify({
 						sourceMap: true,
-						output: { comments: false },
+						output: { comments: /^!/ },
 						compress: {
 							keep_infinity: true,
 							pure_getters: true
@@ -342,9 +343,25 @@ function createConfig(options, entry, format, writeMeta) {
 			},
 			format,
 			name: options.name,
-			file: resolve(options.cwd, (format === 'es' && moduleMain) || (format === 'umd' && umdMain) || cjsMain)
+			file: resolve(options.cwd, (format === 'es' && moduleMain) || (format === 'umd' && umdMain) || cjsMain),
+			banner: createBanner(options)
 		}
 	};
 
 	return config;
+}
+
+
+function createBanner({ banner, pkg, name }) {
+	if (!banner) {
+		return false;
+	}
+
+	const author = typeof pkg.author === 'string' ? pkg.author : stringifyAuthor(pkg.author);
+
+	return `/*!\n * ${name}${pkg.version ? ` v${pkg.version}` : ''}\n` +
+		`${pkg.description ? ` * ${pkg.description}\n` : ''}` +
+		`${pkg.homepage ? ` *\n * ${pkg.homepage}\n *\n` : ''}` +
+		`${pkg.author ? ` * @author ${author}\n` : ''}` +
+		`${pkg.license ? ` * @license ${pkg.license}\n` : ''} */`;
 }

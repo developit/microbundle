@@ -51,7 +51,7 @@ describe('fixtures', () => {
 			try {
 				({ scripts: { build: script } = {} } = JSON.parse(await readFile(resolve(fixturePath, 'package.json'), 'utf8')));
 			}
-			catch (err) {}
+			catch (err) { }
 			script = script || DEFAULT_SCRIPT;
 
 			const prevDir = process.cwd();

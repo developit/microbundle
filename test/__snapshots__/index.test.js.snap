@@ -1,5 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`fixtures banner 1`] = `
+"Used script: microbundle --banner
+
+Directory tree:
+
+banner
+  dist
+    banner.js
+    banner.js.map
+    banner.m.js
+    banner.m.js.map
+    banner.umd.js
+    banner.umd.js.map
+  package.json
+  src
+    index.js
+    two.js
+
+
+Build \\"banner\\" to dist:
+358 B: banner.js
+361 B: banner.m.js
+435 B: banner.umd.js"
+`;
+
 exports[`fixtures basic 1`] = `
 "Used script: microbundle
 
