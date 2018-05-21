@@ -21,7 +21,7 @@ basic
 
 Build \\"basicLib\\" to dist:
 211 B: basic-lib.js
-211 B: basic-lib.m.js
+210 B: basic-lib.m.js
 292 B: basic-lib.umd.js"
 `;
 
@@ -47,7 +47,7 @@ basic-css
 
 Build \\"basicCss\\" to dist:
 107 B: basic-css.js
-107 B: basic-css.m.js
+106 B: basic-css.m.js
 188 B: basic-css.umd.js"
 `;
 
@@ -101,7 +101,7 @@ basic-tsx
 
 Build \\"basicLibTsx\\" to dist:
 221 B: basic-lib-tsx.js
-221 B: basic-lib-tsx.m.js
+222 B: basic-lib-tsx.m.js
 295 B: basic-lib-tsx.umd.js"
 `;
 
@@ -149,7 +149,7 @@ name-custom-amd
 
 Build \\"customNameAmd\\" to dist:
 211 B: name-custom-amd.js
-211 B: name-custom-amd.m.js
+210 B: name-custom-amd.m.js
 295 B: name-custom-amd.umd.js"
 `;
 
@@ -174,7 +174,7 @@ name-custom-cli
 
 Build \\"nameCustomCli\\" to dist:
 211 B: name-custom.js
-211 B: name-custom.m.js
+210 B: name-custom.m.js
 294 B: name-custom.umd.js"
 `;
 
@@ -198,7 +198,7 @@ no-pkg
 
 Build \\"noPkg\\" to dist:
 211 B: no-pkg.js
-211 B: no-pkg.m.js
+210 B: no-pkg.m.js
 288 B: no-pkg.umd.js"
 `;
 
@@ -223,6 +223,6 @@ no-pkg-name
 
 Build \\"noPkgName\\" to dist:
 211 B: no-pkg-name.js
-211 B: no-pkg-name.m.js
+210 B: no-pkg-name.m.js
 292 B: no-pkg-name.umd.js"
 `;
