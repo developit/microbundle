@@ -1,7 +1,7 @@
 import sade from 'sade';
 let { version } = require('../package');
 
-const toArray = val => Array.isArray(val) ? val : val == null ? [] : [val];
+const toArray = val => (Array.isArray(val) ? val : val == null ? [] : [val]);
 
 export default handler => {
 	const cmd = type => (str, opts) => {
@@ -37,11 +37,12 @@ export default handler => {
 		.action(cmd('watch'));
 
 	// Parse argv; add extra aliases
-	return argv => prog.parse(argv, {
-		alias: {
-			o: ['output', 'd'],
-			i: ['entry', 'entries', 'e'],
-			w: ['watch']
-		}
-	});
+	return argv =>
+		prog.parse(argv, {
+			alias: {
+				o: ['output', 'd'],
+				i: ['entry', 'entries', 'e'],
+				w: ['watch'],
+			},
+		});
 };

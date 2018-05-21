@@ -9,6 +9,7 @@
     "build": "npm run -s build:babel && npm run -s build:self",
     "build:babel": "babel-node src/cli.js --format cjs src/{cli,index}.js --presets env",
     "build:self": "node dist/cli.js --format cjs src/{cli,index}.js",
+    "precommit": "lint-staged",
     "prepare": "npm run -s build",
     "prepare:babel": "babel --presets env src/*.js -d dist && npm t",
     "lint": "eslint src",
@@ -17,7 +18,10 @@
   },
   "repository": "developit/microbundle",
   "eslintConfig": {
-    "extends": "eslint-config-developit"
+    "extends": "eslint-config-developit",
+    "rules": {
+      "comma-dangle": ["warn", "always-multiline"]
+    }
   },
   "babel": {
     "presets": [
@@ -73,7 +77,10 @@
     "eslint": "^4.19.1",
     "eslint-config-developit": "^1.1.1",
     "fs-extra": "^5.0.0",
+    "husky": "^0.14.3",
     "jest": "^22.4.3",
+    "lint-staged": "^7.1.0",
+    "prettier": "^1.12.1",
     "rimraf": "^2.6.2",
     "shell-quote": "^1.6.1",
     "strip-ansi": "^4.0.0"

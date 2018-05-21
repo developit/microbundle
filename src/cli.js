@@ -7,14 +7,16 @@ import { stdout, stderr } from './utils';
 const run = opts => {
 	microbundle(opts)
 		.then(output => {
-			if (output!=null) stdout(output);
+			if (output != null) stdout(output);
 			if (!opts.watch) process.exit(0);
 		})
 		.catch(err => {
 			process.exitCode = (typeof err.code === 'number' && err.code) || 1;
 
 			const error = err.error || err;
-			const description = `${error.name ? error.name + ': ' : ''}${error.message || error}`;
+			const description = `${
+				error.name ? error.name + ': ' : ''
+			}${error.message || error}`;
 			const message = error.plugin
 				? `(${error.plugin} plugin) ${description}`
 				: description;
@@ -29,8 +31,7 @@ const run = opts => {
 			if (error.frame) {
 				stderr();
 				stderr(chalk.dim(error.frame));
-			}
-			else if (err.stack) {
+			} else if (err.stack) {
 				const headlessStack = error.stack.replace(message, '');
 				stderr(chalk.dim(headlessStack));
 			}
