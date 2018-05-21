@@ -20,7 +20,9 @@
   "eslintConfig": {
     "extends": "eslint-config-developit",
     "rules": {
-      "comma-dangle": ["warn", "always-multiline"]
+      "brace-style": "off",
+      "comma-dangle": ["warn", "always-multiline"],
+      "indent": "off"
     }
   },
   "babel": {
