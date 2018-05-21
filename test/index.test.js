@@ -20,18 +20,27 @@ const constant = konst => () => konst;
 
 const printTree = (nodes, indentLevel = 0) => {
 	const indent = join(times(indentLevel, constant('  ')));
-	return join(nodes.filter(node => node.name[0] !== '.').map(node =>
-		`${indent}${node.name}\n${node.type === 'directory' ? printTree(node.children, indentLevel + 1) : ''}`
-	));
+	return join(
+		nodes
+			.filter(node => node.name[0] !== '.')
+			.map(
+				node =>
+					`${indent}${node.name}\n${
+						node.type === 'directory'
+							? printTree(node.children, indentLevel + 1)
+							: ''
+					}`,
+			),
+	);
 };
 
 const parseScript = (() => {
 	let parsed;
-	const prog = createProg(_parsed => parsed = _parsed);
+	const prog = createProg(_parsed => (parsed = _parsed));
 	return script => {
 		const argv = shellQuote.parse(`node ${script}`);
 		// assuming {op: 'glob', pattern} for non-string args
-		prog(argv.map(arg => typeof arg === 'string' ? arg : arg.pattern));
+		prog(argv.map(arg => (typeof arg === 'string' ? arg : arg.pattern)));
 		return parsed;
 	};
 })();
@@ -49,9 +58,10 @@ describe('fixtures', () => {
 
 			let script;
 			try {
-				({ scripts: { build: script } = {} } = JSON.parse(await readFile(resolve(fixturePath, 'package.json'), 'utf8')));
-			}
-			catch (err) {}
+				({ scripts: { build: script } = {} } = JSON.parse(
+					await readFile(resolve(fixturePath, 'package.json'), 'utf8'),
+				));
+			} catch (err) {}
 			script = script || DEFAULT_SCRIPT;
 
 			const prevDir = process.cwd();
@@ -61,19 +71,21 @@ describe('fixtures', () => {
 
 			const output = await microbundle({
 				...parsedOpts,
-				cwd: parsedOpts.cwd !== '.' ? parsedOpts.cwd : resolve(fixturePath)
+				cwd: parsedOpts.cwd !== '.' ? parsedOpts.cwd : resolve(fixturePath),
 			});
 
 			process.chdir(prevDir);
 
 			const printedDir = printTree([dirTree(fixturePath)]);
 
-			expect([
-				`Used script: ${script}`,
-				'Directory tree:',
-				printedDir,
-				strip(output)
-			].join('\n\n')).toMatchSnapshot();
+			expect(
+				[
+					`Used script: ${script}`,
+					'Directory tree:',
+					printedDir,
+					strip(output),
+				].join('\n\n'),
+			).toMatchSnapshot();
 		});
 	});
 });

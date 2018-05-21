@@ -18,7 +18,10 @@
   },
   "repository": "developit/microbundle",
   "eslintConfig": {
-    "extends": "eslint-config-developit"
+    "extends": "eslint-config-developit",
+    "rules": {
+      "comma-dangle": ["warn", "always-multiline"]
+    }
   },
   "babel": {
     "presets": [

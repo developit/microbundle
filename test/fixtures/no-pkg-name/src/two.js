@@ -1,3 +1,3 @@
 export async function two(...args) {
-	return args.reduce( (total, value) => total + value, 0);
+	return args.reduce((total, value) => total + value, 0);
 }
