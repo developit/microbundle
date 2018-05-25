@@ -76,7 +76,7 @@ export default async function microbundle(options) {
 	options.name =
 		options.name || options.pkg.amdName || safeVariableName(options.pkg.name);
 
-	const jsOrTs = async filename =>
+	const getFileType = async filename =>
 		resolve(
 			cwd,
 			`${filename}${
@@ -84,7 +84,9 @@ export default async function microbundle(options) {
 					? '.ts'
 					: (await isFile(resolve(cwd, filename + '.tsx')))
 						? '.tsx'
-						: '.js'
+						: (await isFile(resolve(cwd, filename + '.re')))
+							? '.re'
+							: '.js'
 			}`,
 		);
 
@@ -94,8 +96,9 @@ export default async function microbundle(options) {
 			options.entries && options.entries.length
 				? options.entries
 				: options.pkg.source ||
-				  ((await isDir(resolve(cwd, 'src'))) && (await jsOrTs('src/index'))) ||
-				  (await jsOrTs('index')) ||
+				  ((await isDir(resolve(cwd, 'src'))) &&
+						(await getFileType('src/index'))) ||
+				  (await getFileType('index')) ||
 				  options.pkg.module,
 		)
 		.map(file => glob(file))
