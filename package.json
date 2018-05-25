@@ -74,6 +74,7 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "bs-platform": "^3.1.4",
     "directory-tree": "^2.1.0",
     "eslint": "^4.19.1",
     "eslint-config-developit": "^1.1.1",
