@@ -18,6 +18,7 @@ import gzipSize from 'gzip-size';
 import prettyBytes from 'pretty-bytes';
 import shebangPlugin from 'rollup-plugin-preserve-shebang';
 import typescript from 'rollup-plugin-typescript2';
+import bucklescript from 'rollup-plugin-bucklescript';
 import flow from './lib/flow-plugin';
 import { readFile, isDir, isFile, stdout, stderr } from './utils';
 import camelCase from 'camelcase';
@@ -283,6 +284,7 @@ function createConfig(options, entry, format, writeMeta) {
 	}
 
 	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
+	const useReason = extname(entry) === '.re';
 
 	const externalPredicate = new RegExp(`^(${external.join('|')})($|/)`);
 	const externalTest =
@@ -319,7 +321,8 @@ function createConfig(options, entry, format, writeMeta) {
 							typescript: require('typescript'),
 							tsconfigDefaults: { compilerOptions: { declaration: true } },
 						}),
-					!useTypescript && flow({ all: true, pretty: true }),
+					useReason && bucklescript(),
+					!useTypescript && !useReason && flow({ all: true, pretty: true }),
 					nodent({
 						exclude: 'node_modules/**',
 						noRuntime: true,
@@ -334,6 +337,7 @@ function createConfig(options, entry, format, writeMeta) {
 						},
 					}),
 					!useTypescript &&
+						!useReason &&
 						buble({
 							exclude: 'node_modules/**',
 							jsx: options.jsx || 'h',
