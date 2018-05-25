@@ -1,0 +1,6 @@
+{
+	"name": "basic-reason",
+	"sources": ["src"],
+	"package-specs": ["es6"],
+	"refmt": 3
+}
