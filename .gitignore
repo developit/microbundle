@@ -6,3 +6,5 @@ build
 dist
 package-lock.json
 yarn.lock
+test/fixtures/basic-re/lib
+.merlin
