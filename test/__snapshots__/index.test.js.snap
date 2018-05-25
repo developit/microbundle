@@ -51,6 +51,43 @@ Build \\"basicCss\\" to dist:
 188 B: basic-css.umd.js"
 `;
 
+exports[`fixtures basic-re 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+basic-re
+  bsconfig.json
+  dist
+    basic-reason.js
+    basic-reason.js.map
+    basic-reason.m.js
+    basic-reason.m.js.map
+    basic-reason.umd.js
+    basic-reason.umd.js.map
+  lib
+    bs
+      build.ninja
+      src
+        index.cmi
+        index.cmj
+        index.cmt
+        index.mlast
+        index.mlast.d
+    es6
+      src
+        index.js
+  package.json
+  src
+    index.re
+
+
+Build \\"basicReason\\" to dist:
+76 B: basic-reason.js
+80 B: basic-reason.m.js
+175 B: basic-reason.umd.js"
+`;
+
 exports[`fixtures basic-ts 1`] = `
 "Used script: microbundle
 
