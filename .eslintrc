@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "eslint-config-developit",
+    "prettier",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": [
+    "prettier"
+  ],
+  "rules": {
+    "brace-style": "off",
+    "comma-dangle": ["warn", "always-multiline"],
+    "indent": "off"
+  }
+}

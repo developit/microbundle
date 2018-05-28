@@ -17,16 +17,15 @@
     "release": "npm run -s prepare && npm test && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish"
   },
   "repository": "developit/microbundle",
-  "eslintConfig": {
-    "extends": "eslint-config-developit",
-    "rules": {
-      "comma-dangle": ["warn", "always-multiline"]
-    }
-  },
   "babel": {
     "presets": [
       "env"
     ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all",
+    "useTabs": true
   },
   "keywords": [
     "bundle",
@@ -76,11 +75,13 @@
     "directory-tree": "^2.1.0",
     "eslint": "^4.19.1",
     "eslint-config-developit": "^1.1.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.6.0",
     "fs-extra": "^5.0.0",
     "husky": "^0.14.3",
     "jest": "^22.4.3",
     "lint-staged": "^7.1.0",
-    "prettier": "^1.12.1",
+    "prettier": "^1.13.0",
     "rimraf": "^2.6.2",
     "shell-quote": "^1.6.1",
     "strip-ansi": "^4.0.0"
