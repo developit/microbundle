@@ -186,8 +186,8 @@ export default async function microbundle(options) {
 			inputOptions.cache = cache;
 			let bundle = await rollup(inputOptions);
 			cache = bundle;
-			await bundle.write(outputOptions);
-			return await getSizeInfo(bundle._code, outputOptions.file);
+			const { code } = await bundle.write(outputOptions);
+			return await getSizeInfo(code, outputOptions.file);
 		}),
 	);
 
@@ -412,8 +412,8 @@ function createConfig(options, entry, format, writeMeta) {
 						},
 					],
 					{
-						ongenerate({ bundle }, { code }) {
-							config._code = bundle._code = code;
+						ongenerate(outputOptions, { code }) {
+							config._code = code;
 						},
 					},
 					shebangPlugin(),
