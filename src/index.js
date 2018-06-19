@@ -19,6 +19,7 @@ import prettyBytes from 'pretty-bytes';
 import shebangPlugin from 'rollup-plugin-preserve-shebang';
 import typescript from 'rollup-plugin-typescript2';
 import flow from './lib/flow-plugin';
+import logError from './log-error';
 import { readFile, isDir, isFile, stdout, stderr } from './utils';
 import camelCase from 'camelcase';
 
@@ -162,8 +163,10 @@ export default async function microbundle(options) {
 						options.inputOptions,
 					),
 				).on('event', e => {
-					if (e.code === 'ERROR' || e.code === 'FATAL') {
-						return reject(e);
+					if (e.code === 'FATAL') {
+						return reject(e.error);
+					} else if (e.code === 'ERROR') {
+						logError(e.error);
 					}
 					if (e.code === 'END') {
 						getSizeInfo(options._code, options.outputOptions.file).then(
