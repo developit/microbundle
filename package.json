@@ -45,7 +45,7 @@
     "babel-polyfill": "^6.26.0",
     "camelcase": "^5.0.0",
     "chalk": "^2.4.0",
-    "cssnano": "^3.10.0",
+    "cssnano": "^4.0.0",
     "es6-promisify": "^6.0.0",
     "gzip-size": "^4.1.0",
     "pretty-bytes": "^5.1.0",
