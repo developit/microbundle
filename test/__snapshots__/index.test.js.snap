@@ -105,6 +105,17 @@ Build \\"basicLibTsx\\" to dist:
 295 B: basic-lib-tsx.umd.js"
 `;
 
+exports[`fixtures demo 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+demo
+
+
+Build \\"demo\\" to dist:"
+`;
+
 exports[`fixtures jsx 1`] = `
 "Used script: microbundle
 
@@ -225,4 +236,15 @@ Build \\"noPkgName\\" to dist:
 211 B: no-pkg-name.js
 211 B: no-pkg-name.m.js
 292 B: no-pkg-name.umd.js"
+`;
+
+exports[`fixtures ts-demo 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+ts-demo
+
+
+Build \\"tsDemo\\" to dist:"
 `;
