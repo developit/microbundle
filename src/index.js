@@ -288,6 +288,15 @@ function createConfig(options, entry, format, writeMeta) {
 	const externalTest =
 		external.length === 0 ? () => false : id => externalPredicate.test(id);
 
+	function loadNameCache() {
+		try {
+			nameCache = JSON.parse(
+				fs.readFileSync(resolve(options.cwd, 'mangle.json'), 'utf8'),
+			);
+		} catch (e) {}
+	}
+	loadNameCache();
+
 	let config = {
 		inputOptions: {
 			input: exportType ? resolve(__dirname, '../src/lib/__entry__.js') : entry,
@@ -392,16 +401,7 @@ function createConfig(options, entry, format, writeMeta) {
 						}),
 						mangleOptions && {
 							// before hook
-							options() {
-								try {
-									nameCache = JSON.parse(
-										fs.readFileSync(
-											resolve(options.cwd, 'mangle.json'),
-											'utf8',
-										),
-									);
-								} catch (e) {}
-							},
+							options: loadNameCache,
 							// after hook
 							onwrite() {
 								if (writeMeta && nameCache) {
