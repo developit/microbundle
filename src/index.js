@@ -217,15 +217,13 @@ function createConfig(options, entry, format, writeMeta) {
 		aliases['.'] = './' + basename(options.output);
 	}
 
-	let useNodeResolve;
+	let useNodeResolve = true;
 	const peerDeps = Object.keys(pkg.peerDependencies || {});
 	if (options.external === 'none') {
-		useNodeResolve = true;
+		// bundle everything (external=[])
 	} else if (options.external) {
-		useNodeResolve = true;
 		external = external.concat(peerDeps).concat(options.external.split(','));
 	} else {
-		useNodeResolve = false;
 		external = external
 			.concat(peerDeps)
 			.concat(Object.keys(pkg.dependencies || {}));
