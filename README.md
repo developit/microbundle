@@ -75,6 +75,7 @@ Just like `microbundle build`, but watches your source files and rebuilds on any
     --cwd            Use an alternative working directory  (default .)
     --sourcemap      Generate source map  (default true)
     -h, --help       Displays this message
+    --jsx            Support building React Component (--jsx React.createElement)
 ```
 ### Specifying builds in `package.json`
 
