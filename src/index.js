@@ -246,17 +246,17 @@ function createConfig(options, entry, format, writeMeta) {
 
 	let mainNoExtension = options.output;
 	if (options.multipleEntries) {
-		let name = entry.match(/([\\/])index(\.(umd|cjs|es|m))?\.js$/)
+		let name = entry.match(/([\\/])index(\.(umd|cjs|es|m))?\.m?js$/)
 			? mainNoExtension
 			: entry;
 		mainNoExtension = resolve(dirname(mainNoExtension), basename(name));
 	}
-	mainNoExtension = mainNoExtension.replace(/(\.(umd|cjs|es|m))?\.js$/, '');
+	mainNoExtension = mainNoExtension.replace(/(\.(umd|cjs|es|m))?\.m?js$/, '');
 
 	let moduleMain = replaceName(
 		pkg.module && !pkg.module.match(/src\//)
 			? pkg.module
-			: pkg['jsnext:main'] || 'x.m.js',
+			: pkg['jsnext:main'] || 'x.mjs',
 		mainNoExtension,
 	);
 	let cjsMain = replaceName(pkg['cjs:main'] || 'x.js', mainNoExtension);
