@@ -9,8 +9,8 @@ basic
   dist
     basic-lib.js
     basic-lib.js.map
-    basic-lib.m.js
-    basic-lib.m.js.map
+    basic-lib.mjs
+    basic-lib.mjs.map
     basic-lib.umd.js
     basic-lib.umd.js.map
   package.json
@@ -21,7 +21,7 @@ basic
 
 Build \\"basicLib\\" to dist:
 211 B: basic-lib.js
-211 B: basic-lib.m.js
+211 B: basic-lib.mjs
 292 B: basic-lib.umd.js"
 `;
 
@@ -35,8 +35,8 @@ basic-css
     basic-css.css
     basic-css.js
     basic-css.js.map
-    basic-css.m.js
-    basic-css.m.js.map
+    basic-css.mjs
+    basic-css.mjs.map
     basic-css.umd.js
     basic-css.umd.js.map
   package.json
@@ -47,7 +47,7 @@ basic-css
 
 Build \\"basicCss\\" to dist:
 107 B: basic-css.js
-107 B: basic-css.m.js
+107 B: basic-css.mjs
 188 B: basic-css.umd.js"
 `;
 
@@ -60,8 +60,8 @@ basic-ts
   dist
     basic-lib-ts.js
     basic-lib-ts.js.map
-    basic-lib-ts.m.js
-    basic-lib-ts.m.js.map
+    basic-lib-ts.mjs
+    basic-lib-ts.mjs.map
     basic-lib-ts.umd.js
     basic-lib-ts.umd.js.map
     car.d.ts
@@ -75,7 +75,7 @@ basic-ts
 
 Build \\"basicLibTs\\" to dist:
 104 B: basic-lib-ts.js
-97 B: basic-lib-ts.m.js
+97 B: basic-lib-ts.mjs
 180 B: basic-lib-ts.umd.js"
 `;
 
@@ -88,8 +88,8 @@ basic-tsx
   dist
     basic-lib-tsx.js
     basic-lib-tsx.js.map
-    basic-lib-tsx.m.js
-    basic-lib-tsx.m.js.map
+    basic-lib-tsx.mjs
+    basic-lib-tsx.mjs.map
     basic-lib-tsx.umd.js
     basic-lib-tsx.umd.js.map
     index.d.ts
@@ -101,7 +101,7 @@ basic-tsx
 
 Build \\"basicLibTsx\\" to dist:
 221 B: basic-lib-tsx.js
-221 B: basic-lib-tsx.m.js
+221 B: basic-lib-tsx.mjs
 295 B: basic-lib-tsx.umd.js"
 `;
 
@@ -114,8 +114,8 @@ jsx
   dist
     jsx.js
     jsx.js.map
-    jsx.m.js
-    jsx.m.js.map
+    jsx.mjs
+    jsx.mjs.map
     jsx.umd.js
     jsx.umd.js.map
   index.js
@@ -124,7 +124,7 @@ jsx
 
 Build \\"jsx\\" to dist:
 211 B: jsx.js
-212 B: jsx.m.js
+212 B: jsx.mjs
 283 B: jsx.umd.js"
 `;
 
@@ -137,8 +137,8 @@ name-custom-amd
   dist
     name-custom-amd.js
     name-custom-amd.js.map
-    name-custom-amd.m.js
-    name-custom-amd.m.js.map
+    name-custom-amd.mjs
+    name-custom-amd.mjs.map
     name-custom-amd.umd.js
     name-custom-amd.umd.js.map
   package.json
@@ -149,7 +149,7 @@ name-custom-amd
 
 Build \\"customNameAmd\\" to dist:
 211 B: name-custom-amd.js
-211 B: name-custom-amd.m.js
+211 B: name-custom-amd.mjs
 295 B: name-custom-amd.umd.js"
 `;
 
@@ -162,8 +162,8 @@ name-custom-cli
   dist
     name-custom.js
     name-custom.js.map
-    name-custom.m.js
-    name-custom.m.js.map
+    name-custom.mjs
+    name-custom.mjs.map
     name-custom.umd.js
     name-custom.umd.js.map
   package.json
@@ -174,7 +174,7 @@ name-custom-cli
 
 Build \\"nameCustomCli\\" to dist:
 211 B: name-custom.js
-211 B: name-custom.m.js
+211 B: name-custom.mjs
 294 B: name-custom.umd.js"
 `;
 
@@ -187,8 +187,8 @@ no-pkg
   dist
     no-pkg.js
     no-pkg.js.map
-    no-pkg.m.js
-    no-pkg.m.js.map
+    no-pkg.mjs
+    no-pkg.mjs.map
     no-pkg.umd.js
     no-pkg.umd.js.map
   src
@@ -198,7 +198,7 @@ no-pkg
 
 Build \\"noPkg\\" to dist:
 211 B: no-pkg.js
-211 B: no-pkg.m.js
+211 B: no-pkg.mjs
 288 B: no-pkg.umd.js"
 `;
 
@@ -211,8 +211,8 @@ no-pkg-name
   dist
     no-pkg-name.js
     no-pkg-name.js.map
-    no-pkg-name.m.js
-    no-pkg-name.m.js.map
+    no-pkg-name.mjs
+    no-pkg-name.mjs.map
     no-pkg-name.umd.js
     no-pkg-name.umd.js.map
   package.json
@@ -223,6 +223,6 @@ no-pkg-name
 
 Build \\"noPkgName\\" to dist:
 211 B: no-pkg-name.js
-211 B: no-pkg-name.m.js
+211 B: no-pkg-name.mjs
 292 B: no-pkg-name.umd.js"
 `;
