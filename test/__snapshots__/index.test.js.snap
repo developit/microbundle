@@ -226,3 +226,51 @@ Build \\"noPkgName\\" to dist:
 211 B: no-pkg-name.mjs
 292 B: no-pkg-name.umd.js"
 `;
+
+exports[`fixtures pretty 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+pretty
+  dist
+    pretty.js
+    pretty.js.map
+    pretty.mjs
+    pretty.mjs.map
+    pretty.umd.js
+    pretty.umd.js.map
+  package.json
+  src
+    index.js
+
+
+Build \\"pretty\\" to dist:
+1.39 kB: pretty.js
+1.4 kB: pretty.mjs
+1.5 kB: pretty.umd.js"
+`;
+
+exports[`fixtures raw 1`] = `
+"Used script: microbundle --raw
+
+Directory tree:
+
+raw
+  dist
+    raw.js
+    raw.js.map
+    raw.mjs
+    raw.mjs.map
+    raw.umd.js
+    raw.umd.js.map
+  package.json
+  src
+    index.js
+
+
+Build \\"raw\\" to dist:
+1389 B: raw.js
+1398 B: raw.mjs
+1493 B: raw.umd.js"
+`;

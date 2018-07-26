@@ -135,7 +135,7 @@ export default async function microbundle(options) {
 
 	async function getSizeInfo(code, filename) {
 		let size = await gzipSize(code);
-		let prettySize = prettyBytes(size);
+		let prettySize = options.raw ? `${size} B` : prettyBytes(size);
 		let color = size < 5000 ? 'green' : size > 40000 ? 'red' : 'yellow';
 		return `${' '.repeat(10 - prettySize.length)}${chalk[color](
 			prettySize,
