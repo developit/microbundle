@@ -164,6 +164,13 @@ Directory tree:
 
 custom-source-with-cwd
   custom-source
+    dist
+      custom-src.js
+      custom-src.js.map
+      custom-src.mjs
+      custom-src.mjs.map
+      custom-src.umd.js
+      custom-src.umd.js.map
     package.json
     src
       custom-source.js
@@ -171,7 +178,10 @@ custom-source-with-cwd
   package.json
 
 
-Build \\"customSrc\\" to dist:"
+Build \\"customSrc\\" to dist:
+211 B: custom-src.js
+211 B: custom-src.mjs
+291 B: custom-src.umd.js"
 `;
 
 exports[`fixtures jsx 1`] = `
