@@ -94,7 +94,7 @@ export default async function microbundle(options) {
 		.concat(
 			options.entries && options.entries.length
 				? options.entries
-				: options.pkg.source ||
+				: (options.pkg.source && resolve(cwd, options.pkg.source)) ||
 				  ((await isDir(resolve(cwd, 'src'))) && (await jsOrTs('src/index'))) ||
 				  (await jsOrTs('index')) ||
 				  options.pkg.module,
