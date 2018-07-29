@@ -105,6 +105,85 @@ Build \\"basicLibTsx\\" to dist:
 295 B: basic-lib-tsx.umd.js"
 `;
 
+exports[`fixtures basic-with-cwd 1`] = `
+"Used script: microbundle --cwd ./basic
+
+Directory tree:
+
+basic-with-cwd
+  basic
+    dist
+      basic.js
+      basic.js.map
+      basic.mjs
+      basic.mjs.map
+      basic.umd.js
+      basic.umd.js.map
+    package.json
+    src
+      index.js
+      two.js
+  package.json
+
+
+Build \\"basic\\" to dist:
+211 B: basic.js
+211 B: basic.mjs
+287 B: basic.umd.js"
+`;
+
+exports[`fixtures custom-source 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+custom-source
+  dist
+    custom-source.js
+    custom-source.js.map
+    custom-source.mjs
+    custom-source.mjs.map
+    custom-source.umd.js
+    custom-source.umd.js.map
+  package.json
+  src
+    custom-source.js
+    two.js
+
+
+Build \\"customSource\\" to dist:
+211 B: custom-source.js
+211 B: custom-source.mjs
+293 B: custom-source.umd.js"
+`;
+
+exports[`fixtures custom-source-with-cwd 1`] = `
+"Used script: microbundle --cwd ./custom-source
+
+Directory tree:
+
+custom-source-with-cwd
+  custom-source
+    dist
+      custom-src.js
+      custom-src.js.map
+      custom-src.mjs
+      custom-src.mjs.map
+      custom-src.umd.js
+      custom-src.umd.js.map
+    package.json
+    src
+      custom-source.js
+      two.js
+  package.json
+
+
+Build \\"customSrc\\" to dist:
+211 B: custom-src.js
+211 B: custom-src.mjs
+291 B: custom-src.umd.js"
+`;
+
 exports[`fixtures jsx 1`] = `
 "Used script: microbundle
 

@@ -1,0 +1,6 @@
+{
+  "name": "basic-with-cwd",
+  "scripts": {
+    "build": "microbundle --cwd ./basic"
+  }
+}
