@@ -27,6 +27,9 @@
     "trailingComma": "all",
     "useTabs": true
   },
+  "jest": {
+    "testEnvironment": "node"
+  },
   "keywords": [
     "bundle",
     "rollup",
