@@ -44,7 +44,7 @@
   "dependencies": {
     "acorn-jsx": "^4.1.1",
     "asyncro": "^3.0.0",
-    "autoprefixer": "^8.3.0",
+    "autoprefixer": "^9.0.0",
     "babel-polyfill": "^6.26.0",
     "camelcase": "^5.0.0",
     "chalk": "^2.4.0",
