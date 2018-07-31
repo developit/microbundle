@@ -15,6 +15,7 @@ import uglify from 'rollup-plugin-uglify';
 import postcss from 'rollup-plugin-postcss';
 import alias from 'rollup-plugin-strict-alias';
 import gzipSize from 'gzip-size';
+import brotliSize from 'brotli-size';
 import prettyBytes from 'pretty-bytes';
 import shebangPlugin from 'rollup-plugin-preserve-shebang';
 import typescript from 'rollup-plugin-typescript2';
@@ -133,13 +134,19 @@ export default async function microbundle(options) {
 		}
 	}
 
+	function formatSize(size, filename, type) {
+		const pretty = prettyBytes(size);
+		const color = size < 5000 ? 'green' : size > 40000 ? 'red' : 'yellow';
+		const MAGIC_INDENTATION = type === 'br' ? 13 : 10;
+		return `${' '.repeat(MAGIC_INDENTATION - pretty.length)}${chalk[color](
+			pretty,
+		)}: ${chalk.white(basename(filename))}.${type}`;
+	}
+
 	async function getSizeInfo(code, filename) {
-		let size = await gzipSize(code);
-		let prettySize = prettyBytes(size);
-		let color = size < 5000 ? 'green' : size > 40000 ? 'red' : 'yellow';
-		return `${' '.repeat(10 - prettySize.length)}${chalk[color](
-			prettySize,
-		)}: ${chalk.white(basename(filename))}`;
+		const gzip = formatSize(await gzipSize(code), filename, 'gz');
+		const brotli = formatSize(brotliSize.sync(code), filename, 'br');
+		return gzip + '\n' + brotli;
 	}
 
 	if (options.watch) {

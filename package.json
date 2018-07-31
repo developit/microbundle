@@ -46,6 +46,7 @@
     "asyncro": "^3.0.0",
     "autoprefixer": "^9.0.0",
     "babel-polyfill": "^6.26.0",
+    "brotli-size": "^0.0.2",
     "camelcase": "^5.0.0",
     "chalk": "^2.4.0",
     "cssnano": "^4.0.0",
