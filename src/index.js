@@ -15,6 +15,7 @@ import uglify from 'rollup-plugin-uglify';
 import postcss from 'rollup-plugin-postcss';
 import alias from 'rollup-plugin-strict-alias';
 import gzipSize from 'gzip-size';
+import brotliSize from 'brotli-size';
 import prettyBytes from 'pretty-bytes';
 import shebangPlugin from 'rollup-plugin-preserve-shebang';
 import typescript from 'rollup-plugin-typescript2';
@@ -133,13 +134,30 @@ export default async function microbundle(options) {
 		}
 	}
 
+	function colorSeverity(size) {
+		return size < 5000 ? 'green' : size > 40000 ? 'red' : 'yellow';
+	}
+
+	async function getBrotliSize(code, filename) {
+		const size = brotliSize.sync(code);
+		const pretty = prettyBytes(size);
+		return `${' '.repeat(13 - pretty.length)}${chalk[colorSeverity(size)](
+			pretty,
+		)}: ${chalk.white(basename(filename))}.br`;
+	}
+
+	async function getGzipSize(code, filename) {
+		const size = await gzipSize(code);
+		const pretty = prettyBytes(size);
+		return `${' '.repeat(10 - pretty.length)}${chalk[colorSeverity(size)](
+			pretty,
+		)}: ${chalk.white(basename(filename))}.gz`;
+	}
+
 	async function getSizeInfo(code, filename) {
-		let size = await gzipSize(code);
-		let prettySize = prettyBytes(size);
-		let color = size < 5000 ? 'green' : size > 40000 ? 'red' : 'yellow';
-		return `${' '.repeat(10 - prettySize.length)}${chalk[color](
-			prettySize,
-		)}: ${chalk.white(basename(filename))}`;
+		const gzip = await getGzipSize(code, filename);
+		const brotli = await getBrotliSize(code, filename);
+		return gzip + '\n' + brotli;
 	}
 
 	if (options.watch) {
