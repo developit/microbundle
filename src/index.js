@@ -134,29 +134,18 @@ export default async function microbundle(options) {
 		}
 	}
 
-	function colorSeverity(size) {
-		return size < 5000 ? 'green' : size > 40000 ? 'red' : 'yellow';
-	}
-
-	async function getBrotliSize(code, filename) {
-		const size = brotliSize.sync(code);
+	function formatSize(size, filename, type) {
 		const pretty = prettyBytes(size);
-		return `${' '.repeat(13 - pretty.length)}${chalk[colorSeverity(size)](
+		const color = size < 5000 ? 'green' : size > 40000 ? 'red' : 'yellow';
+		const MAGIC_INDENTATION = type === 'br' ? 13 : 10;
+		return `${' '.repeat(MAGIC_INDENTATION - pretty.length)}${chalk[color](
 			pretty,
-		)}: ${chalk.white(basename(filename))}.br`;
-	}
-
-	async function getGzipSize(code, filename) {
-		const size = await gzipSize(code);
-		const pretty = prettyBytes(size);
-		return `${' '.repeat(10 - pretty.length)}${chalk[colorSeverity(size)](
-			pretty,
-		)}: ${chalk.white(basename(filename))}.gz`;
+		)}: ${chalk.white(basename(filename))}.${type}`;
 	}
 
 	async function getSizeInfo(code, filename) {
-		const gzip = await getGzipSize(code, filename);
-		const brotli = await getBrotliSize(code, filename);
+		const gzip = formatSize(await gzipSize(code), filename, 'gz');
+		const brotli = formatSize(brotliSize.sync(code), filename, 'br');
 		return gzip + '\n' + brotli;
 	}
 
