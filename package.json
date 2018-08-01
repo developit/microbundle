@@ -27,6 +27,9 @@
     "trailingComma": "all",
     "useTabs": true
   },
+  "jest": {
+    "testEnvironment": "node"
+  },
   "keywords": [
     "bundle",
     "rollup",
@@ -41,11 +44,12 @@
   "dependencies": {
     "acorn-jsx": "^4.1.1",
     "asyncro": "^3.0.0",
-    "autoprefixer": "^8.3.0",
+    "autoprefixer": "^9.0.0",
     "babel-polyfill": "^6.26.0",
+    "brotli-size": "^0.0.2",
     "camelcase": "^5.0.0",
     "chalk": "^2.4.0",
-    "cssnano": "^3.10.0",
+    "cssnano": "^4.0.0",
     "es6-promisify": "^6.0.0",
     "gzip-size": "^5.0.0",
     "pretty-bytes": "^5.1.0",
@@ -72,11 +76,11 @@
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "directory-tree": "^2.1.0",
-    "eslint": "^4.19.1",
+    "eslint": "^5.0.0",
     "eslint-config-developit": "^1.1.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.0",
-    "fs-extra": "^5.0.0",
+    "fs-extra": "^7.0.0",
     "husky": "^0.14.3",
     "jest": "^22.4.3",
     "lint-staged": "^7.1.0",

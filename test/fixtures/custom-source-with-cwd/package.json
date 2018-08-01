@@ -1,0 +1,6 @@
+{
+  "name": "custom-source-with-cwd",
+  "scripts": {
+    "build": "microbundle --cwd ./custom-source"
+  }
+}
