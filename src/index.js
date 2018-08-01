@@ -135,7 +135,7 @@ export default async function microbundle(options) {
 	}
 
 	function formatSize(size, filename, type) {
-		const pretty = size < 5000 ? `${size} B` : prettyBytes(size);
+		const pretty = options.raw ? `${size} B` : prettyBytes(size);
 		const color = size < 5000 ? 'green' : size > 40000 ? 'red' : 'yellow';
 		const MAGIC_INDENTATION = type === 'br' ? 13 : 10;
 		return `${' '.repeat(MAGIC_INDENTATION - pretty.length)}${chalk[color](
