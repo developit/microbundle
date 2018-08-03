@@ -325,7 +325,7 @@ function createConfig(options, entry, format, writeMeta) {
 						typescript({
 							typescript: require('typescript'),
 							tsconfigDefaults: {
-								compilerOptions: { declaration: true, jsx: options.jsx || 'h' },
+								compilerOptions: { declaration: true, jsx: options.jsx },
 							},
 						}),
 					!useTypescript && flow({ all: true, pretty: true }),
