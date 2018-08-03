@@ -324,7 +324,9 @@ function createConfig(options, entry, format, writeMeta) {
 					useTypescript &&
 						typescript({
 							typescript: require('typescript'),
-							tsconfigDefaults: { compilerOptions: { declaration: true, jsx: options.jsx || 'h' } },
+							tsconfigDefaults: {
+								compilerOptions: { declaration: true, jsx: options.jsx || 'h' },
+							},
 						}),
 					!useTypescript && flow({ all: true, pretty: true }),
 					nodent({
