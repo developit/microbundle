@@ -24,7 +24,7 @@ export default handler => {
 		.option('--strict', 'Enforce undefined global context and add "use strict"')
 		.option('--name', 'Specify name exposed in UMD builds')
 		.option('--cwd', 'Use an alternative working directory', '.')
-		.option('--sourcemap', 'Generate source map', true);
+		.option('--sourcemap', 'Generate source map');
 
 	prog
 		.command('build [...entries]', '', { default: true })

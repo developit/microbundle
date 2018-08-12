@@ -437,7 +437,7 @@ function createConfig(options, entry, format, writeMeta) {
 			legacy: true,
 			freeze: false,
 			esModule: false,
-			sourcemap: options.sourcemap !== false,
+			sourcemap: !!options.sourcemap,
 			treeshake: {
 				propertyReadSideEffects: false,
 			},
