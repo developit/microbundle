@@ -14,6 +14,11 @@ export default handler => {
 
 	prog
 		.version(version)
+		.example('')
+		.example('--compress')
+		.example('--external none --format cjs --strict')
+		.example('build --compress --sourcemap')
+		.example('watch --sourcemap')
 		.option('--entry, -i', 'Entry module(s)')
 		.option('--output, -o', 'Directory to place build files into')
 		.option('--format, -f', 'Only build specified formats', 'es,cjs,umd')
