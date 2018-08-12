@@ -84,6 +84,13 @@ Just like `microbundle build`, but watches your source files and rebuilds on any
     --cwd            Use an alternative working directory  (default .)
     --sourcemap      Generate source map
     -h, --help       Displays this message
+
+  Examples
+    $ microbundle
+    $ microbundle --compress
+    $ microbundle --external none --format cjs --strict
+    $ microbundle build --compress --sourcemap
+    $ microbundle watch --sourcemap
 ```
 
 ### Specifying builds in `package.json`
