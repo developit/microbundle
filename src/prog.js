@@ -17,7 +17,7 @@ export default handler => {
 		.option('--entry, -i', 'Entry module(s)')
 		.option('--output, -o', 'Directory to place build files into')
 		.option('--format, -f', 'Only build specified formats', 'es,cjs,umd')
-		.option('--watch, -w', 'Rebuilds on any change', false)
+		.option('--watch, -w', 'Rebuilds on any change')
 		.option('--target', 'Specify your target environment', 'node')
 		.option('--external', `Specify external dependencies, or 'none'`)
 		.option('--compress', 'Compress output using UglifyJS')
