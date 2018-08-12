@@ -319,7 +319,7 @@ function createConfig(options, entry, format, writeMeta) {
 					postcss({
 						plugins: [
 							autoprefixer(),
-							options.compress !== false &&
+							options.compress &&
 								cssnano({
 									preset: 'default',
 								}),
@@ -381,7 +381,7 @@ function createConfig(options, entry, format, writeMeta) {
 					// 	[`export default ${rollupName};`]: '',
 					// 	[`var ${rollupName} =`]: 'export default'
 					// }),
-					options.compress !== false && [
+					options.compress && [
 						uglify({
 							sourceMap: true,
 							output: { comments: false },
