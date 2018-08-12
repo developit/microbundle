@@ -8,11 +8,8 @@ Directory tree:
 basic
   dist
     basic-lib.js
-    basic-lib.js.map
     basic-lib.mjs
-    basic-lib.mjs.map
     basic-lib.umd.js
-    basic-lib.umd.js.map
   package.json
   src
     index.js
@@ -20,12 +17,12 @@ basic
 
 
 Build \\"basicLib\\" to dist:
-211 B: basic-lib.js.gz
-154 B: basic-lib.js.br
-211 B: basic-lib.mjs.gz
-155 B: basic-lib.mjs.br
-292 B: basic-lib.umd.js.gz
-228 B: basic-lib.umd.js.br"
+304 B: basic-lib.js.gz
+245 B: basic-lib.js.br
+966 B: basic-lib.mjs.gz
+888 B: basic-lib.mjs.br
+1.08 kB: basic-lib.umd.js.gz
+980 B: basic-lib.umd.js.br"
 `;
 
 exports[`fixtures basic-css 1`] = `
@@ -37,11 +34,8 @@ basic-css
   dist
     basic-css.css
     basic-css.js
-    basic-css.js.map
     basic-css.mjs
-    basic-css.mjs.map
     basic-css.umd.js
-    basic-css.umd.js.map
   package.json
   src
     index.js
@@ -49,12 +43,12 @@ basic-css
 
 
 Build \\"basicCss\\" to dist:
-107 B: basic-css.js.gz
-60 B: basic-css.js.br
-107 B: basic-css.mjs.gz
-61 B: basic-css.mjs.br
-188 B: basic-css.umd.js.gz
-135 B: basic-css.umd.js.br"
+130 B: basic-css.js.gz
+86 B: basic-css.js.br
+639 B: basic-css.mjs.gz
+588 B: basic-css.mjs.br
+760 B: basic-css.umd.js.gz
+680 B: basic-css.umd.js.br"
 `;
 
 exports[`fixtures basic-ts 1`] = `
@@ -65,11 +59,8 @@ Directory tree:
 basic-ts
   dist
     basic-lib-ts.js
-    basic-lib-ts.js.map
     basic-lib-ts.mjs
-    basic-lib-ts.mjs.map
     basic-lib-ts.umd.js
-    basic-lib-ts.umd.js.map
     car.d.ts
     index.d.ts
   package.json
@@ -80,12 +71,12 @@ basic-ts
 
 
 Build \\"basicLibTs\\" to dist:
-104 B: basic-lib-ts.js.gz
-76 B: basic-lib-ts.js.br
-97 B: basic-lib-ts.mjs.gz
-73 B: basic-lib-ts.mjs.br
-180 B: basic-lib-ts.umd.js.gz
-137 B: basic-lib-ts.umd.js.br"
+148 B: basic-lib-ts.js.gz
+104 B: basic-lib-ts.js.br
+780 B: basic-lib-ts.mjs.gz
+709 B: basic-lib-ts.mjs.br
+895 B: basic-lib-ts.umd.js.gz
+817 B: basic-lib-ts.umd.js.br"
 `;
 
 exports[`fixtures basic-tsx 1`] = `
@@ -96,11 +87,8 @@ Directory tree:
 basic-tsx
   dist
     basic-lib-tsx.js
-    basic-lib-tsx.js.map
     basic-lib-tsx.mjs
-    basic-lib-tsx.mjs.map
     basic-lib-tsx.umd.js
-    basic-lib-tsx.umd.js.map
     index.d.ts
   package.json
   src
@@ -109,12 +97,37 @@ basic-tsx
 
 
 Build \\"basicLibTsx\\" to dist:
-221 B: basic-lib-tsx.js.gz
-179 B: basic-lib-tsx.js.br
-221 B: basic-lib-tsx.mjs.gz
-193 B: basic-lib-tsx.mjs.br
-295 B: basic-lib-tsx.umd.js.gz
-236 B: basic-lib-tsx.umd.js.br"
+286 B: basic-lib-tsx.js.gz
+241 B: basic-lib-tsx.js.br
+1.18 kB: basic-lib-tsx.mjs.gz
+1.12 kB: basic-lib-tsx.mjs.br
+1.3 kB: basic-lib-tsx.umd.js.gz
+1.2 kB: basic-lib-tsx.umd.js.br"
+`;
+
+exports[`fixtures basic-with-compress 1`] = `
+"Used script: microbundle --compress
+
+Directory tree:
+
+basic-with-compress
+  dist
+    basic-with-compress.js
+    basic-with-compress.mjs
+    basic-with-compress.umd.js
+  package.json
+  src
+    index.js
+    two.js
+
+
+Build \\"basicWithCompress\\" to dist:
+211 B: basic-with-compress.js.gz
+154 B: basic-with-compress.js.br
+211 B: basic-with-compress.mjs.gz
+155 B: basic-with-compress.mjs.br
+298 B: basic-with-compress.umd.js.gz
+233 B: basic-with-compress.umd.js.br"
 `;
 
 exports[`fixtures basic-with-cwd 1`] = `
@@ -126,11 +139,8 @@ basic-with-cwd
   basic
     dist
       basic.js
-      basic.js.map
       basic.mjs
-      basic.mjs.map
       basic.umd.js
-      basic.umd.js.map
     package.json
     src
       index.js
@@ -139,12 +149,40 @@ basic-with-cwd
 
 
 Build \\"basic\\" to dist:
-211 B: basic.js.gz
-154 B: basic.js.br
-211 B: basic.mjs.gz
-155 B: basic.mjs.br
-287 B: basic.umd.js.gz
-224 B: basic.umd.js.br"
+304 B: basic.js.gz
+245 B: basic.js.br
+966 B: basic.mjs.gz
+888 B: basic.mjs.br
+1.08 kB: basic.umd.js.gz
+977 B: basic.umd.js.br"
+`;
+
+exports[`fixtures basic-with-sourcemap 1`] = `
+"Used script: microbundle --sourcemap
+
+Directory tree:
+
+basic-with-sourcemap
+  dist
+    basic-with-sourcemap.js
+    basic-with-sourcemap.js.map
+    basic-with-sourcemap.mjs
+    basic-with-sourcemap.mjs.map
+    basic-with-sourcemap.umd.js
+    basic-with-sourcemap.umd.js.map
+  package.json
+  src
+    index.js
+    two.js
+
+
+Build \\"basicWithSourcemap\\" to dist:
+304 B: basic-with-sourcemap.js.gz
+245 B: basic-with-sourcemap.js.br
+966 B: basic-with-sourcemap.mjs.gz
+888 B: basic-with-sourcemap.mjs.br
+1.09 kB: basic-with-sourcemap.umd.js.gz
+983 B: basic-with-sourcemap.umd.js.br"
 `;
 
 exports[`fixtures custom-source 1`] = `
@@ -155,11 +193,8 @@ Directory tree:
 custom-source
   dist
     custom-source.js
-    custom-source.js.map
     custom-source.mjs
-    custom-source.mjs.map
     custom-source.umd.js
-    custom-source.umd.js.map
   package.json
   src
     custom-source.js
@@ -167,12 +202,12 @@ custom-source
 
 
 Build \\"customSource\\" to dist:
-211 B: custom-source.js.gz
-154 B: custom-source.js.br
-211 B: custom-source.mjs.gz
-155 B: custom-source.mjs.br
-293 B: custom-source.umd.js.gz
-226 B: custom-source.umd.js.br"
+311 B: custom-source.js.gz
+249 B: custom-source.js.br
+974 B: custom-source.mjs.gz
+894 B: custom-source.mjs.br
+1.09 kB: custom-source.umd.js.gz
+982 B: custom-source.umd.js.br"
 `;
 
 exports[`fixtures custom-source-with-cwd 1`] = `
@@ -184,11 +219,8 @@ custom-source-with-cwd
   custom-source
     dist
       custom-src.js
-      custom-src.js.map
       custom-src.mjs
-      custom-src.mjs.map
       custom-src.umd.js
-      custom-src.umd.js.map
     package.json
     src
       custom-source.js
@@ -197,12 +229,12 @@ custom-source-with-cwd
 
 
 Build \\"customSrc\\" to dist:
-211 B: custom-src.js.gz
-154 B: custom-src.js.br
-211 B: custom-src.mjs.gz
-155 B: custom-src.mjs.br
-291 B: custom-src.umd.js.gz
-228 B: custom-src.umd.js.br"
+311 B: custom-src.js.gz
+249 B: custom-src.js.br
+974 B: custom-src.mjs.gz
+894 B: custom-src.mjs.br
+1.09 kB: custom-src.umd.js.gz
+981 B: custom-src.umd.js.br"
 `;
 
 exports[`fixtures jsx 1`] = `
@@ -213,22 +245,19 @@ Directory tree:
 jsx
   dist
     jsx.js
-    jsx.js.map
     jsx.mjs
-    jsx.mjs.map
     jsx.umd.js
-    jsx.umd.js.map
   index.js
   package.json
 
 
 Build \\"jsx\\" to dist:
-211 B: jsx.js.gz
-168 B: jsx.js.br
-212 B: jsx.mjs.gz
-170 B: jsx.mjs.br
-283 B: jsx.umd.js.gz
-230 B: jsx.umd.js.br"
+289 B: jsx.js.gz
+245 B: jsx.js.br
+817 B: jsx.mjs.gz
+748 B: jsx.mjs.br
+927 B: jsx.umd.js.gz
+837 B: jsx.umd.js.br"
 `;
 
 exports[`fixtures name-custom-amd 1`] = `
@@ -239,11 +268,8 @@ Directory tree:
 name-custom-amd
   dist
     name-custom-amd.js
-    name-custom-amd.js.map
     name-custom-amd.mjs
-    name-custom-amd.mjs.map
     name-custom-amd.umd.js
-    name-custom-amd.umd.js.map
   package.json
   src
     index.js
@@ -251,12 +277,12 @@ name-custom-amd
 
 
 Build \\"customNameAmd\\" to dist:
-211 B: name-custom-amd.js.gz
-154 B: name-custom-amd.js.br
-211 B: name-custom-amd.mjs.gz
-155 B: name-custom-amd.mjs.br
-295 B: name-custom-amd.umd.js.gz
-230 B: name-custom-amd.umd.js.br"
+304 B: name-custom-amd.js.gz
+245 B: name-custom-amd.js.br
+966 B: name-custom-amd.mjs.gz
+888 B: name-custom-amd.mjs.br
+1.09 kB: name-custom-amd.umd.js.gz
+980 B: name-custom-amd.umd.js.br"
 `;
 
 exports[`fixtures name-custom-cli 1`] = `
@@ -267,11 +293,8 @@ Directory tree:
 name-custom-cli
   dist
     name-custom.js
-    name-custom.js.map
     name-custom.mjs
-    name-custom.mjs.map
     name-custom.umd.js
-    name-custom.umd.js.map
   package.json
   src
     index.js
@@ -279,12 +302,12 @@ name-custom-cli
 
 
 Build \\"nameCustomCli\\" to dist:
-211 B: name-custom.js.gz
-154 B: name-custom.js.br
-211 B: name-custom.mjs.gz
-155 B: name-custom.mjs.br
-294 B: name-custom.umd.js.gz
-231 B: name-custom.umd.js.br"
+304 B: name-custom.js.gz
+245 B: name-custom.js.br
+966 B: name-custom.mjs.gz
+888 B: name-custom.mjs.br
+1.08 kB: name-custom.umd.js.gz
+990 B: name-custom.umd.js.br"
 `;
 
 exports[`fixtures no-pkg 1`] = `
@@ -295,23 +318,20 @@ Directory tree:
 no-pkg
   dist
     no-pkg.js
-    no-pkg.js.map
     no-pkg.mjs
-    no-pkg.mjs.map
     no-pkg.umd.js
-    no-pkg.umd.js.map
   src
     index.js
     two.js
 
 
 Build \\"noPkg\\" to dist:
-211 B: no-pkg.js.gz
-154 B: no-pkg.js.br
-211 B: no-pkg.mjs.gz
-155 B: no-pkg.mjs.br
-288 B: no-pkg.umd.js.gz
-228 B: no-pkg.umd.js.br"
+304 B: no-pkg.js.gz
+245 B: no-pkg.js.br
+966 B: no-pkg.mjs.gz
+888 B: no-pkg.mjs.br
+1.08 kB: no-pkg.umd.js.gz
+978 B: no-pkg.umd.js.br"
 `;
 
 exports[`fixtures no-pkg-name 1`] = `
@@ -322,11 +342,8 @@ Directory tree:
 no-pkg-name
   dist
     no-pkg-name.js
-    no-pkg-name.js.map
     no-pkg-name.mjs
-    no-pkg-name.mjs.map
     no-pkg-name.umd.js
-    no-pkg-name.umd.js.map
   package.json
   src
     index.js
@@ -334,10 +351,10 @@ no-pkg-name
 
 
 Build \\"noPkgName\\" to dist:
-211 B: no-pkg-name.js.gz
-154 B: no-pkg-name.js.br
-211 B: no-pkg-name.mjs.gz
-155 B: no-pkg-name.mjs.br
-292 B: no-pkg-name.umd.js.gz
-230 B: no-pkg-name.umd.js.br"
+304 B: no-pkg-name.js.gz
+245 B: no-pkg-name.js.br
+966 B: no-pkg-name.mjs.gz
+888 B: no-pkg-name.mjs.br
+1.08 kB: no-pkg-name.umd.js.gz
+981 B: no-pkg-name.umd.js.br"
 `;

@@ -33,7 +33,6 @@
 }
 ```
 
-
 ## 📦 Usage
 
 Microbundle includes two commands - `build` (the default) and `watch`. Neither require any options, but you can tailor things to suit your needs a bit if you like.
@@ -42,6 +41,16 @@ Microbundle includes two commands - `build` (the default) and `watch`. Neither r
 
 By default, microbundle will infer the location of your source entry file
 (the root module in your program) from the `source` field in your `package.json`. It will infer the output directory and filename(s) from the `main` field. For UMD builds, microbundle will use a snake case version of the `name` field in your `package.json` for the export name; you can also specify a name via an `amdName` field or the `name` CLI option.
+
+If you'd like to compress your library for distribution, include the `--compress` flag. You may also produce and include source maps by including the `--sourcemap` flag:
+
+```sh
+$ microbundle --compress --sourcemap
+# or
+$ microbundle build --compress --sourcemap
+```
+
+> **Note:** These flags can also be applied to `watch` mode!
 
 ### `microbundle watch`
 
@@ -66,16 +75,24 @@ Just like `microbundle build`, but watches your source files and rebuilds on any
     -i, --entry      Entry module(s)
     -o, --output     Directory to place build files into
     -f, --format     Only build specified formats  (default es,cjs,umd)
-    -w, --watch      Rebuilds on any change  (default false)
+    -w, --watch      Rebuilds on any change
     --target         Specify your target environment  (default node)
     --external       Specify external dependencies, or 'none'
-    --compress       Compress output using UglifyJS  (default true)
+    --compress       Compress output using UglifyJS
     --strict         Enforce undefined global context and add "use strict"
     --name           Specify name exposed in UMD builds
     --cwd            Use an alternative working directory  (default .)
-    --sourcemap      Generate source map  (default true)
+    --sourcemap      Generate source map
     -h, --help       Displays this message
+
+  Examples
+    $ microbundle
+    $ microbundle --compress
+    $ microbundle --external none --format cjs --strict
+    $ microbundle build --compress --sourcemap
+    $ microbundle watch --sourcemap
 ```
+
 ### Specifying builds in `package.json`
 
 You can specify output builds in a `package.json` as follows:
@@ -95,7 +112,6 @@ Here's what's coming up for Microbundle:
 - [x] [TypeScript support](https://github.com/developit/microbundle/issues/5)
 - [x] [Flowtype support](https://github.com/developit/microbundle/issues/5#issuecomment-351075881)
 
-
 ## 🔨 Built with Microbundle
 
 - [Stockroom](https://github.com/developit/stockroom) Offload your store management to a worker easily.
@@ -106,7 +122,6 @@ Here's what's coming up for Microbundle:
 
 [MIT](https://oss.ninja/mit/developit/)
 
-
-[Rollup]: https://github.com/rollup/rollup
-[Bublé]: https://github.com/Rich-Harris/buble
-[Nodent]: https://github.com/MatAtBread/nodent-compiler
+[rollup]: https://github.com/rollup/rollup
+[bublé]: https://github.com/Rich-Harris/buble
+[nodent]: https://github.com/MatAtBread/nodent-compiler

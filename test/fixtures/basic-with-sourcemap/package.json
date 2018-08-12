@@ -1,0 +1,6 @@
+{
+  "name": "basic-with-sourcemap",
+  "scripts": {
+    "build": "microbundle --sourcemap"
+  }
+}
