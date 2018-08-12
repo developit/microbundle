@@ -1,0 +1,6 @@
+{
+  "name": "basic-with-compress",
+  "scripts": {
+    "build": "microbundle --compress"
+  }
+}
