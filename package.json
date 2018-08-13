@@ -78,7 +78,7 @@
     "directory-tree": "^2.1.0",
     "eslint": "^5.0.0",
     "eslint-config-developit": "^1.1.1",
-    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-prettier": "^3.0.0",
     "eslint-plugin-prettier": "^2.6.0",
     "fs-extra": "^7.0.0",
     "husky": "^0.14.3",
