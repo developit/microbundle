@@ -145,7 +145,7 @@ export default async function microbundle(options) {
 
 	async function getSizeInfo(code, filename) {
 		const gzip = formatSize(await gzipSize(code), filename, 'gz');
-		const brotli = formatSize(brotliSize.sync(code), filename, 'br');
+		const brotli = formatSize(await brotliSize(code), filename, 'br');
 		return gzip + '\n' + brotli;
 	}
 
