@@ -31,6 +31,14 @@ const safeVariableName = name =>
 			.toLowerCase()
 			.replace(/((^[^a-zA-Z]+)|[^\w.-])|([^a-zA-Z0-9]+$)/g, ''),
 	);
+const parseGlobals = globalStrings => {
+	const globals = {};
+	globalStrings.split(',').forEach(globalString => {
+		const [localName, globalName] = globalString.split('=');
+		globals[localName] = globalName;
+	});
+	return globals;
+};
 
 const WATCH_OPTS = {
 	exclude: 'node_modules/**',
@@ -243,6 +251,9 @@ function createConfig(options, entry, format, writeMeta) {
 		}
 		return globals;
 	}, {});
+	if (options.globals && options.globals !== 'none') {
+		globals = Object.assign(globals, parseGlobals(options.globals));
+	}
 
 	function replaceName(filename, name) {
 		return resolve(
