@@ -286,8 +286,10 @@ function createConfig(options, entry, format, writeMeta) {
 	let nameCache = {};
 	let mangleOptions = options.pkg.mangle || false;
 
+	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
+
 	let exportType;
-	if (format !== 'es') {
+	if (!useTypescript && format !== 'es') {
 		try {
 			let file = fs.readFileSync(entry, 'utf-8');
 			let hasDefault = /\bexport\s*default\s*[a-zA-Z_$]/.test(file);
@@ -298,8 +300,6 @@ function createConfig(options, entry, format, writeMeta) {
 			if (hasDefault && hasNamed) exportType = 'default';
 		} catch (e) {}
 	}
-
-	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
 
 	const externalPredicate = new RegExp(`^(${external.join('|')})($|/)`);
 	const externalTest =
