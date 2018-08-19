@@ -1,0 +1,4 @@
+{
+  "name": "basic-with-main-dir",
+  "main": "dist"
+}
