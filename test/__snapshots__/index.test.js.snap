@@ -147,6 +147,34 @@ Build \\"basic\\" to dist:
 224 B: basic.umd.js.br"
 `;
 
+exports[`fixtures basic-with-main-dir 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+basic-with-main-dir
+  dist
+    index.js
+    index.js.map
+    index.mjs
+    index.mjs.map
+    index.umd.js
+    index.umd.js.map
+  package.json
+  src
+    index.js
+    two.js
+
+
+Build \\"basicWithMainDir\\" to dist:
+211 B: index.js.gz
+154 B: index.js.br
+211 B: index.mjs.gz
+155 B: index.mjs.br
+298 B: index.umd.js.gz
+233 B: index.umd.js.br"
+`;
+
 exports[`fixtures custom-source 1`] = `
 "Used script: microbundle
 
