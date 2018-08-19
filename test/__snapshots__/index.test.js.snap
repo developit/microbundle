@@ -209,6 +209,34 @@ Build \\"basic\\" to dist:
 224 B: basic.umd.js.br"
 `;
 
+exports[`fixtures basic-with-entry-dir 1`] = `
+"Used script: microbundle src
+
+Directory tree:
+
+basic-with-entry-dir
+  dist
+    basic-with-entry-dir.js
+    basic-with-entry-dir.js.map
+    basic-with-entry-dir.mjs
+    basic-with-entry-dir.mjs.map
+    basic-with-entry-dir.umd.js
+    basic-with-entry-dir.umd.js.map
+  package.json
+  src
+    index.js
+    two.js
+
+
+Build \\"basicWithEntryDir\\" to dist:
+211 B: basic-with-entry-dir.js.gz
+154 B: basic-with-entry-dir.js.br
+211 B: basic-with-entry-dir.mjs.gz
+155 B: basic-with-entry-dir.mjs.br
+299 B: basic-with-entry-dir.umd.js.gz
+233 B: basic-with-entry-dir.umd.js.br"
+`;
+
 exports[`fixtures basic-with-main-dir 1`] = `
 "Used script: microbundle
 

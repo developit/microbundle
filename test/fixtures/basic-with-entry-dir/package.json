@@ -1,0 +1,6 @@
+{
+  "name": "basic-with-entry-dir",
+	"scripts": {
+		"build": "microbundle src"
+	}
+}
