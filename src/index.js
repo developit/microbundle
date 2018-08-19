@@ -111,16 +111,17 @@ export default async function microbundle(options) {
 		.map(file => glob(file))
 		.forEach(file => options.input.push(...file));
 
-	let main = resolve(cwd, options.output || options.pkg.main || 'dist');
-	if (!main.match(/\.[a-z]+$/) || (await isDir(main))) {
-		main = resolve(main, `${removeScope(options.pkg.name)}.js`);
+	const defaultMain = `dist/${removeScope(options.pkg.name)}.js`;
+	let main = resolve(cwd, options.output || options.pkg.main || defaultMain);
+	if (!main.match(/\.[a-z]+$/)) {
+		main = resolve(main, 'index.js');
 	}
 	options.output = main;
 
 	let entries = (await map([].concat(options.input), async file => {
 		file = resolve(cwd, file);
 		if (await isDir(file)) {
-			file = resolve(file, 'index.js');
+			file = await jsOrTs(`${file}/index`);
 		}
 		return file;
 	})).filter((item, i, arr) => arr.indexOf(item) === i);
@@ -285,8 +286,10 @@ function createConfig(options, entry, format, writeMeta) {
 	let nameCache = {};
 	let mangleOptions = options.pkg.mangle || false;
 
+	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
+
 	let exportType;
-	if (format !== 'es') {
+	if (!useTypescript && format !== 'es') {
 		try {
 			let file = fs.readFileSync(entry, 'utf-8');
 			let hasDefault = /\bexport\s*default\s*[a-zA-Z_$]/.test(file);
@@ -297,8 +300,6 @@ function createConfig(options, entry, format, writeMeta) {
 			if (hasDefault && hasNamed) exportType = 'default';
 		} catch (e) {}
 	}
-
-	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
 
 	const externalPredicate = new RegExp(`^(${external.join('|')})($|/)`);
 	const externalTest =
