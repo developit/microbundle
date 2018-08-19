@@ -88,6 +88,37 @@ Build \\"basicLibTs\\" to dist:
 169 B: basic-lib-ts.umd.js.br"
 `;
 
+exports[`fixtures basic-ts-with-main-dir 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+basic-ts-with-main-dir
+  dist
+    car.d.ts
+    index.d.ts
+    index.js
+    index.js.map
+    index.mjs
+    index.mjs.map
+    index.umd.js
+    index.umd.js.map
+  package.json
+  src
+    car.ts
+    index.ts
+  tsconfig.json
+
+
+Build \\"basicTsWithMainDir\\" to dist:
+121 B: index.js.gz
+98 B: index.js.br
+122 B: index.mjs.gz
+103 B: index.mjs.br
+217 B: index.umd.js.gz
+181 B: index.umd.js.br"
+`;
+
 exports[`fixtures basic-tsx 1`] = `
 "Used script: microbundle
 
