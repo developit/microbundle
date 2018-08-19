@@ -80,12 +80,12 @@ basic-ts
 
 
 Build \\"basicLibTs\\" to dist:
-104 B: basic-lib-ts.js.gz
-76 B: basic-lib-ts.js.br
-97 B: basic-lib-ts.mjs.gz
-73 B: basic-lib-ts.mjs.br
-180 B: basic-lib-ts.umd.js.gz
-137 B: basic-lib-ts.umd.js.br"
+121 B: basic-lib-ts.js.gz
+98 B: basic-lib-ts.js.br
+122 B: basic-lib-ts.mjs.gz
+103 B: basic-lib-ts.mjs.br
+208 B: basic-lib-ts.umd.js.gz
+169 B: basic-lib-ts.umd.js.br"
 `;
 
 exports[`fixtures basic-tsx 1`] = `
