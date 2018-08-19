@@ -112,7 +112,7 @@ export default async function microbundle(options) {
 		.forEach(file => options.input.push(...file));
 
 	let main = resolve(cwd, options.output || options.pkg.main || 'dist');
-	if (!main.match(/\.[a-z]+$/) || (await isDir(main))) {
+	if (!main.match(/\.[a-z]+$/)) {
 		main = resolve(main, `${removeScope(options.pkg.name)}.js`);
 	}
 	options.output = main;
