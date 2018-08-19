@@ -121,7 +121,7 @@ export default async function microbundle(options) {
 	let entries = (await map([].concat(options.input), async file => {
 		file = resolve(cwd, file);
 		if (await isDir(file)) {
-			file = resolve(file, 'index.js');
+			file = await jsOrTs(`${file}/index`);
 		}
 		return file;
 	})).filter((item, i, arr) => arr.indexOf(item) === i);
