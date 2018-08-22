@@ -22,7 +22,7 @@ basic
 Build \\"basicLib\\" to dist:
 211 B: basic-lib.js.gz
 154 B: basic-lib.js.br
-211 B: basic-lib.mjs.gz
+210 B: basic-lib.mjs.gz
 155 B: basic-lib.mjs.br
 292 B: basic-lib.umd.js.gz
 228 B: basic-lib.umd.js.br"
@@ -51,8 +51,8 @@ basic-css
 Build \\"basicCss\\" to dist:
 107 B: basic-css.js.gz
 60 B: basic-css.js.br
-107 B: basic-css.mjs.gz
-61 B: basic-css.mjs.br
+106 B: basic-css.mjs.gz
+56 B: basic-css.mjs.br
 188 B: basic-css.umd.js.gz
 135 B: basic-css.umd.js.br"
 `;
@@ -111,8 +111,8 @@ basic-tsx
 Build \\"basicLibTsx\\" to dist:
 221 B: basic-lib-tsx.js.gz
 179 B: basic-lib-tsx.js.br
-221 B: basic-lib-tsx.mjs.gz
-193 B: basic-lib-tsx.mjs.br
+222 B: basic-lib-tsx.mjs.gz
+197 B: basic-lib-tsx.mjs.br
 295 B: basic-lib-tsx.umd.js.gz
 236 B: basic-lib-tsx.umd.js.br"
 `;
@@ -141,7 +141,7 @@ basic-with-cwd
 Build \\"basic\\" to dist:
 211 B: basic.js.gz
 154 B: basic.js.br
-211 B: basic.mjs.gz
+210 B: basic.mjs.gz
 155 B: basic.mjs.br
 287 B: basic.umd.js.gz
 224 B: basic.umd.js.br"
@@ -169,7 +169,7 @@ custom-source
 Build \\"customSource\\" to dist:
 211 B: custom-source.js.gz
 154 B: custom-source.js.br
-211 B: custom-source.mjs.gz
+210 B: custom-source.mjs.gz
 155 B: custom-source.mjs.br
 293 B: custom-source.umd.js.gz
 226 B: custom-source.umd.js.br"
@@ -199,7 +199,7 @@ custom-source-with-cwd
 Build \\"customSrc\\" to dist:
 211 B: custom-src.js.gz
 154 B: custom-src.js.br
-211 B: custom-src.mjs.gz
+210 B: custom-src.mjs.gz
 155 B: custom-src.mjs.br
 291 B: custom-src.umd.js.gz
 228 B: custom-src.umd.js.br"
@@ -253,7 +253,7 @@ name-custom-amd
 Build \\"customNameAmd\\" to dist:
 211 B: name-custom-amd.js.gz
 154 B: name-custom-amd.js.br
-211 B: name-custom-amd.mjs.gz
+210 B: name-custom-amd.mjs.gz
 155 B: name-custom-amd.mjs.br
 295 B: name-custom-amd.umd.js.gz
 230 B: name-custom-amd.umd.js.br"
@@ -281,7 +281,7 @@ name-custom-cli
 Build \\"nameCustomCli\\" to dist:
 211 B: name-custom.js.gz
 154 B: name-custom.js.br
-211 B: name-custom.mjs.gz
+210 B: name-custom.mjs.gz
 155 B: name-custom.mjs.br
 294 B: name-custom.umd.js.gz
 231 B: name-custom.umd.js.br"
@@ -308,7 +308,7 @@ no-pkg
 Build \\"noPkg\\" to dist:
 211 B: no-pkg.js.gz
 154 B: no-pkg.js.br
-211 B: no-pkg.mjs.gz
+210 B: no-pkg.mjs.gz
 155 B: no-pkg.mjs.br
 288 B: no-pkg.umd.js.gz
 228 B: no-pkg.umd.js.br"
@@ -336,7 +336,7 @@ no-pkg-name
 Build \\"noPkgName\\" to dist:
 211 B: no-pkg-name.js.gz
 154 B: no-pkg-name.js.br
-211 B: no-pkg-name.mjs.gz
+210 B: no-pkg-name.mjs.gz
 155 B: no-pkg-name.mjs.br
 292 B: no-pkg-name.umd.js.gz
 230 B: no-pkg-name.umd.js.br"
