@@ -342,6 +342,7 @@ function createConfig(options, entry, format, writeMeta) {
 					useTypescript &&
 						typescript({
 							typescript: require('typescript'),
+							cacheRoot: `./.rts2_cache_${format}`,
 							tsconfigDefaults: {
 								compilerOptions: { declaration: true, jsx: options.jsx },
 							},
