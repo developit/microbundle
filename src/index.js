@@ -15,6 +15,7 @@ import { terser } from 'rollup-plugin-terser';
 import postcss from 'rollup-plugin-postcss';
 import alias from 'rollup-plugin-strict-alias';
 import gzipSize from 'gzip-size';
+import brotliSize from 'brotli-size';
 import prettyBytes from 'pretty-bytes';
 import shebangPlugin from 'rollup-plugin-preserve-shebang';
 import typescript from 'rollup-plugin-typescript2';
@@ -30,6 +31,14 @@ const safeVariableName = name =>
 			.toLowerCase()
 			.replace(/((^[^a-zA-Z]+)|[^\w.-])|([^a-zA-Z0-9]+$)/g, ''),
 	);
+const parseGlobals = globalStrings => {
+	const globals = {};
+	globalStrings.split(',').forEach(globalString => {
+		const [localName, globalName] = globalString.split('=');
+		globals[localName] = globalName;
+	});
+	return globals;
+};
 
 const WATCH_OPTS = {
 	exclude: 'node_modules/**',
@@ -94,7 +103,7 @@ export default async function microbundle(options) {
 		.concat(
 			options.entries && options.entries.length
 				? options.entries
-				: options.pkg.source ||
+				: (options.pkg.source && resolve(cwd, options.pkg.source)) ||
 				  ((await isDir(resolve(cwd, 'src'))) && (await jsOrTs('src/index'))) ||
 				  (await jsOrTs('index')) ||
 				  options.pkg.module,
@@ -133,13 +142,19 @@ export default async function microbundle(options) {
 		}
 	}
 
+	function formatSize(size, filename, type) {
+		const pretty = prettyBytes(size);
+		const color = size < 5000 ? 'green' : size > 40000 ? 'red' : 'yellow';
+		const MAGIC_INDENTATION = type === 'br' ? 13 : 10;
+		return `${' '.repeat(MAGIC_INDENTATION - pretty.length)}${chalk[color](
+			pretty,
+		)}: ${chalk.white(basename(filename))}.${type}`;
+	}
+
 	async function getSizeInfo(code, filename) {
-		let size = await gzipSize(code);
-		let prettySize = prettyBytes(size);
-		let color = size < 5000 ? 'green' : size > 40000 ? 'red' : 'yellow';
-		return `${' '.repeat(10 - prettySize.length)}${chalk[color](
-			prettySize,
-		)}: ${chalk.white(basename(filename))}`;
+		const gzip = formatSize(await gzipSize(code), filename, 'gz');
+		const brotli = formatSize(await brotliSize(code), filename, 'br');
+		return gzip + '\n' + brotli;
 	}
 
 	if (options.watch) {
@@ -236,6 +251,9 @@ function createConfig(options, entry, format, writeMeta) {
 		}
 		return globals;
 	}, {});
+	if (options.globals && options.globals !== 'none') {
+		globals = Object.assign(globals, parseGlobals(options.globals));
+	}
 
 	function replaceName(filename, name) {
 		return resolve(
@@ -246,17 +264,17 @@ function createConfig(options, entry, format, writeMeta) {
 
 	let mainNoExtension = options.output;
 	if (options.multipleEntries) {
-		let name = entry.match(/([\\/])index(\.(umd|cjs|es|m))?\.js$/)
+		let name = entry.match(/([\\/])index(\.(umd|cjs|es|m))?\.m?js$/)
 			? mainNoExtension
 			: entry;
 		mainNoExtension = resolve(dirname(mainNoExtension), basename(name));
 	}
-	mainNoExtension = mainNoExtension.replace(/(\.(umd|cjs|es|m))?\.js$/, '');
+	mainNoExtension = mainNoExtension.replace(/(\.(umd|cjs|es|m))?\.m?js$/, '');
 
 	let moduleMain = replaceName(
 		pkg.module && !pkg.module.match(/src\//)
 			? pkg.module
-			: pkg['jsnext:main'] || 'x.m.js',
+			: pkg['jsnext:main'] || 'x.mjs',
 		mainNoExtension,
 	);
 	let cjsMain = replaceName(pkg['cjs:main'] || 'x.js', mainNoExtension);
@@ -324,7 +342,10 @@ function createConfig(options, entry, format, writeMeta) {
 					useTypescript &&
 						typescript({
 							typescript: require('typescript'),
-							tsconfigDefaults: { compilerOptions: { declaration: true } },
+							cacheRoot: `./.rts2_cache_${format}`,
+							tsconfigDefaults: {
+								compilerOptions: { declaration: true, jsx: options.jsx },
+							},
 						}),
 					!useTypescript && flow({ all: true, pretty: true }),
 					nodent({

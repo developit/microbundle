@@ -1,6 +1,6 @@
 {
   "name": "microbundle",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "Zero-configuration bundler for tiny JS libs, powered by Rollup.",
   "main": "dist/microbundle.js",
   "source": "src/index.js",
@@ -27,6 +27,10 @@
     "trailingComma": "all",
     "useTabs": true
   },
+  "jest": {
+    "testEnvironment": "node",
+    "testURL": "http://localhost"
+  },
   "keywords": [
     "bundle",
     "rollup",
@@ -41,16 +45,16 @@
   "dependencies": {
     "acorn-jsx": "^4.1.1",
     "asyncro": "^3.0.0",
-    "autoprefixer": "^8.3.0",
+    "autoprefixer": "^9.0.0",
     "babel-polyfill": "^6.26.0",
+    "brotli-size": "^0.0.3",
     "camelcase": "^5.0.0",
     "chalk": "^2.4.0",
-    "cssnano": "^3.10.0",
+    "cssnano": "^4.0.0",
     "es6-promisify": "^6.0.0",
     "gzip-size": "^5.0.0",
     "pretty-bytes": "^5.1.0",
-    "regenerator-runtime": "^0.11.1",
-    "rollup": "^0.62.0",
+    "rollup": "^0.63.0",
     "rollup-plugin-buble": "^0.19.2",
     "rollup-plugin-bundle-size": "^1.0.1",
     "rollup-plugin-commonjs": "^9.0.0",
@@ -67,17 +71,17 @@
     "sade": "^1.4.0",
     "tiny-glob": "^0.2.0",
     "tslib": "^1.9.0",
-    "typescript": "^2.8.3"
+    "typescript": ">=2.8.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "directory-tree": "^2.1.0",
-    "eslint": "^4.19.1",
+    "eslint": "^5.0.0",
     "eslint-config-developit": "^1.1.1",
-    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-prettier": "^3.0.0",
     "eslint-plugin-prettier": "^2.6.0",
-    "fs-extra": "^5.0.0",
+    "fs-extra": "^7.0.0",
     "husky": "^0.14.3",
     "jest": "^22.4.3",
     "lint-staged": "^7.1.0",
