@@ -28,7 +28,8 @@
     "useTabs": true
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "testURL": "http://localhost"
   },
   "keywords": [
     "bundle",
@@ -46,7 +47,7 @@
     "asyncro": "^3.0.0",
     "autoprefixer": "^9.0.0",
     "babel-polyfill": "^6.26.0",
-    "brotli-size": "^0.0.2",
+    "brotli-size": "^0.0.3",
     "camelcase": "^5.0.0",
     "chalk": "^2.4.0",
     "cssnano": "^4.0.0",
@@ -70,7 +71,7 @@
     "sade": "^1.4.0",
     "tiny-glob": "^0.2.0",
     "tslib": "^1.9.0",
-    "typescript": "^2.8.3"
+    "typescript": ">=2.8.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -78,7 +79,7 @@
     "directory-tree": "^2.1.0",
     "eslint": "^5.0.0",
     "eslint-config-developit": "^1.1.1",
-    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-prettier": "^3.0.0",
     "eslint-plugin-prettier": "^2.6.0",
     "fs-extra": "^7.0.0",
     "husky": "^0.14.3",

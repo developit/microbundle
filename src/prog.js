@@ -20,12 +20,18 @@ export default handler => {
 		.option('--watch, -w', 'Rebuilds on any change', false)
 		.option('--target', 'Specify your target environment', 'node')
 		.option('--external', `Specify external dependencies, or 'none'`)
+		.option('--globals', `Specify globals dependencies, or 'none'`)
+		.example('microbundle --globals react=React,jquery=$')
 		.option('--compress', 'Compress output using UglifyJS', true)
 		.option('--strict', 'Enforce undefined global context and add "use strict"')
 		.option('--name', 'Specify name exposed in UMD builds')
 		.option('--cwd', 'Use an alternative working directory', '.')
 		.option('--sourcemap', 'Generate source map', true)
-		.option('--raw', 'Show raw byte size', false);
+		.option('--raw', 'Show raw byte size', false)
+		.option(
+			'--jsx',
+			'A custom JSX pragma like React.createElement (default: h)',
+		);
 
 	prog
 		.command('build [...entries]', '', { default: true })

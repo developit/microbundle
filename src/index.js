@@ -31,6 +31,14 @@ const safeVariableName = name =>
 			.toLowerCase()
 			.replace(/((^[^a-zA-Z]+)|[^\w.-])|([^a-zA-Z0-9]+$)/g, ''),
 	);
+const parseGlobals = globalStrings => {
+	const globals = {};
+	globalStrings.split(',').forEach(globalString => {
+		const [localName, globalName] = globalString.split('=');
+		globals[localName] = globalName;
+	});
+	return globals;
+};
 
 const WATCH_OPTS = {
 	exclude: 'node_modules/**',
@@ -146,7 +154,7 @@ export default async function microbundle(options) {
 	async function getSizeInfo(code, filename) {
 		const raw = options.raw || code.length < 5000;
 		const gzip = formatSize(await gzipSize(code), filename, 'gz', raw);
-		const brotli = formatSize(brotliSize.sync(code), filename, 'br', raw);
+		const brotli = formatSize(await brotliSize(code), filename, 'br', raw);
 		return gzip + '\n' + brotli;
 	}
 
@@ -244,6 +252,9 @@ function createConfig(options, entry, format, writeMeta) {
 		}
 		return globals;
 	}, {});
+	if (options.globals && options.globals !== 'none') {
+		globals = Object.assign(globals, parseGlobals(options.globals));
+	}
 
 	function replaceName(filename, name) {
 		return resolve(
@@ -332,7 +343,10 @@ function createConfig(options, entry, format, writeMeta) {
 					useTypescript &&
 						typescript({
 							typescript: require('typescript'),
-							tsconfigDefaults: { compilerOptions: { declaration: true } },
+							cacheRoot: `./.rts2_cache_${format}`,
+							tsconfigDefaults: {
+								compilerOptions: { declaration: true, jsx: options.jsx },
+							},
 						}),
 					!useTypescript && flow({ all: true, pretty: true }),
 					nodent({
