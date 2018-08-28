@@ -361,12 +361,12 @@ pretty
 
 
 Build \\"pretty\\" to dist:
-1.39 kB: pretty.js.gz
-1.16 kB: pretty.js.br
-1.4 kB: pretty.mjs.gz
-1.17 kB: pretty.mjs.br
-1.5 kB: pretty.umd.js.gz
-1.24 kB: pretty.umd.js.br"
+6.33 kB: pretty.js.gz
+5.19 kB: pretty.js.br
+6.34 kB: pretty.mjs.gz
+5.21 kB: pretty.mjs.br
+6.46 kB: pretty.umd.js.gz
+5.3 kB: pretty.umd.js.br"
 `;
 
 exports[`fixtures raw 1`] = `
