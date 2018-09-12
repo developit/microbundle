@@ -33,7 +33,6 @@
 }
 ```
 
-
 ## 📦 Usage
 
 Microbundle includes two commands - `build` (the default) and `watch`. Neither require any options, but you can tailor things to suit your needs a bit if you like.
@@ -78,6 +77,7 @@ Just like `microbundle build`, but watches your source files and rebuilds on any
     -h, --help       Displays this message
     --jsx            A custom JSX pragma like React.createElement (default: h)
 ```
+
 ### Specifying builds in `package.json`
 
 You can specify output builds in a `package.json` as follows:
@@ -97,7 +97,6 @@ Here's what's coming up for Microbundle:
 - [x] [TypeScript support](https://github.com/developit/microbundle/issues/5)
 - [x] [Flowtype support](https://github.com/developit/microbundle/issues/5#issuecomment-351075881)
 
-
 ## 🔨 Built with Microbundle
 
 - [Stockroom](https://github.com/developit/stockroom) Offload your store management to a worker easily.
@@ -108,7 +107,6 @@ Here's what's coming up for Microbundle:
 
 [MIT](https://oss.ninja/mit/developit/)
 
-
-[Rollup]: https://github.com/rollup/rollup
-[Bublé]: https://github.com/Rich-Harris/buble
-[Nodent]: https://github.com/MatAtBread/nodent-compiler
+[rollup]: https://github.com/rollup/rollup
+[bublé]: https://github.com/Rich-Harris/buble
+[nodent]: https://github.com/MatAtBread/nodent-compiler

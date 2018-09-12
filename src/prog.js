@@ -27,6 +27,7 @@ export default handler => {
 		.option('--name', 'Specify name exposed in UMD builds')
 		.option('--cwd', 'Use an alternative working directory', '.')
 		.option('--sourcemap', 'Generate source map', true)
+		.option('--raw', 'Show raw byte size', false)
 		.option(
 			'--jsx',
 			'A custom JSX pragma like React.createElement (default: h)',

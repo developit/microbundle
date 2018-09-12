@@ -1,0 +1,6 @@
+{
+  "name": "raw",
+  "scripts": {
+    "build": "microbundle --raw"
+  }
+}

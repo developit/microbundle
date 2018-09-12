@@ -142,8 +142,8 @@ export default async function microbundle(options) {
 		}
 	}
 
-	function formatSize(size, filename, type) {
-		const pretty = prettyBytes(size);
+	function formatSize(size, filename, type, raw) {
+		const pretty = raw ? `${size} B` : prettyBytes(size);
 		const color = size < 5000 ? 'green' : size > 40000 ? 'red' : 'yellow';
 		const MAGIC_INDENTATION = type === 'br' ? 13 : 10;
 		return `${' '.repeat(MAGIC_INDENTATION - pretty.length)}${chalk[color](
@@ -152,8 +152,9 @@ export default async function microbundle(options) {
 	}
 
 	async function getSizeInfo(code, filename) {
-		const gzip = formatSize(await gzipSize(code), filename, 'gz');
-		const brotli = formatSize(await brotliSize(code), filename, 'br');
+		const raw = options.raw || code.length < 5000;
+		const gzip = formatSize(await gzipSize(code), filename, 'gz', raw);
+		const brotli = formatSize(await brotliSize(code), filename, 'br', raw);
 		return gzip + '\n' + brotli;
 	}
 
