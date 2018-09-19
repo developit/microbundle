@@ -85,7 +85,7 @@ You can specify output builds in a `package.json` as follows:
 ```
 "main": "dist/foo.js",          // CJS bundle
 "umd:main": "dist/foo.umd.js",  // UMD bundle
-"module": "dist/foo.m.js",      // ES Modules bundle
+"module": "dist/foo.mjs",      // ES Modules bundle
 "source": "src/foo.js",         // custom entry module (same as 1st arg to microbundle)
 ```
 
