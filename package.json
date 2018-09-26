@@ -82,7 +82,7 @@
     "eslint-config-prettier": "^3.0.0",
     "eslint-plugin-prettier": "^2.6.0",
     "fs-extra": "^7.0.0",
-    "husky": "^0.14.3",
+    "husky": "^1.0.0",
     "jest": "^22.4.3",
     "lint-staged": "^7.1.0",
     "prettier": "^1.13.0",
