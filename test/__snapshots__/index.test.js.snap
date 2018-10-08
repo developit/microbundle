@@ -341,25 +341,3 @@ Build \\"noPkgName\\" to dist:
 292 B: no-pkg-name.umd.js.gz
 230 B: no-pkg-name.umd.js.br"
 `;
-
-exports[`fixtures pretty 1`] = `
-"Used script: microbundle
-
-Directory tree:
-
-pretty
-
-
-Build \\"pretty\\" to dist:"
-`;
-
-exports[`fixtures raw 1`] = `
-"Used script: microbundle
-
-Directory tree:
-
-raw
-
-
-Build \\"raw\\" to dist:"
-`;
