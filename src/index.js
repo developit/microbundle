@@ -11,7 +11,7 @@ import nodent from 'rollup-plugin-nodent';
 import commonjs from 'rollup-plugin-commonjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import buble from 'rollup-plugin-buble';
-import uglify from 'rollup-plugin-uglify';
+import { terser } from 'rollup-plugin-terser';
 import postcss from 'rollup-plugin-postcss';
 import alias from 'rollup-plugin-strict-alias';
 import gzipSize from 'gzip-size';
@@ -397,7 +397,7 @@ function createConfig(options, entry, format, writeMeta) {
 					// 	[`var ${rollupName} =`]: 'export default'
 					// }),
 					options.compress !== false && [
-						uglify({
+						terser({
 							sourceMap: true,
 							output: { comments: false },
 							compress: {
