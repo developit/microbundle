@@ -26,7 +26,7 @@ export default handler => {
 		.option('--strict', 'Enforce undefined global context and add "use strict"')
 		.option('--name', 'Specify name exposed in UMD builds')
 		.option('--cwd', 'Use an alternative working directory', '.')
-		.option('--sourcemap', 'Generate source map', true)
+		.option('--no-sourcemap', "Don't generate source map")
 		.option('--raw', 'Show raw byte size', false)
 		.option(
 			'--jsx',
