@@ -16,7 +16,7 @@
 - Produces tiny, optimized code for all inputs
 - Supports multiple entry modules _(`cli.js` + `index.js`, etc)_
 - Creates multiple output formats for each entry _(<abbr title="CommonJS (node)">CJS</abbr>, <abbr title="Universal Module Definition">UMD</abbr> & <abbr title="ECMAScript Modules">ESM</abbr>)_
-- Built-in Uglify compression & gzipped bundle size tracking
+- Built-in Terser compression & gzipped bundle size tracking
 
 ## 🔧 Installation
 
@@ -69,7 +69,7 @@ Just like `microbundle build`, but watches your source files and rebuilds on any
     --target         Specify your target environment  (default node)
     --external       Specify external dependencies, or 'none'
     --globals        Specify globals dependencies, or 'none'
-    --compress       Compress output using UglifyJS  (default true)
+    --compress       Compress output using Terser  (default true)
     --strict         Enforce undefined global context and add "use strict"
     --name           Specify name exposed in UMD builds
     --cwd            Use an alternative working directory  (default .)

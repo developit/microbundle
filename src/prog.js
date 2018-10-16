@@ -22,7 +22,7 @@ export default handler => {
 		.option('--external', `Specify external dependencies, or 'none'`)
 		.option('--globals', `Specify globals dependencies, or 'none'`)
 		.example('microbundle --globals react=React,jquery=$')
-		.option('--compress', 'Compress output using UglifyJS', true)
+		.option('--compress', 'Compress output using Terser', true)
 		.option('--strict', 'Enforce undefined global context and add "use strict"')
 		.option('--name', 'Specify name exposed in UMD builds')
 		.option('--cwd', 'Use an alternative working directory', '.')
