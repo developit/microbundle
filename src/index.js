@@ -86,6 +86,10 @@ export default async function microbundle(options) {
 	options.name =
 		options.name || options.pkg.amdName || safeVariableName(options.pkg.name);
 
+	if (options.sourcemap !== false) {
+		options.sourcemap = true;
+	}
+
 	const jsOrTs = async filename =>
 		resolve(
 			cwd,
@@ -345,7 +349,11 @@ function createConfig(options, entry, format, writeMeta) {
 							typescript: require('typescript'),
 							cacheRoot: `./.rts2_cache_${format}`,
 							tsconfigDefaults: {
-								compilerOptions: { declaration: true, jsx: options.jsx },
+								compilerOptions: {
+									sourceMap: options.sourcemap,
+									declaration: true,
+									jsx: options.jsx,
+								},
 							},
 						}),
 					!useTypescript && flow({ all: true, pretty: true }),
@@ -452,7 +460,7 @@ function createConfig(options, entry, format, writeMeta) {
 			legacy: true,
 			freeze: false,
 			esModule: false,
-			sourcemap: options.sourcemap !== false,
+			sourcemap: options.sourcemap,
 			treeshake: {
 				propertyReadSideEffects: false,
 			},
