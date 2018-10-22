@@ -9,7 +9,6 @@
     "build": "npm run -s build:babel && npm run -s build:self",
     "build:babel": "babel-node src/cli.js --format cjs src/{cli,index}.js --presets env",
     "build:self": "node dist/cli.js --format cjs src/{cli,index}.js",
-    "precommit": "lint-staged",
     "prepare": "npm run -s build",
     "prepare:babel": "babel --presets env src/*.js -d dist && npm t",
     "lint": "eslint src",
@@ -31,6 +30,11 @@
     "testEnvironment": "node",
     "testURL": "http://localhost"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "keywords": [
     "bundle",
     "rollup",
@@ -50,11 +54,11 @@
     "brotli-size": "^0.0.3",
     "camelcase": "^5.0.0",
     "chalk": "^2.4.0",
-    "cssnano": "^4.0.0",
-    "es6-promisify": "^6.0.0",
+    "cssnano": "^4.1.7",
+    "es6-promisify": "^6.0.1",
     "gzip-size": "^5.0.0",
     "pretty-bytes": "^5.1.0",
-    "rollup": "^0.63.0",
+    "rollup": "^0.66.6",
     "rollup-plugin-buble": "^0.19.2",
     "rollup-plugin-bundle-size": "^1.0.1",
     "rollup-plugin-commonjs": "^9.0.0",
@@ -66,8 +70,8 @@
     "rollup-plugin-preserve-shebang": "^0.1.6",
     "rollup-plugin-sizes": "^0.4.2",
     "rollup-plugin-strict-alias": "^1.0.0",
-    "rollup-plugin-terser": "^1.0.1",
-    "rollup-plugin-typescript2": "^0.13.0",
+    "rollup-plugin-terser": "^3.0.0",
+    "rollup-plugin-typescript2": "^0.17.2",
     "sade": "^1.4.0",
     "tiny-glob": "^0.2.0",
     "tslib": "^1.9.0",
@@ -80,14 +84,14 @@
     "eslint": "^5.0.0",
     "eslint-config-developit": "^1.1.1",
     "eslint-config-prettier": "^3.0.0",
-    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-prettier": "^3.0.0",
     "fs-extra": "^7.0.0",
-    "husky": "^0.14.3",
-    "jest": "^22.4.3",
+    "husky": "^1.1.2",
+    "jest": "^23.6.0",
     "lint-staged": "^7.1.0",
     "prettier": "^1.13.0",
     "rimraf": "^2.6.2",
     "shell-quote": "^1.6.1",
-    "strip-ansi": "^4.0.0"
+    "strip-ansi": "^5.0.0"
   }
 }
