@@ -320,10 +320,11 @@ function createConfig(options, entry, format, writeMeta) {
 	loadNameCache();
 
 	function createEnvVars(define) {
-		const [key, value] = define.split('=');
-		return {
-			[key]: value,
-		};
+		return define.split(',').reduce((obj, str) => {
+			const [key, value] = str.split('=');
+			obj[key] = value;
+			return obj;
+		}, {});
 	}
 
 	let config = {

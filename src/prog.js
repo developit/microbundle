@@ -27,9 +27,11 @@ export default handler => {
 		.option('--name', 'Specify name exposed in UMD builds')
 		.option('--cwd', 'Use an alternative working directory', '.')
 		.option('--sourcemap', 'Generate source map', true)
-		.option('--define', 'Define environment variables')
-		.example('--define NODE_ENV=production MY_ENV_VAR=peter')
 		.example("microbundle --no-sourcemap # don't generate sourcemaps")
+		.option('--define', 'Define environment variables')
+		.example(
+			'microbundle --define NODE_ENV=production,API_URL=http://localhost:3000',
+		)
 		.option('--raw', 'Show raw byte size', false)
 		.option(
 			'--jsx',
