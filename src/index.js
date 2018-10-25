@@ -319,11 +319,12 @@ function createConfig(options, entry, format, writeMeta) {
 	}
 	loadNameCache();
 
-	function createEnvVars(define) {
-		return define.split(',').reduce((obj, str) => {
-			const [key, value] = str.split('=');
-			obj[key] = value;
-			return obj;
+	function coerceOptionToMapping(option) {
+		const pairs = Array.isArray(option) ? option : option.split(',');
+		return pairs.reduce((mapping, pair) => {
+			const matches = /^\s*([^=]+)\s*(?:=\s*(.*)\s*)?$/g.exec(pair);
+			mapping[matches[1]] = matches[2] || true;
+			return mapping;
 		}, {});
 	}
 
@@ -341,7 +342,7 @@ function createConfig(options, entry, format, writeMeta) {
 					alias({
 						__microbundle_entry__: entry,
 					}),
-					options.define && replace(createEnvVars(options.define)),
+					options.define && replace(coerceOptionToMapping(options.define)),
 					postcss({
 						plugins: [
 							autoprefixer(),
