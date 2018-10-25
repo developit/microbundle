@@ -19,6 +19,7 @@ import brotliSize from 'brotli-size';
 import prettyBytes from 'pretty-bytes';
 import shebangPlugin from 'rollup-plugin-preserve-shebang';
 import typescript from 'rollup-plugin-typescript2';
+import replace from 'rollup-plugin-replace';
 import flow from './lib/flow-plugin';
 import logError from './log-error';
 import { readFile, isDir, isFile, stdout, stderr } from './utils';
@@ -318,6 +319,13 @@ function createConfig(options, entry, format, writeMeta) {
 	}
 	loadNameCache();
 
+	function createEnvVars(define) {
+		const [key, value] = define.split('=');
+		return {
+			[key]: value,
+		};
+	}
+
 	let config = {
 		inputOptions: {
 			input: exportType ? resolve(__dirname, '../src/lib/__entry__.js') : entry,
@@ -332,6 +340,7 @@ function createConfig(options, entry, format, writeMeta) {
 					alias({
 						__microbundle_entry__: entry,
 					}),
+					options.define && replace(createEnvVars(options.define)),
 					postcss({
 						plugins: [
 							autoprefixer(),
