@@ -406,7 +406,7 @@ function createConfig(options, entry, format, writeMeta) {
 					// }),
 					options.compress !== false && [
 						terser({
-							sourceMap: true,
+							sourcemap: true,
 							output: { comments: false },
 							compress: {
 								keep_infinity: true,
