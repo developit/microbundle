@@ -103,6 +103,7 @@ Here's what's coming up for Microbundle:
 - [Microenvi](https://github.com/fwilkerson/microenvi) Bundle, serve, and hot reload with one command.
 - [react-recomponent](https://github.com/philipp-spiess/react-recomponent) Reason-style reducer components for React using ES6 classes.
 - [brazilian-utils](https://github.com/brazilian-utils/brazilian-utils) Utils library for specific Brazilian businesses.
+- [react-hooks-lib](https://github.com/beizhedenglong/react-hooks-lib) A set of reusable react hooks.
 
 ## 🥂 License
 
