@@ -6,7 +6,8 @@ const toArray = val => (Array.isArray(val) ? val : val == null ? [] : [val]);
 export default handler => {
 	const cmd = type => (str, opts) => {
 		opts.watch = opts.watch || type === 'watch';
-		opts.compress = opts.compress != null || opts.target !== 'node';
+		opts.compress =
+			opts.compress != null ? opts.compress : opts.target !== 'node';
 		opts.entries = toArray(str || opts.entry).concat(opts._);
 		handler(opts);
 	};
