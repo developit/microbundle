@@ -1,4 +1,3 @@
-import 'acorn-jsx';
 import fs from 'fs';
 import { resolve, relative, dirname, basename, extname } from 'path';
 import chalk from 'chalk';
@@ -7,8 +6,8 @@ import glob from 'tiny-glob/sync';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import { rollup, watch } from 'rollup';
-import nodent from 'rollup-plugin-nodent';
 import commonjs from 'rollup-plugin-commonjs';
+import babel from 'rollup-plugin-babel';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import buble from 'rollup-plugin-buble';
 import { terser } from 'rollup-plugin-terser';
@@ -43,6 +42,16 @@ const parseGlobals = globalStrings => {
 const WATCH_OPTS = {
 	exclude: 'node_modules/**',
 };
+
+// Hoist function because something (rollup?) incorrectly removes it
+function formatSize(size, filename, type, raw) {
+	const pretty = raw ? `${size} B` : prettyBytes(size);
+	const color = size < 5000 ? 'green' : size > 40000 ? 'red' : 'yellow';
+	const MAGIC_INDENTATION = type === 'br' ? 13 : 10;
+	return `${' '.repeat(MAGIC_INDENTATION - pretty.length)}${chalk[color](
+		pretty,
+	)}: ${chalk.white(basename(filename))}.${type}`;
+}
 
 export default async function microbundle(options) {
 	let cwd = (options.cwd = resolve(process.cwd(), options.cwd)),
@@ -144,15 +153,6 @@ export default async function microbundle(options) {
 				createConfig(options, entries[i], formats[j], i === 0 && j === 0),
 			);
 		}
-	}
-
-	function formatSize(size, filename, type, raw) {
-		const pretty = raw ? `${size} B` : prettyBytes(size);
-		const color = size < 5000 ? 'green' : size > 40000 ? 'red' : 'yellow';
-		const MAGIC_INDENTATION = type === 'br' ? 13 : 10;
-		return `${' '.repeat(MAGIC_INDENTATION - pretty.length)}${chalk[color](
-			pretty,
-		)}: ${chalk.white(basename(filename))}.${type}`;
 	}
 
 	async function getSizeInfo(code, filename) {
@@ -357,19 +357,18 @@ function createConfig(options, entry, format, writeMeta) {
 							},
 						}),
 					!useTypescript && flow({ all: true, pretty: true }),
-					nodent({
-						exclude: 'node_modules/**',
-						noRuntime: true,
-						promises: true,
-						transformations: {
-							forOf: false,
-						},
-						parser: {
-							plugins: {
-								jsx: true,
-							},
-						},
-					}),
+					// Only used for async await
+					!useTypescript &&
+						babel({
+							exclude: 'node_modules/**',
+							plugins: [
+								'@babel/plugin-syntax-jsx',
+								[
+									'babel-plugin-transform-async-to-promises',
+									{ inlineHelpers: true },
+								],
+							],
+						}),
 					!useTypescript &&
 						buble({
 							exclude: 'node_modules/**',

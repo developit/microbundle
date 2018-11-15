@@ -111,4 +111,3 @@ Here's what's coming up for Microbundle:
 
 [rollup]: https://github.com/rollup/rollup
 [bublé]: https://github.com/Rich-Harris/buble
-[nodent]: https://github.com/MatAtBread/nodent-compiler
