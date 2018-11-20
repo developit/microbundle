@@ -1,14 +1,14 @@
 {
   "name": "microbundle",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Zero-configuration bundler for tiny JS libs, powered by Rollup.",
   "main": "dist/microbundle.js",
   "source": "src/index.js",
   "bin": "dist/cli.js",
   "scripts": {
     "build": "npm run -s build:babel && npm run -s build:self",
-    "build:babel": "babel-node src/cli.js --no-compress --format cjs src/{cli,index}.js --presets env",
-    "build:self": "node dist/cli.js --no-compress --format cjs src/{cli,index}.js",
+    "build:babel": "babel-node src/cli.js --target=node --format cjs src/{cli,index}.js --presets env",
+    "build:self": "node dist/cli.js --target=node --format cjs src/{cli,index}.js",
     "prepare": "npm run -s build",
     "prepare:babel": "babel --presets env src/*.js -d dist && npm t",
     "lint": "eslint src",

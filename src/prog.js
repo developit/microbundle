@@ -6,6 +6,8 @@ const toArray = val => (Array.isArray(val) ? val : val == null ? [] : [val]);
 export default handler => {
 	const cmd = type => (str, opts) => {
 		opts.watch = opts.watch || type === 'watch';
+		opts.compress =
+			opts.compress != null ? opts.compress : opts.target !== 'node';
 		opts.entries = toArray(str || opts.entry).concat(opts._);
 		handler(opts);
 	};
@@ -18,11 +20,11 @@ export default handler => {
 		.option('--output, -o', 'Directory to place build files into')
 		.option('--format, -f', 'Only build specified formats', 'es,cjs,umd')
 		.option('--watch, -w', 'Rebuilds on any change', false)
-		.option('--target', 'Specify your target environment', 'node')
+		.option('--target', 'Specify your target environment', 'web')
 		.option('--external', `Specify external dependencies, or 'none'`)
 		.option('--globals', `Specify globals dependencies, or 'none'`)
 		.example('microbundle --globals react=React,jquery=$')
-		.option('--compress', 'Compress output using Terser', true)
+		.option('--compress', 'Compress output using Terser', null)
 		.option('--strict', 'Enforce undefined global context and add "use strict"')
 		.option('--name', 'Specify name exposed in UMD builds')
 		.option('--cwd', 'Use an alternative working directory', '.')
