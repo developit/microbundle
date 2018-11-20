@@ -47,7 +47,7 @@
   "author": "Jason Miller <jason@developit.ca> (http://jasonformat.com)",
   "license": "MIT",
   "dependencies": {
-    "acorn-jsx": "^4.1.1",
+    "acorn-jsx": "^5.0.1",
     "asyncro": "^3.0.0",
     "autoprefixer": "^9.0.0",
     "babel-polyfill": "^6.26.0",
