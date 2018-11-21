@@ -11,5 +11,10 @@
     "brace-style": "off",
     "comma-dangle": ["warn", "always-multiline"],
     "indent": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "16.6"
+    }
   }
 }
