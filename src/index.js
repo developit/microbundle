@@ -97,8 +97,8 @@ export default async function microbundle(options) {
 				(await isFile(resolve(cwd, filename + '.ts')))
 					? '.ts'
 					: (await isFile(resolve(cwd, filename + '.tsx')))
-					? '.tsx'
-					: '.js'
+						? '.tsx'
+						: '.js'
 			}`,
 		);
 
@@ -108,10 +108,9 @@ export default async function microbundle(options) {
 			options.entries && options.entries.length
 				? options.entries
 				: (options.pkg.source && resolve(cwd, options.pkg.source)) ||
-						((await isDir(resolve(cwd, 'src'))) &&
-							(await jsOrTs('src/index'))) ||
-						(await jsOrTs('index')) ||
-						options.pkg.module,
+				  ((await isDir(resolve(cwd, 'src'))) && (await jsOrTs('src/index'))) ||
+				  (await jsOrTs('index')) ||
+				  options.pkg.module,
 		)
 		.map(file => glob(file))
 		.forEach(file => options.input.push(...file));
