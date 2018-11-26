@@ -147,6 +147,33 @@ Build \\"basic\\" to dist:
 208 B: basic.umd.js.br"
 `;
 
+exports[`fixtures class-properties 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+class-properties
+  dist
+    class-properties.js
+    class-properties.js.map
+    class-properties.mjs
+    class-properties.mjs.map
+    class-properties.umd.js
+    class-properties.umd.js.map
+  package.json
+  src
+    index.js
+
+
+Build \\"classProperties\\" to dist:
+93 B: class-properties.js.gz
+79 B: class-properties.js.br
+89 B: class-properties.mjs.gz
+79 B: class-properties.mjs.br
+191 B: class-properties.umd.js.gz
+145 B: class-properties.umd.js.br"
+`;
+
 exports[`fixtures custom-source 1`] = `
 "Used script: microbundle
 

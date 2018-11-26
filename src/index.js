@@ -370,6 +370,7 @@ function createConfig(options, entry, format, writeMeta) {
 									'babel-plugin-transform-async-to-promises',
 									{ inlineHelpers: true, externalHelpers: true },
 								],
+								['@babel/plugin-proposal-class-properties', { loose: true }],
 							],
 						}),
 					!useTypescript &&
