@@ -322,6 +322,9 @@ function createConfig(options, entry, format, writeMeta) {
 		inputOptions: {
 			input: exportType ? resolve(__dirname, '../src/lib/__entry__.js') : entry,
 			external: id => {
+				if (id === 'babel-plugin-transform-async-to-promises/helpers') {
+					return false;
+				}
 				if (options.multipleEntries && id === '.') {
 					return true;
 				}
@@ -365,7 +368,7 @@ function createConfig(options, entry, format, writeMeta) {
 								'@babel/plugin-syntax-jsx',
 								[
 									'babel-plugin-transform-async-to-promises',
-									{ inlineHelpers: true },
+									{ inlineHelpers: true, externalHelpers: true },
 								],
 							],
 						}),
