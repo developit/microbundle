@@ -368,6 +368,11 @@ function createConfig(options, entry, format, writeMeta) {
 					!useTypescript && flow({ all: true, pretty: true }),
 					// Only used for async await
 					babel({
+						// We mainly use bublé to transpile JS and only use babel to
+						// transpile down `async/await`. To prevent conflicts with user
+						// supplied configurations we set this option to false. Note
+						// that we never supported using custom babel configs anyway.
+						babelrc: false,
 						exclude: 'node_modules/**',
 						plugins: [
 							'@babel/plugin-syntax-jsx',
