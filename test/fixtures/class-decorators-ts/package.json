@@ -1,0 +1,6 @@
+{
+  "name": "class-decorators-ts",
+  "scripts": {
+    "build": "microbundle --raw"
+  }
+}

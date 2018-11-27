@@ -80,12 +80,12 @@ basic-ts
 
 
 Build \\"basicLibTs\\" to dist:
-104 B: basic-lib-ts.js.gz
-76 B: basic-lib-ts.js.br
-97 B: basic-lib-ts.mjs.gz
-73 B: basic-lib-ts.mjs.br
-180 B: basic-lib-ts.umd.js.gz
-137 B: basic-lib-ts.umd.js.br"
+98 B: basic-lib-ts.js.gz
+67 B: basic-lib-ts.js.br
+92 B: basic-lib-ts.mjs.gz
+58 B: basic-lib-ts.mjs.br
+176 B: basic-lib-ts.umd.js.gz
+139 B: basic-lib-ts.umd.js.br"
 `;
 
 exports[`fixtures basic-tsx 1`] = `
@@ -109,12 +109,12 @@ basic-tsx
 
 
 Build \\"basicLibTsx\\" to dist:
-221 B: basic-lib-tsx.js.gz
-179 B: basic-lib-tsx.js.br
-222 B: basic-lib-tsx.mjs.gz
-197 B: basic-lib-tsx.mjs.br
-295 B: basic-lib-tsx.umd.js.gz
-236 B: basic-lib-tsx.umd.js.br"
+211 B: basic-lib-tsx.js.gz
+168 B: basic-lib-tsx.js.br
+212 B: basic-lib-tsx.mjs.gz
+170 B: basic-lib-tsx.mjs.br
+290 B: basic-lib-tsx.umd.js.gz
+228 B: basic-lib-tsx.umd.js.br"
 `;
 
 exports[`fixtures basic-with-cwd 1`] = `
@@ -145,6 +145,35 @@ Build \\"basic\\" to dist:
 145 B: basic.mjs.br
 276 B: basic.umd.js.gz
 208 B: basic.umd.js.br"
+`;
+
+exports[`fixtures class-decorators-ts 1`] = `
+"Used script: microbundle --raw
+
+Directory tree:
+
+class-decorators-ts
+  dist
+    class-decorators-ts.js
+    class-decorators-ts.js.map
+    class-decorators-ts.mjs
+    class-decorators-ts.mjs.map
+    class-decorators-ts.umd.js
+    class-decorators-ts.umd.js.map
+    index.d.ts
+  package.json
+  src
+    index.ts
+  tsconfig.json
+
+
+Build \\"classDecoratorsTs\\" to dist:
+333 B: class-decorators-ts.js.gz
+276 B: class-decorators-ts.js.br
+331 B: class-decorators-ts.mjs.gz
+271 B: class-decorators-ts.mjs.br
+393 B: class-decorators-ts.umd.js.gz
+352 B: class-decorators-ts.umd.js.br"
 `;
 
 exports[`fixtures class-properties 1`] = `
@@ -230,6 +259,35 @@ Build \\"customSrc\\" to dist:
 145 B: custom-src.mjs.br
 279 B: custom-src.umd.js.gz
 212 B: custom-src.umd.js.br"
+`;
+
+exports[`fixtures esnext-ts 1`] = `
+"Used script: microbundle --raw
+
+Directory tree:
+
+esnext-ts
+  dist
+    esnext-ts.js
+    esnext-ts.js.map
+    esnext-ts.mjs
+    esnext-ts.mjs.map
+    esnext-ts.umd.js
+    esnext-ts.umd.js.map
+    index.d.ts
+  package.json
+  src
+    index.ts
+  tsconfig.json
+
+
+Build \\"esnextTs\\" to dist:
+470 B: esnext-ts.js.gz
+404 B: esnext-ts.js.br
+470 B: esnext-ts.mjs.gz
+409 B: esnext-ts.mjs.br
+528 B: esnext-ts.umd.js.gz
+461 B: esnext-ts.umd.js.br"
 `;
 
 exports[`fixtures jsx 1`] = `

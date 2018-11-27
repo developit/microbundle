@@ -359,31 +359,34 @@ function createConfig(options, entry, format, writeMeta) {
 									jsx: options.jsx,
 								},
 							},
+							tsconfigOverride: {
+								compilerOptions: {
+									target: 'es2017',
+								},
+							},
 						}),
 					!useTypescript && flow({ all: true, pretty: true }),
 					// Only used for async await
-					!useTypescript &&
-						babel({
-							exclude: 'node_modules/**',
-							plugins: [
-								'@babel/plugin-syntax-jsx',
-								[
-									'babel-plugin-transform-async-to-promises',
-									{ inlineHelpers: true, externalHelpers: true },
-								],
-								['@babel/plugin-proposal-class-properties', { loose: true }],
+					babel({
+						exclude: 'node_modules/**',
+						plugins: [
+							'@babel/plugin-syntax-jsx',
+							[
+								'babel-plugin-transform-async-to-promises',
+								{ inlineHelpers: true, externalHelpers: true },
 							],
-						}),
-					!useTypescript &&
-						buble({
-							exclude: 'node_modules/**',
-							jsx: options.jsx || 'h',
-							objectAssign: options.assign || 'Object.assign',
-							transforms: {
-								dangerousForOf: true,
-								dangerousTaggedTemplateString: true,
-							},
-						}),
+							['@babel/plugin-proposal-class-properties', { loose: true }],
+						],
+					}),
+					buble({
+						exclude: 'node_modules/**',
+						jsx: options.jsx || 'h',
+						objectAssign: options.assign || 'Object.assign',
+						transforms: {
+							dangerousForOf: true,
+							dangerousTaggedTemplateString: true,
+						},
+					}),
 					useNodeResolve &&
 						commonjs({
 							include: 'node_modules/**',
