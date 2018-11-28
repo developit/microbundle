@@ -1,0 +1,6 @@
+{
+  "name": "esnext-ts",
+  "scripts": {
+    "build": "microbundle --raw"
+  }
+}
