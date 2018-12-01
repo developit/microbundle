@@ -106,8 +106,8 @@ export default async function microbundle(options) {
 				(await isFile(resolve(cwd, filename + '.ts')))
 					? '.ts'
 					: (await isFile(resolve(cwd, filename + '.tsx')))
-					? '.tsx'
-					: '.js'
+						? '.tsx'
+						: '.js'
 			}`,
 		);
 
@@ -117,10 +117,9 @@ export default async function microbundle(options) {
 			options.entries && options.entries.length
 				? options.entries
 				: (options.pkg.source && resolve(cwd, options.pkg.source)) ||
-						((await isDir(resolve(cwd, 'src'))) &&
-							(await jsOrTs('src/index'))) ||
-						(await jsOrTs('index')) ||
-						options.pkg.module,
+				  ((await isDir(resolve(cwd, 'src'))) && (await jsOrTs('src/index'))) ||
+				  (await jsOrTs('index')) ||
+				  options.pkg.module,
 		)
 		.map(file => glob(file))
 		.forEach(file => options.input.push(...file));
@@ -319,6 +318,8 @@ function createConfig(options, entry, format, writeMeta) {
 	}
 	loadNameCache();
 
+	let shebang;
+
 	let config = {
 		inputOptions: {
 			input: exportType ? resolve(__dirname, '../src/lib/__entry__.js') : entry,
@@ -383,6 +384,28 @@ function createConfig(options, entry, format, writeMeta) {
 							['@babel/plugin-proposal-class-properties', { loose: true }],
 						],
 					}),
+					{
+						// Custom plugin that removes shebang from code because newer
+						// versions of bublé bundle their own private version of `acorn`
+						// and I don't know a way to patch in the option `allowHashBang`
+						// to acorn.
+						// See: https://github.com/Rich-Harris/buble/pull/165
+						transform(code) {
+							let reg = /^#!(.*)/;
+							let match = code.match(reg);
+
+							if (match !== null) {
+								shebang = '#!' + match[0];
+							}
+
+							code = code.replace(reg, '');
+
+							return {
+								code,
+								map: null,
+							};
+						},
+					},
 					buble({
 						exclude: 'node_modules/**',
 						jsx: options.jsx || 'h',
@@ -459,7 +482,9 @@ function createConfig(options, entry, format, writeMeta) {
 							config._code = code;
 						},
 					},
-					shebangPlugin(),
+					shebangPlugin({
+						shebang,
+					}),
 				)
 				.filter(Boolean),
 		},
