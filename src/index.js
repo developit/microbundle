@@ -106,8 +106,8 @@ export default async function microbundle(options) {
 				(await isFile(resolve(cwd, filename + '.ts')))
 					? '.ts'
 					: (await isFile(resolve(cwd, filename + '.tsx')))
-					? '.tsx'
-					: '.js'
+						? '.tsx'
+						: '.js'
 			}`,
 		);
 
@@ -117,10 +117,9 @@ export default async function microbundle(options) {
 			options.entries && options.entries.length
 				? options.entries
 				: (options.pkg.source && resolve(cwd, options.pkg.source)) ||
-						((await isDir(resolve(cwd, 'src'))) &&
-							(await jsOrTs('src/index'))) ||
-						(await jsOrTs('index')) ||
-						options.pkg.module,
+				  ((await isDir(resolve(cwd, 'src'))) && (await jsOrTs('src/index'))) ||
+				  (await jsOrTs('index')) ||
+				  options.pkg.module,
 		)
 		.map(file => glob(file))
 		.forEach(file => options.input.push(...file));
@@ -377,12 +376,15 @@ function createConfig(options, entry, format, writeMeta) {
 						babelrc: false,
 						exclude: 'node_modules/**',
 						plugins: [
-							'@babel/plugin-syntax-jsx',
+							require.resolve('@babel/plugin-syntax-jsx'),
 							[
-								'babel-plugin-transform-async-to-promises',
+								require.resolve('babel-plugin-transform-async-to-promises'),
 								{ inlineHelpers: true, externalHelpers: true },
 							],
-							['@babel/plugin-proposal-class-properties', { loose: true }],
+							[
+								require.resolve('@babel/plugin-proposal-class-properties'),
+								{ loose: true },
+							],
 						],
 					}),
 					{
