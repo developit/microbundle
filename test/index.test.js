@@ -88,4 +88,12 @@ describe('fixtures', () => {
 			).toMatchSnapshot();
 		});
 	});
+
+	it('should keep shebang', () => {
+		expect(
+			fs
+				.readFileSync(resolve(FIXTURES_DIR, 'shebang/dist/shebang.js'), 'utf8')
+				.startsWith('#!'),
+		).toEqual(true);
+	});
 });
