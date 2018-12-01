@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="be10be15-772e-464b-a160-002287a2a72b" name="Default" comment="whoops, didn't mean to fuck this up" />
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ElmWorkspace">
+    <elmProjects />
+    <settings binDirPath="" />
+  </component>
+  <component name="FileColors">
+    <fileColor scope="Non-Project Files (Material Darker)" color="323232" />
+    <fileColor scope="Non-Project Files (Material Default)" color="2E3C43" />
+    <fileColor scope="Non-Project Files (Material Lighter)" color="eae8e8" />
+    <fileColor scope="Non-Project Files (Material Palenight)" color="2f2e43" />
+    <fileColor scope="Non-Project Files (Material Oceanic)" color="2E3C43" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>es6</find>
+      <find>nameCache</find>
+      <find>async</find>
+      <find>customNameAmd</find>
+      <find>nameCustomCli</find>
+      <find>noPkg</find>
+      <find>no</find>
+      <find>extend</find>
+      <find>target</find>
+    </findStrings>
+    <dirStrings>
+      <dir>C:\Users\ArmyOfAnarchists\Code\Web\WebstormProjects\microbundle\src</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="shebang" />
+      </map>
+    </option>
+    <option name="RESET_MODE" value="MIXED" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/utils.js" />
+        <option value="$PROJECT_DIR$/test/index.test.js" />
+        <option value="$PROJECT_DIR$/.eslintignore" />
+        <option value="$PROJECT_DIR$/.npmignore" />
+        <option value="$USER_HOME$/Documents/gitignore_global.txt" />
+        <option value="$PROJECT_DIR$/dist/cli.js" />
+        <option value="$PROJECT_DIR$/dist/microbundle.js" />
+        <option value="$PROJECT_DIR$/test/fixtures/jsx/dist/jsx.js" />
+        <option value="$PROJECT_DIR$/.eslintrc" />
+        <option value="$PROJECT_DIR$/lint-staged.config.js" />
+        <option value="$PROJECT_DIR$/test/__snapshots__/index.test.js.snap" />
+        <option value="$PROJECT_DIR$/test/fixtures.old/basic-tsx/dist/basic-lib-tsx.mjs" />
+        <option value="$PROJECT_DIR$/../parket/node_modules/microbundle/dist/microbundle.js" />
+        <option value="$PROJECT_DIR$/../parket/node_modules/microbundle/dist/cli.js" />
+        <option value="$PROJECT_DIR$/../parket/package.json" />
+        <option value="$PROJECT_DIR$/src/index.js" />
+        <option value="$USER_HOME$/AppData/Roaming/npm/node_modules/release/bin/release.js" />
+        <option value="$PROJECT_DIR$/src/prog.js" />
+        <option value="$USER_HOME$/AppData/Roaming/npm/node_modules/release/lib/tags.js" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBowerSettings">
+    <exe-path>C:\Users\ArmyOfAnarchists\AppData\Roaming\npm\bower.cmd</exe-path>
+    <config-path />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>false</service-enabled>
+    <exe-path />
+    <annotation-enable>false</annotation-enable>
+    <other-services-enabled>false</other-services-enabled>
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-7" />
+    <option name="width" value="974" />
+    <option name="height" value="1057" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>CoffeeScript</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="microbundle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="microbundle" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="microbundle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="microbundle" type="462c0819:PsiDirectoryNode" />
+              <item name="dist" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="microbundle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="microbundle" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="microbundle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="microbundle" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="microbundle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="microbundle" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
+    <property name="editor.config.ad.shown" value="true" />
+    <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
+    <property name="js.eslint.eslintPackage" value="" />
+    <property name="js.eslint.nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
+    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Roaming/npm/node_modules/release/bin/release.js" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
+    <property name="node.js.selected.package.eslint" value="C:\Users\harmony\Code\Web\WebstormProjects\microbundle\node_modules\eslint" />
+    <property name="node.js.selected.package.standard" value="C:\Users\harmony\Code\Web\WebstormProjects\microbundle\node_modules\eslint" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="C:/Program Files/nodejs/node" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="C:\Users\harmony\Code\Web\WebstormProjects\microbundle\node_modules\prettier" />
+    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\harmony\Code\Web\WebstormProjects\microbundle\test" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="test" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.test" />
+        <item itemvalue="npm.test" />
+        <item itemvalue="npm.test" />
+        <item itemvalue="npm.test" />
+        <item itemvalue="npm.test" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="be10be15-772e-464b-a160-002287a2a72b" name="Default" comment="" />
+      <created>1519515241790</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1519515241790</updated>
+      <workItem from="1519515243412" duration="2296000" />
+      <workItem from="1524349709188" duration="4433000" />
+      <workItem from="1524354207522" duration="154000" />
+      <workItem from="1524354367401" duration="6458000" />
+      <workItem from="1525037412270" duration="1473000" />
+      <workItem from="1525040640759" duration="1516000" />
+      <workItem from="1526066505067" duration="1544000" />
+      <workItem from="1527516668405" duration="3332000" />
+      <workItem from="1527552259361" duration="292000" />
+      <workItem from="1533756737267" duration="474000" />
+      <workItem from="1533760142031" duration="20000" />
+      <workItem from="1535386359637" duration="1025000" />
+      <workItem from="1539028065388" duration="4679000" />
+      <workItem from="1539032952839" duration="1274000" />
+      <workItem from="1539798957730" duration="634000" />
+      <workItem from="1539799713707" duration="714000" />
+      <workItem from="1540241258384" duration="6659000" />
+      <workItem from="1540328606541" duration="918000" />
+      <workItem from="1540510954729" duration="709000" />
+      <workItem from="1540512733990" duration="6222000" />
+      <workItem from="1540573332621" duration="784000" />
+      <workItem from="1540576771290" duration="71000" />
+      <workItem from="1541876202962" duration="238000" />
+      <workItem from="1542996729900" duration="1155000" />
+      <workItem from="1542998069880" duration="761000" />
+      <workItem from="1543450530155" duration="887000" />
+      <workItem from="1543606531915" duration="5027000" />
+      <workItem from="1543620113009" duration="193000" />
+    </task>
+    <task id="LOCAL-00001" summary="Update dependencies">
+      <created>1519515901723</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1519515901723</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Just some formatting stuff for consistency and readability">
+      <created>1524353639910</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1524353639910</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Fix sourcemaps, use tiny glob, better build">
+      <created>1524359920933</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1524359920933</updated>
+    </task>
+    <task id="LOCAL-00004" summary="missed this for some reason">
+      <created>1524359994370</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1524359994370</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Fix tests &amp; allow local package-lock">
+      <created>1524360603760</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1524360603760</updated>
+    </task>
+    <task id="LOCAL-00006" summary="eslint runs prettier">
+      <created>1527517380901</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1527517380901</updated>
+    </task>
+    <task id="LOCAL-00007" summary="update snapshot">
+      <created>1535386731872</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1535386731872</updated>
+    </task>
+    <task id="LOCAL-00008" summary="update snapshot #2">
+      <created>1539029971193</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1539029971193</updated>
+    </task>
+    <task id="LOCAL-00009" summary="update snapshot #3">
+      <created>1539030251628</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1539030251628</updated>
+    </task>
+    <task id="LOCAL-00010" summary="revert the sourcemap change, but add an example for it">
+      <created>1540242920705</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1540242920705</updated>
+    </task>
+    <task id="LOCAL-00011" summary="don't compress microbundle dist (maybe we can add this for target=node)">
+      <created>1540243231274</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1540243231274</updated>
+    </task>
+    <task id="LOCAL-00012" summary="update dependencies">
+      <created>1540244368225</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1540244368225</updated>
+    </task>
+    <task id="LOCAL-00013" summary="update dependencies">
+      <created>1540244703524</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1540244703524</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Don't minify by default for target == &quot;node&quot;">
+      <created>1540512903318</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1540512903319</updated>
+    </task>
+    <task id="LOCAL-00015" summary="change default target to web and adjust build">
+      <created>1540513746910</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1540513746911</updated>
+    </task>
+    <task id="LOCAL-00016" summary="add useless files to .gitignore">
+      <created>1540514232089</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1540514232089</updated>
+    </task>
+    <task id="LOCAL-00017" summary="whoops, didn't mean to fuck this up">
+      <created>1540517733601</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1540517733601</updated>
+    </task>
+    <task id="LOCAL-00018" summary="accidentally committed idea files">
+      <created>1543670767940</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1543670767940</updated>
+    </task>
+    <task id="LOCAL-00019" summary="accidentally committed idea files">
+      <created>1543670783071</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1543670783071</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="54279000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49840257" visible="true" weight="0.14658849" />
+      <window_info id="Structure" order="1" sideWeight="0.5010707" side_tool="true" weight="0.122068234" />
+      <window_info id="npm" order="2" sideWeight="0.50159746" side_tool="true" weight="0.122068234" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32976446" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4989339" weight="0.32976446" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49573562" weight="0.5342612" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5042644" side_tool="true" weight="0.5342612" />
+      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49573562" weight="0.3222698" />
+      <window_info anchor="bottom" id="Quokka" order="11" weight="0.3290461" />
+      <window_info anchor="bottom" id="TypeScript" order="12" />
+      <window_info anchor="bottom" id="Messages" order="13" />
+      <window_info anchor="bottom" id="GraphQL" order="14" sideWeight="0.49626866" weight="0.32762313" />
+      <window_info anchor="bottom" id="Bucklescript" order="15" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Elm" order="3" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update dependencies" />
+    <MESSAGE value="Just some formatting stuff for consistency and readability" />
+    <MESSAGE value="Fix sourcemaps, use tiny glob, better build" />
+    <MESSAGE value="missed this for some reason" />
+    <MESSAGE value="Fix tests &amp; allow local package-lock" />
+    <MESSAGE value="eslint runs prettier" />
+    <MESSAGE value="update snapshot" />
+    <MESSAGE value="update snapshot #2" />
+    <MESSAGE value="update snapshot #3" />
+    <MESSAGE value="revert the sourcemap change, but add an example for it" />
+    <MESSAGE value="don't compress microbundle dist (maybe we can add this for target=node)" />
+    <MESSAGE value="update dependencies" />
+    <MESSAGE value="Don't minify by default for target == &quot;node&quot;" />
+    <MESSAGE value="change default target to web and adjust build" />
+    <MESSAGE value="add useless files to .gitignore" />
+    <MESSAGE value="whoops, didn't mean to fuck this up" />
+    <MESSAGE value="accidentally committed idea files" />
+    <option name="LAST_COMMIT_MESSAGE" value="accidentally committed idea files" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$USER_HOME$/Documents/gitignore_global.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.npmignore" />
+    <entry file="file://$PROJECT_DIR$/node_modules/sade/lib/index.js" />
+    <entry file="file://$PROJECT_DIR$/src/utils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="11" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/fixtures/jsx/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/fixtures/jsx/dist.old/jsx.umd.js" />
+    <entry file="file://$PROJECT_DIR$/test/fixtures/jsx/dist/jsx.m.js" />
+    <entry file="file://$PROJECT_DIR$/test/fixtures/jsx/dist.old/jsx.js" />
+    <entry file="file://$PROJECT_DIR$/.eslintignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="4" lean-forward="true" selection-start-column="4" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/__entry__.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/flow-plugin.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.eslintrc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="9" column="12" lean-forward="true" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lint-staged.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/index.test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/fixtures/basic-css/dist.old/basic-css.css" />
+    <entry file="file://$PROJECT_DIR$/test/fixtures/basic-css/src/two.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="10" lean-forward="true" selection-start-column="10" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/fixtures/basic-tsx/dist.old/basic-lib-tsx.js" />
+    <entry file="file://$PROJECT_DIR$/test/__snapshots__/index.test.js.snap">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/fixtures.old/basic-tsx/src/index.tsx" />
+    <entry file="file://$PROJECT_DIR$/test/fixtures.old/basic-tsx/dist/basic-lib-tsx.mjs" />
+    <entry file="file://$PROJECT_DIR$/test/fixtures.old/basic-tsx/package.json" />
+    <entry file="file://$PROJECT_DIR$/test/fixtures/basic-tsx/microbundle.mjs" />
+    <entry file="file://$PROJECT_DIR$/test/fixtures/basic-tsx/dist/basic-lib-tsx.mjs" />
+    <entry file="file://$PROJECT_DIR$/src/log-error.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CODE_OF_CONDUCT.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.travis.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="8" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/acorn/dist/acorn.mjs" />
+    <entry file="file://$PROJECT_DIR$/node_modules/nodent-compiler/node_modules/acorn/dist/acorn.js" />
+    <entry file="file://$PROJECT_DIR$/node_modules/nodent-compiler/package.json" />
+    <entry file="file://$PROJECT_DIR$/node_modules/rollup/dist/rollup.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="20846" column="24" selection-start-line="20846" selection-start-column="24" selection-end-line="20846" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/rollup-plugin-nodent/index.js" />
+    <entry file="file://$PROJECT_DIR$/node_modules/rollup-plugin-terser/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/nodent-compiler/compiler.js" />
+    <entry file="file://$PROJECT_DIR$/node_modules/prettier/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="83">
+          <caret line="28399" column="23" selection-start-line="28399" selection-start-column="23" selection-end-line="28399" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/acorn/dist/acorn.es.js" />
+    <entry file="file://$PROJECT_DIR$/node_modules/acorn-jsx/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4577">
+          <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/acorn/dist/acorn.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="781">
+          <caret line="5345" lean-forward="true" selection-start-line="5345" selection-end-line="5345" />
+          <folding>
+            <element signature="e#177821#177822#0" expanded="true" />
+            <element signature="e#177867#177868#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/cli.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="35" selection-end-line="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/microbundle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="27" lean-forward="true" selection-end-line="559" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/rollup-plugin-node-resolve/dist/rollup-plugin-node-resolve.es.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="47" column="9" selection-start-line="47" selection-start-column="9" selection-end-line="47" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Roaming/npm/node_modules/tagged-versions/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="129" column="105" lean-forward="true" selection-start-line="129" selection-start-column="105" selection-end-line="129" selection-end-column="105" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/prog.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="42" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Roaming/npm/node_modules/release/bin/release.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6817">
+          <caret line="401" column="15" selection-start-line="401" selection-start-column="15" selection-end-line="401" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Roaming/npm/node_modules/release/lib/bump.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1445">
+          <caret line="85" selection-start-line="85" selection-end-line="95" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Roaming/npm/node_modules/release/lib/tags.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="33" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="396" column="41" selection-start-line="396" selection-start-column="41" selection-end-line="396" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+            <element signature="e#5466#5467#0" expanded="true" />
+            <element signature="e#5515#5516#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cli.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/babel.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
