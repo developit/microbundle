@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 import microbundle from '.';
 import prog from './prog';
 import { stdout } from './utils';
