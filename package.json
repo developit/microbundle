@@ -90,7 +90,7 @@
     "husky": "^1.1.2",
     "jest": "^23.6.0",
     "lint-staged": "^8.0.0",
-    "prettier": "^1.13.0",
+    "prettier": "^1.15.3",
     "regenerator-runtime": "^0.12.1",
     "rimraf": "^2.6.2",
     "shell-quote": "^1.6.1",

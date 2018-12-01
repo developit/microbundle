@@ -3,21 +3,12 @@ module.exports = {
 		[
 			'@babel/preset-env',
 			{
-				exclude: [
-					'transform-async-to-generator',
-					'proposal-async-generator-functions',
-					'transform-regenerator',
-				],
 				loose: true,
 				targets: {
-					chrome: '58',
-					ie: '11',
+					node: 'current',
 				},
 			},
 		],
 	],
-	plugins: [
-		['babel-plugin-transform-async-to-promises', { inlineHelpers: true }],
-		'@babel/plugin-syntax-jsx',
-	],
+	plugins: ['@babel/plugin-syntax-jsx'],
 };

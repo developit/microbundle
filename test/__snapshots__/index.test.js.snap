@@ -480,3 +480,30 @@ Build \\"raw\\" to dist:
 1493 B: raw.umd.js.gz
 1245 B: raw.umd.js.br"
 `;
+
+exports[`fixtures shebang 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+shebang
+  dist
+    shebang.js
+    shebang.js.map
+    shebang.mjs
+    shebang.mjs.map
+    shebang.umd.js
+    shebang.umd.js.map
+  package.json
+  src
+    index.js
+
+
+Build \\"shebang\\" to dist:
+85 B: shebang.js.gz
+62 B: shebang.js.br
+89 B: shebang.mjs.gz
+70 B: shebang.mjs.br
+177 B: shebang.umd.js.gz
+149 B: shebang.umd.js.br"
+`;
