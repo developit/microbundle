@@ -77,12 +77,12 @@ basic-json
 
 
 Build \\"basicJson\\" to dist:
-138 B: basic-json.js.gz
-90 B: basic-json.js.br
-137 B: basic-json.mjs.gz
-93 B: basic-json.mjs.br
-215 B: basic-json.umd.js.gz
-157 B: basic-json.umd.js.br"
+146 B: basic-json.js.gz
+97 B: basic-json.js.br
+145 B: basic-json.mjs.gz
+98 B: basic-json.mjs.br
+225 B: basic-json.umd.js.gz
+161 B: basic-json.umd.js.br"
 `;
 
 exports[`fixtures basic-ts 1`] = `
