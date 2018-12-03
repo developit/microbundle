@@ -43,7 +43,7 @@
   "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.1.6",
-    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-class-properties": "7.1.0",
     "@babel/plugin-syntax-jsx": "^7.0.0",
     "@babel/polyfill": "^7.0.0",
     "asyncro": "^3.0.0",
@@ -71,7 +71,7 @@
     "rollup-plugin-terser": "^3.0.0",
     "rollup-plugin-typescript2": "^0.18.0",
     "sade": "^1.4.0",
-    "tiny-glob": "0.2.4",
+    "tiny-glob": "^0.2.6",
     "tslib": "^1.9.0",
     "typescript": ">=2.8.3"
   },
@@ -86,12 +86,12 @@
     "eslint-config-developit": "^1.1.1",
     "eslint-config-prettier": "^3.0.0",
     "eslint-plugin-prettier": "^3.0.0",
-    "fs-extra": "^7.0.0",
+    "fs-extra": "^7.0.1",
     "husky": "^1.1.2",
     "jest": "^23.6.0",
     "lint-staged": "^8.0.0",
     "prettier": "^1.15.3",
-    "regenerator-runtime": "^0.12.1",
+    "regenerator-runtime": "^0.13.1",
     "rimraf": "^2.6.2",
     "shell-quote": "^1.6.1",
     "strip-ansi": "^5.0.0"
