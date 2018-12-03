@@ -71,7 +71,7 @@
     "rollup-plugin-terser": "^3.0.0",
     "rollup-plugin-typescript2": "^0.18.0",
     "sade": "^1.4.0",
-    "tiny-glob": "^0.2.0",
+    "tiny-glob": "0.2.4",
     "tslib": "^1.9.0",
     "typescript": ">=2.8.3"
   },
