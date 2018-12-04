@@ -57,6 +57,34 @@ Build \\"basicCss\\" to dist:
 135 B: basic-css.umd.js.br"
 `;
 
+exports[`fixtures basic-json 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+basic-json
+  dist
+    basic-json.js
+    basic-json.js.map
+    basic-json.mjs
+    basic-json.mjs.map
+    basic-json.umd.js
+    basic-json.umd.js.map
+  package.json
+  src
+    index.js
+    two.json
+
+
+Build \\"basicJson\\" to dist:
+146 B: basic-json.js.gz
+97 B: basic-json.js.br
+145 B: basic-json.mjs.gz
+98 B: basic-json.mjs.br
+225 B: basic-json.umd.js.gz
+161 B: basic-json.umd.js.br"
+`;
+
 exports[`fixtures basic-ts 1`] = `
 "Used script: microbundle
 

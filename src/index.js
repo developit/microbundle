@@ -18,6 +18,7 @@ import brotliSize from 'brotli-size';
 import prettyBytes from 'pretty-bytes';
 import shebangPlugin from 'rollup-plugin-preserve-shebang';
 import typescript from 'rollup-plugin-typescript2';
+import json from 'rollup-plugin-json';
 import flow from './lib/flow-plugin';
 import logError from './log-error';
 import { readFile, isDir, isFile, stdout, stderr } from './utils';
@@ -238,7 +239,6 @@ function createConfig(options, entry, format, writeMeta) {
 		aliases['.'] = './' + basename(options.output);
 	}
 
-	let useNodeResolve = true;
 	const peerDeps = Object.keys(pkg.peerDependencies || {});
 	if (options.external === 'none') {
 		// bundle everything (external=[])
@@ -350,6 +350,15 @@ function createConfig(options, entry, format, writeMeta) {
 						inject: false,
 						extract: !!writeMeta,
 					}),
+					nodeResolve({
+						module: true,
+						jsnext: true,
+						browser: options.target !== 'node',
+					}),
+					commonjs({
+						include: 'node_modules/**',
+					}),
+					json(),
 					useTypescript &&
 						typescript({
 							typescript: require('typescript'),
@@ -419,16 +428,6 @@ function createConfig(options, entry, format, writeMeta) {
 							dangerousTaggedTemplateString: true,
 						},
 					}),
-					useNodeResolve &&
-						commonjs({
-							include: 'node_modules/**',
-						}),
-					useNodeResolve &&
-						nodeResolve({
-							module: true,
-							jsnext: true,
-							browser: options.target !== 'node',
-						}),
 					// We should upstream this to rollup
 					// format==='cjs' && replace({
 					// 	[`module.exports = ${rollupName};`]: '',
