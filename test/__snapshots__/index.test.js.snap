@@ -289,6 +289,33 @@ Build \\"customSrc\\" to dist:
 212 B: custom-src.umd.js.br"
 `;
 
+exports[`fixtures default-named 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+default-named
+  dist
+    default-named.js
+    default-named.js.map
+    default-named.mjs
+    default-named.mjs.map
+    default-named.umd.js
+    default-named.umd.js.map
+  package.json
+  src
+    index.js
+
+
+Build \\"defaultNamed\\" to dist:
+59 B: default-named.js.gz
+42 B: default-named.js.br
+70 B: default-named.mjs.gz
+58 B: default-named.mjs.br
+162 B: default-named.umd.js.gz
+124 B: default-named.umd.js.br"
+`;
+
 exports[`fixtures esnext-ts 1`] = `
 "Used script: microbundle --raw
 

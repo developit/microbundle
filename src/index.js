@@ -12,7 +12,6 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 import buble from 'rollup-plugin-buble';
 import { terser } from 'rollup-plugin-terser';
 import postcss from 'rollup-plugin-postcss';
-import alias from 'rollup-plugin-strict-alias';
 import gzipSize from 'gzip-size';
 import brotliSize from 'brotli-size';
 import prettyBytes from 'pretty-bytes';
@@ -291,19 +290,6 @@ function createConfig(options, entry, format, writeMeta) {
 	let nameCache = {};
 	let mangleOptions = options.pkg.mangle || false;
 
-	let exportType;
-	if (format !== 'es') {
-		try {
-			let file = fs.readFileSync(entry, 'utf-8');
-			let hasDefault = /\bexport\s*default\s*[a-zA-Z_$]/.test(file);
-			let hasNamed =
-				/\bexport\s*(let|const|var|async|function\*?)\s*[a-zA-Z_$*]/.test(
-					file,
-				) || /^\s*export\s*\{/m.test(file);
-			if (hasDefault && hasNamed) exportType = 'default';
-		} catch (e) {}
-	}
-
 	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
 
 	const externalPredicate = new RegExp(`^(${external.join('|')})($|/)`);
@@ -323,7 +309,7 @@ function createConfig(options, entry, format, writeMeta) {
 
 	let config = {
 		inputOptions: {
-			input: exportType ? resolve(__dirname, '../src/lib/__entry__.js') : entry,
+			input: entry,
 			external: id => {
 				if (id === 'babel-plugin-transform-async-to-promises/helpers') {
 					return false;
@@ -335,9 +321,6 @@ function createConfig(options, entry, format, writeMeta) {
 			},
 			plugins: []
 				.concat(
-					alias({
-						__microbundle_entry__: entry,
-					}),
 					postcss({
 						plugins: [
 							autoprefixer(),
@@ -493,7 +476,6 @@ function createConfig(options, entry, format, writeMeta) {
 		},
 
 		outputOptions: {
-			exports: exportType ? 'default' : undefined,
 			paths: aliases,
 			globals,
 			strict: options.strict === true,
