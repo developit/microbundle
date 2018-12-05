@@ -12,7 +12,7 @@
     "prepare": "npm run -s build",
     "prepare:babel": "babel src/*.js -d dist && npm t",
     "lint": "eslint src",
-    "test": "npm run -s lint && npm run -s build && jest",
+    "test": "npm run -s lint && npm run -s build && BABEL_ENV=test jest",
     "release": "npm run -s prepare && npm test && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish"
   },
   "repository": "developit/microbundle",
