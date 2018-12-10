@@ -77,6 +77,9 @@ export default babelPlugin.custom(babelCore => {
 						name: '@babel/plugin-transform-regenerator',
 						async: false,
 					},
+					{
+						name: 'babel-plugin-macros',
+					},
 				].filter(Boolean),
 			);
 
