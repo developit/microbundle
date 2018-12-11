@@ -48,7 +48,7 @@
     "@babel/polyfill": "^7.0.0",
     "asyncro": "^3.0.0",
     "autoprefixer": "^9.0.0",
-    "babel-plugin-transform-async-to-promises": "^0.8.1",
+    "babel-plugin-transform-async-to-promises": "^0.8.3",
     "brotli-size": "^0.0.3",
     "camelcase": "^5.0.0",
     "chalk": "^2.4.0",
