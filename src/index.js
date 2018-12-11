@@ -420,7 +420,7 @@ function createConfig(options, entry, format, writeMeta) {
 							},
 							tsconfigOverride: {
 								compilerOptions: {
-									target: 'es2017',
+									target: 'esnext',
 								},
 							},
 						}),
