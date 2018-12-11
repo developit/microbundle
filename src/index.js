@@ -356,7 +356,8 @@ function createConfig(options, entry, format, writeMeta) {
 						browser: options.target !== 'node',
 					}),
 					commonjs({
-						include: 'node_modules/**',
+						// use a regex to make sure to include eventual hoisted packages
+						include: /\/node_modules\//,
 					}),
 					json(),
 					useTypescript &&
