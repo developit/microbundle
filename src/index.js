@@ -578,6 +578,8 @@ function createConfig(options, entry, format, writeMeta) {
 							},
 							compress: Object.assign(
 								{
+									hoist_funs: true,
+									booleans_as_integers: true,
 									keep_infinity: true,
 									pure_getters: true,
 									passes: 10,
@@ -586,6 +588,7 @@ function createConfig(options, entry, format, writeMeta) {
 							),
 							warnings: true,
 							ecma: 5,
+							module: format === 'es',
 							toplevel: format === 'cjs' || format === 'es',
 							mangle: Object.assign({}, minifyOptions.mangle || {}),
 							nameCache,
