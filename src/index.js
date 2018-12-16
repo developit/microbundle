@@ -579,7 +579,6 @@ function createConfig(options, entry, format, writeMeta) {
 							compress: Object.assign(
 								{
 									hoist_funs: true,
-									booleans_as_integers: true,
 									keep_infinity: true,
 									pure_getters: true,
 									passes: 10,
