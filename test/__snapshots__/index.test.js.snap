@@ -1,5 +1,63 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`fixtures async-iife-ts 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+async-iife-ts
+  dist
+    async-iife-ts.js
+    async-iife-ts.js.map
+    async-iife-ts.mjs
+    async-iife-ts.mjs.map
+    async-iife-ts.umd.js
+    async-iife-ts.umd.js.map
+    index.d.ts
+  package.json
+  src
+    index.ts
+  tsconfig.json
+
+
+Build \\"asyncIifeTs\\" to dist:
+93 B: async-iife-ts.js.gz
+74 B: async-iife-ts.js.br
+93 B: async-iife-ts.mjs.gz
+74 B: async-iife-ts.mjs.br
+164 B: async-iife-ts.umd.js.gz
+123 B: async-iife-ts.umd.js.br"
+`;
+
+exports[`fixtures async-ts 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+async-ts
+  dist
+    async-ts.js
+    async-ts.js.map
+    async-ts.mjs
+    async-ts.mjs.map
+    async-ts.umd.js
+    async-ts.umd.js.map
+    index.d.ts
+  package.json
+  src
+    index.ts
+  tsconfig.json
+
+
+Build \\"asyncTs\\" to dist:
+75 B: async-ts.js.gz
+57 B: async-ts.js.br
+77 B: async-ts.mjs.gz
+63 B: async-ts.mjs.br
+176 B: async-ts.umd.js.gz
+141 B: async-ts.umd.js.br"
+`;
+
 exports[`fixtures basic 1`] = `
 "Used script: microbundle
 
@@ -337,12 +395,12 @@ esnext-ts
 
 
 Build \\"esnextTs\\" to dist:
-470 B: esnext-ts.js.gz
-404 B: esnext-ts.js.br
-470 B: esnext-ts.mjs.gz
-409 B: esnext-ts.mjs.br
-528 B: esnext-ts.umd.js.gz
-461 B: esnext-ts.umd.js.br"
+1204 B: esnext-ts.js.gz
+1096 B: esnext-ts.js.br
+1203 B: esnext-ts.mjs.gz
+1094 B: esnext-ts.mjs.br
+1260 B: esnext-ts.umd.js.gz
+1146 B: esnext-ts.umd.js.br"
 `;
 
 exports[`fixtures jsx 1`] = `

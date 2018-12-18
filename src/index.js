@@ -339,7 +339,8 @@ function createConfig(options, entry, format, writeMeta) {
 						browser: options.target !== 'node',
 					}),
 					commonjs({
-						include: 'node_modules/**',
+						// use a regex to make sure to include eventual hoisted packages
+						include: /\/node_modules\//,
 					}),
 					json(),
 					useTypescript &&
@@ -355,7 +356,7 @@ function createConfig(options, entry, format, writeMeta) {
 							},
 							tsconfigOverride: {
 								compilerOptions: {
-									target: 'es2017',
+									target: 'esnext',
 								},
 							},
 						}),
@@ -367,6 +368,7 @@ function createConfig(options, entry, format, writeMeta) {
 						// supplied configurations we set this option to false. Note
 						// that we never supported using custom babel configs anyway.
 						babelrc: false,
+						extensions: ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs'],
 						exclude: 'node_modules/**',
 						plugins: [
 							require.resolve('@babel/plugin-syntax-jsx'),

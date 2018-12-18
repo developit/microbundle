@@ -1,6 +1,6 @@
 {
   "name": "microbundle",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "description": "Zero-configuration bundler for tiny JS libs, powered by Rollup.",
   "main": "dist/microbundle.js",
   "source": "src/index.js",
@@ -12,7 +12,7 @@
     "prepare": "npm run -s build",
     "prepare:babel": "babel src/*.js -d dist && npm t",
     "lint": "eslint src",
-    "test": "npm run -s lint && npm run -s build && BABEL_ENV=test jest",
+    "test": "npm run -s lint && npm run -s build && cross-env BABEL_ENV=test jest",
     "release": "npm run -s prepare && npm test && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish"
   },
   "repository": "developit/microbundle",
@@ -48,7 +48,7 @@
     "@babel/polyfill": "^7.0.0",
     "asyncro": "^3.0.0",
     "autoprefixer": "^9.0.0",
-    "babel-plugin-transform-async-to-promises": "^0.8.1",
+    "babel-plugin-transform-async-to-promises": "^0.8.3",
     "brotli-size": "^0.0.3",
     "camelcase": "^5.0.0",
     "chalk": "^2.4.0",
@@ -81,6 +81,7 @@
     "@babel/preset-env": "^7.1.6",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
+    "cross-env": "^5.2.0",
     "directory-tree": "^2.1.0",
     "eslint": "^5.0.0",
     "eslint-config-developit": "^1.1.1",
