@@ -96,4 +96,13 @@ describe('fixtures', () => {
 				.startsWith('#!'),
 		).toEqual(true);
 	});
+
+	it('should keep named and default export', () => {
+		const mod = require(resolve(
+			FIXTURES_DIR,
+			'default-named/dist/default-named.js',
+		));
+
+		expect(Object.keys(mod)).toEqual(['foo', 'default']);
+	});
 });
