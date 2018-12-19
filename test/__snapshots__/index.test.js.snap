@@ -620,3 +620,34 @@ Build \\"shebang\\" to dist:
 177 B: shebang.umd.js.gz
 149 B: shebang.umd.js.br"
 `;
+
+exports[`fixtures ts-mixed-exports 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+ts-mixed-exports
+  dist
+    car.d.ts
+    index.d.ts
+    ts-mixed-exports.js
+    ts-mixed-exports.js.map
+    ts-mixed-exports.mjs
+    ts-mixed-exports.mjs.map
+    ts-mixed-exports.umd.js
+    ts-mixed-exports.umd.js.map
+  package.json
+  src
+    car.ts
+    index.ts
+  tsconfig.json
+
+
+Build \\"tsMixedExports\\" to dist:
+106 B: ts-mixed-exports.js.gz
+88 B: ts-mixed-exports.js.br
+102 B: ts-mixed-exports.mjs.gz
+78 B: ts-mixed-exports.mjs.br
+198 B: ts-mixed-exports.umd.js.gz
+149 B: ts-mixed-exports.umd.js.br"
+`;
