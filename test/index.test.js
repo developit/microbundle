@@ -54,7 +54,11 @@ describe('fixtures', () => {
 		}
 
 		it(fixtureDir, async () => {
+			// clean up
 			await rimraf(resolve(`${fixturePath}/dist`));
+			await rimraf(resolve(`${fixturePath}/.rts2_cache_cjs`));
+			await rimraf(resolve(`${fixturePath}/.rts2_cache_es`));
+			await rimraf(resolve(`${fixturePath}/.rts2_cache_umd`));
 
 			let script;
 			try {
