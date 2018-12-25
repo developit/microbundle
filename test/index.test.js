@@ -14,12 +14,10 @@ const rimraf = promisify(_rimraf);
 const FIXTURES_DIR = `${__dirname}/fixtures`;
 const DEFAULT_SCRIPT = 'microbundle';
 
-const times = (n, fn) => Array.from({ length: n }).map(i => fn(i));
 const join = (arr, delimiter = '') => arr.join(delimiter);
-const constant = konst => () => konst;
 
 const printTree = (nodes, indentLevel = 0) => {
-	const indent = join(times(indentLevel, constant('  ')));
+	const indent = '  '.repeat(indentLevel);
 	return join(
 		nodes
 			.filter(node => node.name[0] !== '.')
