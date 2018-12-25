@@ -55,8 +55,10 @@ function formatSize(size, filename, type, raw) {
 
 export default async function microbundle(inputOptions) {
 	let options = { ...inputOptions };
-	let cwd = (options.cwd = resolve(process.cwd(), options.cwd)),
-		hasPackageJson = true;
+
+	options.cwd = resolve(process.cwd(), inputOptions.cwd);
+	const cwd = options.cwd;
+	let hasPackageJson = true;
 
 	try {
 		options.pkg = JSON.parse(
