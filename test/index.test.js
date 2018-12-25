@@ -55,13 +55,24 @@ describe('fixtures', () => {
 			await rimraf(resolve(`${fixturePath}/.rts2_cache_es`));
 			await rimraf(resolve(`${fixturePath}/.rts2_cache_umd`));
 
-			let script;
-			try {
-				({ scripts: { build: script } = {} } = JSON.parse(
-					await readFile(resolve(fixturePath, 'package.json'), 'utf8'),
-				));
-			} catch (err) {}
-			script = script || DEFAULT_SCRIPT;
+			async function getBuildScript() {
+				try {
+					const pkgJSON = await readFile(
+						resolve(fixturePath, 'package.json'),
+						'utf8',
+					);
+					const pgk = JSON.parse(pkgJSON);
+					const { scripts: { build } = {} } = pgk;
+					return build;
+				} catch (err) {
+					// Pass the no-pkg test
+					// because it does not have the package.json file
+					return DEFAULT_SCRIPT;
+				}
+			}
+
+			const build = await getBuildScript();
+			const script = build || DEFAULT_SCRIPT;
 
 			const prevDir = process.cwd();
 			process.chdir(resolve(fixturePath));
