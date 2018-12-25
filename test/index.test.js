@@ -21,14 +21,11 @@ const printTree = (nodes, indentLevel = 0) => {
 	return join(
 		nodes
 			.filter(node => node.name[0] !== '.')
-			.map(
-				node =>
-					`${indent}${node.name}\n${
-						node.type === 'directory'
-							? printTree(node.children, indentLevel + 1)
-							: ''
-					}`,
-			),
+			.map(node => {
+				const isDir = node.type === 'directory';
+				const dirTree = isDir ? printTree(node.children, indentLevel + 1) : '';
+				return `${indent}${node.name}\n${dirTree}`;
+			}),
 	);
 };
 
