@@ -53,7 +53,8 @@ function formatSize(size, filename, type, raw) {
 	)}: ${chalk.white(basename(filename))}.${type}`;
 }
 
-export default async function microbundle(options) {
+export default async function microbundle(inputOptions) {
+	let options = { ...inputOptions };
 	let cwd = (options.cwd = resolve(process.cwd(), options.cwd)),
 		hasPackageJson = true;
 
