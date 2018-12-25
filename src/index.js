@@ -62,23 +62,13 @@ export default async function microbundle(inputOptions) {
 	const { hasPackageJson, pkg } = await getConfigFromPkgJson(cwd);
 	options.pkg = pkg;
 
-	if (!options.pkg.name) {
-		options.pkg.name = basename(options.cwd);
-		if (hasPackageJson) {
-			stderr(
-				chalk.yellow(
-					`${chalk.yellow.inverse(
-						'WARN',
-					)} missing package.json "name" field. Assuming "${
-						options.pkg.name
-					}".`,
-				),
-			);
-		}
-	}
-
-	options.name =
-		options.name || options.pkg.amdName || safeVariableName(options.pkg.name);
+	options.name = getName({
+		name: options.name,
+		pkgName: options.pkg.name,
+		amdName: options.pkg.amdName,
+		hasPackageJson,
+		cwd,
+	});
 
 	if (options.sourcemap !== false) {
 		options.sourcemap = true;
@@ -236,6 +226,23 @@ async function getConfigFromPkgJson(cwd) {
 			pkg: {},
 		};
 	}
+}
+
+function getName({ name, pkgName, amdName, cwd, hasPackageJson }) {
+	if (!pkgName) {
+		pkgName = basename(cwd);
+		if (hasPackageJson) {
+			stderr(
+				chalk.yellow(
+					`${chalk.yellow.inverse(
+						'WARN',
+					)} missing package.json "name" field. Assuming "${pkgName}".`,
+				),
+			);
+		}
+	}
+
+	return name || amdName || safeVariableName(pkgName);
 }
 
 function createConfig(options, entry, format, writeMeta) {
