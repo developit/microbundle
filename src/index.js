@@ -58,27 +58,9 @@ export default async function microbundle(inputOptions) {
 
 	options.cwd = resolve(process.cwd(), inputOptions.cwd);
 	const cwd = options.cwd;
-	let hasPackageJson = true;
 
-	try {
-		options.pkg = JSON.parse(
-			await readFile(resolve(cwd, 'package.json'), 'utf8'),
-		);
-	} catch (err) {
-		stderr(
-			chalk.yellow(
-				`${chalk.yellow.inverse(
-					'WARN',
-				)} no package.json found. Assuming a pkg.name of "${basename(
-					options.cwd,
-				)}".`,
-			),
-		);
-		let msg = String(err.message || err);
-		if (!msg.match(/ENOENT/)) stderr(`  ${chalk.red.dim(msg)}`);
-		options.pkg = {};
-		hasPackageJson = false;
-	}
+	const { hasPackageJson, pkg } = await getConfigFromPkgJson(cwd);
+	options.pkg = pkg;
 
 	if (!options.pkg.name) {
 		options.pkg.name = basename(options.cwd);
@@ -226,6 +208,34 @@ export default async function microbundle(inputOptions) {
 		'\n   ' +
 		out.join('\n   ')
 	);
+}
+
+async function getConfigFromPkgJson(cwd) {
+	try {
+		const pkgJSON = await readFile(resolve(cwd, 'package.json'), 'utf8');
+		const pkg = JSON.parse(pkgJSON);
+
+		return {
+			hasPackageJson: true,
+			pkg,
+		};
+	} catch (err) {
+		stderr(
+			chalk.yellow(
+				`${chalk.yellow.inverse(
+					'WARN',
+				)} no package.json found. Assuming a pkg.name of "${basename(cwd)}".`,
+			),
+		);
+
+		let msg = String(err.message || err);
+		if (!msg.match(/ENOENT/)) stderr(`  ${chalk.red.dim(msg)}`);
+
+		return {
+			hasPackageJson: false,
+			pkg: {},
+		};
+	}
 }
 
 function createConfig(options, entry, format, writeMeta) {
