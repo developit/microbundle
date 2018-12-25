@@ -254,12 +254,12 @@ class-decorators-ts
 
 
 Build \\"classDecoratorsTs\\" to dist:
-333 B: class-decorators-ts.js.gz
+334 B: class-decorators-ts.js.gz
 276 B: class-decorators-ts.js.br
 331 B: class-decorators-ts.mjs.gz
 271 B: class-decorators-ts.mjs.br
-393 B: class-decorators-ts.umd.js.gz
-352 B: class-decorators-ts.umd.js.br"
+395 B: class-decorators-ts.umd.js.gz
+336 B: class-decorators-ts.umd.js.br"
 `;
 
 exports[`fixtures class-properties 1`] = `
@@ -395,12 +395,12 @@ esnext-ts
 
 
 Build \\"esnextTs\\" to dist:
-1204 B: esnext-ts.js.gz
-1096 B: esnext-ts.js.br
-1203 B: esnext-ts.mjs.gz
-1094 B: esnext-ts.mjs.br
-1260 B: esnext-ts.umd.js.gz
-1146 B: esnext-ts.umd.js.br"
+1206 B: esnext-ts.js.gz
+1088 B: esnext-ts.js.br
+1207 B: esnext-ts.mjs.gz
+1090 B: esnext-ts.mjs.br
+1263 B: esnext-ts.umd.js.gz
+1140 B: esnext-ts.umd.js.br"
 `;
 
 exports[`fixtures jsx 1`] = `
