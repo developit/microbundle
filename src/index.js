@@ -24,12 +24,7 @@ import { readFile, isDir, isFile, stdout, stderr } from './utils';
 import camelCase from 'camelcase';
 
 const removeScope = name => name.replace(/^@.*\//, '');
-const safeVariableName = name =>
-	camelCase(
-		removeScope(name)
-			.toLowerCase()
-			.replace(/((^[^a-zA-Z]+)|[^\w.-])|([^a-zA-Z0-9]+$)/g, ''),
-	);
+
 const parseGlobals = globalStrings => {
 	const globals = {};
 	globalStrings.split(',').forEach(globalString => {
@@ -227,6 +222,13 @@ async function getConfigFromPkgJson(cwd) {
 		};
 	}
 }
+
+const safeVariableName = name =>
+	camelCase(
+		removeScope(name)
+			.toLowerCase()
+			.replace(/((^[^a-zA-Z]+)|[^\w.-])|([^a-zA-Z0-9]+$)/g, ''),
+	);
 
 function getName({ name, pkgName, amdName, cwd, hasPackageJson }) {
 	if (!pkgName) {
