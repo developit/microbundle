@@ -62,8 +62,8 @@ describe('fixtures', () => {
 						resolve(fixturePath, 'package.json'),
 						'utf8',
 					);
-					const pgk = JSON.parse(pkgJSON);
-					const { scripts: { build } = {} } = pgk;
+					const pkg = JSON.parse(pkgJSON);
+					const { scripts: { build } = {} } = pkg;
 					return build;
 				} catch (err) {
 					// Pass the no-pkg test
