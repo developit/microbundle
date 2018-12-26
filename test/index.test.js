@@ -5,7 +5,7 @@ import dirTree from 'directory-tree';
 import shellQuote from 'shell-quote';
 import _rimraf from 'rimraf';
 import { strip } from './lib/util';
-import { readFile } from '../src/utils';
+import { stat, readFile } from '../src/utils';
 import createProg from '../src/prog';
 import microbundle from '../src/index';
 
@@ -30,20 +30,28 @@ const printTree = (nodes, indentLevel = 0) => {
 	);
 };
 
-const getBuildScript = async fixturePath => {
+const getBuildScript = async (fixturePath, defaultScript) => {
+	const pkgJsonPath = resolve(fixturePath, 'package.json');
+
 	try {
-		const pkgJSON = await readFile(
-			resolve(fixturePath, 'package.json'),
-			'utf8',
-		);
+		await stat(pkgJsonPath);
+	} catch (err) {
+		if (err.code === 'ENOENT') {
+			return defaultScript;
+		}
+	}
+
+	try {
+		const pkgJSON = await readFile(pkgJsonPath, 'utf8');
 		const pkg = JSON.parse(pkgJSON);
 		const { scripts: { build } = {} } = pkg;
-		return build;
-	} catch (err) {
-		// Pass the no-pkg test
-		// because it does not have the package.json file
-		return DEFAULT_SCRIPT;
-	}
+
+		// Return default script if no have
+		// build script in package.json
+		return build || defaultScript;
+	} catch (err) {}
+
+	return defaultScript;
 };
 
 const parseScript = (() => {
@@ -72,8 +80,7 @@ describe('fixtures', () => {
 			await rimraf(resolve(`${fixturePath}/.rts2_cache_es`));
 			await rimraf(resolve(`${fixturePath}/.rts2_cache_umd`));
 
-			const build = await getBuildScript(fixturePath);
-			const script = build || DEFAULT_SCRIPT;
+			const script = await getBuildScript(fixturePath, DEFAULT_SCRIPT);
 
 			const prevDir = process.cwd();
 			process.chdir(resolve(fixturePath));
