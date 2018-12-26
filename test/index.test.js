@@ -30,6 +30,22 @@ const printTree = (nodes, indentLevel = 0) => {
 	);
 };
 
+const getBuildScript = async fixturePath => {
+	try {
+		const pkgJSON = await readFile(
+			resolve(fixturePath, 'package.json'),
+			'utf8',
+		);
+		const pkg = JSON.parse(pkgJSON);
+		const { scripts: { build } = {} } = pkg;
+		return build;
+	} catch (err) {
+		// Pass the no-pkg test
+		// because it does not have the package.json file
+		return DEFAULT_SCRIPT;
+	}
+};
+
 const parseScript = (() => {
 	let parsed;
 	const prog = createProg(_parsed => (parsed = _parsed));
@@ -56,23 +72,7 @@ describe('fixtures', () => {
 			await rimraf(resolve(`${fixturePath}/.rts2_cache_es`));
 			await rimraf(resolve(`${fixturePath}/.rts2_cache_umd`));
 
-			async function getBuildScript() {
-				try {
-					const pkgJSON = await readFile(
-						resolve(fixturePath, 'package.json'),
-						'utf8',
-					);
-					const pkg = JSON.parse(pkgJSON);
-					const { scripts: { build } = {} } = pkg;
-					return build;
-				} catch (err) {
-					// Pass the no-pkg test
-					// because it does not have the package.json file
-					return DEFAULT_SCRIPT;
-				}
-			}
-
-			const build = await getBuildScript();
+			const build = await getBuildScript(fixturePath);
 			const script = build || DEFAULT_SCRIPT;
 
 			const prevDir = process.cwd();
