@@ -23,8 +23,9 @@ const printTree = (nodes, indentLevel = 0) => {
 			.filter(node => node.name[0] !== '.')
 			.map(node => {
 				const isDir = node.type === 'directory';
-				const dirTree = isDir ? printTree(node.children, indentLevel + 1) : '';
-				return `${indent}${node.name}\n${dirTree}`;
+				return `${indent}${node.name}\n${
+					isDir ? printTree(node.children, indentLevel + 1) : ''
+				}`;
 			}),
 	);
 };
