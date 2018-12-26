@@ -5,7 +5,7 @@ import dirTree from 'directory-tree';
 import shellQuote from 'shell-quote';
 import _rimraf from 'rimraf';
 import { strip } from './lib/util';
-import { stat, readFile } from '../src/utils';
+import { readFile } from '../src/utils';
 import createProg from '../src/prog';
 import microbundle from '../src/index';
 
@@ -31,25 +31,13 @@ const printTree = (nodes, indentLevel = 0) => {
 };
 
 const getBuildScript = async (fixturePath, defaultScript) => {
-	const pkgJsonPath = resolve(fixturePath, 'package.json');
-
+	let pkg = {};
 	try {
-		await stat(pkgJsonPath);
-	} catch (err) {
-		if (err.code === 'ENOENT') {
-			return defaultScript;
-		}
-	}
-
-	try {
-		const pkgJSON = await readFile(pkgJsonPath, 'utf8');
-		const pkg = JSON.parse(pkgJSON);
-		const { scripts: { build } = {} } = pkg;
-
-		return build || defaultScript;
-	} catch (err) {}
-
-	return defaultScript;
+		pkg = JSON.parse(
+			await readFile(resolve(fixturePath, 'package.json'), 'utf8'),
+		);
+	} catch (e) {}
+	return (pkg && pkg.scripts && pkg.scripts.build) || defaultScript;
 };
 
 const parseScript = (() => {
