@@ -46,8 +46,6 @@ const getBuildScript = async (fixturePath, defaultScript) => {
 		const pkg = JSON.parse(pkgJSON);
 		const { scripts: { build } = {} } = pkg;
 
-		// Return default script if no have
-		// build script in package.json
 		return build || defaultScript;
 	} catch (err) {}
 
