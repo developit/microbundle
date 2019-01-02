@@ -47,15 +47,20 @@ const parseScript = (() => {
 
 describe('fixtures', () => {
 	fs.readdirSync(FIXTURES_DIR).forEach(fixtureDir => {
-		const fixturePath = resolve(FIXTURES_DIR, fixtureDir);
+		let fixturePath = resolve(FIXTURES_DIR, fixtureDir);
 
 		if (!fs.statSync(fixturePath).isDirectory()) {
 			return;
 		}
 
 		it(fixtureDir, async () => {
+			if (fixtureDir.endsWith('-with-cwd')) {
+				fixturePath = resolve(fixturePath, fixtureDir.replace('-with-cwd', ''));
+			}
+
+			const dist = resolve(`${fixturePath}/dist`);
 			// clean up
-			await rimraf(resolve(`${fixturePath}/dist`));
+			await rimraf(dist);
 			await rimraf(resolve(`${fixturePath}/.rts2_cache_cjs`));
 			await rimraf(resolve(`${fixturePath}/.rts2_cache_es`));
 			await rimraf(resolve(`${fixturePath}/.rts2_cache_umd`));
@@ -90,6 +95,12 @@ describe('fixtures', () => {
 					strip(output),
 				].join('\n\n'),
 			).toMatchSnapshot();
+
+			fs.readdirSync(resolve(dist)).forEach(file => {
+				expect(
+					fs.readFileSync(resolve(dist, file)).toString('utf8'),
+				).toMatchSnapshot();
+			});
 		});
 	});
 
