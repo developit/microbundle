@@ -76,11 +76,12 @@ export default async function microbundle(inputOptions) {
 		module: options.pkg.module,
 	});
 
-	let main = resolve(cwd, options.output || options.pkg.main || 'dist');
-	if (!main.match(/\.[a-z]+$/) || (await isDir(main))) {
-		main = resolve(main, `${removeScope(options.pkg.name)}.js`);
-	}
-	options.output = main;
+	options.output = await getOutput({
+		cwd,
+		output: options.output,
+		pkgMain: options.pkg.main,
+		pkgName: options.pkg.name,
+	});
 
 	let entries = (await map([].concat(options.input), async file => {
 		file = resolve(cwd, file);
@@ -255,6 +256,14 @@ async function getInput({ entries, cwd, source, module }) {
 		.forEach(file => input.push(...file));
 
 	return input;
+}
+
+async function getOutput({ cwd, output, pkgMain, pkgName }) {
+	let main = resolve(cwd, output || pkgMain || 'dist');
+	if (!main.match(/\.[a-z]+$/) || (await isDir(main))) {
+		main = resolve(main, `${removeScope(pkgName)}.js`);
+	}
+	return main;
 }
 
 function createConfig(options, entry, format, writeMeta) {
