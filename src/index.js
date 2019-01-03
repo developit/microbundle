@@ -83,27 +83,27 @@ export default async function microbundle(inputOptions) {
 		pkgName: options.pkg.name,
 	});
 
-	let entries = (await map([].concat(options.input), async file => {
-		file = resolve(cwd, file);
-		if (await isDir(file)) {
-			file = resolve(file, 'index.js');
-		}
-		return file;
-	})).filter((item, i, arr) => arr.indexOf(item) === i);
+	options.entries = await getEntries({
+		cwd,
+		input: options.input,
+	});
 
-	options.entries = entries;
-
-	options.multipleEntries = entries.length > 1;
+	options.multipleEntries = options.entries.length > 1;
 
 	let formats = (options.format || options.formats).split(',');
 	// always compile cjs first if it's there:
 	formats.sort((a, b) => (a === 'cjs' ? -1 : a > b ? 1 : 0));
 
 	let steps = [];
-	for (let i = 0; i < entries.length; i++) {
+	for (let i = 0; i < options.entries.length; i++) {
 		for (let j = 0; j < formats.length; j++) {
 			steps.push(
-				createConfig(options, entries[i], formats[j], i === 0 && j === 0),
+				createConfig(
+					options,
+					options.entries[i],
+					formats[j],
+					i === 0 && j === 0,
+				),
 			);
 		}
 	}
@@ -264,6 +264,17 @@ async function getOutput({ cwd, output, pkgMain, pkgName }) {
 		main = resolve(main, `${removeScope(pkgName)}.js`);
 	}
 	return main;
+}
+
+async function getEntries({ input, cwd }) {
+	let entries = (await map([].concat(input), async file => {
+		file = resolve(cwd, file);
+		if (await isDir(file)) {
+			file = resolve(file, 'index.js');
+		}
+		return file;
+	})).filter((item, i, arr) => arr.indexOf(item) === i);
+	return entries;
 }
 
 function createConfig(options, entry, format, writeMeta) {
