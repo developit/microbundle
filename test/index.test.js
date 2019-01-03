@@ -36,7 +36,9 @@ const getBuildScript = async (fixturePath, defaultScript) => {
 		pkg = JSON.parse(
 			await readFile(resolve(fixturePath, 'package.json'), 'utf8'),
 		);
-	} catch (e) {}
+	} catch (err) {
+		if (err.code !== 'ENOENT') throw err;
+	}
 	return (pkg && pkg.scripts && pkg.scripts.build) || defaultScript;
 };
 
