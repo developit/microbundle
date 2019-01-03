@@ -69,19 +69,12 @@ export default async function microbundle(inputOptions) {
 		options.sourcemap = true;
 	}
 
-	options.input = [];
-	[]
-		.concat(
-			options.entries && options.entries.length
-				? options.entries
-				: (options.pkg.source && resolve(cwd, options.pkg.source)) ||
-						((await isDir(resolve(cwd, 'src'))) &&
-							(await jsOrTs(cwd, 'src/index'))) ||
-						(await jsOrTs(cwd, 'index')) ||
-						options.pkg.module,
-		)
-		.map(file => glob(file))
-		.forEach(file => options.input.push(...file));
+	options.input = await getInput({
+		entries: options.entries,
+		cwd,
+		source: options.pkg.source,
+		module: options.pkg.module,
+	});
 
 	let main = resolve(cwd, options.output || options.pkg.main || 'dist');
 	if (!main.match(/\.[a-z]+$/) || (await isDir(main))) {
@@ -243,6 +236,25 @@ async function jsOrTs(cwd, filename) {
 		: '.js';
 
 	return resolve(cwd, `${filename}${extension}`);
+}
+
+async function getInput({ entries, cwd, source, module }) {
+	const input = [];
+
+	[]
+		.concat(
+			entries && entries.length
+				? entries
+				: (source && resolve(cwd, source)) ||
+						((await isDir(resolve(cwd, 'src'))) &&
+							(await jsOrTs(cwd, 'src/index'))) ||
+						(await jsOrTs(cwd, 'index')) ||
+						module,
+		)
+		.map(file => glob(file))
+		.forEach(file => input.push(...file));
+
+	return input;
 }
 
 function createConfig(options, entry, format, writeMeta) {
