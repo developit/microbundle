@@ -69,18 +69,6 @@ export default async function microbundle(inputOptions) {
 		options.sourcemap = true;
 	}
 
-	const jsOrTs = async filename =>
-		resolve(
-			cwd,
-			`${filename}${
-				(await isFile(resolve(cwd, filename + '.ts')))
-					? '.ts'
-					: (await isFile(resolve(cwd, filename + '.tsx')))
-					? '.tsx'
-					: '.js'
-			}`,
-		);
-
 	options.input = [];
 	[]
 		.concat(
@@ -88,8 +76,8 @@ export default async function microbundle(inputOptions) {
 				? options.entries
 				: (options.pkg.source && resolve(cwd, options.pkg.source)) ||
 						((await isDir(resolve(cwd, 'src'))) &&
-							(await jsOrTs('src/index'))) ||
-						(await jsOrTs('index')) ||
+							(await jsOrTs(cwd, 'src/index'))) ||
+						(await jsOrTs(cwd, 'index')) ||
 						options.pkg.module,
 		)
 		.map(file => glob(file))
@@ -245,6 +233,16 @@ function getName({ name, pkgName, amdName, cwd, hasPackageJson }) {
 	}
 
 	return name || amdName || safeVariableName(pkgName);
+}
+
+async function jsOrTs(cwd, filename) {
+	const extension = (await isFile(resolve(cwd, filename + '.ts')))
+		? '.ts'
+		: (await isFile(resolve(cwd, filename + '.tsx')))
+		? '.tsx'
+		: '.js';
+
+	return resolve(cwd, `${filename}${extension}`);
 }
 
 function createConfig(options, entry, format, writeMeta) {
