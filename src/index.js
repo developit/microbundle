@@ -57,13 +57,16 @@ export default async function microbundle(inputOptions) {
 	const { hasPackageJson, pkg } = await getConfigFromPkgJson(cwd);
 	options.pkg = pkg;
 
-	options.name = getName({
+	const { finalName, pkgName } = getName({
 		name: options.name,
 		pkgName: options.pkg.name,
 		amdName: options.pkg.amdName,
 		hasPackageJson,
 		cwd,
 	});
+
+	options.name = finalName;
+	options.pkg.name = pkgName;
 
 	if (options.sourcemap !== false) {
 		options.sourcemap = true;
@@ -187,21 +190,20 @@ async function getConfigFromPkgJson(cwd) {
 			pkg,
 		};
 	} catch (err) {
+		const pkgName = basename(cwd);
+
 		stderr(
 			chalk.yellow(
 				`${chalk.yellow.inverse(
 					'WARN',
-				)} no package.json found. Assuming a pkg.name of "${basename(cwd)}".`,
+				)} no package.json found. Assuming a pkg.name of "${pkgName}".`,
 			),
 		);
 
 		let msg = String(err.message || err);
 		if (!msg.match(/ENOENT/)) stderr(`  ${chalk.red.dim(msg)}`);
 
-		return {
-			hasPackageJson: false,
-			pkg: {},
-		};
+		return { hasPackageJson: false, pkg: { name: pkgName } };
 	}
 }
 
@@ -226,7 +228,7 @@ function getName({ name, pkgName, amdName, cwd, hasPackageJson }) {
 		}
 	}
 
-	return name || amdName || safeVariableName(pkgName);
+	return { finalName: name || amdName || safeVariableName(pkgName), pkgName };
 }
 
 async function jsOrTs(cwd, filename) {
