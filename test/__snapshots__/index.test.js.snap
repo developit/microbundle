@@ -1374,6 +1374,54 @@ return function(){function t(){}return t.prototype.render=function(){return n(\\
 "
 `;
 
+exports[`fixtures build macro with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+macro
+  dist
+    macro-lib.js
+    macro-lib.js.map
+    macro-lib.mjs
+    macro-lib.mjs.map
+    macro-lib.umd.js
+    macro-lib.umd.js.map
+  package.json
+  src
+    index.js
+    macro.js
+
+
+Build \\"macroLib\\" to dist:
+49 B: macro-lib.js.gz
+33 B: macro-lib.js.br
+48 B: macro-lib.mjs.gz
+32 B: macro-lib.mjs.br
+157 B: macro-lib.umd.js.gz
+125 B: macro-lib.umd.js.br"
+`;
+
+exports[`fixtures build macro with microbundle 2`] = `6`;
+
+exports[`fixtures build macro with microbundle 3`] = `
+"module.exports=\\"name-macro\\";
+//# sourceMappingURL=macro-lib.js.map
+"
+`;
+
+exports[`fixtures build macro with microbundle 4`] = `
+"export default\\"name-macro\\";
+//# sourceMappingURL=macro-lib.mjs.map
+"
+`;
+
+exports[`fixtures build macro with microbundle 5`] = `
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=\\"name-macro\\":\\"function\\"==typeof define&&define.amd?define(function(){return\\"name-macro\\"}):(e=e||self).macroLib=\\"name-macro\\"}(this);
+//# sourceMappingURL=macro-lib.umd.js.map
+"
+`;
+
 exports[`fixtures build name-custom-amd with microbundle 1`] = `
 "Used script: microbundle
 
