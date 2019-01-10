@@ -24,12 +24,7 @@ import { readFile, isDir, isFile, stdout, stderr } from './utils';
 import camelCase from 'camelcase';
 
 const removeScope = name => name.replace(/^@.*\//, '');
-const safeVariableName = name =>
-	camelCase(
-		removeScope(name)
-			.toLowerCase()
-			.replace(/((^[^a-zA-Z]+)|[^\w.-])|([^a-zA-Z0-9]+$)/g, ''),
-	);
+
 const parseGlobals = globalStrings => {
 	const globals = {};
 	globalStrings.split(',').forEach(globalString => {
@@ -53,105 +48,65 @@ function formatSize(size, filename, type, raw) {
 	)}: ${chalk.white(basename(filename))}.${type}`;
 }
 
-export default async function microbundle(options) {
-	let cwd = (options.cwd = resolve(process.cwd(), options.cwd)),
-		hasPackageJson = true;
+export default async function microbundle(inputOptions) {
+	let options = { ...inputOptions };
 
-	try {
-		options.pkg = JSON.parse(
-			await readFile(resolve(cwd, 'package.json'), 'utf8'),
-		);
-	} catch (err) {
-		stderr(
-			chalk.yellow(
-				`${chalk.yellow.inverse(
-					'WARN',
-				)} no package.json found. Assuming a pkg.name of "${basename(
-					options.cwd,
-				)}".`,
-			),
-		);
-		let msg = String(err.message || err);
-		if (!msg.match(/ENOENT/)) stderr(`  ${chalk.red.dim(msg)}`);
-		options.pkg = {};
-		hasPackageJson = false;
-	}
+	options.cwd = resolve(process.cwd(), inputOptions.cwd);
+	const cwd = options.cwd;
 
-	if (!options.pkg.name) {
-		options.pkg.name = basename(options.cwd);
-		if (hasPackageJson) {
-			stderr(
-				chalk.yellow(
-					`${chalk.yellow.inverse(
-						'WARN',
-					)} missing package.json "name" field. Assuming "${
-						options.pkg.name
-					}".`,
-				),
-			);
-		}
-	}
+	const { hasPackageJson, pkg } = await getConfigFromPkgJson(cwd);
+	options.pkg = pkg;
 
-	options.name =
-		options.name || options.pkg.amdName || safeVariableName(options.pkg.name);
+	const { finalName, pkgName } = getName({
+		name: options.name,
+		pkgName: options.pkg.name,
+		amdName: options.pkg.amdName,
+		hasPackageJson,
+		cwd,
+	});
+
+	options.name = finalName;
+	options.pkg.name = pkgName;
 
 	if (options.sourcemap !== false) {
 		options.sourcemap = true;
 	}
 
-	const jsOrTs = async filename =>
-		resolve(
-			cwd,
-			`${filename}${
-				(await isFile(resolve(cwd, filename + '.ts')))
-					? '.ts'
-					: (await isFile(resolve(cwd, filename + '.tsx')))
-					? '.tsx'
-					: '.js'
-			}`,
-		);
+	options.input = await getInput({
+		entries: options.entries,
+		cwd,
+		source: options.pkg.source,
+		module: options.pkg.module,
+	});
 
-	options.input = [];
-	[]
-		.concat(
-			options.entries && options.entries.length
-				? options.entries
-				: (options.pkg.source && resolve(cwd, options.pkg.source)) ||
-						((await isDir(resolve(cwd, 'src'))) &&
-							(await jsOrTs('src/index'))) ||
-						(await jsOrTs('index')) ||
-						options.pkg.module,
-		)
-		.map(file => glob(file))
-		.forEach(file => options.input.push(...file));
+	options.output = await getOutput({
+		cwd,
+		output: options.output,
+		pkgMain: options.pkg.main,
+		pkgName: options.pkg.name,
+	});
 
-	let main = resolve(cwd, options.output || options.pkg.main || 'dist');
-	if (!main.match(/\.[a-z]+$/) || (await isDir(main))) {
-		main = resolve(main, `${removeScope(options.pkg.name)}.js`);
-	}
-	options.output = main;
+	options.entries = await getEntries({
+		cwd,
+		input: options.input,
+	});
 
-	let entries = (await map([].concat(options.input), async file => {
-		file = resolve(cwd, file);
-		if (await isDir(file)) {
-			file = resolve(file, 'index.js');
-		}
-		return file;
-	})).filter((item, i, arr) => arr.indexOf(item) === i);
-
-	options.entries = entries;
-
-	options.multipleEntries = entries.length > 1;
+	options.multipleEntries = options.entries.length > 1;
 
 	let formats = (options.format || options.formats).split(',');
 	// always compile cjs first if it's there:
 	formats.sort((a, b) => (a === 'cjs' ? -1 : a > b ? 1 : 0));
 
 	let steps = [];
-	for (let i = 0; i < entries.length; i++) {
+	for (let i = 0; i < options.entries.length; i++) {
 		for (let j = 0; j < formats.length; j++) {
 			steps.push(
-				createConfig(options, entries[i], formats[j], i === 0 && j === 0),
+				createConfig(
+					options,
+					options.entries[i],
+					formats[j],
+					i === 0 && j === 0,
+				),
 			);
 		}
 	}
@@ -223,6 +178,105 @@ export default async function microbundle(options) {
 		'\n   ' +
 		out.join('\n   ')
 	);
+}
+
+async function getConfigFromPkgJson(cwd) {
+	try {
+		const pkgJSON = await readFile(resolve(cwd, 'package.json'), 'utf8');
+		const pkg = JSON.parse(pkgJSON);
+
+		return {
+			hasPackageJson: true,
+			pkg,
+		};
+	} catch (err) {
+		const pkgName = basename(cwd);
+
+		stderr(
+			chalk.yellow(
+				`${chalk.yellow.inverse(
+					'WARN',
+				)} no package.json found. Assuming a pkg.name of "${pkgName}".`,
+			),
+		);
+
+		let msg = String(err.message || err);
+		if (!msg.match(/ENOENT/)) stderr(`  ${chalk.red.dim(msg)}`);
+
+		return { hasPackageJson: false, pkg: { name: pkgName } };
+	}
+}
+
+const safeVariableName = name =>
+	camelCase(
+		removeScope(name)
+			.toLowerCase()
+			.replace(/((^[^a-zA-Z]+)|[^\w.-])|([^a-zA-Z0-9]+$)/g, ''),
+	);
+
+function getName({ name, pkgName, amdName, cwd, hasPackageJson }) {
+	if (!pkgName) {
+		pkgName = basename(cwd);
+		if (hasPackageJson) {
+			stderr(
+				chalk.yellow(
+					`${chalk.yellow.inverse(
+						'WARN',
+					)} missing package.json "name" field. Assuming "${pkgName}".`,
+				),
+			);
+		}
+	}
+
+	return { finalName: name || amdName || safeVariableName(pkgName), pkgName };
+}
+
+async function jsOrTs(cwd, filename) {
+	const extension = (await isFile(resolve(cwd, filename + '.ts')))
+		? '.ts'
+		: (await isFile(resolve(cwd, filename + '.tsx')))
+		? '.tsx'
+		: '.js';
+
+	return resolve(cwd, `${filename}${extension}`);
+}
+
+async function getInput({ entries, cwd, source, module }) {
+	const input = [];
+
+	[]
+		.concat(
+			entries && entries.length
+				? entries
+				: (source && resolve(cwd, source)) ||
+						((await isDir(resolve(cwd, 'src'))) &&
+							(await jsOrTs(cwd, 'src/index'))) ||
+						(await jsOrTs(cwd, 'index')) ||
+						module,
+		)
+		.map(file => glob(file))
+		.forEach(file => input.push(...file));
+
+	return input;
+}
+
+async function getOutput({ cwd, output, pkgMain, pkgName }) {
+	let main = resolve(cwd, output || pkgMain || 'dist');
+	if (!main.match(/\.[a-z]+$/) || (await isDir(main))) {
+		main = resolve(main, `${removeScope(pkgName)}.js`);
+	}
+	return main;
+}
+
+async function getEntries({ input, cwd }) {
+	let entries = (await map([].concat(input), async file => {
+		file = resolve(cwd, file);
+		if (await isDir(file)) {
+			file = resolve(file, 'index.js');
+		}
+		return file;
+	})).filter((item, i, arr) => arr.indexOf(item) === i);
+	return entries;
 }
 
 function createConfig(options, entry, format, writeMeta) {
