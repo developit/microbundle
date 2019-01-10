@@ -47,14 +47,23 @@ const parseScript = (() => {
 
 describe('fixtures', () => {
 	fs.readdirSync(FIXTURES_DIR).forEach(fixtureDir => {
-		const fixturePath = resolve(FIXTURES_DIR, fixtureDir);
+		let fixturePath = resolve(FIXTURES_DIR, fixtureDir);
 
 		if (!fs.statSync(fixturePath).isDirectory()) {
 			return;
 		}
 
 		it(fixtureDir, async () => {
-			await rimraf(resolve(`${fixturePath}/dist`));
+			if (fixtureDir.endsWith('-with-cwd')) {
+				fixturePath = resolve(fixturePath, fixtureDir.replace('-with-cwd', ''));
+			}
+
+			const dist = resolve(`${fixturePath}/dist`);
+			// clean up
+			await rimraf(dist);
+			await rimraf(resolve(`${fixturePath}/.rts2_cache_cjs`));
+			await rimraf(resolve(`${fixturePath}/.rts2_cache_es`));
+			await rimraf(resolve(`${fixturePath}/.rts2_cache_umd`));
 
 			let script;
 			try {
@@ -86,6 +95,12 @@ describe('fixtures', () => {
 					strip(output),
 				].join('\n\n'),
 			).toMatchSnapshot();
+
+			fs.readdirSync(resolve(dist)).forEach(file => {
+				expect(
+					fs.readFileSync(resolve(dist, file)).toString('utf8'),
+				).toMatchSnapshot();
+			});
 		});
 	});
 
@@ -95,5 +110,14 @@ describe('fixtures', () => {
 				.readFileSync(resolve(FIXTURES_DIR, 'shebang/dist/shebang.js'), 'utf8')
 				.startsWith('#!'),
 		).toEqual(true);
+	});
+
+	it('should keep named and default export', () => {
+		const mod = require(resolve(
+			FIXTURES_DIR,
+			'default-named/dist/default-named.js',
+		));
+
+		expect(Object.keys(mod)).toEqual(['foo', 'default']);
 	});
 });
