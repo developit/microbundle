@@ -296,10 +296,7 @@ function createConfig(options, entry, format, writeMeta) {
 	if (options.external === 'none') {
 		// bundle everything (external=[])
 	} else if (options.external === 'natives') {
-		external = external.concat(
-			require('module').builtinModules ||
-				Object.keys(process.binding('natives')),
-		);
+		external = external.concat(require('module').builtinModules);
 	} else if (options.external) {
 		external = external.concat(peerDeps).concat(options.external.split(','));
 	} else {
