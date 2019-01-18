@@ -295,6 +295,11 @@ function createConfig(options, entry, format, writeMeta) {
 	const peerDeps = Object.keys(pkg.peerDependencies || {});
 	if (options.external === 'none') {
 		// bundle everything (external=[])
+	} else if (options.external === 'natives') {
+		external = external.concat(
+			require('module').builtinModules ||
+				Object.keys(process.binding('natives')),
+		);
 	} else if (options.external) {
 		external = external.concat(peerDeps).concat(options.external.split(','));
 	} else {
