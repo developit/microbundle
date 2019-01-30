@@ -25,7 +25,8 @@ import camelCase from 'camelcase';
 
 const removeScope = name => name.replace(/^@.*\//, '');
 
-const parseGlobals = globalStrings => {
+// Parses values of the form "$=jQuery,React=react" into key-value object pairs.
+const parseMappingArgument = globalStrings => {
 	const globals = {};
 	globalStrings.split(',').forEach(globalString => {
 		const [localName, globalName] = globalString.split('=');
@@ -311,7 +312,16 @@ function createConfig(options, entry, format, writeMeta) {
 		return globals;
 	}, {});
 	if (options.globals && options.globals !== 'none') {
-		globals = Object.assign(globals, parseGlobals(options.globals));
+		globals = Object.assign(globals, parseMappingArgument(options.globals));
+	}
+
+	const NODE_ENV = process.env.NODE_ENV || 'production';
+	let defines = {
+		NODE_ENV,
+		'process.env.NODE_ENV': NODE_ENV
+	};
+	if (options.define) {
+		defines = Object.assign(defines, parseMappingArgument(options.define));
 	}
 
 	function replaceName(filename, name) {
@@ -488,10 +498,7 @@ function createConfig(options, entry, format, writeMeta) {
 							compress: {
 								keep_infinity: true,
 								pure_getters: true,
-								global_defs: Object.assign({
-									NODE_ENV: process.env.NODE_ENV || 'production',
-									'process.env.NODE_ENV': process.env.NODE_ENV || 'production'
-								}, options.define || {})
+								global_defs: defines
 							},
 							warnings: true,
 							ecma: 5,
