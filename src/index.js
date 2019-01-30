@@ -488,6 +488,10 @@ function createConfig(options, entry, format, writeMeta) {
 							compress: {
 								keep_infinity: true,
 								pure_getters: true,
+								global_defs: Object.assign({
+									NODE_ENV: process.env.NODE_ENV || 'production',
+									'process.env.NODE_ENV': process.env.NODE_ENV || 'production'
+								}, options.define || {})
 							},
 							warnings: true,
 							ecma: 5,
