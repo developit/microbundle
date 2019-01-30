@@ -408,7 +408,7 @@ function createConfig(options, entry, format, writeMeta) {
 									jsx: options.jsx,
 								},
 							},
-							tsconfigOverride: {
+							tsconfigDefaults: {
 								compilerOptions: {
 									target: 'esnext',
 								},
