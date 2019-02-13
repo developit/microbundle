@@ -315,11 +315,7 @@ function createConfig(options, entry, format, writeMeta) {
 		globals = Object.assign(globals, parseMappingArgument(options.globals));
 	}
 
-	const NODE_ENV = process.env.NODE_ENV || 'production';
-	let defines = {
-		NODE_ENV,
-		'process.env.NODE_ENV': NODE_ENV
-	};
+	let defines = {};
 	if (options.define) {
 		defines = Object.assign(defines, parseMappingArgument(options.define));
 	}
