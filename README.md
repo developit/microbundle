@@ -89,6 +89,18 @@ You can specify output builds in a `package.json` as follows:
 "source": "src/foo.js",         // custom entry module (same as 1st arg to microbundle)
 ```
 
+### Mangling Properties
+
+Libraries often wish to rename internal object properties or class members to smaller names - transforming `this._internalIdValue` to `this._i`. Microbundle doesn't currently do this by default, but it can be enabled by adding a "mangle" property to your package.json, with a pattern to control when properties should be mangled. To mangle all property names beginning an underscore, add the following:
+
+```json
+{
+  "mangle": {
+    "regex": "^_"
+  }
+}
+```
+
 ## 🛣 Roadmap
 
 Here's what's coming up for Microbundle:
