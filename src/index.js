@@ -291,6 +291,9 @@ function createConfig(options, entry, format, writeMeta) {
 	if (options.multipleEntries) {
 		aliases['.'] = './' + basename(options.output);
 	}
+	if (options.alias) {
+		aliases = Object.assign(aliases, parseGlobals(options.alias));
+	}
 
 	const peerDeps = Object.keys(pkg.peerDependencies || {});
 	if (options.external === 'none') {
