@@ -494,7 +494,7 @@ function createConfig(options, entry, format, writeMeta) {
 							compress: {
 								keep_infinity: true,
 								pure_getters: true,
-								global_defs: defines
+								global_defs: defines,
 							},
 							warnings: true,
 							ecma: 5,
