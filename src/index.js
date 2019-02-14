@@ -406,10 +406,6 @@ function createConfig(options, entry, format, writeMeta) {
 									sourceMap: options.sourcemap,
 									declaration: true,
 									jsx: options.jsx,
-								},
-							},
-							tsconfigDefaults: {
-								compilerOptions: {
 									target: 'esnext',
 								},
 							},
