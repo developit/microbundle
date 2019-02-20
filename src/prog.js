@@ -24,6 +24,8 @@ export default handler => {
 		.option('--external', `Specify external dependencies, or 'none'`)
 		.option('--globals', `Specify globals dependencies, or 'none'`)
 		.example('microbundle --globals react=React,jquery=$')
+		.option('--define', 'Replace constants with hard-coded values')
+		.example('microbundle --define API_KEY=1234')
 		.option('--alias', `Map imports to different modules`)
 		.example('microbundle --alias react=preact')
 		.option('--compress', 'Compress output using Terser', null)
