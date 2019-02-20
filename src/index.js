@@ -293,7 +293,7 @@ function createConfig(options, entry, format, writeMeta) {
 		aliases['.'] = './' + basename(options.output);
 	}
 	if (options.alias) {
-		aliases = Object.assign(aliases, parseGlobals(options.alias));
+		aliases = Object.assign(aliases, parseMappingArgument(options.alias));
 	}
 
 	const peerDeps = Object.keys(pkg.peerDependencies || {});
