@@ -26,12 +26,40 @@ import camelCase from 'camelcase';
 
 const removeScope = name => name.replace(/^@.*\//, '');
 
+// Convert booleans and int define= values to literals.
+// This is more intuitive than `microbundle --define A=1` producing A="1".
+// See: https://github.com/terser-js/terser#conditional-compilation-api
+const toTerserLiteral = (value, name) => {
+	// --define A="1",B='true' produces string:
+	const matches = value.match(/^(['"])(.+)\1$/);
+	if (matches) {
+		return [matches[2], name];
+	}
+
+	// --define A=1,B=true produces int/boolean literal:
+	if (/^(true|false|\d+)$/i.test(value)) {
+		return [value, '@' + name];
+	}
+
+	// default: behaviour from Terser (@prefix=1 produces expression/literal, unprefixed=1 produces string literal):
+};
+
 // Parses values of the form "$=jQuery,React=react" into key-value object pairs.
-const parseMappingArgument = globalStrings => {
+const parseMappingArgument = (globalStrings, processValue) => {
 	const globals = {};
 	globalStrings.split(',').forEach(globalString => {
-		const [localName, globalName] = globalString.split('=');
-		globals[localName] = globalName;
+		let [key, value] = globalString.split('=');
+		if (processValue) {
+			const r = processValue(value, key);
+			if (r !== undefined) {
+				if (Array.isArray(r)) {
+					[value, key] = r;
+				} else {
+					value = r;
+				}
+			}
+		}
+		globals[key] = value;
 	});
 	return globals;
 };
@@ -325,7 +353,10 @@ function createConfig(options, entry, format, writeMeta) {
 
 	let defines = {};
 	if (options.define) {
-		defines = Object.assign(defines, parseMappingArgument(options.define));
+		defines = Object.assign(
+			defines,
+			parseMappingArgument(options.define, toTerserLiteral),
+		);
 	}
 
 	function replaceName(filename, name) {

@@ -753,6 +753,28 @@ exports[`fixtures default-named 6`] = `
 
 exports[`fixtures default-named 7`] = `"{\\"version\\":3,\\"file\\":\\"default-named.umd.js\\",\\"sources\\":[\\"../src/index.js\\"],\\"sourcesContent\\":[\\"export const foo = 42;\\\\nexport default function bar() {}\\\\n\\"],\\"names\\":[],\\"mappings\\":\\"wLAAmB,aACJ\\"}"`;
 
+exports[`fixtures define 1`] = `
+"Used script: microbundle --no-sourcemap -f cjs --define DEBUG=false
+
+Directory tree:
+
+define
+  dist
+    alias.js
+  index.js
+  package.json
+
+
+Build \\"alias\\" to dist:
+50 B: alias.js.gz
+34 B: alias.js.br"
+`;
+
+exports[`fixtures define 2`] = `
+"console.log(\\"debug mode\\",!1);
+"
+`;
+
 exports[`fixtures esnext-ts 1`] = `
 "Used script: microbundle --raw
 
