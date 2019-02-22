@@ -1,6 +1,6 @@
 {
   "name": "alias",
   "scripts": {
-    "build": "microbundle --no-sourcemap -f cjs --define DEBUG=false"
+    "build": "microbundle --no-sourcemap --define DEBUG=false"
   }
 }

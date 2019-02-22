@@ -1,13 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`fixtures alias 1`] = `
-"Used script: microbundle --no-sourcemap -f cjs --alias ./constants=./constants-debug
+"Used script: microbundle --no-sourcemap --alias ./constants=./constants-debug
 
 Directory tree:
 
 alias
   dist
     alias-mapping.js
+    alias-mapping.mjs
+    alias-mapping.umd.js
   package.json
   src
     constants-debug.js
@@ -17,11 +19,25 @@ alias
 
 Build \\"aliasMapping\\" to dist:
 62 B: alias-mapping.js.gz
-46 B: alias-mapping.js.br"
+46 B: alias-mapping.js.br
+62 B: alias-mapping.mjs.gz
+46 B: alias-mapping.mjs.br
+156 B: alias-mapping.umd.js.gz
+111 B: alias-mapping.umd.js.br"
 `;
 
 exports[`fixtures alias 2`] = `
 "console.log(\\"DEBUG should be true: \\",!0);
+"
+`;
+
+exports[`fixtures alias 3`] = `
+"console.log(\\"DEBUG should be true: \\",!0);
+"
+`;
+
+exports[`fixtures alias 4`] = `
+"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?o():\\"function\\"==typeof define&&define.amd?define(o):o()}(0,function(){console.log(\\"DEBUG should be true: \\",!0)});
 "
 `;
 
@@ -754,7 +770,7 @@ exports[`fixtures default-named 6`] = `
 exports[`fixtures default-named 7`] = `"{\\"version\\":3,\\"file\\":\\"default-named.umd.js\\",\\"sources\\":[\\"../src/index.js\\"],\\"sourcesContent\\":[\\"export const foo = 42;\\\\nexport default function bar() {}\\\\n\\"],\\"names\\":[],\\"mappings\\":\\"wLAAmB,aACJ\\"}"`;
 
 exports[`fixtures define 1`] = `
-"Used script: microbundle --no-sourcemap -f cjs --define DEBUG=false
+"Used script: microbundle --no-sourcemap --define DEBUG=false
 
 Directory tree:
 
