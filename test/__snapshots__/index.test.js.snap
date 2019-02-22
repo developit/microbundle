@@ -761,17 +761,33 @@ Directory tree:
 define
   dist
     alias.js
+    alias.mjs
+    alias.umd.js
   index.js
   package.json
 
 
 Build \\"alias\\" to dist:
 50 B: alias.js.gz
-34 B: alias.js.br"
+34 B: alias.js.br
+50 B: alias.mjs.gz
+34 B: alias.mjs.br
+141 B: alias.umd.js.gz
+105 B: alias.umd.js.br"
 `;
 
 exports[`fixtures define 2`] = `
 "console.log(\\"debug mode\\",!1);
+"
+`;
+
+exports[`fixtures define 3`] = `
+"console.log(\\"debug mode\\",!1);
+"
+`;
+
+exports[`fixtures define 4`] = `
+"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?o():\\"function\\"==typeof define&&define.amd?define(o):o()}(0,function(){console.log(\\"debug mode\\",!0)});
 "
 `;
 
