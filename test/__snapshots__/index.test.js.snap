@@ -1,5 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`fixtures alias 1`] = `
+"Used script: microbundle --no-sourcemap -f cjs --alias ./constants=./constants-debug
+
+Directory tree:
+
+alias
+  dist
+    alias-mapping.js
+  package.json
+  src
+    constants-debug.js
+    constants.js
+    index.js
+
+
+Build \\"aliasMapping\\" to dist:
+62 B: alias-mapping.js.gz
+46 B: alias-mapping.js.br"
+`;
+
+exports[`fixtures alias 2`] = `
+"console.log(\\"DEBUG should be true: \\",!0);
+"
+`;
+
 exports[`fixtures async-iife-ts 1`] = `
 "Used script: microbundle
 

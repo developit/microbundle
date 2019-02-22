@@ -11,6 +11,7 @@ import babel from 'rollup-plugin-babel';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import buble from 'rollup-plugin-buble';
 import { terser } from 'rollup-plugin-terser';
+import alias from 'rollup-plugin-alias';
 import postcss from 'rollup-plugin-postcss';
 import gzipSize from 'gzip-size';
 import brotliSize from 'brotli-size';
@@ -34,6 +35,9 @@ const parseMappingArgument = globalStrings => {
 	});
 	return globals;
 };
+
+// Extensions to use when resolving modules
+const EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs'];
 
 const WATCH_OPTS = {
 	exclude: 'node_modules/**',
@@ -287,14 +291,15 @@ function createConfig(options, entry, format, writeMeta) {
 		options.entries.filter(e => e !== entry),
 	);
 
-	let aliases = {};
+	let outputAliases = {};
 	// since we transform src/index.js, we need to rename imports for it:
 	if (options.multipleEntries) {
-		aliases['.'] = './' + basename(options.output);
+		outputAliases['.'] = './' + basename(options.output);
 	}
-	if (options.alias) {
-		aliases = Object.assign(aliases, parseMappingArgument(options.alias));
-	}
+
+	const moduleAliases = options.alias
+		? parseMappingArgument(options.alias)
+		: {};
 
 	const peerDeps = Object.keys(pkg.peerDependencies || {});
 	if (options.external === 'none') {
@@ -396,6 +401,12 @@ function createConfig(options, entry, format, writeMeta) {
 						inject: false,
 						extract: !!writeMeta,
 					}),
+					Object.keys(moduleAliases).length > 0 &&
+						alias(
+							Object.assign({}, moduleAliases, {
+								resolve: EXTENSIONS,
+							}),
+						),
 					nodeResolve({
 						module: true,
 						jsnext: true,
@@ -431,7 +442,7 @@ function createConfig(options, entry, format, writeMeta) {
 						// supplied configurations we set this option to false. Note
 						// that we never supported using custom babel configs anyway.
 						babelrc: false,
-						extensions: ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs'],
+						extensions: EXTENSIONS,
 						exclude: 'node_modules/**',
 						plugins: [
 							require.resolve('@babel/plugin-syntax-jsx'),
@@ -542,7 +553,7 @@ function createConfig(options, entry, format, writeMeta) {
 		},
 
 		outputOptions: {
-			paths: aliases,
+			paths: outputAliases,
 			globals,
 			strict: options.strict === true,
 			legacy: true,
