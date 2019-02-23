@@ -12,7 +12,7 @@
 ## ✨ Features:
 
 - **One dependency** to bundle your library using only a `package.json`
-- Support for ESnext & async/await _(via [Bublé] & [Nodent])_
+- Support for ESnext & async/await _(via [Bublé] & [Nodent](https://github.com/MatAtBread/nodent))_
 - Produces tiny, optimized code for all inputs
 - Supports multiple entry modules _(`cli.js` + `index.js`, etc)_
 - Creates multiple output formats for each entry _(<abbr title="CommonJS (node)">CJS</abbr>, <abbr title="Universal Module Definition">UMD</abbr> & <abbr title="ECMAScript Modules">ESM</abbr>)_
