@@ -1,0 +1,6 @@
+{
+  "name": "alias",
+  "scripts": {
+    "build": "microbundle --no-sourcemap --define DEBUG=false"
+  }
+}

@@ -11,6 +11,7 @@ import babel from 'rollup-plugin-babel';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import buble from 'rollup-plugin-buble';
 import { terser } from 'rollup-plugin-terser';
+import alias from 'rollup-plugin-alias';
 import postcss from 'rollup-plugin-postcss';
 import gzipSize from 'gzip-size';
 import brotliSize from 'brotli-size';
@@ -25,14 +26,46 @@ import camelCase from 'camelcase';
 
 const removeScope = name => name.replace(/^@.*\//, '');
 
-const parseGlobals = globalStrings => {
+// Convert booleans and int define= values to literals.
+// This is more intuitive than `microbundle --define A=1` producing A="1".
+// See: https://github.com/terser-js/terser#conditional-compilation-api
+const toTerserLiteral = (value, name) => {
+	// --define A="1",B='true' produces string:
+	const matches = value.match(/^(['"])(.+)\1$/);
+	if (matches) {
+		return [matches[2], name];
+	}
+
+	// --define A=1,B=true produces int/boolean literal:
+	if (/^(true|false|\d+)$/i.test(value)) {
+		return [value, '@' + name];
+	}
+
+	// default: behaviour from Terser (@prefix=1 produces expression/literal, unprefixed=1 produces string literal):
+};
+
+// Parses values of the form "$=jQuery,React=react" into key-value object pairs.
+const parseMappingArgument = (globalStrings, processValue) => {
 	const globals = {};
 	globalStrings.split(',').forEach(globalString => {
-		const [localName, globalName] = globalString.split('=');
-		globals[localName] = globalName;
+		let [key, value] = globalString.split('=');
+		if (processValue) {
+			const r = processValue(value, key);
+			if (r !== undefined) {
+				if (Array.isArray(r)) {
+					[value, key] = r;
+				} else {
+					value = r;
+				}
+			}
+		}
+		globals[key] = value;
 	});
 	return globals;
 };
+
+// Extensions to use when resolving modules
+const EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs'];
 
 const WATCH_OPTS = {
 	exclude: 'node_modules/**',
@@ -286,11 +319,15 @@ function createConfig(options, entry, format, writeMeta) {
 		options.entries.filter(e => e !== entry),
 	);
 
-	let aliases = {};
+	let outputAliases = {};
 	// since we transform src/index.js, we need to rename imports for it:
 	if (options.multipleEntries) {
-		aliases['.'] = './' + basename(options.output);
+		outputAliases['.'] = './' + basename(options.output);
 	}
+
+	const moduleAliases = options.alias
+		? parseMappingArgument(options.alias)
+		: {};
 
 	const peerDeps = Object.keys(pkg.peerDependencies || {});
 	if (options.external === 'none') {
@@ -311,7 +348,15 @@ function createConfig(options, entry, format, writeMeta) {
 		return globals;
 	}, {});
 	if (options.globals && options.globals !== 'none') {
-		globals = Object.assign(globals, parseGlobals(options.globals));
+		globals = Object.assign(globals, parseMappingArgument(options.globals));
+	}
+
+	let defines = {};
+	if (options.define) {
+		defines = Object.assign(
+			defines,
+			parseMappingArgument(options.define, toTerserLiteral),
+		);
 	}
 
 	function replaceName(filename, name) {
@@ -387,6 +432,12 @@ function createConfig(options, entry, format, writeMeta) {
 						inject: false,
 						extract: !!writeMeta,
 					}),
+					Object.keys(moduleAliases).length > 0 &&
+						alias(
+							Object.assign({}, moduleAliases, {
+								resolve: EXTENSIONS,
+							}),
+						),
 					nodeResolve({
 						module: true,
 						jsnext: true,
@@ -422,7 +473,7 @@ function createConfig(options, entry, format, writeMeta) {
 						// supplied configurations we set this option to false. Note
 						// that we never supported using custom babel configs anyway.
 						babelrc: false,
-						extensions: ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs'],
+						extensions: EXTENSIONS,
 						exclude: 'node_modules/**',
 						plugins: [
 							require.resolve('@babel/plugin-syntax-jsx'),
@@ -488,6 +539,8 @@ function createConfig(options, entry, format, writeMeta) {
 							compress: {
 								keep_infinity: true,
 								pure_getters: true,
+								global_defs: defines,
+								passes: 10,
 							},
 							warnings: true,
 							ecma: 5,
@@ -532,7 +585,7 @@ function createConfig(options, entry, format, writeMeta) {
 		},
 
 		outputOptions: {
-			paths: aliases,
+			paths: outputAliases,
 			globals,
 			strict: options.strict === true,
 			legacy: true,
