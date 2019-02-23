@@ -57,7 +57,7 @@
     "es6-promisify": "^6.0.1",
     "gzip-size": "^5.0.0",
     "pretty-bytes": "^5.1.0",
-    "rollup": "^0.67.3",
+    "rollup": "^1.2.3",
     "rollup-plugin-alias": "^1.5.1",
     "rollup-plugin-babel": "^4.1.0-0",
     "rollup-plugin-buble": "^0.19.4",
