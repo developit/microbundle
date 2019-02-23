@@ -540,6 +540,7 @@ function createConfig(options, entry, format, writeMeta) {
 								keep_infinity: true,
 								pure_getters: true,
 								global_defs: defines,
+								passes: 10,
 							},
 							warnings: true,
 							ecma: 5,
