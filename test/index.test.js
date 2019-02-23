@@ -14,24 +14,32 @@ const rimraf = promisify(_rimraf);
 const FIXTURES_DIR = `${__dirname}/fixtures`;
 const DEFAULT_SCRIPT = 'microbundle';
 
-const times = (n, fn) => Array.from({ length: n }).map(i => fn(i));
 const join = (arr, delimiter = '') => arr.join(delimiter);
-const constant = konst => () => konst;
 
 const printTree = (nodes, indentLevel = 0) => {
-	const indent = join(times(indentLevel, constant('  ')));
+	const indent = '  '.repeat(indentLevel);
 	return join(
 		nodes
 			.filter(node => node.name[0] !== '.')
-			.map(
-				node =>
-					`${indent}${node.name}\n${
-						node.type === 'directory'
-							? printTree(node.children, indentLevel + 1)
-							: ''
-					}`,
-			),
+			.map(node => {
+				const isDir = node.type === 'directory';
+				return `${indent}${node.name}\n${
+					isDir ? printTree(node.children, indentLevel + 1) : ''
+				}`;
+			}),
 	);
+};
+
+const getBuildScript = async (fixturePath, defaultScript) => {
+	let pkg = {};
+	try {
+		pkg = JSON.parse(
+			await readFile(resolve(fixturePath, 'package.json'), 'utf8'),
+		);
+	} catch (err) {
+		if (err.code !== 'ENOENT') throw err;
+	}
+	return (pkg && pkg.scripts && pkg.scripts.build) || defaultScript;
 };
 
 const parseScript = (() => {
@@ -65,13 +73,7 @@ describe('fixtures', () => {
 			await rimraf(resolve(`${fixturePath}/.rts2_cache_es`));
 			await rimraf(resolve(`${fixturePath}/.rts2_cache_umd`));
 
-			let script;
-			try {
-				({ scripts: { build: script } = {} } = JSON.parse(
-					await readFile(resolve(fixturePath, 'package.json'), 'utf8'),
-				));
-			} catch (err) {}
-			script = script || DEFAULT_SCRIPT;
+			const script = await getBuildScript(fixturePath, DEFAULT_SCRIPT);
 
 			const prevDir = process.cwd();
 			process.chdir(resolve(fixturePath));
