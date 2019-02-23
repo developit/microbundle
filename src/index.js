@@ -11,8 +11,8 @@ import babel from 'rollup-plugin-babel';
 import { loadPartialConfig, DEFAULT_EXTENSIONS } from '@babel/core';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
+import alias from 'rollup-plugin-alias';
 import postcss from 'rollup-plugin-postcss';
-import alias from 'rollup-plugin-strict-alias';
 import gzipSize from 'gzip-size';
 import brotliSize from 'brotli-size';
 import prettyBytes from 'pretty-bytes';
@@ -25,20 +25,47 @@ import { readFile, isDir, isFile, stdout, stderr } from './utils';
 import camelCase from 'camelcase';
 
 const removeScope = name => name.replace(/^@.*\//, '');
-const safeVariableName = name =>
-	camelCase(
-		removeScope(name)
-			.toLowerCase()
-			.replace(/((^[^a-zA-Z]+)|[^\w.-])|([^a-zA-Z0-9]+$)/g, ''),
-	);
-const parseGlobals = globalStrings => {
+
+// Convert booleans and int define= values to literals.
+// This is more intuitive than `microbundle --define A=1` producing A="1".
+// See: https://github.com/terser-js/terser#conditional-compilation-api
+const toTerserLiteral = (value, name) => {
+	// --define A="1",B='true' produces string:
+	const matches = value.match(/^(['"])(.+)\1$/);
+	if (matches) {
+		return [matches[2], name];
+	}
+
+	// --define A=1,B=true produces int/boolean literal:
+	if (/^(true|false|\d+)$/i.test(value)) {
+		return [value, '@' + name];
+	}
+
+	// default: behaviour from Terser (@prefix=1 produces expression/literal, unprefixed=1 produces string literal):
+};
+
+// Parses values of the form "$=jQuery,React=react" into key-value object pairs.
+const parseMappingArgument = (globalStrings, processValue) => {
 	const globals = {};
 	globalStrings.split(',').forEach(globalString => {
-		const [localName, globalName] = globalString.split('=');
-		globals[localName] = globalName;
+		let [key, value] = globalString.split('=');
+		if (processValue) {
+			const r = processValue(value, key);
+			if (r !== undefined) {
+				if (Array.isArray(r)) {
+					[value, key] = r;
+				} else {
+					value = r;
+				}
+			}
+		}
+		globals[key] = value;
 	});
 	return globals;
 };
+
+// Extensions to use when resolving modules
+const EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs'];
 
 const WATCH_OPTS = {
 	exclude: 'node_modules/**',
@@ -54,105 +81,65 @@ function formatSize(size, filename, type, raw) {
 	)}: ${chalk.white(basename(filename))}.${type}`;
 }
 
-export default async function microbundle(options) {
-	let cwd = (options.cwd = resolve(process.cwd(), options.cwd)),
-		hasPackageJson = true;
+export default async function microbundle(inputOptions) {
+	let options = { ...inputOptions };
 
-	try {
-		options.pkg = JSON.parse(
-			await readFile(resolve(cwd, 'package.json'), 'utf8'),
-		);
-	} catch (err) {
-		stderr(
-			chalk.yellow(
-				`${chalk.yellow.inverse(
-					'WARN',
-				)} no package.json found. Assuming a pkg.name of "${basename(
-					options.cwd,
-				)}".`,
-			),
-		);
-		let msg = String(err.message || err);
-		if (!msg.match(/ENOENT/)) stderr(`  ${chalk.red.dim(msg)}`);
-		options.pkg = {};
-		hasPackageJson = false;
-	}
+	options.cwd = resolve(process.cwd(), inputOptions.cwd);
+	const cwd = options.cwd;
 
-	if (!options.pkg.name) {
-		options.pkg.name = basename(options.cwd);
-		if (hasPackageJson) {
-			stderr(
-				chalk.yellow(
-					`${chalk.yellow.inverse(
-						'WARN',
-					)} missing package.json "name" field. Assuming "${
-						options.pkg.name
-					}".`,
-				),
-			);
-		}
-	}
+	const { hasPackageJson, pkg } = await getConfigFromPkgJson(cwd);
+	options.pkg = pkg;
 
-	options.name =
-		options.name || options.pkg.amdName || safeVariableName(options.pkg.name);
+	const { finalName, pkgName } = getName({
+		name: options.name,
+		pkgName: options.pkg.name,
+		amdName: options.pkg.amdName,
+		hasPackageJson,
+		cwd,
+	});
+
+	options.name = finalName;
+	options.pkg.name = pkgName;
 
 	if (options.sourcemap !== false) {
 		options.sourcemap = true;
 	}
 
-	const jsOrTs = async filename =>
-		resolve(
-			cwd,
-			`${filename}${
-				(await isFile(resolve(cwd, filename + '.ts')))
-					? '.ts'
-					: (await isFile(resolve(cwd, filename + '.tsx')))
-					? '.tsx'
-					: '.js'
-			}`,
-		);
+	options.input = await getInput({
+		entries: options.entries,
+		cwd,
+		source: options.pkg.source,
+		module: options.pkg.module,
+	});
 
-	options.input = [];
-	[]
-		.concat(
-			options.entries && options.entries.length
-				? options.entries
-				: (options.pkg.source && resolve(cwd, options.pkg.source)) ||
-						((await isDir(resolve(cwd, 'src'))) &&
-							(await jsOrTs('src/index'))) ||
-						(await jsOrTs('index')) ||
-						options.pkg.module,
-		)
-		.map(file => glob(file))
-		.forEach(file => options.input.push(...file));
+	options.output = await getOutput({
+		cwd,
+		output: options.output,
+		pkgMain: options.pkg.main,
+		pkgName: options.pkg.name,
+	});
 
-	let main = resolve(cwd, options.output || options.pkg.main || 'dist');
-	if (!main.match(/\.[a-z]+$/) || (await isDir(main))) {
-		main = resolve(main, `${removeScope(options.pkg.name)}.js`);
-	}
-	options.output = main;
+	options.entries = await getEntries({
+		cwd,
+		input: options.input,
+	});
 
-	let entries = (await map([].concat(options.input), async file => {
-		file = resolve(cwd, file);
-		if (await isDir(file)) {
-			file = resolve(file, 'index.js');
-		}
-		return file;
-	})).filter((item, i, arr) => arr.indexOf(item) === i);
-
-	options.entries = entries;
-
-	options.multipleEntries = entries.length > 1;
+	options.multipleEntries = options.entries.length > 1;
 
 	let formats = (options.format || options.formats).split(',');
 	// always compile cjs first if it's there:
 	formats.sort((a, b) => (a === 'cjs' ? -1 : a > b ? 1 : 0));
 
 	let steps = [];
-	for (let i = 0; i < entries.length; i++) {
+	for (let i = 0; i < options.entries.length; i++) {
 		for (let j = 0; j < formats.length; j++) {
 			steps.push(
-				createConfig(options, entries[i], formats[j], i === 0 && j === 0),
+				createConfig(
+					options,
+					options.entries[i],
+					formats[j],
+					i === 0 && j === 0,
+				),
 			);
 		}
 	}
@@ -274,6 +261,105 @@ function createBabelConfig(options) {
 	};
 }
 
+async function getConfigFromPkgJson(cwd) {
+	try {
+		const pkgJSON = await readFile(resolve(cwd, 'package.json'), 'utf8');
+		const pkg = JSON.parse(pkgJSON);
+
+		return {
+			hasPackageJson: true,
+			pkg,
+		};
+	} catch (err) {
+		const pkgName = basename(cwd);
+
+		stderr(
+			chalk.yellow(
+				`${chalk.yellow.inverse(
+					'WARN',
+				)} no package.json found. Assuming a pkg.name of "${pkgName}".`,
+			),
+		);
+
+		let msg = String(err.message || err);
+		if (!msg.match(/ENOENT/)) stderr(`  ${chalk.red.dim(msg)}`);
+
+		return { hasPackageJson: false, pkg: { name: pkgName } };
+	}
+}
+
+const safeVariableName = name =>
+	camelCase(
+		removeScope(name)
+			.toLowerCase()
+			.replace(/((^[^a-zA-Z]+)|[^\w.-])|([^a-zA-Z0-9]+$)/g, ''),
+	);
+
+function getName({ name, pkgName, amdName, cwd, hasPackageJson }) {
+	if (!pkgName) {
+		pkgName = basename(cwd);
+		if (hasPackageJson) {
+			stderr(
+				chalk.yellow(
+					`${chalk.yellow.inverse(
+						'WARN',
+					)} missing package.json "name" field. Assuming "${pkgName}".`,
+				),
+			);
+		}
+	}
+
+	return { finalName: name || amdName || safeVariableName(pkgName), pkgName };
+}
+
+async function jsOrTs(cwd, filename) {
+	const extension = (await isFile(resolve(cwd, filename + '.ts')))
+		? '.ts'
+		: (await isFile(resolve(cwd, filename + '.tsx')))
+		? '.tsx'
+		: '.js';
+
+	return resolve(cwd, `${filename}${extension}`);
+}
+
+async function getInput({ entries, cwd, source, module }) {
+	const input = [];
+
+	[]
+		.concat(
+			entries && entries.length
+				? entries
+				: (source && resolve(cwd, source)) ||
+						((await isDir(resolve(cwd, 'src'))) &&
+							(await jsOrTs(cwd, 'src/index'))) ||
+						(await jsOrTs(cwd, 'index')) ||
+						module,
+		)
+		.map(file => glob(file))
+		.forEach(file => input.push(...file));
+
+	return input;
+}
+
+async function getOutput({ cwd, output, pkgMain, pkgName }) {
+	let main = resolve(cwd, output || pkgMain || 'dist');
+	if (!main.match(/\.[a-z]+$/) || (await isDir(main))) {
+		main = resolve(main, `${removeScope(pkgName)}.js`);
+	}
+	return main;
+}
+
+async function getEntries({ input, cwd }) {
+	let entries = (await map([].concat(input), async file => {
+		file = resolve(cwd, file);
+		if (await isDir(file)) {
+			file = resolve(file, 'index.js');
+		}
+		return file;
+	})).filter((item, i, arr) => arr.indexOf(item) === i);
+	return entries;
+}
+
 function createConfig(options, entry, format, writeMeta) {
 	let { pkg } = options;
 
@@ -281,11 +367,15 @@ function createConfig(options, entry, format, writeMeta) {
 		options.entries.filter(e => e !== entry),
 	);
 
-	let aliases = {};
+	let outputAliases = {};
 	// since we transform src/index.js, we need to rename imports for it:
 	if (options.multipleEntries) {
-		aliases['.'] = './' + basename(options.output);
+		outputAliases['.'] = './' + basename(options.output);
 	}
+
+	const moduleAliases = options.alias
+		? parseMappingArgument(options.alias)
+		: {};
 
 	const peerDeps = Object.keys(pkg.peerDependencies || {});
 	if (options.external === 'none') {
@@ -306,7 +396,15 @@ function createConfig(options, entry, format, writeMeta) {
 		return globals;
 	}, {});
 	if (options.globals && options.globals !== 'none') {
-		globals = Object.assign(globals, parseGlobals(options.globals));
+		globals = Object.assign(globals, parseMappingArgument(options.globals));
+	}
+
+	let defines = {};
+	if (options.define) {
+		defines = Object.assign(
+			defines,
+			parseMappingArgument(options.define, toTerserLiteral),
+		);
 	}
 
 	function replaceName(filename, name) {
@@ -339,19 +437,6 @@ function createConfig(options, entry, format, writeMeta) {
 	let nameCache = {};
 	let mangleOptions = options.pkg.mangle || false;
 
-	let exportType;
-	if (format !== 'es') {
-		try {
-			let file = fs.readFileSync(entry, 'utf-8');
-			let hasDefault = /\bexport\s*default\s*[a-zA-Z_$]/.test(file);
-			let hasNamed =
-				/\bexport\s*(let|const|var|async|function\*?)\s*[a-zA-Z_$*]/.test(
-					file,
-				) || /^\s*export\s*\{/m.test(file);
-			if (hasDefault && hasNamed) exportType = 'default';
-		} catch (e) {}
-	}
-
 	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
 
 	const externalPredicate = new RegExp(`^(${external.join('|')})($|/)`);
@@ -371,7 +456,7 @@ function createConfig(options, entry, format, writeMeta) {
 
 	let config = {
 		inputOptions: {
-			input: exportType ? resolve(__dirname, '../src/lib/__entry__.js') : entry,
+			input: entry,
 			external: id => {
 				if (id === 'babel-plugin-transform-async-to-promises/helpers') {
 					return false;
@@ -381,11 +466,11 @@ function createConfig(options, entry, format, writeMeta) {
 				}
 				return externalTest(id);
 			},
+			treeshake: {
+				propertyReadSideEffects: false,
+			},
 			plugins: []
 				.concat(
-					alias({
-						__microbundle_entry__: entry,
-					}),
 					postcss({
 						plugins: [
 							autoprefixer(),
@@ -398,13 +483,20 @@ function createConfig(options, entry, format, writeMeta) {
 						inject: false,
 						extract: !!writeMeta,
 					}),
+					Object.keys(moduleAliases).length > 0 &&
+						alias(
+							Object.assign({}, moduleAliases, {
+								resolve: EXTENSIONS,
+							}),
+						),
 					nodeResolve({
 						module: true,
 						jsnext: true,
 						browser: options.target !== 'node',
 					}),
 					commonjs({
-						include: 'node_modules/**',
+						// use a regex to make sure to include eventual hoisted packages
+						include: /\/node_modules\//,
 					}),
 					json(),
 					useTypescript &&
@@ -469,6 +561,8 @@ function createConfig(options, entry, format, writeMeta) {
 							compress: {
 								keep_infinity: true,
 								pure_getters: true,
+								global_defs: defines,
+								passes: 10,
 							},
 							warnings: true,
 							ecma: 5,
@@ -513,17 +607,13 @@ function createConfig(options, entry, format, writeMeta) {
 		},
 
 		outputOptions: {
-			exports: exportType ? 'default' : undefined,
-			paths: aliases,
+			paths: outputAliases,
 			globals,
 			strict: options.strict === true,
 			legacy: true,
 			freeze: false,
 			esModule: false,
 			sourcemap: options.sourcemap,
-			treeshake: {
-				propertyReadSideEffects: false,
-			},
 			format,
 			name: options.name,
 			file: resolve(

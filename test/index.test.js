@@ -14,24 +14,32 @@ const rimraf = promisify(_rimraf);
 const FIXTURES_DIR = `${__dirname}/fixtures`;
 const DEFAULT_SCRIPT = 'microbundle';
 
-const times = (n, fn) => Array.from({ length: n }).map(i => fn(i));
 const join = (arr, delimiter = '') => arr.join(delimiter);
-const constant = konst => () => konst;
 
 const printTree = (nodes, indentLevel = 0) => {
-	const indent = join(times(indentLevel, constant('  ')));
+	const indent = '  '.repeat(indentLevel);
 	return join(
 		nodes
 			.filter(node => node.name[0] !== '.')
-			.map(
-				node =>
-					`${indent}${node.name}\n${
-						node.type === 'directory'
-							? printTree(node.children, indentLevel + 1)
-							: ''
-					}`,
-			),
+			.map(node => {
+				const isDir = node.type === 'directory';
+				return `${indent}${node.name}\n${
+					isDir ? printTree(node.children, indentLevel + 1) : ''
+				}`;
+			}),
 	);
+};
+
+const getBuildScript = async (fixturePath, defaultScript) => {
+	let pkg = {};
+	try {
+		pkg = JSON.parse(
+			await readFile(resolve(fixturePath, 'package.json'), 'utf8'),
+		);
+	} catch (err) {
+		if (err.code !== 'ENOENT') throw err;
+	}
+	return (pkg && pkg.scripts && pkg.scripts.build) || defaultScript;
 };
 
 const parseScript = (() => {
@@ -47,22 +55,25 @@ const parseScript = (() => {
 
 describe('fixtures', () => {
 	fs.readdirSync(FIXTURES_DIR).forEach(fixtureDir => {
-		const fixturePath = resolve(FIXTURES_DIR, fixtureDir);
+		let fixturePath = resolve(FIXTURES_DIR, fixtureDir);
 
 		if (!fs.statSync(fixturePath).isDirectory()) {
 			return;
 		}
 
 		it(fixtureDir, async () => {
-			await rimraf(resolve(`${fixturePath}/dist`));
+			if (fixtureDir.endsWith('-with-cwd')) {
+				fixturePath = resolve(fixturePath, fixtureDir.replace('-with-cwd', ''));
+			}
 
-			let script;
-			try {
-				({ scripts: { build: script } = {} } = JSON.parse(
-					await readFile(resolve(fixturePath, 'package.json'), 'utf8'),
-				));
-			} catch (err) {}
-			script = script || DEFAULT_SCRIPT;
+			const dist = resolve(`${fixturePath}/dist`);
+			// clean up
+			await rimraf(dist);
+			await rimraf(resolve(`${fixturePath}/.rts2_cache_cjs`));
+			await rimraf(resolve(`${fixturePath}/.rts2_cache_es`));
+			await rimraf(resolve(`${fixturePath}/.rts2_cache_umd`));
+
+			const script = await getBuildScript(fixturePath, DEFAULT_SCRIPT);
 
 			const prevDir = process.cwd();
 			process.chdir(resolve(fixturePath));
@@ -86,6 +97,12 @@ describe('fixtures', () => {
 					strip(output),
 				].join('\n\n'),
 			).toMatchSnapshot();
+
+			fs.readdirSync(resolve(dist)).forEach(file => {
+				expect(
+					fs.readFileSync(resolve(dist, file)).toString('utf8'),
+				).toMatchSnapshot();
+			});
 		});
 	});
 
@@ -95,5 +112,14 @@ describe('fixtures', () => {
 				.readFileSync(resolve(FIXTURES_DIR, 'shebang/dist/shebang.js'), 'utf8')
 				.startsWith('#!'),
 		).toEqual(true);
+	});
+
+	it('should keep named and default export', () => {
+		const mod = require(resolve(
+			FIXTURES_DIR,
+			'default-named/dist/default-named.js',
+		));
+
+		expect(Object.keys(mod)).toEqual(['foo', 'default']);
 	});
 });

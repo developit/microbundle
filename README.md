@@ -89,6 +89,18 @@ You can specify output builds in a `package.json` as follows:
 "source": "src/foo.js",         // custom entry module (same as 1st arg to microbundle)
 ```
 
+### Mangling Properties
+
+Libraries often wish to rename internal object properties or class members to smaller names - transforming `this._internalIdValue` to `this._i`. Microbundle doesn't currently do this by default, but it can be enabled by adding a "mangle" property to your package.json, with a pattern to control when properties should be mangled. To mangle all property names beginning an underscore, add the following:
+
+```json
+{
+	"mangle": {
+		"regex": "^_"
+	}
+}
+```
+
 ## 🛣 Roadmap
 
 Here's what's coming up for Microbundle:
@@ -104,6 +116,8 @@ Here's what's coming up for Microbundle:
 - [react-recomponent](https://github.com/philipp-spiess/react-recomponent) Reason-style reducer components for React using ES6 classes.
 - [brazilian-utils](https://github.com/brazilian-utils/brazilian-utils) Utils library for specific Brazilian businesses.
 - [react-hooks-lib](https://github.com/beizhedenglong/react-hooks-lib) A set of reusable react hooks.
+- [mdx-deck-live-code](https://github.com/JReinhold/mdx-deck-live-code) A library for [mdx-deck](https://github.com/jxnblk/mdx-deck) to do live React and JS coding directly in slides.
+- [react-router-ext](https://github.com/ri7nz/react-router-ext) An Extended [react-router-dom](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom) with simple usage.
 
 ## 🥂 License
 

@@ -1,0 +1,6 @@
+{
+  "name": "alias-mapping",
+  "scripts": {
+    "build": "microbundle --no-sourcemap --alias ./constants=./constants-debug"
+  }
+}
