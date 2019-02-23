@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { resolve, relative, dirname, basename, extname } from 'path';
-import chalk from 'chalk';
+import { green, red, yellow, white, blue } from 'kleur';
 import { map, series } from 'asyncro';
 import glob from 'tiny-glob/sync';
 import autoprefixer from 'autoprefixer';
@@ -16,7 +16,6 @@ import postcss from 'rollup-plugin-postcss';
 import gzipSize from 'gzip-size';
 import brotliSize from 'brotli-size';
 import prettyBytes from 'pretty-bytes';
-import shebangPlugin from 'rollup-plugin-preserve-shebang';
 import typescript from 'rollup-plugin-typescript2';
 import json from 'rollup-plugin-json';
 import flow from './lib/flow-plugin';
@@ -74,11 +73,27 @@ const WATCH_OPTS = {
 // Hoist function because something (rollup?) incorrectly removes it
 function formatSize(size, filename, type, raw) {
 	const pretty = raw ? `${size} B` : prettyBytes(size);
-	const color = size < 5000 ? 'green' : size > 40000 ? 'red' : 'yellow';
+	const color = size < 5000 ? green : size > 40000 ? red : yellow;
 	const MAGIC_INDENTATION = type === 'br' ? 13 : 10;
-	return `${' '.repeat(MAGIC_INDENTATION - pretty.length)}${chalk[color](
+	return `${' '.repeat(MAGIC_INDENTATION - pretty.length)}${color(
 		pretty,
-	)}: ${chalk.white(basename(filename))}.${type}`;
+	)}: ${white(basename(filename))}.${type}`;
+}
+
+async function getSizeInfo(code, filename, raw) {
+	const gzip = formatSize(
+		await gzipSize(code),
+		filename,
+		'gz',
+		raw || code.length < 5000,
+	);
+	const brotli = formatSize(
+		await brotliSize(code),
+		filename,
+		'br',
+		raw || code.length < 5000,
+	);
+	return gzip + '\n' + brotli;
 }
 
 export default async function microbundle(inputOptions) {
@@ -144,18 +159,11 @@ export default async function microbundle(inputOptions) {
 		}
 	}
 
-	async function getSizeInfo(code, filename) {
-		const raw = options.raw || code.length < 5000;
-		const gzip = formatSize(await gzipSize(code), filename, 'gz', raw);
-		const brotli = formatSize(await brotliSize(code), filename, 'br', raw);
-		return gzip + '\n' + brotli;
-	}
-
 	if (options.watch) {
 		const onBuild = options.onBuild;
 		return new Promise((resolve, reject) => {
 			stdout(
-				chalk.blue(
+				blue(
 					`Watching source, compiling to ${relative(
 						cwd,
 						dirname(options.output),
@@ -178,11 +186,9 @@ export default async function microbundle(inputOptions) {
 						logError(e.error);
 					}
 					if (e.code === 'END') {
-						getSizeInfo(options._code, options.outputOptions.file).then(
-							text => {
-								stdout(`Wrote ${text.trim()}`);
-							},
-						);
+						options._sizeInfo.then(text => {
+							stdout(`Wrote ${text.trim()}`);
+						});
 						if (typeof onBuild === 'function') {
 							onBuild(e);
 						}
@@ -194,17 +200,19 @@ export default async function microbundle(inputOptions) {
 
 	let cache;
 	let out = await series(
-		steps.map(({ inputOptions, outputOptions }) => async () => {
+		steps.map(config => async () => {
+			const { inputOptions, outputOptions } = config;
 			inputOptions.cache = cache;
 			let bundle = await rollup(inputOptions);
 			cache = bundle;
-			const { code } = await bundle.write(outputOptions);
-			return await getSizeInfo(code, outputOptions.file);
+			await bundle.write(outputOptions);
+			return await config._sizeInfo;
+			// return await getSizeInfo(code, outputOptions.file, options.raw);
 		}),
 	);
 
 	return (
-		chalk.blue(
+		blue(
 			`Build "${options.name}" to ${relative(cwd, dirname(options.output)) ||
 				'.'}:`,
 		) +
@@ -226,15 +234,16 @@ async function getConfigFromPkgJson(cwd) {
 		const pkgName = basename(cwd);
 
 		stderr(
-			chalk.yellow(
-				`${chalk.yellow.inverse(
+			// `Warn ${yellow(`no package.json found. Assuming a pkg.name of "${pkgName}".`)}`
+			yellow(
+				`${yellow().inverse(
 					'WARN',
 				)} no package.json found. Assuming a pkg.name of "${pkgName}".`,
 			),
 		);
 
 		let msg = String(err.message || err);
-		if (!msg.match(/ENOENT/)) stderr(`  ${chalk.red.dim(msg)}`);
+		if (!msg.match(/ENOENT/)) stderr(`  ${red().dim(msg)}`);
 
 		return { hasPackageJson: false, pkg: { name: pkgName } };
 	}
@@ -252,8 +261,8 @@ function getName({ name, pkgName, amdName, cwd, hasPackageJson }) {
 		pkgName = basename(cwd);
 		if (hasPackageJson) {
 			stderr(
-				chalk.yellow(
-					`${chalk.yellow.inverse(
+				yellow(
+					`${yellow().inverse(
 						'WARN',
 					)} missing package.json "name" field. Assuming "${pkgName}".`,
 				),
@@ -561,25 +570,25 @@ function createConfig(options, entry, format, writeMeta) {
 							// before hook
 							options: loadNameCache,
 							// after hook
-							onwrite() {
+							writeBundle() {
 								if (writeMeta && nameCache) {
 									fs.writeFile(
 										resolve(options.cwd, 'mangle.json'),
 										JSON.stringify(nameCache, null, 2),
-										Object,
 									);
 								}
 							},
 						},
 					],
 					{
-						ongenerate(outputOptions, { code }) {
-							config._code = code;
+						writeBundle(bundle) {
+							config._sizeInfo = Promise.all(
+								Object.values(bundle).map(({ code, fileName }) =>
+									code ? getSizeInfo(code, fileName, options.raw) : false,
+								),
+							).then(results => results.filter(Boolean).join('\n'));
 						},
 					},
-					shebangPlugin({
-						shebang,
-					}),
 				)
 				.filter(Boolean),
 		},
@@ -594,6 +603,9 @@ function createConfig(options, entry, format, writeMeta) {
 			sourcemap: options.sourcemap,
 			treeshake: {
 				propertyReadSideEffects: false,
+			},
+			get banner() {
+				return shebang;
 			},
 			format,
 			name: options.name,
