@@ -418,6 +418,9 @@ function createConfig(options, entry, format, writeMeta) {
 				}
 				return externalTest(id);
 			},
+			treeshake: {
+				propertyReadSideEffects: false,
+			},
 			plugins: []
 				.concat(
 					postcss({
@@ -592,9 +595,6 @@ function createConfig(options, entry, format, writeMeta) {
 			freeze: false,
 			esModule: false,
 			sourcemap: options.sourcemap,
-			treeshake: {
-				propertyReadSideEffects: false,
-			},
 			format,
 			name: options.name,
 			file: resolve(
