@@ -43,7 +43,7 @@
   "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.3.4",
-    "@babel/plugin-proposal-class-properties": "7.2.1",
+    "@babel/plugin-proposal-class-properties": "7.3.4",
     "@babel/plugin-syntax-jsx": "^7.2.0",
     "@babel/polyfill": "^7.0.0",
     "asyncro": "^3.0.0",
