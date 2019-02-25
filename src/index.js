@@ -587,6 +587,7 @@ function createConfig(options, entry, format, writeMeta) {
 							warnings: true,
 							ecma: 5,
 							toplevel: format === 'cjs' || format === 'es',
+							module: format === 'es',
 							mangle: Object.assign({}, minifyOptions.mangle || {}),
 							nameCache,
 						}),
