@@ -68,7 +68,7 @@
     "rollup-plugin-node-resolve": "^4.0.0",
     "rollup-plugin-postcss": "^1.6.1",
     "rollup-plugin-preserve-shebang": "^0.1.6",
-    "rollup-plugin-sizes": "^0.4.2",
+    "rollup-plugin-sizes": "^0.5.0",
     "rollup-plugin-terser": "^3.0.0",
     "rollup-plugin-typescript2": "^0.19.0",
     "sade": "^1.4.0",
