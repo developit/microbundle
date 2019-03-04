@@ -515,6 +515,7 @@ function createConfig(options, entry, format, writeMeta) {
 						// supplied configurations we set this option to false. Note
 						// that we never supported using custom babel configs anyway.
 						babelrc: false,
+						configFile: false,
 						extensions: EXTENSIONS,
 						exclude: 'node_modules/**',
 						plugins: [
