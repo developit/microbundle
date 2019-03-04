@@ -44,6 +44,29 @@ const toTerserLiteral = (value, name) => {
 	// default: behaviour from Terser (@prefix=1 produces expression/literal, unprefixed=1 produces string literal):
 };
 
+// Normalize Terser options from microbundle's relaxed JSON format (mutates argument in-place)
+function normalizeMinifyOptions(minifyOptions) {
+	const mangle = minifyOptions.mangle  || (minifyOptions.mangle = {});
+	let properties = mangle.properties;
+
+	// allow top-level "properties" key to override mangle.properties (including {properties:false}):
+	if (minifyOptions.properties != null) {
+		properties = mangle.properties = minifyOptions.properties && Object.assign(properties, minifyOptions.properties);
+	}
+
+	// allow previous format ({ mangle:{regex:'^_',reserved:[]} }):
+	if (minifyOptions.regex || minifyOptions.reserved) {
+		if (!properties) properties = mangle.properties = {};
+		properties.regex = properties.regex || minifyOptions.regex;
+		properties.reserved = properties.reserved || minifyOptions.reserved;
+	}
+	
+	if (properties) {
+		if (properties.regex) properties.regex = new RegExp(properties.regex);
+		properties.reserved = [].concat(properties.reserved || []);
+	}
+}
+
 // Parses values of the form "$=jQuery,React=react" into key-value object pairs.
 const parseMappingArgument = (globalStrings, processValue) => {
 	const globals = {};
@@ -387,7 +410,8 @@ function createConfig(options, entry, format, writeMeta) {
 	// let rollupName = safeVariableName(basename(entry).replace(/\.js$/, ''));
 
 	let nameCache = {};
-	let mangleOptions = options.pkg.mangle || false;
+	// Support "minify" field and legacy "mangle" field via package.json:
+	let minifyOptions = options.pkg.minify || options.pkg.mangle || false;
 
 	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
 
@@ -400,12 +424,15 @@ function createConfig(options, entry, format, writeMeta) {
 			nameCache = JSON.parse(
 				fs.readFileSync(resolve(options.cwd, 'mangle.json'), 'utf8'),
 			);
-			if (nameCache.config) {
-				mangleOptions = Object.assign({}, mangleOptions || {}, nameCache.config);
+			// mangle.json can contain a "minify" field, same format as the pkg.mangle:
+			if (nameCache.minify) {
+				minifyOptions = Object.assign({}, minifyOptions || {}, nameCache.minify);
 			}
 		} catch (e) {}
 	}
 	loadNameCache();
+
+	normalizeMinifyOptions(minifyOptions);
 
 	let shebang;
 
@@ -547,20 +574,11 @@ function createConfig(options, entry, format, writeMeta) {
 								pure_getters: true,
 								global_defs: defines,
 								passes: 10,
-							}, mangleOptions.compress || {}),
+							}, minifyOptions.compress || {}),
 							warnings: true,
 							ecma: 5,
 							toplevel: format === 'cjs' || format === 'es',
-							mangle: Object.assign({
-								properties: mangleOptions
-									? {
-											regex: mangleOptions.regex
-												? new RegExp(mangleOptions.regex)
-												: null,
-											reserved: mangleOptions.reserved || [],
-									  }
-									: false,
-							}, mangleOptions.mangle || {}),
+							mangle: Object.assign({}, minifyOptions.mangle || {}),
 							nameCache,
 						}),
 						mangleOptions && {
