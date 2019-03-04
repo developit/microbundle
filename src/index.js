@@ -400,6 +400,9 @@ function createConfig(options, entry, format, writeMeta) {
 			nameCache = JSON.parse(
 				fs.readFileSync(resolve(options.cwd, 'mangle.json'), 'utf8'),
 			);
+			if (nameCache.config) {
+				mangleOptions = Object.assign({}, mangleOptions || {}, nameCache.config);
+			}
 		} catch (e) {}
 	}
 	loadNameCache();
@@ -539,16 +542,16 @@ function createConfig(options, entry, format, writeMeta) {
 						terser({
 							sourcemap: true,
 							output: { comments: false },
-							compress: {
+							compress: Object.assign({
 								keep_infinity: true,
 								pure_getters: true,
 								global_defs: defines,
 								passes: 10,
-							},
+							}, mangleOptions.compress || {}),
 							warnings: true,
 							ecma: 5,
 							toplevel: format === 'cjs' || format === 'es',
-							mangle: {
+							mangle: Object.assign({
 								properties: mangleOptions
 									? {
 											regex: mangleOptions.regex
@@ -557,7 +560,7 @@ function createConfig(options, entry, format, writeMeta) {
 											reserved: mangleOptions.reserved || [],
 									  }
 									: false,
-							},
+							}, mangleOptions.mangle || {}),
 							nameCache,
 						}),
 						mangleOptions && {
