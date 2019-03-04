@@ -412,6 +412,7 @@ function createConfig(options, entry, format, writeMeta) {
 	// let rollupName = safeVariableName(basename(entry).replace(/\.js$/, ''));
 
 	let nameCache = {};
+	const bareNameCache = nameCache;
 	// Support "minify" field and legacy "mangle" field via package.json:
 	let minifyOptions = options.pkg.minify || options.pkg.mangle || {};
 
@@ -439,6 +440,8 @@ function createConfig(options, entry, format, writeMeta) {
 	loadNameCache();
 
 	normalizeMinifyOptions(minifyOptions);
+
+	if (nameCache === bareNameCache) nameCache = null;
 
 	let shebang;
 
