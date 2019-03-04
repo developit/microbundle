@@ -411,7 +411,7 @@ function createConfig(options, entry, format, writeMeta) {
 
 	let nameCache = {};
 	// Support "minify" field and legacy "mangle" field via package.json:
-	let minifyOptions = options.pkg.minify || options.pkg.mangle || false;
+	let minifyOptions = options.pkg.minify || options.pkg.mangle || {};
 
 	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
 
@@ -581,7 +581,7 @@ function createConfig(options, entry, format, writeMeta) {
 							mangle: Object.assign({}, minifyOptions.mangle || {}),
 							nameCache,
 						}),
-						mangleOptions && {
+						nameCache && {
 							// before hook
 							options: loadNameCache,
 							// after hook
