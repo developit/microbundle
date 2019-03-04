@@ -46,12 +46,14 @@ const toTerserLiteral = (value, name) => {
 
 // Normalize Terser options from microbundle's relaxed JSON format (mutates argument in-place)
 function normalizeMinifyOptions(minifyOptions) {
-	const mangle = minifyOptions.mangle  || (minifyOptions.mangle = {});
+	const mangle = minifyOptions.mangle || (minifyOptions.mangle = {});
 	let properties = mangle.properties;
 
 	// allow top-level "properties" key to override mangle.properties (including {properties:false}):
 	if (minifyOptions.properties != null) {
-		properties = mangle.properties = minifyOptions.properties && Object.assign(properties, minifyOptions.properties);
+		properties = mangle.properties =
+			minifyOptions.properties &&
+			Object.assign(properties, minifyOptions.properties);
 	}
 
 	// allow previous format ({ mangle:{regex:'^_',reserved:[]} }):
@@ -60,7 +62,7 @@ function normalizeMinifyOptions(minifyOptions) {
 		properties.regex = properties.regex || minifyOptions.regex;
 		properties.reserved = properties.reserved || minifyOptions.reserved;
 	}
-	
+
 	if (properties) {
 		if (properties.regex) properties.regex = new RegExp(properties.regex);
 		properties.reserved = [].concat(properties.reserved || []);
@@ -426,7 +428,11 @@ function createConfig(options, entry, format, writeMeta) {
 			);
 			// mangle.json can contain a "minify" field, same format as the pkg.mangle:
 			if (nameCache.minify) {
-				minifyOptions = Object.assign({}, minifyOptions || {}, nameCache.minify);
+				minifyOptions = Object.assign(
+					{},
+					minifyOptions || {},
+					nameCache.minify,
+				);
 			}
 		} catch (e) {}
 	}
@@ -569,12 +575,15 @@ function createConfig(options, entry, format, writeMeta) {
 						terser({
 							sourcemap: true,
 							output: { comments: false },
-							compress: Object.assign({
-								keep_infinity: true,
-								pure_getters: true,
-								global_defs: defines,
-								passes: 10,
-							}, minifyOptions.compress || {}),
+							compress: Object.assign(
+								{
+									keep_infinity: true,
+									pure_getters: true,
+									global_defs: defines,
+									passes: 10,
+								},
+								minifyOptions.compress || {},
+							),
 							warnings: true,
 							ecma: 5,
 							toplevel: format === 'cjs' || format === 'es',
