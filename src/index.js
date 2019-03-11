@@ -358,15 +358,13 @@ async function getOutput({ cwd, output, pkgMain, pkgName }) {
 }
 
 async function getEntries({ input, cwd }) {
-	let entries = (
-		await map([].concat(input), async file => {
-			file = resolve(cwd, file);
-			if (await isDir(file)) {
-				file = resolve(file, 'index.js');
-			}
-			return file;
-		})
-	).filter((item, i, arr) => arr.indexOf(item) === i);
+	let entries = (await map([].concat(input), async file => {
+		file = resolve(cwd, file);
+		if (await isDir(file)) {
+			file = resolve(file, 'index.js');
+		}
+		return file;
+	})).filter((item, i, arr) => arr.indexOf(item) === i);
 	return entries;
 }
 
@@ -488,6 +486,13 @@ function createConfig(options, entry, format, writeMeta) {
 
 	if (nameCache === bareNameCache) nameCache = null;
 
+	let shebang;
+
+	const outputFile = resolve(
+		options.cwd,
+		(format === 'es' && moduleMain) || (format === 'umd' && umdMain) || cjsMain,
+	);
+
 	let config = {
 		inputOptions: {
 			input: entry,
@@ -548,11 +553,15 @@ function createConfig(options, entry, format, writeMeta) {
 								compilerOptions: {
 									sourceMap: options.sourcemap,
 									declaration: true,
-									jsx: 'react',
-									jsxFactory: options.jsx || 'h',
+									declarationDir:
+										options.declarationDir ||
+										pkg.typings ||
+										pkg.types ||
+										dirname(outputFile),
+									jsx: options.jsx,
 								},
 							},
-							tsconfig: options.tsconfig,
+							useTsconfigDeclarationDir: true,
 							tsconfigOverride: {
 								compilerOptions: {
 									target: 'esnext',

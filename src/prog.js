@@ -40,6 +40,11 @@ export default handler => {
 		.example("microbundle --no-sourcemap # don't generate sourcemaps")
 		.option('--raw', 'Show raw byte size', false)
 		.option(
+			'--declarationDir',
+			'Specify target folder for TS declarations',
+			'.',
+		)
+		.option(
 			'--jsx',
 			'A custom JSX pragma like React.createElement (default: h)',
 		)
