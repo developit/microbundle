@@ -577,7 +577,9 @@ function createConfig(options, entry, format, writeMeta) {
 					options.compress !== false && [
 						terser({
 							sourcemap: true,
-							output: { comments: false },
+							output: {
+								comments: (node, comment) => /[@#]__PURE__/.test(comment.value),
+							},
 							compress: Object.assign(
 								{
 									keep_infinity: true,
