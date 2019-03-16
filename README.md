@@ -39,8 +39,9 @@ Microbundle includes two commands - `build` (the default) and `watch`. Neither r
 
 ### `microbundle` / `microbundle build`
 
-By default, microbundle will infer the location of your source entry file
-(the root module in your program) from the `source` field in your `package.json`. It will infer the output directory and filename(s) from the `main` field. For UMD builds, microbundle will use a snake case version of the `name` field in your `package.json` for the export name; you can also specify a name via an `amdName` field or the `name` CLI option.
+Unless overridden via command line, microbundle uses the `source` property in your `package.json` to locate the input file, and the `main` property for the output.
+
+For UMD builds, microbundle will use a snake case version of the `name` field in your `package.json` as export name. This can be overridden either by providing an `amdName` key in your `package.json` or via the `--name` flag in the cli.
 
 ### `microbundle watch`
 
