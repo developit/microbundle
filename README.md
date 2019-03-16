@@ -69,7 +69,29 @@ Just like `microbundle build`, but watches your source files and rebuilds on any
 ### Using with typescript
 
 Just point to a `.ts` file as input using either the cli or the `source` key in your `package.json` and you’re done.
- 
+
+### Specifying builds in `package.json`
+
+You can specify output builds in a `package.json` as follows:
+
+```
+"main": "dist/foo.js",          // CJS bundle
+"umd:main": "dist/foo.umd.js",  // UMD bundle
+"module": "dist/foo.mjs",      // ES Modules bundle
+"source": "src/foo.js",         // custom entry module (same as 1st arg to microbundle)
+```
+
+### Mangling Properties
+
+Libraries often wish to rename internal object properties or class members to smaller names - transforming `this._internalIdValue` to `this._i`. Microbundle doesn't currently do this by default, but it can be enabled by adding a "mangle" property to your package.json, with a pattern to control when properties should be mangled. To mangle all property names beginning an underscore, add the following:
+
+```json
+{
+  "mangle": {
+    "regex": "^_"
+  }
+}
+```
 ### All CLI Options
 
 ```
@@ -100,29 +122,6 @@ Just point to a `.ts` file as input using either the cli or the `source` key in 
     --sourcemap      Generate source map  (default true)
     -h, --help       Displays this message
     --jsx            A custom JSX pragma like React.createElement (default: h)
-```
-
-### Specifying builds in `package.json`
-
-You can specify output builds in a `package.json` as follows:
-
-```
-"main": "dist/foo.js",          // CJS bundle
-"umd:main": "dist/foo.umd.js",  // UMD bundle
-"module": "dist/foo.mjs",      // ES Modules bundle
-"source": "src/foo.js",         // custom entry module (same as 1st arg to microbundle)
-```
-
-### Mangling Properties
-
-Libraries often wish to rename internal object properties or class members to smaller names - transforming `this._internalIdValue` to `this._i`. Microbundle doesn't currently do this by default, but it can be enabled by adding a "mangle" property to your package.json, with a pattern to control when properties should be mangled. To mangle all property names beginning an underscore, add the following:
-
-```json
-{
-  "mangle": {
-    "regex": "^_"
-  }
-}
 ```
 
 ## 🛣 Roadmap
