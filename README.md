@@ -32,6 +32,25 @@
   }
 }
 ```
+## 🔧 Installation
+
+### Download
+
+`npm i -D microbundle`
+
+### Set up your `package.json`
+
+```js
+// package.json
+{
+  "source": "src/foo.js",         // Your source file (same as 1st arg to microbundle)
+  "main": "dist/foo.js",          // Desire output path
+  "scripts": {
+    "build": "microbundle",       // uses the "source" and "main" key in the file as input and output paths by default
+    "dev": "microbundle watch"
+  }
+}
+```
 
 ## 📦 Usage
 
