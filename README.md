@@ -16,6 +16,7 @@
 - Produces tiny, optimized code for all inputs
 - Supports multiple entry modules _(`cli.js` + `index.js`, etc)_
 - Creates multiple output formats for each entry _(<abbr title="CommonJS (node)">CJS</abbr>, <abbr title="Universal Module Definition">UMD</abbr> & <abbr title="ECMAScript Modules">ESM</abbr>)_
+- 0 configuration Typecript support
 - Built-in Terser compression & gzipped bundle size tracking
 
 ## 🔧 Installation
