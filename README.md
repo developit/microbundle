@@ -46,6 +46,10 @@ By default, microbundle will infer the location of your source entry file
 
 Just like `microbundle build`, but watches your source files and rebuilds on any change.
 
+### Using with typescript
+
+Just point to a `.ts` file as input using either the cli or the `source` key in your `package.json` and you’re done.
+ 
 ### All CLI Options
 
 ```
