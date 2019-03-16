@@ -20,20 +20,6 @@
 
 ## 🔧 Installation
 
-`npm i -D microbundle`
-
-... then add the scripts to your `package.json`:
-
-```js
-{
-  "scripts": {
-    "build": "microbundle",
-    "dev": "microbundle watch"
-  }
-}
-```
-## 🔧 Installation
-
 ### Download
 
 `npm i -D microbundle`
@@ -41,7 +27,6 @@
 ### Set up your `package.json`
 
 ```js
-// package.json
 {
   "source": "src/foo.js",         // Your source file (same as 1st arg to microbundle)
   "main": "dist/foo.js",          // Desire output path
