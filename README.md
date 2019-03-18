@@ -16,7 +16,7 @@
 - Produces tiny, optimized code for all inputs
 - Supports multiple entry modules _(`cli.js` + `index.js`, etc)_
 - Creates multiple output formats for each entry _(<abbr title="CommonJS (node)">CJS</abbr>, <abbr title="Universal Module Definition">UMD</abbr> & <abbr title="ECMAScript Modules">ESM</abbr>)_
-- 0 configuration Typecript support
+- 0 configuration TypeScript support
 - Built-in Terser compression & gzipped bundle size tracking
 
 ## 🔧 Installation
@@ -30,7 +30,7 @@
 ```js
 {
   "source": "src/foo.js",         // Your source file (same as 1st arg to microbundle)
-  "main": "dist/foo.js",          // Desire output path
+  "main": "dist/foo.js",          // Desired output path
   "scripts": {
     "build": "microbundle",       // uses the "source" and "main" key in the file as input and output paths by default
     "dev": "microbundle watch"
@@ -44,17 +44,17 @@ Microbundle includes two commands - `build` (the default) and `watch`. Neither r
 
 ### `microbundle` / `microbundle build`
 
-Unless overridden via command line, microbundle uses the `source` property in your `package.json` to locate the input file, and the `main` property for the output.
+Unless overridden via the command line, microbundle uses the `source` property in your `package.json` to locate the input file, and the `main` property for the output.
 
 For UMD builds, microbundle will use a snake case version of the `name` field in your `package.json` as export name. This can be overridden either by providing an `amdName` key in your `package.json` or via the `--name` flag in the cli.
 
 ### `microbundle watch`
 
-Just like `microbundle build`, but watches your source files and rebuilds on any change.
+Acts just like `microbundle build`, but watches your source files and rebuilds on any change.
 
-### Using with typescript
+### Using with TypeScript
 
-Just point to a `.ts` file as input using either the cli or the `source` key in your `package.json` and you’re done.
+Just point the input to a `.ts` file through either the cli or the `source` key in your `package.json` and you’re done.
 
 ### Specifying builds in `package.json`
 
@@ -65,7 +65,7 @@ You can specify output builds in a `package.json` as follows:
 "umd:main": "dist/foo.umd.js",  // UMD bundle
 "module": "dist/foo.mjs",       // ES Modules bundle
 "source": "src/foo.js",         // custom entry module (same as 1st arg to microbundle)
-"types": "dist/foo.d.ts",       // Typescript typings
+"types": "dist/foo.d.ts",       // TypeScript typings
 ```
 
 ### Mangling Properties
