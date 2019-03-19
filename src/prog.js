@@ -20,7 +20,7 @@ export default handler => {
 		.option('--output, -o', 'Directory to place build files into')
 		.option('--format, -f', 'Only build specified formats', 'es,cjs,umd')
 		.option('--watch, -w', 'Rebuilds on any change', false)
-		.option('--target', 'Specify your target environment', 'web')
+		.option('--target', 'Specify your target environment (node or web)', 'web')
 		.option('--external', `Specify external dependencies, or 'none'`)
 		.option('--globals', `Specify globals dependencies, or 'none'`)
 		.example('microbundle --globals react=React,jquery=$')

@@ -12,7 +12,7 @@
 ## ✨ Features:
 
 - **One dependency** to bundle your library using only a `package.json`
-- Support for ESnext & async/await _(via [Bublé] & [Nodent])_
+- Support for ESnext & async/await _(via [Bublé] & [async-to-promises])_
 - Produces tiny, optimized code for all inputs
 - Supports multiple entry modules _(`cli.js` + `index.js`, etc)_
 - Creates multiple output formats for each entry _(<abbr title="CommonJS (node)">CJS</abbr>, <abbr title="Universal Module Definition">UMD</abbr> & <abbr title="ECMAScript Modules">ESM</abbr>)_
@@ -66,7 +66,7 @@ Just like `microbundle build`, but watches your source files and rebuilds on any
     -o, --output     Directory to place build files into
     -f, --format     Only build specified formats  (default es,cjs,umd)
     -w, --watch      Rebuilds on any change  (default false)
-    --target         Specify your target environment  (default node)
+    --target         Specify your target environment (node or web) (default web)
     --external       Specify external dependencies, or 'none'
     --globals        Specify globals dependencies, or 'none'
     --compress       Compress output using Terser  (default true)
@@ -125,3 +125,4 @@ Here's what's coming up for Microbundle:
 
 [rollup]: https://github.com/rollup/rollup
 [bublé]: https://github.com/Rich-Harris/buble
+[async-to-promises]: https://github.com/rpetrich/babel-plugin-transform-async-to-promises
