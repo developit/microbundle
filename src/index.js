@@ -510,6 +510,7 @@ function createConfig(options, entry, format, writeMeta) {
 					!useTypescript && flow({ all: true, pretty: true }),
 					babel({
 						babelrc: false,
+						configFile: false,
 						compact: false,
 						include: 'node_modules/**',
 						plugins: [
