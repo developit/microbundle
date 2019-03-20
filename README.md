@@ -30,9 +30,11 @@
 ```js
 {
   "source": "src/foo.js",         // Your source file (same as 1st arg to microbundle)
-  "main": "dist/foo.js",          // Desired output path
+  "main": "dist/foo.js",        // output path for CommonJS/Node
+  "module": "dist/foo.mjs",     // output path for JS Modules
+  "unpkg": "dist/foo.umd.js",   // optional, for unpkg.com
   "scripts": {
-    "build": "microbundle",       // uses the "source" and "main" key in the file as input and output paths by default
+    "build": "microbundle",       // uses "source" and "main" as input and output paths by default
     "dev": "microbundle watch"
   }
 }
