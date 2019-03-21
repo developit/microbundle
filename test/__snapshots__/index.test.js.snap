@@ -776,20 +776,20 @@ Directory tree:
 
 define
   dist
-    alias.js
-    alias.mjs
-    alias.umd.js
+    define.js
+    define.mjs
+    define.umd.js
   index.js
   package.json
 
 
-Build \\"alias\\" to dist:
-55 B: alias.js.gz
-37 B: alias.js.br
-55 B: alias.mjs.gz
-37 B: alias.mjs.br
-143 B: alias.umd.js.gz
-105 B: alias.umd.js.br"
+Build \\"define\\" to dist:
+55 B: define.js.gz
+37 B: define.js.br
+55 B: define.mjs.gz
+37 B: define.mjs.br
+143 B: define.umd.js.gz
+105 B: define.umd.js.br"
 `;
 
 exports[`fixtures define 2`] = `
