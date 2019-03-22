@@ -49,6 +49,7 @@
     "asyncro": "^3.0.0",
     "autoprefixer": "^9.0.0",
     "babel-plugin-transform-async-to-promises": "^0.8.3",
+    "babel-plugin-transform-replace-expressions": "^0.2.0",
     "brotli-size": "^0.0.3",
     "camelcase": "^5.0.0",
     "chalk": "^2.4.0",

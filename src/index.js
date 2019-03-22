@@ -28,20 +28,20 @@ const removeScope = name => name.replace(/^@.*\//, '');
 
 // Convert booleans and int define= values to literals.
 // This is more intuitive than `microbundle --define A=1` producing A="1".
-// See: https://github.com/terser-js/terser#conditional-compilation-api
-const toTerserLiteral = (value, name) => {
+const toReplacementExpression = (value, name) => {
 	// --define A="1",B='true' produces string:
 	const matches = value.match(/^(['"])(.+)\1$/);
 	if (matches) {
-		return [matches[2], name];
+		return [JSON.stringify(matches[2]), name];
 	}
 
 	// --define A=1,B=true produces int/boolean literal:
 	if (/^(true|false|\d+)$/i.test(value)) {
-		return [value, '@' + name];
+		return [value, name];
 	}
 
-	// default: behaviour from Terser (@prefix=1 produces expression/literal, unprefixed=1 produces string literal):
+	// default: string literal
+	return [JSON.stringify(value), name];
 };
 
 // Normalize Terser options from microbundle's relaxed JSON format (mutates argument in-place)
@@ -380,7 +380,7 @@ function createConfig(options, entry, format, writeMeta) {
 	if (options.define) {
 		defines = Object.assign(
 			defines,
-			parseMappingArgument(options.define, toTerserLiteral),
+			parseMappingArgument(options.define, toReplacementExpression),
 		);
 	}
 
@@ -508,6 +508,18 @@ function createConfig(options, entry, format, writeMeta) {
 							},
 						}),
 					!useTypescript && flow({ all: true, pretty: true }),
+					babel({
+						babelrc: false,
+						configFile: false,
+						compact: false,
+						include: 'node_modules/**',
+						plugins: [
+							[
+								require.resolve('babel-plugin-transform-replace-expressions'),
+								{ replace: defines },
+							],
+						],
+					}),
 					// Only used for async await
 					babel({
 						// We mainly use bublé to transpile JS and only use babel to
@@ -519,6 +531,10 @@ function createConfig(options, entry, format, writeMeta) {
 						exclude: 'node_modules/**',
 						plugins: [
 							require.resolve('@babel/plugin-syntax-jsx'),
+							[
+								require.resolve('babel-plugin-transform-replace-expressions'),
+								{ replace: defines },
+							],
 							[
 								require.resolve('babel-plugin-transform-async-to-promises'),
 								{ inlineHelpers: true, externalHelpers: true },
@@ -582,7 +598,6 @@ function createConfig(options, entry, format, writeMeta) {
 								{
 									keep_infinity: true,
 									pure_getters: true,
-									global_defs: defines,
 									passes: 10,
 								},
 								minifyOptions.compress || {},

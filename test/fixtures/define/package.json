@@ -1,5 +1,5 @@
 {
-  "name": "alias",
+  "name": "define",
   "scripts": {
     "build": "microbundle --no-sourcemap --define DEBUG=false"
   }
