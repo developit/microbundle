@@ -66,16 +66,25 @@ Just like `microbundle build`, but watches your source files and rebuilds on any
     -o, --output     Directory to place build files into
     -f, --format     Only build specified formats  (default es,cjs,umd)
     -w, --watch      Rebuilds on any change  (default false)
-    --target         Specify your target environment (node or web) (default web)
+    --target         Specify your target environment (node or web)  (default web)
     --external       Specify external dependencies, or 'none'
     --globals        Specify globals dependencies, or 'none'
-    --compress       Compress output using Terser  (default true)
+    --define         Replace constants with hard-coded values
+    --alias          Map imports to different modules
+    --compress       Compress output using Terser
     --strict         Enforce undefined global context and add "use strict"
     --name           Specify name exposed in UMD builds
     --cwd            Use an alternative working directory  (default .)
     --sourcemap      Generate source map  (default true)
-    -h, --help       Displays this message
+    --raw            Show raw byte size  (default false)
     --jsx            A custom JSX pragma like React.createElement (default: h)
+    -h, --help       Displays this message
+
+  Examples
+    $ microbundle microbundle --globals react=React,jquery=$
+    $ microbundle microbundle --define API_KEY=1234
+    $ microbundle microbundle --alias react=preact
+    $ microbundle microbundle --no-sourcemap # don't generate sourcemaps
 ```
 
 ### Specifying builds in `package.json`
@@ -95,9 +104,9 @@ Libraries often wish to rename internal object properties or class members to sm
 
 ```json
 {
-  "mangle": {
-    "regex": "^_"
-  }
+	"mangle": {
+		"regex": "^_"
+	}
 }
 ```
 
