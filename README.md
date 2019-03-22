@@ -16,18 +16,25 @@
 - Produces tiny, optimized code for all inputs
 - Supports multiple entry modules _(`cli.js` + `index.js`, etc)_
 - Creates multiple output formats for each entry _(<abbr title="CommonJS (node)">CJS</abbr>, <abbr title="Universal Module Definition">UMD</abbr> & <abbr title="ECMAScript Modules">ESM</abbr>)_
+- 0 configuration TypeScript support
 - Built-in Terser compression & gzipped bundle size tracking
 
 ## 🔧 Installation
 
+### Download
+
 `npm i -D microbundle`
 
-... then add the scripts to your `package.json`:
+### Set up your `package.json`
 
 ```js
 {
+  "source": "src/foo.js",         // Your source file (same as 1st arg to microbundle)
+  "main": "dist/foo.js",        // output path for CommonJS/Node
+  "module": "dist/foo.mjs",     // output path for JS Modules
+  "unpkg": "dist/foo.umd.js",   // optional, for unpkg.com
   "scripts": {
-    "build": "microbundle",
+    "build": "microbundle",       // uses "source" and "main" as input and output paths by default
     "dev": "microbundle watch"
   }
 }
@@ -39,17 +46,45 @@ Microbundle includes two commands - `build` (the default) and `watch`. Neither r
 
 ### `microbundle` / `microbundle build`
 
-By default, microbundle will infer the location of your source entry file
-(the root module in your program) from the `source` field in your `package.json`. It will infer the output directory and filename(s) from the `main` field. For UMD builds, microbundle will use a snake case version of the `name` field in your `package.json` for the export name; you can also specify a name via an `amdName` field or the `name` CLI option.
+Unless overridden via the command line, microbundle uses the `source` property in your `package.json` to locate the input file, and the `main` property for the output.
+
+For UMD builds, microbundle will use a snake case version of the `name` field in your `package.json` as export name. This can be overridden either by providing an `amdName` key in your `package.json` or via the `--name` flag in the cli.
 
 ### `microbundle watch`
 
-Just like `microbundle build`, but watches your source files and rebuilds on any change.
+Acts just like `microbundle build`, but watches your source files and rebuilds on any change.
 
+### Using with TypeScript
+
+Just point the input to a `.ts` file through either the cli or the `source` key in your `package.json` and you’re done.
+
+### Specifying builds in `package.json`
+
+You can specify output builds in a `package.json` as follows:
+
+```
+"main": "dist/foo.js",          // CJS bundle
+"umd:main": "dist/foo.umd.js",  // UMD bundle
+"module": "dist/foo.mjs",       // ES Modules bundle
+"source": "src/foo.js",         // custom entry module (same as 1st arg to microbundle)
+"types": "dist/foo.d.ts",       // TypeScript typings
+```
+
+### Mangling Properties
+
+Libraries often wish to rename internal object properties or class members to smaller names - transforming `this._internalIdValue` to `this._i`. Microbundle doesn't currently do this by default, but it can be enabled by adding a "mangle" property to your package.json, with a pattern to control when properties should be mangled. To mangle all property names beginning an underscore, add the following:
+
+```json
+{
+  "mangle": {
+    "regex": "^_"
+  }
+}
+```
 ### All CLI Options
 
 ```
-  Usage
+ Usage
     $ microbundle <command> [options]
 
   Available Commands
@@ -66,39 +101,25 @@ Just like `microbundle build`, but watches your source files and rebuilds on any
     -o, --output     Directory to place build files into
     -f, --format     Only build specified formats  (default es,cjs,umd)
     -w, --watch      Rebuilds on any change  (default false)
-    --target         Specify your target environment (node or web) (default web)
+    --target         Specify your target environment (node or web, default web)
     --external       Specify external dependencies, or 'none'
     --globals        Specify globals dependencies, or 'none'
+    --define         Replace constants with hard-coded values
+    --alias          Map imports to different modules
     --compress       Compress output using Terser  (default true)
     --strict         Enforce undefined global context and add "use strict"
     --name           Specify name exposed in UMD builds
     --cwd            Use an alternative working directory  (default .)
     --sourcemap      Generate source map  (default true)
-    -h, --help       Displays this message
+    --raw            Show raw byte size  (default false)
     --jsx            A custom JSX pragma like React.createElement (default: h)
-```
+    -h, --help       Displays this message
 
-### Specifying builds in `package.json`
-
-You can specify output builds in a `package.json` as follows:
-
-```
-"main": "dist/foo.js",          // CJS bundle
-"umd:main": "dist/foo.umd.js",  // UMD bundle
-"module": "dist/foo.mjs",      // ES Modules bundle
-"source": "src/foo.js",         // custom entry module (same as 1st arg to microbundle)
-```
-
-### Mangling Properties
-
-Libraries often wish to rename internal object properties or class members to smaller names - transforming `this._internalIdValue` to `this._i`. Microbundle doesn't currently do this by default, but it can be enabled by adding a "mangle" property to your package.json, with a pattern to control when properties should be mangled. To mangle all property names beginning an underscore, add the following:
-
-```json
-{
-  "mangle": {
-    "regex": "^_"
-  }
-}
+  Examples
+    $ microbundle microbundle --globals react=React,jquery=$
+    $ microbundle microbundle --define API_KEY=1234
+    $ microbundle microbundle --alias react=preact
+    $ microbundle microbundle --no-sourcemap # don't generate sourcemaps
 ```
 
 ## 🛣 Roadmap
