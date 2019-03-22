@@ -768,18 +768,18 @@ default-named
 
 
 Build \\"defaultNamed\\" to dist:
-59 B: default-named.js.gz
-42 B: default-named.js.br
+60 B: default-named.js.gz
+46 B: default-named.js.br
 70 B: default-named.mjs.gz
 58 B: default-named.mjs.br
-169 B: default-named.umd.js.gz
-126 B: default-named.umd.js.br"
+170 B: default-named.umd.js.gz
+124 B: default-named.umd.js.br"
 `;
 
 exports[`fixtures build default-named with microbundle 2`] = `6`;
 
 exports[`fixtures build default-named with microbundle 3`] = `
-"exports.foo=42,exports.default=function(){};
+"exports.default=function(){},exports.foo=42;
 //# sourceMappingURL=default-named.js.map
 "
 `;
@@ -791,7 +791,7 @@ exports[`fixtures build default-named with microbundle 4`] = `
 `;
 
 exports[`fixtures build default-named with microbundle 5`] = `
-"!function(e,f){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?f(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],f):f((e=e||self).defaultNamed={})}(this,function(e){e.foo=42,e.default=function(){}});
+"!function(e,f){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?f(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],f):f((e=e||self).defaultNamed={})}(this,function(e){e.default=function(){},e.foo=42});
 //# sourceMappingURL=default-named.umd.js.map
 "
 `;
@@ -815,8 +815,8 @@ Build \\"define\\" to dist:
 37 B: define.js.br
 55 B: define.mjs.gz
 37 B: define.mjs.br
-143 B: define.umd.js.gz
-105 B: define.umd.js.br"
+108 B: define.umd.js.gz
+78 B: define.umd.js.br"
 `;
 
 exports[`fixtures build define with microbundle 2`] = `3`;
@@ -832,7 +832,7 @@ exports[`fixtures build define with microbundle 4`] = `
 `;
 
 exports[`fixtures build define with microbundle 5`] = `
-"!function(e){\\"function\\"==typeof define&&define.amd?define(e):e()}(function(){console.log(\\"debug mode\\",!0)});
+"!function(n){\\"function\\"==typeof define&&define.amd?define(n):n()}(function(){console.log(\\"production mode\\",!1)});
 "
 `;
 

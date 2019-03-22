@@ -129,6 +129,6 @@ describe('fixtures', () => {
 			'default-named/dist/default-named.js',
 		));
 
-		expect(Object.keys(mod)).toEqual(['foo', 'default']);
+		expect(Object.keys(mod)).toEqual(['default', 'foo']);
 	});
 });
