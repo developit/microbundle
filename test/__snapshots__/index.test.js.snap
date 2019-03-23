@@ -57,6 +57,7 @@ async-iife-ts
     async-iife-ts.umd.js
     async-iife-ts.umd.js.map
     index.d.ts
+  node_modules
   package.json
   src
     index.ts
@@ -108,6 +109,7 @@ async-ts
     async-ts.umd.js
     async-ts.umd.js.map
     index.d.ts
+  node_modules
   package.json
   src
     index.ts
@@ -389,6 +391,7 @@ basic-ts
     basic-lib-ts.umd.js.map
     car.d.ts
     index.d.ts
+  node_modules
   package.json
   src
     car.ts
@@ -456,6 +459,7 @@ basic-tsx
     basic-lib-tsx.umd.js
     basic-lib-tsx.umd.js.map
     index.d.ts
+  node_modules
   package.json
   src
     index.tsx
@@ -560,6 +564,7 @@ class-decorators-ts
     class-decorators-ts.umd.js
     class-decorators-ts.umd.js.map
     index.d.ts
+  node_modules
   package.json
   src
     index.ts
@@ -850,6 +855,7 @@ esnext-ts
     esnext-ts.umd.js
     esnext-ts.umd.js.map
     index.d.ts
+  node_modules
   package.json
   src
     index.ts
@@ -1286,6 +1292,7 @@ ts-mixed-exports
     ts-mixed-exports.mjs.map
     ts-mixed-exports.umd.js
     ts-mixed-exports.umd.js.map
+  node_modules
   package.json
   src
     car.ts

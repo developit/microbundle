@@ -525,7 +525,7 @@ function createConfig(options, entry, format, writeMeta) {
 					useTypescript &&
 						typescript({
 							typescript: require('typescript'),
-							cacheRoot: `./.rts2_cache_${format}`,
+							cacheRoot: `./node_modules/.rts2_cache_${format}`,
 							tsconfigDefaults: {
 								compilerOptions: {
 									sourceMap: options.sourcemap,
