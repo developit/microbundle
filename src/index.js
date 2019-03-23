@@ -349,6 +349,9 @@ async function getEntries({ input, cwd }) {
 	return entries;
 }
 
+// shebang cache map thing because the transform only gets run once
+const shebang = {};
+
 function createConfig(options, entry, format, writeMeta) {
 	let { pkg } = options;
 
@@ -455,8 +458,6 @@ function createConfig(options, entry, format, writeMeta) {
 
 	if (nameCache === bareNameCache) nameCache = null;
 
-	let shebang;
-
 	let config = {
 		inputOptions: {
 			input: entry,
@@ -501,6 +502,26 @@ function createConfig(options, entry, format, writeMeta) {
 						include: /\/node_modules\//,
 					}),
 					json(),
+					{
+						// Custom plugin that removes shebang from code because newer
+						// versions of bublé bundle their own private version of `acorn`
+						// and I don't know a way to patch in the option `allowHashBang`
+						// to acorn.
+						// See: https://github.com/Rich-Harris/buble/pull/165
+						transform(code) {
+							let reg = /^#!(.*)/;
+							let match = code.match(reg);
+
+							shebang[options.name] = match ? '#!' + match[1] : '';
+
+							code = code.replace(reg, '');
+
+							return {
+								code,
+								map: null,
+							};
+						},
+					},
 					useTypescript &&
 						typescript({
 							typescript: require('typescript'),
@@ -556,28 +577,6 @@ function createConfig(options, entry, format, writeMeta) {
 							],
 						],
 					}),
-					{
-						// Custom plugin that removes shebang from code because newer
-						// versions of bublé bundle their own private version of `acorn`
-						// and I don't know a way to patch in the option `allowHashBang`
-						// to acorn.
-						// See: https://github.com/Rich-Harris/buble/pull/165
-						transform(code) {
-							let reg = /^#!(.*)/;
-							let match = code.match(reg);
-
-							if (match !== null) {
-								shebang = '#!' + match[0];
-							}
-
-							code = code.replace(reg, '');
-
-							return {
-								code,
-								map: null,
-							};
-						},
-					},
 					buble({
 						exclude: 'node_modules/**',
 						jsx: options.jsx || 'h',
@@ -655,7 +654,7 @@ function createConfig(options, entry, format, writeMeta) {
 			esModule: false,
 			sourcemap: options.sourcemap,
 			get banner() {
-				return shebang;
+				return shebang[options.name];
 			},
 			format,
 			name: options.name,

@@ -1240,25 +1240,26 @@ shebang
 
 
 Build \\"shebang\\" to dist:
-87 B: shebang.js.gz
-63 B: shebang.js.br
-71 B: shebang.mjs.gz
-49 B: shebang.mjs.br
-171 B: shebang.umd.js.gz
-129 B: shebang.umd.js.br"
+85 B: shebang.js.gz
+62 B: shebang.js.br
+89 B: shebang.mjs.gz
+70 B: shebang.mjs.br
+185 B: shebang.umd.js.gz
+146 B: shebang.umd.js.br"
 `;
 
 exports[`fixtures build shebang with microbundle 2`] = `6`;
 
 exports[`fixtures build shebang with microbundle 3`] = `
-"#!#!/usr/bin/env node
+"#!/usr/bin/env node
 exports.foo=function(){return\\"hello world\\"};
 //# sourceMappingURL=shebang.js.map
 "
 `;
 
 exports[`fixtures build shebang with microbundle 4`] = `
-"function o(){return\\"hello world\\"}export{o as foo};
+"#!/usr/bin/env node
+function o(){return\\"hello world\\"}export{o as foo};
 //# sourceMappingURL=shebang.mjs.map
 "
 `;
