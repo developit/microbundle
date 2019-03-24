@@ -559,7 +559,6 @@ function createConfig(options, entry, format, writeMeta) {
 								{
 									loose: true,
 									modules: false,
-									debug: true,
 									useBuiltIns: 'usage',
 									corejs: 2,
 									targets:
