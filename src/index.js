@@ -9,7 +9,6 @@ import { rollup, watch } from 'rollup';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import nodeResolve from 'rollup-plugin-node-resolve';
-import buble from 'rollup-plugin-buble';
 import { terser } from 'rollup-plugin-terser';
 import alias from 'rollup-plugin-alias';
 import postcss from 'rollup-plugin-postcss';
@@ -238,7 +237,7 @@ export default async function microbundle(inputOptions) {
 	return (
 		blue(
 			`Build "${options.name}" to ${relative(cwd, dirname(options.output)) ||
-				'.'}:`,
+			'.'}:`,
 		) +
 		'\n   ' +
 		out.join('\n   ')
@@ -301,8 +300,8 @@ async function jsOrTs(cwd, filename) {
 	const extension = (await isFile(resolve(cwd, filename + '.ts')))
 		? '.ts'
 		: (await isFile(resolve(cwd, filename + '.tsx')))
-		? '.tsx'
-		: '.js';
+			? '.tsx'
+			: '.js';
 
 	return resolve(cwd, `${filename}${extension}`);
 }
@@ -315,13 +314,13 @@ async function getInput({ entries, cwd, source, module }) {
 			entries && entries.length
 				? entries
 				: (source &&
-						(Array.isArray(source) ? source : [source]).map(file =>
-							resolve(cwd, file),
-						)) ||
-						((await isDir(resolve(cwd, 'src'))) &&
-							(await jsOrTs(cwd, 'src/index'))) ||
-						(await jsOrTs(cwd, 'index')) ||
-						module,
+					(Array.isArray(source) ? source : [source]).map(file =>
+						resolve(cwd, file),
+					)) ||
+				((await isDir(resolve(cwd, 'src'))) &&
+					(await jsOrTs(cwd, 'src/index'))) ||
+				(await jsOrTs(cwd, 'index')) ||
+				module,
 		)
 		.map(file => glob(file))
 		.forEach(file => input.push(...file));
@@ -449,7 +448,7 @@ function createConfig(options, entry, format, writeMeta) {
 					nameCache.minify,
 				);
 			}
-		} catch (e) {}
+		} catch (e) { }
 	}
 	loadNameCache();
 
@@ -478,20 +477,20 @@ function createConfig(options, entry, format, writeMeta) {
 						plugins: [
 							autoprefixer(),
 							options.compress !== false &&
-								cssnano({
-									preset: 'default',
-								}),
+							cssnano({
+								preset: 'default',
+							}),
 						].filter(Boolean),
 						// only write out CSS for the first bundle (avoids pointless extra files):
 						inject: false,
 						extract: !!writeMeta,
 					}),
 					Object.keys(moduleAliases).length > 0 &&
-						alias(
-							Object.assign({}, moduleAliases, {
-								resolve: EXTENSIONS,
-							}),
-						),
+					alias(
+						Object.assign({}, moduleAliases, {
+							resolve: EXTENSIONS,
+						}),
+					),
 					nodeResolve({
 						mainFields: ['module', 'jsnext', 'main'],
 						browser: options.target !== 'node',
@@ -522,22 +521,22 @@ function createConfig(options, entry, format, writeMeta) {
 						},
 					},
 					useTypescript &&
-						typescript({
-							typescript: require('typescript'),
-							cacheRoot: `./node_modules/.cache/.rts2_cache_${format}`,
-							tsconfigDefaults: {
-								compilerOptions: {
-									sourceMap: options.sourcemap,
-									declaration: true,
-									jsx: options.jsx,
-								},
+					typescript({
+						typescript: require('typescript'),
+						cacheRoot: `./node_modules/.cache/.rts2_cache_${format}`,
+						tsconfigDefaults: {
+							compilerOptions: {
+								sourceMap: options.sourcemap,
+								declaration: true,
+								jsx: options.jsx,
 							},
-							tsconfigOverride: {
-								compilerOptions: {
-									target: 'esnext',
-								},
+						},
+						tsconfigOverride: {
+							compilerOptions: {
+								target: 'esnext',
 							},
-						}),
+						},
+					}),
 					!useTypescript && flow({ all: true, pretty: true }),
 					babel({
 						babelrc: false,
@@ -551,16 +550,24 @@ function createConfig(options, entry, format, writeMeta) {
 							],
 						],
 					}),
-					// Only used for async await
 					babel({
-						// We mainly use bublé to transpile JS and only use babel to
-						// transpile down `async/await`. To prevent conflicts with user
-						// supplied configurations we set this option to false. Note
-						// that we never supported using custom babel configs anyway.
-						babelrc: false,
-						configFile: false,
 						extensions: EXTENSIONS,
 						exclude: 'node_modules/**',
+						presets: [
+							[
+								'@babel/preset-env',
+								{
+									loose: true,
+									modules: false,
+									debug: true,
+									useBuiltIns: 'usage',
+									corejs: 2,
+									targets:
+										options.target === 'node' ? { node: '6' } : undefined,
+									exclude: ['transform-async-to-generator'],
+								},
+							],
+						],
 						plugins: [
 							require.resolve('@babel/plugin-syntax-jsx'),
 							[
@@ -577,15 +584,15 @@ function createConfig(options, entry, format, writeMeta) {
 							],
 						],
 					}),
-					buble({
-						exclude: 'node_modules/**',
-						jsx: options.jsx || 'h',
-						objectAssign: options.assign || 'Object.assign',
-						transforms: {
-							dangerousForOf: true,
-							dangerousTaggedTemplateString: true,
-						},
-					}),
+					// buble({
+					// 	exclude: 'node_modules/**',
+					// 	jsx: options.jsx || 'h',
+					// 	objectAssign: options.assign || 'Object.assign',
+					// 	transforms: {
+					// 		dangerousForOf: true,
+					// 		dangerousTaggedTemplateString: true,
+					// 	},
+					// }),
 					// We should upstream this to rollup
 					// format==='cjs' && replace({
 					// 	[`module.exports = ${rollupName};`]: '',
@@ -661,8 +668,8 @@ function createConfig(options, entry, format, writeMeta) {
 			file: resolve(
 				options.cwd,
 				(format === 'es' && moduleMain) ||
-					(format === 'umd' && umdMain) ||
-					cjsMain,
+				(format === 'umd' && umdMain) ||
+				cjsMain,
 			),
 		},
 	};
