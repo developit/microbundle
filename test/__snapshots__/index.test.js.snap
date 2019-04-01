@@ -443,6 +443,51 @@ exports[`fixtures build basic-css with microbundle 6`] = `
 "
 `;
 
+exports[`fixtures build basic-css-modules with microbundle 1`] = `
+"Used script: microbundle --no-sourcemap --css-modules
+
+Directory tree:
+
+basic-css-modules
+  dist
+    basic-css-modules.css
+    basic-css-modules.esm.js
+    basic-css-modules.js
+    basic-css-modules.umd.js
+  package.json
+  src
+    index.js
+    two.css
+
+
+Build \\"basicCssModules\\" to dist:
+111 B: basic-css-modules.js.gz
+70 B: basic-css-modules.js.br
+110 B: basic-css-modules.esm.js.gz
+67 B: basic-css-modules.esm.js.br
+204 B: basic-css-modules.umd.js.gz
+142 B: basic-css-modules.umd.js.br"
+`;
+
+exports[`fixtures build basic-css-modules with microbundle 2`] = `4`;
+
+exports[`fixtures build basic-css-modules with microbundle 3`] = `"._rHGVB{display:-webkit-box;display:flex;color:red;background:#00f}"`;
+
+exports[`fixtures build basic-css-modules with microbundle 4`] = `
+"export default function(){var e=document.createElement(\\"div\\");return e.className=\\"_rHGVB\\",e}
+"
+`;
+
+exports[`fixtures build basic-css-modules with microbundle 5`] = `
+"module.exports=function(){var e=document.createElement(\\"div\\");return e.className=\\"_rHGVB\\",e};
+"
+`;
+
+exports[`fixtures build basic-css-modules with microbundle 6`] = `
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e=e||self).basicCssModules=n()}(this,function(){return function(){var e=document.createElement(\\"div\\");return e.className=\\"_rHGVB\\",e}});
+"
+`;
+
 exports[`fixtures build basic-flow with microbundle 1`] = `
 "Used script: microbundle
 

@@ -513,6 +513,9 @@ function createConfig(options, entry, format, writeMeta) {
 									preset: 'default',
 								}),
 						].filter(Boolean),
+						modules:
+							!!options['css-modules'] &&
+							(!!options.watch || { generateScopedName: '_[hash:base64:5]' }),
 						// only write out CSS for the first bundle (avoids pointless extra files):
 						inject: false,
 						extract: !!writeMeta,

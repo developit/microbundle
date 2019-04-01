@@ -1,0 +1,6 @@
+{
+  "name": "basic-css-modules",
+  "scripts": {
+    "build": "microbundle --no-sourcemap --css-modules"
+  }
+}
