@@ -75,7 +75,7 @@
     "sade": "^1.4.0",
     "tiny-glob": "^0.2.6",
     "tslib": "^1.9.0",
-    "typescript": "^3.3.4000"
+    "typescript": "^3.4.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.0",
