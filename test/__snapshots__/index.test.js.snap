@@ -360,7 +360,7 @@ exports[`fixtures basic-multi-source 2`] = `
 "
 `;
 
-exports[`fixtures basic-multi-source 3`] = `"{\\"version\\":3,\\"file\\":\\"a.js\\",\\"sources\\":[\\"../a.js\\"],\\"sourcesContent\\":[\\"console.log('i am a');\\"],\\"names\\":[\\"console\\",\\"log\\"],\\"mappings\\":\\"AAAAA,QAAQC,IAAI\\"}"`;
+exports[`fixtures basic-multi-source 3`] = `"{\\"version\\":3,\\"file\\":\\"a.js\\",\\"sources\\":[\\"../a.js\\"],\\"sourcesContent\\":[\\"console.log('i am a');\\\\n\\"],\\"names\\":[\\"console\\",\\"log\\"],\\"mappings\\":\\"AAAAA,QAAQC,IAAI\\"}"`;
 
 exports[`fixtures basic-multi-source 4`] = `
 "console.log(\\"i am a\\");
@@ -368,7 +368,7 @@ exports[`fixtures basic-multi-source 4`] = `
 "
 `;
 
-exports[`fixtures basic-multi-source 5`] = `"{\\"version\\":3,\\"file\\":\\"a.mjs\\",\\"sources\\":[\\"../a.js\\"],\\"sourcesContent\\":[\\"console.log('i am a');\\"],\\"names\\":[\\"console\\",\\"log\\"],\\"mappings\\":\\"AAAAA,QAAQC,IAAI\\"}"`;
+exports[`fixtures basic-multi-source 5`] = `"{\\"version\\":3,\\"file\\":\\"a.mjs\\",\\"sources\\":[\\"../a.js\\"],\\"sourcesContent\\":[\\"console.log('i am a');\\\\n\\"],\\"names\\":[\\"console\\",\\"log\\"],\\"mappings\\":\\"AAAAA,QAAQC,IAAI\\"}"`;
 
 exports[`fixtures basic-multi-source 6`] = `
 "!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?n():\\"function\\"==typeof define&&define.amd?define(n):n()}(0,function(){console.log(\\"i am a\\")});
@@ -376,7 +376,7 @@ exports[`fixtures basic-multi-source 6`] = `
 "
 `;
 
-exports[`fixtures basic-multi-source 7`] = `"{\\"version\\":3,\\"file\\":\\"a.umd.js\\",\\"sources\\":[\\"../a.js\\"],\\"sourcesContent\\":[\\"console.log('i am a');\\"],\\"names\\":[\\"console\\",\\"log\\"],\\"mappings\\":\\"0IAAAA,QAAQC,IAAI\\"}"`;
+exports[`fixtures basic-multi-source 7`] = `"{\\"version\\":3,\\"file\\":\\"a.umd.js\\",\\"sources\\":[\\"../a.js\\"],\\"sourcesContent\\":[\\"console.log('i am a');\\\\n\\"],\\"names\\":[\\"console\\",\\"log\\"],\\"mappings\\":\\"0IAAAA,QAAQC,IAAI\\"}"`;
 
 exports[`fixtures basic-multi-source 8`] = `
 "console.log(\\"i am b\\");
@@ -384,7 +384,7 @@ exports[`fixtures basic-multi-source 8`] = `
 "
 `;
 
-exports[`fixtures basic-multi-source 9`] = `"{\\"version\\":3,\\"file\\":\\"b.js\\",\\"sources\\":[\\"../b.js\\"],\\"sourcesContent\\":[\\"console.log('i am b');\\"],\\"names\\":[\\"console\\",\\"log\\"],\\"mappings\\":\\"AAAAA,QAAQC,IAAI\\"}"`;
+exports[`fixtures basic-multi-source 9`] = `"{\\"version\\":3,\\"file\\":\\"b.js\\",\\"sources\\":[\\"../b.js\\"],\\"sourcesContent\\":[\\"console.log('i am b');\\\\n\\"],\\"names\\":[\\"console\\",\\"log\\"],\\"mappings\\":\\"AAAAA,QAAQC,IAAI\\"}"`;
 
 exports[`fixtures basic-multi-source 10`] = `
 "console.log(\\"i am b\\");
@@ -392,7 +392,7 @@ exports[`fixtures basic-multi-source 10`] = `
 "
 `;
 
-exports[`fixtures basic-multi-source 11`] = `"{\\"version\\":3,\\"file\\":\\"b.mjs\\",\\"sources\\":[\\"../b.js\\"],\\"sourcesContent\\":[\\"console.log('i am b');\\"],\\"names\\":[\\"console\\",\\"log\\"],\\"mappings\\":\\"AAAAA,QAAQC,IAAI\\"}"`;
+exports[`fixtures basic-multi-source 11`] = `"{\\"version\\":3,\\"file\\":\\"b.mjs\\",\\"sources\\":[\\"../b.js\\"],\\"sourcesContent\\":[\\"console.log('i am b');\\\\n\\"],\\"names\\":[\\"console\\",\\"log\\"],\\"mappings\\":\\"AAAAA,QAAQC,IAAI\\"}"`;
 
 exports[`fixtures basic-multi-source 12`] = `
 "!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?n():\\"function\\"==typeof define&&define.amd?define(n):n()}(0,function(){console.log(\\"i am b\\")});
@@ -400,7 +400,7 @@ exports[`fixtures basic-multi-source 12`] = `
 "
 `;
 
-exports[`fixtures basic-multi-source 13`] = `"{\\"version\\":3,\\"file\\":\\"b.umd.js\\",\\"sources\\":[\\"../b.js\\"],\\"sourcesContent\\":[\\"console.log('i am b');\\"],\\"names\\":[\\"console\\",\\"log\\"],\\"mappings\\":\\"0IAAAA,QAAQC,IAAI\\"}"`;
+exports[`fixtures basic-multi-source 13`] = `"{\\"version\\":3,\\"file\\":\\"b.umd.js\\",\\"sources\\":[\\"../b.js\\"],\\"sourcesContent\\":[\\"console.log('i am b');\\\\n\\"],\\"names\\":[\\"console\\",\\"log\\"],\\"mappings\\":\\"0IAAAA,QAAQC,IAAI\\"}"`;
 
 exports[`fixtures basic-ts 1`] = `
 "Used script: microbundle
