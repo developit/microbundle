@@ -306,7 +306,10 @@ async function getInput({ entries, cwd, source, module }) {
 		.concat(
 			entries && entries.length
 				? entries
-				: (source && resolve(cwd, source)) ||
+				: (source &&
+						(Array.isArray(source)
+							? source
+							: [source].map(file => resolve(cwd, file)))) ||
 						((await isDir(resolve(cwd, 'src'))) &&
 							(await jsOrTs(cwd, 'src/index'))) ||
 						(await jsOrTs(cwd, 'index')) ||
