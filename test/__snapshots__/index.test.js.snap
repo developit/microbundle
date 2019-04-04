@@ -315,6 +315,93 @@ exports[`fixtures basic-json 6`] = `
 
 exports[`fixtures basic-json 7`] = `"{\\"version\\":3,\\"file\\":\\"basic-json.umd.js\\",\\"sources\\":[\\"../src/index.js\\"],\\"sourcesContent\\":[\\"import two from './two.json';\\\\n\\\\nexport default async function(...args) {\\\\n\\\\treturn two;\\\\n}\\\\n\\"],\\"names\\":[\\"two\\"],\\"mappings\\":\\"4RAGQA\\"}"`;
 
+exports[`fixtures basic-multi-source 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+basic-multi-source
+  a.js
+  b.js
+  dist
+    a.js
+    a.js.map
+    a.mjs
+    a.mjs.map
+    a.umd.js
+    a.umd.js.map
+    b.js
+    b.js.map
+    b.mjs
+    b.mjs.map
+    b.umd.js
+    b.umd.js.map
+  package.json
+
+
+Build \\"basicMultiSource\\" to dist:
+43 B: a.js.gz
+27 B: a.js.br
+43 B: a.mjs.gz
+27 B: a.mjs.br
+138 B: a.umd.js.gz
+105 B: a.umd.js.br
+43 B: b.js.gz
+27 B: b.js.br
+43 B: b.mjs.gz
+27 B: b.mjs.br
+138 B: b.umd.js.gz
+97 B: b.umd.js.br"
+`;
+
+exports[`fixtures basic-multi-source 2`] = `
+"console.log(\\"i am a\\");
+//# sourceMappingURL=a.js.map
+"
+`;
+
+exports[`fixtures basic-multi-source 3`] = `"{\\"version\\":3,\\"file\\":\\"a.js\\",\\"sources\\":[\\"../a.js\\"],\\"sourcesContent\\":[\\"console.log('i am a');\\\\n\\"],\\"names\\":[\\"console\\",\\"log\\"],\\"mappings\\":\\"AAAAA,QAAQC,IAAI\\"}"`;
+
+exports[`fixtures basic-multi-source 4`] = `
+"console.log(\\"i am a\\");
+//# sourceMappingURL=a.mjs.map
+"
+`;
+
+exports[`fixtures basic-multi-source 5`] = `"{\\"version\\":3,\\"file\\":\\"a.mjs\\",\\"sources\\":[\\"../a.js\\"],\\"sourcesContent\\":[\\"console.log('i am a');\\\\n\\"],\\"names\\":[\\"console\\",\\"log\\"],\\"mappings\\":\\"AAAAA,QAAQC,IAAI\\"}"`;
+
+exports[`fixtures basic-multi-source 6`] = `
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?n():\\"function\\"==typeof define&&define.amd?define(n):n()}(0,function(){console.log(\\"i am a\\")});
+//# sourceMappingURL=a.umd.js.map
+"
+`;
+
+exports[`fixtures basic-multi-source 7`] = `"{\\"version\\":3,\\"file\\":\\"a.umd.js\\",\\"sources\\":[\\"../a.js\\"],\\"sourcesContent\\":[\\"console.log('i am a');\\\\n\\"],\\"names\\":[\\"console\\",\\"log\\"],\\"mappings\\":\\"0IAAAA,QAAQC,IAAI\\"}"`;
+
+exports[`fixtures basic-multi-source 8`] = `
+"console.log(\\"i am b\\");
+//# sourceMappingURL=b.js.map
+"
+`;
+
+exports[`fixtures basic-multi-source 9`] = `"{\\"version\\":3,\\"file\\":\\"b.js\\",\\"sources\\":[\\"../b.js\\"],\\"sourcesContent\\":[\\"console.log('i am b');\\\\n\\"],\\"names\\":[\\"console\\",\\"log\\"],\\"mappings\\":\\"AAAAA,QAAQC,IAAI\\"}"`;
+
+exports[`fixtures basic-multi-source 10`] = `
+"console.log(\\"i am b\\");
+//# sourceMappingURL=b.mjs.map
+"
+`;
+
+exports[`fixtures basic-multi-source 11`] = `"{\\"version\\":3,\\"file\\":\\"b.mjs\\",\\"sources\\":[\\"../b.js\\"],\\"sourcesContent\\":[\\"console.log('i am b');\\\\n\\"],\\"names\\":[\\"console\\",\\"log\\"],\\"mappings\\":\\"AAAAA,QAAQC,IAAI\\"}"`;
+
+exports[`fixtures basic-multi-source 12`] = `
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?n():\\"function\\"==typeof define&&define.amd?define(n):n()}(0,function(){console.log(\\"i am b\\")});
+//# sourceMappingURL=b.umd.js.map
+"
+`;
+
+exports[`fixtures basic-multi-source 13`] = `"{\\"version\\":3,\\"file\\":\\"b.umd.js\\",\\"sources\\":[\\"../b.js\\"],\\"sourcesContent\\":[\\"console.log('i am b');\\\\n\\"],\\"names\\":[\\"console\\",\\"log\\"],\\"mappings\\":\\"0IAAAA,QAAQC,IAAI\\"}"`;
+
 exports[`fixtures basic-ts 1`] = `
 "Used script: microbundle
 
