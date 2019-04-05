@@ -513,14 +513,25 @@ function createConfig(options, entry, format, writeMeta) {
 									preset: 'default',
 								}),
 						].filter(Boolean),
+						autoModules:
+							options['css-modules'] === null || // microbundle --css-modules
+							(options['css-modules'] === 'true' ||
+								options['css-modules'] === true) || // microbundle --css-modules true
+							!(
+								options['css-modules'] === 'false' ||
+								options['css-modules'] === false
+							), // microbundle --css-modules "_[hash]"
 						modules:
-							!!options['css-modules'] &&
-							(!!options.watch || {
-								generateScopedName:
-									typeof options['css-modules'] == 'string'
-										? options['css-modules']
-										: '_[hash:base64:5]',
-							}),
+							options['css-modules'] == 'false' ||
+							options['css-modules'] === null
+								? false
+								: {
+										generateScopedName:
+											options['css-modules'] === 'true' ||
+											options['css-modules'] === true
+												? '_[hash:base64:5]'
+												: options['css-modules'],
+								  },
 						// only write out CSS for the first bundle (avoids pointless extra files):
 						inject: false,
 						extract: !!writeMeta,
