@@ -55,64 +55,65 @@ const parseScript = (() => {
 })();
 
 describe('fixtures', () => {
+	const dirs = [];
 	fs.readdirSync(FIXTURES_DIR).forEach(fixtureDir => {
-		let fixturePath = resolve(FIXTURES_DIR, fixtureDir);
+		const fixturePath = resolve(FIXTURES_DIR, fixtureDir);
 
 		if (!fs.statSync(fixturePath).isDirectory()) {
 			return;
 		}
 
-		it(
-			fixtureDir,
-			async () => {
-				if (fixtureDir.endsWith('-with-cwd')) {
-					fixturePath = resolve(
-						fixturePath,
-						fixtureDir.replace('-with-cwd', ''),
-					);
-				}
-
-				const dist = resolve(`${fixturePath}/dist`);
-				// clean up
-				await rimraf(dist);
-				await rimraf(resolve(`${fixturePath}/.rts2_cache_cjs`));
-				await rimraf(resolve(`${fixturePath}/.rts2_cache_es`));
-				await rimraf(resolve(`${fixturePath}/.rts2_cache_umd`));
-
-				const script = await getBuildScript(fixturePath, DEFAULT_SCRIPT);
-
-				const prevDir = process.cwd();
-				process.chdir(resolve(fixturePath));
-
-				const parsedOpts = parseScript(script);
-
-				const output = await microbundle({
-					...parsedOpts,
-					cwd: parsedOpts.cwd !== '.' ? parsedOpts.cwd : resolve(fixturePath),
-				});
-
-				process.chdir(prevDir);
-
-				const printedDir = printTree([dirTree(fixturePath)]);
-
-				expect(
-					[
-						`Used script: ${script}`,
-						'Directory tree:',
-						printedDir,
-						strip(output),
-					].join('\n\n'),
-				).toMatchSnapshot();
-
-				fs.readdirSync(resolve(dist)).forEach(file => {
-					expect(
-						fs.readFileSync(resolve(dist, file)).toString('utf8'),
-					).toMatchSnapshot();
-				});
-			},
-			TEST_TIMEOUT,
-		);
+		dirs.push(fixtureDir);
 	});
+
+	it.each(dirs)(
+		'run %s on microbundle',
+		async fixtureDir => {
+			let fixturePath = resolve(FIXTURES_DIR, fixtureDir);
+			if (fixtureDir.endsWith('-with-cwd')) {
+				fixturePath = resolve(fixturePath, fixtureDir.replace('-with-cwd', ''));
+			}
+
+			const dist = resolve(`${fixturePath}/dist`);
+			// clean up
+			await rimraf(dist);
+			await rimraf(resolve(`${fixturePath}/.rts2_cache_cjs`));
+			await rimraf(resolve(`${fixturePath}/.rts2_cache_es`));
+			await rimraf(resolve(`${fixturePath}/.rts2_cache_umd`));
+
+			const script = await getBuildScript(fixturePath, DEFAULT_SCRIPT);
+
+			const prevDir = process.cwd();
+			process.chdir(resolve(fixturePath));
+
+			const parsedOpts = parseScript(script);
+
+			const output = await microbundle({
+				...parsedOpts,
+				cwd: parsedOpts.cwd !== '.' ? parsedOpts.cwd : resolve(fixturePath),
+			});
+
+			process.chdir(prevDir);
+
+			const printedDir = printTree([dirTree(fixturePath)]);
+
+			expect(
+				[
+					`Used script: ${script}`,
+					'Directory tree:',
+					printedDir,
+					strip(output),
+				].join('\n\n'),
+			).toMatchSnapshot();
+
+			fs.readdirSync(resolve(dist)).forEach(file => {
+				expect(
+					fs.readFileSync(resolve(dist, file)).toString('utf8'),
+				).toMatchSnapshot();
+			});
+		},
+		TEST_TIMEOUT,
+	);
 
 	it('should keep shebang', () => {
 		expect(
