@@ -106,11 +106,16 @@ describe('fixtures', () => {
 				].join('\n\n'),
 			).toMatchSnapshot();
 
-			fs.readdirSync(resolve(dist)).forEach(file => {
-				expect(
-					fs.readFileSync(resolve(dist, file)).toString('utf8'),
-				).toMatchSnapshot();
-			});
+			const files = fs.readdirSync(resolve(dist));
+			expect(files.length).toMatchSnapshot();
+			// we don't realy care about the content of a sourcemap
+			files
+				.filter(file => !/\.map$/.test(file))
+				.forEach(file => {
+					expect(
+						fs.readFileSync(resolve(dist, file)).toString('utf8'),
+					).toMatchSnapshot();
+				});
 		},
 		TEST_TIMEOUT,
 	);
