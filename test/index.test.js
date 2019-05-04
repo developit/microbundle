@@ -55,19 +55,13 @@ const parseScript = (() => {
 })();
 
 describe('fixtures', () => {
-	const dirs = [];
-	fs.readdirSync(FIXTURES_DIR).forEach(fixtureDir => {
-		const fixturePath = resolve(FIXTURES_DIR, fixtureDir);
-
-		if (!fs.statSync(fixturePath).isDirectory()) {
-			return;
-		}
-
-		dirs.push(fixtureDir);
-	});
+	const dirs = fs
+		.readdirSync(FIXTURES_DIR)
+		.map(fixturePath => resolve(FIXTURES_DIR, fixturePath))
+		.filter(fixturePath => !fs.statSync(fixturePath).isDirectory());
 
 	it.each(dirs)(
-		'run %s on microbundle',
+		'build %s with microbundle',
 		async fixtureDir => {
 			let fixturePath = resolve(FIXTURES_DIR, fixtureDir);
 			if (fixtureDir.endsWith('-with-cwd')) {
