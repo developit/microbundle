@@ -57,8 +57,9 @@ const parseScript = (() => {
 describe('fixtures', () => {
 	const dirs = fs
 		.readdirSync(FIXTURES_DIR)
-		.map(fixturePath => resolve(FIXTURES_DIR, fixturePath))
-		.filter(fixturePath => !fs.statSync(fixturePath).isDirectory());
+		.filter(fixturePath =>
+			fs.statSync(resolve(FIXTURES_DIR, fixturePath)).isDirectory(),
+		);
 
 	it.each(dirs)(
 		'build %s with microbundle',
