@@ -1,15 +1,8 @@
 import { resolve } from 'path';
 import fs from 'fs-extra';
-import { promisify } from 'es6-promisify';
 import dirTree from 'directory-tree';
-import shellQuote from 'shell-quote';
-import _rimraf from 'rimraf';
 import { strip } from './lib/util';
-import { readFile } from '../src/utils';
-import createProg from '../src/prog';
-import microbundle from '../src/index';
-
-const rimraf = promisify(_rimraf);
+import { buildDirectory, getBuildScript } from '../tools/build-fixture';
 
 const FIXTURES_DIR = `${__dirname}/fixtures`;
 const DEFAULT_SCRIPT = 'microbundle';
@@ -31,29 +24,6 @@ const printTree = (nodes, indentLevel = 0) => {
 	);
 };
 
-const getBuildScript = async (fixturePath, defaultScript) => {
-	let pkg = {};
-	try {
-		pkg = JSON.parse(
-			await readFile(resolve(fixturePath, 'package.json'), 'utf8'),
-		);
-	} catch (err) {
-		if (err.code !== 'ENOENT') throw err;
-	}
-	return (pkg && pkg.scripts && pkg.scripts.build) || defaultScript;
-};
-
-const parseScript = (() => {
-	let parsed;
-	const prog = createProg(_parsed => (parsed = _parsed));
-	return script => {
-		const argv = shellQuote.parse(`node ${script}`);
-		// assuming {op: 'glob', pattern} for non-string args
-		prog(argv.map(arg => (typeof arg === 'string' ? arg : arg.pattern)));
-		return parsed;
-	};
-})();
-
 describe('fixtures', () => {
 	const dirs = fs
 		.readdirSync(FIXTURES_DIR)
@@ -69,38 +39,20 @@ describe('fixtures', () => {
 				fixturePath = resolve(fixturePath, fixtureDir.replace('-with-cwd', ''));
 			}
 
-			const dist = resolve(`${fixturePath}/dist`);
-			// clean up
-			await rimraf(dist);
-			await rimraf(resolve(`${fixturePath}/.rts2_cache_cjs`));
-			await rimraf(resolve(`${fixturePath}/.rts2_cache_es`));
-			await rimraf(resolve(`${fixturePath}/.rts2_cache_umd`));
-
-			const script = await getBuildScript(fixturePath, DEFAULT_SCRIPT);
-
-			const prevDir = process.cwd();
-			process.chdir(resolve(fixturePath));
-
-			const parsedOpts = parseScript(script);
-
-			const output = await microbundle({
-				...parsedOpts,
-				cwd: parsedOpts.cwd !== '.' ? parsedOpts.cwd : resolve(fixturePath),
-			});
-
-			process.chdir(prevDir);
+			const output = await buildDirectory(fixtureDir);
 
 			const printedDir = printTree([dirTree(fixturePath)]);
 
 			expect(
 				[
-					`Used script: ${script}`,
+					`Used script: ${await getBuildScript(fixturePath, DEFAULT_SCRIPT)}`,
 					'Directory tree:',
 					printedDir,
 					strip(output),
 				].join('\n\n'),
 			).toMatchSnapshot();
 
+			const dist = resolve(`${fixturePath}/dist`);
 			const files = fs.readdirSync(resolve(dist));
 			expect(files.length).toMatchSnapshot();
 			// we don't realy care about the content of a sourcemap
