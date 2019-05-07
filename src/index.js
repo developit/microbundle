@@ -232,7 +232,6 @@ export default async function microbundle(inputOptions) {
 			cache = bundle;
 			await bundle.write(outputOptions);
 			return await config._sizeInfo;
-			// return await getSizeInfo(code, outputOptions.file, options.raw);
 		}),
 	);
 
