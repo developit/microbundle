@@ -46,5 +46,5 @@ const dirs = fs
 
 	csv.unshift('file,size');
 
-	console.log(csv.join('\n'));
+	fs.writeFile(resolve(__dirname, '../sizes.csv'), csv.join('\n'));
 })();

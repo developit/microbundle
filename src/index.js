@@ -528,7 +528,8 @@ function createConfig(options, entry, format, writeMeta) {
 								compilerOptions: {
 									sourceMap: options.sourcemap,
 									declaration: true,
-									jsx: options.jsx || 'h',
+									jsx: 'react',
+									jsxFactory: options.jsx || 'h',
 								},
 							},
 							tsconfigOverride: {
@@ -571,6 +572,7 @@ function createConfig(options, entry, format, writeMeta) {
 								require.resolve('@babel/plugin-transform-react-jsx'),
 								{
 									pragma: options.jsx || 'h',
+									pragmaFrag: options.jsxFragment || 'Fragment',
 								},
 							],
 							[
