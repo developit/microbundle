@@ -5,4 +5,4 @@ branches:
   except:
     - trying.tmp
     - staging.tmp
-after_success: node build/bin.js --config
+after_success: sizereport --config
