@@ -589,29 +589,6 @@ function createConfig(options, entry, format, writeMeta) {
 							],
 						],
 					}),
-					// buble({
-					// 	exclude: 'node_modules/**',
-					// 	jsx: options.jsx || 'h',
-					// 	objectAssign: options.assign || 'Object.assign',
-					// 	transforms: {
-					// 		dangerousForOf: true,
-					// 		dangerousTaggedTemplateString: true,
-					// 	},
-					// }),
-					// We should upstream this to rollup
-					// format==='cjs' && replace({
-					// 	[`module.exports = ${rollupName};`]: '',
-					// 	[`var ${rollupName} =`]: 'module.exports ='
-					// }),
-					// This works for the general case, but could cause nasty scope bugs.
-					// format==='umd' && replace({
-					// 	[`return ${rollupName};`]: '',
-					// 	[`var ${rollupName} =`]: 'return'
-					// }),
-					// format==='es' && replace({
-					// 	[`export default ${rollupName};`]: '',
-					// 	[`var ${rollupName} =`]: 'export default'
-					// }),
 					options.compress !== false && [
 						terser({
 							sourcemap: true,
