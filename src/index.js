@@ -17,7 +17,6 @@ import brotliSize from 'brotli-size';
 import prettyBytes from 'pretty-bytes';
 import typescript from 'rollup-plugin-typescript2';
 import json from 'rollup-plugin-json';
-import flow from './lib/flow-plugin';
 import logError from './log-error';
 import { readFile, isDir, isFile, stdout, stderr } from './utils';
 import camelCase from 'camelcase';
@@ -538,7 +537,6 @@ function createConfig(options, entry, format, writeMeta) {
 								},
 							},
 						}),
-					!useTypescript && flow({ all: true, pretty: true }),
 					babel({
 						babelrc: false,
 						configFile: false,
@@ -566,7 +564,8 @@ function createConfig(options, entry, format, writeMeta) {
 									exclude: ['transform-async-to-generator'],
 								},
 							],
-						],
+							!useTypescript && ['@babel/preset-flow', { all: true }],
+						].filter(Boolean),
 						plugins: [
 							[
 								require.resolve('@babel/plugin-transform-react-jsx'),

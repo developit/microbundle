@@ -47,6 +47,7 @@
     "@babel/plugin-syntax-jsx": "^7.2.0",
     "@babel/plugin-transform-react-jsx": "^7.3.0",
     "@babel/polyfill": "^7.4.4",
+    "@babel/preset-flow": "^7.0.0",
     "asyncro": "^3.0.0",
     "autoprefixer": "^9.5.1",
     "babel-plugin-transform-async-to-promises": "^0.8.10",
