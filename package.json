@@ -70,7 +70,7 @@
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^4.2.3",
     "rollup-plugin-postcss": "^2.0.3",
-    "rollup-plugin-terser": "^4.0.4",
+    "rollup-plugin-terser": "^5.0.0",
     "rollup-plugin-typescript2": "^0.21.0",
     "sade": "^1.4.0",
     "tiny-glob": "^0.2.6",
