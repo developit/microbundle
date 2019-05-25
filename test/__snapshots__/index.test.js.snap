@@ -200,6 +200,53 @@ exports[`fixtures build basic with microbundle 5`] = `
 "
 `;
 
+exports[`fixtures build basic-babelrc with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+basic-babelrc
+  dist
+    basic-babelrc.js
+    basic-babelrc.js.map
+    basic-babelrc.mjs
+    basic-babelrc.mjs.map
+    basic-babelrc.umd.js
+    basic-babelrc.umd.js.map
+  package.json
+  src
+    index.js
+
+
+Build \\"basicBabelrc\\" to dist:
+108 B: basic-babelrc.js.gz
+83 B: basic-babelrc.js.br
+108 B: basic-babelrc.mjs.gz
+83 B: basic-babelrc.mjs.br
+150 B: basic-babelrc.umd.js.gz
+108 B: basic-babelrc.umd.js.br"
+`;
+
+exports[`fixtures build basic-babelrc with microbundle 2`] = `6`;
+
+exports[`fixtures build basic-babelrc with microbundle 3`] = `
+"var r;void 0===(r=!0)&&(r=function(r){throw new Error(\\"required!\\")}()),!0===r||function(r){throw new Error(\\"Falsey!\\")}();
+//# sourceMappingURL=basic-babelrc.js.map
+"
+`;
+
+exports[`fixtures build basic-babelrc with microbundle 4`] = `
+"var r;void 0===(r=!0)&&(r=function(r){throw new Error(\\"required!\\")}()),!0===r||function(r){throw new Error(\\"Falsey!\\")}();
+//# sourceMappingURL=basic-babelrc.mjs.map
+"
+`;
+
+exports[`fixtures build basic-babelrc with microbundle 5`] = `
+"!function(n){\\"function\\"==typeof define&&define.amd?define(n):n()}(function(){var n;void 0===(n=!0)&&(n=function(n){throw new Error(\\"required!\\")}()),!0===n||function(n){throw new Error(\\"Falsey!\\")}()});
+//# sourceMappingURL=basic-babelrc.umd.js.map
+"
+`;
+
 exports[`fixtures build basic-css with microbundle 1`] = `
 "Used script: microbundle
 
