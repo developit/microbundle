@@ -9,7 +9,6 @@ import { rollup, watch } from 'rollup';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import nodeResolve from 'rollup-plugin-node-resolve';
-import buble from 'rollup-plugin-buble';
 import { terser } from 'rollup-plugin-terser';
 import alias from 'rollup-plugin-alias';
 import postcss from 'rollup-plugin-postcss';
@@ -18,7 +17,6 @@ import brotliSize from 'brotli-size';
 import prettyBytes from 'pretty-bytes';
 import typescript from 'rollup-plugin-typescript2';
 import json from 'rollup-plugin-json';
-import flow from './lib/flow-plugin';
 import logError from './log-error';
 import { readFile, isDir, isFile, stdout, stderr } from './utils';
 import camelCase from 'camelcase';
@@ -529,7 +527,8 @@ function createConfig(options, entry, format, writeMeta) {
 								compilerOptions: {
 									sourceMap: options.sourcemap,
 									declaration: true,
-									jsx: options.jsx,
+									jsx: 'react',
+									jsxFactory: options.jsx || 'h',
 								},
 							},
 							tsconfigOverride: {
@@ -538,7 +537,6 @@ function createConfig(options, entry, format, writeMeta) {
 								},
 							},
 						}),
-					!useTypescript && flow({ all: true, pretty: true }),
 					babel({
 						babelrc: false,
 						configFile: false,
@@ -551,18 +549,31 @@ function createConfig(options, entry, format, writeMeta) {
 							],
 						],
 					}),
-					// Only used for async await
 					babel({
-						// We mainly use bublé to transpile JS and only use babel to
-						// transpile down `async/await`. To prevent conflicts with user
-						// supplied configurations we set this option to false. Note
-						// that we never supported using custom babel configs anyway.
-						babelrc: false,
-						configFile: false,
 						extensions: EXTENSIONS,
 						exclude: 'node_modules/**',
+						passPerPreset: true, // @see https://babeljs.io/docs/en/options#passperpreset
+						presets: [
+							[
+								'@babel/preset-env',
+								{
+									loose: true,
+									modules: false,
+									targets:
+										options.target === 'node' ? { node: '8' } : undefined,
+									exclude: ['transform-async-to-generator'],
+								},
+							],
+							!useTypescript && ['@babel/preset-flow', { all: true }],
+						].filter(Boolean),
 						plugins: [
-							require.resolve('@babel/plugin-syntax-jsx'),
+							[
+								require.resolve('@babel/plugin-transform-react-jsx'),
+								{
+									pragma: options.jsx || 'h',
+									pragmaFrag: options.jsxFragment || 'Fragment',
+								},
+							],
 							[
 								require.resolve('babel-plugin-transform-replace-expressions'),
 								{ replace: defines },
@@ -577,29 +588,6 @@ function createConfig(options, entry, format, writeMeta) {
 							],
 						],
 					}),
-					buble({
-						exclude: 'node_modules/**',
-						jsx: options.jsx || 'h',
-						objectAssign: options.assign || 'Object.assign',
-						transforms: {
-							dangerousForOf: true,
-							dangerousTaggedTemplateString: true,
-						},
-					}),
-					// We should upstream this to rollup
-					// format==='cjs' && replace({
-					// 	[`module.exports = ${rollupName};`]: '',
-					// 	[`var ${rollupName} =`]: 'module.exports ='
-					// }),
-					// This works for the general case, but could cause nasty scope bugs.
-					// format==='umd' && replace({
-					// 	[`return ${rollupName};`]: '',
-					// 	[`var ${rollupName} =`]: 'return'
-					// }),
-					// format==='es' && replace({
-					// 	[`export default ${rollupName};`]: '',
-					// 	[`var ${rollupName} =`]: 'export default'
-					// }),
 					options.compress !== false && [
 						terser({
 							sourcemap: true,
