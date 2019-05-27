@@ -1,7 +1,8 @@
 language: node_js
 node_js:
-  - "node"
+  - 'node'
 branches:
   except:
-  - trying.tmp
-  - staging.tmp
+    - trying.tmp
+    - staging.tmp
+after_success: sizereport --config

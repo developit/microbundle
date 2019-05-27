@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { resolve, relative, dirname, basename, extname } from 'path';
-import chalk from 'chalk';
+import { green, red, yellow, white, blue } from 'kleur';
 import { map, series } from 'asyncro';
 import glob from 'tiny-glob/sync';
 import autoprefixer from 'autoprefixer';
@@ -9,17 +9,14 @@ import { rollup, watch } from 'rollup';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import nodeResolve from 'rollup-plugin-node-resolve';
-import buble from 'rollup-plugin-buble';
 import { terser } from 'rollup-plugin-terser';
 import alias from 'rollup-plugin-alias';
 import postcss from 'rollup-plugin-postcss';
 import gzipSize from 'gzip-size';
 import brotliSize from 'brotli-size';
 import prettyBytes from 'pretty-bytes';
-import shebangPlugin from 'rollup-plugin-preserve-shebang';
 import typescript from 'rollup-plugin-typescript2';
 import json from 'rollup-plugin-json';
-import flow from './lib/flow-plugin';
 import logError from './log-error';
 import { readFile, isDir, isFile, stdout, stderr } from './utils';
 import camelCase from 'camelcase';
@@ -28,20 +25,20 @@ const removeScope = name => name.replace(/^@.*\//, '');
 
 // Convert booleans and int define= values to literals.
 // This is more intuitive than `microbundle --define A=1` producing A="1".
-// See: https://github.com/terser-js/terser#conditional-compilation-api
-const toTerserLiteral = (value, name) => {
+const toReplacementExpression = (value, name) => {
 	// --define A="1",B='true' produces string:
 	const matches = value.match(/^(['"])(.+)\1$/);
 	if (matches) {
-		return [matches[2], name];
+		return [JSON.stringify(matches[2]), name];
 	}
 
 	// --define A=1,B=true produces int/boolean literal:
 	if (/^(true|false|\d+)$/i.test(value)) {
-		return [value, '@' + name];
+		return [value, name];
 	}
 
-	// default: behaviour from Terser (@prefix=1 produces expression/literal, unprefixed=1 produces string literal):
+	// default: string literal
+	return [JSON.stringify(value), name];
 };
 
 // Normalize Terser options from microbundle's relaxed JSON format (mutates argument in-place)
@@ -99,11 +96,27 @@ const WATCH_OPTS = {
 // Hoist function because something (rollup?) incorrectly removes it
 function formatSize(size, filename, type, raw) {
 	const pretty = raw ? `${size} B` : prettyBytes(size);
-	const color = size < 5000 ? 'green' : size > 40000 ? 'red' : 'yellow';
+	const color = size < 5000 ? green : size > 40000 ? red : yellow;
 	const MAGIC_INDENTATION = type === 'br' ? 13 : 10;
-	return `${' '.repeat(MAGIC_INDENTATION - pretty.length)}${chalk[color](
+	return `${' '.repeat(MAGIC_INDENTATION - pretty.length)}${color(
 		pretty,
-	)}: ${chalk.white(basename(filename))}.${type}`;
+	)}: ${white(basename(filename))}.${type}`;
+}
+
+async function getSizeInfo(code, filename, raw) {
+	const gzip = formatSize(
+		await gzipSize(code),
+		filename,
+		'gz',
+		raw || code.length < 5000,
+	);
+	const brotli = formatSize(
+		await brotliSize(code),
+		filename,
+		'br',
+		raw || code.length < 5000,
+	);
+	return gzip + '\n' + brotli;
 }
 
 export default async function microbundle(inputOptions) {
@@ -169,18 +182,11 @@ export default async function microbundle(inputOptions) {
 		}
 	}
 
-	async function getSizeInfo(code, filename) {
-		const raw = options.raw || code.length < 5000;
-		const gzip = formatSize(await gzipSize(code), filename, 'gz', raw);
-		const brotli = formatSize(await brotliSize(code), filename, 'br', raw);
-		return gzip + '\n' + brotli;
-	}
-
 	if (options.watch) {
 		const onBuild = options.onBuild;
 		return new Promise((resolve, reject) => {
 			stdout(
-				chalk.blue(
+				blue(
 					`Watching source, compiling to ${relative(
 						cwd,
 						dirname(options.output),
@@ -203,11 +209,9 @@ export default async function microbundle(inputOptions) {
 						logError(e.error);
 					}
 					if (e.code === 'END') {
-						getSizeInfo(options._code, options.outputOptions.file).then(
-							text => {
-								stdout(`Wrote ${text.trim()}`);
-							},
-						);
+						options._sizeInfo.then(text => {
+							stdout(`Wrote ${text.trim()}`);
+						});
 						if (typeof onBuild === 'function') {
 							onBuild(e);
 						}
@@ -219,17 +223,18 @@ export default async function microbundle(inputOptions) {
 
 	let cache;
 	let out = await series(
-		steps.map(({ inputOptions, outputOptions }) => async () => {
+		steps.map(config => async () => {
+			const { inputOptions, outputOptions } = config;
 			inputOptions.cache = cache;
 			let bundle = await rollup(inputOptions);
 			cache = bundle;
-			const { code } = await bundle.write(outputOptions);
-			return await getSizeInfo(code, outputOptions.file);
+			await bundle.write(outputOptions);
+			return await config._sizeInfo;
 		}),
 	);
 
 	return (
-		chalk.blue(
+		blue(
 			`Build "${options.name}" to ${relative(cwd, dirname(options.output)) ||
 				'.'}:`,
 		) +
@@ -251,15 +256,16 @@ async function getConfigFromPkgJson(cwd) {
 		const pkgName = basename(cwd);
 
 		stderr(
-			chalk.yellow(
-				`${chalk.yellow.inverse(
+			// `Warn ${yellow(`no package.json found. Assuming a pkg.name of "${pkgName}".`)}`
+			yellow(
+				`${yellow().inverse(
 					'WARN',
 				)} no package.json found. Assuming a pkg.name of "${pkgName}".`,
 			),
 		);
 
 		let msg = String(err.message || err);
-		if (!msg.match(/ENOENT/)) stderr(`  ${chalk.red.dim(msg)}`);
+		if (!msg.match(/ENOENT/)) stderr(`  ${red().dim(msg)}`);
 
 		return { hasPackageJson: false, pkg: { name: pkgName } };
 	}
@@ -277,8 +283,8 @@ function getName({ name, pkgName, amdName, cwd, hasPackageJson }) {
 		pkgName = basename(cwd);
 		if (hasPackageJson) {
 			stderr(
-				chalk.yellow(
-					`${chalk.yellow.inverse(
+				yellow(
+					`${yellow().inverse(
 						'WARN',
 					)} missing package.json "name" field. Assuming "${pkgName}".`,
 				),
@@ -306,7 +312,10 @@ async function getInput({ entries, cwd, source, module }) {
 		.concat(
 			entries && entries.length
 				? entries
-				: (source && resolve(cwd, source)) ||
+				: (source &&
+						(Array.isArray(source) ? source : [source]).map(file =>
+							resolve(cwd, file),
+						)) ||
 						((await isDir(resolve(cwd, 'src'))) &&
 							(await jsOrTs(cwd, 'src/index'))) ||
 						(await jsOrTs(cwd, 'index')) ||
@@ -336,6 +345,9 @@ async function getEntries({ input, cwd }) {
 	})).filter((item, i, arr) => arr.indexOf(item) === i);
 	return entries;
 }
+
+// shebang cache map thing because the transform only gets run once
+const shebang = {};
 
 function createConfig(options, entry, format, writeMeta) {
 	let { pkg } = options;
@@ -380,7 +392,7 @@ function createConfig(options, entry, format, writeMeta) {
 	if (options.define) {
 		defines = Object.assign(
 			defines,
-			parseMappingArgument(options.define, toTerserLiteral),
+			parseMappingArgument(options.define, toReplacementExpression),
 		);
 	}
 
@@ -443,8 +455,6 @@ function createConfig(options, entry, format, writeMeta) {
 
 	if (nameCache === bareNameCache) nameCache = null;
 
-	let shebang;
-
 	let config = {
 		inputOptions: {
 			input: entry,
@@ -481,8 +491,7 @@ function createConfig(options, entry, format, writeMeta) {
 							}),
 						),
 					nodeResolve({
-						module: true,
-						jsnext: true,
+						mainFields: ['module', 'jsnext', 'main'],
 						browser: options.target !== 'node',
 					}),
 					commonjs({
@@ -490,45 +499,6 @@ function createConfig(options, entry, format, writeMeta) {
 						include: /\/node_modules\//,
 					}),
 					json(),
-					useTypescript &&
-						typescript({
-							typescript: require('typescript'),
-							cacheRoot: `./.rts2_cache_${format}`,
-							tsconfigDefaults: {
-								compilerOptions: {
-									sourceMap: options.sourcemap,
-									declaration: true,
-									jsx: options.jsx,
-								},
-							},
-							tsconfigOverride: {
-								compilerOptions: {
-									target: 'esnext',
-								},
-							},
-						}),
-					!useTypescript && flow({ all: true, pretty: true }),
-					// Only used for async await
-					babel({
-						// We mainly use bublé to transpile JS and only use babel to
-						// transpile down `async/await`. To prevent conflicts with user
-						// supplied configurations we set this option to false. Note
-						// that we never supported using custom babel configs anyway.
-						babelrc: false,
-						extensions: EXTENSIONS,
-						exclude: 'node_modules/**',
-						plugins: [
-							require.resolve('@babel/plugin-syntax-jsx'),
-							[
-								require.resolve('babel-plugin-transform-async-to-promises'),
-								{ inlineHelpers: true, externalHelpers: true },
-							],
-							[
-								require.resolve('@babel/plugin-proposal-class-properties'),
-								{ loose: true },
-							],
-						],
-					}),
 					{
 						// Custom plugin that removes shebang from code because newer
 						// versions of bublé bundle their own private version of `acorn`
@@ -539,9 +509,7 @@ function createConfig(options, entry, format, writeMeta) {
 							let reg = /^#!(.*)/;
 							let match = code.match(reg);
 
-							if (match !== null) {
-								shebang = '#!' + match[0];
-							}
+							shebang[options.name] = match ? '#!' + match[1] : '';
 
 							code = code.replace(reg, '');
 
@@ -551,29 +519,75 @@ function createConfig(options, entry, format, writeMeta) {
 							};
 						},
 					},
-					buble({
-						exclude: 'node_modules/**',
-						jsx: options.jsx || 'h',
-						objectAssign: options.assign || 'Object.assign',
-						transforms: {
-							dangerousForOf: true,
-							dangerousTaggedTemplateString: true,
-						},
+					useTypescript &&
+						typescript({
+							typescript: require('typescript'),
+							cacheRoot: `./node_modules/.cache/.rts2_cache_${format}`,
+							tsconfigDefaults: {
+								compilerOptions: {
+									sourceMap: options.sourcemap,
+									declaration: true,
+									jsx: 'react',
+									jsxFactory: options.jsx || 'h',
+								},
+							},
+							tsconfigOverride: {
+								compilerOptions: {
+									target: 'esnext',
+								},
+							},
+						}),
+					babel({
+						babelrc: false,
+						configFile: false,
+						compact: false,
+						include: 'node_modules/**',
+						plugins: [
+							[
+								require.resolve('babel-plugin-transform-replace-expressions'),
+								{ replace: defines },
+							],
+						],
 					}),
-					// We should upstream this to rollup
-					// format==='cjs' && replace({
-					// 	[`module.exports = ${rollupName};`]: '',
-					// 	[`var ${rollupName} =`]: 'module.exports ='
-					// }),
-					// This works for the general case, but could cause nasty scope bugs.
-					// format==='umd' && replace({
-					// 	[`return ${rollupName};`]: '',
-					// 	[`var ${rollupName} =`]: 'return'
-					// }),
-					// format==='es' && replace({
-					// 	[`export default ${rollupName};`]: '',
-					// 	[`var ${rollupName} =`]: 'export default'
-					// }),
+					babel({
+						extensions: EXTENSIONS,
+						exclude: 'node_modules/**',
+						passPerPreset: true, // @see https://babeljs.io/docs/en/options#passperpreset
+						presets: [
+							[
+								'@babel/preset-env',
+								{
+									loose: true,
+									modules: false,
+									targets:
+										options.target === 'node' ? { node: '8' } : undefined,
+									exclude: ['transform-async-to-generator'],
+								},
+							],
+							!useTypescript && ['@babel/preset-flow', { all: true }],
+						].filter(Boolean),
+						plugins: [
+							[
+								require.resolve('@babel/plugin-transform-react-jsx'),
+								{
+									pragma: options.jsx || 'h',
+									pragmaFrag: options.jsxFragment || 'Fragment',
+								},
+							],
+							[
+								require.resolve('babel-plugin-transform-replace-expressions'),
+								{ replace: defines },
+							],
+							[
+								require.resolve('babel-plugin-transform-async-to-promises'),
+								{ inlineHelpers: true, externalHelpers: true },
+							],
+							[
+								require.resolve('@babel/plugin-proposal-class-properties'),
+								{ loose: true },
+							],
+						],
+					}),
 					options.compress !== false && [
 						terser({
 							sourcemap: true,
@@ -584,7 +598,6 @@ function createConfig(options, entry, format, writeMeta) {
 								{
 									keep_infinity: true,
 									pure_getters: true,
-									global_defs: defines,
 									passes: 10,
 								},
 								minifyOptions.compress || {},
@@ -599,25 +612,25 @@ function createConfig(options, entry, format, writeMeta) {
 							// before hook
 							options: loadNameCache,
 							// after hook
-							onwrite() {
+							writeBundle() {
 								if (writeMeta && nameCache) {
 									fs.writeFile(
 										resolve(options.cwd, 'mangle.json'),
 										JSON.stringify(nameCache, null, 2),
-										Object,
 									);
 								}
 							},
 						},
 					],
 					{
-						ongenerate(outputOptions, { code }) {
-							config._code = code;
+						writeBundle(bundle) {
+							config._sizeInfo = Promise.all(
+								Object.values(bundle).map(({ code, fileName }) =>
+									code ? getSizeInfo(code, fileName, options.raw) : false,
+								),
+							).then(results => results.filter(Boolean).join('\n'));
 						},
 					},
-					shebangPlugin({
-						shebang,
-					}),
 				)
 				.filter(Boolean),
 		},
@@ -630,6 +643,9 @@ function createConfig(options, entry, format, writeMeta) {
 			freeze: false,
 			esModule: false,
 			sourcemap: options.sourcemap,
+			get banner() {
+				return shebang[options.name];
+			},
 			format,
 			name: options.name,
 			file: resolve(
