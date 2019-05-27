@@ -164,6 +164,9 @@ export default async function microbundle(inputOptions) {
 
 	options.multipleEntries = options.entries.length > 1;
 
+	// to disable compress you can put in false or 0 but it's a string so our boolean checks won't work
+	options.compress = options.compress !== 'false' && options.compress !== '0';
+
 	let formats = (options.format || options.formats).split(',');
 	// always compile cjs first if it's there:
 	formats.sort((a, b) => (a === 'cjs' ? -1 : a > b ? 1 : 0));

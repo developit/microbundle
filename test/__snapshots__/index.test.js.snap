@@ -423,6 +423,151 @@ exports[`fixtures build basic-multi-source with microbundle 8`] = `
 "
 `;
 
+exports[`fixtures build basic-no-compress with microbundle 1`] = `
+"Used script: microbundle --compress=false
+
+Directory tree:
+
+basic-no-compress
+  dist
+    basic-no-compress.js
+    basic-no-compress.js.map
+    basic-no-compress.mjs
+    basic-no-compress.mjs.map
+    basic-no-compress.umd.js
+    basic-no-compress.umd.js.map
+  package.json
+  src
+    index.js
+    two.js
+
+
+Build \\"basicNoCompress\\" to dist:
+303 B: basic-no-compress.js.gz
+244 B: basic-no-compress.js.br
+301 B: basic-no-compress.mjs.gz
+244 B: basic-no-compress.mjs.br
+422 B: basic-no-compress.umd.js.gz
+349 B: basic-no-compress.umd.js.br"
+`;
+
+exports[`fixtures build basic-no-compress with microbundle 2`] = `6`;
+
+exports[`fixtures build basic-no-compress with microbundle 3`] = `
+"var two = function two() {
+  try {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return Promise.resolve(args.reduce(function (total, value) {
+      return total + value;
+    }, 0));
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+var index = (function () {
+  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+    args[_key] = arguments[_key];
+  }
+
+  try {
+    return Promise.resolve(two.apply(void 0, args)).then(function (_two) {
+      return Promise.resolve(two.apply(void 0, args)).then(function (_two2) {
+        return [_two, _two2];
+      });
+    });
+  } catch (e) {
+    return Promise.reject(e);
+  }
+});
+
+module.exports = index;
+//# sourceMappingURL=basic-no-compress.js.map
+"
+`;
+
+exports[`fixtures build basic-no-compress with microbundle 4`] = `
+"var two = function two() {
+  try {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return Promise.resolve(args.reduce(function (total, value) {
+      return total + value;
+    }, 0));
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+var index = (function () {
+  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+    args[_key] = arguments[_key];
+  }
+
+  try {
+    return Promise.resolve(two.apply(void 0, args)).then(function (_two) {
+      return Promise.resolve(two.apply(void 0, args)).then(function (_two2) {
+        return [_two, _two2];
+      });
+    });
+  } catch (e) {
+    return Promise.reject(e);
+  }
+});
+
+export default index;
+//# sourceMappingURL=basic-no-compress.mjs.map
+"
+`;
+
+exports[`fixtures build basic-no-compress with microbundle 5`] = `
+"(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+	typeof define === 'function' && define.amd ? define(factory) :
+	(global = global || self, global.basicNoCompress = factory());
+}(this, function () {
+	var two = function two() {
+	  try {
+	    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    return Promise.resolve(args.reduce(function (total, value) {
+	      return total + value;
+	    }, 0));
+	  } catch (e) {
+	    return Promise.reject(e);
+	  }
+	};
+
+	var index = (function () {
+	  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+	    args[_key] = arguments[_key];
+	  }
+
+	  try {
+	    return Promise.resolve(two.apply(void 0, args)).then(function (_two) {
+	      return Promise.resolve(two.apply(void 0, args)).then(function (_two2) {
+	        return [_two, _two2];
+	      });
+	    });
+	  } catch (e) {
+	    return Promise.reject(e);
+	  }
+	});
+
+	return index;
+
+}));
+//# sourceMappingURL=basic-no-compress.umd.js.map
+"
+`;
+
 exports[`fixtures build basic-ts with microbundle 1`] = `
 "Used script: microbundle
 
