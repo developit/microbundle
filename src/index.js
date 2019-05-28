@@ -418,8 +418,14 @@ function createConfig(options, entry, format, writeMeta) {
 			: pkg['jsnext:main'] || 'x.mjs',
 		mainNoExtension,
 	);
+	let modernMain = replaceName(
+		(pkg.syntax && pkg.syntax.esmodules) || pkg.esmodule || 'x.modern.mjs',
+		mainNoExtension,
+	);
 	let cjsMain = replaceName(pkg['cjs:main'] || 'x.js', mainNoExtension);
 	let umdMain = replaceName(pkg['umd:main'] || 'x.umd.js', mainNoExtension);
+
+	const modern = format === 'modern';
 
 	// let rollupName = safeVariableName(basename(entry).replace(/\.js$/, ''));
 
@@ -560,7 +566,11 @@ function createConfig(options, entry, format, writeMeta) {
 									loose: true,
 									modules: false,
 									targets:
-										options.target === 'node' ? { node: '8' } : undefined,
+										options.target === 'node'
+											? { node: '8' }
+											: modern
+											? { esmodules: true }
+											: undefined,
 									exclude: ['transform-async-to-generator'],
 								},
 							],
@@ -578,7 +588,7 @@ function createConfig(options, entry, format, writeMeta) {
 								require.resolve('babel-plugin-transform-replace-expressions'),
 								{ replace: defines },
 							],
-							[
+							!modern && [
 								require.resolve('babel-plugin-transform-async-to-promises'),
 								{ inlineHelpers: true, externalHelpers: true },
 							],
@@ -601,8 +611,8 @@ function createConfig(options, entry, format, writeMeta) {
 								minifyOptions.compress || {},
 							),
 							warnings: true,
-							ecma: 5,
-							toplevel: format === 'cjs' || format === 'es',
+							ecma: modern ? 8 : 5,
+							toplevel: modern || format === 'cjs' || format === 'es',
 							mangle: Object.assign({}, minifyOptions.mangle || {}),
 							nameCache,
 						}),
@@ -644,13 +654,19 @@ function createConfig(options, entry, format, writeMeta) {
 			get banner() {
 				return shebang[options.name];
 			},
-			format,
+			format: modern ? 'es' : format,
 			name: options.name,
 			file: resolve(
 				options.cwd,
-				(format === 'es' && moduleMain) ||
-					(format === 'umd' && umdMain) ||
-					cjsMain,
+				{
+					modern: modernMain,
+					es: moduleMain,
+					umd: umdMain,
+				}[format] || cjsMain,
+				// (format === 'modern' && modernMain) ||
+				// 	(format === 'es' && moduleMain) ||
+				// 	(format === 'umd' && umdMain) ||
+				// 	cjsMain,
 			),
 		},
 	};
