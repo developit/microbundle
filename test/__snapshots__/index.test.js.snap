@@ -65,30 +65,30 @@ async-iife-ts
 
 
 Build \\"asyncIifeTs\\" to dist:
-100 B: async-iife-ts.js.gz
-78 B: async-iife-ts.js.br
-100 B: async-iife-ts.mjs.gz
-78 B: async-iife-ts.mjs.br
-142 B: async-iife-ts.umd.js.gz
-105 B: async-iife-ts.umd.js.br"
+70 B: async-iife-ts.js.gz
+55 B: async-iife-ts.js.br
+70 B: async-iife-ts.mjs.gz
+55 B: async-iife-ts.mjs.br
+125 B: async-iife-ts.umd.js.gz
+95 B: async-iife-ts.umd.js.br"
 `;
 
 exports[`fixtures build async-iife-ts with microbundle 2`] = `7`;
 
 exports[`fixtures build async-iife-ts with microbundle 3`] = `
-"!function(){try{console.log(\\"foo\\"),Promise.resolve()}catch(o){return Promise.reject(o)}}();
+"try{console.log(\\"foo\\")}catch(o){Promise.reject(o)}
 //# sourceMappingURL=async-iife-ts.js.map
 "
 `;
 
 exports[`fixtures build async-iife-ts with microbundle 4`] = `
-"!function(){try{console.log(\\"foo\\"),Promise.resolve()}catch(o){return Promise.reject(o)}}();
+"try{console.log(\\"foo\\")}catch(o){Promise.reject(o)}
 //# sourceMappingURL=async-iife-ts.mjs.map
 "
 `;
 
 exports[`fixtures build async-iife-ts with microbundle 5`] = `
-"!function(e){\\"function\\"==typeof define&&define.amd?define(e):e()}(function(){!function(){try{console.log(\\"foo\\"),Promise.resolve()}catch(e){return Promise.reject(e)}}()});
+"!function(e){\\"function\\"==typeof define&&define.amd?define(e):e()}(function(){try{console.log(\\"foo\\")}catch(e){Promise.reject(e)}});
 //# sourceMappingURL=async-iife-ts.umd.js.map
 "
 `;
@@ -1367,63 +1367,6 @@ function(){function e(){}return e.prototype.render=function(){return n(\\"div\\"
 `;
 
 exports[`fixtures build jsx with microbundle 5`] = `
-"!function(n,e){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=e():\\"function\\"==typeof define&&define.amd?define(e):(n=n||self).jsx=e()}(this,function(){var n=function(n,e){for(var t=arguments.length,r=new Array(t>2?t-2:0),o=2;o<t;o++)r[o-2]=arguments[o];return{tag:n,props:e,children:r}},e=function(n){return n.children};
-/* */
-return function(){function t(){}return t.prototype.render=function(){return n(\\"div\\",{id:\\"app\\"},n(\\"h1\\",null,\\"Hello, World!\\"),n(\\"p\\",null,\\"A JSX demo.\\"),n(e,null,n(\\"p\\",null,\\"Test fragment\\")))},t}()});
-//# sourceMappingURL=jsx.umd.js.map
-"
-`;
-
-exports[`fixtures build jsx with microbundle 6`] = `
-"export default function foo(): Promise<any[]>;
-"
-`;
-
-exports[`fixtures build jsx with microbundle 7`] = `
-"Used script: microbundle
-
-Directory tree:
-
-jsx
-  dist
-    jsx.js
-    jsx.js.map
-    jsx.mjs
-    jsx.mjs.map
-    jsx.umd.js
-    jsx.umd.js.map
-  index.js
-  package.json
-
-
-Build \\"jsx\\" to dist:
-268 B: jsx.js.gz
-222 B: jsx.js.br
-268 B: jsx.mjs.gz
-223 B: jsx.mjs.br
-343 B: jsx.umd.js.gz
-288 B: jsx.umd.js.br"
-`;
-
-exports[`fixtures build jsx with microbundle 8`] = `6`;
-
-exports[`fixtures build jsx with microbundle 9`] = `
-"var n=function(n,r){for(var e=arguments.length,t=new Array(e>2?e-2:0),l=2;l<e;l++)t[l-2]=arguments[l];return{tag:n,props:r,children:t}},r=function(n){return n.children};module.exports=
-/* */
-function(){function e(){}return e.prototype.render=function(){return n(\\"div\\",{id:\\"app\\"},n(\\"h1\\",null,\\"Hello, World!\\"),n(\\"p\\",null,\\"A JSX demo.\\"),n(r,null,n(\\"p\\",null,\\"Test fragment\\")))},e}();
-//# sourceMappingURL=jsx.js.map
-"
-`;
-
-exports[`fixtures build jsx with microbundle 10`] = `
-"var n=function(n,r){for(var e=arguments.length,t=new Array(e>2?e-2:0),l=2;l<e;l++)t[l-2]=arguments[l];return{tag:n,props:r,children:t}},r=function(n){return n.children};export default(
-/* */
-function(){function e(){}return e.prototype.render=function(){return n(\\"div\\",{id:\\"app\\"},n(\\"h1\\",null,\\"Hello, World!\\"),n(\\"p\\",null,\\"A JSX demo.\\"),n(r,null,n(\\"p\\",null,\\"Test fragment\\")))},e}());
-//# sourceMappingURL=jsx.mjs.map
-"
-`;
-
-exports[`fixtures build jsx with microbundle 11`] = `
 "!function(n,e){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=e():\\"function\\"==typeof define&&define.amd?define(e):(n=n||self).jsx=e()}(this,function(){var n=function(n,e){for(var t=arguments.length,r=new Array(t>2?t-2:0),o=2;o<t;o++)r[o-2]=arguments[o];return{tag:n,props:e,children:r}},e=function(n){return n.children};
 /* */
 return function(){function t(){}return t.prototype.render=function(){return n(\\"div\\",{id:\\"app\\"},n(\\"h1\\",null,\\"Hello, World!\\"),n(\\"p\\",null,\\"A JSX demo.\\"),n(e,null,n(\\"p\\",null,\\"Test fragment\\")))},t}()});
