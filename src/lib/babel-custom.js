@@ -73,6 +73,10 @@ export default babelPlugin.custom(babelCore => {
 						name: '@babel/plugin-proposal-class-properties',
 						loose: true,
 					},
+					{
+						name: '@babel/plugin-transform-regenerator',
+						async: false,
+					},
 				].filter(Boolean),
 			);
 
@@ -100,7 +104,10 @@ export default babelPlugin.custom(babelCore => {
 										{
 											modules: false,
 											exclude: merge(
-												['transform-async-to-generator'],
+												[
+													'transform-async-to-generator',
+													'transform-regenerator',
+												],
 												preset.options.exclude || [],
 											),
 										},
@@ -122,7 +129,7 @@ export default babelPlugin.custom(babelCore => {
 						targets: customOptions.targets,
 						modules: false,
 						loose: true,
-						exclude: ['transform-async-to-generator'],
+						exclude: ['transform-async-to-generator', 'transform-regenerator'],
 					},
 				]);
 			}
