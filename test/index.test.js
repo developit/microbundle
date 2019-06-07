@@ -4,6 +4,8 @@ import dirTree from 'directory-tree';
 import { strip } from './lib/util';
 import { buildDirectory, getBuildScript } from '../tools/build-fixture';
 
+process.env.MICROBUNDLE_MODERN = 'false';
+
 const FIXTURES_DIR = `${__dirname}/fixtures`;
 const DEFAULT_SCRIPT = 'microbundle';
 const TEST_TIMEOUT = 11000;
@@ -58,6 +60,7 @@ describe('fixtures', () => {
 			// we don't realy care about the content of a sourcemap
 			files
 				.filter(file => !/\.map$/.test(file))
+				.sort(file => (/modern/.test(file) ? 1 : 0))
 				.forEach(file => {
 					expect(
 						fs.readFileSync(resolve(dist, file)).toString('utf8'),
