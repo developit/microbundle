@@ -3,3 +3,4 @@ function test(param = throw new Error('required!')) {
 }
 
 test(true);
+test(false);
