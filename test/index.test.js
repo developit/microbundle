@@ -4,8 +4,6 @@ import dirTree from 'directory-tree';
 import { strip } from './lib/util';
 import { buildDirectory, getBuildScript } from '../tools/build-fixture';
 
-process.env.MICROBUNDLE_MODERN = 'false';
-
 const FIXTURES_DIR = `${__dirname}/fixtures`;
 const DEFAULT_SCRIPT = 'microbundle';
 const TEST_TIMEOUT = 11000;

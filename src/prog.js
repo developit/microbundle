@@ -3,11 +3,11 @@ let { version } = require('../package');
 
 const toArray = val => (Array.isArray(val) ? val : val == null ? [] : [val]);
 
-const ENABLE_MODERN = process.env.MICROBUNDLE_MODERN !== 'false';
-
-const DEFAULT_FORMATS = ENABLE_MODERN ? 'modern,es,cjs,umd' : 'es,cjs,umd';
-
 export default handler => {
+	const ENABLE_MODERN = process.env.MICROBUNDLE_MODERN !== 'false';
+
+	const DEFAULT_FORMATS = ENABLE_MODERN ? 'modern,es,cjs,umd' : 'es,cjs,umd';
+
 	const cmd = type => (str, opts) => {
 		opts.watch = opts.watch || type === 'watch';
 		opts.compress =

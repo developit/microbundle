@@ -1,0 +1,6 @@
+{
+  "name": "basic-lib",
+  "scripts": {
+    "build": "microbundle -f modern"
+  }
+}
