@@ -51,7 +51,7 @@
     "@babel/preset-flow": "^7.0.0",
     "asyncro": "^3.0.0",
     "autoprefixer": "^9.5.1",
-    "babel-plugin-transform-async-to-promises": "^0.8.10",
+    "babel-plugin-transform-async-to-promises": "^0.8.11",
     "babel-plugin-transform-replace-expressions": "^0.2.0",
     "brotli-size": "^0.1.0",
     "camelcase": "^5.3.1",
