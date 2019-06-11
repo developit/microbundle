@@ -77,51 +77,42 @@ export default babelPlugin.custom(babelCore => {
 						name: '@babel/plugin-transform-regenerator',
 						async: false,
 					},
+					{
+						name: 'babel-plugin-macros',
+					},
 				].filter(Boolean),
 			);
 
-			let babelOptions = {
-				presets: [],
-				plugins: [],
-			};
-			if (config.hasFilesystemConfig()) {
-				babelOptions = config.options;
+			const babelOptions = config.options || {};
 
-				if (babelOptions.presets) {
-					babelOptions.presets = babelOptions.presets.map(preset => {
-						// When preset-env is configured we want to make sure we override some settings.
-						// We want to make sure microbundle is still fast & creates small bundles
-						if (preset.file.request === '@babel/preset-env') {
-							preset = createConfigItem(
-								[
-									preset.file.resolved,
-									merge(
-										{
-											loose: true,
-											targets: customOptions.targets,
-										},
-										preset.options,
-										{
-											modules: false,
-											exclude: merge(
-												[
-													'transform-async-to-generator',
-													'transform-regenerator',
-												],
-												preset.options.exclude || [],
-											),
-										},
-									),
-								],
-								{
-									type: `preset`,
-								},
-							);
-						}
+			const envIdx = (babelOptions.presets || []).findIndex(preset =>
+				preset.file.request.includes('@babel/preset-env'),
+			);
 
-						return preset;
-					});
-				}
+			if (envIdx !== -1) {
+				const preset = babelOptions.presets[envIdx];
+				babelOptions.presets[envIdx] = createConfigItem(
+					[
+						preset.file.resolved,
+						merge(
+							{
+								loose: true,
+								targets: customOptions.targets,
+							},
+							preset.options,
+							{
+								modules: false,
+								exclude: merge(
+									['transform-async-to-generator', 'transform-regenerator'],
+									preset.options.exclude || [],
+								),
+							},
+						),
+					],
+					{
+						type: `preset`,
+					},
+				);
 			} else {
 				babelOptions.presets = createConfigItems('preset', [
 					{

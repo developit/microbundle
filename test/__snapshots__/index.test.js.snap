@@ -225,30 +225,30 @@ basic-babelrc
 
 
 Build \\"basicBabelrc\\" to dist:
-94 B: basic-babelrc.js.gz
-75 B: basic-babelrc.js.br
-94 B: basic-babelrc.mjs.gz
-75 B: basic-babelrc.mjs.br
-139 B: basic-babelrc.umd.js.gz
-102 B: basic-babelrc.umd.js.br"
+122 B: basic-babelrc.js.gz
+91 B: basic-babelrc.js.br
+122 B: basic-babelrc.mjs.gz
+91 B: basic-babelrc.mjs.br
+158 B: basic-babelrc.umd.js.gz
+121 B: basic-babelrc.umd.js.br"
 `;
 
 exports[`fixtures build basic-babelrc with microbundle 2`] = `6`;
 
 exports[`fixtures build basic-babelrc with microbundle 3`] = `
-"!function(r=function(r){throw new Error(\\"required!\\")}()){!0===r||function(r){throw new Error(\\"Falsey!\\")}()}(!0);
+"function r(r){return void 0===r&&(r=function(r){throw new Error(\\"required!\\")}()),!0===r||function(r){throw new Error(\\"Falsey!\\")}()}r(!0),r(!1);
 //# sourceMappingURL=basic-babelrc.js.map
 "
 `;
 
 exports[`fixtures build basic-babelrc with microbundle 4`] = `
-"!function(r=function(r){throw new Error(\\"required!\\")}()){!0===r||function(r){throw new Error(\\"Falsey!\\")}()}(!0);
+"function r(r){return void 0===r&&(r=function(r){throw new Error(\\"required!\\")}()),!0===r||function(r){throw new Error(\\"Falsey!\\")}()}r(!0),r(!1);
 //# sourceMappingURL=basic-babelrc.mjs.map
 "
 `;
 
 exports[`fixtures build basic-babelrc with microbundle 5`] = `
-"!function(n){\\"function\\"==typeof define&&define.amd?define(n):n()}(function(){!function(n=function(n){throw new Error(\\"required!\\")}()){!0===n||function(n){throw new Error(\\"Falsey!\\")}()}(!0)});
+"!function(n){\\"function\\"==typeof define&&define.amd?define(n):n()}(function(){function n(n){return void 0===n&&(n=function(n){throw new Error(\\"required!\\")}()),!0===n||function(n){throw new Error(\\"Falsey!\\")}()}n(!0),n(!1)});
 //# sourceMappingURL=basic-babelrc.umd.js.map
 "
 `;
@@ -1371,6 +1371,54 @@ exports[`fixtures build jsx with microbundle 5`] = `
 /* */
 return function(){function t(){}return t.prototype.render=function(){return n(\\"div\\",{id:\\"app\\"},n(\\"h1\\",null,\\"Hello, World!\\"),n(\\"p\\",null,\\"A JSX demo.\\"),n(e,null,n(\\"p\\",null,\\"Test fragment\\")))},t}()});
 //# sourceMappingURL=jsx.umd.js.map
+"
+`;
+
+exports[`fixtures build macro with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+macro
+  dist
+    macro-lib.js
+    macro-lib.js.map
+    macro-lib.mjs
+    macro-lib.mjs.map
+    macro-lib.umd.js
+    macro-lib.umd.js.map
+  package.json
+  src
+    index.js
+    macro.js
+
+
+Build \\"macroLib\\" to dist:
+49 B: macro-lib.js.gz
+33 B: macro-lib.js.br
+48 B: macro-lib.mjs.gz
+32 B: macro-lib.mjs.br
+157 B: macro-lib.umd.js.gz
+125 B: macro-lib.umd.js.br"
+`;
+
+exports[`fixtures build macro with microbundle 2`] = `6`;
+
+exports[`fixtures build macro with microbundle 3`] = `
+"module.exports=\\"name-macro\\";
+//# sourceMappingURL=macro-lib.js.map
+"
+`;
+
+exports[`fixtures build macro with microbundle 4`] = `
+"export default\\"name-macro\\";
+//# sourceMappingURL=macro-lib.mjs.map
+"
+`;
+
+exports[`fixtures build macro with microbundle 5`] = `
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=\\"name-macro\\":\\"function\\"==typeof define&&define.amd?define(function(){return\\"name-macro\\"}):(e=e||self).macroLib=\\"name-macro\\"}(this);
+//# sourceMappingURL=macro-lib.umd.js.map
 "
 `;
 
