@@ -3,7 +3,7 @@ import { createMacro } from 'babel-plugin-macros';
 function myMacro({ references, state, babel }) {
 	const { types: t } = babel;
 
-	references.default.forEach(referencePath => {
+	references.macro.forEach(referencePath => {
 		const parentPath = referencePath.findParent(t.isCallExpression);
 		let variableName = referencePath.findParent(t.isVariableDeclarator).node.id
 			.name;
@@ -17,4 +17,4 @@ function myMacro({ references, state, babel }) {
 	});
 }
 
-export const macro = createMacro(myMacro);
+module.exports = createMacro(myMacro);
