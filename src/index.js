@@ -8,6 +8,7 @@ import cssnano from 'cssnano';
 import { rollup, watch } from 'rollup';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
+import customBabel from './lib/babel-custom';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
 import alias from 'rollup-plugin-alias';
@@ -18,7 +19,7 @@ import prettyBytes from 'pretty-bytes';
 import typescript from 'rollup-plugin-typescript2';
 import json from 'rollup-plugin-json';
 import logError from './log-error';
-import { readFile, isDir, isFile, stdout, stderr } from './utils';
+import { readFile, isDir, isFile, stdout, stderr, isTruthy } from './utils';
 import camelCase from 'camelcase';
 
 const removeScope = name => name.replace(/^@.*\//, '');
@@ -163,6 +164,12 @@ export default async function microbundle(inputOptions) {
 	});
 
 	options.multipleEntries = options.entries.length > 1;
+
+	// to disable compress you can put in false or 0 but it's a string so our boolean checks won't work
+	options.compress =
+		typeof options.compress !== 'boolean'
+			? options.compress !== 'false' && options.compress !== '0'
+			: options.compress;
 
 	let formats = (options.format || options.formats).split(',');
 	// always compile cjs first if it's there:
@@ -537,61 +544,38 @@ function createConfig(options, entry, format, writeMeta) {
 								},
 							},
 						}),
-					babel({
-						babelrc: false,
-						configFile: false,
-						compact: false,
-						include: 'node_modules/**',
-						plugins: [
-							[
-								require.resolve('babel-plugin-transform-replace-expressions'),
-								{ replace: defines },
+					// if defines is not set, we shouldn't run babel through node_modules
+					isTruthy(defines) &&
+						babel({
+							babelrc: false,
+							configFile: false,
+							compact: false,
+							include: 'node_modules/**',
+							plugins: [
+								[
+									require.resolve('babel-plugin-transform-replace-expressions'),
+									{ replace: defines },
+								],
 							],
-						],
-					}),
-					babel({
+						}),
+					customBabel({
 						extensions: EXTENSIONS,
 						exclude: 'node_modules/**',
 						passPerPreset: true, // @see https://babeljs.io/docs/en/options#passperpreset
-						presets: [
-							[
-								'@babel/preset-env',
-								{
-									loose: true,
-									modules: false,
-									targets:
-										options.target === 'node' ? { node: '8' } : undefined,
-									exclude: ['transform-async-to-generator'],
-								},
-							],
-							!useTypescript && ['@babel/preset-flow', { all: true }],
-						].filter(Boolean),
-						plugins: [
-							[
-								require.resolve('@babel/plugin-transform-react-jsx'),
-								{
-									pragma: options.jsx || 'h',
-									pragmaFrag: options.jsxFragment || 'Fragment',
-								},
-							],
-							[
-								require.resolve('babel-plugin-transform-replace-expressions'),
-								{ replace: defines },
-							],
-							[
-								require.resolve('babel-plugin-transform-async-to-promises'),
-								{ inlineHelpers: true, externalHelpers: true },
-							],
-							[
-								require.resolve('@babel/plugin-proposal-class-properties'),
-								{ loose: true },
-							],
-						],
+						custom: {
+							defines,
+							targets: options.target === 'node' ? { node: '8' } : undefined,
+							pragma: options.jsx || 'h',
+							pragmaFrag: options.jsxFragment || 'Fragment',
+							typescript: !!useTypescript,
+						},
 					}),
 					options.compress !== false && [
 						terser({
 							sourcemap: true,
-							output: { comments: false },
+							output: {
+								comments: (node, comment) => /[@#]__PURE__/.test(comment.value),
+							},
 							compress: Object.assign(
 								{
 									keep_infinity: true,

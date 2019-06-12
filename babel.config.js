@@ -8,6 +8,7 @@ module.exports = {
 				targets: {
 					node: 'current',
 				},
+				exclude: ['transform-async-to-generator', 'transform-regenerator'],
 			},
 		],
 	],
