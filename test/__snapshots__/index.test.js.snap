@@ -65,30 +65,30 @@ async-iife-ts
 
 
 Build \\"asyncIifeTs\\" to dist:
-100 B: async-iife-ts.js.gz
-78 B: async-iife-ts.js.br
-100 B: async-iife-ts.mjs.gz
-78 B: async-iife-ts.mjs.br
-142 B: async-iife-ts.umd.js.gz
-105 B: async-iife-ts.umd.js.br"
+70 B: async-iife-ts.js.gz
+55 B: async-iife-ts.js.br
+70 B: async-iife-ts.mjs.gz
+55 B: async-iife-ts.mjs.br
+125 B: async-iife-ts.umd.js.gz
+95 B: async-iife-ts.umd.js.br"
 `;
 
 exports[`fixtures build async-iife-ts with microbundle 2`] = `7`;
 
 exports[`fixtures build async-iife-ts with microbundle 3`] = `
-"!function(){try{console.log(\\"foo\\"),Promise.resolve()}catch(o){return Promise.reject(o)}}();
+"try{console.log(\\"foo\\")}catch(o){Promise.reject(o)}
 //# sourceMappingURL=async-iife-ts.js.map
 "
 `;
 
 exports[`fixtures build async-iife-ts with microbundle 4`] = `
-"!function(){try{console.log(\\"foo\\"),Promise.resolve()}catch(o){return Promise.reject(o)}}();
+"try{console.log(\\"foo\\")}catch(o){Promise.reject(o)}
 //# sourceMappingURL=async-iife-ts.mjs.map
 "
 `;
 
 exports[`fixtures build async-iife-ts with microbundle 5`] = `
-"!function(e){\\"function\\"==typeof define&&define.amd?define(e):e()}(function(){!function(){try{console.log(\\"foo\\"),Promise.resolve()}catch(e){return Promise.reject(e)}}()});
+"!function(e){\\"function\\"==typeof define&&define.amd?define(e):e()}(function(){try{console.log(\\"foo\\")}catch(e){Promise.reject(e)}});
 //# sourceMappingURL=async-iife-ts.umd.js.map
 "
 `;
