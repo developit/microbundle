@@ -1,108 +1,71 @@
 import { resolve } from 'path';
 import fs from 'fs-extra';
-import { promisify } from 'es6-promisify';
 import dirTree from 'directory-tree';
-import shellQuote from 'shell-quote';
-import _rimraf from 'rimraf';
 import { strip } from './lib/util';
-import { readFile } from '../src/utils';
-import createProg from '../src/prog';
-import microbundle from '../src/index';
-
-const rimraf = promisify(_rimraf);
+import { buildDirectory, getBuildScript } from '../tools/build-fixture';
 
 const FIXTURES_DIR = `${__dirname}/fixtures`;
 const DEFAULT_SCRIPT = 'microbundle';
+const TEST_TIMEOUT = 11000;
 
-const times = (n, fn) => Array.from({ length: n }).map(i => fn(i));
 const join = (arr, delimiter = '') => arr.join(delimiter);
-const constant = konst => () => konst;
 
 const printTree = (nodes, indentLevel = 0) => {
-	const indent = join(times(indentLevel, constant('  ')));
+	const indent = '  '.repeat(indentLevel);
 	return join(
 		nodes
 			.filter(node => node.name[0] !== '.')
-			.map(
-				node =>
-					`${indent}${node.name}\n${
-						node.type === 'directory'
-							? printTree(node.children, indentLevel + 1)
-							: ''
-					}`,
-			),
+			.map(node => {
+				const isDir = node.type === 'directory';
+				return `${indent}${node.name}\n${
+					isDir ? printTree(node.children, indentLevel + 1) : ''
+				}`;
+			}),
 	);
 };
 
-const parseScript = (() => {
-	let parsed;
-	const prog = createProg(_parsed => (parsed = _parsed));
-	return script => {
-		const argv = shellQuote.parse(`node ${script}`);
-		// assuming {op: 'glob', pattern} for non-string args
-		prog(argv.map(arg => (typeof arg === 'string' ? arg : arg.pattern)));
-		return parsed;
-	};
-})();
-
 describe('fixtures', () => {
-	fs.readdirSync(FIXTURES_DIR).forEach(fixtureDir => {
-		let fixturePath = resolve(FIXTURES_DIR, fixtureDir);
+	const dirs = fs
+		.readdirSync(FIXTURES_DIR)
+		.filter(fixturePath =>
+			fs.statSync(resolve(FIXTURES_DIR, fixturePath)).isDirectory(),
+		);
 
-		if (!fs.statSync(fixturePath).isDirectory()) {
-			return;
-		}
-
-		it(fixtureDir, async () => {
+	it.each(dirs)(
+		'build %s with microbundle',
+		async fixtureDir => {
+			let fixturePath = resolve(FIXTURES_DIR, fixtureDir);
 			if (fixtureDir.endsWith('-with-cwd')) {
 				fixturePath = resolve(fixturePath, fixtureDir.replace('-with-cwd', ''));
 			}
 
-			const dist = resolve(`${fixturePath}/dist`);
-			// clean up
-			await rimraf(dist);
-			await rimraf(resolve(`${fixturePath}/.rts2_cache_cjs`));
-			await rimraf(resolve(`${fixturePath}/.rts2_cache_es`));
-			await rimraf(resolve(`${fixturePath}/.rts2_cache_umd`));
-
-			let script;
-			try {
-				({ scripts: { build: script } = {} } = JSON.parse(
-					await readFile(resolve(fixturePath, 'package.json'), 'utf8'),
-				));
-			} catch (err) {}
-			script = script || DEFAULT_SCRIPT;
-
-			const prevDir = process.cwd();
-			process.chdir(resolve(fixturePath));
-
-			const parsedOpts = parseScript(script);
-
-			const output = await microbundle({
-				...parsedOpts,
-				cwd: parsedOpts.cwd !== '.' ? parsedOpts.cwd : resolve(fixturePath),
-			});
-
-			process.chdir(prevDir);
+			const output = await buildDirectory(fixtureDir);
 
 			const printedDir = printTree([dirTree(fixturePath)]);
 
 			expect(
 				[
-					`Used script: ${script}`,
+					`Used script: ${await getBuildScript(fixturePath, DEFAULT_SCRIPT)}`,
 					'Directory tree:',
 					printedDir,
 					strip(output),
 				].join('\n\n'),
 			).toMatchSnapshot();
 
-			fs.readdirSync(resolve(dist)).forEach(file => {
-				expect(
-					fs.readFileSync(resolve(dist, file)).toString('utf8'),
-				).toMatchSnapshot();
-			});
-		});
-	});
+			const dist = resolve(`${fixturePath}/dist`);
+			const files = fs.readdirSync(resolve(dist));
+			expect(files.length).toMatchSnapshot();
+			// we don't realy care about the content of a sourcemap
+			files
+				.filter(file => !/\.map$/.test(file))
+				.forEach(file => {
+					expect(
+						fs.readFileSync(resolve(dist, file)).toString('utf8'),
+					).toMatchSnapshot();
+				});
+		},
+		TEST_TIMEOUT,
+	);
 
 	it('should keep shebang', () => {
 		expect(
@@ -118,6 +81,6 @@ describe('fixtures', () => {
 			'default-named/dist/default-named.js',
 		));
 
-		expect(Object.keys(mod)).toEqual(['foo', 'default']);
+		expect(Object.keys(mod)).toEqual(['default', 'foo']);
 	});
 });

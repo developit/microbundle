@@ -12,3 +12,4 @@ yarn.lock
 .vscode
 .idea
 .rts2*
+sizes.csv
