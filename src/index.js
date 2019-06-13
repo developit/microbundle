@@ -570,12 +570,9 @@ function createConfig(options, entry, format, writeMeta) {
 						passPerPreset: true, // @see https://babeljs.io/docs/en/options#passperpreset
 						custom: {
 							defines,
-              targets:
-                options.target === 'node'
-                  ? { node: '8' }
-                  : modern
-                  ? { esmodules: true }
-                  : undefined,
+							modern,
+							compress: options.compress !== false,
+							targets: options.target === 'node' ? { node: '8' } : undefined,
 							pragma: options.jsx || 'h',
 							pragmaFrag: options.jsxFragment || 'Fragment',
 							typescript: !!useTypescript,
@@ -584,9 +581,6 @@ function createConfig(options, entry, format, writeMeta) {
 					options.compress !== false && [
 						terser({
 							sourcemap: true,
-							output: {
-								comments: (node, comment) => /[@#]__PURE__/.test(comment.value),
-							},
 							compress: Object.assign(
 								{
 									keep_infinity: true,
@@ -648,10 +642,6 @@ function createConfig(options, entry, format, writeMeta) {
 					es: moduleMain,
 					umd: umdMain,
 				}[format] || cjsMain,
-				// (format === 'modern' && modernMain) ||
-				// 	(format === 'es' && moduleMain) ||
-				// 	(format === 'umd' && umdMain) ||
-				// 	cjsMain,
 			),
 		},
 	};
