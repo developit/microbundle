@@ -113,7 +113,7 @@ export default babelPlugin.custom(babelCore => {
 									),
 								},
 							),
-							customOptions.modern ? ESMODULES_TARGET : {},
+							customOptions.modern ? { targets: ESMODULES_TARGET } : {},
 						),
 					],
 					{

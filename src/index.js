@@ -585,12 +585,14 @@ function createConfig(options, entry, format, writeMeta) {
 								{
 									keep_infinity: true,
 									pure_getters: true,
+									// Ideally we'd just get Terser to respect existing Arrow functions...
+									// unsafe_arrows: true,
 									passes: 10,
 								},
 								minifyOptions.compress || {},
 							),
 							warnings: true,
-							ecma: modern ? 8 : 5,
+							ecma: modern ? 9 : 5,
 							toplevel: modern || format === 'cjs' || format === 'es',
 							mangle: Object.assign({}, minifyOptions.mangle || {}),
 							nameCache,
