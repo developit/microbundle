@@ -1640,6 +1640,53 @@ exports[`fixtures build pretty with microbundle 5`] = `
 "
 `;
 
+exports[`fixtures build pure with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+pure
+  dist
+    pure.js
+    pure.js.map
+    pure.mjs
+    pure.mjs.map
+    pure.umd.js
+    pure.umd.js.map
+  package.json
+  src
+    index.js
+
+
+Build \\"pure\\" to dist:
+65 B: pure.js.gz
+44 B: pure.js.br
+71 B: pure.mjs.gz
+49 B: pure.mjs.br
+168 B: pure.umd.js.gz
+127 B: pure.umd.js.br"
+`;
+
+exports[`fixtures build pure with microbundle 2`] = `6`;
+
+exports[`fixtures build pure with microbundle 3`] = `
+"exports.foo=function(){return\\"hello world\\"};
+//# sourceMappingURL=pure.js.map
+"
+`;
+
+exports[`fixtures build pure with microbundle 4`] = `
+"function o(){return\\"hello world\\"}export{o as foo};
+//# sourceMappingURL=pure.mjs.map
+"
+`;
+
+exports[`fixtures build pure with microbundle 5`] = `
+"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?o(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],o):o((e=e||self).pure={})}(this,function(e){e.foo=function(){return\\"hello world\\"}});
+//# sourceMappingURL=pure.umd.js.map
+"
+`;
+
 exports[`fixtures build raw with microbundle 1`] = `
 "Used script: microbundle --raw
 
