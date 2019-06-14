@@ -3,6 +3,10 @@ import babelPlugin from 'rollup-plugin-babel';
 import merge from 'lodash.merge';
 import { isTruthy } from '../utils';
 
+const ESMODULES_TARGET = {
+	esmodules: true,
+};
+
 const mergeConfigItems = (type, ...configItemsToMerge) => {
 	const mergedItems = [];
 
@@ -64,7 +68,7 @@ export default babelPlugin.custom(babelCore => {
 						name: 'babel-plugin-transform-replace-expressions',
 						replace: customOptions.defines,
 					},
-					{
+					!customOptions.modern && {
 						name: 'babel-plugin-transform-async-to-promises',
 						inlineHelpers: true,
 						externalHelpers: true,
@@ -73,7 +77,7 @@ export default babelPlugin.custom(babelCore => {
 						name: '@babel/plugin-proposal-class-properties',
 						loose: true,
 					},
-					{
+					!customOptions.modern && {
 						name: '@babel/plugin-transform-regenerator',
 						async: false,
 					},
@@ -94,19 +98,22 @@ export default babelPlugin.custom(babelCore => {
 				babelOptions.presets[envIdx] = createConfigItem(
 					[
 						preset.file.resolved,
-						merge(
-							{
-								loose: true,
-								targets: customOptions.targets,
-							},
-							preset.options,
-							{
-								modules: false,
-								exclude: merge(
-									['transform-async-to-generator', 'transform-regenerator'],
-									preset.options.exclude || [],
-								),
-							},
+						Object.assign(
+							merge(
+								{
+									loose: true,
+									targets: customOptions.targets,
+								},
+								preset.options,
+								{
+									modules: false,
+									exclude: merge(
+										['transform-async-to-generator', 'transform-regenerator'],
+										preset.options.exclude || [],
+									),
+								},
+							),
+							customOptions.modern ? { targets: ESMODULES_TARGET } : {},
 						),
 					],
 					{
@@ -117,7 +124,9 @@ export default babelPlugin.custom(babelCore => {
 				babelOptions.presets = createConfigItems('preset', [
 					{
 						name: '@babel/preset-env',
-						targets: customOptions.targets,
+						targets: customOptions.modern
+							? ESMODULES_TARGET
+							: customOptions.targets,
 						modules: false,
 						loose: true,
 						exclude: ['transform-async-to-generator', 'transform-regenerator'],
@@ -131,6 +140,12 @@ export default babelPlugin.custom(babelCore => {
 				defaultPlugins,
 				babelOptions.plugins || [],
 			);
+
+			babelOptions.generatorOpts = {
+				minified: customOptions.compress,
+				compact: customOptions.compress,
+				shouldPrintComment: comment => /[@#]__PURE__/.test(comment),
+			};
 
 			return babelOptions;
 		},

@@ -12,13 +12,18 @@ const FIXTURES_DIR = resolve(`${__dirname}/../test/fixtures`);
 const DEFAULT_SCRIPT = 'microbundle';
 
 const parseScript = (() => {
-	let parsed;
-	const prog = createProg(_parsed => (parsed = _parsed));
-
 	return script => {
+		let parsed;
+		const prog = createProg(_parsed => (parsed = _parsed));
 		const argv = shellQuote.parse(`node ${script}`);
+
+		// default to non-modern formats
+		let hasFormats = argv.some(arg => /^(--format|-f)$/.test(arg));
+		if (!hasFormats) argv.push('-f', 'es,cjs,umd');
+
 		// assuming {op: 'glob', pattern} for non-string args
 		prog(argv.map(arg => (typeof arg === 'string' ? arg : arg.pattern)));
+
 		return parsed;
 	};
 })();

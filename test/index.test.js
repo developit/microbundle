@@ -58,6 +58,7 @@ describe('fixtures', () => {
 			// we don't realy care about the content of a sourcemap
 			files
 				.filter(file => !/\.map$/.test(file))
+				.sort(file => (/modern/.test(file) ? 1 : 0))
 				.forEach(file => {
 					expect(
 						fs.readFileSync(resolve(dist, file)).toString('utf8'),
