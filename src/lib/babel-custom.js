@@ -107,6 +107,7 @@ export default babelPlugin.custom(babelCore => {
 								preset.options,
 								{
 									modules: false,
+									useBuiltIns: false,
 									exclude: merge(
 										['transform-async-to-generator', 'transform-regenerator'],
 										preset.options.exclude || [],
@@ -129,6 +130,7 @@ export default babelPlugin.custom(babelCore => {
 							: customOptions.targets,
 						modules: false,
 						loose: true,
+						useBuiltIns: false,
 						exclude: ['transform-async-to-generator', 'transform-regenerator'],
 					},
 				]);
