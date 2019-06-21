@@ -153,10 +153,10 @@ Options
 	-h, --help       Displays this message
 
 Examples
-	$ microbundle microbundle --globals react=React,jquery=$
-	$ microbundle microbundle --define API_KEY=1234
-	$ microbundle microbundle --alias react=preact
-	$ microbundle microbundle --no-sourcemap # don't generate sourcemaps
+	$ microbundle build --globals react=React,jquery=$
+	$ microbundle build --define API_KEY=1234
+	$ microbundle build --alias react=preact
+	$ microbundle watch --no-sourcemap # don't generate sourcemaps
 ```
 
 ## 🛣 Roadmap
