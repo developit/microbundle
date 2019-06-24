@@ -1374,6 +1374,55 @@ exports[`fixtures build macro with microbundle 5`] = `
 "
 `;
 
+exports[`fixtures build mangle-json-file with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+mangle-json-file
+  dist
+    mangle-json-file.js
+    mangle-json-file.js.map
+    mangle-json-file.mjs
+    mangle-json-file.mjs.map
+    mangle-json-file.umd.js
+    mangle-json-file.umd.js.map
+  mangle.json
+  package.json
+  src
+    index.js
+    two.js
+
+
+Build \\"mangleJsonFile\\" to dist:
+103 B: mangle-json-file.js.gz
+89 B: mangle-json-file.js.br
+103 B: mangle-json-file.mjs.gz
+95 B: mangle-json-file.mjs.br
+198 B: mangle-json-file.umd.js.gz
+164 B: mangle-json-file.umd.js.br"
+`;
+
+exports[`fixtures build mangle-json-file with microbundle 2`] = `6`;
+
+exports[`fixtures build mangle-json-file with microbundle 3`] = `
+"var o={prop1:1,__p2:2};module.exports=function(){return console.log(o.prop1),console.log(o.__p2),o};
+//# sourceMappingURL=mangle-json-file.js.map
+"
+`;
+
+exports[`fixtures build mangle-json-file with microbundle 4`] = `
+"var o={prop1:1,__p2:2};export default function(){return console.log(o.prop1),console.log(o.__p2),o}
+//# sourceMappingURL=mangle-json-file.mjs.map
+"
+`;
+
+exports[`fixtures build mangle-json-file with microbundle 5`] = `
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e=e||self).mangleJsonFile=n()}(this,function(){var e={prop1:1,__p2:2};return function(){return console.log(e.prop1),console.log(e.__p2),e}});
+//# sourceMappingURL=mangle-json-file.umd.js.map
+"
+`;
+
 exports[`fixtures build minify-config with microbundle 1`] = `
 "Used script: microbundle
 
