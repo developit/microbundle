@@ -423,7 +423,7 @@ Build \\"basicCss\\" to dist:
 
 exports[`fixtures build basic-css with microbundle 2`] = `7`;
 
-exports[`fixtures build basic-css with microbundle 3`] = `".testing{display:flex;color:red;background:#00f}"`;
+exports[`fixtures build basic-css with microbundle 3`] = `".testing{display:-webkit-box;display:flex;color:red;background:#00f}"`;
 
 exports[`fixtures build basic-css with microbundle 4`] = `
 "module.exports=function(){var e=document.createElement(\\"div\\");return e.className=\\"testing\\",e};
