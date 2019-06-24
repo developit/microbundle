@@ -1471,6 +1471,55 @@ exports[`fixtures build minify-config with microbundle 5`] = `
 "
 `;
 
+exports[`fixtures build minify-path-config with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+minify-path-config
+  dist
+    minify-path-config.js
+    minify-path-config.js.map
+    minify-path-config.mjs
+    minify-path-config.mjs.map
+    minify-path-config.umd.js
+    minify-path-config.umd.js.map
+  minify.json
+  package.json
+  src
+    index.js
+    two.js
+
+
+Build \\"minifyPathConfig\\" to dist:
+103 B: minify-path-config.js.gz
+89 B: minify-path-config.js.br
+103 B: minify-path-config.mjs.gz
+95 B: minify-path-config.mjs.br
+200 B: minify-path-config.umd.js.gz
+155 B: minify-path-config.umd.js.br"
+`;
+
+exports[`fixtures build minify-path-config with microbundle 2`] = `6`;
+
+exports[`fixtures build minify-path-config with microbundle 3`] = `
+"var o={prop1:1,__p2:2};module.exports=function(){return console.log(o.prop1),console.log(o.__p2),o};
+//# sourceMappingURL=minify-path-config.js.map
+"
+`;
+
+exports[`fixtures build minify-path-config with microbundle 4`] = `
+"var o={prop1:1,__p2:2};export default function(){return console.log(o.prop1),console.log(o.__p2),o}
+//# sourceMappingURL=minify-path-config.mjs.map
+"
+`;
+
+exports[`fixtures build minify-path-config with microbundle 5`] = `
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e=e||self).minifyPathConfig=n()}(this,function(){var e={prop1:1,__p2:2};return function(){return console.log(e.prop1),console.log(e.__p2),e}});
+//# sourceMappingURL=minify-path-config.umd.js.map
+"
+`;
+
 exports[`fixtures build modern with microbundle 1`] = `
 "Used script: microbundle -f modern
 
