@@ -1520,6 +1520,53 @@ exports[`fixtures build minify-path-config with microbundle 5`] = `
 "
 `;
 
+exports[`fixtures build minify-path-parent-dir-with-cwd with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+minify-path-parent-dir
+  dist
+    minify-path-parent-dir.js
+    minify-path-parent-dir.js.map
+    minify-path-parent-dir.mjs
+    minify-path-parent-dir.mjs.map
+    minify-path-parent-dir.umd.js
+    minify-path-parent-dir.umd.js.map
+  index.js
+  package.json
+  two.js
+
+
+Build \\"minifyPathParentDir\\" to dist:
+103 B: minify-path-parent-dir.js.gz
+89 B: minify-path-parent-dir.js.br
+103 B: minify-path-parent-dir.mjs.gz
+95 B: minify-path-parent-dir.mjs.br
+202 B: minify-path-parent-dir.umd.js.gz
+169 B: minify-path-parent-dir.umd.js.br"
+`;
+
+exports[`fixtures build minify-path-parent-dir-with-cwd with microbundle 2`] = `6`;
+
+exports[`fixtures build minify-path-parent-dir-with-cwd with microbundle 3`] = `
+"var o={prop1:1,__p2:2};module.exports=function(){return console.log(o.prop1),console.log(o.__p2),o};
+//# sourceMappingURL=minify-path-parent-dir.js.map
+"
+`;
+
+exports[`fixtures build minify-path-parent-dir-with-cwd with microbundle 4`] = `
+"var o={prop1:1,__p2:2};export default function(){return console.log(o.prop1),console.log(o.__p2),o}
+//# sourceMappingURL=minify-path-parent-dir.mjs.map
+"
+`;
+
+exports[`fixtures build minify-path-parent-dir-with-cwd with microbundle 5`] = `
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e=e||self).minifyPathParentDir=n()}(this,function(){var e={prop1:1,__p2:2};return function(){return console.log(e.prop1),console.log(e.__p2),e}});
+//# sourceMappingURL=minify-path-parent-dir.umd.js.map
+"
+`;
+
 exports[`fixtures build modern with microbundle 1`] = `
 "Used script: microbundle -f modern
 
