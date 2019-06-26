@@ -169,6 +169,7 @@ Here's what's coming up for Microbundle:
 
 ## 🔨 Built with Microbundle
 
+- [Preact](https://github.com/preactjs/preact) Fast 3kB React alternative with the same modern API. Components & Virtual DOM.
 - [Stockroom](https://github.com/developit/stockroom) Offload your store management to a worker easily.
 - [Microenvi](https://github.com/fwilkerson/microenvi) Bundle, serve, and hot reload with one command.
 - [react-recomponent](https://github.com/philipp-spiess/react-recomponent) Reason-style reducer components for React using ES6 classes.
