@@ -1,0 +1,10 @@
+{
+  "name": "minify-config",
+  "minify": {
+    "mangle": {
+      "properties": {
+        "regex": "^_"
+      }
+    }
+  }
+}
