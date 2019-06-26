@@ -1,0 +1,6 @@
+{
+  "name": "minify-path-parent-dir-with-cwd",
+  "scripts": {
+    "build": "microbundle --cwd ./minify-path-parent-dir"
+  }
+}
