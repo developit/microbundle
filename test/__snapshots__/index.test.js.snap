@@ -254,25 +254,25 @@ Directory tree:
 
 basic-compress-false
   dist
-    basic-no-compress.js
-    basic-no-compress.js.map
-    basic-no-compress.mjs
-    basic-no-compress.mjs.map
-    basic-no-compress.umd.js
-    basic-no-compress.umd.js.map
+    basic-compress-false.js
+    basic-compress-false.js.map
+    basic-compress-false.mjs
+    basic-compress-false.mjs.map
+    basic-compress-false.umd.js
+    basic-compress-false.umd.js.map
   package.json
   src
     index.js
     two.js
 
 
-Build \\"basicNoCompress\\" to dist:
-303 B: basic-no-compress.js.gz
-244 B: basic-no-compress.js.br
-301 B: basic-no-compress.mjs.gz
-244 B: basic-no-compress.mjs.br
-422 B: basic-no-compress.umd.js.gz
-349 B: basic-no-compress.umd.js.br"
+Build \\"basicCompressFalse\\" to dist:
+303 B: basic-compress-false.js.gz
+244 B: basic-compress-false.js.br
+301 B: basic-compress-false.mjs.gz
+244 B: basic-compress-false.mjs.br
+424 B: basic-compress-false.umd.js.gz
+351 B: basic-compress-false.umd.js.br"
 `;
 
 exports[`fixtures build basic-compress-false with microbundle 2`] = `6`;
@@ -309,7 +309,7 @@ var index = (function () {
 });
 
 module.exports = index;
-//# sourceMappingURL=basic-no-compress.js.map
+//# sourceMappingURL=basic-compress-false.js.map
 "
 `;
 
@@ -345,7 +345,7 @@ var index = (function () {
 });
 
 export default index;
-//# sourceMappingURL=basic-no-compress.mjs.map
+//# sourceMappingURL=basic-compress-false.mjs.map
 "
 `;
 
@@ -353,7 +353,7 @@ exports[`fixtures build basic-compress-false with microbundle 5`] = `
 "(function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
-	(global = global || self, global.basicNoCompress = factory());
+	(global = global || self, global.basicCompressFalse = factory());
 }(this, function () {
 	var two = function two() {
 	  try {
@@ -388,7 +388,7 @@ exports[`fixtures build basic-compress-false with microbundle 5`] = `
 	return index;
 
 }));
-//# sourceMappingURL=basic-no-compress.umd.js.map
+//# sourceMappingURL=basic-compress-false.umd.js.map
 "
 `;
 
@@ -1574,24 +1574,24 @@ Directory tree:
 
 modern
   dist
-    basic-lib.modern.mjs
-    basic-lib.modern.mjs.map
+    modern-lib.modern.mjs
+    modern-lib.modern.mjs.map
   package.json
   src
     index.js
     two.js
 
 
-Build \\"basicLib\\" to dist:
-159 B: basic-lib.modern.mjs.gz
-114 B: basic-lib.modern.mjs.br"
+Build \\"modernLib\\" to dist:
+159 B: modern-lib.modern.mjs.gz
+114 B: modern-lib.modern.mjs.br"
 `;
 
 exports[`fixtures build modern with microbundle 2`] = `2`;
 
 exports[`fixtures build modern with microbundle 3`] = `
 "async function n(){for(var n=arguments.length,r=new Array(n),a=0;a<n;a++)r[a]=arguments[a];return r.reduce((n,r)=>n+r,0)}export default async function(){return[await n(...arguments),await n(...arguments)]}
-//# sourceMappingURL=basic-lib.modern.mjs.map
+//# sourceMappingURL=modern-lib.modern.mjs.map
 "
 `;
 
