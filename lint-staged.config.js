@@ -1,7 +1,7 @@
 module.exports = {
-	linters: {
-		'{src,test}/**/*.js': ['eslint --fix', 'git add'],
-		'*.md': ['prettier --write', 'git add'],
-	},
-	ignore: ['**/dist/**/*.js'],
+	'{src,test}/**/*.js': fileNames =>
+		fileNames
+			.filter(fileName => !fileName.includes('/dist/'))
+			.map(fileName => [`eslint --fix ${fileName}`, `git add ${fileName}`]),
+	'*.md': ['prettier --write', 'git add'],
 };

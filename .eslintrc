@@ -10,7 +10,8 @@
   "rules": {
     "brace-style": "off",
     "comma-dangle": ["warn", "always-multiline"],
-    "indent": "off"
+    "indent": "off",
+    "require-atomic-updates": "off"
   },
   "settings": {
     "react": {

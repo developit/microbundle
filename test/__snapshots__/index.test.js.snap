@@ -739,8 +739,8 @@ basic-ts
 Build \\"basicLibTs\\" to dist:
 104 B: basic-lib-ts.js.gz
 76 B: basic-lib-ts.js.br
-97 B: basic-lib-ts.mjs.gz
-73 B: basic-lib-ts.mjs.br
+104 B: basic-lib-ts.mjs.gz
+82 B: basic-lib-ts.mjs.br
 187 B: basic-lib-ts.umd.js.gz
 144 B: basic-lib-ts.umd.js.br"
 `;
@@ -754,7 +754,7 @@ exports[`fixtures build basic-ts with microbundle 3`] = `
 `;
 
 exports[`fixtures build basic-ts with microbundle 4`] = `
-"export default new(function(){function n(){}return n.prototype.drive=function(n){return!0},n}());
+"var n=new(function(){function n(){}return n.prototype.drive=function(n){return!0},n}());export default n;
 //# sourceMappingURL=basic-lib-ts.mjs.map
 "
 `;
@@ -806,8 +806,8 @@ basic-tsx
 Build \\"basicLibTsx\\" to dist:
 235 B: basic-lib-tsx.js.gz
 188 B: basic-lib-tsx.js.br
-239 B: basic-lib-tsx.mjs.gz
-191 B: basic-lib-tsx.mjs.br
+236 B: basic-lib-tsx.mjs.gz
+190 B: basic-lib-tsx.mjs.br
 317 B: basic-lib-tsx.umd.js.gz
 260 B: basic-lib-tsx.umd.js.br"
 `;
@@ -821,7 +821,7 @@ exports[`fixtures build basic-tsx with microbundle 3`] = `
 `;
 
 exports[`fixtures build basic-tsx with microbundle 4`] = `
-"var r=function(r,n){for(var e=arguments.length,t=new Array(e>2?e-2:0),o=2;o<e;o++)t[o-2]=arguments[o];return{tag:r,props:n,children:t}};export default(function(){function n(){}return n.prototype.render=function(){return r(\\"div\\",{id:\\"app\\"},r(\\"h1\\",null,\\"Hello, World!\\"),r(\\"p\\",null,\\"A JSX demo.\\"))},n}());
+"var r=function(r,n){for(var e=arguments.length,t=new Array(e>2?e-2:0),o=2;o<e;o++)t[o-2]=arguments[o];return{tag:r,props:n,children:t}},n=function(){function n(){}return n.prototype.render=function(){return r(\\"div\\",{id:\\"app\\"},r(\\"h1\\",null,\\"Hello, World!\\"),r(\\"p\\",null,\\"A JSX demo.\\"))},n}();export default n;
 //# sourceMappingURL=basic-lib-tsx.mjs.map
 "
 `;
@@ -911,8 +911,8 @@ class-decorators-ts
 Build \\"classDecoratorsTs\\" to dist:
 333 B: class-decorators-ts.js.gz
 276 B: class-decorators-ts.js.br
-331 B: class-decorators-ts.mjs.gz
-271 B: class-decorators-ts.mjs.br
+333 B: class-decorators-ts.mjs.gz
+278 B: class-decorators-ts.mjs.br
 401 B: class-decorators-ts.umd.js.gz
 341 B: class-decorators-ts.umd.js.br"
 `;
@@ -926,7 +926,7 @@ exports[`fixtures build class-decorators-ts with microbundle 3`] = `
 `;
 
 exports[`fixtures build class-decorators-ts with microbundle 4`] = `
-"var e=function(){function e(e){this.greeting=e}return e.prototype.greet=function(){return\\"Hello, \\"+this.greeting},e}();export default new(e=function(e,t,r,n){var o,c=arguments.length,l=c<3?t:null===n?n=Object.getOwnPropertyDescriptor(t,r):n;if(\\"object\\"==typeof Reflect&&\\"function\\"==typeof Reflect.decorate)l=Reflect.decorate(e,t,r,n);else for(var f=e.length-1;f>=0;f--)(o=e[f])&&(l=(c<3?o(l):c>3?o(t,r,l):o(t,r))||l);return c>3&&l&&Object.defineProperty(t,r,l),l}([function(e){Object.seal(e),Object.seal(e.prototype)}],e))(\\"Hello World\\");
+"var e=function(){function e(e){this.greeting=e}return e.prototype.greet=function(){return\\"Hello, \\"+this.greeting},e}(),t=new(e=function(e,t,r,n){var o,c=arguments.length,l=c<3?t:null===n?n=Object.getOwnPropertyDescriptor(t,r):n;if(\\"object\\"==typeof Reflect&&\\"function\\"==typeof Reflect.decorate)l=Reflect.decorate(e,t,r,n);else for(var f=e.length-1;f>=0;f--)(o=e[f])&&(l=(c<3?o(l):c>3?o(t,r,l):o(t,r))||l);return c>3&&l&&Object.defineProperty(t,r,l),l}([function(e){Object.seal(e),Object.seal(e.prototype)}],e))(\\"Hello World\\");export default t;
 //# sourceMappingURL=class-decorators-ts.mjs.map
 "
 `;
@@ -969,8 +969,8 @@ class-properties
 Build \\"classProperties\\" to dist:
 93 B: class-properties.js.gz
 79 B: class-properties.js.br
-89 B: class-properties.mjs.gz
-79 B: class-properties.mjs.br
+96 B: class-properties.mjs.gz
+85 B: class-properties.mjs.br
 198 B: class-properties.umd.js.gz
 150 B: class-properties.umd.js.br"
 `;
@@ -984,7 +984,7 @@ exports[`fixtures build class-properties with microbundle 3`] = `
 `;
 
 exports[`fixtures build class-properties with microbundle 4`] = `
-"var t=function(){this.baz=3};t.bar=2;export default new t;export{t as Foo};
+"var a=function(){this.baz=3};a.bar=2;var r=new a;export default r;export{a as Foo};
 //# sourceMappingURL=class-properties.mjs.map
 "
 `;
@@ -1300,8 +1300,8 @@ jsx
 Build \\"jsx\\" to dist:
 262 B: jsx.js.gz
 209 B: jsx.js.br
-261 B: jsx.mjs.gz
-208 B: jsx.mjs.br
+263 B: jsx.mjs.gz
+212 B: jsx.mjs.br
 335 B: jsx.umd.js.gz
 278 B: jsx.umd.js.br"
 `;
@@ -1315,7 +1315,7 @@ exports[`fixtures build jsx with microbundle 3`] = `
 `;
 
 exports[`fixtures build jsx with microbundle 4`] = `
-"var n=function(n,r){for(var e=arguments.length,t=new Array(e>2?e-2:0),l=2;l<e;l++)t[l-2]=arguments[l];return{tag:n,props:r,children:t}},r=function(n){return n.children};export default(function(){function e(){}return e.prototype.render=function(){return n(\\"div\\",{id:\\"app\\"},n(\\"h1\\",null,\\"Hello, World!\\"),n(\\"p\\",null,\\"A JSX demo.\\"),n(r,null,n(\\"p\\",null,\\"Test fragment\\")))},e}());
+"var n=function(n,r){for(var e=arguments.length,t=new Array(e>2?e-2:0),l=2;l<e;l++)t[l-2]=arguments[l];return{tag:n,props:r,children:t}},r=function(n){return n.children},e=function(){function e(){}return e.prototype.render=function(){return n(\\"div\\",{id:\\"app\\"},n(\\"h1\\",null,\\"Hello, World!\\"),n(\\"p\\",null,\\"A JSX demo.\\"),n(r,null,n(\\"p\\",null,\\"Test fragment\\")))},e}();export default e;
 //# sourceMappingURL=jsx.mjs.map
 "
 `;
@@ -1810,8 +1810,8 @@ ts-mixed-exports
 Build \\"tsMixedExports\\" to dist:
 112 B: ts-mixed-exports.js.gz
 89 B: ts-mixed-exports.js.br
-113 B: ts-mixed-exports.mjs.gz
-98 B: ts-mixed-exports.mjs.br
+115 B: ts-mixed-exports.mjs.gz
+100 B: ts-mixed-exports.mjs.br
 213 B: ts-mixed-exports.umd.js.gz
 171 B: ts-mixed-exports.umd.js.br"
 `;
@@ -1843,7 +1843,7 @@ exports[`fixtures build ts-mixed-exports with microbundle 5`] = `
 `;
 
 exports[`fixtures build ts-mixed-exports with microbundle 6`] = `
-"var t=function(){function t(){}return t.prototype.drive=function(t){return!0},t}();export default new t;export{t as Car};
+"var t=function(){function t(){}return t.prototype.drive=function(t){return!0},t}(),n=new t;export default n;export{t as Car};
 //# sourceMappingURL=ts-mixed-exports.mjs.map
 "
 `;
