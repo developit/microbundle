@@ -81,7 +81,7 @@
     "typescript": "^3.5.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.4.4",
+    "@babel/cli": "^7.5.0",
     "@babel/node": "^7.4.5",
     "@babel/plugin-proposal-throw-expressions": "^7.2.0",
     "@babel/preset-env": "^7.4.5",
