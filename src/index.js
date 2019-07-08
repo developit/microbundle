@@ -439,7 +439,12 @@ function createConfig(options, entry, format, writeMeta) {
 	let nameCache = {};
 	const bareNameCache = nameCache;
 	// Support "minify" field and legacy "mangle" field via package.json:
-	let minifyOptions = options.pkg.minify || options.pkg.mangle || {};
+	const rawMinifyValue = options.pkg.minify || options.pkg.mangle || {};
+	let minifyOptions = typeof rawMinifyValue === 'string' ? {} : rawMinifyValue;
+	const getNameCachePath =
+		typeof rawMinifyValue === 'string'
+			? () => resolve(options.cwd, rawMinifyValue)
+			: () => resolve(options.cwd, 'mangle.json');
 
 	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
 
@@ -449,9 +454,7 @@ function createConfig(options, entry, format, writeMeta) {
 
 	function loadNameCache() {
 		try {
-			nameCache = JSON.parse(
-				fs.readFileSync(resolve(options.cwd, 'mangle.json'), 'utf8'),
-			);
+			nameCache = JSON.parse(fs.readFileSync(getNameCachePath(), 'utf8'));
 			// mangle.json can contain a "minify" field, same format as the pkg.mangle:
 			if (nameCache.minify) {
 				minifyOptions = Object.assign(
@@ -593,7 +596,7 @@ function createConfig(options, entry, format, writeMeta) {
 							writeBundle() {
 								if (writeMeta && nameCache) {
 									fs.writeFile(
-										resolve(options.cwd, 'mangle.json'),
+										getNameCachePath(),
 										JSON.stringify(nameCache, null, 2),
 									);
 								}
