@@ -102,6 +102,7 @@ export default babelPlugin.custom(babelCore => {
 							merge(
 								{
 									loose: true,
+									useBuiltIns: false,
 									targets: customOptions.targets,
 								},
 								preset.options,
@@ -129,6 +130,7 @@ export default babelPlugin.custom(babelCore => {
 							: customOptions.targets,
 						modules: false,
 						loose: true,
+						useBuiltIns: false,
 						exclude: ['transform-async-to-generator', 'transform-regenerator'],
 					},
 				]);
