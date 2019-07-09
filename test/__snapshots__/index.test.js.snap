@@ -443,6 +443,54 @@ exports[`fixtures build basic-css with microbundle 6`] = `
 "
 `;
 
+exports[`fixtures build basic-flow with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+basic-flow
+  dist
+    basic-lib-flow.js
+    basic-lib-flow.js.map
+    basic-lib-flow.mjs
+    basic-lib-flow.mjs.map
+    basic-lib-flow.umd.js
+    basic-lib-flow.umd.js.map
+  package.json
+  src
+    fruits.js
+    index.js
+
+
+Build \\"basicLibFlow\\" to dist:
+57 B: basic-lib-flow.js.gz
+43 B: basic-lib-flow.js.br
+56 B: basic-lib-flow.mjs.gz
+42 B: basic-lib-flow.mjs.br
+172 B: basic-lib-flow.umd.js.gz
+133 B: basic-lib-flow.umd.js.br"
+`;
+
+exports[`fixtures build basic-flow with microbundle 2`] = `6`;
+
+exports[`fixtures build basic-flow with microbundle 3`] = `
+"module.exports=[\\"banana\\",\\"raspberry\\"];
+//# sourceMappingURL=basic-lib-flow.js.map
+"
+`;
+
+exports[`fixtures build basic-flow with microbundle 4`] = `
+"export default[\\"banana\\",\\"raspberry\\"];
+//# sourceMappingURL=basic-lib-flow.mjs.map
+"
+`;
+
+exports[`fixtures build basic-flow with microbundle 5`] = `
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=[\\"banana\\",\\"raspberry\\"]:\\"function\\"==typeof define&&define.amd?define(function(){return[\\"banana\\",\\"raspberry\\"]}):(e=e||self).basicLibFlow=[\\"banana\\",\\"raspberry\\"]}(this);
+//# sourceMappingURL=basic-lib-flow.umd.js.map
+"
+`;
+
 exports[`fixtures build basic-json with microbundle 1`] = `
 "Used script: microbundle
 

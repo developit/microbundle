@@ -64,6 +64,9 @@ export default babelPlugin.custom(babelCore => {
 						pragma: customOptions.jsx || 'h',
 						pragmaFrag: customOptions.jsxFragment || 'Fragment',
 					},
+					!customOptions.typescript && {
+						name: '@babel/plugin-transform-flow-strip-types',
+					},
 					isTruthy(customOptions.defines) && {
 						name: 'babel-plugin-transform-replace-expressions',
 						replace: customOptions.defines,
