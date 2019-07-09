@@ -1,0 +1,15 @@
+{
+  "minify": {
+    "mangle": {
+      "properties": {
+        "regex": "^_"
+      }
+    }
+  },
+  "props": {
+    "cname": 6,
+    "props": {
+      "$_prop2": "__p2"
+    }
+  }
+}

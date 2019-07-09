@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import { red, dim } from 'kleur';
 import { stderr } from './utils';
 
 export default function(err) {
@@ -9,7 +9,7 @@ export default function(err) {
 		? `(${error.plugin} plugin) ${description}`
 		: description;
 
-	stderr(chalk.bold.red(message));
+	stderr(red().bold(message));
 
 	if (error.loc) {
 		stderr();
@@ -18,10 +18,10 @@ export default function(err) {
 
 	if (error.frame) {
 		stderr();
-		stderr(chalk.dim(error.frame));
+		stderr(dim(error.frame));
 	} else if (err.stack) {
 		const headlessStack = error.stack.replace(message, '');
-		stderr(chalk.dim(headlessStack));
+		stderr(dim(headlessStack));
 	}
 
 	stderr();

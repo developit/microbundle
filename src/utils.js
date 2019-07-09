@@ -14,3 +14,11 @@ export const isFile = name =>
 		.catch(() => false);
 export const stdout = console.log.bind(console); // eslint-disable-line no-console
 export const stderr = console.error.bind(console);
+
+export const isTruthy = obj => {
+	if (!obj) {
+		return false;
+	}
+
+	return obj.constructor !== Object || Object.keys(obj).length > 0;
+};
