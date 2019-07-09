@@ -1014,30 +1014,30 @@ custom-babelrc
 
 
 Build \\"customBabelrc\\" to dist:
-210 B: custom-babelrc.js.gz
-165 B: custom-babelrc.js.br
-214 B: custom-babelrc.mjs.gz
-170 B: custom-babelrc.mjs.br
-301 B: custom-babelrc.umd.js.gz
-252 B: custom-babelrc.umd.js.br"
+234 B: custom-babelrc.js.gz
+184 B: custom-babelrc.js.br
+236 B: custom-babelrc.mjs.gz
+191 B: custom-babelrc.mjs.br
+327 B: custom-babelrc.umd.js.gz
+275 B: custom-babelrc.umd.js.br"
 `;
 
 exports[`fixtures build custom-babelrc with microbundle 2`] = `6`;
 
 exports[`fixtures build custom-babelrc with microbundle 3`] = `
-"exports.MyClass=class{constructor(){var e;e=[\\"foo\\",\\"bar\\"],\\"myFields\\"in this?Object.defineProperty(this,\\"myFields\\",{value:e,enumerable:!0,configurable:!0,writable:!0}):this.myFields=e}foo(){try{return this.myFields.find(e=>\\"bar\\"===e)}catch(e){return Promise.reject(e)}}};
+"require(\\"core-js/modules/es.promise\\"),exports.MyClass=class{constructor(){var e;e=[\\"foo\\",\\"bar\\"],\\"myFields\\"in this?Object.defineProperty(this,\\"myFields\\",{value:e,enumerable:!0,configurable:!0,writable:!0}):this.myFields=e}foo(){try{return this.myFields.find(e=>\\"bar\\"===e)}catch(e){return Promise.reject(e)}}};
 //# sourceMappingURL=custom-babelrc.js.map
 "
 `;
 
 exports[`fixtures build custom-babelrc with microbundle 4`] = `
-"class e{constructor(){var e;e=[\\"foo\\",\\"bar\\"],\\"myFields\\"in this?Object.defineProperty(this,\\"myFields\\",{value:e,enumerable:!0,configurable:!0,writable:!0}):this.myFields=e}foo(){try{return this.myFields.find(e=>\\"bar\\"===e)}catch(e){return Promise.reject(e)}}}export{e as MyClass};
+"import\\"core-js/modules/es.promise\\";class e{constructor(){var e;e=[\\"foo\\",\\"bar\\"],\\"myFields\\"in this?Object.defineProperty(this,\\"myFields\\",{value:e,enumerable:!0,configurable:!0,writable:!0}):this.myFields=e}foo(){try{return this.myFields.find(e=>\\"bar\\"===e)}catch(e){return Promise.reject(e)}}}export{e as MyClass};
 //# sourceMappingURL=custom-babelrc.mjs.map
 "
 `;
 
 exports[`fixtures build custom-babelrc with microbundle 5`] = `
-"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?t(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],t):t((e=e||self).customBabelrc={})}(this,function(e){e.MyClass=class{constructor(){var e;e=[\\"foo\\",\\"bar\\"],\\"myFields\\"in this?Object.defineProperty(this,\\"myFields\\",{value:e,enumerable:!0,configurable:!0,writable:!0}):this.myFields=e}foo(){try{return this.myFields.find(e=>\\"bar\\"===e)}catch(e){return Promise.reject(e)}}}});
+"!function(e,s){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?s(exports,require(\\"core-js/modules/es.promise\\")):\\"function\\"==typeof define&&define.amd?define([\\"exports\\",\\"core-js/modules/es.promise\\"],s):s((e=e||self).customBabelrc={})}(this,function(e){e.MyClass=class{constructor(){var e;e=[\\"foo\\",\\"bar\\"],\\"myFields\\"in this?Object.defineProperty(this,\\"myFields\\",{value:e,enumerable:!0,configurable:!0,writable:!0}):this.myFields=e}foo(){try{return this.myFields.find(e=>\\"bar\\"===e)}catch(e){return Promise.reject(e)}}}});
 //# sourceMappingURL=custom-babelrc.umd.js.map
 "
 `;
