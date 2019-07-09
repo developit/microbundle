@@ -456,7 +456,6 @@ basic-flow
     basic-lib-flow.mjs.map
     basic-lib-flow.umd.js
     basic-lib-flow.umd.js.map
-  node_modules
   package.json
   src
     fruits.js
