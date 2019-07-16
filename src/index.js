@@ -422,11 +422,11 @@ function createConfig(options, entry, format, writeMeta) {
 	let moduleMain = replaceName(
 		pkg.module && !pkg.module.match(/src\//)
 			? pkg.module
-			: pkg['jsnext:main'] || 'x.mjs',
+			: pkg['jsnext:main'] || 'x.esm.js',
 		mainNoExtension,
 	);
 	let modernMain = replaceName(
-		(pkg.syntax && pkg.syntax.esmodules) || pkg.esmodule || 'x.modern.mjs',
+		(pkg.syntax && pkg.syntax.esmodules) || pkg.esmodule || 'x.modern.js',
 		mainNoExtension,
 	);
 	let cjsMain = replaceName(pkg['cjs:main'] || 'x.js', mainNoExtension);
