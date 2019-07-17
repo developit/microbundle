@@ -82,7 +82,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
-    "@babel/node": "^7.5.0",
+    "@babel/node": "^7.5.5",
     "@babel/plugin-proposal-throw-expressions": "^7.2.0",
     "babel-jest": "^24.8.0",
     "cross-env": "^5.2.0",
