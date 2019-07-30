@@ -536,6 +536,7 @@ function createConfig(options, entry, format, writeMeta) {
 									jsxFactory: options.jsx || 'h',
 								},
 							},
+							tsconfig: options.tsconfig,
 							tsconfigOverride: {
 								compilerOptions: {
 									target: 'esnext',
