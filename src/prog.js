@@ -45,7 +45,7 @@ export default handler => {
 		)
 		.option(
 			'--tsconfig',
-			'Specify your custom path to tsconfig.json for typescript project',
+			'Specify the path to a custom tsconfig.json',
 		)
 		.example('microbundle build --tsconfig tsconfig.build.json');
 
