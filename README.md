@@ -150,7 +150,7 @@ Options
 	--sourcemap      Generate source map  (default true)
 	--raw            Show raw byte size  (default false)
 	--jsx            A custom JSX pragma like React.createElement (default: h)
-	--tsconfig       Specify your custom path to tsconfig.json for typescript project
+	--tsconfig       Specify the path to a custom tsconfig.json
 	-h, --help       Displays this message
 
 Examples
