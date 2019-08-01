@@ -150,6 +150,7 @@ Options
 	--sourcemap      Generate source map  (default true)
 	--raw            Show raw byte size  (default false)
 	--jsx            A custom JSX pragma like React.createElement (default: h)
+	--tsconfig       Specify the path to a custom tsconfig.json
 	-h, --help       Displays this message
 
 Examples
@@ -157,6 +158,7 @@ Examples
 	$ microbundle build --define API_KEY=1234
 	$ microbundle build --alias react=preact
 	$ microbundle watch --no-sourcemap # don't generate sourcemaps
+	$ microbundle build --tsconfig tsconfig.build.json
 ```
 
 ## 🛣 Roadmap
