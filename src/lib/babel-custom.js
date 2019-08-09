@@ -61,8 +61,8 @@ export default babelPlugin.custom(babelCore => {
 				[
 					{
 						name: '@babel/plugin-transform-react-jsx',
-						pragma: customOptions.jsx || 'h',
-						pragmaFrag: customOptions.jsxFragment || 'Fragment',
+						pragma: customOptions.pragma || 'h',
+						pragmaFrag: customOptions.pragmaFrag || 'Fragment',
 					},
 					!customOptions.typescript && {
 						name: '@babel/plugin-transform-flow-strip-types',
