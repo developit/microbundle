@@ -98,7 +98,7 @@
     "lint-staged": "^9.2.0",
     "prettier": "^1.18.2",
     "regenerator-runtime": "^0.13.3",
-    "rimraf": "^2.6.3",
+    "rimraf": "^3.0.0",
     "shell-quote": "^1.6.1",
     "strip-ansi": "^5.2.0",
     "travis-size-report": "^1.1.0"
