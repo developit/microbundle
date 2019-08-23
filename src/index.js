@@ -87,6 +87,14 @@ const parseMappingArgument = (globalStrings, processValue) => {
 	return globals;
 };
 
+// Parses values of the form "$=jQuery,React=react" into key-value object pairs.
+const parseMappingArgumentAlias = aliasStrings => {
+	return aliasStrings.split(',').map(str => {
+		let [key, value] = str.split('=');
+		return { find: key, replacement: value };
+	});
+};
+
 // Extensions to use when resolving modules
 const EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs'];
 
@@ -370,8 +378,8 @@ function createConfig(options, entry, format, writeMeta) {
 	}
 
 	const moduleAliases = options.alias
-		? parseMappingArgument(options.alias)
-		: {};
+		? parseMappingArgumentAlias(options.alias)
+		: [];
 
 	const peerDeps = Object.keys(pkg.peerDependencies || {});
 	if (options.external === 'none') {
@@ -500,12 +508,11 @@ function createConfig(options, entry, format, writeMeta) {
 						inject: false,
 						extract: !!writeMeta,
 					}),
-					Object.keys(moduleAliases).length > 0 &&
-						alias(
-							Object.assign({}, moduleAliases, {
-								resolve: EXTENSIONS,
-							}),
-						),
+					moduleAliases.length > 0 &&
+						alias({
+							resolve: EXTENSIONS,
+							entries: moduleAliases,
+						}),
 					nodeResolve({
 						mainFields: ['module', 'jsnext', 'main'],
 						browser: options.target !== 'node',
