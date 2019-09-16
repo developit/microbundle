@@ -25,7 +25,11 @@ export default handler => {
 		.option('--format, -f', 'Only build specified formats', DEFAULT_FORMATS)
 		.option('--watch, -w', 'Rebuilds on any change', false)
 		.option('--target', 'Specify your target environment (node or web)', 'web')
-		.option('--external', `Specify external dependencies, or 'none'`)
+		.option(
+			'--external',
+			`comma-separated list of regex and module-names, or 'none'`,
+		)
+		.example('microbundle --external /\\.jp(e)?g$/i,some_package')
 		.option('--globals', `Specify globals dependencies, or 'none'`)
 		.example('microbundle --globals react=React,jquery=$')
 		.option('--define', 'Replace constants with hard-coded values')

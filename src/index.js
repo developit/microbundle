@@ -391,19 +391,31 @@ function createConfig(options, entry, format, writeMeta) {
 		: [];
 
 	const peerDeps = Object.keys(pkg.peerDependencies || {});
+	const deps = Object.keys(pkg.dependencies || {});
 	if (options.external === 'none') {
 		// bundle everything (external=[])
 	} else if (options.external) {
-		external = external.concat(peerDeps).concat(options.external.split(','));
-	} else {
-		external = external
+		let containsPackage = false;
+		external = options.external
+			.split(',')
+			.map(ext => {
+				const match = ext.match(/^\/(.*)\/(i?)$/);
+				if (match) {
+					return new RegExp(match[1], match[2]);
+				}
+
+				containsPackage = true;
+				return ext;
+			})
 			.concat(peerDeps)
-			.concat(Object.keys(pkg.dependencies || {}));
+			.concat(containsPackage ? [] : deps);
+	} else {
+		external = external.concat(peerDeps).concat(deps);
 	}
 
 	let globals = external.reduce((globals, name) => {
 		// valid JS identifiers are usually library globals:
-		if (name.match(/^[a-z_$][a-z0-9_$]*$/)) {
+		if (name.match && name.match(/^[a-z_$][a-z0-9_$]*$/)) {
 			globals[name] = name;
 		}
 		return globals;
@@ -465,9 +477,19 @@ function createConfig(options, entry, format, writeMeta) {
 
 	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
 
-	const externalPredicate = new RegExp(`^(${external.join('|')})($|/)`);
+	const externalPackages = external.filter(ext => typeof ext === 'string');
+	const externalPredicate = new RegExp(`^(${externalPackages.join('|')})($|/)`);
+	const externalRegexList = external
+		.filter(ext => ext instanceof RegExp)
+		.concat(externalPredicate);
 	const externalTest =
-		external.length === 0 ? () => false : id => externalPredicate.test(id);
+		external.length === 0
+			? () => false
+			: id =>
+					externalRegexList.reduce(
+						(excluded, regex) => excluded || regex.test(id),
+						false,
+					);
 
 	function loadNameCache() {
 		try {

@@ -139,7 +139,7 @@ Options
 	-f, --format     Only build specified formats  (default modern,es,cjs,umd)
 	-w, --watch      Rebuilds on any change  (default false)
 	--target         Specify your target environment (node or web)  (default web)
-	--external       Specify external dependencies, or 'none'
+	--external       comma-separated list of regex and module-names, or 'none'
 	--globals        Specify globals dependencies, or 'none'
 	--define         Replace constants with hard-coded values
 	--alias          Map imports to different modules
@@ -154,6 +154,7 @@ Options
 	-h, --help       Displays this message
 
 Examples
+	$ microbundle build --external /\.jp(e)?g$/i,some_package
 	$ microbundle build --globals react=React,jquery=$
 	$ microbundle build --define API_KEY=1234
 	$ microbundle build --alias react=preact

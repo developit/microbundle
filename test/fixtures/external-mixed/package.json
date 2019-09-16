@@ -1,0 +1,13 @@
+{
+	"name": "external-mixed",
+	"scripts": {
+		"build": "microbundle --external /\\.custom$/i,handlebars"
+	},
+	"dependencies": {
+		"handlebars": "*",
+		"some_pkg": "*"
+	},
+	"peerDependencies": {
+		"express": "*"
+	}
+}

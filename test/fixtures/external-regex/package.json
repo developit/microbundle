@@ -1,0 +1,12 @@
+{
+	"name": "external-regex",
+	"scripts": {
+		"build": "microbundle --external /\\.custom$/i"
+	},
+	"dependencies": {
+		"handlebars": "*"
+	},
+	"peerDependencies": {
+		"express": "*"
+	}
+}

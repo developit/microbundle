@@ -1328,6 +1328,106 @@ exports[`fixtures build esnext-ts with microbundle 6`] = `
 "
 `;
 
+exports[`fixtures build external-mixed with microbundle 1`] = `
+"Used script: microbundle --external /\\\\.custom$/i,handlebars
+
+Directory tree:
+
+external-mixed
+  dist
+    external-mixed.esm.js
+    external-mixed.esm.js.map
+    external-mixed.js
+    external-mixed.js.map
+    external-mixed.umd.js
+    external-mixed.umd.js.map
+  node_modules
+    some_pkg
+      foo.custom
+      index.js
+      package.json
+  package.json
+  src
+    index.js
+
+
+Build \\"externalMixed\\" to dist:
+164 B: external-mixed.js.gz
+122 B: external-mixed.js.br
+127 B: external-mixed.esm.js.gz
+99 B: external-mixed.esm.js.br
+287 B: external-mixed.umd.js.gz
+232 B: external-mixed.umd.js.br"
+`;
+
+exports[`fixtures build external-mixed with microbundle 2`] = `6`;
+
+exports[`fixtures build external-mixed with microbundle 3`] = `
+"import r from\\"some_pkg/foo.custom\\";import o from\\"express\\";import e from\\"handlebars\\";function m(){return r(o(e())).reverse()}export{m as bar};
+//# sourceMappingURL=external-mixed.esm.js.map
+"
+`;
+
+exports[`fixtures build external-mixed with microbundle 4`] = `
+"function e(e){return e&&\\"object\\"==typeof e&&\\"default\\"in e?e.default:e}var r=e(require(\\"some_pkg/foo.custom\\")),t=e(require(\\"express\\")),u=e(require(\\"handlebars\\"));exports.bar=function(){return r(t(u())).reverse()};
+//# sourceMappingURL=external-mixed.js.map
+"
+`;
+
+exports[`fixtures build external-mixed with microbundle 5`] = `
+"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?r(exports,require(\\"some_pkg/foo.custom\\"),require(\\"express\\"),require(\\"handlebars\\")):\\"function\\"==typeof define&&define.amd?define([\\"exports\\",\\"some_pkg/foo.custom\\",\\"express\\",\\"handlebars\\"],r):r((e=e||self).externalMixed={},e.custom,e.express,e.handlebars)}(this,function(e,r,t,o){r=r&&r.hasOwnProperty(\\"default\\")?r.default:r,t=t&&t.hasOwnProperty(\\"default\\")?t.default:t,o=o&&o.hasOwnProperty(\\"default\\")?o.default:o,e.bar=function(){return r(t(o())).reverse()}});
+//# sourceMappingURL=external-mixed.umd.js.map
+"
+`;
+
+exports[`fixtures build external-regex with microbundle 1`] = `
+"Used script: microbundle --external /\\\\.custom$/i
+
+Directory tree:
+
+external-regex
+  dist
+    external-regex.esm.js
+    external-regex.esm.js.map
+    external-regex.js
+    external-regex.js.map
+    external-regex.umd.js
+    external-regex.umd.js.map
+  package.json
+  src
+    foo.custom
+    index.js
+
+
+Build \\"externalRegex\\" to dist:
+151 B: external-regex.js.gz
+110 B: external-regex.js.br
+112 B: external-regex.esm.js.gz
+88 B: external-regex.esm.js.br
+272 B: external-regex.umd.js.gz
+225 B: external-regex.umd.js.br"
+`;
+
+exports[`fixtures build external-regex with microbundle 2`] = `6`;
+
+exports[`fixtures build external-regex with microbundle 3`] = `
+"import o from\\"foo.custom\\";import r from\\"express\\";import m from\\"handlebars\\";function t(){return o(r(m()))}export{t as bar};
+//# sourceMappingURL=external-regex.esm.js.map
+"
+`;
+
+exports[`fixtures build external-regex with microbundle 4`] = `
+"function e(e){return e&&\\"object\\"==typeof e&&\\"default\\"in e?e.default:e}var r=e(require(\\"foo.custom\\")),t=e(require(\\"express\\")),u=e(require(\\"handlebars\\"));exports.bar=function(){return r(t(u()))};
+//# sourceMappingURL=external-regex.js.map
+"
+`;
+
+exports[`fixtures build external-regex with microbundle 5`] = `
+"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?t(exports,require(\\"foo.custom\\"),require(\\"express\\"),require(\\"handlebars\\")):\\"function\\"==typeof define&&define.amd?define([\\"exports\\",\\"foo.custom\\",\\"express\\",\\"handlebars\\"],t):t((e=e||self).externalRegex={},e.custom,e.express,e.handlebars)}(this,function(e,t,r,o){t=t&&t.hasOwnProperty(\\"default\\")?t.default:t,r=r&&r.hasOwnProperty(\\"default\\")?r.default:r,o=o&&o.hasOwnProperty(\\"default\\")?o.default:o,e.bar=function(){return t(r(o()))}});
+//# sourceMappingURL=external-regex.umd.js.map
+"
+`;
+
 exports[`fixtures build jsx with microbundle 1`] = `
 "Used script: microbundle
 
