@@ -119,12 +119,19 @@ async function getSizeInfo(code, filename, raw) {
 		'gz',
 		raw || code.length < 5000,
 	);
-	const brotli = formatSize(
-		await brotliSize(code),
-		filename,
-		'br',
-		raw || code.length < 5000,
-	);
+	let brotli;
+	//wrap brotliSize in try/catch in case brotli is unavailable due to
+	//lower node version
+	try {
+		brotli = formatSize(
+			await brotliSize(code),
+			filename,
+			'br',
+			raw || code.length < 5000,
+		);
+	} catch (e) {
+		return gzip;
+	}
 	return gzip + '\n' + brotli;
 }
 
