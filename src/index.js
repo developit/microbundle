@@ -591,6 +591,11 @@ function createConfig(options, entry, format, writeMeta) {
 								},
 								minifyOptions.compress || {},
 							),
+							output: {
+								// By default, Terser wraps function arguments in extra parens to trigger eager parsing.
+								// Whether this is a good idea is way too specific to guess, so we optimize for size by default:
+								wrap_func_args: false
+							},
 							warnings: true,
 							ecma: modern ? 9 : 5,
 							toplevel: modern || format === 'cjs' || format === 'es',
