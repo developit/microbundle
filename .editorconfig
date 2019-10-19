@@ -13,3 +13,8 @@ indent_size = 2
 
 [*.md]
 trim_trailing_whitespace = false
+
+# enabled trailing newline on
+# mangle.json files
+[{mangle.json,**/mangle.json}]
+insert_final_newline = true
