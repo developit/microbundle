@@ -399,7 +399,7 @@ function createConfig(options, entry, format, writeMeta) {
 		external = options.external
 			.split(',')
 			.map(ext => {
-				const match = ext.match(/^\/(.*)\/(i?)$/);
+				const match = ext.match(/^\/(.+)\/(i?)$/);
 				if (match) {
 					return new RegExp(match[1], match[2]);
 				}
