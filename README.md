@@ -31,7 +31,11 @@
 {
   "source": "src/foo.js",         // Your source file (same as 1st arg to microbundle)
   "main": "dist/foo.js",        // output path for CommonJS/Node
-  "module": "dist/foo.mjs",     // output path for JS Modules
+  "module": "dist/foo.
+  
+  
+  
+  ",     // output path for JS Modules
   "unpkg": "dist/foo.umd.js",   // optional, for unpkg.com
   "scripts": {
     "build": "microbundle",       // uses "source" and "main" as input and output paths by default
@@ -68,8 +72,8 @@ This is enabled by default - all you have to do is add the field to your `packag
 
 ```js
 {
-  "main": "dist/foo.umd.js",        // legacy UMD bundle (for Node & CDN's)
-  "module": "dist/foo.modern.mjs",  // modern ES2017 bundle
+  "main": "dist/foo.umd.js",              // legacy UMD bundle (for Node & CDN's)
+  "module": "dist/foo.modern.module.js",  // modern ES2017 bundle
   "scripts": {
     "build": "microbundle src/foo.js -f modern,umd"
   }
