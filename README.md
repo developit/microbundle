@@ -106,6 +106,10 @@ You can specify output builds in a `package.json` as follows:
 "types": "dist/foo.d.ts",       // TypeScript typings
 ```
 
+### Analyze your bundle size
+
+Use the `--visualize` flag in the cli to generate a `stats.html` file at build time, showing the sizes of the files that are included in your bundled output. Uses [rollup-plugin-visualizer](https://www.npmjs.com/package/rollup-plugin-visualizer).
+
 ### Mangling Properties
 
 Libraries often wish to rename internal object properties or class members to smaller names - transforming `this._internalIdValue` to `this._i`. Microbundle doesn't currently do this by default, but it can be enabled by adding a "mangle" property to your package.json, with a pattern to control when properties should be mangled. To mangle all property names beginning an underscore, add the following:
@@ -151,6 +155,7 @@ Options
 	--raw            Show raw byte size  (default false)
 	--jsx            A custom JSX pragma like React.createElement (default: h)
 	--tsconfig       Specify the path to a custom tsconfig.json
+	--visualize      Generate bundle size visualization (stats.html)
 	-h, --help       Displays this message
 
 Examples

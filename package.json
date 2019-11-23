@@ -75,6 +75,7 @@
     "rollup-plugin-postcss": "^2.0.3",
     "rollup-plugin-terser": "^5.1.1",
     "rollup-plugin-typescript2": "^0.23.0",
+    "rollup-plugin-visualizer": "^3.2.2",
     "sade": "^1.6.1",
     "tiny-glob": "^0.2.6",
     "tslib": "^1.10.0",

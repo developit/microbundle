@@ -44,7 +44,12 @@ export default handler => {
 			'A custom JSX pragma like React.createElement (default: h)',
 		)
 		.option('--tsconfig', 'Specify the path to a custom tsconfig.json')
-		.example('microbundle build --tsconfig tsconfig.build.json');
+		.example('microbundle build --tsconfig tsconfig.build.json')
+		.option(
+			'--visualize',
+			'Generate bundle size visualization (stats.html)',
+			false,
+		);
 
 	prog
 		.command('build [...entries]', '', { default: true })

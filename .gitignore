@@ -13,3 +13,5 @@ yarn.lock
 .idea
 .rts2*
 sizes.csv
+test/fixtures/visualize/stats.html
+.eslintcache

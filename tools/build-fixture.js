@@ -2,10 +2,12 @@ import { resolve } from 'path';
 import { promisify } from 'es6-promisify';
 import shellQuote from 'shell-quote';
 import _rimraf from 'rimraf';
+import { exec as _exec } from 'child_process';
 import { readFile } from '../src/utils';
 import createProg from '../src/prog';
 import microbundle from '../src/index';
 
+const exec = promisify(_exec);
 const rimraf = promisify(_rimraf);
 
 const FIXTURES_DIR = resolve(`${__dirname}/../test/fixtures`);
@@ -28,7 +30,7 @@ const parseScript = (() => {
 	};
 })();
 
-export const getBuildScript = async (fixturePath, defaultScript) => {
+const getPackageJson = async (fixturePath) => {
 	let pkg = {};
 	try {
 		pkg = JSON.parse(
@@ -37,7 +39,17 @@ export const getBuildScript = async (fixturePath, defaultScript) => {
 	} catch (err) {
 		if (err.code !== 'ENOENT') throw err;
 	}
+	return pkg;
+};
+
+export const getBuildScript = async (fixturePath, defaultScript) => {
+	const pkg = await getPackageJson(fixturePath);
 	return (pkg && pkg.scripts && pkg.scripts.build) || defaultScript;
+};
+
+export const getPostBuildScript = async fixturePath => {
+	const pkg = await getPackageJson(fixturePath);
+	return pkg && pkg.scripts && pkg.scripts.postbuild;
 };
 
 export const buildDirectory = async fixtureDir => {
@@ -64,6 +76,11 @@ export const buildDirectory = async fixtureDir => {
 		...parsedOpts,
 		cwd: parsedOpts.cwd !== '.' ? parsedOpts.cwd : resolve(fixturePath),
 	});
+
+	const postBuildScript = await getPostBuildScript(fixturePath);
+	if (postBuildScript) {
+		await exec(postBuildScript);
+	}
 
 	process.chdir(prevDir);
 
