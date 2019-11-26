@@ -11,13 +11,13 @@ import babel from 'rollup-plugin-babel';
 import customBabel from './lib/babel-custom';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
-import alias from 'rollup-plugin-alias';
+import alias from '@rollup/plugin-alias';
 import postcss from 'rollup-plugin-postcss';
 import gzipSize from 'gzip-size';
 import brotliSize from 'brotli-size';
 import prettyBytes from 'pretty-bytes';
 import typescript from 'rollup-plugin-typescript2';
-import json from 'rollup-plugin-json';
+import json from '@rollup/plugin-json';
 import logError from './log-error';
 import { readFile, isDir, isFile, stdout, stderr, isTruthy } from './utils';
 import camelCase from 'camelcase';
@@ -258,7 +258,7 @@ export default async function microbundle(inputOptions) {
 	return (
 		blue(
 			`Build "${options.name}" to ${relative(cwd, dirname(options.output)) ||
-				'.'}:`,
+			'.'}:`,
 		) +
 		'\n   ' +
 		out.join('\n   ')
@@ -321,8 +321,8 @@ async function jsOrTs(cwd, filename) {
 	const extension = (await isFile(resolve(cwd, filename + '.ts')))
 		? '.ts'
 		: (await isFile(resolve(cwd, filename + '.tsx')))
-		? '.tsx'
-		: '.js';
+			? '.tsx'
+			: '.js';
 
 	return resolve(cwd, `${filename}${extension}`);
 }
@@ -335,13 +335,13 @@ async function getInput({ entries, cwd, source, module }) {
 			entries && entries.length
 				? entries
 				: (source &&
-						(Array.isArray(source) ? source : [source]).map(file =>
-							resolve(cwd, file),
-						)) ||
-						((await isDir(resolve(cwd, 'src'))) &&
-							(await jsOrTs(cwd, 'src/index'))) ||
-						(await jsOrTs(cwd, 'index')) ||
-						module,
+					(Array.isArray(source) ? source : [source]).map(file =>
+						resolve(cwd, file),
+					)) ||
+				((await isDir(resolve(cwd, 'src'))) &&
+					(await jsOrTs(cwd, 'src/index'))) ||
+				(await jsOrTs(cwd, 'index')) ||
+				module,
 		)
 		.map(file => glob(file))
 		.forEach(file => input.push(...file));
@@ -478,7 +478,7 @@ function createConfig(options, entry, format, writeMeta) {
 					nameCache.minify,
 				);
 			}
-		} catch (e) {}
+		} catch (e) { }
 	}
 	loadNameCache();
 
@@ -507,19 +507,19 @@ function createConfig(options, entry, format, writeMeta) {
 						plugins: [
 							autoprefixer(),
 							options.compress !== false &&
-								cssnano({
-									preset: 'default',
-								}),
+							cssnano({
+								preset: 'default',
+							}),
 						].filter(Boolean),
 						// only write out CSS for the first bundle (avoids pointless extra files):
 						inject: false,
 						extract: !!writeMeta,
 					}),
 					moduleAliases.length > 0 &&
-						alias({
-							resolve: EXTENSIONS,
-							entries: moduleAliases,
-						}),
+					alias({
+						resolve: EXTENSIONS,
+						entries: moduleAliases,
+					}),
 					nodeResolve({
 						mainFields: ['module', 'jsnext', 'main'],
 						browser: options.target !== 'node',
@@ -539,38 +539,38 @@ function createConfig(options, entry, format, writeMeta) {
 						}),
 					},
 					useTypescript &&
-						typescript({
-							typescript: require('typescript'),
-							cacheRoot: `./node_modules/.cache/.rts2_cache_${format}`,
-							tsconfigDefaults: {
-								compilerOptions: {
-									sourceMap: options.sourcemap,
-									declaration: true,
-									jsx: 'react',
-									jsxFactory: options.jsx || 'h',
-								},
+					typescript({
+						typescript: require('typescript'),
+						cacheRoot: `./node_modules/.cache/.rts2_cache_${format}`,
+						tsconfigDefaults: {
+							compilerOptions: {
+								sourceMap: options.sourcemap,
+								declaration: true,
+								jsx: 'react',
+								jsxFactory: options.jsx || 'h',
 							},
-							tsconfig: options.tsconfig,
-							tsconfigOverride: {
-								compilerOptions: {
-									target: 'esnext',
-								},
+						},
+						tsconfig: options.tsconfig,
+						tsconfigOverride: {
+							compilerOptions: {
+								target: 'esnext',
 							},
-						}),
+						},
+					}),
 					// if defines is not set, we shouldn't run babel through node_modules
 					isTruthy(defines) &&
-						babel({
-							babelrc: false,
-							configFile: false,
-							compact: false,
-							include: 'node_modules/**',
-							plugins: [
-								[
-									require.resolve('babel-plugin-transform-replace-expressions'),
-									{ replace: defines },
-								],
+					babel({
+						babelrc: false,
+						configFile: false,
+						compact: false,
+						include: 'node_modules/**',
+						plugins: [
+							[
+								require.resolve('babel-plugin-transform-replace-expressions'),
+								{ replace: defines },
 							],
-						}),
+						],
+					}),
 					customBabel({
 						extensions: EXTENSIONS,
 						exclude: 'node_modules/**',

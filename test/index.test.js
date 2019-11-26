@@ -6,7 +6,7 @@ import { buildDirectory, getBuildScript } from '../tools/build-fixture';
 
 const FIXTURES_DIR = `${__dirname}/fixtures`;
 const DEFAULT_SCRIPT = 'microbundle';
-const TEST_TIMEOUT = 11000;
+const TEST_TIMEOUT = 20000;
 
 const join = (arr, delimiter = '') => arr.join(delimiter);
 
