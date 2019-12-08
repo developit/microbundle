@@ -358,13 +358,15 @@ async function getOutput({ cwd, output, pkgMain, pkgName }) {
 }
 
 async function getEntries({ input, cwd }) {
-	let entries = (await map([].concat(input), async file => {
-		file = resolve(cwd, file);
-		if (await isDir(file)) {
-			file = resolve(file, 'index.js');
-		}
-		return file;
-	})).filter((item, i, arr) => arr.indexOf(item) === i);
+	let entries = (
+		await map([].concat(input), async file => {
+			file = resolve(cwd, file);
+			if (await isDir(file)) {
+				file = resolve(file, 'index.js');
+			}
+			return file;
+		})
+	).filter((item, i, arr) => arr.indexOf(item) === i);
 	return entries;
 }
 
