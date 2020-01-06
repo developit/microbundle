@@ -1834,6 +1834,65 @@ exports[`fixtures build no-pkg-name with microbundle 5`] = `
 "
 `;
 
+exports[`fixtures build optional-chaining-ts with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+optional-chaining-ts
+  dist
+    index.d.ts
+    optional-chaining-ts.esm.js
+    optional-chaining-ts.esm.js.map
+    optional-chaining-ts.js
+    optional-chaining-ts.js.map
+    optional-chaining-ts.umd.js
+    optional-chaining-ts.umd.js.map
+  node_modules
+  package.json
+  src
+    index.ts
+  tsconfig.json
+
+
+Build \\"optionalChainingTs\\" to dist:
+104 B: optional-chaining-ts.js.gz
+77 B: optional-chaining-ts.js.br
+108 B: optional-chaining-ts.esm.js.gz
+92 B: optional-chaining-ts.esm.js.br
+207 B: optional-chaining-ts.umd.js.gz
+166 B: optional-chaining-ts.umd.js.br"
+`;
+
+exports[`fixtures build optional-chaining-ts with microbundle 2`] = `7`;
+
+exports[`fixtures build optional-chaining-ts with microbundle 3`] = `
+"export declare function chain(test: {
+    maybeVar?: {
+        thing: string;
+    };
+}): string | undefined;
+"
+`;
+
+exports[`fixtures build optional-chaining-ts with microbundle 4`] = `
+"function n(n){var r;return null===(r=n.maybeVar)||void 0===r?void 0:r.thing}export{n as chain};
+//# sourceMappingURL=optional-chaining-ts.esm.js.map
+"
+`;
+
+exports[`fixtures build optional-chaining-ts with microbundle 5`] = `
+"exports.chain=function(n){var i;return null===(i=n.maybeVar)||void 0===i?void 0:i.thing};
+//# sourceMappingURL=optional-chaining-ts.js.map
+"
+`;
+
+exports[`fixtures build optional-chaining-ts with microbundle 6`] = `
+"!function(n,e){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?e(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],e):e((n=n||self).optionalChainingTs={})}(this,function(n){n.chain=function(n){var e;return null===(e=n.maybeVar)||void 0===e?void 0:e.thing}});
+//# sourceMappingURL=optional-chaining-ts.umd.js.map
+"
+`;
+
 exports[`fixtures build pretty with microbundle 1`] = `
 "Used script: microbundle
 

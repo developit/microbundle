@@ -13,6 +13,7 @@
     "prepare:babel": "babel src/*.js -d dist && npm t",
     "lint": "eslint src",
     "test": "npm run -s lint && npm run -s build && cross-env BABEL_ENV=test jest",
+    "jest": "cross-env BABEL_ENV=test jest",
     "release": "npm run -s prepare && npm test && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish"
   },
   "repository": "developit/microbundle",
@@ -83,6 +84,7 @@
   "devDependencies": {
     "@babel/cli": "^7.7.7",
     "@babel/node": "^7.7.7",
+    "@babel/plugin-proposal-optional-chaining": "^7.7.5",
     "@babel/plugin-proposal-throw-expressions": "^7.7.4",
     "babel-jest": "^24.8.0",
     "cross-env": "^6.0.3",
