@@ -1,12 +1,11 @@
 name: Node CI
 
 on:
-  pull_request:
-    branches:
-      - master
+  pull_request: {}
   push:
-    branches:
-      - master
+    branches-ignore:
+      - trying.tmp
+      - staging.tmp
 
 jobs:
   build:
@@ -14,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x]
+        node-version: [8.x, 10.x, 12.x, 13.x]
 
     steps:
       - uses: actions/checkout@v1
