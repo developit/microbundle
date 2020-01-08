@@ -26,7 +26,7 @@ jobs:
           npm install
           npm test
       - name: sizereport
-        run: sizereport --config
+        run: ./node_modules/.bin/sizereport --config
 
 # Could add this for canary versions
 #  publish-gpr:
