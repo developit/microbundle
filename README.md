@@ -174,6 +174,7 @@ Here's what's coming up for Microbundle:
 - [Preact](https://github.com/preactjs/preact) Fast 3kB React alternative with the same modern API. Components & Virtual DOM.
 - [Stockroom](https://github.com/developit/stockroom) Offload your store management to a worker easily.
 - [Microenvi](https://github.com/fwilkerson/microenvi) Bundle, serve, and hot reload with one command.
+- [Theme UI](https://github.com/system-ui/theme-ui) Build consistent, themeable React apps based on constraint-based design principles.
 - [react-recomponent](https://github.com/philipp-spiess/react-recomponent) Reason-style reducer components for React using ES6 classes.
 - [brazilian-utils](https://github.com/brazilian-utils/brazilian-utils) Utils library for specific Brazilian businesses.
 - [react-hooks-lib](https://github.com/beizhedenglong/react-hooks-lib) A set of reusable react hooks.
