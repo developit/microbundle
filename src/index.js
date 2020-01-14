@@ -18,6 +18,7 @@ import brotliSize from 'brotli-size';
 import prettyBytes from 'pretty-bytes';
 import typescript from 'rollup-plugin-typescript2';
 import json from 'rollup-plugin-json';
+import visualizer from 'rollup-plugin-visualizer';
 import logError from './log-error';
 import { readFile, isDir, isFile, stdout, stderr, isTruthy } from './utils';
 import camelCase from 'camelcase';
@@ -587,6 +588,7 @@ function createConfig(options, entry, format, writeMeta) {
 							typescript: !!useTypescript,
 						},
 					}),
+					options.visualize && visualizer(),
 					options.compress !== false && [
 						terser({
 							sourcemap: true,

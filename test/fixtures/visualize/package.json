@@ -1,0 +1,10 @@
+{
+  "name": "visualize",
+  "scripts": {
+    "build": "microbundle --visualize",
+    "postbuild": "mv stats.html dist/"
+  },
+  "peerDependencies": {
+    "camelcase": "^5.3.1"
+  }
+}
