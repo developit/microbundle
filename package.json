@@ -13,6 +13,8 @@
     "prepare:babel": "babel src/*.js -d dist && npm t",
     "lint": "eslint src",
     "test": "npm run -s lint && npm run -s build && cross-env BABEL_ENV=test jest",
+    "pretest:docker": "docker build -t microbundle .",
+    "test:docker": "docker run -v $(pwd)/test/__snapshots__:/microbundle/test/__snapshots__ -t microbundle yarn test",
     "release": "npm run -s prepare && npm test && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish"
   },
   "repository": "developit/microbundle",
