@@ -98,6 +98,7 @@
     "husky": "^3.1.0",
     "jest": "^24.8.0",
     "lint-staged": "^9.5.0",
+    "npm-merge-driver-install": "^1.1.1",
     "prettier": "^1.19.1",
     "regenerator-runtime": "^0.13.3",
     "rimraf": "^3.0.0",
