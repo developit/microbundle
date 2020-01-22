@@ -22,6 +22,16 @@
     "trailingComma": "all",
     "useTabs": true
   },
+  "lint-staged": {
+    "{src,test}/**/*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.md": [
+      "prettier --write",
+      "git add"
+    ]
+  },
   "jest": {
     "testEnvironment": "node",
     "testURL": "http://localhost"
