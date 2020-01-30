@@ -8,7 +8,7 @@ import cssnano from 'cssnano';
 import { rollup, watch } from 'rollup';
 import commonjs from '@rollup/plugin-commonjs';
 import babel from 'rollup-plugin-babel';
-import customBabel from './lib/babel-custom';
+import customBabel from './babel-custom';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
 import alias from '@rollup/plugin-alias';
