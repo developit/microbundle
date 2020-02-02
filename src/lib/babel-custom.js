@@ -93,7 +93,7 @@ export default babelPlugin.custom(babelCore => {
 			const babelOptions = config.options || {};
 
 			const envIdx = (babelOptions.presets || []).findIndex(preset =>
-				preset.file.request.includes('@babel/preset-env'),
+				preset.file.request.test(/@babel\/(preset-)?env/),
 			);
 
 			const environmentPreset = customOptions.modern

@@ -100,6 +100,58 @@ exports[`fixtures build async-ts with microbundle 1`] = `
 
 Directory tree:
 
+async-iife-ts
+  dist
+    async-iife-ts.esm.js
+    async-iife-ts.esm.js.map
+    async-iife-ts.js
+    async-iife-ts.js.map
+    async-iife-ts.umd.js
+    async-iife-ts.umd.js.map
+    index.d.ts
+  node_modules
+  package.json
+  src
+    index.ts
+  tsconfig.json
+
+
+Build \\"asyncIifeTs\\" to dist:
+70 B: async-iife-ts.js.gz
+55 B: async-iife-ts.js.br
+70 B: async-iife-ts.esm.js.gz
+55 B: async-iife-ts.esm.js.br
+125 B: async-iife-ts.umd.js.gz
+95 B: async-iife-ts.umd.js.br"
+`;
+
+exports[`fixtures build async-ts with microbundle 2`] = `7`;
+
+exports[`fixtures build async-ts with microbundle 3`] = `
+"try{console.log(\\"foo\\")}catch(o){Promise.reject(o)}
+//# sourceMappingURL=async-iife-ts.esm.js.map
+"
+`;
+
+exports[`fixtures build async-ts with microbundle 4`] = `
+"try{console.log(\\"foo\\")}catch(o){Promise.reject(o)}
+//# sourceMappingURL=async-iife-ts.js.map
+"
+`;
+
+exports[`fixtures build async-ts with microbundle 5`] = `
+"!function(e){\\"function\\"==typeof define&&define.amd?define(e):e()}(function(){try{console.log(\\"foo\\")}catch(e){Promise.reject(e)}});
+//# sourceMappingURL=async-iife-ts.umd.js.map
+"
+`;
+
+exports[`fixtures build async-ts with microbundle 6`] = `""`;
+
+exports[`fixtures build basic with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
 async-ts
   dist
     async-ts.esm.js
@@ -125,34 +177,34 @@ Build \\"asyncTs\\" to dist:
 159 B: async-ts.umd.js.br"
 `;
 
-exports[`fixtures build async-ts with microbundle 2`] = `7`;
+exports[`fixtures build basic with microbundle 2`] = `7`;
 
-exports[`fixtures build async-ts with microbundle 3`] = `
+exports[`fixtures build basic with microbundle 3`] = `
 "var o=function(){function o(){}return o.prototype.foo=function(){return Promise.resolve()},o}();export{o as MyClass};
 //# sourceMappingURL=async-ts.esm.js.map
 "
 `;
 
-exports[`fixtures build async-ts with microbundle 4`] = `
+exports[`fixtures build basic with microbundle 4`] = `
 "exports.MyClass=function(){function o(){}return o.prototype.foo=function(){return Promise.resolve()},o}();
 //# sourceMappingURL=async-ts.js.map
 "
 `;
 
-exports[`fixtures build async-ts with microbundle 5`] = `
+exports[`fixtures build basic with microbundle 5`] = `
 "!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?n(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],n):n((e=e||self).asyncTs={})}(this,function(e){e.MyClass=function(){function e(){}return e.prototype.foo=function(){return Promise.resolve()},e}()});
 //# sourceMappingURL=async-ts.umd.js.map
 "
 `;
 
-exports[`fixtures build async-ts with microbundle 6`] = `
+exports[`fixtures build basic with microbundle 6`] = `
 "export declare class MyClass {
     foo(): Promise<void>;
 }
 "
 `;
 
-exports[`fixtures build basic with microbundle 1`] = `
+exports[`fixtures build basic with microbundle 7`] = `
 "Used script: microbundle
 
 Directory tree:
@@ -165,6 +217,7 @@ basic
     basic-lib.js.map
     basic-lib.umd.js
     basic-lib.umd.js.map
+  node_modules
   package.json
   src
     index.js
@@ -180,21 +233,21 @@ Build \\"basicLib\\" to dist:
 251 B: basic-lib.umd.js.br"
 `;
 
-exports[`fixtures build basic with microbundle 2`] = `6`;
+exports[`fixtures build basic with microbundle 8`] = `6`;
 
-exports[`fixtures build basic with microbundle 3`] = `
+exports[`fixtures build basic with microbundle 9`] = `
 "var r=function(){try{for(var r=arguments.length,e=new Array(r),t=0;t<r;t++)e[t]=arguments[t];return Promise.resolve(e.reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){for(var e=arguments.length,t=new Array(e),n=0;n<e;n++)t[n]=arguments[n];try{return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
 //# sourceMappingURL=basic-lib.esm.js.map
 "
 `;
 
-exports[`fixtures build basic with microbundle 4`] = `
+exports[`fixtures build basic with microbundle 10`] = `
 "var r=function(){try{for(var r=arguments.length,e=new Array(r),n=0;n<r;n++)e[n]=arguments[n];return Promise.resolve(e.reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};module.exports=function(){for(var e=arguments.length,n=new Array(e),t=0;t<e;t++)n[t]=arguments[t];try{return Promise.resolve(r.apply(void 0,n)).then(function(e){return Promise.resolve(r.apply(void 0,n)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};
 //# sourceMappingURL=basic-lib.js.map
 "
 `;
 
-exports[`fixtures build basic with microbundle 5`] = `
+exports[`fixtures build basic with microbundle 11`] = `
 "!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=e||self).basicLib=r()}(this,function(){var e=function(){try{for(var e=arguments.length,r=new Array(e),n=0;n<e;n++)r[n]=arguments[n];return Promise.resolve(r.reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){for(var r=arguments.length,n=new Array(r),t=0;t<r;t++)n[t]=arguments[t];try{return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
 //# sourceMappingURL=basic-lib.umd.js.map
 "
@@ -448,6 +501,57 @@ exports[`fixtures build basic-flow with microbundle 1`] = `
 
 Directory tree:
 
+basic-css
+  dist
+    basic-css.css
+    basic-css.esm.js
+    basic-css.esm.js.map
+    basic-css.js
+    basic-css.js.map
+    basic-css.umd.js
+    basic-css.umd.js.map
+  package.json
+  src
+    index.js
+    two.css
+
+
+Build \\"basicCss\\" to dist:
+107 B: basic-css.js.gz
+60 B: basic-css.js.br
+106 B: basic-css.esm.js.gz
+56 B: basic-css.esm.js.br
+195 B: basic-css.umd.js.gz
+134 B: basic-css.umd.js.br"
+`;
+
+exports[`fixtures build basic-flow with microbundle 2`] = `7`;
+
+exports[`fixtures build basic-flow with microbundle 3`] = `".testing{display:-webkit-box;display:flex;color:red;background:#00f}"`;
+
+exports[`fixtures build basic-flow with microbundle 4`] = `
+"export default function(){var e=document.createElement(\\"div\\");return e.className=\\"testing\\",e}
+//# sourceMappingURL=basic-css.esm.js.map
+"
+`;
+
+exports[`fixtures build basic-flow with microbundle 5`] = `
+"module.exports=function(){var e=document.createElement(\\"div\\");return e.className=\\"testing\\",e};
+//# sourceMappingURL=basic-css.js.map
+"
+`;
+
+exports[`fixtures build basic-flow with microbundle 6`] = `
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e=e||self).basicCss=n()}(this,function(){return function(){var e=document.createElement(\\"div\\");return e.className=\\"testing\\",e}});
+//# sourceMappingURL=basic-css.umd.js.map
+"
+`;
+
+exports[`fixtures build basic-flow with microbundle 7`] = `
+"Used script: microbundle
+
+Directory tree:
+
 basic-flow
   dist
     basic-lib-flow.esm.js
@@ -471,21 +575,21 @@ Build \\"basicLibFlow\\" to dist:
 133 B: basic-lib-flow.umd.js.br"
 `;
 
-exports[`fixtures build basic-flow with microbundle 2`] = `6`;
+exports[`fixtures build basic-flow with microbundle 8`] = `6`;
 
-exports[`fixtures build basic-flow with microbundle 3`] = `
+exports[`fixtures build basic-flow with microbundle 9`] = `
 "export default[\\"banana\\",\\"raspberry\\"];
 //# sourceMappingURL=basic-lib-flow.esm.js.map
 "
 `;
 
-exports[`fixtures build basic-flow with microbundle 4`] = `
+exports[`fixtures build basic-flow with microbundle 10`] = `
 "module.exports=[\\"banana\\",\\"raspberry\\"];
 //# sourceMappingURL=basic-lib-flow.js.map
 "
 `;
 
-exports[`fixtures build basic-flow with microbundle 5`] = `
+exports[`fixtures build basic-flow with microbundle 11`] = `
 "!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=[\\"banana\\",\\"raspberry\\"]:\\"function\\"==typeof define&&define.amd?define(function(){return[\\"banana\\",\\"raspberry\\"]}):(e=e||self).basicLibFlow=[\\"banana\\",\\"raspberry\\"]}(this);
 //# sourceMappingURL=basic-lib-flow.umd.js.map
 "
@@ -835,55 +939,67 @@ exports[`fixtures build basic-tsx with microbundle 1`] = `
 
 Directory tree:
 
-basic-tsx
+basic-ts
   dist
-    basic-lib-tsx.esm.js
-    basic-lib-tsx.esm.js.map
-    basic-lib-tsx.js
-    basic-lib-tsx.js.map
-    basic-lib-tsx.umd.js
-    basic-lib-tsx.umd.js.map
+    basic-lib-ts.esm.js
+    basic-lib-ts.esm.js.map
+    basic-lib-ts.js
+    basic-lib-ts.js.map
+    basic-lib-ts.umd.js
+    basic-lib-ts.umd.js.map
+    car.d.ts
     index.d.ts
   node_modules
   package.json
   src
-    index.tsx
+    car.ts
+    index.ts
   tsconfig.json
 
 
-Build \\"basicLibTsx\\" to dist:
-235 B: basic-lib-tsx.js.gz
-188 B: basic-lib-tsx.js.br
-236 B: basic-lib-tsx.esm.js.gz
-190 B: basic-lib-tsx.esm.js.br
-317 B: basic-lib-tsx.umd.js.gz
-260 B: basic-lib-tsx.umd.js.br"
+Build \\"basicLibTs\\" to dist:
+104 B: basic-lib-ts.js.gz
+76 B: basic-lib-ts.js.br
+104 B: basic-lib-ts.esm.js.gz
+82 B: basic-lib-ts.esm.js.br
+187 B: basic-lib-ts.umd.js.gz
+144 B: basic-lib-ts.umd.js.br"
 `;
 
-exports[`fixtures build basic-tsx with microbundle 2`] = `7`;
+exports[`fixtures build basic-tsx with microbundle 2`] = `8`;
 
 exports[`fixtures build basic-tsx with microbundle 3`] = `
-"var r=function(r,n){for(var e=arguments.length,t=new Array(e>2?e-2:0),o=2;o<e;o++)t[o-2]=arguments[o];return{tag:r,props:n,children:t}},n=function(){function n(){}return n.prototype.render=function(){return r(\\"div\\",{id:\\"app\\"},r(\\"h1\\",null,\\"Hello, World!\\"),r(\\"p\\",null,\\"A JSX demo.\\"))},n}();export default n;
-//# sourceMappingURL=basic-lib-tsx.esm.js.map
+"var n=new(function(){function n(){}return n.prototype.drive=function(n){return!0},n}());export default n;
+//# sourceMappingURL=basic-lib-ts.esm.js.map
 "
 `;
 
 exports[`fixtures build basic-tsx with microbundle 4`] = `
-"var r=function(r,n){for(var e=arguments.length,o=new Array(e>2?e-2:0),t=2;t<e;t++)o[t-2]=arguments[t];return{tag:r,props:n,children:o}};module.exports=function(){function n(){}return n.prototype.render=function(){return r(\\"div\\",{id:\\"app\\"},r(\\"h1\\",null,\\"Hello, World!\\"),r(\\"p\\",null,\\"A JSX demo.\\"))},n}();
-//# sourceMappingURL=basic-lib-tsx.js.map
+"var n=new(function(){function n(){}return n.prototype.drive=function(n){return!0},n}());module.exports=n;
+//# sourceMappingURL=basic-lib-ts.js.map
 "
 `;
 
 exports[`fixtures build basic-tsx with microbundle 5`] = `
-"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e=e||self).basicLibTsx=n()}(this,function(){var e=function(e,n){for(var o=arguments.length,t=new Array(o>2?o-2:0),r=2;r<o;r++)t[r-2]=arguments[r];return{tag:e,props:n,children:t}};return function(){function n(){}return n.prototype.render=function(){return e(\\"div\\",{id:\\"app\\"},e(\\"h1\\",null,\\"Hello, World!\\"),e(\\"p\\",null,\\"A JSX demo.\\"))},n}()});
-//# sourceMappingURL=basic-lib-tsx.umd.js.map
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e=e||self).basicLibTs=n()}(this,function(){return new(function(){function e(){}return e.prototype.drive=function(e){return!0},e}())});
+//# sourceMappingURL=basic-lib-ts.umd.js.map
 "
 `;
 
 exports[`fixtures build basic-tsx with microbundle 6`] = `
-"export default class Foo {
-    render(): any;
+"export interface Driveable {
+    drive(distance: number): boolean;
 }
+export default class Car implements Driveable {
+    drive(distance: number): boolean;
+}
+"
+`;
+
+exports[`fixtures build basic-tsx with microbundle 7`] = `
+"import Car from './car';
+declare let Ferrari: Car;
+export default Ferrari;
 "
 `;
 
@@ -997,6 +1113,67 @@ export default _default;
 `;
 
 exports[`fixtures build class-properties with microbundle 1`] = `
+"Used script: microbundle --raw
+
+Directory tree:
+
+class-decorators-ts
+  dist
+    class-decorators-ts.esm.js
+    class-decorators-ts.esm.js.map
+    class-decorators-ts.js
+    class-decorators-ts.js.map
+    class-decorators-ts.umd.js
+    class-decorators-ts.umd.js.map
+    index.d.ts
+  node_modules
+  package.json
+  src
+    index.ts
+  tsconfig.json
+
+
+Build \\"classDecoratorsTs\\" to dist:
+333 B: class-decorators-ts.js.gz
+276 B: class-decorators-ts.js.br
+333 B: class-decorators-ts.esm.js.gz
+278 B: class-decorators-ts.esm.js.br
+401 B: class-decorators-ts.umd.js.gz
+341 B: class-decorators-ts.umd.js.br"
+`;
+
+exports[`fixtures build class-properties with microbundle 2`] = `7`;
+
+exports[`fixtures build class-properties with microbundle 3`] = `
+"var e=function(){function e(e){this.greeting=e}return e.prototype.greet=function(){return\\"Hello, \\"+this.greeting},e}(),t=new(e=function(e,t,r,n){var o,c=arguments.length,l=c<3?t:null===n?n=Object.getOwnPropertyDescriptor(t,r):n;if(\\"object\\"==typeof Reflect&&\\"function\\"==typeof Reflect.decorate)l=Reflect.decorate(e,t,r,n);else for(var f=e.length-1;f>=0;f--)(o=e[f])&&(l=(c<3?o(l):c>3?o(t,r,l):o(t,r))||l);return c>3&&l&&Object.defineProperty(t,r,l),l}([function(e){Object.seal(e),Object.seal(e.prototype)}],e))(\\"Hello World\\");export default t;
+//# sourceMappingURL=class-decorators-ts.esm.js.map
+"
+`;
+
+exports[`fixtures build class-properties with microbundle 4`] = `
+"var e=function(){function e(e){this.greeting=e}return e.prototype.greet=function(){return\\"Hello, \\"+this.greeting},e}(),t=new(e=function(e,t,r,o){var n,c=arguments.length,l=c<3?t:null===o?o=Object.getOwnPropertyDescriptor(t,r):o;if(\\"object\\"==typeof Reflect&&\\"function\\"==typeof Reflect.decorate)l=Reflect.decorate(e,t,r,o);else for(var f=e.length-1;f>=0;f--)(n=e[f])&&(l=(c<3?n(l):c>3?n(t,r,l):n(t,r))||l);return c>3&&l&&Object.defineProperty(t,r,l),l}([function(e){Object.seal(e),Object.seal(e.prototype)}],e))(\\"Hello World\\");module.exports=t;
+//# sourceMappingURL=class-decorators-ts.js.map
+"
+`;
+
+exports[`fixtures build class-properties with microbundle 5`] = `
+"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=t():\\"function\\"==typeof define&&define.amd?define(t):(e=e||self).classDecoratorsTs=t()}(this,function(){var e=function(){function e(e){this.greeting=e}return e.prototype.greet=function(){return\\"Hello, \\"+this.greeting},e}();return new(e=function(e,t,n,o){var r,f=arguments.length,c=f<3?t:null===o?o=Object.getOwnPropertyDescriptor(t,n):o;if(\\"object\\"==typeof Reflect&&\\"function\\"==typeof Reflect.decorate)c=Reflect.decorate(e,t,n,o);else for(var i=e.length-1;i>=0;i--)(r=e[i])&&(c=(f<3?r(c):f>3?r(t,n,c):r(t,n))||c);return f>3&&c&&Object.defineProperty(t,n,c),c}([function(e){Object.seal(e),Object.seal(e.prototype)}],e))(\\"Hello World\\")});
+//# sourceMappingURL=class-decorators-ts.umd.js.map
+"
+`;
+
+exports[`fixtures build class-properties with microbundle 6`] = `
+"declare class Greeter {
+    greeting: string;
+    constructor(message: string);
+    greet(): string;
+}
+declare const _default: Greeter;
+export default _default;
+"
+`;
+
+exports[`fixtures build class-properties with microbundle 7`] = `
 "Used script: microbundle
 
 Directory tree:
@@ -1009,6 +1186,7 @@ class-properties
     class-properties.js.map
     class-properties.umd.js
     class-properties.umd.js.map
+  node_modules
   package.json
   src
     index.js
@@ -1023,21 +1201,21 @@ Build \\"classProperties\\" to dist:
 150 B: class-properties.umd.js.br"
 `;
 
-exports[`fixtures build class-properties with microbundle 2`] = `6`;
+exports[`fixtures build class-properties with microbundle 8`] = `6`;
 
-exports[`fixtures build class-properties with microbundle 3`] = `
+exports[`fixtures build class-properties with microbundle 9`] = `
 "var a=function(){this.baz=3};a.bar=2;var r=new a;export default r;export{a as Foo};
 //# sourceMappingURL=class-properties.esm.js.map
 "
 `;
 
-exports[`fixtures build class-properties with microbundle 4`] = `
+exports[`fixtures build class-properties with microbundle 10`] = `
 "var a=function(){this.baz=3};a.bar=2;var o=new a;exports.Foo=a,exports.default=o;
 //# sourceMappingURL=class-properties.js.map
 "
 `;
 
-exports[`fixtures build class-properties with microbundle 5`] = `
+exports[`fixtures build class-properties with microbundle 11`] = `
 "!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?o(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],o):o((e=e||self).classProperties={})}(this,function(e){var o=function(){this.baz=3};o.bar=2;var t=new o;e.Foo=o,e.default=t});
 //# sourceMappingURL=class-properties.umd.js.map
 "
@@ -1342,6 +1520,7 @@ jsx
     jsx.umd.js
     jsx.umd.js.map
   index.js
+  node_modules
   package.json
 
 
@@ -1375,6 +1554,61 @@ exports[`fixtures build jsx with microbundle 5`] = `
 `;
 
 exports[`fixtures build macro with microbundle 1`] = `
+"Used script: microbundle --raw
+
+Directory tree:
+
+esnext-ts
+  dist
+    esnext-ts.esm.js
+    esnext-ts.esm.js.map
+    esnext-ts.js
+    esnext-ts.js.map
+    esnext-ts.umd.js
+    esnext-ts.umd.js.map
+    index.d.ts
+  node_modules
+  package.json
+  src
+    index.ts
+  tsconfig.json
+
+
+Build \\"esnextTs\\" to dist:
+1012 B: esnext-ts.js.gz
+913 B: esnext-ts.js.br
+1013 B: esnext-ts.esm.js.gz
+913 B: esnext-ts.esm.js.br
+1072 B: esnext-ts.umd.js.gz
+975 B: esnext-ts.umd.js.br"
+`;
+
+exports[`fixtures build macro with microbundle 2`] = `7`;
+
+exports[`fixtures build macro with microbundle 3`] = `
+"var n=function(){function n(){}return n.prototype.then=function(r,e){var o=new n,i=this.s;if(i){var u=1&i?r:e;if(u){try{t(o,1,u(this.v))}catch(n){t(o,2,n)}return o}return this}return this.o=function(n){try{var i=n.v;1&n.s?t(o,1,r?r(i):i):e?t(o,1,e(i)):t(o,2,i)}catch(n){t(o,2,n)}},o},n}();function t(r,e,o){if(!r.s){if(o instanceof n){if(!o.s)return void(o.o=t.bind(null,r,e));1&e&&(e=o.s),o=o.v}if(o&&o.then)return void o.then(t.bind(null,r,e),t.bind(null,r,2));r.s=e,r.v=o;var i=r.o;i&&i(r)}}function r(t){return t instanceof n&&1&t.s}function e(n,t){try{var r=n()}catch(n){return t(!0,n)}return r&&r.then?r.then(t.bind(null,!1),t.bind(null,!0)):t(!1,r)}\\"undefined\\"!=typeof Symbol&&(Symbol.iterator||(Symbol.iterator=Symbol(\\"Symbol.iterator\\"))),\\"undefined\\"!=typeof Symbol&&(Symbol.asyncIterator||(Symbol.asyncIterator=Symbol(\\"Symbol.asyncIterator\\")));var o=function(){try{var o,i,u,f,h=[],c=!0,a=!1,l=e(function(){return function(e,f){try{var a=function(){o=function(n){var t;if(\\"undefined\\"!=typeof Symbol){if(Symbol.asyncIterator&&null!=(t=n[Symbol.asyncIterator]))return t.call(n);if(Symbol.iterator&&null!=(t=n[Symbol.iterator]))return t.call(n)}throw new TypeError(\\"Object is not async iterable\\")}([1,2]);var e=function(e,o,i){for(var u;;){var f=e();if(r(f)&&(f=f.v),!f)return h;if(f.then){u=0;break}var h=i();if(h&&h.then){if(!r(h)){u=1;break}h=h.s}if(o){var c=o();if(c&&c.then&&!r(c)){u=2;break}}}var a=new n,l=t.bind(null,a,2);return(0===u?f.then(s):1===u?h.then(v):c.then(y)).then(void 0,l),a;function v(n){h=n;do{if(o&&(c=o())&&c.then&&!r(c))return void c.then(y).then(void 0,l);if(!(f=e())||r(f)&&!f.v)return void t(a,1,h);if(f.then)return void f.then(s).then(void 0,l);r(h=i())&&(h=h.v)}while(!h||!h.then);h.then(v).then(void 0,l)}function s(n){n?(h=i())&&h.then?h.then(v).then(void 0,l):v(h):t(a,1,h)}function y(){(f=e())?f.then?f.then(s).then(void 0,l):s(f):t(a,1,h)}}(function(){return!!Promise.resolve(o.next()).then(function(n){return c=i.done,i=n,Promise.resolve(i.value).then(function(n){return u=n,!c})})},function(){return!!(c=!0)},function(){h.push(u)});if(e&&e.then)return e.then(function(){})}()}catch(n){return f(n)}return a&&a.then?a.then(void 0,f):a}(0,function(n){a=!0,f=n})},function(n,t){function r(r){if(n)throw t;return t}var i=e(function(){var n=function(){if(!c&&null!=o.return)return Promise.resolve(o.return()).then(function(){})}();if(n&&n.then)return n.then(function(){})},function(n,t){if(a)throw f;if(n)throw t;return t});return i&&i.then?i.then(r):r()});return Promise.resolve(l&&l.then?l.then(function(n){return h}):h)}catch(n){return Promise.reject(n)}};o().then(console.log);export default o;
+//# sourceMappingURL=esnext-ts.esm.js.map
+"
+`;
+
+exports[`fixtures build macro with microbundle 4`] = `
+"var n=function(){function n(){}return n.prototype.then=function(r,e){var o=new n,i=this.s;if(i){var u=1&i?r:e;if(u){try{t(o,1,u(this.v))}catch(n){t(o,2,n)}return o}return this}return this.o=function(n){try{var i=n.v;1&n.s?t(o,1,r?r(i):i):e?t(o,1,e(i)):t(o,2,i)}catch(n){t(o,2,n)}},o},n}();function t(r,e,o){if(!r.s){if(o instanceof n){if(!o.s)return void(o.o=t.bind(null,r,e));1&e&&(e=o.s),o=o.v}if(o&&o.then)return void o.then(t.bind(null,r,e),t.bind(null,r,2));r.s=e,r.v=o;var i=r.o;i&&i(r)}}function r(t){return t instanceof n&&1&t.s}function e(n,t){try{var r=n()}catch(n){return t(!0,n)}return r&&r.then?r.then(t.bind(null,!1),t.bind(null,!0)):t(!1,r)}\\"undefined\\"!=typeof Symbol&&(Symbol.iterator||(Symbol.iterator=Symbol(\\"Symbol.iterator\\"))),\\"undefined\\"!=typeof Symbol&&(Symbol.asyncIterator||(Symbol.asyncIterator=Symbol(\\"Symbol.asyncIterator\\")));var o=function(){try{var o,i,u,f,h=[],c=!0,a=!1,l=e(function(){return function(e,f){try{var a=function(){o=function(n){var t;if(\\"undefined\\"!=typeof Symbol){if(Symbol.asyncIterator&&null!=(t=n[Symbol.asyncIterator]))return t.call(n);if(Symbol.iterator&&null!=(t=n[Symbol.iterator]))return t.call(n)}throw new TypeError(\\"Object is not async iterable\\")}([1,2]);var e=function(e,o,i){for(var u;;){var f=e();if(r(f)&&(f=f.v),!f)return h;if(f.then){u=0;break}var h=i();if(h&&h.then){if(!r(h)){u=1;break}h=h.s}if(o){var c=o();if(c&&c.then&&!r(c)){u=2;break}}}var a=new n,l=t.bind(null,a,2);return(0===u?f.then(s):1===u?h.then(v):c.then(y)).then(void 0,l),a;function v(n){h=n;do{if(o&&(c=o())&&c.then&&!r(c))return void c.then(y).then(void 0,l);if(!(f=e())||r(f)&&!f.v)return void t(a,1,h);if(f.then)return void f.then(s).then(void 0,l);r(h=i())&&(h=h.v)}while(!h||!h.then);h.then(v).then(void 0,l)}function s(n){n?(h=i())&&h.then?h.then(v).then(void 0,l):v(h):t(a,1,h)}function y(){(f=e())?f.then?f.then(s).then(void 0,l):s(f):t(a,1,h)}}(function(){return!!Promise.resolve(o.next()).then(function(n){return c=i.done,i=n,Promise.resolve(i.value).then(function(n){return u=n,!c})})},function(){return!!(c=!0)},function(){h.push(u)});if(e&&e.then)return e.then(function(){})}()}catch(n){return f(n)}return a&&a.then?a.then(void 0,f):a}(0,function(n){a=!0,f=n})},function(n,t){function r(r){if(n)throw t;return t}var i=e(function(){var n=function(){if(!c&&null!=o.return)return Promise.resolve(o.return()).then(function(){})}();if(n&&n.then)return n.then(function(){})},function(n,t){if(a)throw f;if(n)throw t;return t});return i&&i.then?i.then(r):r()});return Promise.resolve(l&&l.then?l.then(function(n){return h}):h)}catch(n){return Promise.reject(n)}};o().then(console.log),module.exports=o;
+//# sourceMappingURL=esnext-ts.js.map
+"
+`;
+
+exports[`fixtures build macro with microbundle 5`] = `
+"!function(n,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=t():\\"function\\"==typeof define&&define.amd?define(t):(n=n||self).esnextTs=t()}(this,function(){var n=function(){function n(){}return n.prototype.then=function(e,r){var o=new n,i=this.s;if(i){var u=1&i?e:r;if(u){try{t(o,1,u(this.v))}catch(n){t(o,2,n)}return o}return this}return this.o=function(n){try{var i=n.v;1&n.s?t(o,1,e?e(i):i):r?t(o,1,r(i)):t(o,2,i)}catch(n){t(o,2,n)}},o},n}();function t(e,r,o){if(!e.s){if(o instanceof n){if(!o.s)return void(o.o=t.bind(null,e,r));1&r&&(r=o.s),o=o.v}if(o&&o.then)return void o.then(t.bind(null,e,r),t.bind(null,e,2));e.s=r,e.v=o;var i=e.o;i&&i(e)}}function e(t){return t instanceof n&&1&t.s}function r(n,t){try{var e=n()}catch(n){return t(!0,n)}return e&&e.then?e.then(t.bind(null,!1),t.bind(null,!0)):t(!1,e)}\\"undefined\\"!=typeof Symbol&&(Symbol.iterator||(Symbol.iterator=Symbol(\\"Symbol.iterator\\"))),\\"undefined\\"!=typeof Symbol&&(Symbol.asyncIterator||(Symbol.asyncIterator=Symbol(\\"Symbol.asyncIterator\\")));var o=function(){try{var o,i,u,f,c=[],h=!0,a=!1,l=r(function(){return function(r,f){try{var a=function(){o=function(n){var t;if(\\"undefined\\"!=typeof Symbol){if(Symbol.asyncIterator&&null!=(t=n[Symbol.asyncIterator]))return t.call(n);if(Symbol.iterator&&null!=(t=n[Symbol.iterator]))return t.call(n)}throw new TypeError(\\"Object is not async iterable\\")}([1,2]);var r=function(r,o,i){for(var u;;){var f=r();if(e(f)&&(f=f.v),!f)return c;if(f.then){u=0;break}var c=i();if(c&&c.then){if(!e(c)){u=1;break}c=c.s}if(o){var h=o();if(h&&h.then&&!e(h)){u=2;break}}}var a=new n,l=t.bind(null,a,2);return(0===u?f.then(s):1===u?c.then(v):h.then(d)).then(void 0,l),a;function v(n){c=n;do{if(o&&(h=o())&&h.then&&!e(h))return void h.then(d).then(void 0,l);if(!(f=r())||e(f)&&!f.v)return void t(a,1,c);if(f.then)return void f.then(s).then(void 0,l);e(c=i())&&(c=c.v)}while(!c||!c.then);c.then(v).then(void 0,l)}function s(n){n?(c=i())&&c.then?c.then(v).then(void 0,l):v(c):t(a,1,c)}function d(){(f=r())?f.then?f.then(s).then(void 0,l):s(f):t(a,1,c)}}(function(){return!!Promise.resolve(o.next()).then(function(n){return h=i.done,i=n,Promise.resolve(i.value).then(function(n){return u=n,!h})})},function(){return!!(h=!0)},function(){c.push(u)});if(r&&r.then)return r.then(function(){})}()}catch(n){return f(n)}return a&&a.then?a.then(void 0,f):a}(0,function(n){a=!0,f=n})},function(n,t){function e(e){if(n)throw t;return t}var i=r(function(){var n=function(){if(!h&&null!=o.return)return Promise.resolve(o.return()).then(function(){})}();if(n&&n.then)return n.then(function(){})},function(n,t){if(a)throw f;if(n)throw t;return t});return i&&i.then?i.then(e):e()});return Promise.resolve(l&&l.then?l.then(function(n){return c}):c)}catch(n){return Promise.reject(n)}};return o().then(console.log),o});
+//# sourceMappingURL=esnext-ts.umd.js.map
+"
+`;
+
+exports[`fixtures build macro with microbundle 6`] = `
+"export default function foo(): Promise<any[]>;
+"
+`;
+
+exports[`fixtures build macro with microbundle 7`] = `
 "Used script: microbundle
 
 Directory tree:
@@ -1387,6 +1621,7 @@ macro
     macro-lib.js.map
     macro-lib.umd.js
     macro-lib.umd.js.map
+  node_modules
   package.json
   src
     index.js
@@ -1402,21 +1637,21 @@ Build \\"macroLib\\" to dist:
 125 B: macro-lib.umd.js.br"
 `;
 
-exports[`fixtures build macro with microbundle 2`] = `6`;
+exports[`fixtures build macro with microbundle 8`] = `6`;
 
-exports[`fixtures build macro with microbundle 3`] = `
+exports[`fixtures build macro with microbundle 9`] = `
 "export default\\"name-macro\\";
 //# sourceMappingURL=macro-lib.esm.js.map
 "
 `;
 
-exports[`fixtures build macro with microbundle 4`] = `
+exports[`fixtures build macro with microbundle 10`] = `
 "module.exports=\\"name-macro\\";
 //# sourceMappingURL=macro-lib.js.map
 "
 `;
 
-exports[`fixtures build macro with microbundle 5`] = `
+exports[`fixtures build macro with microbundle 11`] = `
 "!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=\\"name-macro\\":\\"function\\"==typeof define&&define.amd?define(function(){return\\"name-macro\\"}):(e=e||self).macroLib=\\"name-macro\\"}(this);
 //# sourceMappingURL=macro-lib.umd.js.map
 "
@@ -1631,14 +1866,14 @@ modern
 
 
 Build \\"modernLib\\" to dist:
-159 B: modern-lib.modern.js.gz
-114 B: modern-lib.modern.js.br"
+110 B: modern-lib.modern.js.gz
+90 B: modern-lib.modern.js.br"
 `;
 
 exports[`fixtures build modern with microbundle 2`] = `2`;
 
 exports[`fixtures build modern with microbundle 3`] = `
-"async function n(){for(var n=arguments.length,r=new Array(n),a=0;a<n;a++)r[a]=arguments[a];return r.reduce((n,r)=>n+r,0)}export default async function(){return[await n(...arguments),await n(...arguments)]}
+"async function n(...n){return n.reduce((n,t)=>n+t,0)}export default async function(...t){return[await n(...t),await n(...t)]}
 //# sourceMappingURL=modern-lib.modern.js.map
 "
 `;
@@ -1898,6 +2133,65 @@ exports[`fixtures build pretty with microbundle 1`] = `
 
 Directory tree:
 
+optional-chaining-ts
+  dist
+    index.d.ts
+    optional-chaining-ts.esm.js
+    optional-chaining-ts.esm.js.map
+    optional-chaining-ts.js
+    optional-chaining-ts.js.map
+    optional-chaining-ts.umd.js
+    optional-chaining-ts.umd.js.map
+  node_modules
+  package.json
+  src
+    index.ts
+  tsconfig.json
+
+
+Build \\"optionalChainingTs\\" to dist:
+104 B: optional-chaining-ts.js.gz
+77 B: optional-chaining-ts.js.br
+108 B: optional-chaining-ts.esm.js.gz
+92 B: optional-chaining-ts.esm.js.br
+207 B: optional-chaining-ts.umd.js.gz
+166 B: optional-chaining-ts.umd.js.br"
+`;
+
+exports[`fixtures build pretty with microbundle 2`] = `7`;
+
+exports[`fixtures build pretty with microbundle 3`] = `
+"export declare function chain(test: {
+    maybeVar?: {
+        thing: string;
+    };
+}): string | undefined;
+"
+`;
+
+exports[`fixtures build pretty with microbundle 4`] = `
+"function n(n){var r;return null===(r=n.maybeVar)||void 0===r?void 0:r.thing}export{n as chain};
+//# sourceMappingURL=optional-chaining-ts.esm.js.map
+"
+`;
+
+exports[`fixtures build pretty with microbundle 5`] = `
+"exports.chain=function(n){var i;return null===(i=n.maybeVar)||void 0===i?void 0:i.thing};
+//# sourceMappingURL=optional-chaining-ts.js.map
+"
+`;
+
+exports[`fixtures build pretty with microbundle 6`] = `
+"!function(n,e){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?e(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],e):e((n=n||self).optionalChainingTs={})}(this,function(n){n.chain=function(n){var e;return null===(e=n.maybeVar)||void 0===e?void 0:e.thing}});
+//# sourceMappingURL=optional-chaining-ts.umd.js.map
+"
+`;
+
+exports[`fixtures build pretty with microbundle 7`] = `
+"Used script: microbundle
+
+Directory tree:
+
 pretty
   dist
     pretty.esm.js
@@ -1920,21 +2214,21 @@ Build \\"pretty\\" to dist:
 5.36 kB: pretty.umd.js.br"
 `;
 
-exports[`fixtures build pretty with microbundle 2`] = `6`;
+exports[`fixtures build pretty with microbundle 8`] = `6`;
 
-exports[`fixtures build pretty with microbundle 3`] = `
+exports[`fixtures build pretty with microbundle 9`] = `
 "var n=\\"\\\\n\\\\nThere is immense joy in just watching - watching all the little creatures in nature. I'll go over the colors one more\\\\ntime that we use: Titanium white, Thalo green, Prussian blue, Van Dyke brown, Alizarin crimson, Sap green, Cad yellow,\\\\nand Permanent red. If you don't like it - change it. It's your world. Be brave. Sometimes you learn more from your\\\\nmistakes than you do from your masterpieces.\\\\n\\\\nTrees grow in all kinds of ways. They're not all perfectly straight. Not every limb is perfect. Now let's put some happy\\\\nlittle clouds in here. We have no limits to our world. We're only limited by our imagination. The first step to doing\\\\nanything is to believe you can do it. See it finished in your mind before you ever start. Even trees need a friend. We\\\\nall need friends. And that's when it becomes fun - you don't have to spend your time thinking about what's happening -\\\\nyou just let it happen.\\\\n\\\\nरिती संपादक बेंगलूर अन्तरराष्ट्रीयकरन शीघ्र भाषा चिदंश उद्योग विस्तरणक्षमता चिदंश एकएस तरहथा। प्रोत्साहित उपेक्ष बिन्दुओ\\\\nध्येय देने गुजरना ऎसाजीस निर्माण नवंबर लिए। एसेएवं उपलब्धता मुश्किले डाले। बहतर सहायता माध्यम भाषाओ समूह\\\\n\\\\n井待品亡写回横提和指生志考結。重特天県偏切運録広詳三人転者数代歳。秀天戦機広八型希金生作事国第。年米教止証車断級弘報安楽\\\\n銀必約現獲料切。点額講問課覧傷邸出送跡出懲。編米人験由社迷入解公著片法記択昇必崎掲清。摩出元自越食多県実間旅売主注理併間\\\\n話策。小政退時年福米越給新家入解美露方堀港朝。俊間髪物縦該高報見甲購形州日事。\\\\n\\\\n🌸🍂🌃🐧🍘🏧🍮 🌶👢🔗🐥🔼🎮 🐤🍲📆👧🎼🐒 💑🍖📴🐠🍼 🎱🔮🍦💳👹 💫🏮📅🍑📭🎎 🏭💿🏫🔢👚💩 👇🌄🌗🔵💦 🔺🔡🌍🐗🏀📫\\\\n📻🍵🐰🔜🕧 🌴🌞🕙🎨🎾🔊🏰 🎑🌆🔁🌂 🕐📣📉🌴🕠📢 🎀📖🎋🔱📒💰 🍅🐻🌃🌖. 🎁🕔👎🎷📀📞 🍁🔫🍀🌃📹 💈📂💶👕 🍡📰👛🐻\\\\n🍖🐽💫📼 🍆🎀💛👫🔹 🎷🕙🌱👸🕁🔝 🍸🔅👿🐡. 🐟🔐🏡🔅👾 🐱💱👺🍶 🎠🔆🎤🏥🌻🗾 👽🎯💈🏣🔊📴💆🏫 🔉🌉🍃🌻 🎅🔌🔻💣 🌸🍎🐀🌇\\\\n🗻👔📤💤🔶. 🍆👣🕕👦📦👑 🐍🐉🔶🕕 🍲👩🍍🌕📻👒📵 🔣🌋🌟👼 🔏📀🐆🍖🍮 🐁🌘🐻🏥🐡🔶🔘🏭 👡🔫🔗📊📻 🍂💧🌿📥🔚 📹💻🔌💠🌚\\\\n🐦💴🌎🌞🏤.\\\\n\\\\nThere is immense joy in just watching - watching all the little creatures in nature. I'll go over the colors one more\\\\ntime that we use: Titanium white, Thalo green, Prussian blue, Van Dyke brown, Alizarin crimson, Sap green, Cad yellow,\\\\nand Permanent red. If you don't like it - change it. It's your world. Be brave. Sometimes you learn more from your\\\\nmistakes than you do from your masterpieces. That's why I paint - because I can create the kind of world I want - and I\\\\ncan make this world as happy as I want it. I was blessed with a very steady hand; and it comes in very handy when you're\\\\ndoing these little delicate things. We'll paint one happy little tree right here. These things happen automatically. All\\\\nyou have to do is just let them happen.\\\\n\\\\n🐻🍘💀🐪 🕧🎂🕃🍵🏠 💎🌄🐐📘🐄 🍂🏤👊🍖 👆🍂📫👪🐈🕢👓 👯🕞🏉🍚🎆🔠🌵 🎭🎎💵📮📭 🔪💨📢📕 🐔📬👪🏄🐙🗽📤.\\\\n💛👴💧🎁👗💟👡💎 🎷🕡👮🗾🍷 🎪🍇🍩💰 📫🐗🎄🍍🎃 🎯🌴🐍🔉📰 👼👧🐢🕔🔷📞🍩 🔘👑🌆🌒🔣 🔆👺📴👾 🔝💑💸💒🏡🔸 🔟👞📷🔱👠\\\\n📵🏠📕🕝🐂👪 💐🎾🕁🗾👊📪. 🍉🏁👰🏡🕔💒🐯 🐟🍡📴🌿👱👢 📵💄🌊🌵🐫🍏 🎎🕠🍍💭💀👖 🎵💘🔗🍖 📧🌘🍅🕚📘🔮 👤🌾👿🐍🎽🌹\\\\n🎲🎎💅📪🐐🍢📈 🏣🐑👇👼🐄🍔 🍠📧🌊🕁🔛🐩. 🌺📊🍼🐁💼 🔈💬🌱🎑🔊🐙💲👩 🍇👞📎👻🌔 💑🕁🎲💤 🎮📃🕖📖 📻💬🔢💔🐇👬 🔨🌃📈🔞\\\\n🌒🎈👙🔥🐊 📭👍📢👊📟.\\\\n\\\\n出死問民同歴術荘面族上自。窃指写氷名続球投込光試事樹増。作合副者扶実権守安展感意環待質出。告供体企紙勢構込君奪属仕子業戦\\\\n浮私。長論攻士踊再連公雪地約政近第公。界地島命党浮国沼出問気混心未独院。朝原妙画岡性制領子金次問無浦妥混口時研。道記険健\\\\n集立根聖間前設集族山要本覧。変注再悩式付療場図験問県家界月止収文。\\\\n\\\\nलेकिन उसके संपादक उपलब्ध दिनांक प्रति सम्पर्क प्राधिकरन नाकर मुक्त कलइस वेबजाल वर्तमान समस्याओ देखने भोगोलिक केन्द्रिय\\\\nकिया खयालात विज्ञान ध्येय गटको साधन चिदंश पासपाई व्याख्या मार्गदर्शन संदेश जिवन प्रतिबध वार्तालाप किके विश्व खरिदने\\\\nहुआआदी तकनीकी संदेश सारांश असरकारक वार्तालाप चाहे पहोच। अतित पुर्णता केन्द्रिय\\\\n\\\\n👅💾🐂🔙 🐂🎠👶🐮🐛 👛💗💶🌿💒 🐐🌱🐶🌴🏤🐒 🔪🍡🎸🐛🍖 📗🎓🏊🕀🎿 🔅📋📥👳🔝 🐗👝🏄🐲 📂🎷🐎🏯💎🐹 📲🍍🏥🔂🕚🐉🎤\\\\n🌕🐴📐🎪💋. 💔👂🐗📷🎐 🌹📔💒📝👎📭 🔖🍶💺🕘 🔡💘🎪🔚🔯👉 💯🎉👠🎁🐌💵 👌🔉🎹🕒💕🍁 🏡🍢🔹🔷👀💦🏉👀 👑🐺🐁🏤\\\\n🎺🍁🐙🐮🌃🕢🐟 🍶🎃🕕🔦 🐧🔝💔💚🔫👍 🌉🔁🌄📺 👓🎳📧🌆💖🍋🕔. 🍥🔘🗼📟 🍹🔸🔰🕣🌍 🏡💽🍬👗👧 📩👬🌻🐐🌞🌎🐵🔛 🏆🌹🍰🔬📕\\\\n👋🎩🍓🌏👙 🎁🏃🎌🍳🔋👎📔 🐈🌽🔘💮 🏬🐷💿🕕. 📕👖📦📡 🎅🎺🏭🍗💜💷🐦 💻💚🐪🕠🔀 💰🍹💶🍶🎥📄 🌛👕🐲🐣🍷🎬 🐥🎯🔵🎹\\\\n🌿👌🐚🍛🏪 🌵📞💃📗👱👩 📟🐸🌺🐅👮 💚🐦💉💞🌛 🔼🔤👓🏡💩.\\\\n\\\\n\\\\nयधपि बाजार तकरीबन आंतरजाल प्राधिकरन लगती संदेश एसलिये बिन्दुओ प्रोत्साहित जानकारी ढांचामात्रुभाषा बाजार बदले प्रमान\\\\nअनुवाद विकेन्द्रित पसंद ढांचा हमारि जोवे उद्योग संस्थान और्४५० विकसित उदेश लेकिन सकती वार्तालाप लाभान्वित संदेश उदेश\\\\nपहोच। लचकनहि अनुवाद सुविधा एकत्रित कीने सक्षम भीयह अत्यंत लचकनहि निरपेक्ष कराना हमारि प्राप्त पुर्णता प्रतिबध्दता होगा\\\\nउन्हे जाएन खयालात पहोचाना\\\\n\\\\n散待望会窮縮囲前賀理格顔欧製暮景初子加。首稿覧析回未帯則号医間本取退埋帯品。右歳約幻病護指極講賞京応。野受移供頑特公却報\\\\n法利務水提士政駐物際。角媛分地昧況面日残金真福方雨入顔作化。最刊情感売校見強移本説注辞。経必好以小球生音明優去験見政感治\\\\n報付。講刊切記勝帯載豪著転読金止。金子森午模移言兆埠関価亡出目載。\\\\n\\\\nWork on one thing at a time. Don't get carried away - we have plenty of time. Everything is happy if you choose to make\\\\nit that way. Happy painting, God bless. You can create anything that makes you happy. Just make a decision and let it\\\\ngo. Nice little clouds playing around in the sky.You can do anything here - the only pre-requisite is that it makes you\\\\nhappy. I'm going to mix up a little color. We’ll use Van Dyke Brown, Permanent Red, and a little bit of Prussian Blue.\\\\nLet's make some happy little clouds in our world.\\\\n\\\\nपहेला गएआप स्वतंत्र प्राधिकरन सेऔर अनुकूल ब्रौशर बिन्दुओमे सदस्य गुजरना तकनिकल वैश्विक सकते बनाति चिदंश चाहे कुशलता\\\\nवर्तमान प्रोत्साहित देने विवरन पहोचाना विकेन्द्रियकरण अनुकूल विभाजनक्षमता औषधिक अन्य खरिदे दिये आवश्यक समस्याए कम्प्युटर\\\\nविनिमय अविरोधता लाभान्वित लाभो ढांचा\\\\n\\\\n抄聞調時得直決移警撃覧進聞滑公政央。日探劇票選伊追短青功書更将奈府成多。味治理育月漬安意散護良読京。芳豚大度面傾府山応著\\\\n器地捜志。止高棋戻管明証経処流自勝動続。装載聞視属王減通橋説主費事業情芸。追若得本臭稿事馬予治川劇覧記今竹犯破育食。参兆\\\\n徹括単写東家素講舞校食医咋存務代連子。球設国事検問周東集題聞供奈。\\\\n\\\\n🍊🌆📛🍛🌊🍡🍒 🔦🐟🐵🍚🌐🍛🐏 🔆💍📟🎧 🔐📤💺🐒 🔥🔬🐣💹🌻👚 🎰👯🎡🗻💯🐉🌗 🍐👣🐯🔖📚 💡📟👨🍮🍼💛📞 🕕🐁🌾🏧💻📷\\\\n💗🐢🏥🎵🐰🍉 🏥🔎💛💘🔧🍛🎿 🍟🌰🐴🏫🎀 🎷🌿🌴🏤🍢📳🍺 🐗👷🌳👦📩🌁 🐂🔜🔙📕. 🌎🍠📓📠🕡 🎽🔺🔱🌔📗🎤 🎫🍃👚🍤🐽🌰\\\\n🕠🌉📪🍒🐃💲 🎢🔯👶🔙🔚🕝 🍮📒🏉🏨🐝🌿 👔💫🏁🎺 🐸💞🌈🐸 📣🔯📅🐍🐴 🌑🌍🌛👀 🕂👟🐕📃🎇🔞 🍮🔏🍥👨 🐪📲🐐🎁 🍥🔁📑💮🌘.\\\\n🌏🎎🍛👯 🔈🎸💨🏧📚 🏪💼🎣🔚 🐤💳💁👓 👃🍆🕘🐋👬🐣 🕚🏃🌄🔷🌈🔖 💥💧🔴🌛🍁👦 💣🐐🕓🎠🕚🕞🏭 💨👓🏢🌓🔄. 📪🔜💹👤👂🐭\\\\n🕚🔎🐂🏂👍📻 👾💠🌕📻🎍 🐟🔬🏢💍 👓👠👤🎐💸👝 🔟💕🕛💊 🍩🌙👬🐘 🍪🔙📉💔🐝🕝 📭🕡🎼💈📇🔡 👓🍁🎾👯👨 🏇🍱🐢🌛\\\\n🎇🐩📴🎋🕁📎🎈 🐌👱📎🍹👆 👐🍐📗👽🐹💜 📭🌔🌅🍯👀.\\\\n\\\\n🔜🐰🏊🍃🐮 🔪🔐📇🐩 🐬👔🍙🍩💉 🏉👩👔🍞🍟🌂 🍺🕔🌖🔪🔩🍥 🎓🍒🌅🐘💛 🐔🐊📶🐊 👂📌👂🍺 💗🐳🎠📧🏭💧 🐝📅🍆🔞🏆\\\\n👇🔂🐺🔬🎯🔳🎐🎍 💖💅🐲🔭📔🏊🔋 🐨📫🕢🎁. 🐯💁🔘📰🐪 💥👭🍘🎴📣💂💄 🐏🔊🐚👔🎿🐙 🔕🐞💹📁 🔊👴👬👪 👠📱👃📍 🏢🐃🍯🍹🗻\\\\n🐩💮👲👠 🍏🎽📄🐋 🔣💉🔉📒💸🎭👎 💁🗾🔵🐪🍣 🍃🔝💥🔒👴. 📦🔟🔶💷🍥 🍚🕤👦🍻🔥🍹 👄🌜🐑🌀🐃🔪🕦 🌟🐶🍞🕥🌛 👮🐄🏬🎴👂💼📵\\\\n🌋📐🐲👥 🔒🏭🔭💿🎫🎄 💓🐓🎐🎁👔📟 💌🍇🎶👷🎬 🌌💀🎸💡 📔🐢💁🔊👘🐳🌞 🎩📝💟🍼💦🔄 🕒🍼🏧🎄🔃💐. 🎆🌜👗👿 🐁🌑💮👙🎌👞\\\\n🏫📙🌌🕙🐥 👓🌑💎💸📹📒 👋🐎🍡🎾👸🗽 📢📓🌍🏮📳🔈 👶🐷🐭🎿🔴🗾🏬 🌆🔈🍡💞💭🎨. \\";export{n as allTheIpsum};
 //# sourceMappingURL=pretty.esm.js.map
 "
 `;
 
-exports[`fixtures build pretty with microbundle 4`] = `
+exports[`fixtures build pretty with microbundle 10`] = `
 "exports.allTheIpsum=\\"\\\\n\\\\nThere is immense joy in just watching - watching all the little creatures in nature. I'll go over the colors one more\\\\ntime that we use: Titanium white, Thalo green, Prussian blue, Van Dyke brown, Alizarin crimson, Sap green, Cad yellow,\\\\nand Permanent red. If you don't like it - change it. It's your world. Be brave. Sometimes you learn more from your\\\\nmistakes than you do from your masterpieces.\\\\n\\\\nTrees grow in all kinds of ways. They're not all perfectly straight. Not every limb is perfect. Now let's put some happy\\\\nlittle clouds in here. We have no limits to our world. We're only limited by our imagination. The first step to doing\\\\nanything is to believe you can do it. See it finished in your mind before you ever start. Even trees need a friend. We\\\\nall need friends. And that's when it becomes fun - you don't have to spend your time thinking about what's happening -\\\\nyou just let it happen.\\\\n\\\\nरिती संपादक बेंगलूर अन्तरराष्ट्रीयकरन शीघ्र भाषा चिदंश उद्योग विस्तरणक्षमता चिदंश एकएस तरहथा। प्रोत्साहित उपेक्ष बिन्दुओ\\\\nध्येय देने गुजरना ऎसाजीस निर्माण नवंबर लिए। एसेएवं उपलब्धता मुश्किले डाले। बहतर सहायता माध्यम भाषाओ समूह\\\\n\\\\n井待品亡写回横提和指生志考結。重特天県偏切運録広詳三人転者数代歳。秀天戦機広八型希金生作事国第。年米教止証車断級弘報安楽\\\\n銀必約現獲料切。点額講問課覧傷邸出送跡出懲。編米人験由社迷入解公著片法記択昇必崎掲清。摩出元自越食多県実間旅売主注理併間\\\\n話策。小政退時年福米越給新家入解美露方堀港朝。俊間髪物縦該高報見甲購形州日事。\\\\n\\\\n🌸🍂🌃🐧🍘🏧🍮 🌶👢🔗🐥🔼🎮 🐤🍲📆👧🎼🐒 💑🍖📴🐠🍼 🎱🔮🍦💳👹 💫🏮📅🍑📭🎎 🏭💿🏫🔢👚💩 👇🌄🌗🔵💦 🔺🔡🌍🐗🏀📫\\\\n📻🍵🐰🔜🕧 🌴🌞🕙🎨🎾🔊🏰 🎑🌆🔁🌂 🕐📣📉🌴🕠📢 🎀📖🎋🔱📒💰 🍅🐻🌃🌖. 🎁🕔👎🎷📀📞 🍁🔫🍀🌃📹 💈📂💶👕 🍡📰👛🐻\\\\n🍖🐽💫📼 🍆🎀💛👫🔹 🎷🕙🌱👸🕁🔝 🍸🔅👿🐡. 🐟🔐🏡🔅👾 🐱💱👺🍶 🎠🔆🎤🏥🌻🗾 👽🎯💈🏣🔊📴💆🏫 🔉🌉🍃🌻 🎅🔌🔻💣 🌸🍎🐀🌇\\\\n🗻👔📤💤🔶. 🍆👣🕕👦📦👑 🐍🐉🔶🕕 🍲👩🍍🌕📻👒📵 🔣🌋🌟👼 🔏📀🐆🍖🍮 🐁🌘🐻🏥🐡🔶🔘🏭 👡🔫🔗📊📻 🍂💧🌿📥🔚 📹💻🔌💠🌚\\\\n🐦💴🌎🌞🏤.\\\\n\\\\nThere is immense joy in just watching - watching all the little creatures in nature. I'll go over the colors one more\\\\ntime that we use: Titanium white, Thalo green, Prussian blue, Van Dyke brown, Alizarin crimson, Sap green, Cad yellow,\\\\nand Permanent red. If you don't like it - change it. It's your world. Be brave. Sometimes you learn more from your\\\\nmistakes than you do from your masterpieces. That's why I paint - because I can create the kind of world I want - and I\\\\ncan make this world as happy as I want it. I was blessed with a very steady hand; and it comes in very handy when you're\\\\ndoing these little delicate things. We'll paint one happy little tree right here. These things happen automatically. All\\\\nyou have to do is just let them happen.\\\\n\\\\n🐻🍘💀🐪 🕧🎂🕃🍵🏠 💎🌄🐐📘🐄 🍂🏤👊🍖 👆🍂📫👪🐈🕢👓 👯🕞🏉🍚🎆🔠🌵 🎭🎎💵📮📭 🔪💨📢📕 🐔📬👪🏄🐙🗽📤.\\\\n💛👴💧🎁👗💟👡💎 🎷🕡👮🗾🍷 🎪🍇🍩💰 📫🐗🎄🍍🎃 🎯🌴🐍🔉📰 👼👧🐢🕔🔷📞🍩 🔘👑🌆🌒🔣 🔆👺📴👾 🔝💑💸💒🏡🔸 🔟👞📷🔱👠\\\\n📵🏠📕🕝🐂👪 💐🎾🕁🗾👊📪. 🍉🏁👰🏡🕔💒🐯 🐟🍡📴🌿👱👢 📵💄🌊🌵🐫🍏 🎎🕠🍍💭💀👖 🎵💘🔗🍖 📧🌘🍅🕚📘🔮 👤🌾👿🐍🎽🌹\\\\n🎲🎎💅📪🐐🍢📈 🏣🐑👇👼🐄🍔 🍠📧🌊🕁🔛🐩. 🌺📊🍼🐁💼 🔈💬🌱🎑🔊🐙💲👩 🍇👞📎👻🌔 💑🕁🎲💤 🎮📃🕖📖 📻💬🔢💔🐇👬 🔨🌃📈🔞\\\\n🌒🎈👙🔥🐊 📭👍📢👊📟.\\\\n\\\\n出死問民同歴術荘面族上自。窃指写氷名続球投込光試事樹増。作合副者扶実権守安展感意環待質出。告供体企紙勢構込君奪属仕子業戦\\\\n浮私。長論攻士踊再連公雪地約政近第公。界地島命党浮国沼出問気混心未独院。朝原妙画岡性制領子金次問無浦妥混口時研。道記険健\\\\n集立根聖間前設集族山要本覧。変注再悩式付療場図験問県家界月止収文。\\\\n\\\\nलेकिन उसके संपादक उपलब्ध दिनांक प्रति सम्पर्क प्राधिकरन नाकर मुक्त कलइस वेबजाल वर्तमान समस्याओ देखने भोगोलिक केन्द्रिय\\\\nकिया खयालात विज्ञान ध्येय गटको साधन चिदंश पासपाई व्याख्या मार्गदर्शन संदेश जिवन प्रतिबध वार्तालाप किके विश्व खरिदने\\\\nहुआआदी तकनीकी संदेश सारांश असरकारक वार्तालाप चाहे पहोच। अतित पुर्णता केन्द्रिय\\\\n\\\\n👅💾🐂🔙 🐂🎠👶🐮🐛 👛💗💶🌿💒 🐐🌱🐶🌴🏤🐒 🔪🍡🎸🐛🍖 📗🎓🏊🕀🎿 🔅📋📥👳🔝 🐗👝🏄🐲 📂🎷🐎🏯💎🐹 📲🍍🏥🔂🕚🐉🎤\\\\n🌕🐴📐🎪💋. 💔👂🐗📷🎐 🌹📔💒📝👎📭 🔖🍶💺🕘 🔡💘🎪🔚🔯👉 💯🎉👠🎁🐌💵 👌🔉🎹🕒💕🍁 🏡🍢🔹🔷👀💦🏉👀 👑🐺🐁🏤\\\\n🎺🍁🐙🐮🌃🕢🐟 🍶🎃🕕🔦 🐧🔝💔💚🔫👍 🌉🔁🌄📺 👓🎳📧🌆💖🍋🕔. 🍥🔘🗼📟 🍹🔸🔰🕣🌍 🏡💽🍬👗👧 📩👬🌻🐐🌞🌎🐵🔛 🏆🌹🍰🔬📕\\\\n👋🎩🍓🌏👙 🎁🏃🎌🍳🔋👎📔 🐈🌽🔘💮 🏬🐷💿🕕. 📕👖📦📡 🎅🎺🏭🍗💜💷🐦 💻💚🐪🕠🔀 💰🍹💶🍶🎥📄 🌛👕🐲🐣🍷🎬 🐥🎯🔵🎹\\\\n🌿👌🐚🍛🏪 🌵📞💃📗👱👩 📟🐸🌺🐅👮 💚🐦💉💞🌛 🔼🔤👓🏡💩.\\\\n\\\\n\\\\nयधपि बाजार तकरीबन आंतरजाल प्राधिकरन लगती संदेश एसलिये बिन्दुओ प्रोत्साहित जानकारी ढांचामात्रुभाषा बाजार बदले प्रमान\\\\nअनुवाद विकेन्द्रित पसंद ढांचा हमारि जोवे उद्योग संस्थान और्४५० विकसित उदेश लेकिन सकती वार्तालाप लाभान्वित संदेश उदेश\\\\nपहोच। लचकनहि अनुवाद सुविधा एकत्रित कीने सक्षम भीयह अत्यंत लचकनहि निरपेक्ष कराना हमारि प्राप्त पुर्णता प्रतिबध्दता होगा\\\\nउन्हे जाएन खयालात पहोचाना\\\\n\\\\n散待望会窮縮囲前賀理格顔欧製暮景初子加。首稿覧析回未帯則号医間本取退埋帯品。右歳約幻病護指極講賞京応。野受移供頑特公却報\\\\n法利務水提士政駐物際。角媛分地昧況面日残金真福方雨入顔作化。最刊情感売校見強移本説注辞。経必好以小球生音明優去験見政感治\\\\n報付。講刊切記勝帯載豪著転読金止。金子森午模移言兆埠関価亡出目載。\\\\n\\\\nWork on one thing at a time. Don't get carried away - we have plenty of time. Everything is happy if you choose to make\\\\nit that way. Happy painting, God bless. You can create anything that makes you happy. Just make a decision and let it\\\\ngo. Nice little clouds playing around in the sky.You can do anything here - the only pre-requisite is that it makes you\\\\nhappy. I'm going to mix up a little color. We’ll use Van Dyke Brown, Permanent Red, and a little bit of Prussian Blue.\\\\nLet's make some happy little clouds in our world.\\\\n\\\\nपहेला गएआप स्वतंत्र प्राधिकरन सेऔर अनुकूल ब्रौशर बिन्दुओमे सदस्य गुजरना तकनिकल वैश्विक सकते बनाति चिदंश चाहे कुशलता\\\\nवर्तमान प्रोत्साहित देने विवरन पहोचाना विकेन्द्रियकरण अनुकूल विभाजनक्षमता औषधिक अन्य खरिदे दिये आवश्यक समस्याए कम्प्युटर\\\\nविनिमय अविरोधता लाभान्वित लाभो ढांचा\\\\n\\\\n抄聞調時得直決移警撃覧進聞滑公政央。日探劇票選伊追短青功書更将奈府成多。味治理育月漬安意散護良読京。芳豚大度面傾府山応著\\\\n器地捜志。止高棋戻管明証経処流自勝動続。装載聞視属王減通橋説主費事業情芸。追若得本臭稿事馬予治川劇覧記今竹犯破育食。参兆\\\\n徹括単写東家素講舞校食医咋存務代連子。球設国事検問周東集題聞供奈。\\\\n\\\\n🍊🌆📛🍛🌊🍡🍒 🔦🐟🐵🍚🌐🍛🐏 🔆💍📟🎧 🔐📤💺🐒 🔥🔬🐣💹🌻👚 🎰👯🎡🗻💯🐉🌗 🍐👣🐯🔖📚 💡📟👨🍮🍼💛📞 🕕🐁🌾🏧💻📷\\\\n💗🐢🏥🎵🐰🍉 🏥🔎💛💘🔧🍛🎿 🍟🌰🐴🏫🎀 🎷🌿🌴🏤🍢📳🍺 🐗👷🌳👦📩🌁 🐂🔜🔙📕. 🌎🍠📓📠🕡 🎽🔺🔱🌔📗🎤 🎫🍃👚🍤🐽🌰\\\\n🕠🌉📪🍒🐃💲 🎢🔯👶🔙🔚🕝 🍮📒🏉🏨🐝🌿 👔💫🏁🎺 🐸💞🌈🐸 📣🔯📅🐍🐴 🌑🌍🌛👀 🕂👟🐕📃🎇🔞 🍮🔏🍥👨 🐪📲🐐🎁 🍥🔁📑💮🌘.\\\\n🌏🎎🍛👯 🔈🎸💨🏧📚 🏪💼🎣🔚 🐤💳💁👓 👃🍆🕘🐋👬🐣 🕚🏃🌄🔷🌈🔖 💥💧🔴🌛🍁👦 💣🐐🕓🎠🕚🕞🏭 💨👓🏢🌓🔄. 📪🔜💹👤👂🐭\\\\n🕚🔎🐂🏂👍📻 👾💠🌕📻🎍 🐟🔬🏢💍 👓👠👤🎐💸👝 🔟💕🕛💊 🍩🌙👬🐘 🍪🔙📉💔🐝🕝 📭🕡🎼💈📇🔡 👓🍁🎾👯👨 🏇🍱🐢🌛\\\\n🎇🐩📴🎋🕁📎🎈 🐌👱📎🍹👆 👐🍐📗👽🐹💜 📭🌔🌅🍯👀.\\\\n\\\\n🔜🐰🏊🍃🐮 🔪🔐📇🐩 🐬👔🍙🍩💉 🏉👩👔🍞🍟🌂 🍺🕔🌖🔪🔩🍥 🎓🍒🌅🐘💛 🐔🐊📶🐊 👂📌👂🍺 💗🐳🎠📧🏭💧 🐝📅🍆🔞🏆\\\\n👇🔂🐺🔬🎯🔳🎐🎍 💖💅🐲🔭📔🏊🔋 🐨📫🕢🎁. 🐯💁🔘📰🐪 💥👭🍘🎴📣💂💄 🐏🔊🐚👔🎿🐙 🔕🐞💹📁 🔊👴👬👪 👠📱👃📍 🏢🐃🍯🍹🗻\\\\n🐩💮👲👠 🍏🎽📄🐋 🔣💉🔉📒💸🎭👎 💁🗾🔵🐪🍣 🍃🔝💥🔒👴. 📦🔟🔶💷🍥 🍚🕤👦🍻🔥🍹 👄🌜🐑🌀🐃🔪🕦 🌟🐶🍞🕥🌛 👮🐄🏬🎴👂💼📵\\\\n🌋📐🐲👥 🔒🏭🔭💿🎫🎄 💓🐓🎐🎁👔📟 💌🍇🎶👷🎬 🌌💀🎸💡 📔🐢💁🔊👘🐳🌞 🎩📝💟🍼💦🔄 🕒🍼🏧🎄🔃💐. 🎆🌜👗👿 🐁🌑💮👙🎌👞\\\\n🏫📙🌌🕙🐥 👓🌑💎💸📹📒 👋🐎🍡🎾👸🗽 📢📓🌍🏮📳🔈 👶🐷🐭🎿🔴🗾🏬 🌆🔈🍡💞💭🎨. \\";
 //# sourceMappingURL=pretty.js.map
 "
 `;
 
-exports[`fixtures build pretty with microbundle 5`] = `
+exports[`fixtures build pretty with microbundle 11`] = `
 "!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?n(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],n):n((e=e||self).pretty={})}(this,function(e){e.allTheIpsum=\\"\\\\n\\\\nThere is immense joy in just watching - watching all the little creatures in nature. I'll go over the colors one more\\\\ntime that we use: Titanium white, Thalo green, Prussian blue, Van Dyke brown, Alizarin crimson, Sap green, Cad yellow,\\\\nand Permanent red. If you don't like it - change it. It's your world. Be brave. Sometimes you learn more from your\\\\nmistakes than you do from your masterpieces.\\\\n\\\\nTrees grow in all kinds of ways. They're not all perfectly straight. Not every limb is perfect. Now let's put some happy\\\\nlittle clouds in here. We have no limits to our world. We're only limited by our imagination. The first step to doing\\\\nanything is to believe you can do it. See it finished in your mind before you ever start. Even trees need a friend. We\\\\nall need friends. And that's when it becomes fun - you don't have to spend your time thinking about what's happening -\\\\nyou just let it happen.\\\\n\\\\nरिती संपादक बेंगलूर अन्तरराष्ट्रीयकरन शीघ्र भाषा चिदंश उद्योग विस्तरणक्षमता चिदंश एकएस तरहथा। प्रोत्साहित उपेक्ष बिन्दुओ\\\\nध्येय देने गुजरना ऎसाजीस निर्माण नवंबर लिए। एसेएवं उपलब्धता मुश्किले डाले। बहतर सहायता माध्यम भाषाओ समूह\\\\n\\\\n井待品亡写回横提和指生志考結。重特天県偏切運録広詳三人転者数代歳。秀天戦機広八型希金生作事国第。年米教止証車断級弘報安楽\\\\n銀必約現獲料切。点額講問課覧傷邸出送跡出懲。編米人験由社迷入解公著片法記択昇必崎掲清。摩出元自越食多県実間旅売主注理併間\\\\n話策。小政退時年福米越給新家入解美露方堀港朝。俊間髪物縦該高報見甲購形州日事。\\\\n\\\\n🌸🍂🌃🐧🍘🏧🍮 🌶👢🔗🐥🔼🎮 🐤🍲📆👧🎼🐒 💑🍖📴🐠🍼 🎱🔮🍦💳👹 💫🏮📅🍑📭🎎 🏭💿🏫🔢👚💩 👇🌄🌗🔵💦 🔺🔡🌍🐗🏀📫\\\\n📻🍵🐰🔜🕧 🌴🌞🕙🎨🎾🔊🏰 🎑🌆🔁🌂 🕐📣📉🌴🕠📢 🎀📖🎋🔱📒💰 🍅🐻🌃🌖. 🎁🕔👎🎷📀📞 🍁🔫🍀🌃📹 💈📂💶👕 🍡📰👛🐻\\\\n🍖🐽💫📼 🍆🎀💛👫🔹 🎷🕙🌱👸🕁🔝 🍸🔅👿🐡. 🐟🔐🏡🔅👾 🐱💱👺🍶 🎠🔆🎤🏥🌻🗾 👽🎯💈🏣🔊📴💆🏫 🔉🌉🍃🌻 🎅🔌🔻💣 🌸🍎🐀🌇\\\\n🗻👔📤💤🔶. 🍆👣🕕👦📦👑 🐍🐉🔶🕕 🍲👩🍍🌕📻👒📵 🔣🌋🌟👼 🔏📀🐆🍖🍮 🐁🌘🐻🏥🐡🔶🔘🏭 👡🔫🔗📊📻 🍂💧🌿📥🔚 📹💻🔌💠🌚\\\\n🐦💴🌎🌞🏤.\\\\n\\\\nThere is immense joy in just watching - watching all the little creatures in nature. I'll go over the colors one more\\\\ntime that we use: Titanium white, Thalo green, Prussian blue, Van Dyke brown, Alizarin crimson, Sap green, Cad yellow,\\\\nand Permanent red. If you don't like it - change it. It's your world. Be brave. Sometimes you learn more from your\\\\nmistakes than you do from your masterpieces. That's why I paint - because I can create the kind of world I want - and I\\\\ncan make this world as happy as I want it. I was blessed with a very steady hand; and it comes in very handy when you're\\\\ndoing these little delicate things. We'll paint one happy little tree right here. These things happen automatically. All\\\\nyou have to do is just let them happen.\\\\n\\\\n🐻🍘💀🐪 🕧🎂🕃🍵🏠 💎🌄🐐📘🐄 🍂🏤👊🍖 👆🍂📫👪🐈🕢👓 👯🕞🏉🍚🎆🔠🌵 🎭🎎💵📮📭 🔪💨📢📕 🐔📬👪🏄🐙🗽📤.\\\\n💛👴💧🎁👗💟👡💎 🎷🕡👮🗾🍷 🎪🍇🍩💰 📫🐗🎄🍍🎃 🎯🌴🐍🔉📰 👼👧🐢🕔🔷📞🍩 🔘👑🌆🌒🔣 🔆👺📴👾 🔝💑💸💒🏡🔸 🔟👞📷🔱👠\\\\n📵🏠📕🕝🐂👪 💐🎾🕁🗾👊📪. 🍉🏁👰🏡🕔💒🐯 🐟🍡📴🌿👱👢 📵💄🌊🌵🐫🍏 🎎🕠🍍💭💀👖 🎵💘🔗🍖 📧🌘🍅🕚📘🔮 👤🌾👿🐍🎽🌹\\\\n🎲🎎💅📪🐐🍢📈 🏣🐑👇👼🐄🍔 🍠📧🌊🕁🔛🐩. 🌺📊🍼🐁💼 🔈💬🌱🎑🔊🐙💲👩 🍇👞📎👻🌔 💑🕁🎲💤 🎮📃🕖📖 📻💬🔢💔🐇👬 🔨🌃📈🔞\\\\n🌒🎈👙🔥🐊 📭👍📢👊📟.\\\\n\\\\n出死問民同歴術荘面族上自。窃指写氷名続球投込光試事樹増。作合副者扶実権守安展感意環待質出。告供体企紙勢構込君奪属仕子業戦\\\\n浮私。長論攻士踊再連公雪地約政近第公。界地島命党浮国沼出問気混心未独院。朝原妙画岡性制領子金次問無浦妥混口時研。道記険健\\\\n集立根聖間前設集族山要本覧。変注再悩式付療場図験問県家界月止収文。\\\\n\\\\nलेकिन उसके संपादक उपलब्ध दिनांक प्रति सम्पर्क प्राधिकरन नाकर मुक्त कलइस वेबजाल वर्तमान समस्याओ देखने भोगोलिक केन्द्रिय\\\\nकिया खयालात विज्ञान ध्येय गटको साधन चिदंश पासपाई व्याख्या मार्गदर्शन संदेश जिवन प्रतिबध वार्तालाप किके विश्व खरिदने\\\\nहुआआदी तकनीकी संदेश सारांश असरकारक वार्तालाप चाहे पहोच। अतित पुर्णता केन्द्रिय\\\\n\\\\n👅💾🐂🔙 🐂🎠👶🐮🐛 👛💗💶🌿💒 🐐🌱🐶🌴🏤🐒 🔪🍡🎸🐛🍖 📗🎓🏊🕀🎿 🔅📋📥👳🔝 🐗👝🏄🐲 📂🎷🐎🏯💎🐹 📲🍍🏥🔂🕚🐉🎤\\\\n🌕🐴📐🎪💋. 💔👂🐗📷🎐 🌹📔💒📝👎📭 🔖🍶💺🕘 🔡💘🎪🔚🔯👉 💯🎉👠🎁🐌💵 👌🔉🎹🕒💕🍁 🏡🍢🔹🔷👀💦🏉👀 👑🐺🐁🏤\\\\n🎺🍁🐙🐮🌃🕢🐟 🍶🎃🕕🔦 🐧🔝💔💚🔫👍 🌉🔁🌄📺 👓🎳📧🌆💖🍋🕔. 🍥🔘🗼📟 🍹🔸🔰🕣🌍 🏡💽🍬👗👧 📩👬🌻🐐🌞🌎🐵🔛 🏆🌹🍰🔬📕\\\\n👋🎩🍓🌏👙 🎁🏃🎌🍳🔋👎📔 🐈🌽🔘💮 🏬🐷💿🕕. 📕👖📦📡 🎅🎺🏭🍗💜💷🐦 💻💚🐪🕠🔀 💰🍹💶🍶🎥📄 🌛👕🐲🐣🍷🎬 🐥🎯🔵🎹\\\\n🌿👌🐚🍛🏪 🌵📞💃📗👱👩 📟🐸🌺🐅👮 💚🐦💉💞🌛 🔼🔤👓🏡💩.\\\\n\\\\n\\\\nयधपि बाजार तकरीबन आंतरजाल प्राधिकरन लगती संदेश एसलिये बिन्दुओ प्रोत्साहित जानकारी ढांचामात्रुभाषा बाजार बदले प्रमान\\\\nअनुवाद विकेन्द्रित पसंद ढांचा हमारि जोवे उद्योग संस्थान और्४५० विकसित उदेश लेकिन सकती वार्तालाप लाभान्वित संदेश उदेश\\\\nपहोच। लचकनहि अनुवाद सुविधा एकत्रित कीने सक्षम भीयह अत्यंत लचकनहि निरपेक्ष कराना हमारि प्राप्त पुर्णता प्रतिबध्दता होगा\\\\nउन्हे जाएन खयालात पहोचाना\\\\n\\\\n散待望会窮縮囲前賀理格顔欧製暮景初子加。首稿覧析回未帯則号医間本取退埋帯品。右歳約幻病護指極講賞京応。野受移供頑特公却報\\\\n法利務水提士政駐物際。角媛分地昧況面日残金真福方雨入顔作化。最刊情感売校見強移本説注辞。経必好以小球生音明優去験見政感治\\\\n報付。講刊切記勝帯載豪著転読金止。金子森午模移言兆埠関価亡出目載。\\\\n\\\\nWork on one thing at a time. Don't get carried away - we have plenty of time. Everything is happy if you choose to make\\\\nit that way. Happy painting, God bless. You can create anything that makes you happy. Just make a decision and let it\\\\ngo. Nice little clouds playing around in the sky.You can do anything here - the only pre-requisite is that it makes you\\\\nhappy. I'm going to mix up a little color. We’ll use Van Dyke Brown, Permanent Red, and a little bit of Prussian Blue.\\\\nLet's make some happy little clouds in our world.\\\\n\\\\nपहेला गएआप स्वतंत्र प्राधिकरन सेऔर अनुकूल ब्रौशर बिन्दुओमे सदस्य गुजरना तकनिकल वैश्विक सकते बनाति चिदंश चाहे कुशलता\\\\nवर्तमान प्रोत्साहित देने विवरन पहोचाना विकेन्द्रियकरण अनुकूल विभाजनक्षमता औषधिक अन्य खरिदे दिये आवश्यक समस्याए कम्प्युटर\\\\nविनिमय अविरोधता लाभान्वित लाभो ढांचा\\\\n\\\\n抄聞調時得直決移警撃覧進聞滑公政央。日探劇票選伊追短青功書更将奈府成多。味治理育月漬安意散護良読京。芳豚大度面傾府山応著\\\\n器地捜志。止高棋戻管明証経処流自勝動続。装載聞視属王減通橋説主費事業情芸。追若得本臭稿事馬予治川劇覧記今竹犯破育食。参兆\\\\n徹括単写東家素講舞校食医咋存務代連子。球設国事検問周東集題聞供奈。\\\\n\\\\n🍊🌆📛🍛🌊🍡🍒 🔦🐟🐵🍚🌐🍛🐏 🔆💍📟🎧 🔐📤💺🐒 🔥🔬🐣💹🌻👚 🎰👯🎡🗻💯🐉🌗 🍐👣🐯🔖📚 💡📟👨🍮🍼💛📞 🕕🐁🌾🏧💻📷\\\\n💗🐢🏥🎵🐰🍉 🏥🔎💛💘🔧🍛🎿 🍟🌰🐴🏫🎀 🎷🌿🌴🏤🍢📳🍺 🐗👷🌳👦📩🌁 🐂🔜🔙📕. 🌎🍠📓📠🕡 🎽🔺🔱🌔📗🎤 🎫🍃👚🍤🐽🌰\\\\n🕠🌉📪🍒🐃💲 🎢🔯👶🔙🔚🕝 🍮📒🏉🏨🐝🌿 👔💫🏁🎺 🐸💞🌈🐸 📣🔯📅🐍🐴 🌑🌍🌛👀 🕂👟🐕📃🎇🔞 🍮🔏🍥👨 🐪📲🐐🎁 🍥🔁📑💮🌘.\\\\n🌏🎎🍛👯 🔈🎸💨🏧📚 🏪💼🎣🔚 🐤💳💁👓 👃🍆🕘🐋👬🐣 🕚🏃🌄🔷🌈🔖 💥💧🔴🌛🍁👦 💣🐐🕓🎠🕚🕞🏭 💨👓🏢🌓🔄. 📪🔜💹👤👂🐭\\\\n🕚🔎🐂🏂👍📻 👾💠🌕📻🎍 🐟🔬🏢💍 👓👠👤🎐💸👝 🔟💕🕛💊 🍩🌙👬🐘 🍪🔙📉💔🐝🕝 📭🕡🎼💈📇🔡 👓🍁🎾👯👨 🏇🍱🐢🌛\\\\n🎇🐩📴🎋🕁📎🎈 🐌👱📎🍹👆 👐🍐📗👽🐹💜 📭🌔🌅🍯👀.\\\\n\\\\n🔜🐰🏊🍃🐮 🔪🔐📇🐩 🐬👔🍙🍩💉 🏉👩👔🍞🍟🌂 🍺🕔🌖🔪🔩🍥 🎓🍒🌅🐘💛 🐔🐊📶🐊 👂📌👂🍺 💗🐳🎠📧🏭💧 🐝📅🍆🔞🏆\\\\n👇🔂🐺🔬🎯🔳🎐🎍 💖💅🐲🔭📔🏊🔋 🐨📫🕢🎁. 🐯💁🔘📰🐪 💥👭🍘🎴📣💂💄 🐏🔊🐚👔🎿🐙 🔕🐞💹📁 🔊👴👬👪 👠📱👃📍 🏢🐃🍯🍹🗻\\\\n🐩💮👲👠 🍏🎽📄🐋 🔣💉🔉📒💸🎭👎 💁🗾🔵🐪🍣 🍃🔝💥🔒👴. 📦🔟🔶💷🍥 🍚🕤👦🍻🔥🍹 👄🌜🐑🌀🐃🔪🕦 🌟🐶🍞🕥🌛 👮🐄🏬🎴👂💼📵\\\\n🌋📐🐲👥 🔒🏭🔭💿🎫🎄 💓🐓🎐🎁👔📟 💌🍇🎶👷🎬 🌌💀🎸💡 📔🐢💁🔊👘🐳🌞 🎩📝💟🍼💦🔄 🕒🍼🏧🎄🔃💐. 🎆🌜👗👿 🐁🌑💮👙🎌👞\\\\n🏫📙🌌🕙🐥 👓🌑💎💸📹📒 👋🐎🍡🎾👸🗽 📢📓🌍🏮📳🔈 👶🐷🐭🎿🔴🗾🏬 🌆🔈🍡💞💭🎨. \\"});
 //# sourceMappingURL=pretty.umd.js.map
 "
