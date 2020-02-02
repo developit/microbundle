@@ -42,6 +42,8 @@ const createConfigItems = (type, items) => {
 	});
 };
 
+const presetEnvRegex = RegExp(/@babel\/(preset-)?env/);
+
 export default babelPlugin.custom(babelCore => {
 	return {
 		// Passed the plugin options.
@@ -93,7 +95,7 @@ export default babelPlugin.custom(babelCore => {
 			const babelOptions = config.options || {};
 
 			const envIdx = (babelOptions.presets || []).findIndex(preset =>
-				preset.file.request.test(/@babel\/(preset-)?env/),
+				presetEnvRegex.test(preset.file.request),
 			);
 
 			const environmentPreset = customOptions.modern
