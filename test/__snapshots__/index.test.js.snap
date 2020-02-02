@@ -165,7 +165,6 @@ basic
     basic-lib.js.map
     basic-lib.umd.js
     basic-lib.umd.js.map
-  node_modules
   package.json
   src
     index.js
@@ -1010,7 +1009,6 @@ class-properties
     class-properties.js.map
     class-properties.umd.js
     class-properties.umd.js.map
-  node_modules
   package.json
   src
     index.js
@@ -1344,7 +1342,6 @@ jsx
     jsx.umd.js
     jsx.umd.js.map
   index.js
-  node_modules
   package.json
 
 
@@ -1390,7 +1387,6 @@ macro
     macro-lib.js.map
     macro-lib.umd.js
     macro-lib.umd.js.map
-  node_modules
   package.json
   src
     index.js
