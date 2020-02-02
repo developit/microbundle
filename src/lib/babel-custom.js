@@ -104,7 +104,7 @@ export default babelPlugin.custom(babelCore => {
 				const preset = babelOptions.presets[envIdx];
 				babelOptions.presets[envIdx] = createConfigItem(
 					[
-						preset.file.resolved,
+						environmentPreset,
 						Object.assign(
 							merge(
 								{
