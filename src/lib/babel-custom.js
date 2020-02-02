@@ -96,6 +96,10 @@ export default babelPlugin.custom(babelCore => {
 				preset.file.request.includes('@babel/preset-env'),
 			);
 
+			const environmentPreset = customOptions.modern
+				? '@babel/preset-modules'
+				: '@babel/preset-env';
+
 			if (envIdx !== -1) {
 				const preset = babelOptions.presets[envIdx];
 				babelOptions.presets[envIdx] = createConfigItem(
@@ -127,7 +131,7 @@ export default babelPlugin.custom(babelCore => {
 			} else {
 				babelOptions.presets = createConfigItems('preset', [
 					{
-						name: '@babel/preset-env',
+						name: environmentPreset,
 						targets: customOptions.modern
 							? ESMODULES_TARGET
 							: customOptions.targets,
