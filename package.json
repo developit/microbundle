@@ -63,7 +63,7 @@
     "@rollup/plugin-alias": "^3.0.0",
     "@rollup/plugin-commonjs": "^11.0.1",
     "@rollup/plugin-json": "^4.0.1",
-    "@rollup/plugin-node-resolve": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^7.1.1",
     "asyncro": "^3.0.0",
     "autoprefixer": "^9.7.3",
     "babel-plugin-macros": "^2.8.0",
