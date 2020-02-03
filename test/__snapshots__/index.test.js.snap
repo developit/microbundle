@@ -1631,14 +1631,14 @@ modern
 
 
 Build \\"modernLib\\" to dist:
-159 B: modern-lib.modern.js.gz
-114 B: modern-lib.modern.js.br"
+110 B: modern-lib.modern.js.gz
+90 B: modern-lib.modern.js.br"
 `;
 
 exports[`fixtures build modern with microbundle 2`] = `2`;
 
 exports[`fixtures build modern with microbundle 3`] = `
-"async function n(){for(var n=arguments.length,r=new Array(n),a=0;a<n;a++)r[a]=arguments[a];return r.reduce((n,r)=>n+r,0)}export default async function(){return[await n(...arguments),await n(...arguments)]}
+"async function n(...n){return n.reduce((n,t)=>n+t,0)}export default async function(...t){return[await n(...t),await n(...t)]}
 //# sourceMappingURL=modern-lib.modern.js.map
 "
 `;
