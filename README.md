@@ -180,6 +180,7 @@ Here's what's coming up for Microbundle:
 - [mdx-deck-live-code](https://github.com/JReinhold/mdx-deck-live-code) A library for [mdx-deck](https://github.com/jxnblk/mdx-deck) to do live React and JS coding directly in slides.
 - [react-router-ext](https://github.com/ri7nz/react-router-ext) An Extended [react-router-dom](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom) with simple usage.
 - [routex.js](https://github.com/alexhoma/routex.js) A dynamic routing library for Next.js.
+- [hooked-form](https://github.com/JoviDeCroock/hooked-form) A lightweight form-management library for React.
 
 ## 🥂 License
 
