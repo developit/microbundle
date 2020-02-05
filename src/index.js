@@ -485,11 +485,7 @@ function createConfig(options, entry, format, writeMeta) {
 	const externalTest =
 		external.length === 0
 			? () => false
-			: id =>
-					externalRegexList.reduce(
-						(excluded, regex) => excluded || regex.test(id),
-						false,
-					);
+			: id => externalRegexList.some(regex => regex.test(id));
 
 	function loadNameCache() {
 		try {
