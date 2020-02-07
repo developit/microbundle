@@ -39,7 +39,7 @@ export default handler => {
 		.option('--sourcemap', 'Generate source map', true)
 		.option(
 			'--css-modules',
-			'Turns on css-modules for all .css imports. Passing a string will override the generatedScopeName. eg --css-modules="_[hash]"',
+			'Turns on css-modules for all .css imports. Passing a string will override the scopeName. eg --css-modules="_[hash]"',
 			null,
 		)
 		.example("microbundle --no-sourcemap # don't generate sourcemaps")
