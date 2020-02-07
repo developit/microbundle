@@ -1,0 +1,9 @@
+body {
+	display: flex;
+	color: red;
+	background: blue;
+}
+
+.test_class_that_shouldnt_be_scoped {
+	background-color: blue;
+}
