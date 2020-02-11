@@ -14,6 +14,7 @@
     "lint": "eslint src",
     "test": "npm run -s lint && npm run -s build && cross-env BABEL_ENV=test jest",
     "jest": "cross-env BABEL_ENV=test jest",
+    "format": "prettier --write \"{*,{src,test}/**/*}.+(js|css)\"",
     "release": "npm run -s prepare && npm test && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish"
   },
   "repository": "developit/microbundle",
@@ -25,11 +26,13 @@
   "lint-staged": {
     "{src,test}/**/*.js": [
       "eslint --fix",
-      "git add"
+      "prettier --write"
+    ],
+    "{*,{src,test}/**/*}.+(js|css)": [
+      "prettier --write"
     ],
     "*.md": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ]
   },
   "jest": {
@@ -111,9 +114,9 @@
     "eslint-plugin-prettier": "^3.1.2",
     "esm": "^3.2.22",
     "fs-extra": "^8.1.0",
-    "husky": "^3.1.0",
+    "husky": "^4.2.1",
     "jest": "^24.8.0",
-    "lint-staged": "^9.5.0",
+    "lint-staged": "^10.0.7",
     "npm-merge-driver-install": "^1.1.1",
     "prettier": "^1.19.1",
     "regenerator-runtime": "^0.13.3",
