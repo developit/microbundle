@@ -44,6 +44,11 @@
       "pre-commit": "lint-staged"
     }
   },
+  "greenkeeper": {
+    "lockfiles": {
+      "outOfRangeUpdatesOnly": true
+    }
+  },
   "keywords": [
     "bundle",
     "rollup",
