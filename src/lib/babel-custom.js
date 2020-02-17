@@ -44,7 +44,7 @@ const createConfigItems = (type, items) => {
 
 const presetEnvRegex = RegExp(/@babel\/(preset-)?env/);
 
-export default babelPlugin.custom(babelCore => {
+export default () => babelPlugin.custom(babelCore => {
 	return {
 		// Passed the plugin options.
 		options({ custom: customOptions, ...pluginOptions }) {
