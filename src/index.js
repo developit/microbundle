@@ -6,18 +6,18 @@ import glob from 'tiny-glob/sync';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import { rollup, watch } from 'rollup';
-import commonjs from 'rollup-plugin-commonjs';
+import commonjs from '@rollup/plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import customBabel from './lib/babel-custom';
-import nodeResolve from 'rollup-plugin-node-resolve';
+import nodeResolve from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
-import alias from 'rollup-plugin-alias';
+import alias from '@rollup/plugin-alias';
 import postcss from 'rollup-plugin-postcss';
 import gzipSize from 'gzip-size';
 import brotliSize from 'brotli-size';
 import prettyBytes from 'pretty-bytes';
 import typescript from 'rollup-plugin-typescript2';
-import json from 'rollup-plugin-json';
+import json from '@rollup/plugin-json';
 import logError from './log-error';
 import { readFile, isDir, isFile, stdout, stderr, isTruthy } from './utils';
 import camelCase from 'camelcase';
@@ -513,6 +513,8 @@ function createConfig(options, entry, format, writeMeta) {
 									preset: 'default',
 								}),
 						].filter(Boolean),
+						autoModules: shouldCssModules(options),
+						modules: cssModulesConfig(options),
 						// only write out CSS for the first bundle (avoids pointless extra files):
 						inject: false,
 						extract: !!writeMeta,
@@ -663,4 +665,54 @@ function createConfig(options, entry, format, writeMeta) {
 	};
 
 	return config;
+}
+
+function shouldCssModules(options) {
+	const passedInOption = processCssmodulesArgument(options);
+
+	// We should module when my-file.module.css or my-file.css
+	const moduleAllCss = passedInOption === true;
+
+	// We should module when my-file.module.css
+	const allowOnlySuffixModule = passedInOption === null;
+
+	return moduleAllCss || allowOnlySuffixModule;
+}
+
+function cssModulesConfig(options) {
+	const passedInOption = processCssmodulesArgument(options);
+	const isWatchMode = options.watch;
+	const hasPassedInScopeName = !(
+		typeof passedInOption === 'boolean' || passedInOption === null
+	);
+
+	if (shouldCssModules(options) || hasPassedInScopeName) {
+		let generateScopedName = isWatchMode
+			? '_[name]__[local]__[hash:base64:5]'
+			: '_[hash:base64:5]';
+
+		if (hasPassedInScopeName) {
+			generateScopedName = passedInOption; // would be the string from --css-modules "_[hash]".
+		}
+
+		return { generateScopedName };
+	}
+
+	return false;
+}
+
+/*
+This is done becuase if you use the cli default property, you get a primiatve "null" or "false",
+but when using the cli arguments, you always get back strings. This method aims at correcting those
+for both realms. So that both realms _convert_ into primatives.
+*/
+function processCssmodulesArgument(options) {
+	if (options['css-modules'] === 'true' || options['css-modules'] === true)
+		return true;
+	if (options['css-modules'] === 'false' || options['css-modules'] === false)
+		return false;
+	if (options['css-modules'] === 'null' || options['css-modules'] === null)
+		return null;
+
+	return options['css-modules'];
 }

@@ -1,0 +1,10 @@
+{
+	"plugins": [
+		[
+			"@babel/plugin-proposal-optional-chaining",
+			{
+				"loose": false
+			}
+		]
+	]
+}

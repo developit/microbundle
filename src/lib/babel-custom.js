@@ -42,6 +42,8 @@ const createConfigItems = (type, items) => {
 	});
 };
 
+const presetEnvRegex = RegExp(/@babel\/(preset-)?env/);
+
 export default babelPlugin.custom(babelCore => {
 	return {
 		// Passed the plugin options.
@@ -93,14 +95,18 @@ export default babelPlugin.custom(babelCore => {
 			const babelOptions = config.options || {};
 
 			const envIdx = (babelOptions.presets || []).findIndex(preset =>
-				preset.file.request.includes('@babel/preset-env'),
+				presetEnvRegex.test(preset.file.request),
 			);
+
+			const environmentPreset = customOptions.modern
+				? '@babel/preset-modules'
+				: '@babel/preset-env';
 
 			if (envIdx !== -1) {
 				const preset = babelOptions.presets[envIdx];
 				babelOptions.presets[envIdx] = createConfigItem(
 					[
-						preset.file.resolved,
+						environmentPreset,
 						Object.assign(
 							merge(
 								{
@@ -127,7 +133,7 @@ export default babelPlugin.custom(babelCore => {
 			} else {
 				babelOptions.presets = createConfigItems('preset', [
 					{
-						name: '@babel/preset-env',
+						name: environmentPreset,
 						targets: customOptions.modern
 							? ESMODULES_TARGET
 							: customOptions.targets,

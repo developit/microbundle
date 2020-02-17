@@ -94,6 +94,26 @@ Acts just like `microbundle build`, but watches your source files and rebuilds o
 
 Just point the input to a `.ts` file through either the cli or the `source` key in your `package.json` and you’re done.
 
+### Using CSS Modules
+
+By default any css file imported as `.module.css`, will be treated as a css-module. If you wish to treat all .css
+imports as a module, specify the cli flag `--css-modules true`. If you wish to disable all css-module behaviours set the
+flag to `false`.
+
+The default scope name when css-modules is turned on will be, in watch mode `_[name]__[local]__[hash:base64:5]` and when
+you build `_[hash:base64:5]`. This can be overriden by specifying the flag, eg
+`--css-modules "_something_[hash:base64:7]"`. _Note:_ by setting this, it will be treated as a true, and thus, all .css
+imports will be scoped.
+
+| flag  | import                         |   is css module?   |
+| ----- | ------------------------------ | :----------------: |
+| null  | import './my-file.css';        |        :x:         |
+| null  | import './my-file.module.css'; | :white_check_mark: |
+| false | import './my-file.css';        |        :x:         |
+| false | import './my-file.module.css'; |        :x:         |
+| true  | import './my-file.css';        | :white_check_mark: |
+| true  | import './my-file.module.css'; | :white_check_mark: |
+
 ### Specifying builds in `package.json`
 
 You can specify output builds in a `package.json` as follows:
@@ -151,6 +171,7 @@ Options
 	--raw            Show raw byte size  (default false)
 	--jsx            A custom JSX pragma like React.createElement (default: h)
 	--tsconfig       Specify the path to a custom tsconfig.json
+	--css-modules    Configures .css to be treated as modules (default: null)
 	-h, --help       Displays this message
 
 Examples
@@ -181,6 +202,8 @@ Here's what's coming up for Microbundle:
 - [mdx-deck-live-code](https://github.com/JReinhold/mdx-deck-live-code) A library for [mdx-deck](https://github.com/jxnblk/mdx-deck) to do live React and JS coding directly in slides.
 - [react-router-ext](https://github.com/ri7nz/react-router-ext) An Extended [react-router-dom](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom) with simple usage.
 - [routex.js](https://github.com/alexhoma/routex.js) A dynamic routing library for Next.js.
+- [hooked-form](https://github.com/JoviDeCroock/hooked-form) A lightweight form-management library for React.
+- [goober](https://github.com/cristianbote/goober) Less than 1KB css-in-js alternative with a familiar API.
 
 ## 🥂 License
 
