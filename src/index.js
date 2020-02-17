@@ -592,7 +592,7 @@ function createConfig(options, entry, format, writeMeta) {
 						},
 					}),
 					options.compress !== false && [
-						options.closure
+						options.closure && (modern || format === 'es')
 							? closureCompiler()
 							: terser({
 									sourcemap: true,
