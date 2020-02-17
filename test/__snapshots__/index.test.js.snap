@@ -57,7 +57,6 @@ async-iife-ts
     async-iife-ts.umd.js
     async-iife-ts.umd.js.map
     index.d.ts
-  node_modules
   package.json
   src
     index.ts
