@@ -575,7 +575,7 @@ function createConfig(options, entry, format, writeMeta) {
 								],
 							],
 						}),
-					customBabel({
+					customBabel()({
 						extensions: EXTENSIONS,
 						exclude: 'node_modules/**',
 						passPerPreset: true, // @see https://babeljs.io/docs/en/options#passperpreset
