@@ -61,7 +61,7 @@
   "author": "Jason Miller <jason@developit.ca> (http://jasonformat.com)",
   "license": "MIT",
   "dependencies": {
-    "@ampproject/rollup-plugin-closure-compiler": "^0.21.0",
+    "@ampproject/rollup-plugin-closure-compiler": "^0.22.2",
     "@babel/core": "^7.7.7",
     "@babel/plugin-proposal-class-properties": "7.7.4",
     "@babel/plugin-syntax-jsx": "^7.7.4",
