@@ -163,7 +163,7 @@ Options
 	--globals        Specify globals dependencies, or 'none'
 	--define         Replace constants with hard-coded values
 	--alias          Map imports to different modules
-	--compress       Compress output using Terser
+	--compress       Compress output using Closure/Terser
 	--strict         Enforce undefined global context and add "use strict"
 	--name           Specify name exposed in UMD builds
 	--cwd            Use an alternative working directory  (default .)
@@ -173,6 +173,7 @@ Options
 	--tsconfig       Specify the path to a custom tsconfig.json
 	--css-modules    Configures .css to be treated as modules (default: null)
 	-h, --help       Displays this message
+	--closure				 Specify if using the closure-compiler, when false microbundle will use terser instead (default: true)
 
 Examples
 	$ microbundle build --globals react=React,jquery=$
