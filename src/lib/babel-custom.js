@@ -141,7 +141,10 @@ export default () => {
 							modules: false,
 							loose: true,
 							useBuiltIns: false,
-							exclude: ['transform-async-to-generator', 'transform-regenerator'],
+							exclude: [
+								'transform-async-to-generator',
+								'transform-regenerator'
+							],
 						},
 					]);
 				}
