@@ -21,6 +21,7 @@ import json from '@rollup/plugin-json';
 import logError from './log-error';
 import { readFile, isDir, isFile, stdout, stderr, isTruthy } from './utils';
 import camelCase from 'camelcase';
+import closureCompiler from '@ampproject/rollup-plugin-closure-compiler';
 
 const removeScope = name => name.replace(/^@.*\//, '');
 
@@ -590,29 +591,31 @@ function createConfig(options, entry, format, writeMeta) {
 						},
 					}),
 					options.compress !== false && [
-						terser({
-							sourcemap: true,
-							compress: Object.assign(
-								{
-									keep_infinity: true,
-									pure_getters: true,
-									// Ideally we'd just get Terser to respect existing Arrow functions...
-									// unsafe_arrows: true,
-									passes: 10,
-								},
-								minifyOptions.compress || {},
-							),
-							output: {
-								// By default, Terser wraps function arguments in extra parens to trigger eager parsing.
-								// Whether this is a good idea is way too specific to guess, so we optimize for size by default:
-								wrap_func_args: false,
-							},
-							warnings: true,
-							ecma: modern ? 9 : 5,
-							toplevel: modern || format === 'cjs' || format === 'es',
-							mangle: Object.assign({}, minifyOptions.mangle || {}),
-							nameCache,
-						}),
+						options.closure
+							? closureCompiler()
+							: terser({
+									sourcemap: true,
+									compress: Object.assign(
+										{
+											keep_infinity: true,
+											pure_getters: true,
+											// Ideally we'd just get Terser to respect existing Arrow functions...
+											// unsafe_arrows: true,
+											passes: 10,
+										},
+										minifyOptions.compress || {},
+									),
+									output: {
+										// By default, Terser wraps function arguments in extra parens to trigger eager parsing.
+										// Whether this is a good idea is way too specific to guess, so we optimize for size by default:
+										wrap_func_args: false,
+									},
+									warnings: true,
+									ecma: modern ? 9 : 5,
+									toplevel: modern || format === 'cjs' || format === 'es',
+									mangle: Object.assign({}, minifyOptions.mangle || {}),
+									nameCache,
+							  }),
 						nameCache && {
 							// before hook
 							options: loadNameCache,
