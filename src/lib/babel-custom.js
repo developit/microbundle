@@ -143,7 +143,7 @@ export default () => {
 							useBuiltIns: false,
 							exclude: [
 								'transform-async-to-generator',
-								'transform-regenerator'
+								'transform-regenerator',
 							],
 						},
 					]);

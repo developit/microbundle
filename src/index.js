@@ -467,7 +467,7 @@ function createConfig(options, entry, format, writeMeta) {
 
 	const externalPredicate = new RegExp(`^(${external.join('|')})($|/)`);
 	const externalTest =
-		external.length === 0 ? () => false : id => externalPredicate.test(id);
+		external.length === 0 ? id => false : id => externalPredicate.test(id);
 
 	function loadNameCache() {
 		try {
@@ -605,7 +605,7 @@ function createConfig(options, entry, format, writeMeta) {
 							output: {
 								// By default, Terser wraps function arguments in extra parens to trigger eager parsing.
 								// Whether this is a good idea is way too specific to guess, so we optimize for size by default:
-								wrap_func_args: false,
+								wrap_iife: false,
 							},
 							warnings: true,
 							ecma: modern ? 9 : 5,
@@ -622,6 +622,7 @@ function createConfig(options, entry, format, writeMeta) {
 									fs.writeFile(
 										getNameCachePath(),
 										JSON.stringify(nameCache, null, 2),
+										() => {},
 									);
 								}
 							},
@@ -630,9 +631,11 @@ function createConfig(options, entry, format, writeMeta) {
 					{
 						writeBundle(bundle) {
 							config._sizeInfo = Promise.all(
-								Object.values(bundle).map(({ code, fileName }) =>
-									code ? getSizeInfo(code, fileName, options.raw) : false,
-								),
+								Object.values(bundle).map(({ code, fileName }) => {
+									if (code) {
+										return getSizeInfo(code, fileName, options.raw);
+									}
+								}),
 							).then(results => results.filter(Boolean).join('\n'));
 						},
 					},
