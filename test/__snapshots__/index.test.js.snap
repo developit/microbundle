@@ -57,6 +57,7 @@ async-iife-ts
     async-iife-ts.umd.js
     async-iife-ts.umd.js.map
     index.d.ts
+  node_modules
   package.json
   src
     index.ts
@@ -164,7 +165,6 @@ basic
     basic-lib.js.map
     basic-lib.umd.js
     basic-lib.umd.js.map
-  node_modules
   package.json
   src
     index.js
