@@ -556,7 +556,6 @@ function createConfig(options, entry, format, writeMeta) {
 								},
 							},
 							tsconfig: options.tsconfig,
-							objectHashIgnoreUnknownHack: !!options.closure,
 							tsconfigOverride: {
 								compilerOptions: {
 									target: 'esnext',
