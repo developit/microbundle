@@ -527,6 +527,7 @@ function createConfig(options, entry, format, writeMeta) {
 					nodeResolve({
 						mainFields: ['module', 'jsnext', 'main'],
 						browser: options.target !== 'node',
+						extensions: ['.mjs', '.js', '.jsx', '.json', '.node'],
 					}),
 					commonjs({
 						// use a regex to make sure to include eventual hoisted packages
