@@ -1,7 +1,8 @@
 {
 	"compilerOptions": {
-		"rootDir": "./src",
 		"jsxFactory": "h",
-		"jsx": "react"
-	}
+		"jsx": "react",
+		"baseUrl": "."
+	},
+	"files": ["src/index.tsx"]
 }

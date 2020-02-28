@@ -1,6 +1,7 @@
 {
 	"compilerOptions": {
-		"rootDir": "./src",
-		"experimentalDecorators": true
-	}
+		"experimentalDecorators": true,
+		"baseUrl": "."
+	},
+	"files": ["src/index.ts"]
 }
