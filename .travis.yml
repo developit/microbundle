@@ -1,9 +1,0 @@
-language: node_js
-node_js:
-  - 'node'
-  - 'lts/*'
-branches:
-  except:
-    - trying.tmp
-    - staging.tmp
-after_success: sizereport --config
