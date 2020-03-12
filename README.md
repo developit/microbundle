@@ -29,12 +29,12 @@
 
 ```js
 {
-  "source": "src/foo.js",         // Your source file (same as 1st arg to microbundle)
-  "main": "dist/foo.js",        // output path for CommonJS/Node
-  "module": "dist/foo.mjs",     // output path for JS Modules
-  "unpkg": "dist/foo.umd.js",   // optional, for unpkg.com
+  "source": "src/foo.js",          // Your source file (same as 1st arg to microbundle)
+  "main": "dist/foo.js",           // output path for CommonJS/Node
+  "module": "dist/foo.module.js",  // output path for JS Modules
+  "unpkg": "dist/foo.umd.js",      // optional, for unpkg.com
   "scripts": {
-    "build": "microbundle",       // uses "source" and "main" as input and output paths by default
+    "build": "microbundle",        // uses "source" and "main" as input and output paths by default
     "dev": "microbundle watch"
   }
 }
@@ -68,8 +68,8 @@ This is enabled by default - all you have to do is add the field to your `packag
 
 ```js
 {
-  "main": "dist/foo.umd.js",        // legacy UMD bundle (for Node & CDN's)
-  "module": "dist/foo.modern.mjs",  // modern ES2017 bundle
+  "main": "dist/foo.umd.js",              // legacy UMD bundle (for Node & CDN's)
+  "module": "dist/foo.modern.module.js",  // modern ES2017 bundle
   "scripts": {
     "build": "microbundle src/foo.js -f modern,umd"
   }
@@ -128,15 +128,17 @@ You can specify output builds in a `package.json` as follows:
 
 ### Mangling Properties
 
-Libraries often wish to rename internal object properties or class members to smaller names - transforming `this._internalIdValue` to `this._i`. Microbundle doesn't currently do this by default, but it can be enabled by adding a "mangle" property to your package.json, with a pattern to control when properties should be mangled. To mangle all property names beginning an underscore, add the following:
+To achieve the smallest possible bundle size, libraries often wish to rename internal object properties or class members to smaller names - transforming `this._internalIdValue` to `this._i`. Microbundle doesn't do this by default, however it can be enabled by createing a `mangle.json` file (or a `"mangle"` property in your package.json). Within that file, you can specify a regular expression pattern to control which properties should be mangled. For example: to mangle all property names beginning an underscore:
 
 ```json
 {
-	"mangle": {
-		"regex": "^_"
-	}
+  "mangle": {
+    "regex": "^_"
+  }
 }
 ```
+
+It's also possible to configure repeatable short names for each mangled property, so that every build of your library has the same output. **See the wiki for a [complete guide to property mangling in Microbundle](https://github.com/developit/microbundle/wiki/mangle.json).**
 
 ### All CLI Options
 
@@ -195,6 +197,7 @@ Here's what's coming up for Microbundle:
 - [Preact](https://github.com/preactjs/preact) Fast 3kB React alternative with the same modern API. Components & Virtual DOM.
 - [Stockroom](https://github.com/developit/stockroom) Offload your store management to a worker easily.
 - [Microenvi](https://github.com/fwilkerson/microenvi) Bundle, serve, and hot reload with one command.
+- [Theme UI](https://github.com/system-ui/theme-ui) Build consistent, themeable React apps based on constraint-based design principles.
 - [react-recomponent](https://github.com/philipp-spiess/react-recomponent) Reason-style reducer components for React using ES6 classes.
 - [brazilian-utils](https://github.com/brazilian-utils/brazilian-utils) Utils library for specific Brazilian businesses.
 - [react-hooks-lib](https://github.com/beizhedenglong/react-hooks-lib) A set of reusable react hooks.
