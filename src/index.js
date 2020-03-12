@@ -552,8 +552,7 @@ function createConfig(options, entry, format, writeMeta) {
 								compilerOptions: {
 									sourceMap: options.sourcemap,
 									declaration: true,
-									jsx: 'react',
-									jsxFactory: options.jsx || 'h',
+									jsx: 'preserve',
 								},
 							},
 							tsconfig: options.tsconfig,
