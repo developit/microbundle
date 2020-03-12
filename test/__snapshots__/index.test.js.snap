@@ -1839,6 +1839,64 @@ exports[`fixtures build modern with microbundle 3`] = `
 "
 `;
 
+exports[`fixtures build modern-generators with microbundle 1`] = `
+"Used script: microbundle -f modern,es,umd,cjs
+
+Directory tree:
+
+modern-generators
+  dist
+    modern-generators.esm.js
+    modern-generators.esm.js.map
+    modern-generators.js
+    modern-generators.js.map
+    modern-generators.modern.js
+    modern-generators.modern.js.map
+    modern-generators.umd.js
+    modern-generators.umd.js.map
+  package.json
+  src
+    index.js
+    two.js
+
+
+Build \\"modernGenerators\\" to dist:
+234 B: modern-generators.js.gz
+207 B: modern-generators.js.br
+233 B: modern-generators.modern.js.gz
+191 B: modern-generators.modern.js.br
+233 B: modern-generators.esm.js.gz
+191 B: modern-generators.esm.js.br
+311 B: modern-generators.umd.js.gz
+256 B: modern-generators.umd.js.br"
+`;
+
+exports[`fixtures build modern-generators with microbundle 2`] = `8`;
+
+exports[`fixtures build modern-generators with microbundle 3`] = `
+"var e=regeneratorRuntime.mark(r);function r(){var r;return regeneratorRuntime.wrap(function(e){for(;;)switch(e.prev=e.next){case 0:r=0;case 1:return e.next=4,r++;case 4:e.next=1;break;case 6:case\\"end\\":return e.stop()}},e)}export default function(){try{var e=r();return Promise.resolve([e.next().value,e.next().value])}catch(e){return Promise.reject(e)}}
+//# sourceMappingURL=modern-generators.esm.js.map
+"
+`;
+
+exports[`fixtures build modern-generators with microbundle 4`] = `
+"var e=regeneratorRuntime.mark(r);function r(){var r;return regeneratorRuntime.wrap(function(e){for(;;)switch(e.prev=e.next){case 0:r=0;case 1:return e.next=4,r++;case 4:e.next=1;break;case 6:case\\"end\\":return e.stop()}},e)}module.exports=function(){try{var e=r();return Promise.resolve([e.next().value,e.next().value])}catch(e){return Promise.reject(e)}};
+//# sourceMappingURL=modern-generators.js.map
+"
+`;
+
+exports[`fixtures build modern-generators with microbundle 5`] = `
+"var e=regeneratorRuntime.mark(r);function r(){var r;return regeneratorRuntime.wrap(function(e){for(;;)switch(e.prev=e.next){case 0:r=0;case 1:return e.next=4,r++;case 4:e.next=1;break;case 6:case\\"end\\":return e.stop()}},e)}export default function(){try{var e=r();return Promise.resolve([e.next().value,e.next().value])}catch(e){return Promise.reject(e)}}
+//# sourceMappingURL=modern-generators.modern.js.map
+"
+`;
+
+exports[`fixtures build modern-generators with microbundle 6`] = `
+"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=e||self).modernGenerators=r()}(this,function(){var e=regeneratorRuntime.mark(r);function r(){var r;return regeneratorRuntime.wrap(function(e){for(;;)switch(e.prev=e.next){case 0:r=0;case 1:return e.next=4,r++;case 4:e.next=1;break;case 6:case\\"end\\":return e.stop()}},e)}return function(){try{var e=r();return Promise.resolve([e.next().value,e.next().value])}catch(e){return Promise.reject(e)}}});
+//# sourceMappingURL=modern-generators.umd.js.map
+"
+`;
+
 exports[`fixtures build name-custom-amd with microbundle 1`] = `
 "Used script: microbundle
 

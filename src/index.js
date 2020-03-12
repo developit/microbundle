@@ -467,7 +467,7 @@ function createConfig(options, entry, format, writeMeta) {
 
 	const externalPredicate = new RegExp(`^(${external.join('|')})($|/)`);
 	const externalTest =
-		external.length === 0 ? () => false : id => externalPredicate.test(id);
+		external.length === 0 ? id => false : id => externalPredicate.test(id);
 
 	function loadNameCache() {
 		try {
@@ -576,7 +576,7 @@ function createConfig(options, entry, format, writeMeta) {
 								],
 							],
 						}),
-					customBabel({
+					customBabel()({
 						extensions: EXTENSIONS,
 						exclude: 'node_modules/**',
 						passPerPreset: true, // @see https://babeljs.io/docs/en/options#passperpreset
@@ -623,6 +623,7 @@ function createConfig(options, entry, format, writeMeta) {
 									fs.writeFile(
 										getNameCachePath(),
 										JSON.stringify(nameCache, null, 2),
+										() => {},
 									);
 								}
 							},
@@ -631,9 +632,11 @@ function createConfig(options, entry, format, writeMeta) {
 					{
 						writeBundle(bundle) {
 							config._sizeInfo = Promise.all(
-								Object.values(bundle).map(({ code, fileName }) =>
-									code ? getSizeInfo(code, fileName, options.raw) : false,
-								),
+								Object.values(bundle).map(({ code, fileName }) => {
+									if (code) {
+										return getSizeInfo(code, fileName, options.raw);
+									}
+								}),
 							).then(results => results.filter(Boolean).join('\n'));
 						},
 					},
