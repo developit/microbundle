@@ -436,7 +436,7 @@ function createConfig(options, entry, format, writeMeta) {
 	}
 	mainNoExtension = mainNoExtension.replace(
 		/(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/,
-		''
+		'',
 	);
 
 	let moduleMain = replaceName(
