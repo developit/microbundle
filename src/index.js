@@ -464,6 +464,7 @@ function createConfig(options, entry, format, writeMeta) {
 			: () => resolve(options.cwd, 'mangle.json');
 
 	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
+	const emitDeclaration = !!options.generateTypes;
 
 	const externalPredicate = new RegExp(`^(${external.join('|')})($|/)`);
 	const externalTest =
@@ -544,7 +545,7 @@ function createConfig(options, entry, format, writeMeta) {
 							map: null,
 						}),
 					},
-					useTypescript &&
+					(useTypescript || emitDeclaration) &&
 						typescript({
 							typescript: require('typescript'),
 							cacheRoot: `./node_modules/.cache/.rts2_cache_${format}`,
@@ -552,6 +553,8 @@ function createConfig(options, entry, format, writeMeta) {
 								compilerOptions: {
 									sourceMap: options.sourcemap,
 									declaration: true,
+									allowJs: emitDeclaration,
+									emitDeclarationOnly: emitDeclaration,
 									jsx: 'react',
 									jsxFactory: options.jsx || 'h',
 								},
@@ -562,6 +565,18 @@ function createConfig(options, entry, format, writeMeta) {
 									target: 'esnext',
 								},
 							},
+							include: [
+								"*.ts+(|x)",
+								"**/*.ts+(|x)"
+							].concat(emitDeclaration ? [
+								"*.js+(|x)",
+								"**/*.js+(|x)"
+							] : []),
+							exclude: [
+								"**/node_modules/**",
+								"*.d.ts",
+								"**/*.d.ts"
+							],
 						}),
 					// if defines is not set, we shouldn't run babel through node_modules
 					isTruthy(defines) &&
