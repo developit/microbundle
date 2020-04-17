@@ -565,18 +565,10 @@ function createConfig(options, entry, format, writeMeta) {
 									target: 'esnext',
 								},
 							},
-							include: [
-								"*.ts+(|x)",
-								"**/*.ts+(|x)"
-							].concat(emitDeclaration ? [
-								"*.js+(|x)",
-								"**/*.js+(|x)"
-							] : []),
-							exclude: [
-								"**/node_modules/**",
-								"*.d.ts",
-								"**/*.d.ts"
-							],
+							include: ["*.ts+(|x)", "**/*.ts+(|x)"].concat(
+								emitDeclaration ? ["*.js+(|x)", "**/*.js+(|x)"] : [],
+							),
+							exclude: ["**/node_modules/**", "*.d.ts", "**/*.d.ts"],
 						}),
 					// if defines is not set, we shouldn't run babel through node_modules
 					isTruthy(defines) &&
