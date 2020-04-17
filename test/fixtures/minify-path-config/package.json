@@ -1,0 +1,4 @@
+{
+  "name": "minify-path-config",
+  "minify": "./minify.json"
+}

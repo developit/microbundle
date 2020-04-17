@@ -1,0 +1,6 @@
+{
+  "name": "basic-compress-false",
+  "scripts": {
+    "build": "microbundle --compress=false"
+  }
+}

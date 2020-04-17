@@ -1,47 +1,45 @@
 import fs from 'fs';
 import { resolve, relative, dirname, basename, extname } from 'path';
-import chalk from 'chalk';
+import { green, red, yellow, white, blue } from 'kleur';
 import { map, series } from 'asyncro';
 import glob from 'tiny-glob/sync';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import { rollup, watch } from 'rollup';
-import commonjs from 'rollup-plugin-commonjs';
+import commonjs from '@rollup/plugin-commonjs';
 import babel from 'rollup-plugin-babel';
-import nodeResolve from 'rollup-plugin-node-resolve';
-import buble from 'rollup-plugin-buble';
+import customBabel from './lib/babel-custom';
+import nodeResolve from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
-import alias from 'rollup-plugin-alias';
+import alias from '@rollup/plugin-alias';
 import postcss from 'rollup-plugin-postcss';
 import gzipSize from 'gzip-size';
 import brotliSize from 'brotli-size';
 import prettyBytes from 'pretty-bytes';
-import shebangPlugin from 'rollup-plugin-preserve-shebang';
 import typescript from 'rollup-plugin-typescript2';
-import json from 'rollup-plugin-json';
-import flow from './lib/flow-plugin';
+import json from '@rollup/plugin-json';
 import logError from './log-error';
-import { readFile, isDir, isFile, stdout, stderr } from './utils';
+import { readFile, isDir, isFile, stdout, stderr, isTruthy } from './utils';
 import camelCase from 'camelcase';
 
 const removeScope = name => name.replace(/^@.*\//, '');
 
 // Convert booleans and int define= values to literals.
 // This is more intuitive than `microbundle --define A=1` producing A="1".
-// See: https://github.com/terser-js/terser#conditional-compilation-api
-const toTerserLiteral = (value, name) => {
+const toReplacementExpression = (value, name) => {
 	// --define A="1",B='true' produces string:
 	const matches = value.match(/^(['"])(.+)\1$/);
 	if (matches) {
-		return [matches[2], name];
+		return [JSON.stringify(matches[2]), name];
 	}
 
 	// --define A=1,B=true produces int/boolean literal:
 	if (/^(true|false|\d+)$/i.test(value)) {
-		return [value, '@' + name];
+		return [value, name];
 	}
 
-	// default: behaviour from Terser (@prefix=1 produces expression/literal, unprefixed=1 produces string literal):
+	// default: string literal
+	return [JSON.stringify(value), name];
 };
 
 // Normalize Terser options from microbundle's relaxed JSON format (mutates argument in-place)
@@ -89,6 +87,14 @@ const parseMappingArgument = (globalStrings, processValue) => {
 	return globals;
 };
 
+// Parses values of the form "$=jQuery,React=react" into key-value object pairs.
+const parseMappingArgumentAlias = aliasStrings => {
+	return aliasStrings.split(',').map(str => {
+		let [key, value] = str.split('=');
+		return { find: key, replacement: value };
+	});
+};
+
 // Extensions to use when resolving modules
 const EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs'];
 
@@ -99,11 +105,34 @@ const WATCH_OPTS = {
 // Hoist function because something (rollup?) incorrectly removes it
 function formatSize(size, filename, type, raw) {
 	const pretty = raw ? `${size} B` : prettyBytes(size);
-	const color = size < 5000 ? 'green' : size > 40000 ? 'red' : 'yellow';
+	const color = size < 5000 ? green : size > 40000 ? red : yellow;
 	const MAGIC_INDENTATION = type === 'br' ? 13 : 10;
-	return `${' '.repeat(MAGIC_INDENTATION - pretty.length)}${chalk[color](
+	return `${' '.repeat(MAGIC_INDENTATION - pretty.length)}${color(
 		pretty,
-	)}: ${chalk.white(basename(filename))}.${type}`;
+	)}: ${white(basename(filename))}.${type}`;
+}
+
+async function getSizeInfo(code, filename, raw) {
+	const gzip = formatSize(
+		await gzipSize(code),
+		filename,
+		'gz',
+		raw || code.length < 5000,
+	);
+	let brotli;
+	//wrap brotliSize in try/catch in case brotli is unavailable due to
+	//lower node version
+	try {
+		brotli = formatSize(
+			await brotliSize(code),
+			filename,
+			'br',
+			raw || code.length < 5000,
+		);
+	} catch (e) {
+		return gzip;
+	}
+	return gzip + '\n' + brotli;
 }
 
 export default async function microbundle(inputOptions) {
@@ -151,6 +180,12 @@ export default async function microbundle(inputOptions) {
 
 	options.multipleEntries = options.entries.length > 1;
 
+	// to disable compress you can put in false or 0 but it's a string so our boolean checks won't work
+	options.compress =
+		typeof options.compress !== 'boolean'
+			? options.compress !== 'false' && options.compress !== '0'
+			: options.compress;
+
 	let formats = (options.format || options.formats).split(',');
 	// always compile cjs first if it's there:
 	formats.sort((a, b) => (a === 'cjs' ? -1 : a > b ? 1 : 0));
@@ -169,18 +204,11 @@ export default async function microbundle(inputOptions) {
 		}
 	}
 
-	async function getSizeInfo(code, filename) {
-		const raw = options.raw || code.length < 5000;
-		const gzip = formatSize(await gzipSize(code), filename, 'gz', raw);
-		const brotli = formatSize(await brotliSize(code), filename, 'br', raw);
-		return gzip + '\n' + brotli;
-	}
-
 	if (options.watch) {
 		const onBuild = options.onBuild;
 		return new Promise((resolve, reject) => {
 			stdout(
-				chalk.blue(
+				blue(
 					`Watching source, compiling to ${relative(
 						cwd,
 						dirname(options.output),
@@ -203,11 +231,9 @@ export default async function microbundle(inputOptions) {
 						logError(e.error);
 					}
 					if (e.code === 'END') {
-						getSizeInfo(options._code, options.outputOptions.file).then(
-							text => {
-								stdout(`Wrote ${text.trim()}`);
-							},
-						);
+						options._sizeInfo.then(text => {
+							stdout(`Wrote ${text.trim()}`);
+						});
 						if (typeof onBuild === 'function') {
 							onBuild(e);
 						}
@@ -219,17 +245,18 @@ export default async function microbundle(inputOptions) {
 
 	let cache;
 	let out = await series(
-		steps.map(({ inputOptions, outputOptions }) => async () => {
+		steps.map(config => async () => {
+			const { inputOptions, outputOptions } = config;
 			inputOptions.cache = cache;
 			let bundle = await rollup(inputOptions);
 			cache = bundle;
-			const { code } = await bundle.write(outputOptions);
-			return await getSizeInfo(code, outputOptions.file);
+			await bundle.write(outputOptions);
+			return await config._sizeInfo;
 		}),
 	);
 
 	return (
-		chalk.blue(
+		blue(
 			`Build "${options.name}" to ${relative(cwd, dirname(options.output)) ||
 				'.'}:`,
 		) +
@@ -251,15 +278,16 @@ async function getConfigFromPkgJson(cwd) {
 		const pkgName = basename(cwd);
 
 		stderr(
-			chalk.yellow(
-				`${chalk.yellow.inverse(
+			// `Warn ${yellow(`no package.json found. Assuming a pkg.name of "${pkgName}".`)}`
+			yellow(
+				`${yellow().inverse(
 					'WARN',
 				)} no package.json found. Assuming a pkg.name of "${pkgName}".`,
 			),
 		);
 
 		let msg = String(err.message || err);
-		if (!msg.match(/ENOENT/)) stderr(`  ${chalk.red.dim(msg)}`);
+		if (!msg.match(/ENOENT/)) stderr(`  ${red().dim(msg)}`);
 
 		return { hasPackageJson: false, pkg: { name: pkgName } };
 	}
@@ -277,8 +305,8 @@ function getName({ name, pkgName, amdName, cwd, hasPackageJson }) {
 		pkgName = basename(cwd);
 		if (hasPackageJson) {
 			stderr(
-				chalk.yellow(
-					`${chalk.yellow.inverse(
+				yellow(
+					`${yellow().inverse(
 						'WARN',
 					)} missing package.json "name" field. Assuming "${pkgName}".`,
 				),
@@ -306,7 +334,10 @@ async function getInput({ entries, cwd, source, module }) {
 		.concat(
 			entries && entries.length
 				? entries
-				: (source && resolve(cwd, source)) ||
+				: (source &&
+						(Array.isArray(source) ? source : [source]).map(file =>
+							resolve(cwd, file),
+						)) ||
 						((await isDir(resolve(cwd, 'src'))) &&
 							(await jsOrTs(cwd, 'src/index'))) ||
 						(await jsOrTs(cwd, 'index')) ||
@@ -327,15 +358,20 @@ async function getOutput({ cwd, output, pkgMain, pkgName }) {
 }
 
 async function getEntries({ input, cwd }) {
-	let entries = (await map([].concat(input), async file => {
-		file = resolve(cwd, file);
-		if (await isDir(file)) {
-			file = resolve(file, 'index.js');
-		}
-		return file;
-	})).filter((item, i, arr) => arr.indexOf(item) === i);
+	let entries = (
+		await map([].concat(input), async file => {
+			file = resolve(cwd, file);
+			if (await isDir(file)) {
+				file = resolve(file, 'index.js');
+			}
+			return file;
+		})
+	).filter((item, i, arr) => arr.indexOf(item) === i);
 	return entries;
 }
+
+// shebang cache map because the transform only gets run once
+const shebang = {};
 
 function createConfig(options, entry, format, writeMeta) {
 	let { pkg } = options;
@@ -351,8 +387,8 @@ function createConfig(options, entry, format, writeMeta) {
 	}
 
 	const moduleAliases = options.alias
-		? parseMappingArgument(options.alias)
-		: {};
+		? parseMappingArgumentAlias(options.alias)
+		: [];
 
 	const peerDeps = Object.keys(pkg.peerDependencies || {});
 	if (options.external === 'none') {
@@ -380,7 +416,7 @@ function createConfig(options, entry, format, writeMeta) {
 	if (options.define) {
 		defines = Object.assign(
 			defines,
-			parseMappingArgument(options.define, toTerserLiteral),
+			parseMappingArgument(options.define, toReplacementExpression),
 		);
 	}
 
@@ -403,30 +439,39 @@ function createConfig(options, entry, format, writeMeta) {
 	let moduleMain = replaceName(
 		pkg.module && !pkg.module.match(/src\//)
 			? pkg.module
-			: pkg['jsnext:main'] || 'x.mjs',
+			: pkg['jsnext:main'] || 'x.esm.js',
+		mainNoExtension,
+	);
+	let modernMain = replaceName(
+		(pkg.syntax && pkg.syntax.esmodules) || pkg.esmodule || 'x.modern.js',
 		mainNoExtension,
 	);
 	let cjsMain = replaceName(pkg['cjs:main'] || 'x.js', mainNoExtension);
 	let umdMain = replaceName(pkg['umd:main'] || 'x.umd.js', mainNoExtension);
+
+	const modern = format === 'modern';
 
 	// let rollupName = safeVariableName(basename(entry).replace(/\.js$/, ''));
 
 	let nameCache = {};
 	const bareNameCache = nameCache;
 	// Support "minify" field and legacy "mangle" field via package.json:
-	let minifyOptions = options.pkg.minify || options.pkg.mangle || {};
+	const rawMinifyValue = options.pkg.minify || options.pkg.mangle || {};
+	let minifyOptions = typeof rawMinifyValue === 'string' ? {} : rawMinifyValue;
+	const getNameCachePath =
+		typeof rawMinifyValue === 'string'
+			? () => resolve(options.cwd, rawMinifyValue)
+			: () => resolve(options.cwd, 'mangle.json');
 
 	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
 
 	const externalPredicate = new RegExp(`^(${external.join('|')})($|/)`);
 	const externalTest =
-		external.length === 0 ? () => false : id => externalPredicate.test(id);
+		external.length === 0 ? id => false : id => externalPredicate.test(id);
 
 	function loadNameCache() {
 		try {
-			nameCache = JSON.parse(
-				fs.readFileSync(resolve(options.cwd, 'mangle.json'), 'utf8'),
-			);
+			nameCache = JSON.parse(fs.readFileSync(getNameCachePath(), 'utf8'));
 			// mangle.json can contain a "minify" field, same format as the pkg.mangle:
 			if (nameCache.minify) {
 				minifyOptions = Object.assign(
@@ -442,8 +487,6 @@ function createConfig(options, entry, format, writeMeta) {
 	normalizeMinifyOptions(minifyOptions);
 
 	if (nameCache === bareNameCache) nameCache = null;
-
-	let shebang;
 
 	let config = {
 		inputOptions: {
@@ -470,126 +513,105 @@ function createConfig(options, entry, format, writeMeta) {
 									preset: 'default',
 								}),
 						].filter(Boolean),
+						autoModules: shouldCssModules(options),
+						modules: cssModulesConfig(options),
 						// only write out CSS for the first bundle (avoids pointless extra files):
 						inject: false,
 						extract: !!writeMeta,
 					}),
-					Object.keys(moduleAliases).length > 0 &&
-						alias(
-							Object.assign({}, moduleAliases, {
-								resolve: EXTENSIONS,
-							}),
-						),
+					moduleAliases.length > 0 &&
+						alias({
+							resolve: EXTENSIONS,
+							entries: moduleAliases,
+						}),
 					nodeResolve({
-						module: true,
-						jsnext: true,
+						mainFields: ['module', 'jsnext', 'main'],
 						browser: options.target !== 'node',
+						// defaults + .jsx
+						extensions: ['.mjs', '.js', '.jsx', '.json', '.node'],
 					}),
 					commonjs({
 						// use a regex to make sure to include eventual hoisted packages
 						include: /\/node_modules\//,
 					}),
 					json(),
+					{
+						// We have to remove shebang so it doesn't end up in the middle of the code somewhere
+						transform: code => ({
+							code: code.replace(/^#![^\n]*/, bang => {
+								shebang[options.name] = bang;
+							}),
+							map: null,
+						}),
+					},
 					useTypescript &&
 						typescript({
 							typescript: require('typescript'),
-							cacheRoot: `./.rts2_cache_${format}`,
+							cacheRoot: `./node_modules/.cache/.rts2_cache_${format}`,
 							tsconfigDefaults: {
 								compilerOptions: {
 									sourceMap: options.sourcemap,
 									declaration: true,
-									jsx: options.jsx,
+									jsx: 'react',
+									jsxFactory: options.jsx || 'h',
 								},
 							},
+							tsconfig: options.tsconfig,
 							tsconfigOverride: {
 								compilerOptions: {
 									target: 'esnext',
 								},
 							},
 						}),
-					!useTypescript && flow({ all: true, pretty: true }),
-					// Only used for async await
-					babel({
-						// We mainly use bublé to transpile JS and only use babel to
-						// transpile down `async/await`. To prevent conflicts with user
-						// supplied configurations we set this option to false. Note
-						// that we never supported using custom babel configs anyway.
-						babelrc: false,
+					// if defines is not set, we shouldn't run babel through node_modules
+					isTruthy(defines) &&
+						babel({
+							babelrc: false,
+							configFile: false,
+							compact: false,
+							include: 'node_modules/**',
+							plugins: [
+								[
+									require.resolve('babel-plugin-transform-replace-expressions'),
+									{ replace: defines },
+								],
+							],
+						}),
+					customBabel()({
 						extensions: EXTENSIONS,
 						exclude: 'node_modules/**',
-						plugins: [
-							require.resolve('@babel/plugin-syntax-jsx'),
-							[
-								require.resolve('babel-plugin-transform-async-to-promises'),
-								{ inlineHelpers: true, externalHelpers: true },
-							],
-							[
-								require.resolve('@babel/plugin-proposal-class-properties'),
-								{ loose: true },
-							],
-						],
-					}),
-					{
-						// Custom plugin that removes shebang from code because newer
-						// versions of bublé bundle their own private version of `acorn`
-						// and I don't know a way to patch in the option `allowHashBang`
-						// to acorn.
-						// See: https://github.com/Rich-Harris/buble/pull/165
-						transform(code) {
-							let reg = /^#!(.*)/;
-							let match = code.match(reg);
-
-							if (match !== null) {
-								shebang = '#!' + match[0];
-							}
-
-							code = code.replace(reg, '');
-
-							return {
-								code,
-								map: null,
-							};
-						},
-					},
-					buble({
-						exclude: 'node_modules/**',
-						jsx: options.jsx || 'h',
-						objectAssign: options.assign || 'Object.assign',
-						transforms: {
-							dangerousForOf: true,
-							dangerousTaggedTemplateString: true,
+						passPerPreset: true, // @see https://babeljs.io/docs/en/options#passperpreset
+						custom: {
+							defines,
+							modern,
+							compress: options.compress !== false,
+							targets: options.target === 'node' ? { node: '8' } : undefined,
+							pragma: options.jsx || 'h',
+							pragmaFrag: options.jsxFragment || 'Fragment',
+							typescript: !!useTypescript,
 						},
 					}),
-					// We should upstream this to rollup
-					// format==='cjs' && replace({
-					// 	[`module.exports = ${rollupName};`]: '',
-					// 	[`var ${rollupName} =`]: 'module.exports ='
-					// }),
-					// This works for the general case, but could cause nasty scope bugs.
-					// format==='umd' && replace({
-					// 	[`return ${rollupName};`]: '',
-					// 	[`var ${rollupName} =`]: 'return'
-					// }),
-					// format==='es' && replace({
-					// 	[`export default ${rollupName};`]: '',
-					// 	[`var ${rollupName} =`]: 'export default'
-					// }),
 					options.compress !== false && [
 						terser({
 							sourcemap: true,
-							output: { comments: false },
 							compress: Object.assign(
 								{
 									keep_infinity: true,
 									pure_getters: true,
-									global_defs: defines,
+									// Ideally we'd just get Terser to respect existing Arrow functions...
+									// unsafe_arrows: true,
 									passes: 10,
 								},
 								minifyOptions.compress || {},
 							),
+							output: {
+								// By default, Terser wraps function arguments in extra parens to trigger eager parsing.
+								// Whether this is a good idea is way too specific to guess, so we optimize for size by default:
+								wrap_func_args: false,
+							},
 							warnings: true,
-							ecma: 5,
-							toplevel: format === 'cjs' || format === 'es',
+							ecma: modern ? 9 : 5,
+							toplevel: modern || format === 'cjs' || format === 'es',
 							mangle: Object.assign({}, minifyOptions.mangle || {}),
 							nameCache,
 						}),
@@ -597,25 +619,28 @@ function createConfig(options, entry, format, writeMeta) {
 							// before hook
 							options: loadNameCache,
 							// after hook
-							onwrite() {
+							writeBundle() {
 								if (writeMeta && nameCache) {
 									fs.writeFile(
-										resolve(options.cwd, 'mangle.json'),
+										getNameCachePath(),
 										JSON.stringify(nameCache, null, 2),
-										Object,
+										() => {},
 									);
 								}
 							},
 						},
 					],
 					{
-						ongenerate(outputOptions, { code }) {
-							config._code = code;
+						writeBundle(bundle) {
+							config._sizeInfo = Promise.all(
+								Object.values(bundle).map(({ code, fileName }) => {
+									if (code) {
+										return getSizeInfo(code, fileName, options.raw);
+									}
+								}),
+							).then(results => results.filter(Boolean).join('\n'));
 						},
 					},
-					shebangPlugin({
-						shebang,
-					}),
 				)
 				.filter(Boolean),
 		},
@@ -628,16 +653,71 @@ function createConfig(options, entry, format, writeMeta) {
 			freeze: false,
 			esModule: false,
 			sourcemap: options.sourcemap,
-			format,
+			get banner() {
+				return shebang[options.name];
+			},
+			format: modern ? 'es' : format,
 			name: options.name,
 			file: resolve(
 				options.cwd,
-				(format === 'es' && moduleMain) ||
-					(format === 'umd' && umdMain) ||
-					cjsMain,
+				{
+					modern: modernMain,
+					es: moduleMain,
+					umd: umdMain,
+				}[format] || cjsMain,
 			),
 		},
 	};
 
 	return config;
+}
+
+function shouldCssModules(options) {
+	const passedInOption = processCssmodulesArgument(options);
+
+	// We should module when my-file.module.css or my-file.css
+	const moduleAllCss = passedInOption === true;
+
+	// We should module when my-file.module.css
+	const allowOnlySuffixModule = passedInOption === null;
+
+	return moduleAllCss || allowOnlySuffixModule;
+}
+
+function cssModulesConfig(options) {
+	const passedInOption = processCssmodulesArgument(options);
+	const isWatchMode = options.watch;
+	const hasPassedInScopeName = !(
+		typeof passedInOption === 'boolean' || passedInOption === null
+	);
+
+	if (shouldCssModules(options) || hasPassedInScopeName) {
+		let generateScopedName = isWatchMode
+			? '_[name]__[local]__[hash:base64:5]'
+			: '_[hash:base64:5]';
+
+		if (hasPassedInScopeName) {
+			generateScopedName = passedInOption; // would be the string from --css-modules "_[hash]".
+		}
+
+		return { generateScopedName };
+	}
+
+	return false;
+}
+
+/*
+This is done becuase if you use the cli default property, you get a primiatve "null" or "false",
+but when using the cli arguments, you always get back strings. This method aims at correcting those
+for both realms. So that both realms _convert_ into primatives.
+*/
+function processCssmodulesArgument(options) {
+	if (options['css-modules'] === 'true' || options['css-modules'] === true)
+		return true;
+	if (options['css-modules'] === 'false' || options['css-modules'] === false)
+		return false;
+	if (options['css-modules'] === 'null' || options['css-modules'] === null)
+		return null;
+
+	return options['css-modules'];
 }

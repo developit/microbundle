@@ -7,8 +7,8 @@ node_modules
 .rts2_cache_umd
 build
 dist
-package-lock.json
 yarn.lock
 .vscode
 .idea
 .rts2*
+sizes.csv
