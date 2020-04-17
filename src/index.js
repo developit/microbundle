@@ -6,18 +6,18 @@ import glob from 'tiny-glob/sync';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import { rollup, watch } from 'rollup';
-import commonjs from 'rollup-plugin-commonjs';
+import commonjs from '@rollup/plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import customBabel from './lib/babel-custom';
-import nodeResolve from 'rollup-plugin-node-resolve';
+import nodeResolve from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
-import alias from 'rollup-plugin-alias';
+import alias from '@rollup/plugin-alias';
 import postcss from 'rollup-plugin-postcss';
 import gzipSize from 'gzip-size';
 import brotliSize from 'brotli-size';
 import prettyBytes from 'pretty-bytes';
 import typescript from 'rollup-plugin-typescript2';
-import json from 'rollup-plugin-json';
+import json from '@rollup/plugin-json';
 import logError from './log-error';
 import { readFile, isDir, isFile, stdout, stderr, isTruthy } from './utils';
 import camelCase from 'camelcase';
@@ -87,6 +87,14 @@ const parseMappingArgument = (globalStrings, processValue) => {
 	return globals;
 };
 
+// Parses values of the form "$=jQuery,React=react" into key-value object pairs.
+const parseMappingArgumentAlias = aliasStrings => {
+	return aliasStrings.split(',').map(str => {
+		let [key, value] = str.split('=');
+		return { find: key, replacement: value };
+	});
+};
+
 // Extensions to use when resolving modules
 const EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs'];
 
@@ -111,12 +119,19 @@ async function getSizeInfo(code, filename, raw) {
 		'gz',
 		raw || code.length < 5000,
 	);
-	const brotli = formatSize(
-		await brotliSize(code),
-		filename,
-		'br',
-		raw || code.length < 5000,
-	);
+	let brotli;
+	//wrap brotliSize in try/catch in case brotli is unavailable due to
+	//lower node version
+	try {
+		brotli = formatSize(
+			await brotliSize(code),
+			filename,
+			'br',
+			raw || code.length < 5000,
+		);
+	} catch (e) {
+		return gzip;
+	}
 	return gzip + '\n' + brotli;
 }
 
@@ -343,13 +358,15 @@ async function getOutput({ cwd, output, pkgMain, pkgName }) {
 }
 
 async function getEntries({ input, cwd }) {
-	let entries = (await map([].concat(input), async file => {
-		file = resolve(cwd, file);
-		if (await isDir(file)) {
-			file = resolve(file, 'index.js');
-		}
-		return file;
-	})).filter((item, i, arr) => arr.indexOf(item) === i);
+	let entries = (
+		await map([].concat(input), async file => {
+			file = resolve(cwd, file);
+			if (await isDir(file)) {
+				file = resolve(file, 'index.js');
+			}
+			return file;
+		})
+	).filter((item, i, arr) => arr.indexOf(item) === i);
 	return entries;
 }
 
@@ -370,8 +387,8 @@ function createConfig(options, entry, format, writeMeta) {
 	}
 
 	const moduleAliases = options.alias
-		? parseMappingArgument(options.alias)
-		: {};
+		? parseMappingArgumentAlias(options.alias)
+		: [];
 
 	const peerDeps = Object.keys(pkg.peerDependencies || {});
 	if (options.external === 'none') {
@@ -424,11 +441,11 @@ function createConfig(options, entry, format, writeMeta) {
 	let moduleMain = replaceName(
 		pkg.module && !pkg.module.match(/src\//)
 			? pkg.module
-			: pkg['jsnext:main'] || 'x.mjs',
+			: pkg['jsnext:main'] || 'x.esm.js',
 		mainNoExtension,
 	);
 	let modernMain = replaceName(
-		(pkg.syntax && pkg.syntax.esmodules) || pkg.esmodule || 'x.modern.mjs',
+		(pkg.syntax && pkg.syntax.esmodules) || pkg.esmodule || 'x.modern.js',
 		mainNoExtension,
 	);
 	let cjsMain = replaceName(pkg['cjs:main'] || 'x.js', mainNoExtension);
@@ -452,7 +469,7 @@ function createConfig(options, entry, format, writeMeta) {
 
 	const externalPredicate = new RegExp(`^(${external.join('|')})($|/)`);
 	const externalTest =
-		external.length === 0 ? () => false : id => externalPredicate.test(id);
+		external.length === 0 ? id => false : id => externalPredicate.test(id);
 
 	function loadNameCache() {
 		try {
@@ -498,19 +515,22 @@ function createConfig(options, entry, format, writeMeta) {
 									preset: 'default',
 								}),
 						].filter(Boolean),
+						autoModules: shouldCssModules(options),
+						modules: cssModulesConfig(options),
 						// only write out CSS for the first bundle (avoids pointless extra files):
 						inject: false,
 						extract: !!writeMeta,
 					}),
-					Object.keys(moduleAliases).length > 0 &&
-						alias(
-							Object.assign({}, moduleAliases, {
-								resolve: EXTENSIONS,
-							}),
-						),
+					moduleAliases.length > 0 &&
+						alias({
+							resolve: EXTENSIONS,
+							entries: moduleAliases,
+						}),
 					nodeResolve({
 						mainFields: ['module', 'jsnext', 'main'],
 						browser: options.target !== 'node',
+						// defaults + .jsx
+						extensions: ['.mjs', '.js', '.jsx', '.json', '.node'],
 					}),
 					commonjs({
 						// use a regex to make sure to include eventual hoisted packages
@@ -538,6 +558,7 @@ function createConfig(options, entry, format, writeMeta) {
 									jsxFactory: options.jsx || 'h',
 								},
 							},
+							tsconfig: options.tsconfig,
 							tsconfigOverride: {
 								compilerOptions: {
 									target: 'esnext',
@@ -558,7 +579,7 @@ function createConfig(options, entry, format, writeMeta) {
 								],
 							],
 						}),
-					customBabel({
+					customBabel()({
 						extensions: EXTENSIONS,
 						exclude: 'node_modules/**',
 						passPerPreset: true, // @see https://babeljs.io/docs/en/options#passperpreset
@@ -585,6 +606,11 @@ function createConfig(options, entry, format, writeMeta) {
 								},
 								minifyOptions.compress || {},
 							),
+							output: {
+								// By default, Terser wraps function arguments in extra parens to trigger eager parsing.
+								// Whether this is a good idea is way too specific to guess, so we optimize for size by default:
+								wrap_func_args: false,
+							},
 							warnings: true,
 							ecma: modern ? 9 : 5,
 							toplevel: modern || format === 'cjs' || format === 'es',
@@ -600,6 +626,7 @@ function createConfig(options, entry, format, writeMeta) {
 									fs.writeFile(
 										getNameCachePath(),
 										JSON.stringify(nameCache, null, 2),
+										() => {},
 									);
 								}
 							},
@@ -608,9 +635,11 @@ function createConfig(options, entry, format, writeMeta) {
 					{
 						writeBundle(bundle) {
 							config._sizeInfo = Promise.all(
-								Object.values(bundle).map(({ code, fileName }) =>
-									code ? getSizeInfo(code, fileName, options.raw) : false,
-								),
+								Object.values(bundle).map(({ code, fileName }) => {
+									if (code) {
+										return getSizeInfo(code, fileName, options.raw);
+									}
+								}),
 							).then(results => results.filter(Boolean).join('\n'));
 						},
 					},
@@ -643,4 +672,54 @@ function createConfig(options, entry, format, writeMeta) {
 	};
 
 	return config;
+}
+
+function shouldCssModules(options) {
+	const passedInOption = processCssmodulesArgument(options);
+
+	// We should module when my-file.module.css or my-file.css
+	const moduleAllCss = passedInOption === true;
+
+	// We should module when my-file.module.css
+	const allowOnlySuffixModule = passedInOption === null;
+
+	return moduleAllCss || allowOnlySuffixModule;
+}
+
+function cssModulesConfig(options) {
+	const passedInOption = processCssmodulesArgument(options);
+	const isWatchMode = options.watch;
+	const hasPassedInScopeName = !(
+		typeof passedInOption === 'boolean' || passedInOption === null
+	);
+
+	if (shouldCssModules(options) || hasPassedInScopeName) {
+		let generateScopedName = isWatchMode
+			? '_[name]__[local]__[hash:base64:5]'
+			: '_[hash:base64:5]';
+
+		if (hasPassedInScopeName) {
+			generateScopedName = passedInOption; // would be the string from --css-modules "_[hash]".
+		}
+
+		return { generateScopedName };
+	}
+
+	return false;
+}
+
+/*
+This is done becuase if you use the cli default property, you get a primiatve "null" or "false",
+but when using the cli arguments, you always get back strings. This method aims at correcting those
+for both realms. So that both realms _convert_ into primatives.
+*/
+function processCssmodulesArgument(options) {
+	if (options['css-modules'] === 'true' || options['css-modules'] === true)
+		return true;
+	if (options['css-modules'] === 'false' || options['css-modules'] === false)
+		return false;
+	if (options['css-modules'] === 'null' || options['css-modules'] === null)
+		return null;
+
+	return options['css-modules'];
 }

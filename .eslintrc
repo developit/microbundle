@@ -17,5 +17,8 @@
     "react": {
       "version": "16.6"
     }
-  }
+  },
+  "ignorePatterns": [
+    "dist"
+  ]
 }

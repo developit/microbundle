@@ -37,12 +37,19 @@ export default handler => {
 		.option('--name', 'Specify name exposed in UMD builds')
 		.option('--cwd', 'Use an alternative working directory', '.')
 		.option('--sourcemap', 'Generate source map', true)
+		.option(
+			'--css-modules',
+			'Turns on css-modules for all .css imports. Passing a string will override the scopeName. eg --css-modules="_[hash]"',
+			null,
+		)
 		.example("microbundle --no-sourcemap # don't generate sourcemaps")
 		.option('--raw', 'Show raw byte size', false)
 		.option(
 			'--jsx',
 			'A custom JSX pragma like React.createElement (default: h)',
-		);
+		)
+		.option('--tsconfig', 'Specify the path to a custom tsconfig.json')
+		.example('microbundle build --tsconfig tsconfig.build.json');
 
 	prog
 		.command('build [...entries]', '', { default: true })
