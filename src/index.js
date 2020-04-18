@@ -529,7 +529,7 @@ function createConfig(options, entry, format, writeMeta) {
 						browser: options.target !== 'node',
 						// defaults + .jsx
 						extensions: ['.mjs', '.js', '.jsx', '.json', '.node'],
-						preferBuiltins: options.target === 'node' ? true : undefined
+						preferBuiltins: options.target === 'node' ? true : undefined,
 					}),
 					commonjs({
 						// use a regex to make sure to include eventual hoisted packages
