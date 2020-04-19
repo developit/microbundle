@@ -467,7 +467,7 @@ function createConfig(options, entry, format, writeMeta) {
 
 	const externalPredicate = new RegExp(`^(${external.join('|')})($|/)`);
 	const externalTest =
-		external.length === 0 ? () => false : id => externalPredicate.test(id);
+		external.length === 0 ? id => false : id => externalPredicate.test(id);
 
 	function loadNameCache() {
 		try {
@@ -513,6 +513,8 @@ function createConfig(options, entry, format, writeMeta) {
 									preset: 'default',
 								}),
 						].filter(Boolean),
+						autoModules: shouldCssModules(options),
+						modules: cssModulesConfig(options),
 						// only write out CSS for the first bundle (avoids pointless extra files):
 						inject: false,
 						extract: !!writeMeta,
@@ -525,6 +527,8 @@ function createConfig(options, entry, format, writeMeta) {
 					nodeResolve({
 						mainFields: ['module', 'jsnext', 'main'],
 						browser: options.target !== 'node',
+						// defaults + .jsx
+						extensions: ['.mjs', '.js', '.jsx', '.json', '.node'],
 					}),
 					commonjs({
 						// use a regex to make sure to include eventual hoisted packages
@@ -573,7 +577,7 @@ function createConfig(options, entry, format, writeMeta) {
 								],
 							],
 						}),
-					customBabel({
+					customBabel()({
 						extensions: EXTENSIONS,
 						exclude: 'node_modules/**',
 						passPerPreset: true, // @see https://babeljs.io/docs/en/options#passperpreset
@@ -620,6 +624,7 @@ function createConfig(options, entry, format, writeMeta) {
 									fs.writeFile(
 										getNameCachePath(),
 										JSON.stringify(nameCache, null, 2),
+										() => {},
 									);
 								}
 							},
@@ -628,9 +633,11 @@ function createConfig(options, entry, format, writeMeta) {
 					{
 						writeBundle(bundle) {
 							config._sizeInfo = Promise.all(
-								Object.values(bundle).map(({ code, fileName }) =>
-									code ? getSizeInfo(code, fileName, options.raw) : false,
-								),
+								Object.values(bundle).map(({ code, fileName }) => {
+									if (code) {
+										return getSizeInfo(code, fileName, options.raw);
+									}
+								}),
 							).then(results => results.filter(Boolean).join('\n'));
 						},
 					},
@@ -663,4 +670,54 @@ function createConfig(options, entry, format, writeMeta) {
 	};
 
 	return config;
+}
+
+function shouldCssModules(options) {
+	const passedInOption = processCssmodulesArgument(options);
+
+	// We should module when my-file.module.css or my-file.css
+	const moduleAllCss = passedInOption === true;
+
+	// We should module when my-file.module.css
+	const allowOnlySuffixModule = passedInOption === null;
+
+	return moduleAllCss || allowOnlySuffixModule;
+}
+
+function cssModulesConfig(options) {
+	const passedInOption = processCssmodulesArgument(options);
+	const isWatchMode = options.watch;
+	const hasPassedInScopeName = !(
+		typeof passedInOption === 'boolean' || passedInOption === null
+	);
+
+	if (shouldCssModules(options) || hasPassedInScopeName) {
+		let generateScopedName = isWatchMode
+			? '_[name]__[local]__[hash:base64:5]'
+			: '_[hash:base64:5]';
+
+		if (hasPassedInScopeName) {
+			generateScopedName = passedInOption; // would be the string from --css-modules "_[hash]".
+		}
+
+		return { generateScopedName };
+	}
+
+	return false;
+}
+
+/*
+This is done becuase if you use the cli default property, you get a primiatve "null" or "false",
+but when using the cli arguments, you always get back strings. This method aims at correcting those
+for both realms. So that both realms _convert_ into primatives.
+*/
+function processCssmodulesArgument(options) {
+	if (options['css-modules'] === 'true' || options['css-modules'] === true)
+		return true;
+	if (options['css-modules'] === 'false' || options['css-modules'] === false)
+		return false;
+	if (options['css-modules'] === 'null' || options['css-modules'] === null)
+		return null;
+
+	return options['css-modules'];
 }
