@@ -1,0 +1,47 @@
+name: Node CI
+
+on:
+  pull_request: {}
+  push:
+    branches-ignore:
+      - trying.tmp
+      - staging.tmp
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x, 13.x]
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install, build, and test
+        run: |
+          npm install
+          npm test
+      - name: sizereport
+        run: ./node_modules/.bin/sizereport --config
+
+# Could add this for canary versions
+#  publish-gpr:
+#    needs: build
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v1
+#      - uses: actions/setup-node@v1
+#        with:
+#          node-version: 12
+#          registry-url: https://npm.pkg.github.com/
+#          scope: '@preact'
+#      - run: |
+#          npm install
+#          npm config set registry https://npm.pkg.github.com/
+#          npm publish
+#        env:
+#          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
