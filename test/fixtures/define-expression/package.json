@@ -1,0 +1,6 @@
+{
+  "name": "define-expression",
+  "scripts": {
+    "build": "microbundle -f esm --no-sourcemap --define @Object.freeze=Object"
+  }
+}
