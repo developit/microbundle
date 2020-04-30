@@ -78,7 +78,7 @@ export default () => {
 							name: 'babel-plugin-transform-async-to-promises',
 							inlineHelpers: true,
 							externalHelpers: false,
-							minify: true
+							minify: true,
 						},
 						{
 							name: '@babel/plugin-proposal-class-properties',
