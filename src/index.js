@@ -434,12 +434,15 @@ function createConfig(options, entry, format, writeMeta) {
 
 	let mainNoExtension = options.output;
 	if (options.multipleEntries) {
-		let name = entry.match(/([\\/])index(\.(umd|cjs|es|m))?\.m?js$/)
+		let name = entry.match(/([\\/])index(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/)
 			? mainNoExtension
 			: entry;
 		mainNoExtension = resolve(dirname(mainNoExtension), basename(name));
 	}
-	mainNoExtension = mainNoExtension.replace(/(\.(umd|cjs|es|m))?\.m?js$/, '');
+	mainNoExtension = mainNoExtension.replace(
+		/(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/,
+		'',
+	);
 
 	let moduleMain = replaceName(
 		pkg.module && !pkg.module.match(/src\//)
@@ -534,6 +537,7 @@ function createConfig(options, entry, format, writeMeta) {
 						browser: options.target !== 'node',
 						// defaults + .jsx
 						extensions: ['.mjs', '.js', '.jsx', '.json', '.node'],
+						preferBuiltins: options.target === 'node' ? true : undefined,
 					}),
 					commonjs({
 						// use a regex to make sure to include eventual hoisted packages
