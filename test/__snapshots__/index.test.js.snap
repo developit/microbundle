@@ -1469,6 +1469,30 @@ exports[`fixtures build define with microbundle 5`] = `
 "
 `;
 
+exports[`fixtures build define-expression with microbundle 1`] = `
+"Used script: microbundle -f esm --no-sourcemap --define @Object.freeze=Object
+
+Directory tree:
+
+define-expression
+  dist
+    define-expression.js
+  index.js
+  package.json
+
+
+Build \\"defineExpression\\" to dist:
+56 B: define-expression.js.gz
+40 B: define-expression.js.br"
+`;
+
+exports[`fixtures build define-expression with microbundle 2`] = `1`;
+
+exports[`fixtures build define-expression with microbundle 3`] = `
+"console.log(Object({a:\\"b\\",c:\\"d\\"}));
+"
+`;
+
 exports[`fixtures build esnext-ts with microbundle 1`] = `
 "Used script: microbundle --raw
 
