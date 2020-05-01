@@ -8,6 +8,8 @@ const FIXTURES_DIR = `${__dirname}/fixtures`;
 const DEFAULT_SCRIPT = 'microbundle';
 const TEST_TIMEOUT = 11000;
 
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
 const join = (arr, delimiter = '') => arr.join(delimiter);
 
 const printTree = (nodes, indentLevel = 0) => {
@@ -39,7 +41,11 @@ describe('fixtures', () => {
 				fixturePath = resolve(fixturePath, fixtureDir.replace('-with-cwd', ''));
 			}
 
+			await sleep(1);
+
 			const output = await buildDirectory(fixtureDir);
+
+			await sleep(1);
 
 			const printedDir = printTree([dirTree(fixturePath)]);
 

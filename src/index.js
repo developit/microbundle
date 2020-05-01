@@ -33,6 +33,11 @@ const toReplacementExpression = (value, name) => {
 		return [JSON.stringify(matches[2]), name];
 	}
 
+	// --define @assign=Object.assign replaces expressions with expressions:
+	if (name[0] === '@') {
+		return [value, name.substring(1)];
+	}
+
 	// --define A=1,B=true produces int/boolean literal:
 	if (/^(true|false|\d+)$/i.test(value)) {
 		return [value, name];
