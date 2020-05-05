@@ -25,7 +25,7 @@ export default handler => {
 		.option(
 			'--format, -f',
 			`Only build specified formats (any of ${DEFAULT_FORMATS} or iife)`,
-			DEFAULT_FORMATS
+			DEFAULT_FORMATS,
 		)
 		.option('--watch, -w', 'Rebuilds on any change', false)
 		.option('--target', 'Specify your target environment (node or web)', 'web')
