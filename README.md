@@ -158,7 +158,7 @@ Options
 	-v, --version    Displays current version
 	-i, --entry      Entry module(s)
 	-o, --output     Directory to place build files into
-	-f, --format     Only build specified formats  (default modern,es,cjs,umd)
+	-f, --format     Only build specified formats (any of modern,es,cjs,umd or iife) (default modern,es,cjs,umd)
 	-w, --watch      Rebuilds on any change  (default false)
 	--target         Specify your target environment (node or web)  (default web)
 	--external       Specify external dependencies, or 'none'
