@@ -1562,6 +1562,7 @@ jsx
     jsx.umd.js
     jsx.umd.js.map
   index.js
+  node_modules
   package.json
 
 
@@ -1887,8 +1888,8 @@ modern-generators
 Build \\"modernGenerators\\" to dist:
 234 B: modern-generators.js.gz
 207 B: modern-generators.js.br
-233 B: modern-generators.modern.js.gz
-191 B: modern-generators.modern.js.br
+113 B: modern-generators.modern.js.gz
+92 B: modern-generators.modern.js.br
 233 B: modern-generators.esm.js.gz
 191 B: modern-generators.esm.js.br
 311 B: modern-generators.umd.js.gz
@@ -1910,7 +1911,7 @@ exports[`fixtures build modern-generators with microbundle 4`] = `
 `;
 
 exports[`fixtures build modern-generators with microbundle 5`] = `
-"var e=regeneratorRuntime.mark(r);function r(){var r;return regeneratorRuntime.wrap(function(e){for(;;)switch(e.prev=e.next){case 0:r=0;case 1:return e.next=4,r++;case 4:e.next=1;break;case 6:case\\"end\\":return e.stop()}},e)}export default function(){try{var e=r();return Promise.resolve([e.next().value,e.next().value])}catch(e){return Promise.reject(e)}}
+"export default async function(){const e=function*(){let e=0;for(;;)yield e++}();return[e.next().value,e.next().value]}
 //# sourceMappingURL=modern-generators.modern.js.map
 "
 `;
