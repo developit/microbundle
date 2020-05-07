@@ -1562,7 +1562,6 @@ jsx
     jsx.umd.js
     jsx.umd.js.map
   index.js
-  node_modules
   package.json
 
 
