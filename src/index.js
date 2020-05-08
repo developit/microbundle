@@ -252,7 +252,9 @@ export default async function microbundle(inputOptions) {
 	let out = await series(
 		steps.map(config => async () => {
 			const { inputOptions, outputOptions } = config;
-			inputOptions.cache = cache;
+			if (inputOptions.cache !== false) {
+				inputOptions.cache = cache;
+			}
 			let bundle = await rollup(inputOptions);
 			cache = bundle;
 			await bundle.write(outputOptions);
@@ -498,6 +500,9 @@ function createConfig(options, entry, format, writeMeta) {
 
 	let config = {
 		inputOptions: {
+			// disable Rollup's cache for the modern build to prevent re-use of legacy transpiled modules:
+			cache: modern ? false : undefined,
+
 			input: entry,
 			external: id => {
 				if (id === 'babel-plugin-transform-async-to-promises/helpers') {
