@@ -33,6 +33,11 @@ const toReplacementExpression = (value, name) => {
 		return [JSON.stringify(matches[2]), name];
 	}
 
+	// --define @assign=Object.assign replaces expressions with expressions:
+	if (name[0] === '@') {
+		return [value, name.substring(1)];
+	}
+
 	// --define A=1,B=true produces int/boolean literal:
 	if (/^(true|false|\d+)$/i.test(value)) {
 		return [value, name];
@@ -247,7 +252,9 @@ export default async function microbundle(inputOptions) {
 	let out = await series(
 		steps.map(config => async () => {
 			const { inputOptions, outputOptions } = config;
-			inputOptions.cache = cache;
+			if (inputOptions.cache !== false) {
+				inputOptions.cache = cache;
+			}
 			let bundle = await rollup(inputOptions);
 			cache = bundle;
 			await bundle.write(outputOptions);
@@ -429,12 +436,15 @@ function createConfig(options, entry, format, writeMeta) {
 
 	let mainNoExtension = options.output;
 	if (options.multipleEntries) {
-		let name = entry.match(/([\\/])index(\.(umd|cjs|es|m))?\.m?js$/)
+		let name = entry.match(/([\\/])index(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/)
 			? mainNoExtension
 			: entry;
 		mainNoExtension = resolve(dirname(mainNoExtension), basename(name));
 	}
-	mainNoExtension = mainNoExtension.replace(/(\.(umd|cjs|es|m))?\.m?js$/, '');
+	mainNoExtension = mainNoExtension.replace(
+		/(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/,
+		'',
+	);
 
 	let moduleMain = replaceName(
 		pkg.module && !pkg.module.match(/src\//)
@@ -490,6 +500,9 @@ function createConfig(options, entry, format, writeMeta) {
 
 	let config = {
 		inputOptions: {
+			// disable Rollup's cache for the modern build to prevent re-use of legacy transpiled modules:
+			cache: modern ? false : undefined,
+
 			input: entry,
 			external: id => {
 				if (id === 'babel-plugin-transform-async-to-promises/helpers') {
@@ -529,6 +542,7 @@ function createConfig(options, entry, format, writeMeta) {
 						browser: options.target !== 'node',
 						// defaults + .jsx
 						extensions: ['.mjs', '.js', '.jsx', '.json', '.node'],
+						preferBuiltins: options.target === 'node',
 					}),
 					commonjs({
 						// use a regex to make sure to include eventual hoisted packages

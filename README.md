@@ -158,7 +158,7 @@ Options
 	-v, --version    Displays current version
 	-i, --entry      Entry module(s)
 	-o, --output     Directory to place build files into
-	-f, --format     Only build specified formats  (default modern,es,cjs,umd)
+	-f, --format     Only build specified formats (any of modern,es,cjs,umd or iife) (default modern,es,cjs,umd)
 	-w, --watch      Rebuilds on any change  (default false)
 	--target         Specify your target environment (node or web)  (default web)
 	--external       Specify external dependencies, or 'none'
@@ -206,6 +206,7 @@ Here's what's coming up for Microbundle:
 - [routex.js](https://github.com/alexhoma/routex.js) A dynamic routing library for Next.js.
 - [hooked-form](https://github.com/JoviDeCroock/hooked-form) A lightweight form-management library for React.
 - [goober](https://github.com/cristianbote/goober) Less than 1KB css-in-js alternative with a familiar API.
+- [react-model](https://github.com/byte-fe/react-model) The next generation state management library for React
 
 ## 🥂 License
 
