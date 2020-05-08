@@ -172,30 +172,30 @@ basic
 
 
 Build \\"basicLib\\" to dist:
-229 B: basic-lib.js.gz
-174 B: basic-lib.js.br
-230 B: basic-lib.esm.js.gz
-177 B: basic-lib.esm.js.br
-313 B: basic-lib.umd.js.gz
-251 B: basic-lib.umd.js.br"
+187 B: basic-lib.js.gz
+138 B: basic-lib.js.br
+188 B: basic-lib.esm.js.gz
+139 B: basic-lib.esm.js.br
+274 B: basic-lib.umd.js.gz
+219 B: basic-lib.umd.js.br"
 `;
 
 exports[`fixtures build basic with microbundle 2`] = `6`;
 
 exports[`fixtures build basic with microbundle 3`] = `
-"var r=function(){try{for(var r=arguments.length,e=new Array(r),t=0;t<r;t++)e[t]=arguments[t];return Promise.resolve(e.reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){for(var e=arguments.length,t=new Array(e),n=0;n<e;n++)t[n]=arguments[n];try{return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
 //# sourceMappingURL=basic-lib.esm.js.map
 "
 `;
 
 exports[`fixtures build basic with microbundle 4`] = `
-"var r=function(){try{for(var r=arguments.length,e=new Array(r),n=0;n<r;n++)e[n]=arguments[n];return Promise.resolve(e.reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};module.exports=function(){for(var e=arguments.length,n=new Array(e),t=0;t<e;t++)n[t]=arguments[t];try{return Promise.resolve(r.apply(void 0,n)).then(function(e){return Promise.resolve(r.apply(void 0,n)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};module.exports=function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};
 //# sourceMappingURL=basic-lib.js.map
 "
 `;
 
 exports[`fixtures build basic with microbundle 5`] = `
-"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=e||self).basicLib=r()}(this,function(){var e=function(){try{for(var e=arguments.length,r=new Array(e),n=0;n<e;n++)r[n]=arguments[n];return Promise.resolve(r.reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){for(var r=arguments.length,n=new Array(r),t=0;t<r;t++)n[t]=arguments[t];try{return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
+"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=e||self).basicLib=r()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){try{var r=arguments,n=[].slice.call(r);return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
 //# sourceMappingURL=basic-lib.umd.js.map
 "
 `;
@@ -267,12 +267,12 @@ basic-compress-false
 
 
 Build \\"basicCompressFalse\\" to dist:
-303 B: basic-compress-false.js.gz
-244 B: basic-compress-false.js.br
-301 B: basic-compress-false.esm.js.gz
-244 B: basic-compress-false.esm.js.br
-424 B: basic-compress-false.umd.js.gz
-348 B: basic-compress-false.umd.js.br"
+260 B: basic-compress-false.js.gz
+206 B: basic-compress-false.js.br
+258 B: basic-compress-false.esm.js.gz
+209 B: basic-compress-false.esm.js.br
+383 B: basic-compress-false.umd.js.gz
+305 B: basic-compress-false.umd.js.br"
 `;
 
 exports[`fixtures build basic-compress-false with microbundle 2`] = `6`;
@@ -280,11 +280,8 @@ exports[`fixtures build basic-compress-false with microbundle 2`] = `6`;
 exports[`fixtures build basic-compress-false with microbundle 3`] = `
 "var two = function two() {
   try {
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return Promise.resolve(args.reduce(function (total, value) {
+    var _arguments2 = arguments;
+    return Promise.resolve([].slice.call(_arguments2).reduce(function (total, value) {
       return total + value;
     }, 0));
   } catch (e) {
@@ -293,11 +290,9 @@ exports[`fixtures build basic-compress-false with microbundle 3`] = `
 };
 
 var index = (function () {
-  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-    args[_key] = arguments[_key];
-  }
-
   try {
+    var _arguments2 = arguments;
+    var args = [].slice.call(_arguments2);
     return Promise.resolve(two.apply(void 0, args)).then(function (_two) {
       return Promise.resolve(two.apply(void 0, args)).then(function (_two2) {
         return [_two, _two2];
@@ -316,11 +311,8 @@ export default index;
 exports[`fixtures build basic-compress-false with microbundle 4`] = `
 "var two = function two() {
   try {
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return Promise.resolve(args.reduce(function (total, value) {
+    var _arguments2 = arguments;
+    return Promise.resolve([].slice.call(_arguments2).reduce(function (total, value) {
       return total + value;
     }, 0));
   } catch (e) {
@@ -329,11 +321,9 @@ exports[`fixtures build basic-compress-false with microbundle 4`] = `
 };
 
 var index = (function () {
-  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-    args[_key] = arguments[_key];
-  }
-
   try {
+    var _arguments2 = arguments;
+    var args = [].slice.call(_arguments2);
     return Promise.resolve(two.apply(void 0, args)).then(function (_two) {
       return Promise.resolve(two.apply(void 0, args)).then(function (_two2) {
         return [_two, _two2];
@@ -357,11 +347,8 @@ exports[`fixtures build basic-compress-false with microbundle 5`] = `
 }(this, (function () {
 	var two = function two() {
 	  try {
-	    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-
-	    return Promise.resolve(args.reduce(function (total, value) {
+	    var _arguments2 = arguments;
+	    return Promise.resolve([].slice.call(_arguments2).reduce(function (total, value) {
 	      return total + value;
 	    }, 0));
 	  } catch (e) {
@@ -370,11 +357,9 @@ exports[`fixtures build basic-compress-false with microbundle 5`] = `
 	};
 
 	var index = (function () {
-	  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-	    args[_key] = arguments[_key];
-	  }
-
 	  try {
+	    var _arguments2 = arguments;
+	    var args = [].slice.call(_arguments2);
 	    return Promise.resolve(two.apply(void 0, args)).then(function (_two) {
 	      return Promise.resolve(two.apply(void 0, args)).then(function (_two2) {
 	        return [_two, _two2];
@@ -636,12 +621,12 @@ basic-no-compress
 
 
 Build \\"basicNoCompress\\" to dist:
-303 B: basic-no-compress.js.gz
-244 B: basic-no-compress.js.br
-301 B: basic-no-compress.esm.js.gz
-244 B: basic-no-compress.esm.js.br
-421 B: basic-no-compress.umd.js.gz
-345 B: basic-no-compress.umd.js.br"
+260 B: basic-no-compress.js.gz
+206 B: basic-no-compress.js.br
+258 B: basic-no-compress.esm.js.gz
+209 B: basic-no-compress.esm.js.br
+381 B: basic-no-compress.umd.js.gz
+310 B: basic-no-compress.umd.js.br"
 `;
 
 exports[`fixtures build basic-no-compress with microbundle 2`] = `6`;
@@ -649,11 +634,8 @@ exports[`fixtures build basic-no-compress with microbundle 2`] = `6`;
 exports[`fixtures build basic-no-compress with microbundle 3`] = `
 "var two = function two() {
   try {
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return Promise.resolve(args.reduce(function (total, value) {
+    var _arguments2 = arguments;
+    return Promise.resolve([].slice.call(_arguments2).reduce(function (total, value) {
       return total + value;
     }, 0));
   } catch (e) {
@@ -662,11 +644,9 @@ exports[`fixtures build basic-no-compress with microbundle 3`] = `
 };
 
 var index = (function () {
-  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-    args[_key] = arguments[_key];
-  }
-
   try {
+    var _arguments2 = arguments;
+    var args = [].slice.call(_arguments2);
     return Promise.resolve(two.apply(void 0, args)).then(function (_two) {
       return Promise.resolve(two.apply(void 0, args)).then(function (_two2) {
         return [_two, _two2];
@@ -685,11 +665,8 @@ export default index;
 exports[`fixtures build basic-no-compress with microbundle 4`] = `
 "var two = function two() {
   try {
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return Promise.resolve(args.reduce(function (total, value) {
+    var _arguments2 = arguments;
+    return Promise.resolve([].slice.call(_arguments2).reduce(function (total, value) {
       return total + value;
     }, 0));
   } catch (e) {
@@ -698,11 +675,9 @@ exports[`fixtures build basic-no-compress with microbundle 4`] = `
 };
 
 var index = (function () {
-  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-    args[_key] = arguments[_key];
-  }
-
   try {
+    var _arguments2 = arguments;
+    var args = [].slice.call(_arguments2);
     return Promise.resolve(two.apply(void 0, args)).then(function (_two) {
       return Promise.resolve(two.apply(void 0, args)).then(function (_two2) {
         return [_two, _two2];
@@ -726,11 +701,8 @@ exports[`fixtures build basic-no-compress with microbundle 5`] = `
 }(this, (function () {
 	var two = function two() {
 	  try {
-	    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-
-	    return Promise.resolve(args.reduce(function (total, value) {
+	    var _arguments2 = arguments;
+	    return Promise.resolve([].slice.call(_arguments2).reduce(function (total, value) {
 	      return total + value;
 	    }, 0));
 	  } catch (e) {
@@ -739,11 +711,9 @@ exports[`fixtures build basic-no-compress with microbundle 5`] = `
 	};
 
 	var index = (function () {
-	  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-	    args[_key] = arguments[_key];
-	  }
-
 	  try {
+	    var _arguments2 = arguments;
+	    var args = [].slice.call(_arguments2);
 	    return Promise.resolve(two.apply(void 0, args)).then(function (_two) {
 	      return Promise.resolve(two.apply(void 0, args)).then(function (_two2) {
 	        return [_two, _two2];
@@ -852,30 +822,30 @@ basic-tsx
 
 
 Build \\"basicLibTsx\\" to dist:
-235 B: basic-lib-tsx.js.gz
-188 B: basic-lib-tsx.js.br
-236 B: basic-lib-tsx.esm.js.gz
-190 B: basic-lib-tsx.esm.js.br
-317 B: basic-lib-tsx.umd.js.gz
-260 B: basic-lib-tsx.umd.js.br"
+199 B: basic-lib-tsx.js.gz
+153 B: basic-lib-tsx.js.br
+200 B: basic-lib-tsx.esm.js.gz
+153 B: basic-lib-tsx.esm.js.br
+282 B: basic-lib-tsx.umd.js.gz
+221 B: basic-lib-tsx.umd.js.br"
 `;
 
 exports[`fixtures build basic-tsx with microbundle 2`] = `7`;
 
 exports[`fixtures build basic-tsx with microbundle 3`] = `
-"var r=function(r,n){for(var e=arguments.length,t=new Array(e>2?e-2:0),o=2;o<e;o++)t[o-2]=arguments[o];return{tag:r,props:n,children:t}},n=function(){function n(){}return n.prototype.render=function(){return r(\\"div\\",{id:\\"app\\"},r(\\"h1\\",null,\\"Hello, World!\\"),r(\\"p\\",null,\\"A JSX demo.\\"))},n}();export default n;
+"var n=function(n,r){return{tag:n,props:r,children:[].slice.call(arguments,2)}},r=function(){function r(){}return r.prototype.render=function(){return n(\\"div\\",{id:\\"app\\"},n(\\"h1\\",null,\\"Hello, World!\\"),n(\\"p\\",null,\\"A JSX demo.\\"))},r}();export default r;
 //# sourceMappingURL=basic-lib-tsx.esm.js.map
 "
 `;
 
 exports[`fixtures build basic-tsx with microbundle 4`] = `
-"var r=function(r,n){for(var e=arguments.length,o=new Array(e>2?e-2:0),t=2;t<e;t++)o[t-2]=arguments[t];return{tag:r,props:n,children:o}};module.exports=function(){function n(){}return n.prototype.render=function(){return r(\\"div\\",{id:\\"app\\"},r(\\"h1\\",null,\\"Hello, World!\\"),r(\\"p\\",null,\\"A JSX demo.\\"))},n}();
+"var n=function(n,r){return{tag:n,props:r,children:[].slice.call(arguments,2)}};module.exports=function(){function r(){}return r.prototype.render=function(){return n(\\"div\\",{id:\\"app\\"},n(\\"h1\\",null,\\"Hello, World!\\"),n(\\"p\\",null,\\"A JSX demo.\\"))},r}();
 //# sourceMappingURL=basic-lib-tsx.js.map
 "
 `;
 
 exports[`fixtures build basic-tsx with microbundle 5`] = `
-"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e=e||self).basicLibTsx=n()}(this,function(){var e=function(e,n){for(var o=arguments.length,t=new Array(o>2?o-2:0),r=2;r<o;r++)t[r-2]=arguments[r];return{tag:e,props:n,children:t}};return function(){function n(){}return n.prototype.render=function(){return e(\\"div\\",{id:\\"app\\"},e(\\"h1\\",null,\\"Hello, World!\\"),e(\\"p\\",null,\\"A JSX demo.\\"))},n}()});
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e=e||self).basicLibTsx=n()}(this,function(){var e=function(e,n){return{tag:e,props:n,children:[].slice.call(arguments,2)}};return function(){function n(){}return n.prototype.render=function(){return e(\\"div\\",{id:\\"app\\"},e(\\"h1\\",null,\\"Hello, World!\\"),e(\\"p\\",null,\\"A JSX demo.\\"))},n}()});
 //# sourceMappingURL=basic-lib-tsx.umd.js.map
 "
 `;
@@ -907,30 +877,30 @@ basic
 
 
 Build \\"basic\\" to dist:
-229 B: basic.js.gz
-174 B: basic.js.br
-230 B: basic.esm.js.gz
-177 B: basic.esm.js.br
-310 B: basic.umd.js.gz
-247 B: basic.umd.js.br"
+187 B: basic.js.gz
+138 B: basic.js.br
+188 B: basic.esm.js.gz
+139 B: basic.esm.js.br
+271 B: basic.umd.js.gz
+202 B: basic.umd.js.br"
 `;
 
 exports[`fixtures build basic-with-cwd with microbundle 2`] = `6`;
 
 exports[`fixtures build basic-with-cwd with microbundle 3`] = `
-"var r=function(){try{for(var r=arguments.length,e=new Array(r),t=0;t<r;t++)e[t]=arguments[t];return Promise.resolve(e.reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){for(var e=arguments.length,t=new Array(e),n=0;n<e;n++)t[n]=arguments[n];try{return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
 //# sourceMappingURL=basic.esm.js.map
 "
 `;
 
 exports[`fixtures build basic-with-cwd with microbundle 4`] = `
-"var r=function(){try{for(var r=arguments.length,e=new Array(r),n=0;n<r;n++)e[n]=arguments[n];return Promise.resolve(e.reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};module.exports=function(){for(var e=arguments.length,n=new Array(e),t=0;t<e;t++)n[t]=arguments[t];try{return Promise.resolve(r.apply(void 0,n)).then(function(e){return Promise.resolve(r.apply(void 0,n)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};module.exports=function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};
 //# sourceMappingURL=basic.js.map
 "
 `;
 
 exports[`fixtures build basic-with-cwd with microbundle 5`] = `
-"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=e||self).basic=r()}(this,function(){var e=function(){try{for(var e=arguments.length,r=new Array(e),n=0;n<e;n++)r[n]=arguments[n];return Promise.resolve(r.reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){for(var r=arguments.length,n=new Array(r),t=0;t<r;t++)n[t]=arguments[t];try{return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
+"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=e||self).basic=r()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){try{var r=arguments,n=[].slice.call(r);return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
 //# sourceMappingURL=basic.umd.js.map
 "
 `;
@@ -1306,30 +1276,30 @@ custom-source
 
 
 Build \\"customSource\\" to dist:
-229 B: custom-source.js.gz
-174 B: custom-source.js.br
-230 B: custom-source.esm.js.gz
-177 B: custom-source.esm.js.br
-316 B: custom-source.umd.js.gz
-247 B: custom-source.umd.js.br"
+187 B: custom-source.js.gz
+138 B: custom-source.js.br
+188 B: custom-source.esm.js.gz
+139 B: custom-source.esm.js.br
+276 B: custom-source.umd.js.gz
+205 B: custom-source.umd.js.br"
 `;
 
 exports[`fixtures build custom-source with microbundle 2`] = `6`;
 
 exports[`fixtures build custom-source with microbundle 3`] = `
-"var r=function(){try{for(var r=arguments.length,e=new Array(r),t=0;t<r;t++)e[t]=arguments[t];return Promise.resolve(e.reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){for(var e=arguments.length,t=new Array(e),n=0;n<e;n++)t[n]=arguments[n];try{return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
 //# sourceMappingURL=custom-source.esm.js.map
 "
 `;
 
 exports[`fixtures build custom-source with microbundle 4`] = `
-"var r=function(){try{for(var r=arguments.length,e=new Array(r),n=0;n<r;n++)e[n]=arguments[n];return Promise.resolve(e.reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};module.exports=function(){for(var e=arguments.length,n=new Array(e),t=0;t<e;t++)n[t]=arguments[t];try{return Promise.resolve(r.apply(void 0,n)).then(function(e){return Promise.resolve(r.apply(void 0,n)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};module.exports=function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};
 //# sourceMappingURL=custom-source.js.map
 "
 `;
 
 exports[`fixtures build custom-source with microbundle 5`] = `
-"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=e||self).customSource=r()}(this,function(){var e=function(){try{for(var e=arguments.length,r=new Array(e),n=0;n<e;n++)r[n]=arguments[n];return Promise.resolve(r.reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){for(var r=arguments.length,n=new Array(r),t=0;t<r;t++)n[t]=arguments[t];try{return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
+"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=e||self).customSource=r()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){try{var r=arguments,t=[].slice.call(r);return Promise.resolve(e.apply(void 0,t)).then(function(r){return Promise.resolve(e.apply(void 0,t)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
 //# sourceMappingURL=custom-source.umd.js.map
 "
 `;
@@ -1354,30 +1324,30 @@ custom-source
 
 
 Build \\"customSrc\\" to dist:
-229 B: custom-src.js.gz
-174 B: custom-src.js.br
-230 B: custom-src.esm.js.gz
-177 B: custom-src.esm.js.br
-314 B: custom-src.umd.js.gz
-247 B: custom-src.umd.js.br"
+187 B: custom-src.js.gz
+138 B: custom-src.js.br
+188 B: custom-src.esm.js.gz
+139 B: custom-src.esm.js.br
+274 B: custom-src.umd.js.gz
+222 B: custom-src.umd.js.br"
 `;
 
 exports[`fixtures build custom-source-with-cwd with microbundle 2`] = `6`;
 
 exports[`fixtures build custom-source-with-cwd with microbundle 3`] = `
-"var r=function(){try{for(var r=arguments.length,e=new Array(r),t=0;t<r;t++)e[t]=arguments[t];return Promise.resolve(e.reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){for(var e=arguments.length,t=new Array(e),n=0;n<e;n++)t[n]=arguments[n];try{return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
 //# sourceMappingURL=custom-src.esm.js.map
 "
 `;
 
 exports[`fixtures build custom-source-with-cwd with microbundle 4`] = `
-"var r=function(){try{for(var r=arguments.length,e=new Array(r),n=0;n<r;n++)e[n]=arguments[n];return Promise.resolve(e.reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};module.exports=function(){for(var e=arguments.length,n=new Array(e),t=0;t<e;t++)n[t]=arguments[t];try{return Promise.resolve(r.apply(void 0,n)).then(function(e){return Promise.resolve(r.apply(void 0,n)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};module.exports=function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};
 //# sourceMappingURL=custom-src.js.map
 "
 `;
 
 exports[`fixtures build custom-source-with-cwd with microbundle 5`] = `
-"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=e||self).customSrc=r()}(this,function(){var e=function(){try{for(var e=arguments.length,r=new Array(e),n=0;n<e;n++)r[n]=arguments[n];return Promise.resolve(r.reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){for(var r=arguments.length,n=new Array(r),t=0;t<r;t++)n[t]=arguments[t];try{return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
+"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=e||self).customSrc=r()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){try{var r=arguments,t=[].slice.call(r);return Promise.resolve(e.apply(void 0,t)).then(function(r){return Promise.resolve(e.apply(void 0,t)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
 //# sourceMappingURL=custom-src.umd.js.map
 "
 `;
@@ -1566,30 +1536,30 @@ jsx
 
 
 Build \\"jsx\\" to dist:
-262 B: jsx.js.gz
-209 B: jsx.js.br
-263 B: jsx.esm.js.gz
-212 B: jsx.esm.js.br
-335 B: jsx.umd.js.gz
-278 B: jsx.umd.js.br"
+221 B: jsx.js.gz
+179 B: jsx.js.br
+223 B: jsx.esm.js.gz
+193 B: jsx.esm.js.br
+298 B: jsx.umd.js.gz
+236 B: jsx.umd.js.br"
 `;
 
 exports[`fixtures build jsx with microbundle 2`] = `6`;
 
 exports[`fixtures build jsx with microbundle 3`] = `
-"var n=function(n,r){for(var e=arguments.length,t=new Array(e>2?e-2:0),l=2;l<e;l++)t[l-2]=arguments[l];return{tag:n,props:r,children:t}},r=function(n){return n.children},e=function(){function e(){}return e.prototype.render=function(){return n(\\"div\\",{id:\\"app\\"},n(\\"h1\\",null,\\"Hello, World!\\"),n(\\"p\\",null,\\"A JSX demo.\\"),n(r,null,n(\\"p\\",null,\\"Test fragment\\")))},e}();export default e;
+"var n=function(n,r){return{tag:n,props:r,children:[].slice.call(arguments,2)}},r=function(n){return n.children},l=function(){function l(){}return l.prototype.render=function(){return n(\\"div\\",{id:\\"app\\"},n(\\"h1\\",null,\\"Hello, World!\\"),n(\\"p\\",null,\\"A JSX demo.\\"),n(r,null,n(\\"p\\",null,\\"Test fragment\\")))},l}();export default l;
 //# sourceMappingURL=jsx.esm.js.map
 "
 `;
 
 exports[`fixtures build jsx with microbundle 4`] = `
-"var n=function(n,r){for(var e=arguments.length,t=new Array(e>2?e-2:0),l=2;l<e;l++)t[l-2]=arguments[l];return{tag:n,props:r,children:t}},r=function(n){return n.children};module.exports=function(){function e(){}return e.prototype.render=function(){return n(\\"div\\",{id:\\"app\\"},n(\\"h1\\",null,\\"Hello, World!\\"),n(\\"p\\",null,\\"A JSX demo.\\"),n(r,null,n(\\"p\\",null,\\"Test fragment\\")))},e}();
+"var n=function(n,r){return{tag:n,props:r,children:[].slice.call(arguments,2)}},r=function(n){return n.children};module.exports=function(){function l(){}return l.prototype.render=function(){return n(\\"div\\",{id:\\"app\\"},n(\\"h1\\",null,\\"Hello, World!\\"),n(\\"p\\",null,\\"A JSX demo.\\"),n(r,null,n(\\"p\\",null,\\"Test fragment\\")))},l}();
 //# sourceMappingURL=jsx.js.map
 "
 `;
 
 exports[`fixtures build jsx with microbundle 5`] = `
-"!function(n,e){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=e():\\"function\\"==typeof define&&define.amd?define(e):(n=n||self).jsx=e()}(this,function(){var n=function(n,e){for(var t=arguments.length,r=new Array(t>2?t-2:0),o=2;o<t;o++)r[o-2]=arguments[o];return{tag:n,props:e,children:r}},e=function(n){return n.children};return function(){function t(){}return t.prototype.render=function(){return n(\\"div\\",{id:\\"app\\"},n(\\"h1\\",null,\\"Hello, World!\\"),n(\\"p\\",null,\\"A JSX demo.\\"),n(e,null,n(\\"p\\",null,\\"Test fragment\\")))},t}()});
+"!function(n,e){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=e():\\"function\\"==typeof define&&define.amd?define(e):(n=n||self).jsx=e()}(this,function(){var n=function(n,e){return{tag:n,props:e,children:[].slice.call(arguments,2)}},e=function(n){return n.children};return function(){function t(){}return t.prototype.render=function(){return n(\\"div\\",{id:\\"app\\"},n(\\"h1\\",null,\\"Hello, World!\\"),n(\\"p\\",null,\\"A JSX demo.\\"),n(e,null,n(\\"p\\",null,\\"Test fragment\\")))},t}()});
 //# sourceMappingURL=jsx.umd.js.map
 "
 `;
@@ -1941,30 +1911,30 @@ name-custom-amd
 
 
 Build \\"customNameAmd\\" to dist:
-229 B: name-custom-amd.js.gz
-174 B: name-custom-amd.js.br
-230 B: name-custom-amd.esm.js.gz
-177 B: name-custom-amd.esm.js.br
-317 B: name-custom-amd.umd.js.gz
-253 B: name-custom-amd.umd.js.br"
+187 B: name-custom-amd.js.gz
+138 B: name-custom-amd.js.br
+188 B: name-custom-amd.esm.js.gz
+139 B: name-custom-amd.esm.js.br
+278 B: name-custom-amd.umd.js.gz
+226 B: name-custom-amd.umd.js.br"
 `;
 
 exports[`fixtures build name-custom-amd with microbundle 2`] = `6`;
 
 exports[`fixtures build name-custom-amd with microbundle 3`] = `
-"var r=function(){try{for(var r=arguments.length,e=new Array(r),t=0;t<r;t++)e[t]=arguments[t];return Promise.resolve(e.reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){for(var e=arguments.length,t=new Array(e),n=0;n<e;n++)t[n]=arguments[n];try{return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
 //# sourceMappingURL=name-custom-amd.esm.js.map
 "
 `;
 
 exports[`fixtures build name-custom-amd with microbundle 4`] = `
-"var r=function(){try{for(var r=arguments.length,e=new Array(r),n=0;n<r;n++)e[n]=arguments[n];return Promise.resolve(e.reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};module.exports=function(){for(var e=arguments.length,n=new Array(e),t=0;t<e;t++)n[t]=arguments[t];try{return Promise.resolve(r.apply(void 0,n)).then(function(e){return Promise.resolve(r.apply(void 0,n)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};module.exports=function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};
 //# sourceMappingURL=name-custom-amd.js.map
 "
 `;
 
 exports[`fixtures build name-custom-amd with microbundle 5`] = `
-"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=e||self).customNameAmd=r()}(this,function(){var e=function(){try{for(var e=arguments.length,r=new Array(e),n=0;n<e;n++)r[n]=arguments[n];return Promise.resolve(r.reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){for(var r=arguments.length,n=new Array(r),t=0;t<r;t++)n[t]=arguments[t];try{return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
+"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=e||self).customNameAmd=r()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){try{var r=arguments,t=[].slice.call(r);return Promise.resolve(e.apply(void 0,t)).then(function(r){return Promise.resolve(e.apply(void 0,t)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
 //# sourceMappingURL=name-custom-amd.umd.js.map
 "
 `;
@@ -1989,30 +1959,30 @@ name-custom-cli
 
 
 Build \\"nameCustomCli\\" to dist:
-229 B: name-custom.js.gz
-174 B: name-custom.js.br
-230 B: name-custom.esm.js.gz
-177 B: name-custom.esm.js.br
-316 B: name-custom.umd.js.gz
-255 B: name-custom.umd.js.br"
+187 B: name-custom.js.gz
+138 B: name-custom.js.br
+188 B: name-custom.esm.js.gz
+139 B: name-custom.esm.js.br
+277 B: name-custom.umd.js.gz
+225 B: name-custom.umd.js.br"
 `;
 
 exports[`fixtures build name-custom-cli with microbundle 2`] = `6`;
 
 exports[`fixtures build name-custom-cli with microbundle 3`] = `
-"var r=function(){try{for(var r=arguments.length,e=new Array(r),t=0;t<r;t++)e[t]=arguments[t];return Promise.resolve(e.reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){for(var e=arguments.length,t=new Array(e),n=0;n<e;n++)t[n]=arguments[n];try{return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
 //# sourceMappingURL=name-custom.esm.js.map
 "
 `;
 
 exports[`fixtures build name-custom-cli with microbundle 4`] = `
-"var r=function(){try{for(var r=arguments.length,e=new Array(r),n=0;n<r;n++)e[n]=arguments[n];return Promise.resolve(e.reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};module.exports=function(){for(var e=arguments.length,n=new Array(e),t=0;t<e;t++)n[t]=arguments[t];try{return Promise.resolve(r.apply(void 0,n)).then(function(e){return Promise.resolve(r.apply(void 0,n)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};module.exports=function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};
 //# sourceMappingURL=name-custom.js.map
 "
 `;
 
 exports[`fixtures build name-custom-cli with microbundle 5`] = `
-"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=e||self).nameCustomCli=r()}(this,function(){var e=function(){try{for(var e=arguments.length,r=new Array(e),n=0;n<e;n++)r[n]=arguments[n];return Promise.resolve(r.reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){for(var r=arguments.length,n=new Array(r),t=0;t<r;t++)n[t]=arguments[t];try{return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
+"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=e||self).nameCustomCli=r()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){try{var r=arguments,n=[].slice.call(r);return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
 //# sourceMappingURL=name-custom.umd.js.map
 "
 `;
@@ -2036,30 +2006,30 @@ no-pkg
 
 
 Build \\"noPkg\\" to dist:
-229 B: no-pkg.js.gz
-174 B: no-pkg.js.br
-230 B: no-pkg.esm.js.gz
-177 B: no-pkg.esm.js.br
-310 B: no-pkg.umd.js.gz
-248 B: no-pkg.umd.js.br"
+187 B: no-pkg.js.gz
+138 B: no-pkg.js.br
+188 B: no-pkg.esm.js.gz
+139 B: no-pkg.esm.js.br
+271 B: no-pkg.umd.js.gz
+213 B: no-pkg.umd.js.br"
 `;
 
 exports[`fixtures build no-pkg with microbundle 2`] = `6`;
 
 exports[`fixtures build no-pkg with microbundle 3`] = `
-"var r=function(){try{for(var r=arguments.length,e=new Array(r),t=0;t<r;t++)e[t]=arguments[t];return Promise.resolve(e.reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){for(var e=arguments.length,t=new Array(e),n=0;n<e;n++)t[n]=arguments[n];try{return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
 //# sourceMappingURL=no-pkg.esm.js.map
 "
 `;
 
 exports[`fixtures build no-pkg with microbundle 4`] = `
-"var r=function(){try{for(var r=arguments.length,e=new Array(r),n=0;n<r;n++)e[n]=arguments[n];return Promise.resolve(e.reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};module.exports=function(){for(var e=arguments.length,n=new Array(e),t=0;t<e;t++)n[t]=arguments[t];try{return Promise.resolve(r.apply(void 0,n)).then(function(e){return Promise.resolve(r.apply(void 0,n)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};module.exports=function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};
 //# sourceMappingURL=no-pkg.js.map
 "
 `;
 
 exports[`fixtures build no-pkg with microbundle 5`] = `
-"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=e||self).noPkg=r()}(this,function(){var e=function(){try{for(var e=arguments.length,r=new Array(e),n=0;n<e;n++)r[n]=arguments[n];return Promise.resolve(r.reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){for(var r=arguments.length,n=new Array(r),t=0;t<r;t++)n[t]=arguments[t];try{return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
+"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=e||self).noPkg=r()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){try{var r=arguments,n=[].slice.call(r);return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
 //# sourceMappingURL=no-pkg.umd.js.map
 "
 `;
@@ -2084,30 +2054,30 @@ no-pkg-name
 
 
 Build \\"noPkgName\\" to dist:
-229 B: no-pkg-name.js.gz
-174 B: no-pkg-name.js.br
-230 B: no-pkg-name.esm.js.gz
-177 B: no-pkg-name.esm.js.br
-314 B: no-pkg-name.umd.js.gz
-246 B: no-pkg-name.umd.js.br"
+187 B: no-pkg-name.js.gz
+138 B: no-pkg-name.js.br
+188 B: no-pkg-name.esm.js.gz
+139 B: no-pkg-name.esm.js.br
+275 B: no-pkg-name.umd.js.gz
+215 B: no-pkg-name.umd.js.br"
 `;
 
 exports[`fixtures build no-pkg-name with microbundle 2`] = `6`;
 
 exports[`fixtures build no-pkg-name with microbundle 3`] = `
-"var r=function(){try{for(var r=arguments.length,e=new Array(r),t=0;t<r;t++)e[t]=arguments[t];return Promise.resolve(e.reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){for(var e=arguments.length,t=new Array(e),n=0;n<e;n++)t[n]=arguments[n];try{return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
 //# sourceMappingURL=no-pkg-name.esm.js.map
 "
 `;
 
 exports[`fixtures build no-pkg-name with microbundle 4`] = `
-"var r=function(){try{for(var r=arguments.length,e=new Array(r),n=0;n<r;n++)e[n]=arguments[n];return Promise.resolve(e.reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};module.exports=function(){for(var e=arguments.length,n=new Array(e),t=0;t<e;t++)n[t]=arguments[t];try{return Promise.resolve(r.apply(void 0,n)).then(function(e){return Promise.resolve(r.apply(void 0,n)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};module.exports=function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};
 //# sourceMappingURL=no-pkg-name.js.map
 "
 `;
 
 exports[`fixtures build no-pkg-name with microbundle 5`] = `
-"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=e||self).noPkgName=r()}(this,function(){var e=function(){try{for(var e=arguments.length,r=new Array(e),n=0;n<e;n++)r[n]=arguments[n];return Promise.resolve(r.reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){for(var r=arguments.length,n=new Array(r),t=0;t<r;t++)n[t]=arguments[t];try{return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
+"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=e||self).noPkgName=r()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){try{var r=arguments,n=[].slice.call(r);return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
 //# sourceMappingURL=no-pkg-name.umd.js.map
 "
 `;
