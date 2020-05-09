@@ -12,7 +12,7 @@
 ## ✨ Features:
 
 - **One dependency** to bundle your library using only a `package.json`
-- Support for ESnext & async/await _(via [Bublé] & [async-to-promises])_
+- Support for ESnext & async/await _(via [Babel] & [async-to-promises])_
 - Produces tiny, optimized code for all inputs
 - Supports multiple entry modules _(`cli.js` + `index.js`, etc)_
 - Creates multiple output formats for each entry _(<abbr title="CommonJS (node)">CJS</abbr>, <abbr title="Universal Module Definition">UMD</abbr> & <abbr title="ECMAScript Modules">ESM</abbr>)_
@@ -213,5 +213,5 @@ Here's what's coming up for Microbundle:
 [MIT](https://oss.ninja/mit/developit/)
 
 [rollup]: https://github.com/rollup/rollup
-[bublé]: https://github.com/Rich-Harris/buble
+[Babel]: https://babeljs.io/
 [async-to-promises]: https://github.com/rpetrich/babel-plugin-transform-async-to-promises
