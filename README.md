@@ -12,7 +12,7 @@
 ## ✨ Features:
 
 - **One dependency** to bundle your library using only a `package.json`
-- Support for ESnext & async/await _(via [Bublé] & [async-to-promises])_
+- Support for ESnext & async/await _(via [Babel] & [async-to-promises])_
 - Produces tiny, optimized code for all inputs
 - Supports multiple entry modules _(`cli.js` + `index.js`, etc)_
 - Creates multiple output formats for each entry _(<abbr title="CommonJS (node)">CJS</abbr>, <abbr title="Universal Module Definition">UMD</abbr> & <abbr title="ECMAScript Modules">ESM</abbr>)_
@@ -128,7 +128,7 @@ You can specify output builds in a `package.json` as follows:
 
 ### Mangling Properties
 
-To achieve the smallest possible bundle size, libraries often wish to rename internal object properties or class members to smaller names - transforming `this._internalIdValue` to `this._i`. Microbundle doesn't do this by default, however it can be enabled by createing a `mangle.json` file (or a `"mangle"` property in your package.json). Within that file, you can specify a regular expression pattern to control which properties should be mangled. For example: to mangle all property names beginning an underscore:
+To achieve the smallest possible bundle size, libraries often wish to rename internal object properties or class members to smaller names - transforming `this._internalIdValue` to `this._i`. Microbundle doesn't do this by default, however it can be enabled by creating a `mangle.json` file (or a `"mangle"` property in your package.json). Within that file, you can specify a regular expression pattern to control which properties should be mangled. For example: to mangle all property names beginning an underscore:
 
 ```json
 {
@@ -158,7 +158,7 @@ Options
 	-v, --version    Displays current version
 	-i, --entry      Entry module(s)
 	-o, --output     Directory to place build files into
-	-f, --format     Only build specified formats  (default modern,es,cjs,umd)
+	-f, --format     Only build specified formats (any of modern,es,cjs,umd or iife) (default modern,es,cjs,umd)
 	-w, --watch      Rebuilds on any change  (default false)
 	--target         Specify your target environment (node or web)  (default web)
 	--external       Specify external dependencies, or 'none'
@@ -213,5 +213,5 @@ Here's what's coming up for Microbundle:
 [MIT](https://oss.ninja/mit/developit/)
 
 [rollup]: https://github.com/rollup/rollup
-[bublé]: https://github.com/Rich-Harris/buble
+[Babel]: https://babeljs.io/
 [async-to-promises]: https://github.com/rpetrich/babel-plugin-transform-async-to-promises
