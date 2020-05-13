@@ -167,7 +167,7 @@ Options
 	--alias          Map imports to different modules
 	--compress       Compress output using Terser
 	--strict         Enforce undefined global context and add "use strict"
-	--name           Specify name exposed in UMD builds
+	--name           Specify name exposed in UMD and IIFE builds
 	--cwd            Use an alternative working directory  (default .)
 	--sourcemap      Generate source map  (default true)
 	--raw            Show raw byte size  (default false)
