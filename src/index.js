@@ -7,7 +7,7 @@ import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import { rollup, watch } from 'rollup';
 import commonjs from '@rollup/plugin-commonjs';
-import babel from 'rollup-plugin-babel';
+import babel from '@rollup/plugin-babel';
 import customBabel from './lib/babel-custom';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
@@ -580,9 +580,10 @@ function createConfig(options, entry, format, writeMeta) {
 					// if defines is not set, we shouldn't run babel through node_modules
 					isTruthy(defines) &&
 						babel({
+							babelHelpers: 'bundled',
 							babelrc: false,
-							configFile: false,
 							compact: false,
+							configFile: false,
 							include: 'node_modules/**',
 							plugins: [
 								[
@@ -592,6 +593,7 @@ function createConfig(options, entry, format, writeMeta) {
 							],
 						}),
 					customBabel()({
+						babelHelpers: 'bundled',
 						extensions: EXTENSIONS,
 						exclude: 'node_modules/**',
 						passPerPreset: true, // @see https://babeljs.io/docs/en/options#passperpreset
