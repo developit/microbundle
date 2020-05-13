@@ -1,5 +1,5 @@
 import { createConfigItem } from '@babel/core';
-import babelPlugin from 'rollup-plugin-babel';
+import { createBabelInputPluginFactory } from '@rollup/plugin-babel';
 import merge from 'lodash.merge';
 import transformFastRest from './transform-fast-rest';
 import { isTruthy } from '../utils';
@@ -50,7 +50,7 @@ const createConfigItems = (type, items) => {
 const presetEnvRegex = RegExp(/@babel\/(preset-)?env/);
 
 export default () => {
-	return babelPlugin.custom(babelCore => {
+	return createBabelInputPluginFactory(babelCore => {
 		return {
 			// Passed the plugin options.
 			options({ custom: customOptions, ...pluginOptions }) {
