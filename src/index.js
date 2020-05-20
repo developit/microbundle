@@ -567,7 +567,12 @@ function createConfig(options, entry, format, writeMeta) {
 									sourceMap: options.sourcemap,
 									declaration: true,
 									jsx: 'react',
-									jsxFactory: options.jsx || 'h',
+									jsxFactory:
+										// TypeScript fails to resolve Fragments when jsxFactory
+										// is set, even when it's the same as the default value.
+										options.jsx === 'React.createElement'
+											? undefined
+											: options.jsx || 'h',
 								},
 							},
 							tsconfig: options.tsconfig,
