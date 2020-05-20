@@ -48,7 +48,7 @@ export function parseMappingArgument(globalStrings, processValue) {
 /**
  * Parses values of the form "$=jQuery,React=react" into key-value object pairs.
  */
-export function parseMappingArgumentAlias(aliasStrings) {
+export function parseAliasArgument(aliasStrings) {
 	return aliasStrings.split(',').map(str => {
 		let [key, value] = str.split('=');
 		return { find: key, replacement: value };
