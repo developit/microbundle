@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { resolve, relative, dirname, basename, extname } from 'path';
-import { green, red, yellow, white, blue } from 'kleur';
+import { blue } from 'kleur';
 import { map, series } from 'asyncro';
 import glob from 'tiny-glob/sync';
 import autoprefixer from 'autoprefixer';
@@ -13,92 +13,18 @@ import nodeResolve from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
 import alias from '@rollup/plugin-alias';
 import postcss from 'rollup-plugin-postcss';
-import gzipSize from 'gzip-size';
-import brotliSize from 'brotli-size';
-import prettyBytes from 'pretty-bytes';
 import typescript from 'rollup-plugin-typescript2';
 import json from '@rollup/plugin-json';
 import logError from './log-error';
-import { readFile, isDir, isFile, stdout, stderr, isTruthy } from './utils';
-import camelCase from 'camelcase';
-
-const removeScope = name => name.replace(/^@.*\//, '');
-
-// Convert booleans and int define= values to literals.
-// This is more intuitive than `microbundle --define A=1` producing A="1".
-const toReplacementExpression = (value, name) => {
-	// --define A="1",B='true' produces string:
-	const matches = value.match(/^(['"])(.+)\1$/);
-	if (matches) {
-		return [JSON.stringify(matches[2]), name];
-	}
-
-	// --define @assign=Object.assign replaces expressions with expressions:
-	if (name[0] === '@') {
-		return [value, name.substring(1)];
-	}
-
-	// --define A=1,B=true produces int/boolean literal:
-	if (/^(true|false|\d+)$/i.test(value)) {
-		return [value, name];
-	}
-
-	// default: string literal
-	return [JSON.stringify(value), name];
-};
-
-// Normalize Terser options from microbundle's relaxed JSON format (mutates argument in-place)
-function normalizeMinifyOptions(minifyOptions) {
-	const mangle = minifyOptions.mangle || (minifyOptions.mangle = {});
-	let properties = mangle.properties;
-
-	// allow top-level "properties" key to override mangle.properties (including {properties:false}):
-	if (minifyOptions.properties != null) {
-		properties = mangle.properties =
-			minifyOptions.properties &&
-			Object.assign(properties, minifyOptions.properties);
-	}
-
-	// allow previous format ({ mangle:{regex:'^_',reserved:[]} }):
-	if (minifyOptions.regex || minifyOptions.reserved) {
-		if (!properties) properties = mangle.properties = {};
-		properties.regex = properties.regex || minifyOptions.regex;
-		properties.reserved = properties.reserved || minifyOptions.reserved;
-	}
-
-	if (properties) {
-		if (properties.regex) properties.regex = new RegExp(properties.regex);
-		properties.reserved = [].concat(properties.reserved || []);
-	}
-}
-
-// Parses values of the form "$=jQuery,React=react" into key-value object pairs.
-const parseMappingArgument = (globalStrings, processValue) => {
-	const globals = {};
-	globalStrings.split(',').forEach(globalString => {
-		let [key, value] = globalString.split('=');
-		if (processValue) {
-			const r = processValue(value, key);
-			if (r !== undefined) {
-				if (Array.isArray(r)) {
-					[value, key] = r;
-				} else {
-					value = r;
-				}
-			}
-		}
-		globals[key] = value;
-	});
-	return globals;
-};
-
-// Parses values of the form "$=jQuery,React=react" into key-value object pairs.
-const parseMappingArgumentAlias = aliasStrings => {
-	return aliasStrings.split(',').map(str => {
-		let [key, value] = str.split('=');
-		return { find: key, replacement: value };
-	});
-};
+import { isDir, isFile, stdout, isTruthy, removeScope } from './utils';
+import { getSizeInfo } from './lib/compressed-size';
+import { normalizeMinifyOptions } from './lib/terser';
+import {
+	parseMappingArgumentAlias,
+	parseMappingArgument,
+	toReplacementExpression,
+} from './lib/option-normalization';
+import { getConfigFromPkgJson, getName } from './lib/package-info';
 
 // Extensions to use when resolving modules
 const EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs'];
@@ -106,39 +32,6 @@ const EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs'];
 const WATCH_OPTS = {
 	exclude: 'node_modules/**',
 };
-
-// Hoist function because something (rollup?) incorrectly removes it
-function formatSize(size, filename, type, raw) {
-	const pretty = raw ? `${size} B` : prettyBytes(size);
-	const color = size < 5000 ? green : size > 40000 ? red : yellow;
-	const MAGIC_INDENTATION = type === 'br' ? 13 : 10;
-	return `${' '.repeat(MAGIC_INDENTATION - pretty.length)}${color(
-		pretty,
-	)}: ${white(basename(filename))}.${type}`;
-}
-
-async function getSizeInfo(code, filename, raw) {
-	const gzip = formatSize(
-		await gzipSize(code),
-		filename,
-		'gz',
-		raw || code.length < 5000,
-	);
-	let brotli;
-	//wrap brotliSize in try/catch in case brotli is unavailable due to
-	//lower node version
-	try {
-		brotli = formatSize(
-			await brotliSize(code),
-			filename,
-			'br',
-			raw || code.length < 5000,
-		);
-	} catch (e) {
-		return gzip;
-	}
-	return gzip + '\n' + brotli;
-}
 
 export default async function microbundle(inputOptions) {
 	let options = { ...inputOptions };
@@ -230,9 +123,7 @@ export default async function microbundle(inputOptions) {
 						options.inputOptions,
 					),
 				).on('event', e => {
-					if (e.code === 'FATAL') {
-						return reject(e.error);
-					} else if (e.code === 'ERROR') {
+					if (e.code === 'ERROR') {
 						logError(e.error);
 					}
 					if (e.code === 'END') {
@@ -262,66 +153,9 @@ export default async function microbundle(inputOptions) {
 		}),
 	);
 
-	return (
-		blue(
-			`Build "${options.name}" to ${relative(cwd, dirname(options.output)) ||
-				'.'}:`,
-		) +
-		'\n   ' +
-		out.join('\n   ')
-	);
-}
-
-async function getConfigFromPkgJson(cwd) {
-	try {
-		const pkgJSON = await readFile(resolve(cwd, 'package.json'), 'utf8');
-		const pkg = JSON.parse(pkgJSON);
-
-		return {
-			hasPackageJson: true,
-			pkg,
-		};
-	} catch (err) {
-		const pkgName = basename(cwd);
-
-		stderr(
-			// `Warn ${yellow(`no package.json found. Assuming a pkg.name of "${pkgName}".`)}`
-			yellow(
-				`${yellow().inverse(
-					'WARN',
-				)} no package.json found. Assuming a pkg.name of "${pkgName}".`,
-			),
-		);
-
-		let msg = String(err.message || err);
-		if (!msg.match(/ENOENT/)) stderr(`  ${red().dim(msg)}`);
-
-		return { hasPackageJson: false, pkg: { name: pkgName } };
-	}
-}
-
-const safeVariableName = name =>
-	camelCase(
-		removeScope(name)
-			.toLowerCase()
-			.replace(/((^[^a-zA-Z]+)|[^\w.-])|([^a-zA-Z0-9]+$)/g, ''),
-	);
-
-function getName({ name, pkgName, amdName, cwd, hasPackageJson }) {
-	if (!pkgName) {
-		pkgName = basename(cwd);
-		if (hasPackageJson) {
-			stderr(
-				yellow(
-					`${yellow().inverse(
-						'WARN',
-					)} missing package.json "name" field. Assuming "${pkgName}".`,
-				),
-			);
-		}
-	}
-
-	return { finalName: name || amdName || safeVariableName(pkgName), pkgName };
+	const targetDir = relative(cwd, dirname(options.output)) || '.';
+	const banner = blue(`Build "${options.name}" to ${targetDir}:`);
+	return `${banner}\n   ${out.join('\n   ')}`;
 }
 
 async function jsOrTs(cwd, filename) {
