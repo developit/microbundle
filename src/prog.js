@@ -1,5 +1,5 @@
 import sade from 'sade';
-let { version } = require('../package');
+let { version } = require('../package.json');
 
 const toArray = val => (Array.isArray(val) ? val : val == null ? [] : [val]);
 
