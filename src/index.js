@@ -79,12 +79,6 @@ export default async function microbundle(inputOptions) {
 
 	options.multipleEntries = options.entries.length > 1;
 
-	// to disable compress you can put in false or 0 but it's a string so our boolean checks won't work
-	options.compress =
-		typeof options.compress !== 'boolean'
-			? options.compress !== 'false' && options.compress !== '0'
-			: options.compress;
-
 	let formats = (options.format || options.formats).split(',');
 	// always compile cjs first if it's there:
 	formats.sort((a, b) => (a === 'cjs' ? -1 : a > b ? 1 : 0));
@@ -104,40 +98,7 @@ export default async function microbundle(inputOptions) {
 	}
 
 	if (options.watch) {
-		const onBuild = options.onBuild;
-		return new Promise((resolve, reject) => {
-			stdout(
-				blue(
-					`Watching source, compiling to ${relative(
-						cwd,
-						dirname(options.output),
-					)}:`,
-				),
-			);
-			steps.map(options => {
-				watch(
-					Object.assign(
-						{
-							output: options.outputOptions,
-							watch: WATCH_OPTS,
-						},
-						options.inputOptions,
-					),
-				).on('event', e => {
-					if (e.code === 'ERROR') {
-						logError(e.error);
-					}
-					if (e.code === 'END') {
-						options._sizeInfo.then(text => {
-							stdout(`Wrote ${text.trim()}`);
-						});
-						if (typeof onBuild === 'function') {
-							onBuild(e);
-						}
-					}
-				});
-			});
-		});
+		return doWatch(options, cwd, steps);
 	}
 
 	let cache;
@@ -157,6 +118,33 @@ export default async function microbundle(inputOptions) {
 	const targetDir = relative(cwd, dirname(options.output)) || '.';
 	const banner = blue(`Build "${options.name}" to ${targetDir}:`);
 	return `${banner}\n   ${out.join('\n   ')}`;
+}
+
+function doWatch(options, cwd, steps) {
+	const onBuild = options.onBuild;
+	return new Promise((resolve, reject) => {
+		const targetDir = relative(cwd, dirname(options.output));
+		stdout(blue(`Watching source, compiling to ${targetDir}:`));
+		steps.map(options => {
+			watch({
+				output: options.outputOptions,
+				watch: WATCH_OPTS,
+				...(options.inputOptions || {}),
+			}).on('event', e => {
+				if (e.code === 'ERROR') {
+					logError(e.error);
+				}
+				if (e.code === 'END') {
+					options._sizeInfo.then(text => {
+						stdout(`Wrote ${text.trim()}`);
+					});
+					if (typeof onBuild === 'function') {
+						onBuild(e);
+					}
+				}
+			});
+		});
+	});
 }
 
 async function jsOrTs(cwd, filename) {
