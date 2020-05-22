@@ -40,35 +40,57 @@
 }
 ```
 
-### New: Modern JS
+## 🤖 Modern Output
 
-Microbundle now has a new `modern` format (`microbundle -f modern`).
-Modern output still bundles and compresses your code, but it keeps useful syntax
-around that actually helps compression:
+Microbundle's `esm`, `cjs`, `umd` and `iife` output formats all compile your code to syntax that works pretty much everywhere. You can customize which browser or Node versions you wish to support by [adding a browserslist configuration](https://github.com/browserslist/browserslist#browserslist-), however the default setting is recommended for most cases since it supports as many browsers as possible.
+
+In addition to the above formats, Microbundle also outputs a `modern` bundle specially designed to work in _all modern browsers_. This bundle preserves most modern JS features when compiling your code, but ensures the result runs in 90% of web browsers without needing to be transpiled. Specifically, it uses [preset-modules](https://github.com/babel/preset-modules) to target the set of browsers that support `<script type="module">` - that allows syntax like async/await, tagged templates, arrow functions, destructured and rest parameters, etc. The result is generally smaller and faster to execute than the `esm` bundle:
 
 ```js
 // Our source, "src/make-dom.js":
 export default async function makeDom(tag, props, children) {
-	const el = document.createElement(tag);
-	el.append(...(await children));
-	return Object.assign(el, props);
+  const el = document.createElement(tag);
+  el.append(...(await children));
+  return Object.assign(el, props);
 }
 ```
 
-Microbundle compiles the above to this:
+Compiling the above using Microbundle produces the following `modern` and `esm` bundles:
+
+<table>
+<thead><tr>
+  <th align="left"><code>make-dom.modern.js</code> <sup>(123b)</sup></th>
+  <th align="left"><code>make-dom.module.js</code> <sup>(166b)</sup></th>
+</tr></thead>
+<tbody><tr valign="top"><td>
 
 ```js
-export default async (e, t, a) => {
-	const n = document.createElement(e);
-	return n.append(...(await a)), Object.assign(n, t);
-};
+export default async function(e, t, a) {
+  var n = document.createElement(e);
+  n.append(...await a);
+  return Object.assign(n, t);
+}
 ```
 
-This is enabled by default - all you have to do is add the field to your `package.json`. You might choose to ship modern JS using the "module" field:
+</td><td>
+
+```js
+export default function(e, t, r) { try {
+  var n = document.createElement(e);
+  return Promise.resolve(r).then(function(e) {
+    n.append.apply(n, e);
+    return Object.assign(n, t);
+  });
+} catch (e) { return Promise.reject(e) } }
+```
+
+</td></tbody></table>
+
+This is enabled by default - all you have to do is add the field to your `package.json`. While the best way to point to modern source from a package.json is [still being discussed](https://twitter.com/_developit/status/1263174528974364675), you might choose to use the "module" field:
 
 ```js
 {
-  "main": "dist/foo.umd.js",              // legacy UMD bundle (for Node & CDN's)
+  "main": "dist/foo.umd.js",              // legacy UMD bundle (for Node & CDN use)
   "module": "dist/foo.modern.module.js",  // modern ES2017 bundle
   "scripts": {
     "build": "microbundle src/foo.js -f modern,umd"
