@@ -71,6 +71,9 @@ export default () => {
 					'plugin',
 					[
 						{
+							name: '@babel/plugin-syntax-import-meta',
+						},
+						{
 							name: '@babel/plugin-transform-react-jsx',
 							pragma: customOptions.pragma || 'h',
 							pragmaFrag: customOptions.pragmaFrag || 'Fragment',
