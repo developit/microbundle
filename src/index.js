@@ -7,7 +7,7 @@ import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import { rollup, watch } from 'rollup';
 import commonjs from '@rollup/plugin-commonjs';
-import babel from 'rollup-plugin-babel';
+import babel from '@rollup/plugin-babel';
 import customBabel from './lib/babel-custom';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
@@ -31,6 +31,11 @@ const toReplacementExpression = (value, name) => {
 	const matches = value.match(/^(['"])(.+)\1$/);
 	if (matches) {
 		return [JSON.stringify(matches[2]), name];
+	}
+
+	// --define @assign=Object.assign replaces expressions with expressions:
+	if (name[0] === '@') {
+		return [value, name.substring(1)];
 	}
 
 	// --define A=1,B=true produces int/boolean literal:
@@ -247,7 +252,9 @@ export default async function microbundle(inputOptions) {
 	let out = await series(
 		steps.map(config => async () => {
 			const { inputOptions, outputOptions } = config;
-			inputOptions.cache = cache;
+			if (inputOptions.cache !== false) {
+				inputOptions.cache = cache;
+			}
 			let bundle = await rollup(inputOptions);
 			cache = bundle;
 			await bundle.write(outputOptions);
@@ -441,12 +448,15 @@ function createConfig(options, entry, format, writeMeta) {
 
 	let mainNoExtension = options.output;
 	if (options.multipleEntries) {
-		let name = entry.match(/([\\/])index(\.(umd|cjs|es|m))?\.m?js$/)
+		let name = entry.match(/([\\/])index(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/)
 			? mainNoExtension
 			: entry;
 		mainNoExtension = resolve(dirname(mainNoExtension), basename(name));
 	}
-	mainNoExtension = mainNoExtension.replace(/(\.(umd|cjs|es|m))?\.m?js$/, '');
+	mainNoExtension = mainNoExtension.replace(
+		/(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/,
+		'',
+	);
 
 	let moduleMain = replaceName(
 		pkg.module && !pkg.module.match(/src\//)
@@ -484,7 +494,7 @@ function createConfig(options, entry, format, writeMeta) {
 		.concat(externalPredicate);
 	const externalTest =
 		external.length === 0
-			? () => false
+			? id => false
 			: id => externalRegexList.some(regex => regex.test(id));
 
 	function loadNameCache() {
@@ -508,6 +518,9 @@ function createConfig(options, entry, format, writeMeta) {
 
 	let config = {
 		inputOptions: {
+			// disable Rollup's cache for the modern build to prevent re-use of legacy transpiled modules:
+			cache: modern ? false : undefined,
+
 			input: entry,
 			external: id => {
 				if (id === 'babel-plugin-transform-async-to-promises/helpers') {
@@ -531,6 +544,8 @@ function createConfig(options, entry, format, writeMeta) {
 									preset: 'default',
 								}),
 						].filter(Boolean),
+						autoModules: shouldCssModules(options),
+						modules: cssModulesConfig(options),
 						// only write out CSS for the first bundle (avoids pointless extra files):
 						inject: false,
 						extract: !!writeMeta,
@@ -543,6 +558,9 @@ function createConfig(options, entry, format, writeMeta) {
 					nodeResolve({
 						mainFields: ['module', 'jsnext', 'main'],
 						browser: options.target !== 'node',
+						// defaults + .jsx
+						extensions: ['.mjs', '.js', '.jsx', '.json', '.node'],
+						preferBuiltins: options.target === 'node',
 					}),
 					commonjs({
 						// use a regex to make sure to include eventual hoisted packages
@@ -567,7 +585,12 @@ function createConfig(options, entry, format, writeMeta) {
 									sourceMap: options.sourcemap,
 									declaration: true,
 									jsx: 'react',
-									jsxFactory: options.jsx || 'h',
+									jsxFactory:
+										// TypeScript fails to resolve Fragments when jsxFactory
+										// is set, even when it's the same as the default value.
+										options.jsx === 'React.createElement'
+											? undefined
+											: options.jsx || 'h',
 								},
 							},
 							tsconfig: options.tsconfig,
@@ -580,9 +603,10 @@ function createConfig(options, entry, format, writeMeta) {
 					// if defines is not set, we shouldn't run babel through node_modules
 					isTruthy(defines) &&
 						babel({
+							babelHelpers: 'bundled',
 							babelrc: false,
-							configFile: false,
 							compact: false,
+							configFile: false,
 							include: 'node_modules/**',
 							plugins: [
 								[
@@ -591,7 +615,8 @@ function createConfig(options, entry, format, writeMeta) {
 								],
 							],
 						}),
-					customBabel({
+					customBabel()({
+						babelHelpers: 'bundled',
 						extensions: EXTENSIONS,
 						exclude: 'node_modules/**',
 						passPerPreset: true, // @see https://babeljs.io/docs/en/options#passperpreset
@@ -638,6 +663,7 @@ function createConfig(options, entry, format, writeMeta) {
 									fs.writeFile(
 										getNameCachePath(),
 										JSON.stringify(nameCache, null, 2),
+										() => {},
 									);
 								}
 							},
@@ -646,9 +672,11 @@ function createConfig(options, entry, format, writeMeta) {
 					{
 						writeBundle(bundle) {
 							config._sizeInfo = Promise.all(
-								Object.values(bundle).map(({ code, fileName }) =>
-									code ? getSizeInfo(code, fileName, options.raw) : false,
-								),
+								Object.values(bundle).map(({ code, fileName }) => {
+									if (code) {
+										return getSizeInfo(code, fileName, options.raw);
+									}
+								}),
 							).then(results => results.filter(Boolean).join('\n'));
 						},
 					},
@@ -681,4 +709,54 @@ function createConfig(options, entry, format, writeMeta) {
 	};
 
 	return config;
+}
+
+function shouldCssModules(options) {
+	const passedInOption = processCssmodulesArgument(options);
+
+	// We should module when my-file.module.css or my-file.css
+	const moduleAllCss = passedInOption === true;
+
+	// We should module when my-file.module.css
+	const allowOnlySuffixModule = passedInOption === null;
+
+	return moduleAllCss || allowOnlySuffixModule;
+}
+
+function cssModulesConfig(options) {
+	const passedInOption = processCssmodulesArgument(options);
+	const isWatchMode = options.watch;
+	const hasPassedInScopeName = !(
+		typeof passedInOption === 'boolean' || passedInOption === null
+	);
+
+	if (shouldCssModules(options) || hasPassedInScopeName) {
+		let generateScopedName = isWatchMode
+			? '_[name]__[local]__[hash:base64:5]'
+			: '_[hash:base64:5]';
+
+		if (hasPassedInScopeName) {
+			generateScopedName = passedInOption; // would be the string from --css-modules "_[hash]".
+		}
+
+		return { generateScopedName };
+	}
+
+	return false;
+}
+
+/*
+This is done becuase if you use the cli default property, you get a primiatve "null" or "false",
+but when using the cli arguments, you always get back strings. This method aims at correcting those
+for both realms. So that both realms _convert_ into primatives.
+*/
+function processCssmodulesArgument(options) {
+	if (options['css-modules'] === 'true' || options['css-modules'] === true)
+		return true;
+	if (options['css-modules'] === 'false' || options['css-modules'] === false)
+		return false;
+	if (options['css-modules'] === 'null' || options['css-modules'] === null)
+		return null;
+
+	return options['css-modules'];
 }

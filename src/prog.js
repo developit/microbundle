@@ -22,7 +22,11 @@ export default handler => {
 		.version(version)
 		.option('--entry, -i', 'Entry module(s)')
 		.option('--output, -o', 'Directory to place build files into')
-		.option('--format, -f', 'Only build specified formats', DEFAULT_FORMATS)
+		.option(
+			'--format, -f',
+			`Only build specified formats (any of ${DEFAULT_FORMATS} or iife)`,
+			DEFAULT_FORMATS,
+		)
 		.option('--watch, -w', 'Rebuilds on any change', false)
 		.option('--target', 'Specify your target environment (node or web)', 'web')
 		.option(
@@ -41,6 +45,11 @@ export default handler => {
 		.option('--name', 'Specify name exposed in UMD builds')
 		.option('--cwd', 'Use an alternative working directory', '.')
 		.option('--sourcemap', 'Generate source map', true)
+		.option(
+			'--css-modules',
+			'Turns on css-modules for all .css imports. Passing a string will override the scopeName. eg --css-modules="_[hash]"',
+			null,
+		)
 		.example("microbundle --no-sourcemap # don't generate sourcemaps")
 		.option('--raw', 'Show raw byte size', false)
 		.option(

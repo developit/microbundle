@@ -1,0 +1,6 @@
+{
+  "name": "modern-generators",
+  "scripts": {
+    "build": "microbundle -f modern,es,umd,cjs"
+  }
+}
