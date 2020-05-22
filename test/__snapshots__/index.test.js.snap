@@ -2332,6 +2332,61 @@ exports[`fixtures build shebang with microbundle 5`] = `
 "
 `;
 
+exports[`fixtures build ts-jsx with microbundle 1`] = `
+"Used script: microbundle build --jsx 'React.createElement'
+
+Directory tree:
+
+ts-jsx
+  dist
+    index.d.ts
+    ts-jsx.esm.js
+    ts-jsx.esm.js.map
+    ts-jsx.js
+    ts-jsx.js.map
+    ts-jsx.umd.js
+    ts-jsx.umd.js.map
+  node_modules
+  package.json
+  src
+    index.tsx
+  tsconfig.json
+
+
+Build \\"tsJsx\\" to dist:
+130 B: ts-jsx.js.gz
+94 B: ts-jsx.js.br
+131 B: ts-jsx.esm.js.gz
+111 B: ts-jsx.esm.js.br
+220 B: ts-jsx.umd.js.gz
+177 B: ts-jsx.umd.js.br"
+`;
+
+exports[`fixtures build ts-jsx with microbundle 2`] = `7`;
+
+exports[`fixtures build ts-jsx with microbundle 3`] = `
+"export declare const foo: any;
+"
+`;
+
+exports[`fixtures build ts-jsx with microbundle 4`] = `
+"var n=function(n,r){return{tag:n,props:r,children:[].slice.call(arguments,2)}}(function(n){return n.children},null,\\"foo\\");export{n as foo};
+//# sourceMappingURL=ts-jsx.esm.js.map
+"
+`;
+
+exports[`fixtures build ts-jsx with microbundle 5`] = `
+"var n=function(n,r){return{tag:n,props:r,children:[].slice.call(arguments,2)}}(function(n){return n.children},null,\\"foo\\");exports.foo=n;
+//# sourceMappingURL=ts-jsx.js.map
+"
+`;
+
+exports[`fixtures build ts-jsx with microbundle 6`] = `
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?n(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],n):n((e=e||self).tsJsx={})}(this,function(e){var n=function(e,n){return{tag:e,props:n,children:[].slice.call(arguments,2)}}(function(e){return e.children},null,\\"foo\\");e.foo=n});
+//# sourceMappingURL=ts-jsx.umd.js.map
+"
+`;
+
 exports[`fixtures build ts-mixed-exports with microbundle 1`] = `
 "Used script: microbundle
 
