@@ -574,6 +574,7 @@ function createConfig(options, entry, format, writeMeta) {
 											? undefined
 											: options.jsx || 'h',
 								},
+								files: options.entries,
 							},
 							tsconfig: options.tsconfig,
 							tsconfigOverride: {
