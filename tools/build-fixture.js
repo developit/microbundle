@@ -49,6 +49,7 @@ export const buildDirectory = async fixtureDir => {
 	const dist = resolve(`${fixturePath}/dist`);
 	// clean up
 	await rimraf(dist);
+	await rimraf(resolve(`${fixturePath}/types`));
 	await rimraf(resolve(`${fixturePath}/.rts2_cache_cjs`));
 	await rimraf(resolve(`${fixturePath}/.rts2_cache_es`));
 	await rimraf(resolve(`${fixturePath}/.rts2_cache_umd`));
