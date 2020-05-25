@@ -1,0 +1,5 @@
+{
+	"name": "ts-no-declarations",
+	"main": "dist/index.js",
+	"source": "src/index.tsx"
+}

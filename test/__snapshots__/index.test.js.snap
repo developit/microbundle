@@ -56,7 +56,6 @@ async-iife-ts
     async-iife-ts.js.map
     async-iife-ts.umd.js
     async-iife-ts.umd.js.map
-    index.d.ts
   node_modules
   package.json
   src
@@ -73,7 +72,7 @@ Build \\"asyncIifeTs\\" to dist:
 95 B: async-iife-ts.umd.js.br"
 `;
 
-exports[`fixtures build async-iife-ts with microbundle 2`] = `7`;
+exports[`fixtures build async-iife-ts with microbundle 2`] = `6`;
 
 exports[`fixtures build async-iife-ts with microbundle 3`] = `
 "try{console.log(\\"foo\\")}catch(o){Promise.reject(o)}
@@ -93,8 +92,6 @@ exports[`fixtures build async-iife-ts with microbundle 5`] = `
 "
 `;
 
-exports[`fixtures build async-iife-ts with microbundle 6`] = `""`;
-
 exports[`fixtures build async-ts with microbundle 1`] = `
 "Used script: microbundle
 
@@ -108,7 +105,6 @@ async-ts
     async-ts.js.map
     async-ts.umd.js
     async-ts.umd.js.map
-    index.d.ts
   node_modules
   package.json
   src
@@ -125,7 +121,7 @@ Build \\"asyncTs\\" to dist:
 159 B: async-ts.umd.js.br"
 `;
 
-exports[`fixtures build async-ts with microbundle 2`] = `7`;
+exports[`fixtures build async-ts with microbundle 2`] = `6`;
 
 exports[`fixtures build async-ts with microbundle 3`] = `
 "var o=function(){function o(){}return o.prototype.foo=function(){return Promise.resolve()},o}();export{o as MyClass};
@@ -142,13 +138,6 @@ exports[`fixtures build async-ts with microbundle 4`] = `
 exports[`fixtures build async-ts with microbundle 5`] = `
 "!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?n(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],n):n((e=e||self).asyncTs={})}(this,function(e){e.MyClass=function(){function e(){}return e.prototype.foo=function(){return Promise.resolve()},e}()});
 //# sourceMappingURL=async-ts.umd.js.map
-"
-`;
-
-exports[`fixtures build async-ts with microbundle 6`] = `
-"export declare class MyClass {
-    foo(): Promise<void>;
-}
 "
 `;
 
@@ -744,8 +733,6 @@ basic-ts
     basic-lib-ts.js.map
     basic-lib-ts.umd.js
     basic-lib-ts.umd.js.map
-    car.d.ts
-    index.d.ts
   node_modules
   package.json
   src
@@ -763,7 +750,7 @@ Build \\"basicLibTs\\" to dist:
 144 B: basic-lib-ts.umd.js.br"
 `;
 
-exports[`fixtures build basic-ts with microbundle 2`] = `8`;
+exports[`fixtures build basic-ts with microbundle 2`] = `6`;
 
 exports[`fixtures build basic-ts with microbundle 3`] = `
 "var n=new(function(){function n(){}return n.prototype.drive=function(n){return!0},n}());export default n;
@@ -783,23 +770,6 @@ exports[`fixtures build basic-ts with microbundle 5`] = `
 "
 `;
 
-exports[`fixtures build basic-ts with microbundle 6`] = `
-"export interface Driveable {
-    drive(distance: number): boolean;
-}
-export default class Car implements Driveable {
-    drive(distance: number): boolean;
-}
-"
-`;
-
-exports[`fixtures build basic-ts with microbundle 7`] = `
-"import Car from './car';
-declare let Ferrari: Car;
-export default Ferrari;
-"
-`;
-
 exports[`fixtures build basic-tsx with microbundle 1`] = `
 "Used script: microbundle
 
@@ -813,7 +783,6 @@ basic-tsx
     basic-lib-tsx.js.map
     basic-lib-tsx.umd.js
     basic-lib-tsx.umd.js.map
-    index.d.ts
   node_modules
   package.json
   src
@@ -830,7 +799,7 @@ Build \\"basicLibTsx\\" to dist:
 221 B: basic-lib-tsx.umd.js.br"
 `;
 
-exports[`fixtures build basic-tsx with microbundle 2`] = `7`;
+exports[`fixtures build basic-tsx with microbundle 2`] = `6`;
 
 exports[`fixtures build basic-tsx with microbundle 3`] = `
 "var n=function(n,r){return{tag:n,props:r,children:[].slice.call(arguments,2)}},r=function(){function r(){}return r.prototype.render=function(){return n(\\"div\\",{id:\\"app\\"},n(\\"h1\\",null,\\"Hello, World!\\"),n(\\"p\\",null,\\"A JSX demo.\\"))},r}();export default r;
@@ -847,13 +816,6 @@ exports[`fixtures build basic-tsx with microbundle 4`] = `
 exports[`fixtures build basic-tsx with microbundle 5`] = `
 "!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e=e||self).basicLibTsx=n()}(this,function(){var e=function(e,n){return{tag:e,props:n,children:[].slice.call(arguments,2)}};return function(){function n(){}return n.prototype.render=function(){return e(\\"div\\",{id:\\"app\\"},e(\\"h1\\",null,\\"Hello, World!\\"),e(\\"p\\",null,\\"A JSX demo.\\"))},n}()});
 //# sourceMappingURL=basic-lib-tsx.umd.js.map
-"
-`;
-
-exports[`fixtures build basic-tsx with microbundle 6`] = `
-"export default class Foo {
-    render(): any;
-}
 "
 `;
 
@@ -918,7 +880,6 @@ class-decorators-ts
     class-decorators-ts.js.map
     class-decorators-ts.umd.js
     class-decorators-ts.umd.js.map
-    index.d.ts
   node_modules
   package.json
   src
@@ -935,7 +896,7 @@ Build \\"classDecoratorsTs\\" to dist:
 341 B: class-decorators-ts.umd.js.br"
 `;
 
-exports[`fixtures build class-decorators-ts with microbundle 2`] = `7`;
+exports[`fixtures build class-decorators-ts with microbundle 2`] = `6`;
 
 exports[`fixtures build class-decorators-ts with microbundle 3`] = `
 "var e=function(){function e(e){this.greeting=e}return e.prototype.greet=function(){return\\"Hello, \\"+this.greeting},e}(),t=new(e=function(e,t,r,n){var o,c=arguments.length,l=c<3?t:null===n?n=Object.getOwnPropertyDescriptor(t,r):n;if(\\"object\\"==typeof Reflect&&\\"function\\"==typeof Reflect.decorate)l=Reflect.decorate(e,t,r,n);else for(var f=e.length-1;f>=0;f--)(o=e[f])&&(l=(c<3?o(l):c>3?o(t,r,l):o(t,r))||l);return c>3&&l&&Object.defineProperty(t,r,l),l}([function(e){Object.seal(e),Object.seal(e.prototype)}],e))(\\"Hello World\\");export default t;
@@ -952,17 +913,6 @@ exports[`fixtures build class-decorators-ts with microbundle 4`] = `
 exports[`fixtures build class-decorators-ts with microbundle 5`] = `
 "!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=t():\\"function\\"==typeof define&&define.amd?define(t):(e=e||self).classDecoratorsTs=t()}(this,function(){var e=function(){function e(e){this.greeting=e}return e.prototype.greet=function(){return\\"Hello, \\"+this.greeting},e}();return new(e=function(e,t,n,o){var r,f=arguments.length,c=f<3?t:null===o?o=Object.getOwnPropertyDescriptor(t,n):o;if(\\"object\\"==typeof Reflect&&\\"function\\"==typeof Reflect.decorate)c=Reflect.decorate(e,t,n,o);else for(var i=e.length-1;i>=0;i--)(r=e[i])&&(c=(f<3?r(c):f>3?r(t,n,c):r(t,n))||c);return f>3&&c&&Object.defineProperty(t,n,c),c}([function(e){Object.seal(e),Object.seal(e.prototype)}],e))(\\"Hello World\\")});
 //# sourceMappingURL=class-decorators-ts.umd.js.map
-"
-`;
-
-exports[`fixtures build class-decorators-ts with microbundle 6`] = `
-"declare class Greeter {
-    greeting: string;
-    constructor(message: string);
-    greet(): string;
-}
-declare const _default: Greeter;
-export default _default;
 "
 `;
 
@@ -1476,7 +1426,6 @@ esnext-ts
     esnext-ts.js.map
     esnext-ts.umd.js
     esnext-ts.umd.js.map
-    index.d.ts
   node_modules
   package.json
   src
@@ -1493,7 +1442,7 @@ Build \\"esnextTs\\" to dist:
 937 B: esnext-ts.umd.js.br"
 `;
 
-exports[`fixtures build esnext-ts with microbundle 2`] = `7`;
+exports[`fixtures build esnext-ts with microbundle 2`] = `6`;
 
 exports[`fixtures build esnext-ts with microbundle 3`] = `
 "function n(t,e,i){if(!t.s){if(i instanceof r){if(!i.s)return void(i.o=n.bind(null,t,e));1&e&&(e=i.s),i=i.v}if(i&&i.then)return void i.then(n.bind(null,t,e),n.bind(null,t,2));t.s=e,t.v=i;var o=t.o;o&&o(t)}}var t=function(){try{var t,o,u,f,h=[],c=!0,v=!1,a=i(function(){return function(i,f){try{var v=function(){t=function(n){var t;if(\\"undefined\\"!=typeof Symbol){if(Symbol.asyncIterator&&null!=(t=n[Symbol.asyncIterator]))return t.call(n);if(Symbol.iterator&&null!=(t=n[Symbol.iterator]))return t.call(n)}throw new TypeError(\\"Object is not async iterable\\")}([1,2]);var i=function(t,i,o){for(var u;;){var f=t();if(e(f)&&(f=f.v),!f)return h;if(f.then){u=0;break}var h=o();if(h&&h.then){if(!e(h)){u=1;break}h=h.s}if(i){var c=i();if(c&&c.then&&!e(c)){u=2;break}}}var v=new r,a=n.bind(null,v,2);return(0===u?f.then(s):1===u?h.then(l):c.then(d)).then(void 0,a),v;function l(r){h=r;do{if(i&&(c=i())&&c.then&&!e(c))return void c.then(d).then(void 0,a);if(!(f=t())||e(f)&&!f.v)return void n(v,1,h);if(f.then)return void f.then(s).then(void 0,a);e(h=o())&&(h=h.v)}while(!h||!h.then);h.then(l).then(void 0,a)}function s(t){t?(h=o())&&h.then?h.then(l).then(void 0,a):l(h):n(v,1,h)}function d(){(f=t())?f.then?f.then(s).then(void 0,a):s(f):n(v,1,h)}}(function(){return!!Promise.resolve(t.next()).then(function(n){return c=o.done,o=n,Promise.resolve(o.value).then(function(n){return u=n,!c})})},function(){return!!(c=!0)},function(){h.push(u)});if(i&&i.then)return i.then(function(){})}()}catch(n){return f(n)}return v&&v.then?v.then(void 0,f):v}(0,function(n){v=!0,f=n})},function(n,r){function e(t){if(n)throw r;return r}var o=i(function(){var n=function(){if(!c&&null!=t.return)return Promise.resolve(t.return()).then(function(){})}();if(n&&n.then)return n.then(function(){})},function(n,t){if(v)throw f;if(n)throw t;return t});return o&&o.then?o.then(e):e()});return Promise.resolve(a&&a.then?a.then(function(n){return h}):h)}catch(n){return Promise.reject(n)}},r=function(){function t(){}return t.prototype.then=function(r,e){var i=new t,o=this.s;if(o){var u=1&o?r:e;if(u){try{n(i,1,u(this.v))}catch(t){n(i,2,t)}return i}return this}return this.o=function(t){try{var o=t.v;1&t.s?n(i,1,r?r(o):o):e?n(i,1,e(o)):n(i,2,o)}catch(t){n(i,2,t)}},i},t}();function e(n){return n instanceof r&&1&n.s}function i(n,t){try{var r=n()}catch(n){return t(!0,n)}return r&&r.then?r.then(t.bind(null,!1),t.bind(null,!0)):t(!1,r)}t().then(console.log);export default t;
@@ -1510,11 +1459,6 @@ exports[`fixtures build esnext-ts with microbundle 4`] = `
 exports[`fixtures build esnext-ts with microbundle 5`] = `
 "!function(n,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=t():\\"function\\"==typeof define&&define.amd?define(t):(n=n||self).esnextTs=t()}(this,function(){function n(t,r,i){if(!t.s){if(i instanceof e){if(!i.s)return void(i.o=n.bind(null,t,r));1&r&&(r=i.s),i=i.v}if(i&&i.then)return void i.then(n.bind(null,t,r),n.bind(null,t,2));t.s=r,t.v=i;var o=t.o;o&&o(t)}}var t=function(){try{var t,o,u,f,h=[],c=!0,v=!1,a=i(function(){return function(i,f){try{var v=function(){t=function(n){var t;if(\\"undefined\\"!=typeof Symbol){if(Symbol.asyncIterator&&null!=(t=n[Symbol.asyncIterator]))return t.call(n);if(Symbol.iterator&&null!=(t=n[Symbol.iterator]))return t.call(n)}throw new TypeError(\\"Object is not async iterable\\")}([1,2]);var i=function(t,i,o){for(var u;;){var f=t();if(r(f)&&(f=f.v),!f)return h;if(f.then){u=0;break}var h=o();if(h&&h.then){if(!r(h)){u=1;break}h=h.s}if(i){var c=i();if(c&&c.then&&!r(c)){u=2;break}}}var v=new e,a=n.bind(null,v,2);return(0===u?f.then(s):1===u?h.then(l):c.then(d)).then(void 0,a),v;function l(e){h=e;do{if(i&&(c=i())&&c.then&&!r(c))return void c.then(d).then(void 0,a);if(!(f=t())||r(f)&&!f.v)return void n(v,1,h);if(f.then)return void f.then(s).then(void 0,a);r(h=o())&&(h=h.v)}while(!h||!h.then);h.then(l).then(void 0,a)}function s(t){t?(h=o())&&h.then?h.then(l).then(void 0,a):l(h):n(v,1,h)}function d(){(f=t())?f.then?f.then(s).then(void 0,a):s(f):n(v,1,h)}}(function(){return!!Promise.resolve(t.next()).then(function(n){return c=o.done,o=n,Promise.resolve(o.value).then(function(n){return u=n,!c})})},function(){return!!(c=!0)},function(){h.push(u)});if(i&&i.then)return i.then(function(){})}()}catch(n){return f(n)}return v&&v.then?v.then(void 0,f):v}(0,function(n){v=!0,f=n})},function(n,e){function r(t){if(n)throw e;return e}var o=i(function(){var n=function(){if(!c&&null!=t.return)return Promise.resolve(t.return()).then(function(){})}();if(n&&n.then)return n.then(function(){})},function(n,t){if(v)throw f;if(n)throw t;return t});return o&&o.then?o.then(r):r()});return Promise.resolve(a&&a.then?a.then(function(n){return h}):h)}catch(n){return Promise.reject(n)}},e=function(){function t(){}return t.prototype.then=function(e,r){var i=new t,o=this.s;if(o){var u=1&o?e:r;if(u){try{n(i,1,u(this.v))}catch(t){n(i,2,t)}return i}return this}return this.o=function(t){try{var o=t.v;1&t.s?n(i,1,e?e(o):o):r?n(i,1,r(o)):n(i,2,o)}catch(t){n(i,2,t)}},i},t}();function r(n){return n instanceof e&&1&n.s}function i(n,t){try{var e=n()}catch(n){return t(!0,n)}return e&&e.then?e.then(t.bind(null,!1),t.bind(null,!0)):t(!1,e)}return t().then(console.log),t});
 //# sourceMappingURL=esnext-ts.umd.js.map
-"
-`;
-
-exports[`fixtures build esnext-ts with microbundle 6`] = `
-"export default function foo(): Promise<any[]>;
 "
 `;
 
@@ -2089,7 +2033,6 @@ Directory tree:
 
 optional-chaining-ts
   dist
-    index.d.ts
     optional-chaining-ts.esm.js
     optional-chaining-ts.esm.js.map
     optional-chaining-ts.js
@@ -2112,30 +2055,21 @@ Build \\"optionalChainingTs\\" to dist:
 166 B: optional-chaining-ts.umd.js.br"
 `;
 
-exports[`fixtures build optional-chaining-ts with microbundle 2`] = `7`;
+exports[`fixtures build optional-chaining-ts with microbundle 2`] = `6`;
 
 exports[`fixtures build optional-chaining-ts with microbundle 3`] = `
-"export declare function chain(test: {
-    maybeVar?: {
-        thing: string;
-    };
-}): string | undefined;
-"
-`;
-
-exports[`fixtures build optional-chaining-ts with microbundle 4`] = `
 "function n(n){var r;return null===(r=n.maybeVar)||void 0===r?void 0:r.thing}export{n as chain};
 //# sourceMappingURL=optional-chaining-ts.esm.js.map
 "
 `;
 
-exports[`fixtures build optional-chaining-ts with microbundle 5`] = `
+exports[`fixtures build optional-chaining-ts with microbundle 4`] = `
 "exports.chain=function(n){var i;return null===(i=n.maybeVar)||void 0===i?void 0:i.thing};
 //# sourceMappingURL=optional-chaining-ts.js.map
 "
 `;
 
-exports[`fixtures build optional-chaining-ts with microbundle 6`] = `
+exports[`fixtures build optional-chaining-ts with microbundle 5`] = `
 "!function(n,e){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?e(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],e):e((n=n||self).optionalChainingTs={})}(this,function(n){n.chain=function(n){var e;return null===(e=n.maybeVar)||void 0===e?void 0:e.thing}});
 //# sourceMappingURL=optional-chaining-ts.umd.js.map
 "
@@ -2397,7 +2331,6 @@ Directory tree:
 
 ts-jsx
   dist
-    index.d.ts
     ts-jsx.esm.js
     ts-jsx.esm.js.map
     ts-jsx.js
@@ -2420,26 +2353,21 @@ Build \\"tsJsx\\" to dist:
 177 B: ts-jsx.umd.js.br"
 `;
 
-exports[`fixtures build ts-jsx with microbundle 2`] = `7`;
+exports[`fixtures build ts-jsx with microbundle 2`] = `6`;
 
 exports[`fixtures build ts-jsx with microbundle 3`] = `
-"export declare const foo: any;
-"
-`;
-
-exports[`fixtures build ts-jsx with microbundle 4`] = `
 "var n=function(n,r){return{tag:n,props:r,children:[].slice.call(arguments,2)}}(function(n){return n.children},null,\\"foo\\");export{n as foo};
 //# sourceMappingURL=ts-jsx.esm.js.map
 "
 `;
 
-exports[`fixtures build ts-jsx with microbundle 5`] = `
+exports[`fixtures build ts-jsx with microbundle 4`] = `
 "var n=function(n,r){return{tag:n,props:r,children:[].slice.call(arguments,2)}}(function(n){return n.children},null,\\"foo\\");exports.foo=n;
 //# sourceMappingURL=ts-jsx.js.map
 "
 `;
 
-exports[`fixtures build ts-jsx with microbundle 6`] = `
+exports[`fixtures build ts-jsx with microbundle 5`] = `
 "!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?n(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],n):n((e=e||self).tsJsx={})}(this,function(e){var n=function(e,n){return{tag:e,props:n,children:[].slice.call(arguments,2)}}(function(e){return e.children},null,\\"foo\\");e.foo=n});
 //# sourceMappingURL=ts-jsx.umd.js.map
 "
@@ -2452,8 +2380,6 @@ Directory tree:
 
 ts-mixed-exports
   dist
-    car.d.ts
-    index.d.ts
     ts-mixed-exports.esm.js
     ts-mixed-exports.esm.js.map
     ts-mixed-exports.js
@@ -2477,40 +2403,71 @@ Build \\"tsMixedExports\\" to dist:
 171 B: ts-mixed-exports.umd.js.br"
 `;
 
-exports[`fixtures build ts-mixed-exports with microbundle 2`] = `8`;
+exports[`fixtures build ts-mixed-exports with microbundle 2`] = `6`;
 
 exports[`fixtures build ts-mixed-exports with microbundle 3`] = `
-"export interface Driveable {
-    drive(distance: number): boolean;
-}
-export default class Car implements Driveable {
-    drive(distance: number): boolean;
-}
-"
-`;
-
-exports[`fixtures build ts-mixed-exports with microbundle 4`] = `
-"import Car from './car';
-declare let Ferrari: Car;
-export { Car };
-export default Ferrari;
-"
-`;
-
-exports[`fixtures build ts-mixed-exports with microbundle 5`] = `
 "var t=function(){function t(){}return t.prototype.drive=function(t){return!0},t}(),n=new t;export default n;export{t as Car};
 //# sourceMappingURL=ts-mixed-exports.esm.js.map
 "
 `;
 
-exports[`fixtures build ts-mixed-exports with microbundle 6`] = `
+exports[`fixtures build ts-mixed-exports with microbundle 4`] = `
 "var r=function(){function r(){}return r.prototype.drive=function(r){return!0},r}(),t=new r;exports.Car=r,exports.default=t;
 //# sourceMappingURL=ts-mixed-exports.js.map
 "
 `;
 
-exports[`fixtures build ts-mixed-exports with microbundle 7`] = `
+exports[`fixtures build ts-mixed-exports with microbundle 5`] = `
 "!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?t(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],t):t((e=e||self).tsMixedExports={})}(this,function(e){var t=function(){function e(){}return e.prototype.drive=function(e){return!0},e}(),n=new t;e.Car=t,e.default=n});
 //# sourceMappingURL=ts-mixed-exports.umd.js.map
+"
+`;
+
+exports[`fixtures build ts-no-declaration with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+ts-no-declaration
+  dist
+    index.esm.js
+    index.esm.js.map
+    index.js
+    index.js.map
+    index.umd.js
+    index.umd.js.map
+  node_modules
+  package.json
+  src
+    index.tsx
+  tsconfig.json
+
+
+Build \\"tsNoDeclarations\\" to dist:
+55 B: index.js.gz
+33 B: index.js.br
+61 B: index.esm.js.gz
+45 B: index.esm.js.br
+174 B: index.umd.js.gz
+129 B: index.umd.js.br"
+`;
+
+exports[`fixtures build ts-no-declaration with microbundle 2`] = `6`;
+
+exports[`fixtures build ts-no-declaration with microbundle 3`] = `
+"function n(){return 42}export{n as foo};
+//# sourceMappingURL=index.esm.js.map
+"
+`;
+
+exports[`fixtures build ts-no-declaration with microbundle 4`] = `
+"exports.foo=function(){return 42};
+//# sourceMappingURL=index.js.map
+"
+`;
+
+exports[`fixtures build ts-no-declaration with microbundle 5`] = `
+"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?o(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],o):o((e=e||self).tsNoDeclarations={})}(this,function(e){e.foo=function(){return 42}});
+//# sourceMappingURL=index.umd.js.map
 "
 `;

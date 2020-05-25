@@ -566,7 +566,7 @@ function createConfig(options, entry, format, writeMeta) {
 							tsconfigDefaults: {
 								compilerOptions: {
 									sourceMap: options.sourcemap,
-									declaration: true,
+									declaration: !!(pkg.types || pkg.typings),
 									declarationDir: dirname(
 										pkg.types || pkg.typings || options.output,
 									),
