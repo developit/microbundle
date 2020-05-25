@@ -562,10 +562,14 @@ function createConfig(options, entry, format, writeMeta) {
 						typescript({
 							typescript: require('typescript'),
 							cacheRoot: `./node_modules/.cache/.rts2_cache_${format}`,
+							useTsconfigDeclarationDir: true,
 							tsconfigDefaults: {
 								compilerOptions: {
 									sourceMap: options.sourcemap,
 									declaration: true,
+									declarationDir: dirname(
+										pkg.types || pkg.typings || options.output,
+									),
 									jsx: 'react',
 									jsxFactory:
 										// TypeScript fails to resolve Fragments when jsxFactory
@@ -574,6 +578,7 @@ function createConfig(options, entry, format, writeMeta) {
 											? undefined
 											: options.jsx || 'h',
 								},
+								files: options.entries,
 							},
 							tsconfig: options.tsconfig,
 							tsconfigOverride: {
