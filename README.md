@@ -9,66 +9,104 @@
 
 ---
 
-## ✨ Features:
+<p align="center">
+  <strong>Guide → </strong>
+  <a href="#setup">Setup</a> ✯
+  <a href="#formats">Formats</a> ✯
+  <a href="#modern">Modern Mode</a> ✯
+  <a href="#usage">Usage &amp; Configuration</a> ✯
+  <a href="#options">All Options</a>
+</p>
+
+---
+
+## ✨ Features <a name="features"></a>
 
 - **One dependency** to bundle your library using only a `package.json`
-- Support for ESnext & async/await _(via [Bublé] & [async-to-promises])_
+- Support for ESnext & async/await _(via [Babel] & [async-to-promises])_
 - Produces tiny, optimized code for all inputs
 - Supports multiple entry modules _(`cli.js` + `index.js`, etc)_
 - Creates multiple output formats for each entry _(<abbr title="CommonJS (node)">CJS</abbr>, <abbr title="Universal Module Definition">UMD</abbr> & <abbr title="ECMAScript Modules">ESM</abbr>)_
 - 0 configuration TypeScript support
 - Built-in Terser compression & gzipped bundle size tracking
 
-## 🔧 Installation
+## 🔧 Installation & Setup <a name="setup"></a> <a name="installation"></a>
 
-### Download
+1️⃣ **Install** by running: `npm i -D microbundle`
 
-`npm i -D microbundle`
-
-### Set up your `package.json`
+2️⃣ **Set up** your `package.json`:
 
 ```js
 {
-  "source": "src/foo.js",          // Your source file (same as 1st arg to microbundle)
-  "main": "dist/foo.js",           // output path for CommonJS/Node
-  "module": "dist/foo.module.js",  // output path for JS Modules
-  "unpkg": "dist/foo.umd.js",      // optional, for unpkg.com
+  "name": "foo",                   // your package name
+  "source": "src/foo.js",          // your source code
+  "main": "dist/foo.js",           // where to generate the CommonJS/Node bundle
+  "module": "dist/foo.module.js",  // where to generate the ESM bundle
+  "unpkg": "dist/foo.umd.js",      // where to generate the UMD bundle (also aliased as "umd:main")
   "scripts": {
-    "build": "microbundle",        // uses "source" and "main" as input and output paths by default
-    "dev": "microbundle watch"
+    "build": "microbundle",        // compiles "source" to "main"/"module"/"unpkg"
+    "dev": "microbundle watch"     // re-build when source files change
   }
 }
 ```
 
-### New: Modern JS
+3️⃣ **Try it out** by running `npm run build`.
 
-Microbundle now has a new `modern` format (`microbundle -f modern`).
-Modern output still bundles and compresses your code, but it keeps useful syntax
-around that actually helps compression:
+## 💽 Output Formats <a name="formats"></a>
+
+Microbundle produces <code title="ECMAScript Modules (import / export)">esm</code>, <code title="CommonJS (Node-style module.exports)">cjs</code>, <code title="Universal Module Definition (works everywhere)">umd</code> bundles with your code compiled to syntax that works pretty much everywhere. While it's possible to customize the browser or Node versions you wish to support using a [browserslist configuration](https://github.com/browserslist/browserslist#browserslist-), the default setting is optimal and strongly recommended.
+
+## 🤖 Modern Mode <a name="modern"></a>
+
+In addition to the above formats, Microbundle also outputs a `modern` bundle specially designed to work in _all modern browsers_. This bundle preserves most modern JS features when compiling your code, but ensures the result runs in 90% of web browsers without needing to be transpiled. Specifically, it uses [preset-modules](https://github.com/babel/preset-modules) to target the set of browsers that support `<script type="module">` - that allows syntax like async/await, tagged templates, arrow functions, destructured and rest parameters, etc. The result is generally smaller and faster to execute than the `esm` bundle:
 
 ```js
 // Our source, "src/make-dom.js":
 export default async function makeDom(tag, props, children) {
-	const el = document.createElement(tag);
-	el.append(...(await children));
-	return Object.assign(el, props);
+  let el = document.createElement(tag);
+  el.append(...(await children));
+  return Object.assign(el, props);
 }
 ```
 
-Microbundle compiles the above to this:
+Compiling the above using Microbundle produces the following `modern` and `esm` bundles:
+
+<table>
+<thead><tr>
+  <th align="left"><code>make-dom.modern.js</code> <sup>(123b)</sup></th>
+  <th align="left"><code>make-dom.module.js</code> <sup>(166b)</sup></th>
+</tr></thead>
+<tbody><tr valign="top"><td>
 
 ```js
-export default async (e, t, a) => {
-	const n = document.createElement(e);
-	return n.append(...(await a)), Object.assign(n, t);
-};
+export default async function(e, t, a) {
+  let n = document.createElement(e);
+  n.append(...await a);
+  return Object.assign(n, t);
+}
 ```
 
-This is enabled by default - all you have to do is add the field to your `package.json`. You might choose to ship modern JS using the "module" field:
+</td><td>
+
+```js
+export default function(e, t, r) { try {
+  var n = document.createElement(e);
+  return Promise.resolve(r).then(function(e) {
+    n.append.apply(n, e);
+    return Object.assign(n, t);
+  });
+} catch (e) { return Promise.reject(e) } }
+```
+
+</td></tbody></table>
+
+This is enabled by default - all you have to do is add the field to your `package.json`.
+
+<details><summary>💁‍♂️ <em>How to point to modern code in a package.json is <a href="https://twitter.com/_developit/status/1263174528974364675">being discussed</a>. You might use the "module" field.</em></summary>
 
 ```js
 {
-  "main": "dist/foo.umd.js",              // legacy UMD bundle (for Node & CDN's)
+  "main": "dist/foo.umd.js",              // legacy UMD bundle (for Node & CDN use)
   "module": "dist/foo.modern.module.js",  // modern ES2017 bundle
   "scripts": {
     "build": "microbundle src/foo.js -f modern,umd"
@@ -76,15 +114,27 @@ This is enabled by default - all you have to do is add the field to your `packag
 }
 ```
 
-## 📦 Usage
+</details>
+
+## 📦 Usage & Configuration <a name="usage"></a>
 
 Microbundle includes two commands - `build` (the default) and `watch`. Neither require any options, but you can tailor things to suit your needs a bit if you like.
 
 ### `microbundle` / `microbundle build`
 
-Unless overridden via the command line, microbundle uses the `source` property in your `package.json` to locate the input file, and the `main` property for the output.
+Unless overridden via the command line, microbundle uses the `source` property in your `package.json` to locate the input file, and the `main` property for the output:
 
-For UMD builds, microbundle will use a snake case version of the `name` field in your `package.json` as export name. This can be overridden either by providing an `amdName` key in your `package.json` or via the `--name` flag in the cli.
+```js
+{
+  "source": "src/index.js",      // input
+  "main": "dist/my-library.js",  // output
+  "scripts": {
+    "build": "microbundle"
+  }
+}
+```
+
+For UMD builds, microbundle will use a snake_case version of the `name` field in your `package.json` as export name. This can be customized using an `"amdName"` key in your `package.json` or the `--name` command line argument.
 
 ### `microbundle watch`
 
@@ -116,19 +166,21 @@ imports will be scoped.
 
 ### Specifying builds in `package.json`
 
-You can specify output builds in a `package.json` as follows:
+Microbundle uses the fields from your `package.json` to figure out where it should place each generated bundle:
 
 ```
-"main": "dist/foo.js",          // CJS bundle
-"umd:main": "dist/foo.umd.js",  // UMD bundle
-"module": "dist/foo.m.js",       // ES Modules bundle
-"source": "src/foo.js",         // custom entry module (same as 1st arg to microbundle)
-"types": "dist/foo.d.ts",       // TypeScript typings
+{
+  "main": "dist/foo.js",            // CommonJS bundle
+  "umd:main": "dist/foo.umd.js",    // UMD bundle
+  "module": "dist/foo.m.js",        // ES Modules bundle
+  "esmodule": "dist/foo.modern.js", // Modern bundle
+  "types": "dist/foo.d.ts"          // TypeScript typings
+}
 ```
 
 ### Mangling Properties
 
-To achieve the smallest possible bundle size, libraries often wish to rename internal object properties or class members to smaller names - transforming `this._internalIdValue` to `this._i`. Microbundle doesn't do this by default, however it can be enabled by createing a `mangle.json` file (or a `"mangle"` property in your package.json). Within that file, you can specify a regular expression pattern to control which properties should be mangled. For example: to mangle all property names beginning an underscore:
+To achieve the smallest possible bundle size, libraries often wish to rename internal object properties or class members to smaller names - transforming `this._internalIdValue` to `this._i`. Microbundle doesn't do this by default, however it can be enabled by creating a `mangle.json` file (or a `"mangle"` property in your package.json). Within that file, you can specify a regular expression pattern to control which properties should be mangled. For example: to mangle all property names beginning an underscore:
 
 ```json
 {
@@ -140,7 +192,7 @@ To achieve the smallest possible bundle size, libraries often wish to rename int
 
 It's also possible to configure repeatable short names for each mangled property, so that every build of your library has the same output. **See the wiki for a [complete guide to property mangling in Microbundle](https://github.com/developit/microbundle/wiki/mangle.json).**
 
-### All CLI Options
+### All CLI Options <a name="options"></a>
 
 ```
 Usage
@@ -158,7 +210,7 @@ Options
 	-v, --version    Displays current version
 	-i, --entry      Entry module(s)
 	-o, --output     Directory to place build files into
-	-f, --format     Only build specified formats  (default modern,es,cjs,umd)
+	-f, --format     Only build specified formats (any of modern,es,cjs,umd or iife) (default modern,es,cjs,umd)
 	-w, --watch      Rebuilds on any change  (default false)
 	--target         Specify your target environment (node or web)  (default web)
 	--external       Specify external dependencies, or 'none'
@@ -167,7 +219,7 @@ Options
 	--alias          Map imports to different modules
 	--compress       Compress output using Terser
 	--strict         Enforce undefined global context and add "use strict"
-	--name           Specify name exposed in UMD builds
+	--name           Specify name exposed in UMD and IIFE builds
 	--cwd            Use an alternative working directory  (default .)
 	--sourcemap      Generate source map  (default true)
 	--raw            Show raw byte size  (default false)
@@ -213,5 +265,5 @@ Here's what's coming up for Microbundle:
 [MIT](https://oss.ninja/mit/developit/)
 
 [rollup]: https://github.com/rollup/rollup
-[bublé]: https://github.com/Rich-Harris/buble
+[Babel]: https://babeljs.io/
 [async-to-promises]: https://github.com/rpetrich/babel-plugin-transform-async-to-promises

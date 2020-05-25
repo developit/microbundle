@@ -1,0 +1,7 @@
+{
+	"name": "ts-jsx",
+	"source": "src/index.tsx",
+	"scripts": {
+		"build": "microbundle build --jsx 'React.createElement'"
+	}
+}

@@ -1,6 +1,7 @@
 import { createConfigItem } from '@babel/core';
-import babelPlugin from 'rollup-plugin-babel';
+import { createBabelInputPluginFactory } from '@rollup/plugin-babel';
 import merge from 'lodash.merge';
+import transformFastRest from './transform-fast-rest';
 import { isTruthy } from '../utils';
 
 const ESMODULES_TARGET = {
@@ -13,7 +14,9 @@ const mergeConfigItems = (type, ...configItemsToMerge) => {
 	configItemsToMerge.forEach(configItemToMerge => {
 		configItemToMerge.forEach(item => {
 			const itemToMergeWithIndex = mergedItems.findIndex(
-				mergedItem => mergedItem.file.resolved === item.file.resolved,
+				mergedItem =>
+					(mergedItem.name || mergedItem.file.resolved) ===
+					(item.name || item.file.resolved),
 			);
 
 			if (itemToMergeWithIndex === -1) {
@@ -37,15 +40,17 @@ const mergeConfigItems = (type, ...configItemsToMerge) => {
 };
 
 const createConfigItems = (type, items) => {
-	return items.map(({ name, ...options }) => {
-		return createConfigItem([require.resolve(name), options], { type });
+	return items.map(item => {
+		let { name, value, ...options } = item;
+		value = value || [require.resolve(name), options];
+		return createConfigItem(value, { type });
 	});
 };
 
 const presetEnvRegex = RegExp(/@babel\/(preset-)?env/);
 
 export default () => {
-	return babelPlugin.custom(babelCore => {
+	return createBabelInputPluginFactory(babelCore => {
 		return {
 			// Passed the plugin options.
 			options({ custom: customOptions, ...pluginOptions }) {
@@ -59,9 +64,15 @@ export default () => {
 			},
 
 			config(config, { customOptions }) {
+				const targets = customOptions.targets;
+				const isNodeTarget = targets && targets.node != null;
+
 				const defaultPlugins = createConfigItems(
 					'plugin',
 					[
+						{
+							name: '@babel/plugin-syntax-import-meta',
+						},
 						{
 							name: '@babel/plugin-transform-react-jsx',
 							pragma: customOptions.pragma || 'h',
@@ -80,6 +91,18 @@ export default () => {
 							externalHelpers: false,
 							minify: true,
 						},
+						!customOptions.modern &&
+							!isNodeTarget && {
+								value: [
+									transformFastRest,
+									{
+										// Use inline [].slice.call(arguments)
+										helper: false,
+										literal: true,
+									},
+									'transform-fast-rest',
+								],
+							},
 						{
 							name: '@babel/plugin-proposal-class-properties',
 							loose: true,

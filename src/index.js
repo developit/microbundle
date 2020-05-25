@@ -7,7 +7,7 @@ import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import { rollup, watch } from 'rollup';
 import commonjs from '@rollup/plugin-commonjs';
-import babel from 'rollup-plugin-babel';
+import babel from '@rollup/plugin-babel';
 import customBabel from './lib/babel-custom';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
@@ -252,7 +252,9 @@ export default async function microbundle(inputOptions) {
 	let out = await series(
 		steps.map(config => async () => {
 			const { inputOptions, outputOptions } = config;
-			inputOptions.cache = cache;
+			if (inputOptions.cache !== false) {
+				inputOptions.cache = cache;
+			}
 			let bundle = await rollup(inputOptions);
 			cache = bundle;
 			await bundle.write(outputOptions);
@@ -472,7 +474,7 @@ function createConfig(options, entry, format, writeMeta) {
 			: () => resolve(options.cwd, 'mangle.json');
 
 	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
-	const emitDeclaration = !!options.generateTypes;
+	const emitDeclaration = !!(options.generateTypes || pkg.types || pkg.typings);
 
 	const externalPredicate = new RegExp(`^(${external.join('|')})($|/)`);
 	const externalTest =
@@ -499,6 +501,9 @@ function createConfig(options, entry, format, writeMeta) {
 
 	let config = {
 		inputOptions: {
+			// disable Rollup's cache for the modern build to prevent re-use of legacy transpiled modules:
+			cache: modern ? false : undefined,
+
 			input: entry,
 			external: id => {
 				if (id === 'babel-plugin-transform-async-to-promises/helpers') {
@@ -538,7 +543,7 @@ function createConfig(options, entry, format, writeMeta) {
 						browser: options.target !== 'node',
 						// defaults + .jsx
 						extensions: ['.mjs', '.js', '.jsx', '.json', '.node'],
-						preferBuiltins: options.target === 'node' ? true : undefined,
+						preferBuiltins: options.target === 'node',
 					}),
 					commonjs({
 						// use a regex to make sure to include eventual hoisted packages
@@ -558,15 +563,25 @@ function createConfig(options, entry, format, writeMeta) {
 						typescript({
 							typescript: require('typescript'),
 							cacheRoot: `./node_modules/.cache/.rts2_cache_${format}`,
+							useTsconfigDeclarationDir: true,
 							tsconfigDefaults: {
 								compilerOptions: {
 									sourceMap: options.sourcemap,
 									declaration: true,
 									allowJs: emitDeclaration,
 									emitDeclarationOnly: emitDeclaration,
+									declarationDir: dirname(
+										pkg.types || pkg.typings || options.output,
+									),
 									jsx: 'react',
-									jsxFactory: options.jsx || 'h',
+									jsxFactory:
+										// TypeScript fails to resolve Fragments when jsxFactory
+										// is set, even when it's the same as the default value.
+										options.jsx === 'React.createElement'
+											? undefined
+											: options.jsx || 'h',
 								},
+								files: options.entries,
 							},
 							tsconfig: options.tsconfig,
 							tsconfigOverride: {
@@ -582,9 +597,10 @@ function createConfig(options, entry, format, writeMeta) {
 					// if defines is not set, we shouldn't run babel through node_modules
 					isTruthy(defines) &&
 						babel({
+							babelHelpers: 'bundled',
 							babelrc: false,
-							configFile: false,
 							compact: false,
+							configFile: false,
 							include: 'node_modules/**',
 							plugins: [
 								[
@@ -594,6 +610,7 @@ function createConfig(options, entry, format, writeMeta) {
 							],
 						}),
 					customBabel()({
+						babelHelpers: 'bundled',
 						extensions: EXTENSIONS,
 						exclude: 'node_modules/**',
 						passPerPreset: true, // @see https://babeljs.io/docs/en/options#passperpreset

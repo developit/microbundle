@@ -63,13 +63,29 @@ describe('fixtures', () => {
 			expect(files.length).toMatchSnapshot();
 			// we don't realy care about the content of a sourcemap
 			files
-				.filter(file => !/\.map$/.test(file))
+				.filter(
+					file =>
+						!/\.map$/.test(file) &&
+						!fs.lstatSync(resolve(dist, file)).isDirectory(),
+				)
 				.sort(file => (/modern/.test(file) ? 1 : 0))
 				.forEach(file => {
 					expect(
 						fs.readFileSync(resolve(dist, file)).toString('utf8'),
 					).toMatchSnapshot();
 				});
+
+			// TypeScript declaration files
+			const types = resolve(`${fixturePath}/types`);
+			if (fs.existsSync(types)) {
+				const declarations = fs.readdirSync(types);
+				expect(declarations.length).toMatchSnapshot();
+				declarations.forEach(file => {
+					expect(
+						fs.readFileSync(resolve(types, file)).toString('utf8'),
+					).toMatchSnapshot();
+				});
+			}
 		},
 		TEST_TIMEOUT,
 	);
