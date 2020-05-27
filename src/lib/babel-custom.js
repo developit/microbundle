@@ -131,7 +131,7 @@ export default () => {
 					const preset = babelOptions.presets[envIdx];
 					babelOptions.presets[envIdx] = createConfigItem(
 						[
-							environmentPreset,
+							require.resolve(environmentPreset),
 							Object.assign(
 								merge(
 									{
