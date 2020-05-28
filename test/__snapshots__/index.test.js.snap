@@ -1546,8 +1546,8 @@ Build \\"externalMixed\\" to dist:
 122 B: external-mixed.js.br
 127 B: external-mixed.esm.js.gz
 99 B: external-mixed.esm.js.br
-287 B: external-mixed.umd.js.gz
-232 B: external-mixed.umd.js.br"
+303 B: external-mixed.umd.js.gz
+238 B: external-mixed.umd.js.br"
 `;
 
 exports[`fixtures build external-mixed with microbundle 2`] = `6`;
@@ -1565,7 +1565,7 @@ exports[`fixtures build external-mixed with microbundle 4`] = `
 `;
 
 exports[`fixtures build external-mixed with microbundle 5`] = `
-"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?r(exports,require(\\"some_pkg/foo.custom\\"),require(\\"express\\"),require(\\"handlebars\\")):\\"function\\"==typeof define&&define.amd?define([\\"exports\\",\\"some_pkg/foo.custom\\",\\"express\\",\\"handlebars\\"],r):r((e=e||self).externalMixed={},e.custom,e.express,e.handlebars)}(this,function(e,r,t,o){r=r&&r.hasOwnProperty(\\"default\\")?r.default:r,t=t&&t.hasOwnProperty(\\"default\\")?t.default:t,o=o&&o.hasOwnProperty(\\"default\\")?o.default:o,e.bar=function(){return r(t(o())).reverse()}});
+"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?t(exports,require(\\"some_pkg/foo.custom\\"),require(\\"express\\"),require(\\"handlebars\\")):\\"function\\"==typeof define&&define.amd?define([\\"exports\\",\\"some_pkg/foo.custom\\",\\"express\\",\\"handlebars\\"],t):t((e=e||self).externalMixed={},e.custom,e.express,e.handlebars)}(this,function(e,t,o,r){t=t&&Object.prototype.hasOwnProperty.call(t,\\"default\\")?t.default:t,o=o&&Object.prototype.hasOwnProperty.call(o,\\"default\\")?o.default:o,r=r&&Object.prototype.hasOwnProperty.call(r,\\"default\\")?r.default:r,e.bar=function(){return t(o(r())).reverse()}});
 //# sourceMappingURL=external-mixed.umd.js.map
 "
 `;
@@ -1594,8 +1594,8 @@ Build \\"externalRegex\\" to dist:
 110 B: external-regex.js.br
 112 B: external-regex.esm.js.gz
 88 B: external-regex.esm.js.br
-272 B: external-regex.umd.js.gz
-225 B: external-regex.umd.js.br"
+287 B: external-regex.umd.js.gz
+232 B: external-regex.umd.js.br"
 `;
 
 exports[`fixtures build external-regex with microbundle 2`] = `6`;
@@ -1613,7 +1613,7 @@ exports[`fixtures build external-regex with microbundle 4`] = `
 `;
 
 exports[`fixtures build external-regex with microbundle 5`] = `
-"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?t(exports,require(\\"foo.custom\\"),require(\\"express\\"),require(\\"handlebars\\")):\\"function\\"==typeof define&&define.amd?define([\\"exports\\",\\"foo.custom\\",\\"express\\",\\"handlebars\\"],t):t((e=e||self).externalRegex={},e.custom,e.express,e.handlebars)}(this,function(e,t,r,o){t=t&&t.hasOwnProperty(\\"default\\")?t.default:t,r=r&&r.hasOwnProperty(\\"default\\")?r.default:r,o=o&&o.hasOwnProperty(\\"default\\")?o.default:o,e.bar=function(){return t(r(o()))}});
+"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?t(exports,require(\\"foo.custom\\"),require(\\"express\\"),require(\\"handlebars\\")):\\"function\\"==typeof define&&define.amd?define([\\"exports\\",\\"foo.custom\\",\\"express\\",\\"handlebars\\"],t):t((e=e||self).externalRegex={},e.custom,e.express,e.handlebars)}(this,function(e,t,o,r){t=t&&Object.prototype.hasOwnProperty.call(t,\\"default\\")?t.default:t,o=o&&Object.prototype.hasOwnProperty.call(o,\\"default\\")?o.default:o,r=r&&Object.prototype.hasOwnProperty.call(r,\\"default\\")?r.default:r,e.bar=function(){return t(o(r()))}});
 //# sourceMappingURL=external-regex.umd.js.map
 "
 `;
