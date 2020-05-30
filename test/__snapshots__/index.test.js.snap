@@ -2514,3 +2514,65 @@ exports[`fixtures build ts-mixed-exports with microbundle 7`] = `
 //# sourceMappingURL=ts-mixed-exports.umd.js.map
 "
 `;
+
+exports[`fixtures build ts-module with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+ts-module
+  dist
+    foo.d.ts
+    index.d.ts
+    ts-module.esm.js
+    ts-module.esm.js.map
+    ts-module.js
+    ts-module.js.map
+    ts-module.umd.js
+    ts-module.umd.js.map
+  node_modules
+  package.json
+  src
+    foo.ts
+    index.ts
+  tsconfig.json
+
+
+Build \\"tsModule\\" to dist:
+59 B: ts-module.js.gz
+42 B: ts-module.js.br
+65 B: ts-module.esm.js.gz
+49 B: ts-module.esm.js.br
+168 B: ts-module.umd.js.gz
+128 B: ts-module.umd.js.br"
+`;
+
+exports[`fixtures build ts-module with microbundle 2`] = `8`;
+
+exports[`fixtures build ts-module with microbundle 3`] = `
+"export declare function foo(): string;
+"
+`;
+
+exports[`fixtures build ts-module with microbundle 4`] = `
+"export declare function foobar(): string;
+"
+`;
+
+exports[`fixtures build ts-module with microbundle 5`] = `
+"function o(){return\\"foobar\\"}export{o as foobar};
+//# sourceMappingURL=ts-module.esm.js.map
+"
+`;
+
+exports[`fixtures build ts-module with microbundle 6`] = `
+"exports.foobar=function(){return\\"foobar\\"};
+//# sourceMappingURL=ts-module.js.map
+"
+`;
+
+exports[`fixtures build ts-module with microbundle 7`] = `
+"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?o(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],o):o((e=e||self).tsModule={})}(this,function(e){e.foobar=function(){return\\"foobar\\"}});
+//# sourceMappingURL=ts-module.umd.js.map
+"
+`;
