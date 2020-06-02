@@ -364,6 +364,21 @@ async function getOutput({ cwd, output, pkgMain, pkgName }) {
 	return main;
 }
 
+function getDeclarationDir({ options, pkg }) {
+	const { cwd, output } = options;
+
+	let result = output;
+
+	if (pkg.types || pkg.typings) {
+		result = pkg.types || pkg.typings;
+		result = resolve(cwd, result);
+	}
+
+	result = dirname(result);
+
+	return result;
+}
+
 async function getEntries({ input, cwd }) {
 	let entries = (
 		await map([].concat(input), async file => {
@@ -567,9 +582,7 @@ function createConfig(options, entry, format, writeMeta) {
 								compilerOptions: {
 									sourceMap: options.sourcemap,
 									declaration: true,
-									declarationDir: dirname(
-										pkg.types || pkg.typings || options.output,
-									),
+									declarationDir: getDeclarationDir({ options, pkg }),
 									jsx: 'react',
 									jsxFactory:
 										// TypeScript fails to resolve Fragments when jsxFactory
