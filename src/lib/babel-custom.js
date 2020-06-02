@@ -180,11 +180,13 @@ export default () => {
 					babelOptions.plugins || [],
 				);
 
-				babelOptions.generatorOpts = {
-					minified: customOptions.compress,
-					compact: customOptions.compress,
-					shouldPrintComment: comment => /[@#]__PURE__/.test(comment),
-				};
+				if (customOptions.compress) {
+					babelOptions.generatorOpts = {
+						minified: true,
+						compact: true,
+						shouldPrintComment: comment => /[@#]__PURE__/.test(comment),
+					};
+				}
 
 				return babelOptions;
 			},
