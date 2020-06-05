@@ -21,6 +21,7 @@ import json from '@rollup/plugin-json';
 import logError from './log-error';
 import { readFile, isDir, isFile, stdout, stderr, isTruthy } from './utils';
 import camelCase from 'camelcase';
+import escapeStringRegexp from 'escape-string-regexp';
 
 const removeScope = name => name.replace(/^@.*\//, '');
 
@@ -490,7 +491,9 @@ function createConfig(options, entry, format, writeMeta) {
 
 	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
 
-	const externalPredicate = new RegExp(`^(${external.join('|')})($|/)`);
+	const externalPredicate = new RegExp(
+		`^(${external.map(escapeStringRegexp).join('|')})($|/)`,
+	);
 	const externalTest =
 		external.length === 0 ? id => false : id => externalPredicate.test(id);
 
