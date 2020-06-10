@@ -21,7 +21,8 @@
   "prettier": {
     "singleQuote": true,
     "trailingComma": "all",
-    "useTabs": true
+    "useTabs": true,
+    "arrowParens": "avoid"
   },
   "lint-staged": {
     "{src,test}/**/*.js": [
