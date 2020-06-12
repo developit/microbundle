@@ -731,6 +731,38 @@ exports[`fixtures build basic-no-compress with microbundle 5`] = `
 "
 `;
 
+exports[`fixtures build basic-no-pkg-main with microbundle 1`] = `
+"Used script: microbundle --pkg-main false
+
+Directory tree:
+
+basic-no-pkg-main
+  dist
+    basic-no-pkg-main.js
+    basic-no-pkg-main.js.map
+  package.json
+  src
+    index.js
+    two.js
+
+
+Build \\"basicNoPkgMain\\" to dist:
+187 B: basic-no-pkg-main.js.gz
+138 B: basic-no-pkg-main.js.br
+188 B: basic-no-pkg-main.js.gz
+139 B: basic-no-pkg-main.js.br
+279 B: basic-no-pkg-main.js.gz
+229 B: basic-no-pkg-main.js.br"
+`;
+
+exports[`fixtures build basic-no-pkg-main with microbundle 2`] = `2`;
+
+exports[`fixtures build basic-no-pkg-main with microbundle 3`] = `
+"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=e||self).basicNoPkgMain=r()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){try{var r=arguments,n=[].slice.call(r);return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
+//# sourceMappingURL=basic-no-pkg-main.js.map
+"
+`;
+
 exports[`fixtures build basic-ts with microbundle 1`] = `
 "Used script: microbundle
 
