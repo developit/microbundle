@@ -392,6 +392,54 @@ async function getEntries({ input, cwd }) {
 	return entries;
 }
 
+function replaceName(filename, name) {
+	return resolve(
+		dirname(filename),
+		name + basename(filename).replace(/^[^.]+/, ''),
+	);
+}
+
+function getMain({ options, entry, format }) {
+	const { pkg } = options;
+	const pkgMain = options['pkg-main'];
+
+	if (!pkgMain) {
+		return options.output;
+	}
+
+	let mainNoExtension = options.output;
+	if (options.multipleEntries) {
+		let name = entry.match(/([\\/])index(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/)
+			? mainNoExtension
+			: entry;
+		mainNoExtension = resolve(dirname(mainNoExtension), basename(name));
+	}
+	mainNoExtension = mainNoExtension.replace(
+		/(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/,
+		'',
+	);
+
+	const mainsByFormat = {};
+
+	mainsByFormat.es = replaceName(
+		pkg.module && !pkg.module.match(/src\//)
+			? pkg.module
+			: pkg['jsnext:main'] || 'x.esm.js',
+		mainNoExtension,
+	);
+	mainsByFormat.modern = replaceName(
+		(pkg.syntax && pkg.syntax.esmodules) || pkg.esmodule || 'x.modern.js',
+		mainNoExtension,
+	);
+	mainsByFormat.cjs = replaceName(pkg['cjs:main'] || 'x.js', mainNoExtension);
+	mainsByFormat.umd = replaceName(
+		pkg['umd:main'] || 'x.umd.js',
+		mainNoExtension,
+	);
+
+	return mainsByFormat[format] || mainsByFormat.cjs;
+}
+
 // shebang cache map because the transform only gets run once
 const shebang = {};
 
@@ -441,38 +489,6 @@ function createConfig(options, entry, format, writeMeta) {
 			parseMappingArgument(options.define, toReplacementExpression),
 		);
 	}
-
-	function replaceName(filename, name) {
-		return resolve(
-			dirname(filename),
-			name + basename(filename).replace(/^[^.]+/, ''),
-		);
-	}
-
-	let mainNoExtension = options.output;
-	if (options.multipleEntries) {
-		let name = entry.match(/([\\/])index(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/)
-			? mainNoExtension
-			: entry;
-		mainNoExtension = resolve(dirname(mainNoExtension), basename(name));
-	}
-	mainNoExtension = mainNoExtension.replace(
-		/(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/,
-		'',
-	);
-
-	let moduleMain = replaceName(
-		pkg.module && !pkg.module.match(/src\//)
-			? pkg.module
-			: pkg['jsnext:main'] || 'x.esm.js',
-		mainNoExtension,
-	);
-	let modernMain = replaceName(
-		(pkg.syntax && pkg.syntax.esmodules) || pkg.esmodule || 'x.modern.js',
-		mainNoExtension,
-	);
-	let cjsMain = replaceName(pkg['cjs:main'] || 'x.js', mainNoExtension);
-	let umdMain = replaceName(pkg['umd:main'] || 'x.umd.js', mainNoExtension);
 
 	const modern = format === 'modern';
 
@@ -698,14 +714,7 @@ function createConfig(options, entry, format, writeMeta) {
 			},
 			format: modern ? 'es' : format,
 			name: options.name,
-			file: resolve(
-				options.cwd,
-				{
-					modern: modernMain,
-					es: moduleMain,
-					umd: umdMain,
-				}[format] || cjsMain,
-			),
+			file: resolve(options.cwd, getMain({ options, entry, format })),
 		},
 	};
 

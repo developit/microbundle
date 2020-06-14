@@ -28,6 +28,11 @@ export default handler => {
 			DEFAULT_FORMATS,
 		)
 		.option('--watch, -w', 'Rebuilds on any change', false)
+		.option(
+			'--pkg-main',
+			'Outputs files analog to package.json main entries',
+			true,
+		)
 		.option('--target', 'Specify your target environment (node or web)', 'web')
 		.option('--external', `Specify external dependencies, or 'none'`)
 		.option('--globals', `Specify globals dependencies, or 'none'`)
