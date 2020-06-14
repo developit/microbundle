@@ -86,6 +86,7 @@
     "camelcase": "^5.3.1",
     "cssnano": "^4.1.10",
     "es6-promisify": "^6.0.1",
+    "escape-string-regexp": "^4.0.0",
     "filesize": "^6.1.0",
     "gzip-size": "^5.1.1",
     "kleur": "^3.0.3",
