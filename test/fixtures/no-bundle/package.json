@@ -1,0 +1,6 @@
+{
+  "name": "no-bundle",
+  "scripts": {
+    "build": "microbundle build --format cjs,es --no-compress --output dist \"src/*.js\""
+  }
+}

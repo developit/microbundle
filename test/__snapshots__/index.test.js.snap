@@ -476,6 +476,60 @@ exports[`fixtures build basic-flow with microbundle 5`] = `
 "
 `;
 
+exports[`fixtures build basic-flow with microbundle 6`] = `
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e=e||self).basicCss=n()}(this,function(){return function(){var e=document.createElement(\\"div\\");return e.className=\\"testing\\",e}});
+//# sourceMappingURL=basic-css.umd.js.map
+"
+`;
+
+exports[`fixtures build basic-flow with microbundle 7`] = `
+"Used script: microbundle
+
+Directory tree:
+
+basic-flow
+  dist
+    basic-lib-flow.esm.js
+    basic-lib-flow.esm.js.map
+    basic-lib-flow.js
+    basic-lib-flow.js.map
+    basic-lib-flow.umd.js
+    basic-lib-flow.umd.js.map
+  package.json
+  src
+    fruits.js
+    index.js
+
+
+Build \\"basicLibFlow\\" to dist:
+57 B: basic-lib-flow.js.gz
+43 B: basic-lib-flow.js.br
+56 B: basic-lib-flow.esm.js.gz
+42 B: basic-lib-flow.esm.js.br
+172 B: basic-lib-flow.umd.js.gz
+133 B: basic-lib-flow.umd.js.br"
+`;
+
+exports[`fixtures build basic-flow with microbundle 8`] = `6`;
+
+exports[`fixtures build basic-flow with microbundle 9`] = `
+"export default[\\"banana\\",\\"raspberry\\"];
+//# sourceMappingURL=basic-lib-flow.esm.js.map
+"
+`;
+
+exports[`fixtures build basic-flow with microbundle 10`] = `
+"module.exports=[\\"banana\\",\\"raspberry\\"];
+//# sourceMappingURL=basic-lib-flow.js.map
+"
+`;
+
+exports[`fixtures build basic-flow with microbundle 11`] = `
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=[\\"banana\\",\\"raspberry\\"]:\\"function\\"==typeof define&&define.amd?define(function(){return[\\"banana\\",\\"raspberry\\"]}):(e=e||self).basicLibFlow=[\\"banana\\",\\"raspberry\\"]}(this);
+//# sourceMappingURL=basic-lib-flow.umd.js.map
+"
+`;
+
 exports[`fixtures build basic-json with microbundle 1`] = `
 "Used script: microbundle
 
@@ -1644,6 +1698,59 @@ exports[`fixtures build macro with microbundle 5`] = `
 "
 `;
 
+exports[`fixtures build macro with microbundle 6`] = `
+"export default function foo(): Promise<any[]>;
+"
+`;
+
+exports[`fixtures build macro with microbundle 7`] = `
+"Used script: microbundle
+
+Directory tree:
+
+macro
+  dist
+    macro-lib.esm.js
+    macro-lib.esm.js.map
+    macro-lib.js
+    macro-lib.js.map
+    macro-lib.umd.js
+    macro-lib.umd.js.map
+  package.json
+  src
+    index.js
+    macro.js
+
+
+Build \\"macroLib\\" to dist:
+49 B: macro-lib.js.gz
+33 B: macro-lib.js.br
+48 B: macro-lib.esm.js.gz
+32 B: macro-lib.esm.js.br
+157 B: macro-lib.umd.js.gz
+125 B: macro-lib.umd.js.br"
+`;
+
+exports[`fixtures build macro with microbundle 8`] = `6`;
+
+exports[`fixtures build macro with microbundle 9`] = `
+"export default\\"name-macro\\";
+//# sourceMappingURL=macro-lib.esm.js.map
+"
+`;
+
+exports[`fixtures build macro with microbundle 10`] = `
+"module.exports=\\"name-macro\\";
+//# sourceMappingURL=macro-lib.js.map
+"
+`;
+
+exports[`fixtures build macro with microbundle 11`] = `
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=\\"name-macro\\":\\"function\\"==typeof define&&define.amd?define(function(){return\\"name-macro\\"}):(e=e||self).macroLib=\\"name-macro\\"}(this);
+//# sourceMappingURL=macro-lib.umd.js.map
+"
+`;
+
 exports[`fixtures build mangle-json-file with microbundle 1`] = `
 "Used script: microbundle
 
@@ -2016,6 +2123,86 @@ exports[`fixtures build name-custom-cli with microbundle 4`] = `
 exports[`fixtures build name-custom-cli with microbundle 5`] = `
 "!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=e||self).nameCustomCli=r()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){try{var r=arguments,n=[].slice.call(r);return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
 //# sourceMappingURL=name-custom.umd.js.map
+"
+`;
+
+exports[`fixtures build no-bundle with microbundle 1`] = `
+"Used script: microbundle build --format cjs,es --no-compress --output dist \\"src/*.js\\"
+
+Directory tree:
+
+no-bundle
+  dist
+    add.esm.js
+    add.esm.js.map
+    add.js
+    add.js.map
+    no-bundle.esm.js
+    no-bundle.esm.js.map
+    no-bundle.js
+    no-bundle.js.map
+  package.json
+  src
+    add.js
+    index.js
+
+
+Build \\"noBundle\\" to dist:
+79 B: add.js.gz
+61 B: add.js.br
+77 B: add.esm.js.gz
+59 B: add.esm.js.br
+173 B: no-bundle.js.gz
+141 B: no-bundle.js.br
+94 B: no-bundle.esm.js.gz
+77 B: no-bundle.esm.js.br"
+`;
+
+exports[`fixtures build no-bundle with microbundle 2`] = `8`;
+
+exports[`fixtures build no-bundle with microbundle 3`] = `
+"function add(a, b) {
+  return a + b;
+}
+
+export default add;
+//# sourceMappingURL=add.esm.js.map
+"
+`;
+
+exports[`fixtures build no-bundle with microbundle 4`] = `
+"function add(a, b) {
+  return a + b;
+}
+
+module.exports = add;
+//# sourceMappingURL=add.js.map
+"
+`;
+
+exports[`fixtures build no-bundle with microbundle 5`] = `
+"import add from './add';
+
+function bar() {
+  return add(1, 2);
+}
+
+export { bar };
+//# sourceMappingURL=no-bundle.esm.js.map
+"
+`;
+
+exports[`fixtures build no-bundle with microbundle 6`] = `
+"function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
+var add = _interopDefault(require('./add'));
+
+function bar() {
+  return add(1, 2);
+}
+
+exports.bar = bar;
+//# sourceMappingURL=no-bundle.js.map
 "
 `;
 

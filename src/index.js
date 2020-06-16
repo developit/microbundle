@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { resolve, relative, dirname, basename, extname } from 'path';
+import { resolve, relative, dirname, basename, extname, join } from 'path';
 import { green, red, yellow, white, blue } from 'kleur';
 import { map, series } from 'asyncro';
 import glob from 'tiny-glob/sync';
@@ -447,9 +447,8 @@ const shebang = {};
 function createConfig(options, entry, format, writeMeta) {
 	let { pkg } = options;
 
-	let external = ['dns', 'fs', 'path', 'url'].concat(
-		options.entries.filter(e => e !== entry),
-	);
+	let external = ['dns', 'fs', 'path', 'url'];
+	const externalEntries = options.entries.filter(e => e !== entry);
 
 	let outputAliases = {};
 	// since we transform src/index.js, we need to rename imports for it:
@@ -513,6 +512,8 @@ function createConfig(options, entry, format, writeMeta) {
 	const externalTest =
 		external.length === 0 ? id => false : id => externalPredicate.test(id);
 
+	const entryDir = dirname(entry);
+
 	function loadNameCache() {
 		try {
 			nameCache = JSON.parse(fs.readFileSync(getNameCachePath(), 'utf8'));
@@ -545,7 +546,18 @@ function createConfig(options, entry, format, writeMeta) {
 				if (options.multipleEntries && id === '.') {
 					return true;
 				}
-				return externalTest(id);
+				let result = externalTest(id);
+				if (!result) {
+					id = join(entryDir, id);
+					result = externalEntries.includes(id);
+				}
+				if (!result && !extname(id)) {
+					result =
+						externalEntries.includes(`${id}.js`) ||
+						externalEntries.includes(`${id}.cjs`) ||
+						externalEntries.includes(`${id}.mjs`);
+				}
+				return result;
 			},
 			treeshake: {
 				propertyReadSideEffects: false,
