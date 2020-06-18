@@ -229,6 +229,8 @@ Options
 	--compress       Compress output using Terser
 	--strict         Enforce undefined global context and add "use strict"
 	--name           Specify name exposed in UMD and IIFE builds
+	--amd.id         ID for AMD module (default is anonymous)
+	--amd.define     Function to use in place of `define`
 	--cwd            Use an alternative working directory  (default .)
 	--sourcemap      Generate source map  (default true)
 	--raw            Show raw byte size  (default false)

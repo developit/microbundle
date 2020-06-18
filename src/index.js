@@ -457,6 +457,15 @@ function createConfig(options, entry, format, writeMeta) {
 		outputAliases['.'] = './' + basename(options.output);
 	}
 
+	let amd = {};
+	if (options['amd.id']) {
+		amd.id = options['amd.id'];
+	}
+
+	if (options['amd.define']) {
+		amd.define = options['amd.define'];
+	}
+
 	const moduleAliases = options.alias
 		? parseMappingArgumentAlias(options.alias)
 		: [];
@@ -707,6 +716,7 @@ function createConfig(options, entry, format, writeMeta) {
 		outputOptions: {
 			paths: outputAliases,
 			globals,
+			amd,
 			strict: options.strict === true,
 			legacy: true,
 			freeze: false,
