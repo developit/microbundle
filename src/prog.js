@@ -44,6 +44,8 @@ export default handler => {
 		.option('--compress', 'Compress output using Terser', null)
 		.option('--strict', 'Enforce undefined global context and add "use strict"')
 		.option('--name', 'Specify name exposed in UMD builds')
+		.option('--amd-name', '[amd] use named define("name", ...)')
+		.option('--amd-define', '[amd] function to use in place of define()')
 		.option('--cwd', 'Use an alternative working directory', '.')
 		.option('--sourcemap', 'Generate source map', true)
 		.option(
