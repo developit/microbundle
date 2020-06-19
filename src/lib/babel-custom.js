@@ -7,7 +7,7 @@ const ESMODULES_TARGET = {
 	esmodules: true,
 };
 
-const mergeConfigItems = (type, ...configItemsToMerge) => {
+const mergeConfigItems = (babel, type, ...configItemsToMerge) => {
 	const mergedItems = [];
 
 	configItemsToMerge.forEach(configItemToMerge => {
@@ -23,7 +23,7 @@ const mergeConfigItems = (type, ...configItemsToMerge) => {
 				return;
 			}
 
-			mergedItems[itemToMergeWithIndex] = createConfigItem(
+			mergedItems[itemToMergeWithIndex] = babel.createConfigItem(
 				[
 					mergedItems[itemToMergeWithIndex].file.resolved,
 					merge(mergedItems[itemToMergeWithIndex].options, item.options),
@@ -38,17 +38,17 @@ const mergeConfigItems = (type, ...configItemsToMerge) => {
 	return mergedItems;
 };
 
-const createConfigItems = (type, items) => {
+const createConfigItems = (babel, type, items) => {
 	return items.map(item => {
 		let { name, value, ...options } = item;
 		value = value || [require.resolve(name), options];
-		return createConfigItem(value, { type });
+		return babel.createConfigItem(value, { type });
 	});
 };
 
 const presetEnvRegex = RegExp(/@babel\/(preset-)?env/);
 
-export default ({ createConfigItem }) => {
+export default () => {
 	return createBabelInputPluginFactory(babelCore => {
 		return {
 			// Passed the plugin options.
@@ -67,6 +67,7 @@ export default ({ createConfigItem }) => {
 				const isNodeTarget = targets && targets.node != null;
 
 				const defaultPlugins = createConfigItems(
+					babelCore,
 					'plugin',
 					[
 						{
@@ -128,7 +129,7 @@ export default ({ createConfigItem }) => {
 
 				if (envIdx !== -1) {
 					const preset = babelOptions.presets[envIdx];
-					babelOptions.presets[envIdx] = createConfigItem(
+					babelOptions.presets[envIdx] = babelCore.createConfigItem(
 						[
 							require.resolve(environmentPreset),
 							Object.assign(
@@ -155,7 +156,7 @@ export default ({ createConfigItem }) => {
 						},
 					);
 				} else {
-					babelOptions.presets = createConfigItems('preset', [
+					babelOptions.presets = createConfigItems(babelCore, 'preset', [
 						{
 							name: environmentPreset,
 							targets: customOptions.modern
@@ -174,6 +175,7 @@ export default ({ createConfigItem }) => {
 
 				// Merge babelrc & our plugins together
 				babelOptions.plugins = mergeConfigItems(
+					babelCore,
 					'plugin',
 					defaultPlugins,
 					babelOptions.plugins || [],
