@@ -465,7 +465,10 @@ function createConfig(options, entry, format, writeMeta) {
 	if (options.external === 'none') {
 		// bundle everything (external=[])
 	} else if (options.external) {
-		external = external.concat(peerDeps).concat(options.external.split(','));
+		external = external.concat(peerDeps).concat(
+			// CLI --external supports regular expressions:
+			options.external.split(',').map(str => new RegExp(str)),
+		);
 	} else {
 		external = external
 			.concat(peerDeps)
@@ -473,6 +476,9 @@ function createConfig(options, entry, format, writeMeta) {
 	}
 
 	let globals = external.reduce((globals, name) => {
+		// Use raw value for CLI-provided RegExp externals:
+		if (name instanceof RegExp) name = name.source;
+
 		// valid JS identifiers are usually library globals:
 		if (name.match(/^[a-z_$][a-z0-9_$]*$/)) {
 			globals[name] = name;
@@ -507,8 +513,10 @@ function createConfig(options, entry, format, writeMeta) {
 
 	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
 
+	const escapeStringExternals = ext =>
+		ext instanceof RegExp ? ext.source : escapeStringRegexp(ext);
 	const externalPredicate = new RegExp(
-		`^(${external.map(escapeStringRegexp).join('|')})($|/)`,
+		`^(${external.map(escapeStringExternals).join('|')})($|/)`,
 	);
 	const externalTest =
 		external.length === 0 ? id => false : id => externalPredicate.test(id);
