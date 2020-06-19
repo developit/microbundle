@@ -583,7 +583,7 @@ function createConfig(options, entry, format, writeMeta) {
 					}),
 					moduleAliases.length > 0 &&
 						alias({
-							// @TODO: this is no longer supported, but didn't appear to be reuiqred?
+							// @TODO: this is no longer supported, but didn't appear to be required?
 							// resolve: EXTENSIONS,
 							entries: moduleAliases,
 						}),
