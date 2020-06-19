@@ -408,7 +408,7 @@ Build \\"basicCss\\" to dist:
 
 exports[`fixtures build basic-css with microbundle 2`] = `7`;
 
-exports[`fixtures build basic-css with microbundle 3`] = `"._rHGVB{display:-webkit-box;display:flex;color:red;background:#00f}"`;
+exports[`fixtures build basic-css with microbundle 3`] = `"._rHGVB{display:flex;color:red;background:#00f}"`;
 
 exports[`fixtures build basic-css with microbundle 4`] = `
 "export default function(){var e=document.createElement(\\"div\\");return e.className=\\"testing\\",e}
@@ -731,6 +731,38 @@ exports[`fixtures build basic-no-compress with microbundle 5`] = `
 "
 `;
 
+exports[`fixtures build basic-no-pkg-main with microbundle 1`] = `
+"Used script: microbundle --pkg-main false
+
+Directory tree:
+
+basic-no-pkg-main
+  dist
+    basic-no-pkg-main.js
+    basic-no-pkg-main.js.map
+  package.json
+  src
+    index.js
+    two.js
+
+
+Build \\"basicNoPkgMain\\" to dist:
+187 B: basic-no-pkg-main.js.gz
+138 B: basic-no-pkg-main.js.br
+188 B: basic-no-pkg-main.js.gz
+139 B: basic-no-pkg-main.js.br
+279 B: basic-no-pkg-main.js.gz
+229 B: basic-no-pkg-main.js.br"
+`;
+
+exports[`fixtures build basic-no-pkg-main with microbundle 2`] = `2`;
+
+exports[`fixtures build basic-no-pkg-main with microbundle 3`] = `
+"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=e||self).basicNoPkgMain=r()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){try{var r=arguments,n=[].slice.call(r);return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
+//# sourceMappingURL=basic-no-pkg-main.js.map
+"
+`;
+
 exports[`fixtures build basic-ts with microbundle 1`] = `
 "Used script: microbundle
 
@@ -1043,7 +1075,7 @@ Build \\"cssModulesFalse\\" to dist:
 exports[`fixtures build css-modules--false with microbundle 2`] = `4`;
 
 exports[`fixtures build css-modules--false with microbundle 3`] = `
-"body{display:-webkit-box;display:flex;color:red;background:#00f}.test_class_that_shouldnt_be_scoped{background-color:#00f}
+"body{display:flex;color:red;background:#00f}.test_class_that_shouldnt_be_scoped{background-color:#00f}
 .not_scoped_class{color:pink}"
 `;
 
@@ -1092,7 +1124,7 @@ Build \\"cssModulesNull\\" to dist:
 exports[`fixtures build css-modules--null with microbundle 2`] = `4`;
 
 exports[`fixtures build css-modules--null with microbundle 3`] = `
-"body{display:-webkit-box;display:flex;color:red;background:#00f}._2Dgv6{background-color:#00f}
+"body{display:flex;color:red;background:#00f}._2Dgv6{background-color:#00f}
 ._2kWDE{color:pink}"
 `;
 
@@ -1141,7 +1173,7 @@ Build \\"cssModulesString\\" to dist:
 exports[`fixtures build css-modules--string with microbundle 2`] = `4`;
 
 exports[`fixtures build css-modules--string with microbundle 3`] = `
-"body{display:-webkit-box;display:flex;color:red;background:#00f}._contains_this_81567d0efc15a456670452d3277e1a68{background-color:#00f}
+"body{display:flex;color:red;background:#00f}._contains_this_81567d0efc15a456670452d3277e1a68{background-color:#00f}
 ._contains_this_0a8c24df242c2cd708036873307aea94{color:pink}"
 `;
 
@@ -1190,7 +1222,7 @@ Build \\"cssModulesTrue\\" to dist:
 exports[`fixtures build css-modules--true with microbundle 2`] = `4`;
 
 exports[`fixtures build css-modules--true with microbundle 3`] = `
-"body{display:-webkit-box;display:flex;color:red;background:#00f}._1E6DU{background-color:#00f}
+"body{display:flex;color:red;background:#00f}._1E6DU{background-color:#00f}
 ._2kWDE{color:pink}"
 `;
 
@@ -2512,5 +2544,67 @@ exports[`fixtures build ts-mixed-exports with microbundle 6`] = `
 exports[`fixtures build ts-mixed-exports with microbundle 7`] = `
 "!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?t(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],t):t((e=e||self).tsMixedExports={})}(this,function(e){var t=function(){function e(){}return e.prototype.drive=function(e){return!0},e}(),n=new t;e.Car=t,e.default=n});
 //# sourceMappingURL=ts-mixed-exports.umd.js.map
+"
+`;
+
+exports[`fixtures build ts-module with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+ts-module
+  dist
+    foo.d.ts
+    index.d.ts
+    ts-module.esm.js
+    ts-module.esm.js.map
+    ts-module.js
+    ts-module.js.map
+    ts-module.umd.js
+    ts-module.umd.js.map
+  node_modules
+  package.json
+  src
+    foo.ts
+    index.ts
+  tsconfig.json
+
+
+Build \\"tsModule\\" to dist:
+59 B: ts-module.js.gz
+42 B: ts-module.js.br
+65 B: ts-module.esm.js.gz
+49 B: ts-module.esm.js.br
+168 B: ts-module.umd.js.gz
+128 B: ts-module.umd.js.br"
+`;
+
+exports[`fixtures build ts-module with microbundle 2`] = `8`;
+
+exports[`fixtures build ts-module with microbundle 3`] = `
+"export declare function foo(): string;
+"
+`;
+
+exports[`fixtures build ts-module with microbundle 4`] = `
+"export declare function foobar(): string;
+"
+`;
+
+exports[`fixtures build ts-module with microbundle 5`] = `
+"function o(){return\\"foobar\\"}export{o as foobar};
+//# sourceMappingURL=ts-module.esm.js.map
+"
+`;
+
+exports[`fixtures build ts-module with microbundle 6`] = `
+"exports.foobar=function(){return\\"foobar\\"};
+//# sourceMappingURL=ts-module.js.map
+"
+`;
+
+exports[`fixtures build ts-module with microbundle 7`] = `
+"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?o(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],o):o((e=e||self).tsModule={})}(this,function(e){e.foobar=function(){return\\"foobar\\"}});
+//# sourceMappingURL=ts-module.umd.js.map
 "
 `;

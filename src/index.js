@@ -21,6 +21,7 @@ import json from '@rollup/plugin-json';
 import logError from './log-error';
 import { readFile, isDir, isFile, stdout, stderr, isTruthy } from './utils';
 import camelCase from 'camelcase';
+import escapeStringRegexp from 'escape-string-regexp';
 
 const removeScope = name => name.replace(/^@.*\//, '');
 
@@ -364,6 +365,21 @@ async function getOutput({ cwd, output, pkgMain, pkgName }) {
 	return main;
 }
 
+function getDeclarationDir({ options, pkg }) {
+	const { cwd, output } = options;
+
+	let result = output;
+
+	if (pkg.types || pkg.typings) {
+		result = pkg.types || pkg.typings;
+		result = resolve(cwd, result);
+	}
+
+	result = dirname(result);
+
+	return result;
+}
+
 async function getEntries({ input, cwd }) {
 	let entries = (
 		await map([].concat(input), async file => {
@@ -377,16 +393,66 @@ async function getEntries({ input, cwd }) {
 	return entries;
 }
 
+function replaceName(filename, name) {
+	return resolve(
+		dirname(filename),
+		name + basename(filename).replace(/^[^.]+/, ''),
+	);
+}
+
+function getMain({ options, entry, format }) {
+	const { pkg } = options;
+	const pkgMain = options['pkg-main'];
+
+	if (!pkgMain) {
+		return options.output;
+	}
+
+	let mainNoExtension = options.output;
+	if (options.multipleEntries) {
+		let name = entry.match(/([\\/])index(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/)
+			? mainNoExtension
+			: entry;
+		mainNoExtension = resolve(dirname(mainNoExtension), basename(name));
+	}
+	mainNoExtension = mainNoExtension.replace(
+		/(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/,
+		'',
+	);
+
+	const mainsByFormat = {};
+
+	mainsByFormat.es = replaceName(
+		pkg.module && !pkg.module.match(/src\//)
+			? pkg.module
+			: pkg['jsnext:main'] || 'x.esm.js',
+		mainNoExtension,
+	);
+	mainsByFormat.modern = replaceName(
+		(pkg.syntax && pkg.syntax.esmodules) || pkg.esmodule || 'x.modern.js',
+		mainNoExtension,
+	);
+	mainsByFormat.cjs = replaceName(pkg['cjs:main'] || 'x.js', mainNoExtension);
+	mainsByFormat.umd = replaceName(
+		pkg['umd:main'] || 'x.umd.js',
+		mainNoExtension,
+	);
+
+	return mainsByFormat[format] || mainsByFormat.cjs;
+}
+
 // shebang cache map because the transform only gets run once
 const shebang = {};
 
 function createConfig(options, entry, format, writeMeta) {
 	let { pkg } = options;
 
+	/** @type {(string|RegExp)[]} */
 	let external = ['dns', 'fs', 'path', 'url'].concat(
 		options.entries.filter(e => e !== entry),
 	);
 
+	/** @type {Record<string, string>} */
 	let outputAliases = {};
 	// since we transform src/index.js, we need to rename imports for it:
 	if (options.multipleEntries) {
@@ -401,7 +467,10 @@ function createConfig(options, entry, format, writeMeta) {
 	if (options.external === 'none') {
 		// bundle everything (external=[])
 	} else if (options.external) {
-		external = external.concat(peerDeps).concat(options.external.split(','));
+		external = external.concat(peerDeps).concat(
+			// CLI --external supports regular expressions:
+			options.external.split(',').map(str => new RegExp(str)),
+		);
 	} else {
 		external = external
 			.concat(peerDeps)
@@ -409,6 +478,9 @@ function createConfig(options, entry, format, writeMeta) {
 	}
 
 	let globals = external.reduce((globals, name) => {
+		// Use raw value for CLI-provided RegExp externals:
+		if (name instanceof RegExp) name = name.source;
+
 		// valid JS identifiers are usually library globals:
 		if (name.match(/^[a-z_$][a-z0-9_$]*$/)) {
 			globals[name] = name;
@@ -427,38 +499,6 @@ function createConfig(options, entry, format, writeMeta) {
 		);
 	}
 
-	function replaceName(filename, name) {
-		return resolve(
-			dirname(filename),
-			name + basename(filename).replace(/^[^.]+/, ''),
-		);
-	}
-
-	let mainNoExtension = options.output;
-	if (options.multipleEntries) {
-		let name = entry.match(/([\\/])index(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/)
-			? mainNoExtension
-			: entry;
-		mainNoExtension = resolve(dirname(mainNoExtension), basename(name));
-	}
-	mainNoExtension = mainNoExtension.replace(
-		/(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/,
-		'',
-	);
-
-	let moduleMain = replaceName(
-		pkg.module && !pkg.module.match(/src\//)
-			? pkg.module
-			: pkg['jsnext:main'] || 'x.esm.js',
-		mainNoExtension,
-	);
-	let modernMain = replaceName(
-		(pkg.syntax && pkg.syntax.esmodules) || pkg.esmodule || 'x.modern.js',
-		mainNoExtension,
-	);
-	let cjsMain = replaceName(pkg['cjs:main'] || 'x.js', mainNoExtension);
-	let umdMain = replaceName(pkg['umd:main'] || 'x.umd.js', mainNoExtension);
-
 	const modern = format === 'modern';
 
 	// let rollupName = safeVariableName(basename(entry).replace(/\.js$/, ''));
@@ -476,7 +516,11 @@ function createConfig(options, entry, format, writeMeta) {
 	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
 	const emitDeclaration = !!(options.generateTypes || pkg.types || pkg.typings);
 
-	const externalPredicate = new RegExp(`^(${external.join('|')})($|/)`);
+	const escapeStringExternals = ext =>
+		ext instanceof RegExp ? ext.source : escapeStringRegexp(ext);
+	const externalPredicate = new RegExp(
+		`^(${external.map(escapeStringExternals).join('|')})($|/)`,
+	);
 	const externalTest =
 		external.length === 0 ? id => false : id => externalPredicate.test(id);
 
@@ -499,10 +543,15 @@ function createConfig(options, entry, format, writeMeta) {
 
 	if (nameCache === bareNameCache) nameCache = null;
 
+	/** @type {false | import('rollup').RollupCache} */
+	let cache;
+	if (modern) cache = false;
+
 	let config = {
+		/** @type {import('rollup').InputOptions} */
 		inputOptions: {
 			// disable Rollup's cache for the modern build to prevent re-use of legacy transpiled modules:
-			cache: modern ? false : undefined,
+			cache,
 
 			input: entry,
 			external: id => {
@@ -535,7 +584,8 @@ function createConfig(options, entry, format, writeMeta) {
 					}),
 					moduleAliases.length > 0 &&
 						alias({
-							resolve: EXTENSIONS,
+							// @TODO: this is no longer supported, but didn't appear to be required?
+							// resolve: EXTENSIONS,
 							entries: moduleAliases,
 						}),
 					nodeResolve({
@@ -570,9 +620,7 @@ function createConfig(options, entry, format, writeMeta) {
 									declaration: true,
 									allowJs: emitDeclaration,
 									emitDeclarationOnly: emitDeclaration,
-									declarationDir: dirname(
-										pkg.types || pkg.typings || options.output,
-									),
+									declarationDir: getDeclarationDir({ options, pkg }),
 									jsx: 'react',
 									jsxFactory:
 										// TypeScript fails to resolve Fragments when jsxFactory
@@ -586,6 +634,7 @@ function createConfig(options, entry, format, writeMeta) {
 							tsconfig: options.tsconfig,
 							tsconfigOverride: {
 								compilerOptions: {
+									module: 'ESNext',
 									target: 'esnext',
 								},
 							},
@@ -674,11 +723,11 @@ function createConfig(options, entry, format, writeMeta) {
 				.filter(Boolean),
 		},
 
+		/** @type {import('rollup').OutputOptions} */
 		outputOptions: {
 			paths: outputAliases,
 			globals,
 			strict: options.strict === true,
-			legacy: true,
 			freeze: false,
 			esModule: false,
 			sourcemap: options.sourcemap,
@@ -687,14 +736,7 @@ function createConfig(options, entry, format, writeMeta) {
 			},
 			format: modern ? 'es' : format,
 			name: options.name,
-			file: resolve(
-				options.cwd,
-				{
-					modern: modernMain,
-					es: moduleMain,
-					umd: umdMain,
-				}[format] || cjsMain,
-			),
+			file: resolve(options.cwd, getMain({ options, entry, format })),
 		},
 	};
 

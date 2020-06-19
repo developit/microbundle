@@ -178,6 +178,14 @@ Microbundle uses the fields from your `package.json` to figure out where it shou
 }
 ```
 
+### Building a single bundle with a fixed output name
+
+By default Microbundle outputs multiple bundles, one bundle per format. A single bundle with a fixed output name can be built like this:
+
+```bash
+microbundle -i lib/main.js -o dist/bundle.js --no-pkg-main -f umd
+```
+
 ### Mangling Properties
 
 To achieve the smallest possible bundle size, libraries often wish to rename internal object properties or class members to smaller names - transforming `this._internalIdValue` to `this._i`. Microbundle doesn't do this by default, however it can be enabled by creating a `mangle.json` file (or a `"mangle"` property in your package.json). Within that file, you can specify a regular expression pattern to control which properties should be mangled. For example: to mangle all property names beginning an underscore:
@@ -212,8 +220,9 @@ Options
 	-o, --output     Directory to place build files into
 	-f, --format     Only build specified formats (any of modern,es,cjs,umd or iife) (default modern,es,cjs,umd)
 	-w, --watch      Rebuilds on any change  (default false)
+	--pkg-main       Outputs files analog to package.json main entries  (default true)
 	--target         Specify your target environment (node or web)  (default web)
-	--external       Specify external dependencies, or 'none'
+	--external       Specify external dependencies, or 'none' (default peerDependencies and dependencies in package.json)
 	--globals        Specify globals dependencies, or 'none'
 	--define         Replace constants with hard-coded values
 	--alias          Map imports to different modules
