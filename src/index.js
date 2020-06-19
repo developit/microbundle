@@ -476,7 +476,7 @@ function createConfig(options, entry, format, writeMeta) {
 	}
 
 	let globals = external.reduce((globals, name) => {
-		// Use raw/escaped value for CLI-provided RegExp externals:
+		// Use raw value for CLI-provided RegExp externals:
 		if (name instanceof RegExp) name = name.source;
 
 		// valid JS identifiers are usually library globals:
