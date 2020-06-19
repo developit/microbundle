@@ -447,10 +447,12 @@ const shebang = {};
 function createConfig(options, entry, format, writeMeta) {
 	let { pkg } = options;
 
+	/** @type {(string|RegExp)[]} */
 	let external = ['dns', 'fs', 'path', 'url'].concat(
 		options.entries.filter(e => e !== entry),
 	);
 
+	/** @type {Record<string, string>} */
 	let outputAliases = {};
 	// since we transform src/index.js, we need to rename imports for it:
 	if (options.multipleEntries) {
@@ -540,10 +542,15 @@ function createConfig(options, entry, format, writeMeta) {
 
 	if (nameCache === bareNameCache) nameCache = null;
 
+	/** @type {false | import('rollup').RollupCache} */
+	let cache;
+	if (modern) cache = false;
+
 	let config = {
+		/** @type {import('rollup').InputOptions} */
 		inputOptions: {
 			// disable Rollup's cache for the modern build to prevent re-use of legacy transpiled modules:
-			cache: modern ? false : undefined,
+			cache,
 
 			input: entry,
 			external: id => {
@@ -576,7 +583,8 @@ function createConfig(options, entry, format, writeMeta) {
 					}),
 					moduleAliases.length > 0 &&
 						alias({
-							resolve: EXTENSIONS,
+							// @TODO: this is no longer supported, but didn't appear to be reuiqred?
+							// resolve: EXTENSIONS,
 							entries: moduleAliases,
 						}),
 					nodeResolve({
@@ -712,11 +720,11 @@ function createConfig(options, entry, format, writeMeta) {
 				.filter(Boolean),
 		},
 
+		/** @type {import('rollup').OutputOptions} */
 		outputOptions: {
 			paths: outputAliases,
 			globals,
 			strict: options.strict === true,
-			legacy: true,
 			freeze: false,
 			esModule: false,
 			sourcemap: options.sourcemap,
