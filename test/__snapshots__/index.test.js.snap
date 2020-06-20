@@ -428,6 +428,54 @@ exports[`fixtures build basic-css with microbundle 6`] = `
 "
 `;
 
+exports[`fixtures build basic-dashed-external with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+basic-dashed-external
+  dist
+    basic-dashed-external.esm.js
+    basic-dashed-external.esm.js.map
+    basic-dashed-external.js
+    basic-dashed-external.js.map
+    basic-dashed-external.umd.js
+    basic-dashed-external.umd.js.map
+  package.json
+  src
+    index.js
+    two.js
+
+
+Build \\"basicDashedExternal\\" to dist:
+248 B: basic-dashed-external.js.gz
+188 B: basic-dashed-external.js.br
+214 B: basic-dashed-external.esm.js.gz
+164 B: basic-dashed-external.esm.js.br
+349 B: basic-dashed-external.umd.js.gz
+281 B: basic-dashed-external.umd.js.br"
+`;
+
+exports[`fixtures build basic-dashed-external with microbundle 2`] = `6`;
+
+exports[`fixtures build basic-dashed-external with microbundle 3`] = `
+"import r from\\"tiny-glob\\";var e=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};console.log(r);export default function(){try{var r=arguments,t=[].slice.call(r);return Promise.resolve(e.apply(void 0,t)).then(function(r){return Promise.resolve(e.apply(void 0,t)).then(function(e){return[r,e]})})}catch(r){return Promise.reject(r)}}
+//# sourceMappingURL=basic-dashed-external.esm.js.map
+"
+`;
+
+exports[`fixtures build basic-dashed-external with microbundle 4`] = `
+"var e,r=(e=require(\\"tiny-glob\\"))&&\\"object\\"==typeof e&&\\"default\\"in e?e.default:e,t=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};console.log(r),module.exports=function(){try{var e=arguments,r=[].slice.call(e);return Promise.resolve(t.apply(void 0,r)).then(function(e){return Promise.resolve(t.apply(void 0,r)).then(function(r){return[e,r]})})}catch(e){return Promise.reject(e)}};
+//# sourceMappingURL=basic-dashed-external.js.map
+"
+`;
+
+exports[`fixtures build basic-dashed-external with microbundle 5`] = `
+"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=t(require(\\"tiny-glob\\")):\\"function\\"==typeof define&&define.amd?define([\\"tiny-glob\\"],t):(e=e||self).basicDashedExternal=t(e.tinyGlob)}(this,function(e){e=e&&Object.prototype.hasOwnProperty.call(e,\\"default\\")?e.default:e;var t=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,t){return e+t},0))}catch(e){return Promise.reject(e)}};return console.log(e),function(){try{var e=arguments,r=[].slice.call(e);return Promise.resolve(t.apply(void 0,r)).then(function(e){return Promise.resolve(t.apply(void 0,r)).then(function(t){return[e,t]})})}catch(e){return Promise.reject(e)}}});
+//# sourceMappingURL=basic-dashed-external.umd.js.map
+"
+`;
+
 exports[`fixtures build basic-flow with microbundle 1`] = `
 "Used script: microbundle
 

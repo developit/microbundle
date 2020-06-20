@@ -482,8 +482,8 @@ function createConfig(options, entry, format, writeMeta) {
 		if (name instanceof RegExp) name = name.source;
 
 		// valid JS identifiers are usually library globals:
-		if (name.match(/^[a-z_$][a-z0-9_$]*$/)) {
-			globals[name] = name;
+		if (name.match(/^[a-z_$][a-z0-9_\-$]*$/)) {
+			globals[name] = camelCase(name);
 		}
 		return globals;
 	}, {});
