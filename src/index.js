@@ -458,12 +458,12 @@ function createConfig(options, entry, format, writeMeta) {
 	}
 
 	let amd = {};
-	if (options.amdName) {
-		amd.id = options.amdName;
+	if (options['amd-name']) {
+		amd.id = options['amd-name'];
 	}
 
-	if (options.amdDefine) {
-		amd.define = options.amdDefine;
+	if (options['amd-define']) {
+		amd.define = options['amd-define'];
 	}
 
 	const moduleAliases = options.alias
