@@ -43,6 +43,54 @@ exports[`fixtures build alias with microbundle 5`] = `
 "
 `;
 
+exports[`fixtures build alias-external with microbundle 1`] = `
+"Used script: microbundle --alias tiny-glob=./colossal-glob.js
+
+Directory tree:
+
+alias-external
+  dist
+    alias-external.esm.js
+    alias-external.esm.js.map
+    alias-external.js
+    alias-external.js.map
+    alias-external.umd.js
+    alias-external.umd.js.map
+  package.json
+  src
+    colossal-glob.js
+    index.js
+
+
+Build \\"aliasExternal\\" to dist:
+37 B: alias-external.js.gz
+21 B: alias-external.js.br
+37 B: alias-external.esm.js.gz
+21 B: alias-external.esm.js.br
+93 B: alias-external.umd.js.gz
+89 B: alias-external.umd.js.br"
+`;
+
+exports[`fixtures build alias-external with microbundle 2`] = `6`;
+
+exports[`fixtures build alias-external with microbundle 3`] = `
+"console.log(42);
+//# sourceMappingURL=alias-external.esm.js.map
+"
+`;
+
+exports[`fixtures build alias-external with microbundle 4`] = `
+"console.log(42);
+//# sourceMappingURL=alias-external.js.map
+"
+`;
+
+exports[`fixtures build alias-external with microbundle 5`] = `
+"!function(n){\\"function\\"==typeof define&&define.amd?define(n):n()}(function(){console.log(42)});
+//# sourceMappingURL=alias-external.umd.js.map
+"
+`;
+
 exports[`fixtures build async-iife-ts with microbundle 1`] = `
 "Used script: microbundle
 

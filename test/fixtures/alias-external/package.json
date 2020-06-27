@@ -1,0 +1,10 @@
+{
+  "name": "alias-external",
+  "scripts": {
+    "build": "microbundle --alias tiny-glob=./colossal-glob.js"
+  },
+  "dependencies": {
+    "tiny-glob": "^0.2.6",
+    "lodash.merge": "^4.6.2"
+  }
+}
