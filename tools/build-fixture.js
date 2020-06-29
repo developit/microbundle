@@ -60,11 +60,11 @@ export const buildDirectory = async fixtureDir => {
 	process.chdir(resolve(fixturePath));
 
 	const parsedOpts = parseScript(script);
-	let output = '';
-	output = await microbundle({
+	let { output } = await microbundle({
 		...parsedOpts,
 		cwd: parsedOpts.cwd !== '.' ? parsedOpts.cwd : resolve(fixturePath),
 	});
+	output = output || '';
 
 	process.chdir(prevDir);
 

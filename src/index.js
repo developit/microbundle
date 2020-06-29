@@ -211,8 +211,8 @@ export default async function microbundle(inputOptions) {
 	}
 
 	if (options.watch) {
-		const onBuild = options.onBuild;
-		return new Promise((resolve, reject) => {
+		const { onStart, onBuild, onError } = options;
+		return new Promise(resolve => {
 			stdout(
 				blue(
 					`Watching source, compiling to ${relative(
@@ -221,8 +221,9 @@ export default async function microbundle(inputOptions) {
 					)}:`,
 				),
 			);
-			steps.map(options => {
-				watch(
+
+			const watchers = steps.reduce((acc, options) => {
+				acc[options.inputOptions.input] = watch(
 					Object.assign(
 						{
 							output: options.outputOptions,
@@ -231,10 +232,16 @@ export default async function microbundle(inputOptions) {
 						options.inputOptions,
 					),
 				).on('event', e => {
-					if (e.code === 'FATAL') {
-						return reject(e.error);
-					} else if (e.code === 'ERROR') {
+					if (e.code === 'START') {
+						if (typeof onStart === 'function') {
+							onStart(e);
+						}
+					}
+					if (e.code === 'ERROR') {
 						logError(e.error);
+						if (typeof onError === 'function') {
+							onError(e);
+						}
 					}
 					if (e.code === 'END') {
 						options._sizeInfo.then(text => {
@@ -245,7 +252,11 @@ export default async function microbundle(inputOptions) {
 						}
 					}
 				});
-			});
+
+				return acc;
+			}, {});
+
+			resolve({ watchers });
 		});
 	}
 
@@ -263,14 +274,15 @@ export default async function microbundle(inputOptions) {
 		}),
 	);
 
-	return (
-		blue(
-			`Build "${options.name}" to ${relative(cwd, dirname(options.output)) ||
-				'.'}:`,
-		) +
-		'\n   ' +
-		out.join('\n   ')
-	);
+	return {
+		output:
+			blue(
+				`Build "${options.name}" to ${relative(cwd, dirname(options.output)) ||
+					'.'}:`,
+			) +
+			'\n   ' +
+			out.join('\n   '),
+	};
 }
 
 async function getConfigFromPkgJson(cwd) {
