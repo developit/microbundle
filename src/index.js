@@ -462,6 +462,7 @@ function createConfig(options, entry, format, writeMeta) {
 	const moduleAliases = options.alias
 		? parseMappingArgumentAlias(options.alias)
 		: [];
+	const aliasIds = moduleAliases.map(alias => alias.find);
 
 	const peerDeps = Object.keys(pkg.peerDependencies || {});
 	if (options.external === 'none') {
@@ -559,6 +560,9 @@ function createConfig(options, entry, format, writeMeta) {
 				}
 				if (options.multipleEntries && id === '.') {
 					return true;
+				}
+				if (aliasIds.indexOf(id) >= 0) {
+					return false;
 				}
 				return externalTest(id);
 			},
