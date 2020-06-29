@@ -7,7 +7,7 @@ import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import { rollup, watch } from 'rollup';
 import commonjs from '@rollup/plugin-commonjs';
-import babel from 'rollup-plugin-babel';
+import babel from '@rollup/plugin-babel';
 import customBabel from './lib/babel-custom';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
@@ -21,6 +21,7 @@ import json from '@rollup/plugin-json';
 import logError from './log-error';
 import { readFile, isDir, isFile, stdout, stderr, isTruthy } from './utils';
 import camelCase from 'camelcase';
+import escapeStringRegexp from 'escape-string-regexp';
 
 const removeScope = name => name.replace(/^@.*\//, '');
 
@@ -31,6 +32,11 @@ const toReplacementExpression = (value, name) => {
 	const matches = value.match(/^(['"])(.+)\1$/);
 	if (matches) {
 		return [JSON.stringify(matches[2]), name];
+	}
+
+	// --define @assign=Object.assign replaces expressions with expressions:
+	if (name[0] === '@') {
+		return [value, name.substring(1)];
 	}
 
 	// --define A=1,B=true produces int/boolean literal:
@@ -247,7 +253,9 @@ export default async function microbundle(inputOptions) {
 	let out = await series(
 		steps.map(config => async () => {
 			const { inputOptions, outputOptions } = config;
-			inputOptions.cache = cache;
+			if (inputOptions.cache !== false) {
+				inputOptions.cache = cache;
+			}
 			let bundle = await rollup(inputOptions);
 			cache = bundle;
 			await bundle.write(outputOptions);
@@ -357,6 +365,21 @@ async function getOutput({ cwd, output, pkgMain, pkgName }) {
 	return main;
 }
 
+function getDeclarationDir({ options, pkg }) {
+	const { cwd, output } = options;
+
+	let result = output;
+
+	if (pkg.types || pkg.typings) {
+		result = pkg.types || pkg.typings;
+		result = resolve(cwd, result);
+	}
+
+	result = dirname(result);
+
+	return result;
+}
+
 async function getEntries({ input, cwd }) {
 	let entries = (
 		await map([].concat(input), async file => {
@@ -370,16 +393,66 @@ async function getEntries({ input, cwd }) {
 	return entries;
 }
 
+function replaceName(filename, name) {
+	return resolve(
+		dirname(filename),
+		name + basename(filename).replace(/^[^.]+/, ''),
+	);
+}
+
+function getMain({ options, entry, format }) {
+	const { pkg } = options;
+	const pkgMain = options['pkg-main'];
+
+	if (!pkgMain) {
+		return options.output;
+	}
+
+	let mainNoExtension = options.output;
+	if (options.multipleEntries) {
+		let name = entry.match(/([\\/])index(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/)
+			? mainNoExtension
+			: entry;
+		mainNoExtension = resolve(dirname(mainNoExtension), basename(name));
+	}
+	mainNoExtension = mainNoExtension.replace(
+		/(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/,
+		'',
+	);
+
+	const mainsByFormat = {};
+
+	mainsByFormat.es = replaceName(
+		pkg.module && !pkg.module.match(/src\//)
+			? pkg.module
+			: pkg['jsnext:main'] || 'x.esm.js',
+		mainNoExtension,
+	);
+	mainsByFormat.modern = replaceName(
+		(pkg.syntax && pkg.syntax.esmodules) || pkg.esmodule || 'x.modern.js',
+		mainNoExtension,
+	);
+	mainsByFormat.cjs = replaceName(pkg['cjs:main'] || 'x.js', mainNoExtension);
+	mainsByFormat.umd = replaceName(
+		pkg['umd:main'] || 'x.umd.js',
+		mainNoExtension,
+	);
+
+	return mainsByFormat[format] || mainsByFormat.cjs;
+}
+
 // shebang cache map because the transform only gets run once
 const shebang = {};
 
 function createConfig(options, entry, format, writeMeta) {
 	let { pkg } = options;
 
+	/** @type {(string|RegExp)[]} */
 	let external = ['dns', 'fs', 'path', 'url'].concat(
 		options.entries.filter(e => e !== entry),
 	);
 
+	/** @type {Record<string, string>} */
 	let outputAliases = {};
 	// since we transform src/index.js, we need to rename imports for it:
 	if (options.multipleEntries) {
@@ -394,7 +467,10 @@ function createConfig(options, entry, format, writeMeta) {
 	if (options.external === 'none') {
 		// bundle everything (external=[])
 	} else if (options.external) {
-		external = external.concat(peerDeps).concat(options.external.split(','));
+		external = external.concat(peerDeps).concat(
+			// CLI --external supports regular expressions:
+			options.external.split(',').map(str => new RegExp(str)),
+		);
 	} else {
 		external = external
 			.concat(peerDeps)
@@ -402,9 +478,12 @@ function createConfig(options, entry, format, writeMeta) {
 	}
 
 	let globals = external.reduce((globals, name) => {
+		// Use raw value for CLI-provided RegExp externals:
+		if (name instanceof RegExp) name = name.source;
+
 		// valid JS identifiers are usually library globals:
-		if (name.match(/^[a-z_$][a-z0-9_$]*$/)) {
-			globals[name] = name;
+		if (name.match(/^[a-z_$][a-z0-9_\-$]*$/)) {
+			globals[name] = camelCase(name);
 		}
 		return globals;
 	}, {});
@@ -419,35 +498,6 @@ function createConfig(options, entry, format, writeMeta) {
 			parseMappingArgument(options.define, toReplacementExpression),
 		);
 	}
-
-	function replaceName(filename, name) {
-		return resolve(
-			dirname(filename),
-			name + basename(filename).replace(/^[^.]+/, ''),
-		);
-	}
-
-	let mainNoExtension = options.output;
-	if (options.multipleEntries) {
-		let name = entry.match(/([\\/])index(\.(umd|cjs|es|m))?\.m?js$/)
-			? mainNoExtension
-			: entry;
-		mainNoExtension = resolve(dirname(mainNoExtension), basename(name));
-	}
-	mainNoExtension = mainNoExtension.replace(/(\.(umd|cjs|es|m))?\.m?js$/, '');
-
-	let moduleMain = replaceName(
-		pkg.module && !pkg.module.match(/src\//)
-			? pkg.module
-			: pkg['jsnext:main'] || 'x.esm.js',
-		mainNoExtension,
-	);
-	let modernMain = replaceName(
-		(pkg.syntax && pkg.syntax.esmodules) || pkg.esmodule || 'x.modern.js',
-		mainNoExtension,
-	);
-	let cjsMain = replaceName(pkg['cjs:main'] || 'x.js', mainNoExtension);
-	let umdMain = replaceName(pkg['umd:main'] || 'x.umd.js', mainNoExtension);
 
 	const modern = format === 'modern';
 
@@ -465,9 +515,13 @@ function createConfig(options, entry, format, writeMeta) {
 
 	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
 
-	const externalPredicate = new RegExp(`^(${external.join('|')})($|/)`);
+	const escapeStringExternals = ext =>
+		ext instanceof RegExp ? ext.source : escapeStringRegexp(ext);
+	const externalPredicate = new RegExp(
+		`^(${external.map(escapeStringExternals).join('|')})($|/)`,
+	);
 	const externalTest =
-		external.length === 0 ? () => false : id => externalPredicate.test(id);
+		external.length === 0 ? id => false : id => externalPredicate.test(id);
 
 	function loadNameCache() {
 		try {
@@ -488,8 +542,16 @@ function createConfig(options, entry, format, writeMeta) {
 
 	if (nameCache === bareNameCache) nameCache = null;
 
+	/** @type {false | import('rollup').RollupCache} */
+	let cache;
+	if (modern) cache = false;
+
 	let config = {
+		/** @type {import('rollup').InputOptions} */
 		inputOptions: {
+			// disable Rollup's cache for the modern build to prevent re-use of legacy transpiled modules:
+			cache,
+
 			input: entry,
 			external: id => {
 				if (id === 'babel-plugin-transform-async-to-promises/helpers') {
@@ -521,12 +583,16 @@ function createConfig(options, entry, format, writeMeta) {
 					}),
 					moduleAliases.length > 0 &&
 						alias({
-							resolve: EXTENSIONS,
+							// @TODO: this is no longer supported, but didn't appear to be required?
+							// resolve: EXTENSIONS,
 							entries: moduleAliases,
 						}),
 					nodeResolve({
 						mainFields: ['module', 'jsnext', 'main'],
 						browser: options.target !== 'node',
+						// defaults + .jsx
+						extensions: ['.mjs', '.js', '.jsx', '.json', '.node'],
+						preferBuiltins: options.target === 'node',
 					}),
 					commonjs({
 						// use a regex to make sure to include eventual hoisted packages
@@ -546,17 +612,26 @@ function createConfig(options, entry, format, writeMeta) {
 						typescript({
 							typescript: require('typescript'),
 							cacheRoot: `./node_modules/.cache/.rts2_cache_${format}`,
+							useTsconfigDeclarationDir: true,
 							tsconfigDefaults: {
 								compilerOptions: {
 									sourceMap: options.sourcemap,
 									declaration: true,
+									declarationDir: getDeclarationDir({ options, pkg }),
 									jsx: 'react',
-									jsxFactory: options.jsx || 'h',
+									jsxFactory:
+										// TypeScript fails to resolve Fragments when jsxFactory
+										// is set, even when it's the same as the default value.
+										options.jsx === 'React.createElement'
+											? undefined
+											: options.jsx || 'h',
 								},
+								files: options.entries,
 							},
 							tsconfig: options.tsconfig,
 							tsconfigOverride: {
 								compilerOptions: {
+									module: 'ESNext',
 									target: 'esnext',
 								},
 							},
@@ -564,9 +639,10 @@ function createConfig(options, entry, format, writeMeta) {
 					// if defines is not set, we shouldn't run babel through node_modules
 					isTruthy(defines) &&
 						babel({
+							babelHelpers: 'bundled',
 							babelrc: false,
-							configFile: false,
 							compact: false,
+							configFile: false,
 							include: 'node_modules/**',
 							plugins: [
 								[
@@ -575,7 +651,8 @@ function createConfig(options, entry, format, writeMeta) {
 								],
 							],
 						}),
-					customBabel({
+					customBabel()({
+						babelHelpers: 'bundled',
 						extensions: EXTENSIONS,
 						exclude: 'node_modules/**',
 						passPerPreset: true, // @see https://babeljs.io/docs/en/options#passperpreset
@@ -623,6 +700,7 @@ function createConfig(options, entry, format, writeMeta) {
 									fs.writeFile(
 										getNameCachePath(),
 										JSON.stringify(nameCache, null, 2),
+										() => {},
 									);
 								}
 							},
@@ -631,9 +709,11 @@ function createConfig(options, entry, format, writeMeta) {
 					{
 						writeBundle(bundle) {
 							config._sizeInfo = Promise.all(
-								Object.values(bundle).map(({ code, fileName }) =>
-									code ? getSizeInfo(code, fileName, options.raw) : false,
-								),
+								Object.values(bundle).map(({ code, fileName }) => {
+									if (code) {
+										return getSizeInfo(code, fileName, options.raw);
+									}
+								}),
 							).then(results => results.filter(Boolean).join('\n'));
 						},
 					},
@@ -641,11 +721,11 @@ function createConfig(options, entry, format, writeMeta) {
 				.filter(Boolean),
 		},
 
+		/** @type {import('rollup').OutputOptions} */
 		outputOptions: {
 			paths: outputAliases,
 			globals,
 			strict: options.strict === true,
-			legacy: true,
 			freeze: false,
 			esModule: false,
 			sourcemap: options.sourcemap,
@@ -654,14 +734,7 @@ function createConfig(options, entry, format, writeMeta) {
 			},
 			format: modern ? 'es' : format,
 			name: options.name,
-			file: resolve(
-				options.cwd,
-				{
-					modern: modernMain,
-					es: moduleMain,
-					umd: umdMain,
-				}[format] || cjsMain,
-			),
+			file: resolve(options.cwd, getMain({ options, entry, format })),
 		},
 	};
 

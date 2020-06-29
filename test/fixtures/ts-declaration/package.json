@@ -1,0 +1,6 @@
+{
+	"name": "ts-declarations",
+	"main": "dist/index.js",
+	"types": "types/index.d.ts",
+	"source": "src/index.tsx"
+}

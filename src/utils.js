@@ -1,18 +1,21 @@
-import fs from 'fs';
-import { promisify } from 'es6-promisify';
+import { promises as fs } from 'fs';
 
-export const readFile = promisify(fs.readFile);
-// export const writeFile = promisify(fs.writeFile);
-export const stat = promisify(fs.stat);
+export const readFile = fs.readFile;
+
+export const stat = fs.stat;
+
 export const isDir = name =>
 	stat(name)
 		.then(stats => stats.isDirectory())
 		.catch(() => false);
+
 export const isFile = name =>
 	stat(name)
 		.then(stats => stats.isFile())
 		.catch(() => false);
+
 export const stdout = console.log.bind(console); // eslint-disable-line no-console
+
 export const stderr = console.error.bind(console);
 
 export const isTruthy = obj => {

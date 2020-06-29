@@ -1,0 +1,6 @@
+{
+  "name": "basic-no-pkg-main",
+  "scripts": {
+    "build": "microbundle --pkg-main false"
+  }
+}
