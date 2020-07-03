@@ -559,6 +559,10 @@ function createConfig(options, entry, format, writeMeta) {
 	let cache;
 	if (modern) cache = false;
 
+	const absMain = resolve(options.cwd, getMain({ options, entry, format }));
+	const outputDir = dirname(absMain);
+	const outputEntryFileName = basename(absMain);
+
 	let config = {
 		/** @type {import('rollup').InputOptions} */
 		inputOptions: {
@@ -750,7 +754,8 @@ function createConfig(options, entry, format, writeMeta) {
 			},
 			format: modern ? 'es' : format,
 			name: options.name,
-			file: resolve(options.cwd, getMain({ options, entry, format })),
+			dir: outputDir,
+			entryFileNames: outputEntryFileName,
 		},
 	};
 
