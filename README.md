@@ -144,6 +144,8 @@ Acts just like `microbundle build`, but watches your source files and rebuilds o
 
 Just point the input to a `.ts` file through either the cli or the `source` key in your `package.json` and you’re done.
 
+Microbundle will generally respect your TypeScript config defined in a `tsconfig.json` file with notable exceptions being the "[target](https://www.typescriptlang.org/tsconfig#target)" and "[module](https://www.typescriptlang.org/tsconfig#module)" settings. To ensure your TypeScript configuration matches the configuration that Microbundle uses internally it's strongly recommended that you set `"module": "ESNext"` and `"target": "ESNext"` in your `tsconfig.json`.
+
 ### Using CSS Modules
 
 By default any css file imported as `.module.css`, will be treated as a css-module. If you wish to treat all .css
