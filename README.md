@@ -56,6 +56,8 @@
 
 Microbundle produces <code title="ECMAScript Modules (import / export)">esm</code>, <code title="CommonJS (Node-style module.exports)">cjs</code>, <code title="Universal Module Definition (works everywhere)">umd</code> bundles with your code compiled to syntax that works pretty much everywhere. While it's possible to customize the browser or Node versions you wish to support using a [browserslist configuration](https://github.com/browserslist/browserslist#browserslist-), the default setting is optimal and strongly recommended.
 
+_Note: Microbundle expects that your code is authored in ECMAScript Modules (import / export)._
+
 ## 🤖 Modern Mode <a name="modern"></a>
 
 In addition to the above formats, Microbundle also outputs a `modern` bundle specially designed to work in _all modern browsers_. This bundle preserves most modern JS features when compiling your code, but ensures the result runs in 90% of web browsers without needing to be transpiled. Specifically, it uses [preset-modules](https://github.com/babel/preset-modules) to target the set of browsers that support `<script type="module">` - that allows syntax like async/await, tagged templates, arrow functions, destructured and rest parameters, etc. The result is generally smaller and faster to execute than the `esm` bundle:
@@ -63,9 +65,9 @@ In addition to the above formats, Microbundle also outputs a `modern` bundle spe
 ```js
 // Our source, "src/make-dom.js":
 export default async function makeDom(tag, props, children) {
-  let el = document.createElement(tag);
-  el.append(...(await children));
-  return Object.assign(el, props);
+	let el = document.createElement(tag);
+	el.append(...(await children));
+	return Object.assign(el, props);
 }
 ```
 
@@ -80,22 +82,26 @@ Compiling the above using Microbundle produces the following `modern` and `esm` 
 
 ```js
 export default async function(e, t, a) {
-  let n = document.createElement(e);
-  n.append(...await a);
-  return Object.assign(n, t);
+	let n = document.createElement(e);
+	n.append(...(await a));
+	return Object.assign(n, t);
 }
 ```
 
 </td><td>
 
 ```js
-export default function(e, t, r) { try {
-  var n = document.createElement(e);
-  return Promise.resolve(r).then(function(e) {
-    n.append.apply(n, e);
-    return Object.assign(n, t);
-  });
-} catch (e) { return Promise.reject(e) } }
+export default function(e, t, r) {
+	try {
+		var n = document.createElement(e);
+		return Promise.resolve(r).then(function(e) {
+			n.append.apply(n, e);
+			return Object.assign(n, t);
+		});
+	} catch (e) {
+		return Promise.reject(e);
+	}
+}
 ```
 
 </td></tbody></table>
@@ -194,9 +200,9 @@ To achieve the smallest possible bundle size, libraries often wish to rename int
 
 ```json
 {
-  "mangle": {
-    "regex": "^_"
-  }
+	"mangle": {
+		"regex": "^_"
+	}
 }
 ```
 
@@ -276,5 +282,5 @@ Here's what's coming up for Microbundle:
 [MIT](https://oss.ninja/mit/developit/)
 
 [rollup]: https://github.com/rollup/rollup
-[Babel]: https://babeljs.io/
+[babel]: https://babeljs.io/
 [async-to-promises]: https://github.com/rpetrich/babel-plugin-transform-async-to-promises
