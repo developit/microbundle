@@ -3,7 +3,7 @@ import { resolve, relative, dirname, basename, extname } from 'path';
 import camelCase from 'camelcase';
 import escapeStringRegexp from 'escape-string-regexp';
 import { blue } from 'kleur';
-import { map, series } from 'asyncro';
+import { map } from 'asyncro';
 import glob from 'tiny-glob/sync';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
@@ -23,6 +23,7 @@ import { getSizeInfo } from './lib/compressed-size';
 import { normalizeMinifyOptions } from './lib/terser';
 import {
 	parseAliasArgument,
+	parseExternals,
 	parseMappingArgument,
 	toReplacementExpression,
 } from './lib/option-normalization';
@@ -79,43 +80,43 @@ export default async function microbundle(inputOptions) {
 		input: options.input,
 	});
 
-	options.multipleEntries = options.entries.length > 1;
+	// options.multipleEntries = options.entries.length > 1;
+	options.multipleEntries = false;
 
 	let formats = (options.format || options.formats).split(',');
 	// always compile cjs first if it's there:
 	formats.sort((a, b) => (a === 'cjs' ? -1 : a > b ? 1 : 0));
 
+	const bundle = await rollup(getConfigInput(options));
+
 	let steps = [];
-	for (let i = 0; i < options.entries.length; i++) {
-		for (let j = 0; j < formats.length; j++) {
-			steps.push(
-				createConfig(
-					options,
-					options.entries[i],
-					formats[j],
-					i === 0 && j === 0,
-				),
-			);
-		}
-	}
+	// for (let i = 0; i < options.entries.length; i++) {
+	// for (let j = 0; j < formats.length; j++) {
+	// 	steps.push(createConfig(options, options.entries[0], formats[j], j === 0));
+	// }
+	// }
 
 	if (options.watch) {
 		return doWatch(options, cwd, steps);
 	}
 
-	let cache;
-	let out = await series(
-		steps.map(config => async () => {
-			const { inputOptions, outputOptions } = config;
-			if (inputOptions.cache !== false) {
-				inputOptions.cache = cache;
-			}
-			let bundle = await rollup(inputOptions);
-			cache = bundle;
-			await bundle.write(outputOptions);
-			return await config._sizeInfo;
-		}),
-	);
+	let out = [];
+	for (let i = 0; i < formats.length; i++) {
+		const { output } = await bundle.write(
+			getConfigOutput(options, formats[i], i === 0),
+		);
+
+		out.push(
+			await Promise.all(
+				output.map(({ code, fileName }) => {
+					if (code) {
+						return getSizeInfo(code, fileName, options.raw);
+					}
+				}),
+			).then(results => results.filter(Boolean).join('\n')),
+		);
+	}
+	// );
 
 	const targetDir = relative(cwd, dirname(options.output)) || '.';
 	const banner = blue(`Build "${options.name}" to ${targetDir}:`);
@@ -253,12 +254,12 @@ function getMain({ options, entry, format }) {
 	}
 
 	let mainNoExtension = options.output;
-	if (options.multipleEntries) {
-		let name = entry.match(/([\\/])index(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/)
-			? mainNoExtension
-			: entry;
-		mainNoExtension = resolve(dirname(mainNoExtension), basename(name));
-	}
+	// if (options.multipleEntries) {
+	let name = entry.match(/([\\/])index(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/)
+		? mainNoExtension
+		: entry;
+	mainNoExtension = resolve(dirname(mainNoExtension), basename(name));
+	// }
 	mainNoExtension = mainNoExtension.replace(
 		/(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/,
 		'',
@@ -288,13 +289,194 @@ function getMain({ options, entry, format }) {
 // shebang cache map because the transform only gets run once
 const shebang = {};
 
+function getConfigInput(options) {
+	const { pkg } = options;
+
+	const moduleAliases = options.alias ? parseAliasArgument(options.alias) : [];
+	const aliasIds = moduleAliases.map(alias => alias.find);
+
+	const useTypescript = options.entries.some(entry => {
+		const ext = extname(entry);
+		return ext === '.ts' || ext === '.tsx';
+	});
+
+	const external = /** @type {Array<string|RegExp>} */ ([
+		'dns',
+		'fs',
+		'path',
+		'url',
+	])
+		.concat(options.entries)
+		.concat(
+			parseExternals(options.external, pkg.peerDependencies, pkg.dependencies),
+		);
+
+	const escapeStringExternals = ext =>
+		ext instanceof RegExp ? ext.source : escapeStringRegexp(ext);
+	const externalPredicate = new RegExp(
+		`^(${external.map(escapeStringExternals).join('|')})($|/)`,
+	);
+	const externalTest =
+		external.length === 0 ? id => false : id => externalPredicate.test(id);
+
+	/** @type {import('rollup').InputOptions} */
+	const config = {
+		input: options.entries.reduce((acc, entry) => {
+			acc[
+				basename(getMain({ options, entry, format: 'cjs' })).replace('.js', '')
+			] = entry;
+
+			return acc;
+		}, {}),
+		external: id => {
+			// include async-to-promises helper once inside the bundle
+			if (id === 'babel-plugin-transform-async-to-promises/helpers') {
+				return false;
+			}
+
+			// Mark other entries as external so they don't get bundled
+			if (options.multipleEntries && id === '.') {
+				return true;
+			}
+
+			if (aliasIds.indexOf(id) >= 0) {
+				return false;
+			}
+			return externalTest(id);
+		},
+		treeshake: {
+			propertyReadSideEffects: false,
+		},
+		plugins: [
+			postcss({
+				autoModules: shouldCssModules(options),
+				modules: cssModulesConfig(options),
+				// only write out CSS for the first bundle (avoids pointless extra files):
+				inject: false,
+				extract: false,
+			}),
+			moduleAliases.length > 0 &&
+				alias({
+					// @TODO: this is no longer supported, but didn't appear to be required?
+					// resolve: EXTENSIONS,
+					entries: moduleAliases,
+				}),
+			nodeResolve({
+				mainFields: ['module', 'jsnext', 'main'],
+				browser: options.target !== 'node',
+				// defaults + .jsx
+				extensions: ['.mjs', '.js', '.jsx', '.json', '.node'],
+				preferBuiltins: options.target === 'node',
+			}),
+			commonjs({
+				// use a regex to make sure to include eventual hoisted packages
+				include: /\/node_modules\//,
+			}),
+			json(),
+			customBabel()({
+				babelHelpers: 'bundled',
+				extensions: EXTENSIONS,
+				exclude: 'node_modules/**',
+				passPerPreset: true, // @see https://babeljs.io/docs/en/options#passperpreset
+				custom: {
+					// defines,
+					// modern,
+					compress: options.compress !== false,
+					targets: options.target === 'node' ? { node: '8' } : undefined,
+					pragma: options.jsx || 'h',
+					pragmaFrag: options.jsxFragment || 'Fragment',
+					typescript: !!useTypescript,
+				},
+			}),
+			useTypescript &&
+				typescript({
+					typescript: require('typescript'),
+					cacheRoot: `./node_modules/.cache/.rts2_cache`,
+					useTsconfigDeclarationDir: true,
+					tsconfigDefaults: {
+						compilerOptions: {
+							sourceMap: options.sourcemap,
+							declaration: true,
+							declarationDir: getDeclarationDir({ options, pkg }),
+							jsx: 'react',
+							jsxFactory:
+								// TypeScript fails to resolve Fragments when jsxFactory
+								// is set, even when it's the same as the default value.
+								options.jsx === 'React.createElement'
+									? undefined
+									: options.jsx || 'h',
+						},
+						files: options.entries,
+					},
+					tsconfig: options.tsconfig,
+					tsconfigOverride: {
+						compilerOptions: {
+							module: 'ESNext',
+							target: 'esnext',
+						},
+					},
+				}),
+			{
+				// We have to remove shebang so it doesn't end up in the middle of the code somewhere
+				transform: code => ({
+					code: code.replace(/^#![^\n]*/, bang => {
+						shebang[options.name] = bang;
+					}),
+					map: null,
+				}),
+			},
+		],
+	};
+
+	return config;
+}
+
+function getConfigOutput(options, format, writeMeta) {
+	const isModern = format === 'modern';
+
+	const absMain = resolve(
+		options.cwd,
+		getMain({ options, entry: options.entries[0], format }),
+	);
+	const outputDir = dirname(absMain);
+
+	/** @type {Record<string, string>} */
+	let outputAliases = {};
+	// since we transform src/index.js, we need to rename imports for it:
+	if (options.multipleEntries) {
+		outputAliases['.'] = './' + basename(options.output);
+	}
+
+	return {
+		paths: outputAliases,
+		// globals,
+		strict: options.strict === true,
+		freeze: false,
+		esModule: false,
+		sourcemap: options.sourcemap,
+		get banner() {
+			return shebang[options.name];
+		},
+		format: isModern ? 'es' : format,
+		name: options.name,
+		dir: outputDir,
+		entryFileNames: '[name].js',
+	};
+}
+
 function createConfig(options, entry, format, writeMeta) {
 	let { pkg } = options;
 
-	/** @type {(string|RegExp)[]} */
-	let external = ['dns', 'fs', 'path', 'url'].concat(
-		options.entries.filter(e => e !== entry),
-	);
+	const external = /** @type {Array<string|RegExp>} */ ([
+		'dns',
+		'fs',
+		'path',
+		'url',
+	])
+		.concat(options.entries.filter(e => e !== entry))
+		.concat(
+			parseExternals(options.external, pkg.peerDependencies, pkg.dependencies),
+		);
 
 	/** @type {Record<string, string>} */
 	let outputAliases = {};
@@ -305,20 +487,6 @@ function createConfig(options, entry, format, writeMeta) {
 
 	const moduleAliases = options.alias ? parseAliasArgument(options.alias) : [];
 	const aliasIds = moduleAliases.map(alias => alias.find);
-
-	const peerDeps = Object.keys(pkg.peerDependencies || {});
-	if (options.external === 'none') {
-		// bundle everything (external=[])
-	} else if (options.external) {
-		external = external.concat(peerDeps).concat(
-			// CLI --external supports regular expressions:
-			options.external.split(',').map(str => new RegExp(str)),
-		);
-	} else {
-		external = external
-			.concat(peerDeps)
-			.concat(Object.keys(pkg.dependencies || {}));
-	}
 
 	let globals = external.reduce((globals, name) => {
 		// Use raw value for CLI-provided RegExp externals:
@@ -458,34 +626,6 @@ function createConfig(options, entry, format, writeMeta) {
 							map: null,
 						}),
 					},
-					useTypescript &&
-						typescript({
-							typescript: require('typescript'),
-							cacheRoot: `./node_modules/.cache/.rts2_cache_${format}`,
-							useTsconfigDeclarationDir: true,
-							tsconfigDefaults: {
-								compilerOptions: {
-									sourceMap: options.sourcemap,
-									declaration: true,
-									declarationDir: getDeclarationDir({ options, pkg }),
-									jsx: 'react',
-									jsxFactory:
-										// TypeScript fails to resolve Fragments when jsxFactory
-										// is set, even when it's the same as the default value.
-										options.jsx === 'React.createElement'
-											? undefined
-											: options.jsx || 'h',
-								},
-								files: options.entries,
-							},
-							tsconfig: options.tsconfig,
-							tsconfigOverride: {
-								compilerOptions: {
-									module: 'ESNext',
-									target: 'esnext',
-								},
-							},
-						}),
 					// if defines is not set, we shouldn't run babel through node_modules
 					isTruthy(defines) &&
 						babel({
@@ -556,17 +696,6 @@ function createConfig(options, entry, format, writeMeta) {
 							},
 						},
 					],
-					{
-						writeBundle(bundle) {
-							config._sizeInfo = Promise.all(
-								Object.values(bundle).map(({ code, fileName }) => {
-									if (code) {
-										return getSizeInfo(code, fileName, options.raw);
-									}
-								}),
-							).then(results => results.filter(Boolean).join('\n'));
-						},
-					},
 				)
 				.filter(Boolean),
 		},

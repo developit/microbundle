@@ -47,10 +47,42 @@ export function parseMappingArgument(globalStrings, processValue) {
 
 /**
  * Parses values of the form "$=jQuery,React=react" into key-value object pairs.
+ * @param {string} aliasStrings
+ * @return {{ find: string, replacement: string }[]}
  */
 export function parseAliasArgument(aliasStrings) {
 	return aliasStrings.split(',').map(str => {
 		let [key, value] = str.split('=');
 		return { find: key, replacement: value };
 	});
+}
+
+/**
+ *
+ * @param {string} external
+ * @param {Record<string, string>} peerDependencies
+ * @param {Record<string, string>} dependencies
+ * @return {Array<string|RegExp>}
+ */
+export function parseExternals(
+	external,
+	peerDependencies = {},
+	dependencies = {},
+) {
+	if (external === 'none') {
+		return [];
+	}
+
+	const peerDeps = Object.keys(peerDependencies);
+	if (external) {
+		/** @type {Array<string|RegExp>} */
+		const externals = [].concat(peerDeps).concat(
+			// CLI --external supports regular expressions:
+			external.split(',').map(str => new RegExp(str)),
+		);
+
+		return externals;
+	}
+
+	return peerDeps.concat(Object.keys(dependencies));
 }
