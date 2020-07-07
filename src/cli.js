@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import microbundle from '.';
+import microbundle from './index';
 import prog from './prog';
 import { stdout } from './utils';
 import logError from './log-error';
