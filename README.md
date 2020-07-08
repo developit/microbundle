@@ -176,7 +176,7 @@ Microbundle uses the fields from your `package.json` to figure out where it shou
   "umd:main": "dist/foo.umd.js",    // UMD bundle
   "module": "dist/foo.m.js",        // ES Modules bundle
   "esmodule": "dist/foo.modern.js", // Modern bundle
-  "types": "dist/foo.d.ts"          // TypeScript typings
+  "types": "dist/foo.d.ts"          // TypeScript typings directory
 }
 ```
 
