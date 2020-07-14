@@ -22,7 +22,16 @@
     "singleQuote": true,
     "trailingComma": "all",
     "useTabs": true,
-    "arrowParens": "avoid"
+    "arrowParens": "avoid",
+    "overrides": [
+      {
+        "files": "package.json",
+        "options": {
+          "useTabs": false,
+          "parser": "json-stringify"
+        }
+      }
+    ]
   },
   "lint-staged": {
     "{src,test}/**/*.js": [
