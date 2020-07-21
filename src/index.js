@@ -468,7 +468,7 @@ function createConfig(options, entry, format, writeMeta) {
 									sourceMap: options.sourcemap,
 									declaration: true,
 									declarationDir: getDeclarationDir({ options, pkg }),
-									jsx: 'react',
+									jsx: 'preserve',
 									jsxFactory:
 										// TypeScript fails to resolve Fragments when jsxFactory
 										// is set, even when it's the same as the default value.
