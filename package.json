@@ -15,7 +15,8 @@
     "test": "npm run -s lint && npm run -s build && cross-env BABEL_ENV=test jest",
     "jest": "cross-env BABEL_ENV=test jest",
     "format": "prettier --write \"{*,{src,test}/**/*}.+(js|css)\"",
-    "release": "npm run -s prepare && npm test && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish"
+    "changeset": "changeset",
+    "release": "npm run -s prepare && npm test && changeset publish"
   },
   "repository": "developit/microbundle",
   "prettier": {
@@ -118,6 +119,8 @@
     "@babel/node": "^7.10.1",
     "@babel/plugin-proposal-optional-chaining": "^7.10.1",
     "@babel/plugin-proposal-throw-expressions": "^7.10.1",
+    "@changesets/changelog-github": "^0.2.6",
+    "@changesets/cli": "^2.9.2",
     "babel-jest": "^24.8.0",
     "cross-env": "^6.0.3",
     "directory-tree": "^2.2.3",
