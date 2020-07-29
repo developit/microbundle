@@ -134,7 +134,7 @@ Unless overridden via the command line, microbundle uses the `source` property i
 }
 ```
 
-For UMD builds, microbundle will use a snake_case version of the `name` field in your `package.json` as export name. This can be customized using an `"amdName"` key in your `package.json` or the `--name` command line argument.
+For UMD builds, microbundle will use a camelCase version of the `name` field in your `package.json` as export name. This can be customized using an `"amdName"` key in your `package.json` or the `--name` command line argument.
 
 ### `microbundle watch`
 
