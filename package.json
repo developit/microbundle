@@ -1,6 +1,6 @@
 {
-  "name": "microbundle",
-  "version": "0.12.3",
+  "name": "@eik/microbundle",
+  "version": "0.0.0",
   "description": "Zero-configuration bundler for tiny JS libs, powered by Rollup.",
   "main": "dist/microbundle.js",
   "source": "src/index.js",
@@ -18,7 +18,7 @@
     "changeset": "changeset",
     "release": "npm run -s prepare && npm test && changeset publish"
   },
-  "repository": "developit/microbundle",
+  "repository": "eik-lib/microbundle",
   "prettier": {
     "singleQuote": true,
     "trailingComma": "all",
@@ -82,6 +82,7 @@
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-flow": "^7.10.1",
     "@babel/preset-modules": "^0.1.3",
+    "@eik/rollup-plugin-import-map": "^1.0.0",
     "@rollup/plugin-alias": "^3.1.1",
     "@rollup/plugin-babel": "^5.0.3",
     "@rollup/plugin-commonjs": "^13.0.0",

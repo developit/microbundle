@@ -28,6 +28,7 @@ import {
 } from './lib/option-normalization';
 import { getConfigFromPkgJson, getName } from './lib/package-info';
 import { shouldCssModules, cssModulesConfig } from './lib/css-modules';
+import eik from '@eik/rollup-plugin-import-map';
 
 // Extensions to use when resolving modules
 const EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs'];
@@ -417,6 +418,7 @@ function createConfig(options, entry, format, writeMeta) {
 			},
 			plugins: []
 				.concat(
+					modern && eik(),
 					postcss({
 						plugins: [
 							autoprefixer(),
