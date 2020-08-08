@@ -226,7 +226,7 @@ Options
 	--target         Specify your target environment (node or web)  (default web)
 	--external       Specify external dependencies, or 'none' (default peerDependencies and dependencies in package.json)
 	--globals        Specify globals dependencies, or 'none'
-	--define         Replace constants with hard-coded values
+	--define         Replace constants with hard-coded values (use @key=exp to replace an expression)
 	--alias          Map imports to different modules
 	--compress       Compress output using Terser
 	--strict         Enforce undefined global context and add "use strict"
