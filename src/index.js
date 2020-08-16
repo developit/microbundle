@@ -8,6 +8,7 @@ import glob from 'tiny-glob/sync';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import { rollup, watch } from 'rollup';
+import builtinModules from 'builtin-modules';
 import commonjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
 import customBabel from './lib/babel-custom';
@@ -305,6 +306,12 @@ function createConfig(options, entry, format, writeMeta) {
 
 	const moduleAliases = options.alias ? parseAliasArgument(options.alias) : [];
 	const aliasIds = moduleAliases.map(alias => alias.find);
+
+	// We want to silence rollup warnings for node builtins as we rollup-node-resolve threats them as externals anyway
+	// @see https://github.com/rollup/plugins/tree/master/packages/node-resolve/#resolving-built-ins-like-fs
+	if (options.target === 'node') {
+		external = external.concat(builtinModules);
+	}
 
 	const peerDeps = Object.keys(pkg.peerDependencies || {});
 	if (options.external === 'none') {
