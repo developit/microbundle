@@ -63,9 +63,9 @@ In addition to the above formats, Microbundle also outputs a `modern` bundle spe
 ```js
 // Our source, "src/make-dom.js":
 export default async function makeDom(tag, props, children) {
-  let el = document.createElement(tag);
-  el.append(...(await children));
-  return Object.assign(el, props);
+	let el = document.createElement(tag);
+	el.append(...(await children));
+	return Object.assign(el, props);
 }
 ```
 
@@ -80,22 +80,26 @@ Compiling the above using Microbundle produces the following `modern` and `esm` 
 
 ```js
 export default async function(e, t, a) {
-  let n = document.createElement(e);
-  n.append(...await a);
-  return Object.assign(n, t);
+	let n = document.createElement(e);
+	n.append(...(await a));
+	return Object.assign(n, t);
 }
 ```
 
 </td><td>
 
 ```js
-export default function(e, t, r) { try {
-  var n = document.createElement(e);
-  return Promise.resolve(r).then(function(e) {
-    n.append.apply(n, e);
-    return Object.assign(n, t);
-  });
-} catch (e) { return Promise.reject(e) } }
+export default function(e, t, r) {
+	try {
+		var n = document.createElement(e);
+		return Promise.resolve(r).then(function(e) {
+			n.append.apply(n, e);
+			return Object.assign(n, t);
+		});
+	} catch (e) {
+		return Promise.reject(e);
+	}
+}
 ```
 
 </td></tbody></table>
@@ -194,9 +198,9 @@ To achieve the smallest possible bundle size, libraries often wish to rename int
 
 ```json
 {
-  "mangle": {
-    "regex": "^_"
-  }
+	"mangle": {
+		"regex": "^_"
+	}
 }
 ```
 
@@ -229,6 +233,7 @@ Options
 	--define         Replace constants with hard-coded values
 	--alias          Map imports to different modules
 	--compress       Compress output using Terser
+	--no-compress    Disable output compressing
 	--strict         Enforce undefined global context and add "use strict"
 	--name           Specify name exposed in UMD and IIFE builds
 	--cwd            Use an alternative working directory  (default .)
@@ -276,5 +281,5 @@ Here's what's coming up for Microbundle:
 [MIT](https://oss.ninja/mit/developit/)
 
 [rollup]: https://github.com/rollup/rollup
-[Babel]: https://babeljs.io/
+[babel]: https://babeljs.io/
 [async-to-promises]: https://github.com/rpetrich/babel-plugin-transform-async-to-promises
