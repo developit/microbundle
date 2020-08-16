@@ -46,7 +46,8 @@ const createConfigItems = (babel, type, items) => {
 	});
 };
 
-const presetEnvRegex = RegExp(/@babel\/(preset-)?env/);
+const environmentPreset = '@babel/preset-env';
+const presetEnvRegex = new RegExp(environmentPreset);
 
 export default () => {
 	return createBabelInputPluginFactory(babelCore => {
@@ -123,10 +124,6 @@ export default () => {
 					presetEnvRegex.test(preset.file.request),
 				);
 
-				const environmentPreset = customOptions.modern
-					? '@babel/preset-modules'
-					: '@babel/preset-env';
-
 				if (envIdx !== -1) {
 					const preset = babelOptions.presets[envIdx];
 					babelOptions.presets[envIdx] = babelCore.createConfigItem(
@@ -141,6 +138,7 @@ export default () => {
 									},
 									preset.options,
 									{
+										bugfixes: customOptions.modern,
 										modules: false,
 										exclude: merge(
 											['transform-async-to-generator', 'transform-regenerator'],
@@ -165,6 +163,7 @@ export default () => {
 							modules: false,
 							loose: true,
 							useBuiltIns: false,
+							bugfixes: customOptions.modern,
 							exclude: [
 								'transform-async-to-generator',
 								'transform-regenerator',
