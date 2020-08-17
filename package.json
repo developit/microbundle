@@ -93,6 +93,7 @@
     "babel-plugin-transform-async-to-promises": "^0.8.15",
     "babel-plugin-transform-replace-expressions": "^0.2.0",
     "brotli-size": "^4.0.0",
+    "builtin-modules": "^3.1.0",
     "camelcase": "^5.3.1",
     "cssnano": "^4.1.10",
     "es6-promisify": "^6.1.1",
