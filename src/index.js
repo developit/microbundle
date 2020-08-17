@@ -279,7 +279,7 @@ function getMain({ options, entry, format }) {
 	);
 	mainsByFormat.cjs = replaceName(pkg['cjs:main'] || 'x.js', mainNoExtension);
 	mainsByFormat.umd = replaceName(
-		pkg['umd:main'] || 'x.umd.js',
+		pkg['umd:main'] || pkg.unpkg || 'x.umd.js',
 		mainNoExtension,
 	);
 
