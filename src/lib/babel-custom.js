@@ -85,12 +85,13 @@ export default () => {
 							name: 'babel-plugin-transform-replace-expressions',
 							replace: customOptions.defines,
 						},
-						!customOptions.modern && {
-							name: 'babel-plugin-transform-async-to-promises',
-							inlineHelpers: true,
-							externalHelpers: false,
-							minify: true,
-						},
+						!customOptions.modern &&
+							!isNodeTarget && {
+								name: 'babel-plugin-transform-async-to-promises',
+								inlineHelpers: true,
+								externalHelpers: false,
+								minify: true,
+							},
 						!customOptions.modern &&
 							!isNodeTarget && {
 								value: [
@@ -107,10 +108,11 @@ export default () => {
 							name: '@babel/plugin-proposal-class-properties',
 							loose: true,
 						},
-						!customOptions.modern && {
-							name: '@babel/plugin-transform-regenerator',
-							async: false,
-						},
+						!customOptions.modern &&
+							!isNodeTarget && {
+								name: '@babel/plugin-transform-regenerator',
+								async: false,
+							},
 						{
 							name: 'babel-plugin-macros',
 						},
