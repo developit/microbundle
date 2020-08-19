@@ -6,7 +6,7 @@ const toArray = val => (Array.isArray(val) ? val : val == null ? [] : [val]);
 export default handler => {
 	const ENABLE_MODERN = process.env.MICROBUNDLE_MODERN !== 'false';
 
-	const DEFAULT_FORMATS = ENABLE_MODERN ? 'modern,es,cjs,umd' : 'es,cjs,umd';
+	const DEFAULT_FORMATS = ENABLE_MODERN ? 'modern,iife' : 'iife';
 
 	const cmd = type => (str, opts) => {
 		opts.watch = opts.watch || type === 'watch';
@@ -31,7 +31,7 @@ export default handler => {
 	prog
 		.version(version)
 		.option('--entry, -i', 'Entry module(s)')
-		.option('--output, -o', 'Directory to place build files into')
+		.option('--output, -o', 'Directory to place build files into', 'dist')
 		.option(
 			'--format, -f',
 			`Only build specified formats (any of ${DEFAULT_FORMATS} or iife)`,
