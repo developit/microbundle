@@ -590,7 +590,8 @@ function createConfig(options, entry, format, writeMeta) {
 				return shebang[options.name];
 			},
 			format: modern ? 'es' : format,
-			name: options.name,
+			name: options.name && options.name.replace(/^global\./, ''),
+			extend: /^global\./.test(options.name),
 			dir: outputDir,
 			entryFileNames: outputEntryFileName,
 		},
