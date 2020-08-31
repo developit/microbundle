@@ -1,5 +1,5 @@
 ---
-"@fake-scope/fake-pkg": patch
+"microbundle": patch
 ---
 
-Support global extend via `{"amdName":"global.xyz"}` in package.json.
+Support [extending a UMD global](https://rollupjs.org/guide/en/#outputextend) by prefixing the package.json `"amdName"` field (eg: `"global.xyz"`).
