@@ -47,7 +47,8 @@ const createConfigItems = (babel, type, items) => {
 };
 
 const environmentPreset = '@babel/preset-env';
-const presetEnvRegex = new RegExp(environmentPreset);
+// capture both @babel/env & @babel/preset-env
+const presetEnvRegex = new RegExp(/@babel\/(preset-)?env/);
 
 export default () => {
 	return createBabelInputPluginFactory(babelCore => {
