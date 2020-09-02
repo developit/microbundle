@@ -47,7 +47,7 @@ const createConfigItems = (babel, type, items) => {
 };
 
 const environmentPreset = '@babel/preset-env';
-// capture both @babel/env & @babel/preset-env
+// capture both @babel/env & @babel/preset-env (https://babeljs.io/docs/en/presets#preset-shorthand)
 const presetEnvRegex = new RegExp(/@babel\/(preset-)?env/);
 
 export default () => {
