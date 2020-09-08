@@ -83,6 +83,8 @@ export default async function microbundle(inputOptions) {
 	options.multipleEntries = options.entries.length > 1;
 
 	let formats = (options.format || options.formats).split(',');
+	// de-dupe formats and convert "esm" to "es":
+	formats = Array.from(new Set(formats.map(f => f === 'esm' ? 'es' : f)));
 	// always compile cjs first if it's there:
 	formats.sort((a, b) => (a === 'cjs' ? -1 : a > b ? 1 : 0));
 
