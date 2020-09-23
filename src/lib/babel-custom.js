@@ -75,7 +75,7 @@ export default () => {
 						{
 							name: '@babel/plugin-syntax-import-meta',
 						},
-						{
+						!customOptions.jsxImportSource && {
 							name: '@babel/plugin-transform-react-jsx',
 							pragma: customOptions.pragma || 'h',
 							pragmaFrag: customOptions.pragmaFrag || 'Fragment',
@@ -157,22 +157,31 @@ export default () => {
 						},
 					);
 				} else {
-					babelOptions.presets = createConfigItems(babelCore, 'preset', [
-						{
-							name: environmentPreset,
-							targets: customOptions.modern
-								? ESMODULES_TARGET
-								: customOptions.targets,
-							modules: false,
-							loose: true,
-							useBuiltIns: false,
-							bugfixes: customOptions.modern,
-							exclude: [
-								'transform-async-to-generator',
-								'transform-regenerator',
-							],
-						},
-					]);
+					babelOptions.presets = createConfigItems(
+						babelCore,
+						'preset',
+						[
+							{
+								name: environmentPreset,
+								targets: customOptions.modern
+									? ESMODULES_TARGET
+									: customOptions.targets,
+								modules: false,
+								loose: true,
+								useBuiltIns: false,
+								bugfixes: customOptions.modern,
+								exclude: [
+									'transform-async-to-generator',
+									'transform-regenerator',
+								],
+							},
+							customOptions.jsxImportSource && {
+								name: '@babel/preset-react',
+								runtime: 'automatic',
+								importSource: customOptions.jsxImportSource,
+							},
+						].filter(Boolean),
+					);
 				}
 
 				// Merge babelrc & our plugins together

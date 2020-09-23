@@ -221,28 +221,29 @@ For more info, run any command with the `--help` flag
 	$ microbundle watch --help
 
 Options
-	-v, --version    Displays current version
-	-i, --entry      Entry module(s)
-	-o, --output     Directory to place build files into
-	-f, --format     Only build specified formats (any of modern,es,cjs,umd or iife) (default modern,es,cjs,umd)
-	-w, --watch      Rebuilds on any change  (default false)
-	--pkg-main       Outputs files analog to package.json main entries  (default true)
-	--target         Specify your target environment (node or web)  (default web)
-	--external       Specify external dependencies, or 'none' (default peerDependencies and dependencies in package.json)
-	--globals        Specify globals dependencies, or 'none'
-	--define         Replace constants with hard-coded values
-	--alias          Map imports to different modules
-	--compress       Compress output using Terser
-	--no-compress    Disable output compressing
-	--strict         Enforce undefined global context and add "use strict"
-	--name           Specify name exposed in UMD and IIFE builds
-	--cwd            Use an alternative working directory  (default .)
-	--sourcemap      Generate source map  (default true)
-	--raw            Show raw byte size  (default false)
-	--jsx            A custom JSX pragma like React.createElement (default: h)
-	--tsconfig       Specify the path to a custom tsconfig.json
-	--css-modules    Configures .css to be treated as modules (default: null)
-	-h, --help       Displays this message
+	-v, --version      Displays current version
+	-i, --entry        Entry module(s)
+	-o, --output       Directory to place build files into
+	-f, --format       Only build specified formats (any of modern,es,cjs,umd or iife) (default modern,es,cjs,umd)
+	-w, --watch        Rebuilds on any change  (default false)
+	--pkg-main         Outputs files analog to package.json main entries  (default true)
+	--target           Specify your target environment (node or web)  (default web)
+	--external         Specify external dependencies, or 'none' (default peerDependencies and dependencies in package.json)
+	--globals          Specify globals dependencies, or 'none'
+	--define           Replace constants with hard-coded values
+	--alias            Map imports to different modules
+	--compress         Compress output using Terser
+	--no-compress      Disable output compressing
+	--strict           Enforce undefined global context and add "use strict"
+	--name             Specify name exposed in UMD and IIFE builds
+	--cwd              Use an alternative working directory  (default .)
+	--sourcemap        Generate source map  (default true)
+	--raw              Show raw byte size  (default false)
+	--jsx              A custom JSX pragma like React.createElement (default: h)
+	--jsxImportSource  Specify the automatic import source for JSX like preact
+	--tsconfig         Specify the path to a custom tsconfig.json
+	--css-modules      Configures .css to be treated as modules (default: null)
+	-h, --help         Displays this message
 
 Examples
 	$ microbundle build --globals react=React,jquery=$
