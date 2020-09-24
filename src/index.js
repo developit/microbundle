@@ -521,6 +521,7 @@ function createConfig(options, entry, format, writeMeta) {
 							pragma: options.jsx || 'h',
 							pragmaFrag: options.jsxFragment || 'Fragment',
 							typescript: !!useTypescript,
+							jsxImportSource: options.jsxImportSource || false,
 						},
 					}),
 					options.compress !== false && [
