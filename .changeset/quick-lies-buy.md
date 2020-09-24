@@ -1,5 +1,5 @@
 ---
-"@fake-scope/fake-pkg": patch
+"microbundle": patch
 ---
 
 Add jsxImportSource flag for new JSX runtime
