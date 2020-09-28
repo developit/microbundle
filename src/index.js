@@ -417,10 +417,10 @@ function createConfig(options, entry, format, writeMeta) {
 				// https://github.com/rollup/rollup/blob/0fa9758cb7b1976537ae0875d085669e3a21e918/src/utils/error.ts#L324
 				if (warning.code === 'UNRESOLVED_IMPORT') {
 					stdout(
-						`Failed to resolve the module ${warning.source} imported by ${warning.importer}`
-						`Is the module installed? Note:\n` +
-						`↳ to inline a module into your bundle, install it to "devDependencies".` +
-						`↳ to depend on a module via import/require, install it to "dependencies".`
+						`Failed to resolve the module ${warning.source} imported by ${warning.importer}` +
+							`\nIs the module installed? Note:` +
+							`\n ↳ to inline a module into your bundle, install it to "devDependencies".` +
+							`\n ↳ to depend on a module via import/require, install it to "dependencies".`,
 					);
 					return;
 				}
