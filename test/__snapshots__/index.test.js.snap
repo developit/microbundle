@@ -1615,14 +1615,14 @@ Directory tree:
 
 define-expression
   dist
-    define-expression.js
+    define-expression.esm.js
   index.js
   package.json
 
 
 Build \\"defineExpression\\" to dist:
-56 B: define-expression.js.gz
-40 B: define-expression.js.br"
+56 B: define-expression.esm.js.gz
+40 B: define-expression.esm.js.br"
 `;
 
 exports[`fixtures build define-expression with microbundle 2`] = `1`;
