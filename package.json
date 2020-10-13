@@ -103,7 +103,7 @@
     "lodash.merge": "^4.6.2",
     "module-details-from-path": "^1.0.3",
     "pretty-bytes": "^5.4.1",
-    "rollup": "^1.32.1",
+    "rollup": "^2.29.0",
     "rollup-plugin-bundle-size": "^1.0.3",
     "rollup-plugin-es3": "^1.1.0",
     "rollup-plugin-postcss": "^2.9.0",
