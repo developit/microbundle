@@ -448,18 +448,18 @@ basic-css
 Build \\"basicCss\\" to dist:
 107 B: basic-css.js.gz
 60 B: basic-css.js.br
-106 B: basic-css.esm.js.gz
-56 B: basic-css.esm.js.br
+109 B: basic-css.esm.js.gz
+67 B: basic-css.esm.js.br
 212 B: basic-css.umd.js.gz
 145 B: basic-css.umd.js.br"
 `;
 
 exports[`fixtures build basic-css with microbundle 2`] = `7`;
 
-exports[`fixtures build basic-css with microbundle 3`] = `"._rHGVB{display:flex;color:red;background:#00f}"`;
+exports[`fixtures build basic-css with microbundle 3`] = `".testing{display:flex;color:red;background:#00f}"`;
 
 exports[`fixtures build basic-css with microbundle 4`] = `
-"export default function(){var e=document.createElement(\\"div\\");return e.className=\\"testing\\",e}
+"function e(){var e=document.createElement(\\"div\\");return e.className=\\"testing\\",e}export default e;
 //# sourceMappingURL=basic-css.esm.js.map
 "
 `;
@@ -1203,21 +1203,18 @@ css-modules--false
 Build \\"cssModulesFalse\\" to dist:
 49 B: css-modules--false.js.gz
 23 B: css-modules--false.js.br
-48 B: css-modules--false.esm.js.gz
-32 B: css-modules--false.esm.js.br
+52 B: css-modules--false.esm.js.gz
+36 B: css-modules--false.esm.js.br
 172 B: css-modules--false.umd.js.gz
 125 B: css-modules--false.umd.js.br"
 `;
 
 exports[`fixtures build css-modules--false with microbundle 2`] = `4`;
 
-exports[`fixtures build css-modules--false with microbundle 3`] = `
-".not_scoped_class{color:pink}
-body{display:flex;color:red;background:#00f}.test_class_that_shouldnt_be_scoped{background-color:#00f}"
-`;
+exports[`fixtures build css-modules--false with microbundle 3`] = `"body{display:flex;color:red;background:#00f}.test_class_that_shouldnt_be_scoped{background-color:#00f}.not_scoped_class{color:pink}"`;
 
 exports[`fixtures build css-modules--false with microbundle 4`] = `
-"export default function(){}
+"function t(){}export default t;
 "
 `;
 
@@ -1252,21 +1249,18 @@ css-modules--null
 Build \\"cssModulesNull\\" to dist:
 110 B: css-modules--null.js.gz
 72 B: css-modules--null.js.br
-109 B: css-modules--null.esm.js.gz
-70 B: css-modules--null.esm.js.br
+112 B: css-modules--null.esm.js.gz
+77 B: css-modules--null.esm.js.br
 217 B: css-modules--null.umd.js.gz
 152 B: css-modules--null.umd.js.br"
 `;
 
 exports[`fixtures build css-modules--null with microbundle 2`] = `4`;
 
-exports[`fixtures build css-modules--null with microbundle 3`] = `
-"body{display:flex;color:red;background:#00f}._2Dgv6{background-color:#00f}
-._2kWDE{color:pink}"
-`;
+exports[`fixtures build css-modules--null with microbundle 3`] = `"body{display:flex;color:red;background:#00f}.test_class_that_shouldnt_be_scoped{background-color:#00f}._2kWDE{color:pink}"`;
 
 exports[`fixtures build css-modules--null with microbundle 4`] = `
-"export default function(){var e=document.createElement(\\"div\\");return e.className=\\"_2kWDE\\",e}
+"function e(){var e=document.createElement(\\"div\\");return e.className=\\"_2kWDE\\",e}export default e;
 "
 `;
 
@@ -1301,21 +1295,18 @@ css-modules--string
 Build \\"cssModulesString\\" to dist:
 166 B: css-modules--string.js.gz
 118 B: css-modules--string.js.br
-166 B: css-modules--string.esm.js.gz
-117 B: css-modules--string.esm.js.br
+168 B: css-modules--string.esm.js.gz
+122 B: css-modules--string.esm.js.br
 278 B: css-modules--string.umd.js.gz
 207 B: css-modules--string.umd.js.br"
 `;
 
 exports[`fixtures build css-modules--string with microbundle 2`] = `4`;
 
-exports[`fixtures build css-modules--string with microbundle 3`] = `
-"body{display:flex;color:red;background:#00f}._contains_this_81567d0efc15a456670452d3277e1a68{background-color:#00f}
-._contains_this_0a8c24df242c2cd708036873307aea94{color:pink}"
-`;
+exports[`fixtures build css-modules--string with microbundle 3`] = `"body{display:flex;color:red;background:#00f}._contains_this_81567d0efc15a456670452d3277e1a68{background-color:#00f}._contains_this_0a8c24df242c2cd708036873307aea94{color:pink}"`;
 
 exports[`fixtures build css-modules--string with microbundle 4`] = `
-"export default function(){var a=document.createElement(\\"div\\");return a.className=\\"_contains_this_0a8c24df242c2cd708036873307aea94 _contains_this_81567d0efc15a456670452d3277e1a68\\",a}
+"function a(){var a=document.createElement(\\"div\\");return a.className=\\"_contains_this_0a8c24df242c2cd708036873307aea94 _contains_this_81567d0efc15a456670452d3277e1a68\\",a}export default a;
 "
 `;
 
@@ -1348,33 +1339,30 @@ css-modules--true
 
 
 Build \\"cssModulesTrue\\" to dist:
-118 B: css-modules--true.js.gz
-80 B: css-modules--true.js.br
-117 B: css-modules--true.esm.js.gz
-77 B: css-modules--true.esm.js.br
-226 B: css-modules--true.umd.js.gz
-160 B: css-modules--true.umd.js.br"
+139 B: css-modules--true.js.gz
+94 B: css-modules--true.js.br
+141 B: css-modules--true.esm.js.gz
+108 B: css-modules--true.esm.js.br
+246 B: css-modules--true.umd.js.gz
+179 B: css-modules--true.umd.js.br"
 `;
 
 exports[`fixtures build css-modules--true with microbundle 2`] = `4`;
 
-exports[`fixtures build css-modules--true with microbundle 3`] = `
-"body{display:flex;color:red;background:#00f}._1E6DU{background-color:#00f}
-._2kWDE{color:pink}"
-`;
+exports[`fixtures build css-modules--true with microbundle 3`] = `"body{display:flex;color:red;background:#00f}.test_class_that_should_be_scoped{background-color:#00f}._2kWDE{color:pink}"`;
 
 exports[`fixtures build css-modules--true with microbundle 4`] = `
-"export default function(){var e=document.createElement(\\"div\\");return e.className=\\"_2kWDE _1E6DU\\",e}
+"function e(){var e=document.createElement(\\"div\\");return e.className=\\"_2kWDE \\"+(void 0).test_class_that_should_be_scoped,e}export default e;
 "
 `;
 
 exports[`fixtures build css-modules--true with microbundle 5`] = `
-"module.exports=function(){var e=document.createElement(\\"div\\");return e.className=\\"_2kWDE _1E6DU\\",e};
+"module.exports=function(){var e=document.createElement(\\"div\\");return e.className=\\"_2kWDE \\"+(void 0).test_class_that_should_be_scoped,e};
 "
 `;
 
 exports[`fixtures build css-modules--true with microbundle 6`] = `
-"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).cssModulesTrue=n()}(this,function(){return function(){var e=document.createElement(\\"div\\");return e.className=\\"_2kWDE _1E6DU\\",e}});
+"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=t():\\"function\\"==typeof define&&define.amd?define(t):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).cssModulesTrue=t()}(this,function(){return function(){var e=document.createElement(\\"div\\");return e.className=\\"_2kWDE \\"+(void 0).test_class_that_should_be_scoped,e}});
 "
 `;
 
@@ -1397,30 +1385,30 @@ custom-babelrc
 
 
 Build \\"customBabelrc\\" to dist:
-215 B: custom-babelrc.js.gz
-174 B: custom-babelrc.js.br
-219 B: custom-babelrc.esm.js.gz
-177 B: custom-babelrc.esm.js.br
-320 B: custom-babelrc.umd.js.gz
-271 B: custom-babelrc.umd.js.br"
+218 B: custom-babelrc.js.gz
+193 B: custom-babelrc.js.br
+222 B: custom-babelrc.esm.js.gz
+185 B: custom-babelrc.esm.js.br
+324 B: custom-babelrc.umd.js.gz
+270 B: custom-babelrc.umd.js.br"
 `;
 
 exports[`fixtures build custom-babelrc with microbundle 2`] = `6`;
 
 exports[`fixtures build custom-babelrc with microbundle 3`] = `
-"class e{constructor(){var e;e=[\\"foo\\",\\"bar\\"],\\"myFields\\"in this?Object.defineProperty(this,\\"myFields\\",{value:e,enumerable:!0,configurable:!0,writable:!0}):this.myFields=e}foo(){try{return Promise.resolve(this.myFields.find(e=>\\"bar\\"===e))}catch(e){return Promise.reject(e)}}}export{e as MyClass};
+"class e{constructor(){var e,r;r=[\\"foo\\",\\"bar\\"],(e=\\"myFields\\")in this?Object.defineProperty(this,e,{value:r,enumerable:!0,configurable:!0,writable:!0}):this[e]=r}foo(){try{return Promise.resolve(this.myFields.find(e=>\\"bar\\"===e))}catch(e){return Promise.reject(e)}}}export{e as MyClass};
 //# sourceMappingURL=custom-babelrc.esm.js.map
 "
 `;
 
 exports[`fixtures build custom-babelrc with microbundle 4`] = `
-"exports.MyClass=class{constructor(){var e;e=[\\"foo\\",\\"bar\\"],\\"myFields\\"in this?Object.defineProperty(this,\\"myFields\\",{value:e,enumerable:!0,configurable:!0,writable:!0}):this.myFields=e}foo(){try{return Promise.resolve(this.myFields.find(e=>\\"bar\\"===e))}catch(e){return Promise.reject(e)}}};
+"exports.MyClass=class{constructor(){var e,r;r=[\\"foo\\",\\"bar\\"],(e=\\"myFields\\")in this?Object.defineProperty(this,e,{value:r,enumerable:!0,configurable:!0,writable:!0}):this[e]=r}foo(){try{return Promise.resolve(this.myFields.find(e=>\\"bar\\"===e))}catch(e){return Promise.reject(e)}}};
 //# sourceMappingURL=custom-babelrc.js.map
 "
 `;
 
 exports[`fixtures build custom-babelrc with microbundle 5`] = `
-"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?t(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],t):t((e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).customBabelrc={})}(this,function(e){e.MyClass=class{constructor(){var e;e=[\\"foo\\",\\"bar\\"],\\"myFields\\"in this?Object.defineProperty(this,\\"myFields\\",{value:e,enumerable:!0,configurable:!0,writable:!0}):this.myFields=e}foo(){try{return Promise.resolve(this.myFields.find(e=>\\"bar\\"===e))}catch(e){return Promise.reject(e)}}}});
+"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?t(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],t):t((e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).customBabelrc={})}(this,function(e){e.MyClass=class{constructor(){var e,t;t=[\\"foo\\",\\"bar\\"],(e=\\"myFields\\")in this?Object.defineProperty(this,e,{value:t,enumerable:!0,configurable:!0,writable:!0}):this[e]=t}foo(){try{return Promise.resolve(this.myFields.find(e=>\\"bar\\"===e))}catch(e){return Promise.reject(e)}}}});
 //# sourceMappingURL=custom-babelrc.umd.js.map
 "
 `;
@@ -1542,8 +1530,8 @@ default-named
 Build \\"defaultNamed\\" to dist:
 60 B: default-named.js.gz
 46 B: default-named.js.br
-70 B: default-named.esm.js.gz
-58 B: default-named.esm.js.br
+74 B: default-named.esm.js.gz
+62 B: default-named.esm.js.br
 182 B: default-named.umd.js.gz
 136 B: default-named.umd.js.br"
 `;
@@ -1551,7 +1539,7 @@ Build \\"defaultNamed\\" to dist:
 exports[`fixtures build default-named with microbundle 2`] = `6`;
 
 exports[`fixtures build default-named with microbundle 3`] = `
-"var t=42;export default function(){}export{t as foo};
+"var t=42;function e(){}export default e;export{t as foo};
 //# sourceMappingURL=default-named.esm.js.map
 "
 `;
@@ -1804,8 +1792,8 @@ mangle-json-file
 Build \\"mangleJsonFile\\" to dist:
 103 B: mangle-json-file.js.gz
 89 B: mangle-json-file.js.br
-103 B: mangle-json-file.esm.js.gz
-95 B: mangle-json-file.esm.js.br
+105 B: mangle-json-file.esm.js.gz
+91 B: mangle-json-file.esm.js.br
 211 B: mangle-json-file.umd.js.gz
 173 B: mangle-json-file.umd.js.br"
 `;
@@ -1813,7 +1801,7 @@ Build \\"mangleJsonFile\\" to dist:
 exports[`fixtures build mangle-json-file with microbundle 2`] = `6`;
 
 exports[`fixtures build mangle-json-file with microbundle 3`] = `
-"var o={prop1:1,__p2:2};export default function(){return console.log(o.prop1),console.log(o.__p2),o}
+"var o={prop1:1,__p2:2};function r(){return console.log(o.prop1),console.log(o.__p2),o}export default r;
 //# sourceMappingURL=mangle-json-file.esm.js.map
 "
 `;
@@ -1852,8 +1840,8 @@ minify-config
 Build \\"minifyConfig\\" to dist:
 99 B: minify-config.js.gz
 85 B: minify-config.js.br
-99 B: minify-config.esm.js.gz
-88 B: minify-config.esm.js.br
+101 B: minify-config.esm.js.gz
+87 B: minify-config.esm.js.br
 205 B: minify-config.umd.js.gz
 153 B: minify-config.umd.js.br"
 `;
@@ -1861,7 +1849,7 @@ Build \\"minifyConfig\\" to dist:
 exports[`fixtures build minify-config with microbundle 2`] = `6`;
 
 exports[`fixtures build minify-config with microbundle 3`] = `
-"var o={prop1:1,o:2};export default function(){return console.log(o.prop1),console.log(o.o),o}
+"var o={prop1:1,o:2};function r(){return console.log(o.prop1),console.log(o.o),o}export default r;
 //# sourceMappingURL=minify-config.esm.js.map
 "
 `;
@@ -1901,8 +1889,8 @@ minify-path-config
 Build \\"minifyPathConfig\\" to dist:
 103 B: minify-path-config.js.gz
 89 B: minify-path-config.js.br
-103 B: minify-path-config.esm.js.gz
-95 B: minify-path-config.esm.js.br
+105 B: minify-path-config.esm.js.gz
+91 B: minify-path-config.esm.js.br
 213 B: minify-path-config.umd.js.gz
 166 B: minify-path-config.umd.js.br"
 `;
@@ -1910,7 +1898,7 @@ Build \\"minifyPathConfig\\" to dist:
 exports[`fixtures build minify-path-config with microbundle 2`] = `6`;
 
 exports[`fixtures build minify-path-config with microbundle 3`] = `
-"var o={prop1:1,__p2:2};export default function(){return console.log(o.prop1),console.log(o.__p2),o}
+"var o={prop1:1,__p2:2};function r(){return console.log(o.prop1),console.log(o.__p2),o}export default r;
 //# sourceMappingURL=minify-path-config.esm.js.map
 "
 `;
@@ -1948,8 +1936,8 @@ minify-path-parent-dir
 Build \\"minifyPathParentDir\\" to dist:
 103 B: minify-path-parent-dir.js.gz
 89 B: minify-path-parent-dir.js.br
-103 B: minify-path-parent-dir.esm.js.gz
-95 B: minify-path-parent-dir.esm.js.br
+105 B: minify-path-parent-dir.esm.js.gz
+91 B: minify-path-parent-dir.esm.js.br
 216 B: minify-path-parent-dir.umd.js.gz
 174 B: minify-path-parent-dir.umd.js.br"
 `;
@@ -1957,7 +1945,7 @@ Build \\"minifyPathParentDir\\" to dist:
 exports[`fixtures build minify-path-parent-dir-with-cwd with microbundle 2`] = `6`;
 
 exports[`fixtures build minify-path-parent-dir-with-cwd with microbundle 3`] = `
-"var o={prop1:1,__p2:2};export default function(){return console.log(o.prop1),console.log(o.__p2),o}
+"var o={prop1:1,__p2:2};function r(){return console.log(o.prop1),console.log(o.__p2),o}export default r;
 //# sourceMappingURL=minify-path-parent-dir.esm.js.map
 "
 `;
@@ -1990,14 +1978,14 @@ modern
 
 
 Build \\"modernLib\\" to dist:
-110 B: modern-lib.modern.js.gz
-90 B: modern-lib.modern.js.br"
+113 B: modern-lib.modern.js.gz
+92 B: modern-lib.modern.js.br"
 `;
 
 exports[`fixtures build modern with microbundle 2`] = `2`;
 
 exports[`fixtures build modern with microbundle 3`] = `
-"async function n(...n){return n.reduce((n,t)=>n+t,0)}export default async function(...t){return[await n(...t),await n(...t)]}
+"async function n(...n){return n.reduce((n,t)=>n+t,0)}async function t(...t){return[await n(...t),await n(...t)]}export default t;
 //# sourceMappingURL=modern-lib.modern.js.map
 "
 `;
@@ -2026,8 +2014,8 @@ modern-generators
 Build \\"modernGenerators\\" to dist:
 234 B: modern-generators.js.gz
 207 B: modern-generators.js.br
-113 B: modern-generators.modern.js.gz
-92 B: modern-generators.modern.js.br
+118 B: modern-generators.modern.js.gz
+99 B: modern-generators.modern.js.br
 233 B: modern-generators.esm.js.gz
 191 B: modern-generators.esm.js.br
 325 B: modern-generators.umd.js.gz
@@ -2049,7 +2037,7 @@ exports[`fixtures build modern-generators with microbundle 4`] = `
 `;
 
 exports[`fixtures build modern-generators with microbundle 5`] = `
-"export default async function(){const e=function*(){let e=0;for(;;)yield e++}();return[e.next().value,e.next().value]}
+"async function e(){const e=function*(){let e=0;for(;;)yield e++}();return[e.next().value,e.next().value]}export default e;
 //# sourceMappingURL=modern-generators.modern.js.map
 "
 `;

@@ -6,7 +6,6 @@ import { blue } from 'kleur';
 import { map, series } from 'asyncro';
 import glob from 'tiny-glob/sync';
 import autoprefixer from 'autoprefixer';
-import cssnano from 'cssnano';
 import { rollup, watch } from 'rollup';
 import builtinModules from 'builtin-modules';
 import commonjs from '@rollup/plugin-commonjs';
@@ -435,18 +434,13 @@ function createConfig(options, entry, format, writeMeta) {
 			plugins: []
 				.concat(
 					postcss({
-						plugins: [
-							autoprefixer(),
-							options.compress !== false &&
-								cssnano({
-									preset: 'default',
-								}),
-						].filter(Boolean),
+						plugins: [autoprefixer()],
 						autoModules: shouldCssModules(options),
 						modules: cssModulesConfig(options),
 						// only write out CSS for the first bundle (avoids pointless extra files):
 						inject: false,
 						extract: !!writeMeta,
+						minimize: options.compress,
 					}),
 					moduleAliases.length > 0 &&
 						alias({
@@ -536,7 +530,6 @@ function createConfig(options, entry, format, writeMeta) {
 					}),
 					options.compress !== false && [
 						terser({
-							sourcemap: true,
 							compress: Object.assign(
 								{
 									keep_infinity: true,
