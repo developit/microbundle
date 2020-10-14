@@ -78,10 +78,6 @@ export default () => {
 							legacy: true,
 						},
 						{
-							name: '@babel/plugin-proposal-class-properties',
-							loose: true,
-						},
-						{
 							name: '@babel/plugin-syntax-import-meta',
 						},
 						!customOptions.jsxImportSource && {
