@@ -73,6 +73,15 @@ export default () => {
 					'plugin',
 					[
 						{
+							name: '@babel/plugin-proposal-decorators',
+							// Note that legacy option are needed as Vue Class Component only supports stage 1 (legacy) decorator spec yet.
+							legacy: true,
+						},
+						{
+							name: '@babel/plugin-proposal-class-properties',
+							loose: true,
+						},
+						{
 							name: '@babel/plugin-syntax-import-meta',
 						},
 						!customOptions.jsxImportSource && {

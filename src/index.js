@@ -29,9 +29,19 @@ import {
 } from './lib/option-normalization';
 import { getConfigFromPkgJson, getName } from './lib/package-info';
 import { shouldCssModules, cssModulesConfig } from './lib/css-modules';
+import vue from 'rollup-plugin-vue';
 
 // Extensions to use when resolving modules
-const EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs'];
+const EXTENSIONS = [
+	'.ts',
+	'.tsx',
+	'.js',
+	'.jsx',
+	'.es6',
+	'.es',
+	'.mjs',
+	'.vue',
+];
 
 const WATCH_OPTS = {
 	exclude: 'node_modules/**',
@@ -172,14 +182,13 @@ function doWatch(options, cwd, steps) {
 	});
 }
 
-async function jsOrTs(cwd, filename) {
-	const extension = (await isFile(resolve(cwd, filename + '.ts')))
-		? '.ts'
-		: (await isFile(resolve(cwd, filename + '.tsx')))
-		? '.tsx'
-		: '.js';
+async function getEntryJs(cwd, filename) {
+	const usedExtension =
+		['.ts', '.tsx', '.vue', '.ts.vue', '.js'].filter(extension =>
+			isFile(resolve(cwd, filename + extension)),
+		) || '';
 
-	return resolve(cwd, `${filename}${extension}`);
+	return resolve(cwd, `${filename}${usedExtension}`);
 }
 
 async function getInput({ entries, cwd, source, module }) {
@@ -194,8 +203,8 @@ async function getInput({ entries, cwd, source, module }) {
 							resolve(cwd, file),
 						)) ||
 						((await isDir(resolve(cwd, 'src'))) &&
-							(await jsOrTs(cwd, 'src/index'))) ||
-						(await jsOrTs(cwd, 'index')) ||
+							(await getEntryJs(cwd, 'src/index'))) ||
+						(await getEntryJs(cwd, 'index')) ||
 						module,
 		)
 		.map(file => glob(file))
@@ -365,7 +374,11 @@ function createConfig(options, entry, format, writeMeta) {
 			? () => resolve(options.cwd, rawMinifyValue)
 			: () => resolve(options.cwd, 'mangle.json');
 
-	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
+	const useTypescript =
+		extname(entry) === '.ts' ||
+		extname(entry) === '.tsx' ||
+		basename(entry).endsWith('.ts.vue');
+	const useVue = extname(entry) === '.vue';
 
 	const escapeStringExternals = ext =>
 		ext instanceof RegExp ? ext.source : escapeStringRegexp(ext);
@@ -489,6 +502,7 @@ function createConfig(options, entry, format, writeMeta) {
 							typescript: require('typescript'),
 							cacheRoot: `./node_modules/.cache/.rts2_cache_${format}`,
 							useTsconfigDeclarationDir: true,
+							experimentalDecorators: true,
 							tsconfigDefaults: {
 								compilerOptions: {
 									sourceMap: options.sourcemap,
@@ -512,6 +526,7 @@ function createConfig(options, entry, format, writeMeta) {
 								},
 							},
 						}),
+					useVue && vue(),
 					// if defines is not set, we shouldn't run babel through node_modules
 					isTruthy(defines) &&
 						babel({

@@ -1,9 +1,9 @@
-import { promises as fs } from 'fs';
+import fs, { promises as asyncFs } from 'fs';
 import camelCase from 'camelcase';
 
-export const readFile = fs.readFile;
+export const readFile = asyncFs.readFile;
 
-export const stat = fs.stat;
+export const stat = asyncFs.stat;
 
 export function isDir(name) {
 	return stat(name)
@@ -12,9 +12,11 @@ export function isDir(name) {
 }
 
 export function isFile(name) {
-	return stat(name)
-		.then(stats => stats.isFile())
-		.catch(() => false);
+	try {
+		return fs.statSync(name).isFile();
+	} catch (e) {
+		return false;
+	}
 }
 
 // eslint-disable-next-line no-console
