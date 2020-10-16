@@ -487,8 +487,10 @@ function createConfig(options, entry, format, writeMeta) {
 					},
 					useTypescript &&
 						typescript({
-							typescript: require(resolveFrom(process.cwd(), 'typescript') ||
-								'typescript'),
+							typescript: require(resolveFrom(
+								dirname(process.argv[1]),
+								'typescript',
+							) || 'typescript'),
 							cacheRoot: `./node_modules/.cache/.rts2_cache_${format}`,
 							useTsconfigDeclarationDir: true,
 							tsconfigDefaults: {
