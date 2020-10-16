@@ -403,6 +403,18 @@ function createConfig(options, entry, format, writeMeta) {
 	const outputDir = dirname(absMain);
 	const outputEntryFileName = basename(absMain);
 
+	const argv1 = process.argv[1];
+	let typescriptLibPath;
+	if (argv1 != null) {
+		// If argv1 exists, try to require 'typescript' from there.
+		typescriptLibPath = resolveFrom(dirname(argv1), 'typescript');
+	}
+	if (typescriptLibPath == null) {
+		// If argv1 doesn't exist or no 'typescript' found there,
+		// fallback to bundled 'typescript'.
+		typescriptLibPath = 'typescript';
+	}
+
 	let config = {
 		/** @type {import('rollup').InputOptions} */
 		inputOptions: {
@@ -487,10 +499,7 @@ function createConfig(options, entry, format, writeMeta) {
 					},
 					useTypescript &&
 						typescript({
-							typescript: require(resolveFrom(
-								dirname(process.argv[1]),
-								'typescript',
-							) || 'typescript'),
+							typescript: require(typescriptLibPath),
 							cacheRoot: `./node_modules/.cache/.rts2_cache_${format}`,
 							useTsconfigDeclarationDir: true,
 							tsconfigDefaults: {
