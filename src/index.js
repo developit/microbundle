@@ -9,6 +9,7 @@ import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import { rollup, watch } from 'rollup';
 import builtinModules from 'builtin-modules';
+import resolveFrom from 'resolve-from';
 import commonjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
 import customBabel from './lib/babel-custom';
@@ -486,7 +487,8 @@ function createConfig(options, entry, format, writeMeta) {
 					},
 					useTypescript &&
 						typescript({
-							typescript: require('typescript'),
+							typescript: require(resolveFrom(process.cwd(), 'typescript') ||
+								'typescript'),
 							cacheRoot: `./node_modules/.cache/.rts2_cache_${format}`,
 							useTsconfigDeclarationDir: true,
 							tsconfigDefaults: {
