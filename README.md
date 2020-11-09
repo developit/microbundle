@@ -109,24 +109,27 @@ export default function(e, t, r) {
 
 ```jsonc
 {
-  "main": "dist/foo.umd.js",        // legacy UMD output (for Node & CDN use)
-  "module": "dist/foo.module.js",   // legacy ES Modules output (for bundlers)
-  "exports": "dist/foo.modern.js",  // modern ES2017 output
+  "main": "./dist/foo.umd.js",       // legacy UMD output (for Node & CDN use)
+  "module": "./dist/foo.module.js",  // legacy ES Modules output (for bundlers)
+  "exports": "./dist/foo.modern.js", // modern ES2017 output
   "scripts": {
     "build": "microbundle src/foo.js"
   }
 }
 ```
 
-The `"exports"` field can be an object where keys are your package's "entry modules":
+The `"exports"` field can also be an object for packages with multiple entry modules:
 
 ```jsonc
 {
   "name": "foo",
   "exports": {
-    ".": "dist/foo.modern.js",       // import "foo" (the default)
-    "./lite": "dist/lite.modern.js", // import "foo/lite"
-    "./full": "dist/full.modern.js"  // import "foo"
+    ".": "./dist/foo.modern.js",       // import "foo" (the default)
+    "./lite": "./dist/lite.modern.js", // import "foo/lite"
+    "./full": "./dist/full.modern.js"  // import "foo"
+  },
+  "scripts": {
+    "build": "microbundle src/*.js"    // build foo.js, lite.js and full.js
   }
 }
 ```
