@@ -18,6 +18,7 @@ import alias from '@rollup/plugin-alias';
 import postcss from 'rollup-plugin-postcss';
 import typescript from 'rollup-plugin-typescript2';
 import json from '@rollup/plugin-json';
+import ttypescriptPlugin from 'ttypescript';
 import logError from './log-error';
 import { isDir, isFile, stdout, isTruthy, removeScope } from './utils';
 import { getSizeInfo } from './lib/compressed-size';
@@ -486,7 +487,7 @@ function createConfig(options, entry, format, writeMeta) {
 					},
 					useTypescript &&
 						typescript({
-							typescript: require('typescript'),
+							typescript: ttypescriptPlugin,
 							cacheRoot: `./node_modules/.cache/.rts2_cache_${format}`,
 							useTsconfigDeclarationDir: true,
 							tsconfigDefaults: {
