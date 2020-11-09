@@ -74,15 +74,15 @@ Compiling the above using Microbundle produces the following `modern` and `esm` 
 
 <table>
 <thead><tr>
-  <th align="left"><code>make-dom.modern.js</code> <sup>(123b)</sup></th>
-  <th align="left"><code>make-dom.module.js</code> <sup>(166b)</sup></th>
+  <th align="left"><code>make-dom.modern.js</code> <sup>(117b)</sup></th>
+  <th align="left"><code>make-dom.module.js</code> <sup>(194b)</sup></th>
 </tr></thead>
 <tbody><tr valign="top"><td>
 
 ```js
 export default async function(e, t, a) {
   let n = document.createElement(e);
-  n.append(...(await a));
+  n.append(...await a);
   return Object.assign(n, t);
 }
 ```
@@ -94,8 +94,8 @@ export default function(e, t, r) {
   try {
     var n = document.createElement(e);
     return Promise.resolve(r).then(function(e) {
-      n.append.apply(n, e);
-      return Object.assign(n, t);
+      return n.append.apply(n, e),
+        Object.assign(n, t);
     });
   } catch (e) {
     return Promise.reject(e);
