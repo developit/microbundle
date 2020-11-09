@@ -41,6 +41,7 @@
   "name": "foo",                   // your package name
   "source": "src/foo.js",          // your source code
   "main": "dist/foo.js",           // where to generate the CommonJS/Node bundle
+  "exports": "dist/foo.modern.js", // path to the modern output (see below)
   "module": "dist/foo.module.js",  // where to generate the ESM bundle
   "unpkg": "dist/foo.umd.js",      // where to generate the UMD bundle (also aliased as "umd:main")
   "scripts": {
@@ -58,14 +59,14 @@ Microbundle produces <code title="ECMAScript Modules (import / export)">esm</cod
 
 ## 🤖 Modern Mode <a name="modern"></a>
 
-In addition to the above formats, Microbundle also outputs a `modern` bundle specially designed to work in _all modern browsers_. This bundle preserves most modern JS features when compiling your code, but ensures the result runs in 90% of web browsers without needing to be transpiled. Specifically, it uses [preset-modules](https://github.com/babel/preset-modules) to target the set of browsers that support `<script type="module">` - that allows syntax like async/await, tagged templates, arrow functions, destructured and rest parameters, etc. The result is generally smaller and faster to execute than the `esm` bundle:
+In addition to the above formats, Microbundle also outputs a `modern` bundle specially designed to work in _all modern browsers_. This bundle preserves most modern JS features when compiling your code, but ensures the result runs in 95% of web browsers without needing to be transpiled. Specifically, it uses [preset-modules](https://github.com/babel/preset-modules) to target the set of browsers that support `<script type="module">` - that allows syntax like async/await, tagged templates, arrow functions, destructured and rest parameters, etc. The result is generally smaller and faster to execute than the `esm` bundle:
 
 ```js
 // Our source, "src/make-dom.js":
 export default async function makeDom(tag, props, children) {
-	let el = document.createElement(tag);
-	el.append(...(await children));
-	return Object.assign(el, props);
+  let el = document.createElement(tag);
+  el.append(...(await children));
+  return Object.assign(el, props);
 }
 ```
 
@@ -80,9 +81,9 @@ Compiling the above using Microbundle produces the following `modern` and `esm` 
 
 ```js
 export default async function(e, t, a) {
-	let n = document.createElement(e);
-	n.append(...(await a));
-	return Object.assign(n, t);
+  let n = document.createElement(e);
+  n.append(...(await a));
+  return Object.assign(n, t);
 }
 ```
 
@@ -90,35 +91,45 @@ export default async function(e, t, a) {
 
 ```js
 export default function(e, t, r) {
-	try {
-		var n = document.createElement(e);
-		return Promise.resolve(r).then(function(e) {
-			n.append.apply(n, e);
-			return Object.assign(n, t);
-		});
-	} catch (e) {
-		return Promise.reject(e);
-	}
+  try {
+    var n = document.createElement(e);
+    return Promise.resolve(r).then(function(e) {
+      n.append.apply(n, e);
+      return Object.assign(n, t);
+    });
+  } catch (e) {
+    return Promise.reject(e);
+  }
 }
 ```
 
 </td></tbody></table>
 
-This is enabled by default - all you have to do is add the field to your `package.json`.
+**This is enabled by default.** All you have to do is add an `"exports"` field to your `package.json`:
 
-<details><summary>💁‍♂️ <em>How to point to modern code in a package.json is <a href="https://twitter.com/_developit/status/1263174528974364675">being discussed</a>. You might use the "module" field.</em></summary>
-
-```js
+```jsonc
 {
-  "main": "dist/foo.umd.js",              // legacy UMD bundle (for Node & CDN use)
-  "module": "dist/foo.modern.module.js",  // modern ES2017 bundle
+  "main": "dist/foo.umd.js",        // legacy UMD output (for Node & CDN use)
+  "module": "dist/foo.module.js",   // legacy ES Modules output (for bundlers)
+  "exports": "dist/foo.modern.js",  // modern ES2017 output
   "scripts": {
-    "build": "microbundle src/foo.js -f modern,umd"
+    "build": "microbundle src/foo.js"
   }
 }
 ```
 
-</details>
+The `"exports"` field can be an object where keys are your package's "entry modules":
+
+```jsonc
+{
+  "name": "foo",
+  "exports": {
+    ".": "dist/foo.modern.js",       // import "foo" (the default)
+    "./lite": "dist/lite.modern.js", // import "foo/lite"
+    "./full": "dist/full.modern.js"  // import "foo"
+  }
+}
+```
 
 ## 📦 Usage & Configuration <a name="usage"></a>
 
