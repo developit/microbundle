@@ -65,7 +65,7 @@ In addition to the above formats, Microbundle also outputs a `modern` bundle spe
 // Our source, "src/make-dom.js":
 export default async function makeDom(tag, props, children) {
   let el = document.createElement(tag);
-  el.append(...(await children));
+  el.append(...await children);
   return Object.assign(el, props);
 }
 ```
