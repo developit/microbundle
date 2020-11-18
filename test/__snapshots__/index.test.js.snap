@@ -433,6 +433,7 @@ Directory tree:
 basic-css
   dist
     basic-css.css
+    basic-css.css.map
     basic-css.esm.js
     basic-css.esm.js.map
     basic-css.js
@@ -454,9 +455,12 @@ Build \\"basicCss\\" to dist:
 134 B: basic-css.umd.js.br"
 `;
 
-exports[`fixtures build basic-css with microbundle 2`] = `7`;
+exports[`fixtures build basic-css with microbundle 2`] = `8`;
 
-exports[`fixtures build basic-css with microbundle 3`] = `"._rHGVB{display:flex;color:red;background:#00f}"`;
+exports[`fixtures build basic-css with microbundle 3`] = `
+"._rHGVB{display:flex;color:red;background:#00f}
+/*# sourceMappingURL=basic-css.css.map */"
+`;
 
 exports[`fixtures build basic-css with microbundle 4`] = `
 "export default function(){var e=document.createElement(\\"div\\");return e.className=\\"testing\\",e}

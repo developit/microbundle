@@ -456,6 +456,7 @@ function createConfig(options, entry, format, writeMeta) {
 						// only write out CSS for the first bundle (avoids pointless extra files):
 						inject: false,
 						extract: !!writeMeta,
+						sourceMap: options.sourcemap,
 					}),
 					moduleAliases.length > 0 &&
 						alias({
