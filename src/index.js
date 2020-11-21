@@ -29,6 +29,7 @@ import {
 } from './lib/option-normalization';
 import { getConfigFromPkgJson, getName } from './lib/package-info';
 import { shouldCssModules, cssModulesConfig } from './lib/css-modules';
+import { getConfigOverride } from './lib/config-override';
 
 // Extensions to use when resolving modules
 const EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs'];
@@ -92,7 +93,7 @@ export default async function microbundle(inputOptions) {
 	for (let i = 0; i < options.entries.length; i++) {
 		for (let j = 0; j < formats.length; j++) {
 			steps.push(
-				createConfig(
+				await createConfig(
 					options,
 					options.entries[i],
 					formats[j],
@@ -291,8 +292,9 @@ function getMain({ options, entry, format }) {
 // shebang cache map because the transform only gets run once
 const shebang = {};
 
-function createConfig(options, entry, format, writeMeta) {
+async function createConfig(options, entry, format, writeMeta) {
 	let { pkg } = options;
+	const context = { options, entry, format, writeMeta };
 
 	/** @type {(string|RegExp)[]} */
 	let external = ['dns', 'fs', 'path', 'url'].concat(
@@ -402,6 +404,8 @@ function createConfig(options, entry, format, writeMeta) {
 	const outputDir = dirname(absMain);
 	const outputEntryFileName = basename(absMain);
 
+	const configOverride = await getConfigOverride(context);
+
 	let config = {
 		/** @type {import('rollup').InputOptions} */
 		inputOptions: {
@@ -443,38 +447,46 @@ function createConfig(options, entry, format, writeMeta) {
 
 			plugins: []
 				.concat(
-					postcss({
-						plugins: [
-							autoprefixer(),
-							options.compress !== false &&
-								cssnano({
-									preset: 'default',
-								}),
-						].filter(Boolean),
-						autoModules: shouldCssModules(options),
-						modules: cssModulesConfig(options),
-						// only write out CSS for the first bundle (avoids pointless extra files):
-						inject: false,
-						extract: !!writeMeta,
-					}),
-					moduleAliases.length > 0 &&
-						alias({
-							// @TODO: this is no longer supported, but didn't appear to be required?
-							// resolve: EXTENSIONS,
-							entries: moduleAliases,
+					postcss(
+						configOverride.pluginConfig('postcss', options, {
+							plugins: [
+								autoprefixer(),
+								options.compress !== false &&
+									cssnano({
+										preset: 'default',
+									}),
+							].filter(Boolean),
+							autoModules: shouldCssModules(options),
+							modules: cssModulesConfig(options),
+							// only write out CSS for the first bundle (avoids pointless extra files):
+							inject: false,
+							extract: !!writeMeta,
 						}),
-					nodeResolve({
-						mainFields: ['module', 'jsnext', 'main'],
-						browser: options.target !== 'node',
-						// defaults + .jsx
-						extensions: ['.mjs', '.js', '.jsx', '.json', '.node'],
-						preferBuiltins: options.target === 'node',
-					}),
-					commonjs({
-						// use a regex to make sure to include eventual hoisted packages
-						include: /\/node_modules\//,
-					}),
-					json(),
+					),
+					moduleAliases.length > 0 &&
+						alias(
+							configOverride.pluginConfig('alias', {
+								// @TODO: this is no longer supported, but didn't appear to be required?
+								// resolve: EXTENSIONS,
+								entries: moduleAliases,
+							}),
+						),
+					nodeResolve(
+						configOverride.pluginConfig('nodeResolve', {
+							mainFields: ['module', 'jsnext', 'main'],
+							browser: options.target !== 'node',
+							// defaults + .jsx
+							extensions: ['.mjs', '.js', '.jsx', '.json', '.node'],
+							preferBuiltins: options.target === 'node',
+						}),
+					),
+					commonjs(
+						configOverride.pluginConfig('commonjs', {
+							// use a regex to make sure to include eventual hoisted packages
+							include: /\/node_modules\//,
+						}),
+					),
+					json(configOverride.pluginConfig('json', {})),
 					{
 						// We have to remove shebang so it doesn't end up in the middle of the code somewhere
 						transform: code => ({
@@ -485,89 +497,99 @@ function createConfig(options, entry, format, writeMeta) {
 						}),
 					},
 					useTypescript &&
-						typescript({
-							typescript: require('typescript'),
-							cacheRoot: `./node_modules/.cache/.rts2_cache_${format}`,
-							useTsconfigDeclarationDir: true,
-							tsconfigDefaults: {
-								compilerOptions: {
-									sourceMap: options.sourcemap,
-									declaration: true,
-									declarationDir: getDeclarationDir({ options, pkg }),
-									jsx: 'preserve',
-									jsxFactory:
-										// TypeScript fails to resolve Fragments when jsxFactory
-										// is set, even when it's the same as the default value.
-										options.jsx === 'React.createElement'
-											? undefined
-											: options.jsx || 'h',
+						typescript(
+							configOverride.pluginConfig('typescript', {
+								typescript: require('typescript'),
+								cacheRoot: `./node_modules/.cache/.rts2_cache_${format}`,
+								useTsconfigDeclarationDir: true,
+								tsconfigDefaults: {
+									compilerOptions: {
+										sourceMap: options.sourcemap,
+										declaration: true,
+										declarationDir: getDeclarationDir({ options, pkg }),
+										jsx: 'preserve',
+										jsxFactory:
+											// TypeScript fails to resolve Fragments when jsxFactory
+											// is set, even when it's the same as the default value.
+											options.jsx === 'React.createElement'
+												? undefined
+												: options.jsx || 'h',
+									},
+									files: options.entries,
 								},
-								files: options.entries,
-							},
-							tsconfig: options.tsconfig,
-							tsconfigOverride: {
-								compilerOptions: {
-									module: 'ESNext',
-									target: 'esnext',
+								tsconfig: options.tsconfig,
+								tsconfigOverride: {
+									compilerOptions: {
+										module: 'ESNext',
+										target: 'esnext',
+									},
 								},
-							},
-						}),
+							}),
+						),
 					// if defines is not set, we shouldn't run babel through node_modules
 					isTruthy(defines) &&
-						babel({
-							babelHelpers: 'bundled',
-							babelrc: false,
-							compact: false,
-							configFile: false,
-							include: 'node_modules/**',
-							plugins: [
-								[
-									require.resolve('babel-plugin-transform-replace-expressions'),
-									{ replace: defines },
+						babel(
+							configOverride.pluginConfig('babel', {
+								babelHelpers: 'bundled',
+								babelrc: false,
+								compact: false,
+								configFile: false,
+								include: 'node_modules/**',
+								plugins: [
+									[
+										require.resolve(
+											'babel-plugin-transform-replace-expressions',
+										),
+										{ replace: defines },
+									],
 								],
-							],
-						}),
-					customBabel()({
-						babelHelpers: 'bundled',
-						extensions: EXTENSIONS,
-						exclude: 'node_modules/**',
-						passPerPreset: true, // @see https://babeljs.io/docs/en/options#passperpreset
-						custom: {
-							defines,
-							modern,
-							compress: options.compress !== false,
-							targets: options.target === 'node' ? { node: '8' } : undefined,
-							pragma: options.jsx || 'h',
-							pragmaFrag: options.jsxFragment || 'Fragment',
-							typescript: !!useTypescript,
-							jsxImportSource: options.jsxImportSource || false,
-						},
-					}),
-					options.compress !== false && [
-						terser({
-							sourcemap: true,
-							compress: Object.assign(
-								{
-									keep_infinity: true,
-									pure_getters: true,
-									// Ideally we'd just get Terser to respect existing Arrow functions...
-									// unsafe_arrows: true,
-									passes: 10,
-								},
-								minifyOptions.compress || {},
-							),
-							output: {
-								// By default, Terser wraps function arguments in extra parens to trigger eager parsing.
-								// Whether this is a good idea is way too specific to guess, so we optimize for size by default:
-								wrap_func_args: false,
-								comments: false,
+							}),
+						),
+					customBabel()(
+						configOverride.pluginConfig('customBabel', {
+							babelHelpers: 'bundled',
+							extensions: EXTENSIONS,
+							exclude: 'node_modules/**',
+							passPerPreset: true, // @see https://babeljs.io/docs/en/options#passperpreset
+							custom: {
+								defines,
+								modern,
+								compress: options.compress !== false,
+								targets: options.target === 'node' ? { node: '8' } : undefined,
+								pragma: options.jsx || 'h',
+								pragmaFrag: options.jsxFragment || 'Fragment',
+								typescript: !!useTypescript,
+								jsxImportSource: options.jsxImportSource || false,
 							},
-							warnings: true,
-							ecma: modern ? 9 : 5,
-							toplevel: modern || format === 'cjs' || format === 'es',
-							mangle: Object.assign({}, minifyOptions.mangle || {}),
-							nameCache,
 						}),
+					),
+					options.compress !== false && [
+						terser(
+							configOverride.pluginConfig('terser', {
+								sourcemap: true,
+								compress: Object.assign(
+									{
+										keep_infinity: true,
+										pure_getters: true,
+										// Ideally we'd just get Terser to respect existing Arrow functions...
+										// unsafe_arrows: true,
+										passes: 10,
+									},
+									minifyOptions.compress || {},
+								),
+								output: {
+									// By default, Terser wraps function arguments in extra parens to trigger eager parsing.
+									// Whether this is a good idea is way too specific to guess, so we optimize for size by default:
+									wrap_func_args: false,
+									comments: false,
+								},
+								warnings: true,
+								ecma: modern ? 9 : 5,
+								toplevel: modern || format === 'cjs' || format === 'es',
+								mangle: Object.assign({}, minifyOptions.mangle || {}),
+								nameCache,
+							}),
+						),
 						nameCache && {
 							// before hook
 							options: loadNameCache,
@@ -617,5 +639,5 @@ function createConfig(options, entry, format, writeMeta) {
 		},
 	};
 
-	return config;
+	return configOverride.config(config);
 }
