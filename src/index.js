@@ -448,7 +448,7 @@ async function createConfig(options, entry, format, writeMeta) {
 			plugins: []
 				.concat(
 					postcss(
-						configOverride.pluginConfig('postcss', options, {
+						configOverride.pluginConfig('postcss', {
 							plugins: [
 								autoprefixer(),
 								options.compress !== false &&
