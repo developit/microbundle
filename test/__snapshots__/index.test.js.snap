@@ -3016,3 +3016,73 @@ exports[`fixtures build ts-module with microbundle 7`] = `
 //# sourceMappingURL=ts-module.umd.js.map
 "
 `;
+
+exports[`fixtures build worker-loader with microbundle 1`] = `
+"Used script: microbundle --worker-loader
+
+Directory tree:
+
+worker-loader
+  dist
+    bar.d.ts
+    index.d.ts
+    web-worker.esm.js
+    web-worker.esm.js.map
+    web-worker.js
+    web-worker.js.map
+    web-worker.umd.js
+    web-worker.umd.js.map
+    worker.d.ts
+  node_modules
+  package.json
+  src
+    bar.ts
+    index.ts
+    worker.ts
+    workers.d.ts
+  tsconfig.json
+
+
+Build \\"webWorker\\" to dist:
+1004 B: web-worker.js.gz
+919 B: web-worker.js.br
+1004 B: web-worker.esm.js.gz
+919 B: web-worker.esm.js.br
+1030 B: web-worker.umd.js.gz
+941 B: web-worker.umd.js.br"
+`;
+
+exports[`fixtures build worker-loader with microbundle 2`] = `9`;
+
+exports[`fixtures build worker-loader with microbundle 3`] = `
+"export declare function bar(): string;
+"
+`;
+
+exports[`fixtures build worker-loader with microbundle 4`] = `
+"export {};
+"
+`;
+
+exports[`fixtures build worker-loader with microbundle 5`] = `
+"var c=null;try{var i=\\"undefined\\"!=typeof module&&\\"function\\"==typeof module.require&&module.require(\\"worker_threads\\")||\\"function\\"==typeof __non_webpack_require__&&__non_webpack_require__(\\"worker_threads\\")||\\"function\\"==typeof require&&require(\\"worker_threads\\");c=i.Worker}catch(c){}var n,t,d,e,I=new(\\"[object process]\\"===Object.prototype.toString.call(\\"undefined\\"!=typeof process?process:0)?(d=(t=Buffer.from(\\"Lyogcm9sbHVwLXBsdWdpbi13ZWItd29ya2VyLWxvYWRlciAqLwohZnVuY3Rpb24oKXsidXNlIHN0cmljdCI7c2VsZi5vbm1lc3NhZ2U9ZnVuY3Rpb24ocyl7cmV0dXJuIHNlbGYucG9zdE1lc3NhZ2Uocy5kYXRhKyJiYXIiKX19KCk7Cgo=\\",\\"base64\\").toString(\\"utf8\\")).indexOf(\\"\\\\n\\",10)+1,e=t.substring(d)+\\"//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid29ya2VyLmpzIiwic291cmNlcyI6WyJ3b3JrZXI6Ly93ZWItd29ya2VyL3dvcmtlci50cyIsIndvcmtlcjovL3dlYi13b3JrZXIvYmFyLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IGJhciB9IGZyb20gJy4vYmFyJztcblxuZGVjbGFyZSBjb25zdCBzZWxmOiBXb3JrZXI7XG5cbnNlbGYub25tZXNzYWdlID0gbWVzc2FnZSA9PiBzZWxmLnBvc3RNZXNzYWdlKG1lc3NhZ2UuZGF0YSArIGJhcigpKTtcbiIsImV4cG9ydCBmdW5jdGlvbiBiYXIoKSB7XG5cdHJldHVybiAnYmFyJztcbn1cbiJdLCJuYW1lcyI6WyJzZWxmIiwib25tZXNzYWdlIiwibWVzc2FnZSIsInBvc3RNZXNzYWdlIiwiZGF0YSJdLCJtYXBwaW5ncyI6InlCQUlBQSxLQUFLQyxVQUFZLFNBQUFDLFVBQVdGLEtBQUtHLFlBQVlELEVBQVFFLEtDSDdDIn0=\\",function(i){return new c(e,Object.assign({},i,{eval:!0}))}):function(c){return n=n||function(c,i,n){var t=atob(\\"Lyogcm9sbHVwLXBsdWdpbi13ZWItd29ya2VyLWxvYWRlciAqLwohZnVuY3Rpb24oKXsidXNlIHN0cmljdCI7c2VsZi5vbm1lc3NhZ2U9ZnVuY3Rpb24ocyl7cmV0dXJuIHNlbGYucG9zdE1lc3NhZ2Uocy5kYXRhKyJiYXIiKX19KCk7Cgo=\\"),d=t.indexOf(\\"\\\\n\\",10)+1,e=t.substring(d)+\\"//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid29ya2VyLmpzIiwic291cmNlcyI6WyJ3b3JrZXI6Ly93ZWItd29ya2VyL3dvcmtlci50cyIsIndvcmtlcjovL3dlYi13b3JrZXIvYmFyLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IGJhciB9IGZyb20gJy4vYmFyJztcblxuZGVjbGFyZSBjb25zdCBzZWxmOiBXb3JrZXI7XG5cbnNlbGYub25tZXNzYWdlID0gbWVzc2FnZSA9PiBzZWxmLnBvc3RNZXNzYWdlKG1lc3NhZ2UuZGF0YSArIGJhcigpKTtcbiIsImV4cG9ydCBmdW5jdGlvbiBiYXIoKSB7XG5cdHJldHVybiAnYmFyJztcbn1cbiJdLCJuYW1lcyI6WyJzZWxmIiwib25tZXNzYWdlIiwibWVzc2FnZSIsInBvc3RNZXNzYWdlIiwiZGF0YSJdLCJtYXBwaW5ncyI6InlCQUlBQSxLQUFLQyxVQUFZLFNBQUFDLFVBQVdGLEtBQUtHLFlBQVlELEVBQVFFLEtDSDdDIn0=\\",I=new Blob([e],{type:\\"application/javascript\\"});return URL.createObjectURL(I)}(),new Worker(n,c)});I.onmessage=function(c){return\\"foobar\\"===c.data},I.postMessage(\\"foo\\");
+//# sourceMappingURL=web-worker.esm.js.map
+"
+`;
+
+exports[`fixtures build worker-loader with microbundle 6`] = `
+"var c=null;try{var i=\\"undefined\\"!=typeof module&&\\"function\\"==typeof module.require&&module.require(\\"worker_threads\\")||\\"function\\"==typeof __non_webpack_require__&&__non_webpack_require__(\\"worker_threads\\")||\\"function\\"==typeof require&&require(\\"worker_threads\\");c=i.Worker}catch(c){}var n,t,d,e,I=new(\\"[object process]\\"===Object.prototype.toString.call(\\"undefined\\"!=typeof process?process:0)?(d=(t=Buffer.from(\\"Lyogcm9sbHVwLXBsdWdpbi13ZWItd29ya2VyLWxvYWRlciAqLwohZnVuY3Rpb24oKXsidXNlIHN0cmljdCI7c2VsZi5vbm1lc3NhZ2U9ZnVuY3Rpb24ocyl7cmV0dXJuIHNlbGYucG9zdE1lc3NhZ2Uocy5kYXRhKyJiYXIiKX19KCk7Cgo=\\",\\"base64\\").toString(\\"utf8\\")).indexOf(\\"\\\\n\\",10)+1,e=t.substring(d)+\\"//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid29ya2VyLmpzIiwic291cmNlcyI6WyJ3b3JrZXI6Ly93ZWItd29ya2VyL3dvcmtlci50cyIsIndvcmtlcjovL3dlYi13b3JrZXIvYmFyLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IGJhciB9IGZyb20gJy4vYmFyJztcblxuZGVjbGFyZSBjb25zdCBzZWxmOiBXb3JrZXI7XG5cbnNlbGYub25tZXNzYWdlID0gbWVzc2FnZSA9PiBzZWxmLnBvc3RNZXNzYWdlKG1lc3NhZ2UuZGF0YSArIGJhcigpKTtcbiIsImV4cG9ydCBmdW5jdGlvbiBiYXIoKSB7XG5cdHJldHVybiAnYmFyJztcbn1cbiJdLCJuYW1lcyI6WyJzZWxmIiwib25tZXNzYWdlIiwibWVzc2FnZSIsInBvc3RNZXNzYWdlIiwiZGF0YSJdLCJtYXBwaW5ncyI6InlCQUlBQSxLQUFLQyxVQUFZLFNBQUFDLFVBQVdGLEtBQUtHLFlBQVlELEVBQVFFLEtDSDdDIn0=\\",function(i){return new c(e,Object.assign({},i,{eval:!0}))}):function(c){return n=n||function(c,i,n){var t=atob(\\"Lyogcm9sbHVwLXBsdWdpbi13ZWItd29ya2VyLWxvYWRlciAqLwohZnVuY3Rpb24oKXsidXNlIHN0cmljdCI7c2VsZi5vbm1lc3NhZ2U9ZnVuY3Rpb24ocyl7cmV0dXJuIHNlbGYucG9zdE1lc3NhZ2Uocy5kYXRhKyJiYXIiKX19KCk7Cgo=\\"),d=t.indexOf(\\"\\\\n\\",10)+1,e=t.substring(d)+\\"//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid29ya2VyLmpzIiwic291cmNlcyI6WyJ3b3JrZXI6Ly93ZWItd29ya2VyL3dvcmtlci50cyIsIndvcmtlcjovL3dlYi13b3JrZXIvYmFyLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IGJhciB9IGZyb20gJy4vYmFyJztcblxuZGVjbGFyZSBjb25zdCBzZWxmOiBXb3JrZXI7XG5cbnNlbGYub25tZXNzYWdlID0gbWVzc2FnZSA9PiBzZWxmLnBvc3RNZXNzYWdlKG1lc3NhZ2UuZGF0YSArIGJhcigpKTtcbiIsImV4cG9ydCBmdW5jdGlvbiBiYXIoKSB7XG5cdHJldHVybiAnYmFyJztcbn1cbiJdLCJuYW1lcyI6WyJzZWxmIiwib25tZXNzYWdlIiwibWVzc2FnZSIsInBvc3RNZXNzYWdlIiwiZGF0YSJdLCJtYXBwaW5ncyI6InlCQUlBQSxLQUFLQyxVQUFZLFNBQUFDLFVBQVdGLEtBQUtHLFlBQVlELEVBQVFFLEtDSDdDIn0=\\",I=new Blob([e],{type:\\"application/javascript\\"});return URL.createObjectURL(I)}(),new Worker(n,c)});I.onmessage=function(c){return\\"foobar\\"===c.data},I.postMessage(\\"foo\\");
+//# sourceMappingURL=web-worker.js.map
+"
+`;
+
+exports[`fixtures build worker-loader with microbundle 7`] = `
+"!function(c){\\"function\\"==typeof define&&define.amd?define(c):c()}(function(){var c=null;try{var i=\\"undefined\\"!=typeof module&&\\"function\\"==typeof module.require&&module.require(\\"worker_threads\\")||\\"function\\"==typeof __non_webpack_require__&&__non_webpack_require__(\\"worker_threads\\")||\\"function\\"==typeof require&&require(\\"worker_threads\\");c=i.Worker}catch(c){}var n,t,e,d,o=new(\\"[object process]\\"===Object.prototype.toString.call(\\"undefined\\"!=typeof process?process:0)?(e=(t=Buffer.from(\\"Lyogcm9sbHVwLXBsdWdpbi13ZWItd29ya2VyLWxvYWRlciAqLwohZnVuY3Rpb24oKXsidXNlIHN0cmljdCI7c2VsZi5vbm1lc3NhZ2U9ZnVuY3Rpb24ocyl7cmV0dXJuIHNlbGYucG9zdE1lc3NhZ2Uocy5kYXRhKyJiYXIiKX19KCk7Cgo=\\",\\"base64\\").toString(\\"utf8\\")).indexOf(\\"\\\\n\\",10)+1,d=t.substring(e)+\\"//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid29ya2VyLmpzIiwic291cmNlcyI6WyJ3b3JrZXI6Ly93ZWItd29ya2VyL3dvcmtlci50cyIsIndvcmtlcjovL3dlYi13b3JrZXIvYmFyLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IGJhciB9IGZyb20gJy4vYmFyJztcblxuZGVjbGFyZSBjb25zdCBzZWxmOiBXb3JrZXI7XG5cbnNlbGYub25tZXNzYWdlID0gbWVzc2FnZSA9PiBzZWxmLnBvc3RNZXNzYWdlKG1lc3NhZ2UuZGF0YSArIGJhcigpKTtcbiIsImV4cG9ydCBmdW5jdGlvbiBiYXIoKSB7XG5cdHJldHVybiAnYmFyJztcbn1cbiJdLCJuYW1lcyI6WyJzZWxmIiwib25tZXNzYWdlIiwibWVzc2FnZSIsInBvc3RNZXNzYWdlIiwiZGF0YSJdLCJtYXBwaW5ncyI6InlCQUlBQSxLQUFLQyxVQUFZLFNBQUFDLFVBQVdGLEtBQUtHLFlBQVlELEVBQVFFLEtDSDdDIn0=\\",function(i){return new c(d,Object.assign({},i,{eval:!0}))}):function(c){return n=n||function(c,i,n){var t=atob(\\"Lyogcm9sbHVwLXBsdWdpbi13ZWItd29ya2VyLWxvYWRlciAqLwohZnVuY3Rpb24oKXsidXNlIHN0cmljdCI7c2VsZi5vbm1lc3NhZ2U9ZnVuY3Rpb24ocyl7cmV0dXJuIHNlbGYucG9zdE1lc3NhZ2Uocy5kYXRhKyJiYXIiKX19KCk7Cgo=\\"),e=t.indexOf(\\"\\\\n\\",10)+1,d=t.substring(e)+\\"//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid29ya2VyLmpzIiwic291cmNlcyI6WyJ3b3JrZXI6Ly93ZWItd29ya2VyL3dvcmtlci50cyIsIndvcmtlcjovL3dlYi13b3JrZXIvYmFyLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IGJhciB9IGZyb20gJy4vYmFyJztcblxuZGVjbGFyZSBjb25zdCBzZWxmOiBXb3JrZXI7XG5cbnNlbGYub25tZXNzYWdlID0gbWVzc2FnZSA9PiBzZWxmLnBvc3RNZXNzYWdlKG1lc3NhZ2UuZGF0YSArIGJhcigpKTtcbiIsImV4cG9ydCBmdW5jdGlvbiBiYXIoKSB7XG5cdHJldHVybiAnYmFyJztcbn1cbiJdLCJuYW1lcyI6WyJzZWxmIiwib25tZXNzYWdlIiwibWVzc2FnZSIsInBvc3RNZXNzYWdlIiwiZGF0YSJdLCJtYXBwaW5ncyI6InlCQUlBQSxLQUFLQyxVQUFZLFNBQUFDLFVBQVdGLEtBQUtHLFlBQVlELEVBQVFFLEtDSDdDIn0=\\",o=new Blob([d],{type:\\"application/javascript\\"});return URL.createObjectURL(o)}(),new Worker(n,c)});o.onmessage=function(c){return\\"foobar\\"===c.data},o.postMessage(\\"foo\\")});
+//# sourceMappingURL=web-worker.umd.js.map
+"
+`;
+
+exports[`fixtures build worker-loader with microbundle 8`] = `
+"export {};
+"
+`;

@@ -1,0 +1,7 @@
+{
+	"compilerOptions": {
+		"baseUrl": "."
+	},
+	"files": ["src/index.ts"],
+	"include": ["src/workers.d.ts"]
+}
