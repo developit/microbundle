@@ -18,6 +18,7 @@ import alias from '@rollup/plugin-alias';
 import postcss from 'rollup-plugin-postcss';
 import typescript from 'rollup-plugin-typescript2';
 import json from '@rollup/plugin-json';
+import webWorkerLoader from 'rollup-plugin-web-worker-loader';
 import logError from './log-error';
 import { isDir, isFile, stdout, isTruthy, removeScope } from './utils';
 import { getSizeInfo } from './lib/compressed-size';
@@ -366,6 +367,7 @@ function createConfig(options, entry, format, writeMeta) {
 			: () => resolve(options.cwd, 'mangle.json');
 
 	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
+	const useWorkerLoader = options['worker-loader'] !== false;
 
 	const escapeStringExternals = ext =>
 		ext instanceof RegExp ? ext.source : escapeStringRegexp(ext);
@@ -396,7 +398,7 @@ function createConfig(options, entry, format, writeMeta) {
 
 	/** @type {false | import('rollup').RollupCache} */
 	let cache;
-	if (modern) cache = false;
+	if (modern || useWorkerLoader) cache = false;
 
 	const absMain = resolve(options.cwd, getMain({ options, entry, format }));
 	const outputDir = dirname(absMain);
@@ -583,6 +585,11 @@ function createConfig(options, entry, format, writeMeta) {
 							},
 						},
 					],
+					useWorkerLoader &&
+						webWorkerLoader({
+							extensions: ['.js'].concat(useTypescript ? '.ts' : []),
+							sourcemap: options.sourcemap
+						}),
 					{
 						writeBundle(bundle) {
 							config._sizeInfo = Promise.all(
