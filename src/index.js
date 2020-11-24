@@ -17,6 +17,7 @@ import { terser } from 'rollup-plugin-terser';
 import alias from '@rollup/plugin-alias';
 import postcss from 'rollup-plugin-postcss';
 import typescript from 'rollup-plugin-typescript2';
+import webWorkerLoader from 'rollup-plugin-web-worker-loader';
 import json from '@rollup/plugin-json';
 import logError from './log-error';
 import { isDir, isFile, stdout, isTruthy, removeScope } from './utils';
@@ -385,6 +386,7 @@ function createConfig(options, entry, format, writeMeta) {
 			: () => resolve(options.cwd, 'mangle.json');
 
 	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
+	const useWorkerLoader = options['worker-loader'] !== false;
 	const emitDeclaration =
 		options.generateTypes == null
 			? !!(pkg.types || pkg.typings)
@@ -418,7 +420,7 @@ function createConfig(options, entry, format, writeMeta) {
 
 	/** @type {false | import('rollup').RollupCache} */
 	let cache;
-	if (modern) cache = false;
+	if (modern || useWorkerLoader) cache = false;
 
 	const absMain = resolve(options.cwd, getMain({ options, entry, format }));
 	const outputDir = dirname(absMain);
@@ -616,6 +618,11 @@ function createConfig(options, entry, format, writeMeta) {
 							},
 						},
 					],
+					useWorkerLoader &&
+						webWorkerLoader({
+							extensions: ['.js'].concat(useTypescript ? '.ts' : []),
+							sourcemap: options.sourcemap,
+						}),
 					/** @type {import('rollup').Plugin} */
 					({
 						name: 'postprocessing',
