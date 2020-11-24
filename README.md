@@ -266,6 +266,7 @@ Options
 	--jsxImportSource  Specify the automatic import source for JSX like preact
 	--tsconfig         Specify the path to a custom tsconfig.json
 	--css-modules      Configures .css to be treated as modules (default: null)
+	--worker-loader    Generate inline worker blobs  (default false)
 	-h, --help         Displays this message
 
 Examples
