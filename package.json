@@ -87,6 +87,7 @@
 		"@rollup/plugin-commonjs": "^13.0.0",
 		"@rollup/plugin-json": "^4.1.0",
 		"@rollup/plugin-node-resolve": "^6.1.0",
+		"@surma/rollup-plugin-off-main-thread": "2.1.0",
 		"asyncro": "^3.0.0",
 		"autoprefixer": "^9.8.0",
 		"babel-plugin-macros": "^2.8.0",

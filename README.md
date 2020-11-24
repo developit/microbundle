@@ -192,6 +192,24 @@ By default Microbundle outputs multiple bundles, one bundle per format. A single
 microbundle -i lib/main.js -o dist/bundle.js --no-pkg-main -f umd
 ```
 
+### Building web workers as inline blobs
+
+Microbundle is able to detect and bundle workers when building with format `es`
+or `modern`. Consider the following example:
+
+```js
+const worker = new Worker('./worker.js', { type: 'module' });
+```
+
+And build it like this:
+
+```bash
+microbundle --worker-loader
+```
+
+For more information see
+[@surma/rollup-plugin-off-main-thread](https://github.com/surma/rollup-plugin-off-main-thread#config).
+
 ### Mangling Properties
 
 To achieve the smallest possible bundle size, libraries often wish to rename internal object properties or class members to smaller names - transforming `this._internalIdValue` to `this._i`. Microbundle doesn't do this by default, however it can be enabled by creating a `mangle.json` file (or a `"mangle"` property in your package.json). Within that file, you can specify a regular expression pattern to control which properties should be mangled. For example: to mangle all property names beginning an underscore:
@@ -243,6 +261,7 @@ Options
 	--jsxImportSource  Specify the automatic import source for JSX like preact
 	--tsconfig         Specify the path to a custom tsconfig.json
 	--css-modules      Configures .css to be treated as modules (default: null)
+	--worker-loader    Generate inline worker blobs  (default false)
 	-h, --help         Displays this message
 
 Examples
