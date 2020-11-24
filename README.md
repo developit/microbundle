@@ -253,6 +253,29 @@ This can be customized by passing the command line argument `--css-modules "[nam
 | true  | import './my-file.css';        | :white_check_mark: |
 | true  | import './my-file.module.css'; | :white_check_mark: |
 
+### Building web workers as inline blobs
+
+Through the [rollup-plugin-web-worker-loader](https://github.com/darionco/rollup-plugin-web-worker-loader), microbundle can be instructed to create inlined JavaScript source blobs which contain all dependencies to run within a WebWorker execution context. Consider the following minimal example:
+
+```js
+// main.js
+import MyWorker from 'web-worker:./my-worker';
+const myWorker = new MyWorker();
+myWorker.postMessage(3.14159);
+
+// my-worker.js
+import { longRunningJob } from 'heavy-calculations'; // Imports will be inlined
+self.onmessage = message => self.postMessage(longRunningJob(message.data));
+```
+
+And build it like this:
+
+```bash
+microbundle --worker-loader
+```
+
+**Note** For usage in TypeScript projects, have a look at the [rollup-typescript-webworkers](https://github.com/darionco/rollup-typescript-webworkers) example by the rollup-plugin-web-worker-loader maintainers.
+
 ### Mangling Properties
 
 To achieve the smallest possible bundle size, libraries often wish to rename internal object properties or class members to smaller names - transforming `this._internalIdValue` to `this._i`. Microbundle doesn't do this by default, however it can be enabled by creating a `mangle.json` file (or a `"mangle"` property in your package.json). Within that file, you can specify a regular expression pattern to control which properties should be mangled. For example: to mangle all property names beginning an underscore:

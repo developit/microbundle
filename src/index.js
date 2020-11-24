@@ -429,7 +429,7 @@ function createConfig(options, entry, format, writeMeta) {
 	let config = {
 		/** @type {import('rollup').InputOptions} */
 		inputOptions: {
-			// disable Rollup's cache for the modern build to prevent re-use of legacy transpiled modules:
+			// disable Rollup's cache for modern and worker-loader builds to prevent re-use of legacy transpiled modules:
 			cache,
 			input: entry,
 			external: id => {
