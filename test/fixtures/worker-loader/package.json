@@ -1,5 +1,5 @@
 {
-  "name": "web-worker",
+  "name": "worker-loader",
   "scripts": {
     "build": "microbundle --worker-loader"
   }

@@ -1,4 +1,4 @@
-import WebWorker from 'web-worker:./worker';
+import WebWorker from 'worker-loader:./worker';
 
 const webWorker = new WebWorker();
 

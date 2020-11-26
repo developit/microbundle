@@ -259,7 +259,7 @@ Through the [rollup-plugin-web-worker-loader](https://github.com/darionco/rollup
 
 ```js
 // main.js
-import MyWorker from 'web-worker:./my-worker';
+import MyWorker from 'worker-loader:./my-worker';
 const myWorker = new MyWorker();
 myWorker.postMessage(3.14159);
 
