@@ -9,6 +9,7 @@ import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import { rollup, watch } from 'rollup';
 import builtinModules from 'builtin-modules';
+import importMap from 'rollup-plugin-import-map';
 import commonjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
 import customBabel from './lib/babel-custom';
@@ -351,6 +352,14 @@ function createConfig(options, entry, format, writeMeta) {
 		);
 	}
 
+	let imports = {};
+	if (options['import-map']) {
+		imports = Object.assign(
+			imports,
+			parseMappingArgument(options['import-map']),
+		);
+	}
+
 	const modern = format === 'modern';
 
 	// let rollupName = safeVariableName(basename(entry).replace(/\.js$/, ''));
@@ -443,6 +452,9 @@ function createConfig(options, entry, format, writeMeta) {
 
 			plugins: []
 				.concat(
+					(modern || format === 'es') &&
+						isTruthy(imports) &&
+						importMap({ imports }),
 					postcss({
 						plugins: [
 							autoprefixer(),
