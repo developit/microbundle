@@ -51,6 +51,11 @@ export default handler => {
 		.example('microbundle --define API_KEY=1234')
 		.option('--alias', `Map imports to different modules`)
 		.example('microbundle --alias react=preact')
+		.option(
+			'--import-map',
+			`Import maps bare import specifiers to absolute URLs, when outputting ESM (-f esm,modern). Allows loading modules from a CDN at runtime, instead of bundling them at build time.`,
+		)
+		.example('microbundle --import-map preact=https://unpkg.com/preact?module')
 		.option('--compress', 'Compress output using Terser', null)
 		.option('--strict', 'Enforce undefined global context and add "use strict"')
 		.option('--name', 'Specify name exposed in UMD builds')
