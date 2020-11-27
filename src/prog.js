@@ -53,7 +53,7 @@ export default handler => {
 		.example('microbundle --alias react=preact')
 		.option(
 			'--import-map',
-			`Import maps bare import specifiers to absolute URLs, when outputting ESM (-f esm,modern). Allows loading modules from a CDN at runtime, instead of bundling them at build time.`,
+			'Import ESM packages from a CDN, instead of including them in the ESM bundle',
 		)
 		.example('microbundle --import-map preact=https://unpkg.com/preact?module')
 		.option('--compress', 'Compress output using Terser', null)
