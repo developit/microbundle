@@ -1688,7 +1688,7 @@ exports[`fixtures build esnext-ts with microbundle 6`] = `
 `;
 
 exports[`fixtures build import-map with microbundle 1`] = `
-"Used script: microbundle -f modern --import-map web-vitals=https://unpkg.com/web-vitals/base?module
+"Used script: microbundle -f modern --import-map web-vitals=https://unpkg.com/web-vitals?module
 
 Directory tree:
 
@@ -1701,14 +1701,14 @@ import-map
 
 
 Build \\"importMap\\" to dist:
-124 B: import-map.modern.js.gz
-107 B: import-map.modern.js.br"
+119 B: import-map.modern.js.gz
+100 B: import-map.modern.js.br"
 `;
 
 exports[`fixtures build import-map with microbundle 2`] = `2`;
 
 exports[`fixtures build import-map with microbundle 3`] = `
-"import{getCLS as o,getFID as l,getLCP as e}from\\"https://unpkg.com/web-vitals/base?module\\";o(console.log),l(console.log),e(console.log);
+"import{getCLS as o,getFID as l,getLCP as e}from\\"https://unpkg.com/web-vitals?module\\";o(console.log),l(console.log),e(console.log);
 //# sourceMappingURL=import-map.modern.js.map
 "
 `;
