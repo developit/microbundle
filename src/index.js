@@ -621,6 +621,7 @@ function createConfig(options, entry, format, writeMeta) {
 					useWorkerLoader &&
 						webWorkerLoader({
 							extensions: ['.js'].concat(useTypescript ? '.ts' : []),
+							external: [],
 							pattern: /worker-loader:(.+)/,
 							sourcemap: options.sourcemap,
 						}),
