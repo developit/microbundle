@@ -192,6 +192,29 @@ By default Microbundle outputs multiple bundles, one bundle per format. A single
 microbundle -i lib/main.js -o dist/bundle.js --no-pkg-main -f umd
 ```
 
+### Building web workers as inline blobs
+
+Through the [rollup-plugin-web-worker-loader](https://github.com/darionco/rollup-plugin-web-worker-loader), microbundle can be instructed to create inlined JavaScript source blobs which contain all dependencies to run within a WebWorker execution context. Consider the following minimal example:
+
+```js
+// main.js
+import MyWorker from 'worker-loader:./my-worker';
+const myWorker = new MyWorker();
+myWorker.postMessage(3.14159);
+
+// my-worker.js
+import { longRunningJob } from 'heavy-calculations'; // Imports will be inlined
+self.onmessage = message => self.postMessage(longRunningJob(message.data));
+```
+
+And build it like this:
+
+```bash
+microbundle --worker-loader
+```
+
+**Note** For usage in TypeScript projects, have a look at the [rollup-typescript-webworkers](https://github.com/darionco/rollup-typescript-webworkers) example by the rollup-plugin-web-worker-loader maintainers.
+
 ### Mangling Properties
 
 To achieve the smallest possible bundle size, libraries often wish to rename internal object properties or class members to smaller names - transforming `this._internalIdValue` to `this._i`. Microbundle doesn't do this by default, however it can be enabled by creating a `mangle.json` file (or a `"mangle"` property in your package.json). Within that file, you can specify a regular expression pattern to control which properties should be mangled. For example: to mangle all property names beginning an underscore:
@@ -243,6 +266,7 @@ Options
 	--jsxImportSource  Specify the automatic import source for JSX like preact
 	--tsconfig         Specify the path to a custom tsconfig.json
 	--css-modules      Configures .css to be treated as modules (default: null)
+	--worker-loader    Generate inline worker blobs  (default false)
 	-h, --help         Displays this message
 
 Examples
