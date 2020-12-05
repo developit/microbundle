@@ -590,7 +590,7 @@ function createConfig(options, entry, format, writeMeta) {
 							extensions: ['.js'].concat(useTypescript ? '.ts' : []),
 							external: [],
 							pattern: /worker-loader:(.+)/,
-							sourcemap: options.sourcemap,
+							sourcemap: options.compress === false && options.sourcemap,
 						}),
 					{
 						writeBundle(bundle) {
