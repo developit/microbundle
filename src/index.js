@@ -503,6 +503,7 @@ function createConfig(options, entry, format, writeMeta) {
 							cacheRoot: `./node_modules/.cache/.rts2_cache_${format}`,
 							useTsconfigDeclarationDir: true,
 							experimentalDecorators: true,
+							objectHashIgnoreUnknownHack: true,
 							tsconfigDefaults: {
 								compilerOptions: {
 									sourceMap: options.sourcemap,
