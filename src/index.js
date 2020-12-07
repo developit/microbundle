@@ -378,7 +378,6 @@ function createConfig(options, entry, format, writeMeta) {
 		extname(entry) === '.ts' ||
 		extname(entry) === '.tsx' ||
 		basename(entry).endsWith('.ts.vue');
-	const useVue = extname(entry) === '.vue';
 
 	const escapeStringExternals = ext =>
 		ext instanceof RegExp ? ext.source : escapeStringRegexp(ext);
@@ -527,7 +526,7 @@ function createConfig(options, entry, format, writeMeta) {
 								},
 							},
 						}),
-					useVue && vue(),
+					vue(),
 					// if defines is not set, we shouldn't run babel through node_modules
 					isTruthy(defines) &&
 						babel({

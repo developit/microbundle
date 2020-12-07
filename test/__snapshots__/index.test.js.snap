@@ -2847,3 +2847,51 @@ exports[`fixtures build ts-module with microbundle 7`] = `
 //# sourceMappingURL=ts-module.umd.js.map
 "
 `;
+
+exports[`fixtures build vue-component with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+vue-component
+  dist
+    vue-component.esm.js
+    vue-component.esm.js.map
+    vue-component.js
+    vue-component.js.map
+    vue-component.umd.js
+    vue-component.umd.js.map
+  package.json
+  src
+    component.vue
+    index.js
+
+
+Build \\"vueComponent\\" to dist:
+257 B: vue-component.js.gz
+203 B: vue-component.js.br
+228 B: vue-component.esm.js.gz
+179 B: vue-component.esm.js.br
+327 B: vue-component.umd.js.gz
+261 B: vue-component.umd.js.br"
+`;
+
+exports[`fixtures build vue-component with microbundle 2`] = `6`;
+
+exports[`fixtures build vue-component with microbundle 3`] = `
+"import e,{openBlock as n,createBlock as o,toDisplayString as r}from\\"vue\\";var l={data:function(){return{message:\\"Hello world!\\"}}};const s={class:\\"example\\"};l.render=function(e,l,t,a,c,m){return n(),o(\\"div\\",s,r(c.message),1)},l.__file=\\"src/component.vue\\",new e({el:\\"#app\\",components:{hello:l}});
+//# sourceMappingURL=vue-component.esm.js.map
+"
+`;
+
+exports[`fixtures build vue-component with microbundle 4`] = `
+"var e,n=require(\\"vue\\"),o=(e=n)&&\\"object\\"==typeof e&&\\"default\\"in e?e.default:e,t={data:function(){return{message:\\"Hello world!\\"}}};const l={class:\\"example\\"};t.render=function(e,o,t,r,a,c){return n.openBlock(),n.createBlock(\\"div\\",l,n.toDisplayString(a.message),1)},t.__file=\\"src/component.vue\\",new o({el:\\"#app\\",components:{hello:t}});
+//# sourceMappingURL=vue-component.js.map
+"
+`;
+
+exports[`fixtures build vue-component with microbundle 5`] = `
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?n(require(\\"vue\\")):\\"function\\"==typeof define&&define.amd?define([\\"vue\\"],n):n((e=e||self).Vue)}(this,function(e){var n=\\"default\\"in e?e.default:e,o={data:function(){return{message:\\"Hello world!\\"}}};const t={class:\\"example\\"};o.render=function(n,o,f,i,l,u){return e.openBlock(),e.createBlock(\\"div\\",t,e.toDisplayString(l.message),1)},o.__file=\\"src/component.vue\\",new n({el:\\"#app\\",components:{hello:o}})});
+//# sourceMappingURL=vue-component.umd.js.map
+"
+`;
