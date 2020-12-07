@@ -969,6 +969,61 @@ export default Ferrari;
 "
 `;
 
+exports[`fixtures build basic-ts-vue with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+basic-ts-vue
+  dist
+    basic-lib-vue.esm.js
+    basic-lib-vue.esm.js.map
+    basic-lib-vue.js
+    basic-lib-vue.js.map
+    basic-lib-vue.umd.js
+    basic-lib-vue.umd.js.map
+    index.ts.vue.d.ts
+  node_modules
+  package.json
+  src
+    index.ts.vue
+
+
+Build \\"basicLibVue\\" to dist:
+210 B: basic-lib-vue.js.gz
+169 B: basic-lib-vue.js.br
+214 B: basic-lib-vue.esm.js.gz
+169 B: basic-lib-vue.esm.js.br
+305 B: basic-lib-vue.umd.js.gz
+240 B: basic-lib-vue.umd.js.br"
+`;
+
+exports[`fixtures build basic-ts-vue with microbundle 2`] = `7`;
+
+exports[`fixtures build basic-ts-vue with microbundle 3`] = `
+"import{openBlock as e,createBlock as r,toDisplayString as t}from\\"vue\\";var n={data:function(){return{message:\\"Hello world!\\"}}};const s={class:\\"example\\"};n.render=function(n,a,o,l,u,d){return e(),r(\\"div\\",s,t(u.message),1)},n.__file=\\"src/index.ts.vue\\";export default n;
+//# sourceMappingURL=basic-lib-vue.esm.js.map
+"
+`;
+
+exports[`fixtures build basic-ts-vue with microbundle 4`] = `
+"var e=require(\\"vue\\"),r={data:function(){return{message:\\"Hello world!\\"}}};const n={class:\\"example\\"};r.render=function(r,o,s,t,l,a){return e.openBlock(),e.createBlock(\\"div\\",n,e.toDisplayString(l.message),1)},r.__file=\\"src/index.ts.vue\\",module.exports=r;
+//# sourceMappingURL=basic-lib-vue.js.map
+"
+`;
+
+exports[`fixtures build basic-ts-vue with microbundle 5`] = `
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n(require(\\"vue\\")):\\"function\\"==typeof define&&define.amd?define([\\"vue\\"],n):(e=e||self).basicLibVue=n(e.vue)}(this,function(e){var n={data:function(){return{message:\\"Hello world!\\"}}};const t={class:\\"example\\"};return n.render=function(n,o,i,r,u,s){return e.openBlock(),e.createBlock(\\"div\\",t,e.toDisplayString(u.message),1)},n.__file=\\"src/index.ts.vue\\",n});
+//# sourceMappingURL=basic-lib-vue.umd.js.map
+"
+`;
+
+exports[`fixtures build basic-ts-vue with microbundle 6`] = `
+"declare const _default: boolean;
+export default _default;
+"
+`;
+
 exports[`fixtures build basic-tsx with microbundle 1`] = `
 "Used script: microbundle
 
