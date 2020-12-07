@@ -2848,6 +2848,61 @@ exports[`fixtures build ts-module with microbundle 7`] = `
 "
 `;
 
+exports[`fixtures build ts-vue-component with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+ts-vue-component
+  dist
+    index.d.ts
+    ts-vue-component.esm.js
+    ts-vue-component.esm.js.map
+    ts-vue-component.js
+    ts-vue-component.js.map
+    ts-vue-component.umd.js
+    ts-vue-component.umd.js.map
+  node_modules
+  package.json
+  src
+    component.ts.vue
+    index.ts
+
+
+Build \\"tsVueComponent\\" to dist:
+259 B: ts-vue-component.js.gz
+206 B: ts-vue-component.js.br
+230 B: ts-vue-component.esm.js.gz
+180 B: ts-vue-component.esm.js.br
+327 B: ts-vue-component.umd.js.gz
+266 B: ts-vue-component.umd.js.br"
+`;
+
+exports[`fixtures build ts-vue-component with microbundle 2`] = `7`;
+
+exports[`fixtures build ts-vue-component with microbundle 3`] = `
+"export {};
+"
+`;
+
+exports[`fixtures build ts-vue-component with microbundle 4`] = `
+"import e,{openBlock as n,createBlock as o,toDisplayString as r}from\\"vue\\";var s={data:function(){return{message:\\"Hello world!\\"}}};const t={class:\\"example\\"};s.render=function(e,s,l,a,c,m){return n(),o(\\"div\\",t,r(c.message),1)},s.__file=\\"src/component.ts.vue\\",new e({el:\\"#app\\",components:{hello:s}});
+//# sourceMappingURL=ts-vue-component.esm.js.map
+"
+`;
+
+exports[`fixtures build ts-vue-component with microbundle 5`] = `
+"var e,n=require(\\"vue\\"),o=(e=n)&&\\"object\\"==typeof e&&\\"default\\"in e?e.default:e,t={data:function(){return{message:\\"Hello world!\\"}}};const l={class:\\"example\\"};t.render=function(e,o,t,r,a,c){return n.openBlock(),n.createBlock(\\"div\\",l,n.toDisplayString(a.message),1)},t.__file=\\"src/component.ts.vue\\",new o({el:\\"#app\\",components:{hello:t}});
+//# sourceMappingURL=ts-vue-component.js.map
+"
+`;
+
+exports[`fixtures build ts-vue-component with microbundle 6`] = `
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?n(require(\\"vue\\")):\\"function\\"==typeof define&&define.amd?define([\\"vue\\"],n):n((e=e||self).Vue)}(this,function(e){var n=\\"default\\"in e?e.default:e,o={data:function(){return{message:\\"Hello world!\\"}}};const t={class:\\"example\\"};o.render=function(n,o,f,i,l,u){return e.openBlock(),e.createBlock(\\"div\\",t,e.toDisplayString(l.message),1)},o.__file=\\"src/component.ts.vue\\",new n({el:\\"#app\\",components:{hello:o}})});
+//# sourceMappingURL=ts-vue-component.umd.js.map
+"
+`;
+
 exports[`fixtures build vue-component with microbundle 1`] = `
 "Used script: microbundle
 
