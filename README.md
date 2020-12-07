@@ -248,7 +248,7 @@ Options
 Examples
 	$ microbundle build --globals react=React,jquery=$
 	$ microbundle build --define API_KEY=1234
-	$ microbundle build --alias react=preact
+	$ microbundle build --alias react=preact/compat
 	$ microbundle watch --no-sourcemap # don't generate sourcemaps
 	$ microbundle build --tsconfig tsconfig.build.json
 ```
