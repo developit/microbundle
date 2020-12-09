@@ -1688,7 +1688,7 @@ exports[`fixtures build esnext-ts with microbundle 6`] = `
 `;
 
 exports[`fixtures build import-map with microbundle 1`] = `
-"Used script: microbundle -f modern --import-map web-vitals=https://unpkg.com/web-vitals?module
+"Used script: microbundle -f modern --import-map import-map.json
 
 Directory tree:
 
@@ -1696,6 +1696,7 @@ import-map
   dist
     import-map.modern.js
     import-map.modern.js.map
+  import-map.json
   index.js
   package.json
 

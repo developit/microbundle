@@ -1,6 +1,6 @@
 {
   "name": "import-map",
   "scripts": {
-    "build": "microbundle -f modern --import-map web-vitals=https://unpkg.com/web-vitals?module"
+    "build": "microbundle -f modern --import-map import-map.json"
   }
 }

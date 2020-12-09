@@ -352,14 +352,6 @@ function createConfig(options, entry, format, writeMeta) {
 		);
 	}
 
-	let imports = {};
-	if (options['import-map']) {
-		imports = Object.assign(
-			imports,
-			parseMappingArgument(options['import-map']),
-		);
-	}
-
 	const modern = format === 'modern';
 
 	// let rollupName = safeVariableName(basename(entry).replace(/\.js$/, ''));
@@ -453,8 +445,8 @@ function createConfig(options, entry, format, writeMeta) {
 			plugins: []
 				.concat(
 					(modern || format === 'es') &&
-						isTruthy(imports) &&
-						importMap({ imports }),
+						options['import-map'] &&
+						importMap(options['import-map']),
 					postcss({
 						plugins: [
 							autoprefixer(),
