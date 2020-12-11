@@ -9,7 +9,7 @@ import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import { rollup, watch } from 'rollup';
 import builtinModules from 'builtin-modules';
-import { rollupImportMapPlugin as importMap } from 'rollup-plugin-import-map';
+import { rollupImportMapPlugin as importMap } from 'rollup-plugin-import-map/dist/lib/plugin.js';
 import commonjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
 import customBabel from './lib/babel-custom';
