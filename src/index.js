@@ -57,7 +57,7 @@ export default async function microbundle(inputOptions) {
 	options.name = finalName;
 	options.pkg.name = pkgName;
 
-	if (options.sourcemap !== false) {
+	if (options.sourcemap !== false && options.sourcemap !== 'inline') {
 		options.sourcemap = true;
 	}
 
