@@ -276,6 +276,7 @@ Here's what's coming up for Microbundle:
 - [hooked-form](https://github.com/JoviDeCroock/hooked-form) A lightweight form-management library for React.
 - [goober](https://github.com/cristianbote/goober) Less than 1KB css-in-js alternative with a familiar API.
 - [react-model](https://github.com/byte-fe/react-model) The next generation state management library for React
+- [Lowland](https://github.com/ryangjchandler/lowland) A front-end framework designed for minimalists.
 
 ## 🥂 License
 
