@@ -61,7 +61,7 @@ describe('fixtures', () => {
 			const dist = resolve(`${fixturePath}/dist`);
 			const files = fs.readdirSync(resolve(dist));
 			expect(files.length).toMatchSnapshot();
-			// we don't realy care about the content of a sourcemap
+			// we don't really care about the content of a sourcemap
 			files
 				.filter(
 					file =>

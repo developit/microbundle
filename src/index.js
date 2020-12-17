@@ -8,6 +8,8 @@ import glob from 'tiny-glob/sync';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import { rollup, watch } from 'rollup';
+import builtinModules from 'builtin-modules';
+import resolveFrom from 'resolve-from';
 import commonjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
 import customBabel from './lib/babel-custom';
@@ -82,6 +84,8 @@ export default async function microbundle(inputOptions) {
 	options.multipleEntries = options.entries.length > 1;
 
 	let formats = (options.format || options.formats).split(',');
+	// de-dupe formats and convert "esm" to "es":
+	formats = Array.from(new Set(formats.map(f => (f === 'esm' ? 'es' : f))));
 	// always compile cjs first if it's there:
 	formats.sort((a, b) => (a === 'cjs' ? -1 : a > b ? 1 : 0));
 
@@ -278,7 +282,7 @@ function getMain({ options, entry, format }) {
 	);
 	mainsByFormat.cjs = replaceName(pkg['cjs:main'] || 'x.js', mainNoExtension);
 	mainsByFormat.umd = replaceName(
-		pkg['umd:main'] || 'x.umd.js',
+		pkg['umd:main'] || pkg.unpkg || 'x.umd.js',
 		mainNoExtension,
 	);
 
@@ -305,6 +309,12 @@ function createConfig(options, entry, format, writeMeta) {
 
 	const moduleAliases = options.alias ? parseAliasArgument(options.alias) : [];
 	const aliasIds = moduleAliases.map(alias => alias.find);
+
+	// We want to silence rollup warnings for node builtins as we rollup-node-resolve threats them as externals anyway
+	// @see https://github.com/rollup/plugins/tree/master/packages/node-resolve/#resolving-built-ins-like-fs
+	if (options.target === 'node') {
+		external = external.concat(builtinModules);
+	}
 
 	const peerDeps = Object.keys(pkg.peerDependencies || {});
 	if (options.external === 'none') {
@@ -412,9 +422,26 @@ function createConfig(options, entry, format, writeMeta) {
 				}
 				return externalTest(id);
 			},
+
+			onwarn(warning, warn) {
+				// https://github.com/rollup/rollup/blob/0fa9758cb7b1976537ae0875d085669e3a21e918/src/utils/error.ts#L324
+				if (warning.code === 'UNRESOLVED_IMPORT') {
+					stdout(
+						`Failed to resolve the module ${warning.source} imported by ${warning.importer}` +
+							`\nIs the module installed? Note:` +
+							`\n ↳ to inline a module into your bundle, install it to "devDependencies".` +
+							`\n ↳ to depend on a module via import/require, install it to "dependencies".`,
+					);
+					return;
+				}
+
+				warn(warning);
+			},
+
 			treeshake: {
 				propertyReadSideEffects: false,
 			},
+
 			plugins: []
 				.concat(
 					postcss({
@@ -430,6 +457,7 @@ function createConfig(options, entry, format, writeMeta) {
 						// only write out CSS for the first bundle (avoids pointless extra files):
 						inject: false,
 						extract: !!writeMeta,
+						sourceMap: options.sourcemap,
 					}),
 					moduleAliases.length > 0 &&
 						alias({
@@ -460,7 +488,10 @@ function createConfig(options, entry, format, writeMeta) {
 					},
 					useTypescript &&
 						typescript({
-							typescript: require('typescript'),
+							typescript: require(resolveFrom.silent(
+								options.cwd,
+								'typescript',
+							) || 'typescript'),
 							cacheRoot: `./node_modules/.cache/.rts2_cache_${format}`,
 							useTsconfigDeclarationDir: true,
 							tsconfigDefaults: {
@@ -514,6 +545,7 @@ function createConfig(options, entry, format, writeMeta) {
 							pragma: options.jsx || 'h',
 							pragmaFrag: options.jsxFragment || 'Fragment',
 							typescript: !!useTypescript,
+							jsxImportSource: options.jsxImportSource || false,
 						},
 					}),
 					options.compress !== false && [
@@ -583,7 +615,8 @@ function createConfig(options, entry, format, writeMeta) {
 				return shebang[options.name];
 			},
 			format: modern ? 'es' : format,
-			name: options.name,
+			name: options.name && options.name.replace(/^global\./, ''),
+			extend: /^global\./.test(options.name),
 			dir: outputDir,
 			entryFileNames: outputEntryFileName,
 		},

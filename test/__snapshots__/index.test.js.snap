@@ -433,6 +433,7 @@ Directory tree:
 basic-css
   dist
     basic-css.css
+    basic-css.css.map
     basic-css.esm.js
     basic-css.esm.js.map
     basic-css.js
@@ -454,9 +455,12 @@ Build \\"basicCss\\" to dist:
 134 B: basic-css.umd.js.br"
 `;
 
-exports[`fixtures build basic-css with microbundle 2`] = `7`;
+exports[`fixtures build basic-css with microbundle 2`] = `8`;
 
-exports[`fixtures build basic-css with microbundle 3`] = `"._rHGVB{display:flex;color:red;background:#00f}"`;
+exports[`fixtures build basic-css with microbundle 3`] = `
+"._rHGVB{display:flex;color:red;background:#00f}
+/*# sourceMappingURL=basic-css.css.map */"
+`;
 
 exports[`fixtures build basic-css with microbundle 4`] = `
 "export default function(){var e=document.createElement(\\"div\\");return e.className=\\"testing\\",e}
@@ -856,6 +860,47 @@ exports[`fixtures build basic-no-pkg-main with microbundle 2`] = `2`;
 exports[`fixtures build basic-no-pkg-main with microbundle 3`] = `
 "!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=e||self).basicNoPkgMain=r()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){try{var r=arguments,n=[].slice.call(r);return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
 //# sourceMappingURL=basic-no-pkg-main.js.map
+"
+`;
+
+exports[`fixtures build basic-node-internals with microbundle 1`] = `
+"Used script: microbundle --target=node -f cjs
+
+Directory tree:
+
+basic-node-internals
+  dist
+    basic-node-internals.js
+    basic-node-internals.js.map
+  package.json
+  src
+    index.js
+
+
+Build \\"basicNodeInternals\\" to dist:
+191 B: basic-node-internals.js.gz
+149 B: basic-node-internals.js.br"
+`;
+
+exports[`fixtures build basic-node-internals with microbundle 2`] = `2`;
+
+exports[`fixtures build basic-node-internals with microbundle 3`] = `
+"var child_process = require('child_process');
+
+function runCommand(cmd) {
+  return new Promise((resolve, reject) => {
+    child_process.exec(cmd, (error, stdout, stderr) => {
+      if (error) {
+        reject(error);
+      }
+
+      resolve(stdout || stderr);
+    });
+  });
+}
+
+exports.runCommand = runCommand;
+//# sourceMappingURL=basic-node-internals.js.map
 "
 `;
 
@@ -1574,14 +1619,14 @@ Directory tree:
 
 define-expression
   dist
-    define-expression.js
+    define-expression.esm.js
   index.js
   package.json
 
 
 Build \\"defineExpression\\" to dist:
-56 B: define-expression.js.gz
-40 B: define-expression.js.br"
+56 B: define-expression.esm.js.gz
+40 B: define-expression.esm.js.br"
 `;
 
 exports[`fixtures build define-expression with microbundle 2`] = `1`;
@@ -2232,12 +2277,12 @@ optional-chaining-ts
 
 
 Build \\"optionalChainingTs\\" to dist:
-104 B: optional-chaining-ts.js.gz
-77 B: optional-chaining-ts.js.br
-108 B: optional-chaining-ts.esm.js.gz
-92 B: optional-chaining-ts.esm.js.br
-207 B: optional-chaining-ts.umd.js.gz
-166 B: optional-chaining-ts.umd.js.br"
+109 B: optional-chaining-ts.js.gz
+88 B: optional-chaining-ts.js.br
+111 B: optional-chaining-ts.esm.js.gz
+97 B: optional-chaining-ts.esm.js.br
+211 B: optional-chaining-ts.umd.js.gz
+170 B: optional-chaining-ts.umd.js.br"
 `;
 
 exports[`fixtures build optional-chaining-ts with microbundle 2`] = `7`;
@@ -2252,19 +2297,19 @@ exports[`fixtures build optional-chaining-ts with microbundle 3`] = `
 `;
 
 exports[`fixtures build optional-chaining-ts with microbundle 4`] = `
-"function n(n){var r;return null===(r=n.maybeVar)||void 0===r?void 0:r.thing}export{n as chain};
+"function n(n){var r,i;return null!=(r=null==(i=n.maybeVar)?void 0:i.thing)?r:void 0}export{n as chain};
 //# sourceMappingURL=optional-chaining-ts.esm.js.map
 "
 `;
 
 exports[`fixtures build optional-chaining-ts with microbundle 5`] = `
-"exports.chain=function(n){var i;return null===(i=n.maybeVar)||void 0===i?void 0:i.thing};
+"exports.chain=function(n){var i,r;return null!=(i=null==(r=n.maybeVar)?void 0:r.thing)?i:void 0};
 //# sourceMappingURL=optional-chaining-ts.js.map
 "
 `;
 
 exports[`fixtures build optional-chaining-ts with microbundle 6`] = `
-"!function(n,e){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?e(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],e):e((n=n||self).optionalChainingTs={})}(this,function(n){n.chain=function(n){var e;return null===(e=n.maybeVar)||void 0===e?void 0:e.thing}});
+"!function(n,e){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?e(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],e):e((n=n||self).optionalChainingTs={})}(this,function(n){n.chain=function(n){var e,i;return null!=(e=null==(i=n.maybeVar)?void 0:i.thing)?e:void 0}});
 //# sourceMappingURL=optional-chaining-ts.umd.js.map
 "
 `;
