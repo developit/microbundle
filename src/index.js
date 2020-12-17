@@ -499,8 +499,8 @@ function createConfig(options, entry, format, writeMeta) {
 								compilerOptions: {
 									sourceMap: options.sourcemap,
 									declaration: true,
-									allowJs: emitDeclaration,
-									emitDeclarationOnly: emitDeclaration,
+									allowJs: useTypescript || emitDeclaration,
+									emitDeclarationOnly: options.generateTypes && !useTypescript,
 									declarationDir: getDeclarationDir({ options, pkg }),
 									jsx: 'preserve',
 									jsxFactory:
