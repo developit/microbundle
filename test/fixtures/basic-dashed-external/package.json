@@ -1,0 +1,9 @@
+{
+  "name": "basic-dashed-external",
+  "scripts": {
+    "build": "microbundle"
+  },
+  "dependencies": {
+    "tiny-glob": "^0.2.6"
+  }
+}

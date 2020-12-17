@@ -1,132 +1,145 @@
 {
-  "name": "microbundle",
-  "version": "0.12.1",
-  "description": "Zero-configuration bundler for tiny JS libs, powered by Rollup.",
-  "main": "dist/microbundle.js",
-  "source": "src/index.js",
-  "bin": "dist/cli.js",
-  "scripts": {
-    "build": "npm run -s build:babel && npm run -s build:self",
-    "build:babel": "babel-node src/cli.js --target=node --format cjs src/{cli,index}.js",
-    "build:self": "node dist/cli.js --target=node --format cjs src/{cli,index}.js",
-    "prepare": "npm run -s build",
-    "prepare:babel": "babel src/*.js -d dist && npm t",
-    "lint": "eslint src",
-    "test": "npm run -s lint && npm run -s build && cross-env BABEL_ENV=test jest",
-    "jest": "cross-env BABEL_ENV=test jest",
-    "format": "prettier --write \"{*,{src,test}/**/*}.+(js|css)\"",
-    "release": "npm run -s prepare && npm test && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish"
-  },
-  "repository": "developit/microbundle",
-  "prettier": {
-    "singleQuote": true,
-    "trailingComma": "all",
-    "useTabs": true,
-    "arrowParens": "avoid"
-  },
-  "lint-staged": {
-    "{src,test}/**/*.js": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "{*,{src,test}/**/*}.+(js|css)": [
-      "prettier --write"
-    ],
-    "*.md": [
-      "prettier --write"
-    ]
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "testURL": "http://localhost"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "greenkeeper": {
-    "lockfiles": {
-      "outOfRangeUpdatesOnly": true
-    }
-  },
-  "keywords": [
-    "bundle",
-    "rollup",
-    "micro library"
-  ],
-  "files": [
-    "src",
-    "dist"
-  ],
-  "author": "Jason Miller <jason@developit.ca> (http://jasonformat.com)",
-  "license": "MIT",
-  "dependencies": {
-    "@babel/core": "^7.10.2",
-    "@babel/plugin-proposal-class-properties": "7.7.4",
-    "@babel/plugin-syntax-import-meta": "^7.10.1",
-    "@babel/plugin-syntax-jsx": "^7.10.1",
-    "@babel/plugin-transform-flow-strip-types": "^7.10.1",
-    "@babel/plugin-transform-react-jsx": "^7.10.1",
-    "@babel/plugin-transform-regenerator": "^7.10.1",
-    "@babel/preset-env": "^7.10.2",
-    "@babel/preset-flow": "^7.10.1",
-    "@babel/preset-modules": "^0.1.3",
-    "@rollup/plugin-alias": "^3.1.1",
-    "@rollup/plugin-babel": "^5.0.3",
-    "@rollup/plugin-commonjs": "^13.0.0",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^6.1.0",
-    "asyncro": "^3.0.0",
-    "autoprefixer": "^9.8.0",
-    "babel-plugin-macros": "^2.8.0",
-    "babel-plugin-transform-async-to-promises": "^0.8.15",
-    "babel-plugin-transform-replace-expressions": "^0.2.0",
-    "brotli-size": "^4.0.0",
-    "camelcase": "^5.3.1",
-    "cssnano": "^4.1.10",
-    "es6-promisify": "^6.1.1",
-    "escape-string-regexp": "^4.0.0",
-    "filesize": "^6.1.0",
-    "gzip-size": "^5.1.1",
-    "kleur": "^3.0.3",
-    "lodash.merge": "^4.6.2",
-    "module-details-from-path": "^1.0.3",
-    "pretty-bytes": "^5.3.0",
-    "rollup": "^1.32.1",
-    "rollup-plugin-bundle-size": "^1.0.1",
-    "rollup-plugin-es3": "^1.1.0",
-    "rollup-plugin-postcss": "^2.9.0",
-    "rollup-plugin-terser": "^5.3.0",
-    "rollup-plugin-typescript2": "^0.25.3",
-    "sade": "^1.7.3",
-    "tiny-glob": "^0.2.6",
-    "tslib": "^1.13.0",
-    "typescript": "^3.9.5"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.10.1",
-    "@babel/node": "^7.10.1",
-    "@babel/plugin-proposal-optional-chaining": "^7.10.1",
-    "@babel/plugin-proposal-throw-expressions": "^7.10.1",
-    "babel-jest": "^24.8.0",
-    "cross-env": "^6.0.3",
-    "directory-tree": "^2.2.3",
-    "eslint": "^6.8.0",
-    "eslint-config-developit": "^1.2.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "esm": "^3.2.22",
-    "fs-extra": "^8.1.0",
-    "husky": "^4.2.5",
-    "jest": "^24.8.0",
-    "lint-staged": "^10.2.10",
-    "npm-merge-driver-install": "^1.1.1",
-    "prettier": "^1.19.1",
-    "regenerator-runtime": "^0.13.5",
-    "rimraf": "^3.0.2",
-    "shell-quote": "^1.6.1",
-    "strip-ansi": "^6.0.0",
-    "travis-size-report": "^1.1.0"
-  }
+	"name": "microbundle",
+	"version": "0.12.4",
+	"description": "Zero-configuration bundler for tiny JS libs, powered by Rollup.",
+	"main": "dist/microbundle.js",
+	"source": "src/index.js",
+	"bin": "dist/cli.js",
+	"scripts": {
+		"build": "npm run -s build:babel && npm run -s build:self",
+		"build:babel": "babel-node src/cli.js --target=node --format cjs src/{cli,index}.js",
+		"build:self": "node dist/cli.js --target=node --format cjs src/{cli,index}.js",
+		"prepare": "npm run -s build",
+		"prepare:babel": "babel src/*.js -d dist && npm t",
+		"lint": "eslint src",
+		"test": "npm run -s lint && npm run -s build && cross-env BABEL_ENV=test jest",
+		"jest": "cross-env BABEL_ENV=test jest",
+		"format": "prettier --write \"{*,{src,test}/**/*}.+(js|css)\"",
+		"changeset": "changeset",
+		"release": "npm run -s prepare && npm test && changeset publish"
+	},
+	"repository": "developit/microbundle",
+	"prettier": {
+		"singleQuote": true,
+		"trailingComma": "all",
+		"useTabs": true,
+		"arrowParens": "avoid",
+		"overrides": [
+			{
+				"files": "package.json",
+				"options": {
+					"useTabs": false,
+					"parser": "json-stringify"
+				}
+			}
+		]
+	},
+	"lint-staged": {
+		"{src,test}/**/*.js": [
+			"eslint --fix",
+			"prettier --write"
+		],
+		"{*,{src,test}/**/*}.+(js|css)": [
+			"prettier --write"
+		],
+		"*.md": [
+			"prettier --write"
+		]
+	},
+	"jest": {
+		"testEnvironment": "node",
+		"testURL": "http://localhost"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"greenkeeper": {
+		"lockfiles": {
+			"outOfRangeUpdatesOnly": true
+		}
+	},
+	"keywords": [
+		"bundle",
+		"rollup",
+		"micro library"
+	],
+	"files": [
+		"src",
+		"dist"
+	],
+	"author": "Jason Miller <jason@developit.ca> (http://jasonformat.com)",
+	"license": "MIT",
+	"dependencies": {
+		"@babel/core": "^7.10.2",
+		"@babel/plugin-proposal-class-properties": "7.7.4",
+		"@babel/plugin-syntax-import-meta": "^7.10.1",
+		"@babel/plugin-syntax-jsx": "^7.10.1",
+		"@babel/plugin-transform-flow-strip-types": "^7.10.1",
+		"@babel/plugin-transform-react-jsx": "^7.10.1",
+		"@babel/plugin-transform-regenerator": "^7.10.1",
+		"@babel/preset-env": "^7.11.0",
+		"@babel/preset-flow": "^7.10.1",
+		"@babel/preset-react": "^7.10.4",
+		"@rollup/plugin-alias": "^3.1.1",
+		"@rollup/plugin-babel": "^5.0.3",
+		"@rollup/plugin-commonjs": "^13.0.0",
+		"@rollup/plugin-json": "^4.1.0",
+		"@rollup/plugin-node-resolve": "^6.1.0",
+		"asyncro": "^3.0.0",
+		"autoprefixer": "^9.8.0",
+		"babel-plugin-macros": "^2.8.0",
+		"babel-plugin-transform-async-to-promises": "^0.8.15",
+		"babel-plugin-transform-replace-expressions": "^0.2.0",
+		"brotli-size": "^4.0.0",
+		"builtin-modules": "^3.1.0",
+		"camelcase": "^5.3.1",
+		"cssnano": "^4.1.10",
+		"es6-promisify": "^6.1.1",
+		"escape-string-regexp": "^4.0.0",
+		"filesize": "^6.1.0",
+		"gzip-size": "^5.1.1",
+		"kleur": "^3.0.3",
+		"lodash.merge": "^4.6.2",
+		"module-details-from-path": "^1.0.3",
+		"pretty-bytes": "^5.3.0",
+		"resolve-from": "^4.0.0",
+		"rollup": "^1.32.1",
+		"rollup-plugin-bundle-size": "^1.0.1",
+		"rollup-plugin-es3": "^1.1.0",
+		"rollup-plugin-postcss": "^2.9.0",
+		"rollup-plugin-terser": "^5.3.0",
+		"rollup-plugin-typescript2": "^0.25.3",
+		"sade": "^1.7.3",
+		"tiny-glob": "^0.2.6",
+		"tslib": "^1.13.0",
+		"typescript": "^3.9.5"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.10.1",
+		"@babel/node": "^7.10.1",
+		"@babel/plugin-proposal-throw-expressions": "^7.10.1",
+		"@changesets/changelog-github": "^0.2.6",
+		"@changesets/cli": "^2.9.2",
+		"babel-jest": "^24.8.0",
+		"cross-env": "^6.0.3",
+		"directory-tree": "^2.2.3",
+		"eslint": "^6.8.0",
+		"eslint-config-developit": "^1.2.0",
+		"eslint-config-prettier": "^6.11.0",
+		"eslint-plugin-prettier": "^3.1.4",
+		"esm": "^3.2.22",
+		"fs-extra": "^8.1.0",
+		"husky": "^4.2.5",
+		"jest": "^24.8.0",
+		"lint-staged": "^10.2.10",
+		"npm-merge-driver-install": "^1.1.1",
+		"prettier": "^1.19.1",
+		"regenerator-runtime": "^0.13.5",
+		"rimraf": "^3.0.2",
+		"shell-quote": "^1.6.1",
+		"strip-ansi": "^6.0.0",
+		"travis-size-report": "^1.1.0"
+	}
 }

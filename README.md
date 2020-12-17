@@ -41,6 +41,7 @@
   "name": "foo",                   // your package name
   "source": "src/foo.js",          // your source code
   "main": "dist/foo.js",           // where to generate the CommonJS/Node bundle
+  "exports": "dist/foo.modern.js", // path to the modern output (see below)
   "module": "dist/foo.module.js",  // where to generate the ESM bundle
   "unpkg": "dist/foo.umd.js",      // where to generate the UMD bundle (also aliased as "umd:main")
   "scripts": {
@@ -58,13 +59,13 @@ Microbundle produces <code title="ECMAScript Modules (import / export)">esm</cod
 
 ## 🤖 Modern Mode <a name="modern"></a>
 
-In addition to the above formats, Microbundle also outputs a `modern` bundle specially designed to work in _all modern browsers_. This bundle preserves most modern JS features when compiling your code, but ensures the result runs in 90% of web browsers without needing to be transpiled. Specifically, it uses [preset-modules](https://github.com/babel/preset-modules) to target the set of browsers that support `<script type="module">` - that allows syntax like async/await, tagged templates, arrow functions, destructured and rest parameters, etc. The result is generally smaller and faster to execute than the `esm` bundle:
+In addition to the above formats, Microbundle also outputs a `modern` bundle specially designed to work in _all modern browsers_. This bundle preserves most modern JS features when compiling your code, but ensures the result runs in 95% of web browsers without needing to be transpiled. Specifically, it uses [preset-modules](https://github.com/babel/preset-modules) to target the set of browsers that support `<script type="module">` - that allows syntax like async/await, tagged templates, arrow functions, destructured and rest parameters, etc. The result is generally smaller and faster to execute than the `esm` bundle:
 
 ```js
 // Our source, "src/make-dom.js":
 export default async function makeDom(tag, props, children) {
   let el = document.createElement(tag);
-  el.append(...(await children));
+  el.append(...await children);
   return Object.assign(el, props);
 }
 ```
@@ -73,8 +74,8 @@ Compiling the above using Microbundle produces the following `modern` and `esm` 
 
 <table>
 <thead><tr>
-  <th align="left"><code>make-dom.modern.js</code> <sup>(123b)</sup></th>
-  <th align="left"><code>make-dom.module.js</code> <sup>(166b)</sup></th>
+  <th align="left"><code>make-dom.modern.js</code> <sup>(117b)</sup></th>
+  <th align="left"><code>make-dom.module.js</code> <sup>(194b)</sup></th>
 </tr></thead>
 <tbody><tr valign="top"><td>
 
@@ -89,32 +90,49 @@ export default async function(e, t, a) {
 </td><td>
 
 ```js
-export default function(e, t, r) { try {
-  var n = document.createElement(e);
-  return Promise.resolve(r).then(function(e) {
-    n.append.apply(n, e);
-    return Object.assign(n, t);
-  });
-} catch (e) { return Promise.reject(e) } }
-```
-
-</td></tbody></table>
-
-This is enabled by default - all you have to do is add the field to your `package.json`.
-
-<details><summary>💁‍♂️ <em>How to point to modern code in a package.json is <a href="https://twitter.com/_developit/status/1263174528974364675">being discussed</a>. You might use the "module" field.</em></summary>
-
-```js
-{
-  "main": "dist/foo.umd.js",              // legacy UMD bundle (for Node & CDN use)
-  "module": "dist/foo.modern.module.js",  // modern ES2017 bundle
-  "scripts": {
-    "build": "microbundle src/foo.js -f modern,umd"
+export default function(e, t, r) {
+  try {
+    var n = document.createElement(e);
+    return Promise.resolve(r).then(function(e) {
+      return n.append.apply(n, e),
+        Object.assign(n, t);
+    });
+  } catch (e) {
+    return Promise.reject(e);
   }
 }
 ```
 
-</details>
+</td></tbody></table>
+
+**This is enabled by default.** All you have to do is add an `"exports"` field to your `package.json`:
+
+```jsonc
+{
+  "main": "./dist/foo.umd.js",       // legacy UMD output (for Node & CDN use)
+  "module": "./dist/foo.module.js",  // legacy ES Modules output (for bundlers)
+  "exports": "./dist/foo.modern.js", // modern ES2017 output
+  "scripts": {
+    "build": "microbundle src/foo.js"
+  }
+}
+```
+
+The `"exports"` field can also be an object for packages with multiple entry modules:
+
+```jsonc
+{
+  "name": "foo",
+  "exports": {
+    ".": "./dist/foo.modern.js",       // import "foo" (the default)
+    "./lite": "./dist/lite.modern.js", // import "foo/lite"
+    "./full": "./dist/full.modern.js"  // import "foo"
+  },
+  "scripts": {
+    "build": "microbundle src/*.js"    // build foo.js, lite.js and full.js
+  }
+}
+```
 
 ## 📦 Usage & Configuration <a name="usage"></a>
 
@@ -134,7 +152,7 @@ Unless overridden via the command line, microbundle uses the `source` property i
 }
 ```
 
-For UMD builds, microbundle will use a snake_case version of the `name` field in your `package.json` as export name. This can be customized using an `"amdName"` key in your `package.json` or the `--name` command line argument.
+For UMD builds, microbundle will use a camelCase version of the `name` field in your `package.json` as export name. This can be customized using an `"amdName"` key in your `package.json` or the `--name` command line argument.
 
 ### `microbundle watch`
 
@@ -143,6 +161,8 @@ Acts just like `microbundle build`, but watches your source files and rebuilds o
 ### Using with TypeScript
 
 Just point the input to a `.ts` file through either the cli or the `source` key in your `package.json` and you’re done.
+
+Microbundle will generally respect your TypeScript config defined in a `tsconfig.json` file with notable exceptions being the "[target](https://www.typescriptlang.org/tsconfig#target)" and "[module](https://www.typescriptlang.org/tsconfig#module)" settings. To ensure your TypeScript configuration matches the configuration that Microbundle uses internally it's strongly recommended that you set `"module": "ESNext"` and `"target": "ESNext"` in your `tsconfig.json`.
 
 ### Using CSS Modules
 
@@ -174,7 +194,7 @@ Microbundle uses the fields from your `package.json` to figure out where it shou
   "umd:main": "dist/foo.umd.js",    // UMD bundle
   "module": "dist/foo.m.js",        // ES Modules bundle
   "esmodule": "dist/foo.modern.js", // Modern bundle
-  "types": "dist/foo.d.ts"          // TypeScript typings
+  "types": "dist/foo.d.ts"          // TypeScript typings directory
 }
 ```
 
@@ -192,9 +212,9 @@ To achieve the smallest possible bundle size, libraries often wish to rename int
 
 ```json
 {
-  "mangle": {
-    "regex": "^_"
-  }
+	"mangle": {
+		"regex": "^_"
+	}
 }
 ```
 
@@ -215,32 +235,34 @@ For more info, run any command with the `--help` flag
 	$ microbundle watch --help
 
 Options
-	-v, --version    Displays current version
-	-i, --entry      Entry module(s)
-	-o, --output     Directory to place build files into
-	-f, --format     Only build specified formats (any of modern,es,cjs,umd or iife) (default modern,es,cjs,umd)
-	-w, --watch      Rebuilds on any change  (default false)
-	--pkg-main       Outputs files analog to package.json main entries  (default true)
-	--target         Specify your target environment (node or web)  (default web)
-	--external       Specify external dependencies, or 'none' (default peerDependencies and dependencies in package.json)
-	--globals        Specify globals dependencies, or 'none'
-	--define         Replace constants with hard-coded values
-	--alias          Map imports to different modules
-	--compress       Compress output using Terser
-	--strict         Enforce undefined global context and add "use strict"
-	--name           Specify name exposed in UMD and IIFE builds
-	--cwd            Use an alternative working directory  (default .)
-	--sourcemap      Generate source map  (default true)
-	--raw            Show raw byte size  (default false)
-	--jsx            A custom JSX pragma like React.createElement (default: h)
-	--tsconfig       Specify the path to a custom tsconfig.json
-	--css-modules    Configures .css to be treated as modules (default: null)
-	-h, --help       Displays this message
+	-v, --version      Displays current version
+	-i, --entry        Entry module(s)
+	-o, --output       Directory to place build files into
+	-f, --format       Only build specified formats (any of modern,es,cjs,umd or iife) (default modern,es,cjs,umd)
+	-w, --watch        Rebuilds on any change  (default false)
+	--pkg-main         Outputs files analog to package.json main entries  (default true)
+	--target           Specify your target environment (node or web)  (default web)
+	--external         Specify external dependencies, or 'none' (default peerDependencies and dependencies in package.json)
+	--globals          Specify globals dependencies, or 'none'
+	--define           Replace constants with hard-coded values
+	--alias            Map imports to different modules
+	--compress         Compress output using Terser
+	--no-compress      Disable output compressing
+	--strict           Enforce undefined global context and add "use strict"
+	--name             Specify name exposed in UMD and IIFE builds
+	--cwd              Use an alternative working directory  (default .)
+	--sourcemap        Generate source map  (default true)
+	--raw              Show raw byte size  (default false)
+	--jsx              A custom JSX pragma like React.createElement (default: h)
+	--jsxImportSource  Specify the automatic import source for JSX like preact
+	--tsconfig         Specify the path to a custom tsconfig.json
+	--css-modules      Configures .css to be treated as modules (default: null)
+	-h, --help         Displays this message
 
 Examples
 	$ microbundle build --globals react=React,jquery=$
 	$ microbundle build --define API_KEY=1234
-	$ microbundle build --alias react=preact
+	$ microbundle build --alias react=preact/compat
 	$ microbundle watch --no-sourcemap # don't generate sourcemaps
 	$ microbundle build --tsconfig tsconfig.build.json
 ```
@@ -274,5 +296,5 @@ Here's what's coming up for Microbundle:
 [MIT](https://oss.ninja/mit/developit/)
 
 [rollup]: https://github.com/rollup/rollup
-[Babel]: https://babeljs.io/
+[babel]: https://babeljs.io/
 [async-to-promises]: https://github.com/rpetrich/babel-plugin-transform-async-to-promises
