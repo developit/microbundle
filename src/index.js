@@ -583,8 +583,8 @@ function createConfig(options, entry, format, writeMeta) {
 						renderChunk(code, chunk, opts) {
 							if (opts.format === 'umd') {
 								code = code.replace(
-									/\(([a-zA-Z$_]+)="undefined"!=typeof globalThis\?globalThis:(\1\|\|self)/,
-									(str, id, g) => ' '.repeat(str.length - g.length) + g,
+									/([a-zA-Z$_]+)="undefined"!=typeof globalThis\?globalThis:(\1\|\|self)/,
+									'$2',
 								);
 								return { code, map: null };
 							}
