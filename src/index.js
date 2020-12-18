@@ -459,6 +459,8 @@ function createConfig(options, entry, format, writeMeta) {
 					commonjs({
 						// use a regex to make sure to include eventual hoisted packages
 						include: /\/node_modules\//,
+						esmExternals: false,
+						requireReturnsDefault: 'namespace',
 					}),
 					json(),
 					{
@@ -544,14 +546,15 @@ function createConfig(options, entry, format, writeMeta) {
 								},
 								minifyOptions.compress || {},
 							),
-							output: {
+							format: {
 								// By default, Terser wraps function arguments in extra parens to trigger eager parsing.
 								// Whether this is a good idea is way too specific to guess, so we optimize for size by default:
 								wrap_func_args: false,
-								comments: false,
+								comments: /^\s*([@#]__[A-Z]__\s*$|@cc_on)/,
+								preserve_annotations: true,
 							},
-							warnings: true,
-							ecma: modern ? 9 : 5,
+							module: modern,
+							ecma: modern ? 2017 : 5,
 							toplevel: modern || format === 'cjs' || format === 'es',
 							mangle: Object.assign({}, minifyOptions.mangle || {}),
 							nameCache,
@@ -571,7 +574,28 @@ function createConfig(options, entry, format, writeMeta) {
 							},
 						},
 					],
-					{
+					/** @type {import('rollup').Plugin} */
+					({
+						name: 'postprocessing',
+						// Rollup 2 injects globalThis, which is nice, but doesn't really make sense for Microbundle.
+						// Only ESM environments necessitate globalThis, and UMD bundles can't be properly loaded as ESM.
+						// So we remove the globalThis check, replacing it with `this||self` to match Rollup 1's output:
+						renderChunk(code, chunk, opts) {
+							if (opts.format === 'umd') {
+								// minified:
+								code = code.replace(
+									/([a-zA-Z$_]+)="undefined"!=typeof globalThis\?globalThis:(\1\|\|self)/,
+									'$2',
+								);
+								// unminified:
+								code = code.replace(
+									/(global *= *)typeof +globalThis *!== *['"]undefined['"] *\? *globalThis *: *(global *\|\| *self)/,
+									'$1$2',
+								);
+								return { code, map: null };
+							}
+						},
+						// Grab size info before writing files to disk:
 						writeBundle(_, bundle) {
 							config._sizeInfo = Promise.all(
 								Object.values(bundle).map(({ code, fileName }) => {
@@ -581,7 +605,7 @@ function createConfig(options, entry, format, writeMeta) {
 								}),
 							).then(results => results.filter(Boolean).join('\n'));
 						},
-					},
+					}),
 				)
 				.filter(Boolean),
 		},

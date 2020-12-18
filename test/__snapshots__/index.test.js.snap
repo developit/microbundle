@@ -169,8 +169,8 @@ Build \\"asyncTs\\" to dist:
 72 B: async-ts.js.br
 112 B: async-ts.esm.js.gz
 91 B: async-ts.esm.js.br
-214 B: async-ts.umd.js.gz
-167 B: async-ts.umd.js.br"
+200 B: async-ts.umd.js.gz
+156 B: async-ts.umd.js.br"
 `;
 
 exports[`fixtures build async-ts with microbundle 2`] = `7`;
@@ -188,7 +188,7 @@ exports[`fixtures build async-ts with microbundle 4`] = `
 `;
 
 exports[`fixtures build async-ts with microbundle 5`] = `
-"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?o(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],o):o((e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).asyncTs={})}(this,function(e){e.MyClass=function(){function e(){}return e.prototype.foo=function(){return Promise.resolve()},e}()});
+"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?o(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],o):o((e||self).asyncTs={})}(this,function(e){e.MyClass=function(){function e(){}return e.prototype.foo=function(){return Promise.resolve()},e}()});
 //# sourceMappingURL=async-ts.umd.js.map
 "
 `;
@@ -224,8 +224,8 @@ Build \\"basicLib\\" to dist:
 138 B: basic-lib.js.br
 188 B: basic-lib.esm.js.gz
 139 B: basic-lib.esm.js.br
-287 B: basic-lib.umd.js.gz
-231 B: basic-lib.umd.js.br"
+273 B: basic-lib.umd.js.gz
+211 B: basic-lib.umd.js.br"
 `;
 
 exports[`fixtures build basic with microbundle 2`] = `6`;
@@ -243,7 +243,7 @@ exports[`fixtures build basic with microbundle 4`] = `
 `;
 
 exports[`fixtures build basic with microbundle 5`] = `
-"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).basicLib=r()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){try{var r=arguments,n=[].slice.call(r);return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
+"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e||self).basicLib=r()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){try{var r=arguments,n=[].slice.call(r);return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
 //# sourceMappingURL=basic-lib.umd.js.map
 "
 `;
@@ -319,8 +319,8 @@ Build \\"basicCompressFalse\\" to dist:
 206 B: basic-compress-false.js.br
 258 B: basic-compress-false.esm.js.gz
 209 B: basic-compress-false.esm.js.br
-396 B: basic-compress-false.umd.js.gz
-319 B: basic-compress-false.umd.js.br"
+383 B: basic-compress-false.umd.js.gz
+305 B: basic-compress-false.umd.js.br"
 `;
 
 exports[`fixtures build basic-compress-false with microbundle 2`] = `6`;
@@ -391,7 +391,7 @@ exports[`fixtures build basic-compress-false with microbundle 5`] = `
 "(function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
-	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.basicCompressFalse = factory());
+	(global = global || self, global.basicCompressFalse = factory());
 }(this, (function () {
 	var two = function two() {
 	  try {
@@ -450,8 +450,8 @@ Build \\"basicCss\\" to dist:
 60 B: basic-css.js.br
 109 B: basic-css.esm.js.gz
 67 B: basic-css.esm.js.br
-212 B: basic-css.umd.js.gz
-145 B: basic-css.umd.js.br"
+195 B: basic-css.umd.js.gz
+138 B: basic-css.umd.js.br"
 `;
 
 exports[`fixtures build basic-css with microbundle 2`] = `7`;
@@ -471,7 +471,7 @@ exports[`fixtures build basic-css with microbundle 5`] = `
 `;
 
 exports[`fixtures build basic-css with microbundle 6`] = `
-"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).basicCss=n()}(this,function(){return function(){var e=document.createElement(\\"div\\");return e.className=\\"testing\\",e}});
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e||self).basicCss=n()}(this,function(){return function(){var e=document.createElement(\\"div\\");return e.className=\\"testing\\",e}});
 //# sourceMappingURL=basic-css.umd.js.map
 "
 `;
@@ -500,8 +500,8 @@ Build \\"basicDashedExternal\\" to dist:
 196 B: basic-dashed-external.js.br
 214 B: basic-dashed-external.esm.js.gz
 164 B: basic-dashed-external.esm.js.br
-355 B: basic-dashed-external.umd.js.gz
-295 B: basic-dashed-external.umd.js.br"
+343 B: basic-dashed-external.umd.js.gz
+286 B: basic-dashed-external.umd.js.br"
 `;
 
 exports[`fixtures build basic-dashed-external with microbundle 2`] = `6`;
@@ -519,7 +519,7 @@ exports[`fixtures build basic-dashed-external with microbundle 4`] = `
 `;
 
 exports[`fixtures build basic-dashed-external with microbundle 5`] = `
-"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=t(require(\\"tiny-glob\\")):\\"function\\"==typeof define&&define.amd?define([\\"tiny-glob\\"],t):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).basicDashedExternal=t(e.tinyGlob)}(this,function(e){function t(e){return e&&\\"object\\"==typeof e&&\\"default\\"in e?e:{default:e}}var n=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,t){return e+t},0))}catch(e){return Promise.reject(e)}};return console.log(t(e).default),function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(n.apply(void 0,t)).then(function(e){return Promise.resolve(n.apply(void 0,t)).then(function(t){return[e,t]})})}catch(e){return Promise.reject(e)}}});
+"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=t(require(\\"tiny-glob\\")):\\"function\\"==typeof define&&define.amd?define([\\"tiny-glob\\"],t):(e||self).basicDashedExternal=t(e.tinyGlob)}(this,function(e){function t(e){return e&&\\"object\\"==typeof e&&\\"default\\"in e?e:{default:e}}var n=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,t){return e+t},0))}catch(e){return Promise.reject(e)}};return console.log(t(e).default),function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(n.apply(void 0,t)).then(function(e){return Promise.resolve(n.apply(void 0,t)).then(function(t){return[e,t]})})}catch(e){return Promise.reject(e)}}});
 //# sourceMappingURL=basic-dashed-external.umd.js.map
 "
 `;
@@ -548,8 +548,8 @@ Build \\"basicLibFlow\\" to dist:
 43 B: basic-lib-flow.js.br
 56 B: basic-lib-flow.esm.js.gz
 42 B: basic-lib-flow.esm.js.br
-186 B: basic-lib-flow.umd.js.gz
-147 B: basic-lib-flow.umd.js.br"
+171 B: basic-lib-flow.umd.js.gz
+132 B: basic-lib-flow.umd.js.br"
 `;
 
 exports[`fixtures build basic-flow with microbundle 2`] = `6`;
@@ -567,7 +567,7 @@ exports[`fixtures build basic-flow with microbundle 4`] = `
 `;
 
 exports[`fixtures build basic-flow with microbundle 5`] = `
-"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=[\\"banana\\",\\"raspberry\\"]:\\"function\\"==typeof define&&define.amd?define(function(){return[\\"banana\\",\\"raspberry\\"]}):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).basicLibFlow=[\\"banana\\",\\"raspberry\\"]}(this);
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=[\\"banana\\",\\"raspberry\\"]:\\"function\\"==typeof define&&define.amd?define(function(){return[\\"banana\\",\\"raspberry\\"]}):(e||self).basicLibFlow=[\\"banana\\",\\"raspberry\\"]}(this);
 //# sourceMappingURL=basic-lib-flow.umd.js.map
 "
 `;
@@ -596,8 +596,8 @@ Build \\"basicJson\\" to dist:
 65 B: basic-json.js.br
 92 B: basic-json.esm.js.gz
 64 B: basic-json.esm.js.br
-196 B: basic-json.umd.js.gz
-145 B: basic-json.umd.js.br"
+180 B: basic-json.umd.js.gz
+129 B: basic-json.umd.js.br"
 `;
 
 exports[`fixtures build basic-json with microbundle 2`] = `6`;
@@ -615,7 +615,7 @@ exports[`fixtures build basic-json with microbundle 4`] = `
 `;
 
 exports[`fixtures build basic-json with microbundle 5`] = `
-"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).basicJson=n()}(this,function(){var e={test:\\"true\\"};return function(){return Promise.resolve(e)}});
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e||self).basicJson=n()}(this,function(){var e={test:\\"true\\"};return function(){return Promise.resolve(e)}});
 //# sourceMappingURL=basic-json.umd.js.map
 "
 `;
@@ -721,8 +721,8 @@ Build \\"basicNoCompress\\" to dist:
 206 B: basic-no-compress.js.br
 258 B: basic-no-compress.esm.js.gz
 209 B: basic-no-compress.esm.js.br
-392 B: basic-no-compress.umd.js.gz
-319 B: basic-no-compress.umd.js.br"
+381 B: basic-no-compress.umd.js.gz
+310 B: basic-no-compress.umd.js.br"
 `;
 
 exports[`fixtures build basic-no-compress with microbundle 2`] = `6`;
@@ -793,7 +793,7 @@ exports[`fixtures build basic-no-compress with microbundle 5`] = `
 "(function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
-	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.basicNoCompress = factory());
+	(global = global || self, global.basicNoCompress = factory());
 }(this, (function () {
 	var two = function two() {
 	  try {
@@ -847,14 +847,14 @@ Build \\"basicNoPkgMain\\" to dist:
 138 B: basic-no-pkg-main.js.br
 188 B: basic-no-pkg-main.js.gz
 139 B: basic-no-pkg-main.js.br
-294 B: basic-no-pkg-main.js.gz
-245 B: basic-no-pkg-main.js.br"
+278 B: basic-no-pkg-main.js.gz
+229 B: basic-no-pkg-main.js.br"
 `;
 
 exports[`fixtures build basic-no-pkg-main with microbundle 2`] = `2`;
 
 exports[`fixtures build basic-no-pkg-main with microbundle 3`] = `
-"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).basicNoPkgMain=n()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,n){return e+n},0))}catch(e){return Promise.reject(e)}};return function(){try{var n=arguments,r=[].slice.call(n);return Promise.resolve(e.apply(void 0,r)).then(function(n){return Promise.resolve(e.apply(void 0,r)).then(function(e){return[n,e]})})}catch(e){return Promise.reject(e)}}});
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e||self).basicNoPkgMain=n()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,n){return e+n},0))}catch(e){return Promise.reject(e)}};return function(){try{var n=arguments,r=[].slice.call(n);return Promise.resolve(e.apply(void 0,r)).then(function(n){return Promise.resolve(e.apply(void 0,r)).then(function(e){return[n,e]})})}catch(e){return Promise.reject(e)}}});
 //# sourceMappingURL=basic-no-pkg-main.js.map
 "
 `;
@@ -928,8 +928,8 @@ Build \\"basicLibTs\\" to dist:
 76 B: basic-lib-ts.js.br
 104 B: basic-lib-ts.esm.js.gz
 82 B: basic-lib-ts.esm.js.br
-201 B: basic-lib-ts.umd.js.gz
-158 B: basic-lib-ts.umd.js.br"
+186 B: basic-lib-ts.umd.js.gz
+141 B: basic-lib-ts.umd.js.br"
 `;
 
 exports[`fixtures build basic-ts with microbundle 2`] = `8`;
@@ -947,7 +947,7 @@ exports[`fixtures build basic-ts with microbundle 4`] = `
 `;
 
 exports[`fixtures build basic-ts with microbundle 5`] = `
-"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).basicLibTs=n()}(this,function(){return new(function(){function e(){}return e.prototype.drive=function(e){return!0},e}())});
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e||self).basicLibTs=n()}(this,function(){return new(function(){function e(){}return e.prototype.drive=function(e){return!0},e}())});
 //# sourceMappingURL=basic-lib-ts.umd.js.map
 "
 `;
@@ -995,8 +995,8 @@ Build \\"basicLibTsx\\" to dist:
 153 B: basic-lib-tsx.js.br
 200 B: basic-lib-tsx.esm.js.gz
 153 B: basic-lib-tsx.esm.js.br
-294 B: basic-lib-tsx.umd.js.gz
-233 B: basic-lib-tsx.umd.js.br"
+281 B: basic-lib-tsx.umd.js.gz
+217 B: basic-lib-tsx.umd.js.br"
 `;
 
 exports[`fixtures build basic-tsx with microbundle 2`] = `7`;
@@ -1014,7 +1014,7 @@ exports[`fixtures build basic-tsx with microbundle 4`] = `
 `;
 
 exports[`fixtures build basic-tsx with microbundle 5`] = `
-"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).basicLibTsx=n()}(this,function(){var e=function(e,n){return{tag:e,props:n,children:[].slice.call(arguments,2)}};return function(){function n(){}return n.prototype.render=function(){return e(\\"div\\",{id:\\"app\\"},e(\\"h1\\",null,\\"Hello, World!\\"),e(\\"p\\",null,\\"A JSX demo.\\"))},n}()});
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e||self).basicLibTsx=n()}(this,function(){var e=function(e,n){return{tag:e,props:n,children:[].slice.call(arguments,2)}};return function(){function n(){}return n.prototype.render=function(){return e(\\"div\\",{id:\\"app\\"},e(\\"h1\\",null,\\"Hello, World!\\"),e(\\"p\\",null,\\"A JSX demo.\\"))},n}()});
 //# sourceMappingURL=basic-lib-tsx.umd.js.map
 "
 `;
@@ -1050,8 +1050,8 @@ Build \\"basic\\" to dist:
 138 B: basic.js.br
 188 B: basic.esm.js.gz
 139 B: basic.esm.js.br
-283 B: basic.umd.js.gz
-233 B: basic.umd.js.br"
+269 B: basic.umd.js.gz
+198 B: basic.umd.js.br"
 `;
 
 exports[`fixtures build basic-with-cwd with microbundle 2`] = `6`;
@@ -1069,7 +1069,7 @@ exports[`fixtures build basic-with-cwd with microbundle 4`] = `
 `;
 
 exports[`fixtures build basic-with-cwd with microbundle 5`] = `
-"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).basic=r()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){try{var r=arguments,n=[].slice.call(r);return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
+"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e||self).basic=r()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){try{var r=arguments,n=[].slice.call(r);return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
 //# sourceMappingURL=basic.umd.js.map
 "
 `;
@@ -1100,8 +1100,8 @@ Build \\"classDecoratorsTs\\" to dist:
 276 B: class-decorators-ts.js.br
 333 B: class-decorators-ts.esm.js.gz
 278 B: class-decorators-ts.esm.js.br
-414 B: class-decorators-ts.umd.js.gz
-355 B: class-decorators-ts.umd.js.br"
+400 B: class-decorators-ts.umd.js.gz
+341 B: class-decorators-ts.umd.js.br"
 `;
 
 exports[`fixtures build class-decorators-ts with microbundle 2`] = `7`;
@@ -1119,7 +1119,7 @@ exports[`fixtures build class-decorators-ts with microbundle 4`] = `
 `;
 
 exports[`fixtures build class-decorators-ts with microbundle 5`] = `
-"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=t():\\"function\\"==typeof define&&define.amd?define(t):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).classDecoratorsTs=t()}(this,function(){var e=function(){function e(e){this.greeting=e}return e.prototype.greet=function(){return\\"Hello, \\"+this.greeting},e}();return new(e=function(e,t,o,n){var r,f=arguments.length,i=f<3?t:null===n?n=Object.getOwnPropertyDescriptor(t,o):n;if(\\"object\\"==typeof Reflect&&\\"function\\"==typeof Reflect.decorate)i=Reflect.decorate(e,t,o,n);else for(var c=e.length-1;c>=0;c--)(r=e[c])&&(i=(f<3?r(i):f>3?r(t,o,i):r(t,o))||i);return f>3&&i&&Object.defineProperty(t,o,i),i}([function(e){Object.seal(e),Object.seal(e.prototype)}],e))(\\"Hello World\\")});
+"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=t():\\"function\\"==typeof define&&define.amd?define(t):(e||self).classDecoratorsTs=t()}(this,function(){var e=function(){function e(e){this.greeting=e}return e.prototype.greet=function(){return\\"Hello, \\"+this.greeting},e}();return new(e=function(e,t,o,n){var r,f=arguments.length,i=f<3?t:null===n?n=Object.getOwnPropertyDescriptor(t,o):n;if(\\"object\\"==typeof Reflect&&\\"function\\"==typeof Reflect.decorate)i=Reflect.decorate(e,t,o,n);else for(var c=e.length-1;c>=0;c--)(r=e[c])&&(i=(f<3?r(i):f>3?r(t,o,i):r(t,o))||i);return f>3&&i&&Object.defineProperty(t,o,i),i}([function(e){Object.seal(e),Object.seal(e.prototype)}],e))(\\"Hello World\\")});
 //# sourceMappingURL=class-decorators-ts.umd.js.map
 "
 `;
@@ -1158,8 +1158,8 @@ Build \\"classProperties\\" to dist:
 79 B: class-properties.js.br
 96 B: class-properties.esm.js.gz
 85 B: class-properties.esm.js.br
-213 B: class-properties.umd.js.gz
-166 B: class-properties.umd.js.br"
+197 B: class-properties.umd.js.gz
+150 B: class-properties.umd.js.br"
 `;
 
 exports[`fixtures build class-properties with microbundle 2`] = `6`;
@@ -1177,7 +1177,7 @@ exports[`fixtures build class-properties with microbundle 4`] = `
 `;
 
 exports[`fixtures build class-properties with microbundle 5`] = `
-"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?o(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],o):o((e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).classProperties={})}(this,function(e){var o=function(){this.baz=3};o.bar=2;var n=new o;e.Foo=o,e.default=n});
+"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?o(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],o):o((e||self).classProperties={})}(this,function(e){var o=function(){this.baz=3};o.bar=2;var n=new o;e.Foo=o,e.default=n});
 //# sourceMappingURL=class-properties.umd.js.map
 "
 `;
@@ -1205,8 +1205,8 @@ Build \\"cssModulesFalse\\" to dist:
 23 B: css-modules--false.js.br
 52 B: css-modules--false.esm.js.gz
 36 B: css-modules--false.esm.js.br
-172 B: css-modules--false.umd.js.gz
-125 B: css-modules--false.umd.js.br"
+156 B: css-modules--false.umd.js.gz
+109 B: css-modules--false.umd.js.br"
 `;
 
 exports[`fixtures build css-modules--false with microbundle 2`] = `4`;
@@ -1224,7 +1224,7 @@ exports[`fixtures build css-modules--false with microbundle 5`] = `
 `;
 
 exports[`fixtures build css-modules--false with microbundle 6`] = `
-"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=function(){}:\\"function\\"==typeof define&&define.amd?define(function(){return function(){}}):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).cssModulesFalse=function(){}}(this);
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=function(){}:\\"function\\"==typeof define&&define.amd?define(function(){return function(){}}):(e||self).cssModulesFalse=function(){}}(this);
 "
 `;
 
@@ -1251,8 +1251,8 @@ Build \\"cssModulesNull\\" to dist:
 72 B: css-modules--null.js.br
 112 B: css-modules--null.esm.js.gz
 77 B: css-modules--null.esm.js.br
-217 B: css-modules--null.umd.js.gz
-152 B: css-modules--null.umd.js.br"
+200 B: css-modules--null.umd.js.gz
+140 B: css-modules--null.umd.js.br"
 `;
 
 exports[`fixtures build css-modules--null with microbundle 2`] = `4`;
@@ -1270,7 +1270,7 @@ exports[`fixtures build css-modules--null with microbundle 5`] = `
 `;
 
 exports[`fixtures build css-modules--null with microbundle 6`] = `
-"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).cssModulesNull=n()}(this,function(){return function(){var e=document.createElement(\\"div\\");return e.className=\\"_2kWDE\\",e}});
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e||self).cssModulesNull=n()}(this,function(){return function(){var e=document.createElement(\\"div\\");return e.className=\\"_2kWDE\\",e}});
 "
 `;
 
@@ -1297,8 +1297,8 @@ Build \\"cssModulesString\\" to dist:
 118 B: css-modules--string.js.br
 168 B: css-modules--string.esm.js.gz
 122 B: css-modules--string.esm.js.br
-278 B: css-modules--string.umd.js.gz
-207 B: css-modules--string.umd.js.br"
+263 B: css-modules--string.umd.js.gz
+192 B: css-modules--string.umd.js.br"
 `;
 
 exports[`fixtures build css-modules--string with microbundle 2`] = `4`;
@@ -1316,7 +1316,7 @@ exports[`fixtures build css-modules--string with microbundle 5`] = `
 `;
 
 exports[`fixtures build css-modules--string with microbundle 6`] = `
-"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).cssModulesString=n()}(this,function(){return function(){var e=document.createElement(\\"div\\");return e.className=\\"_contains_this_0a8c24df242c2cd708036873307aea94 _contains_this_81567d0efc15a456670452d3277e1a68\\",e}});
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e||self).cssModulesString=n()}(this,function(){return function(){var e=document.createElement(\\"div\\");return e.className=\\"_contains_this_0a8c24df242c2cd708036873307aea94 _contains_this_81567d0efc15a456670452d3277e1a68\\",e}});
 "
 `;
 
@@ -1343,8 +1343,8 @@ Build \\"cssModulesTrue\\" to dist:
 94 B: css-modules--true.js.br
 141 B: css-modules--true.esm.js.gz
 108 B: css-modules--true.esm.js.br
-246 B: css-modules--true.umd.js.gz
-179 B: css-modules--true.umd.js.br"
+230 B: css-modules--true.umd.js.gz
+165 B: css-modules--true.umd.js.br"
 `;
 
 exports[`fixtures build css-modules--true with microbundle 2`] = `4`;
@@ -1362,7 +1362,7 @@ exports[`fixtures build css-modules--true with microbundle 5`] = `
 `;
 
 exports[`fixtures build css-modules--true with microbundle 6`] = `
-"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=t():\\"function\\"==typeof define&&define.amd?define(t):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).cssModulesTrue=t()}(this,function(){return function(){var e=document.createElement(\\"div\\");return e.className=\\"_2kWDE \\"+(void 0).test_class_that_should_be_scoped,e}});
+"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=t():\\"function\\"==typeof define&&define.amd?define(t):(e||self).cssModulesTrue=t()}(this,function(){return function(){var e=document.createElement(\\"div\\");return e.className=\\"_2kWDE \\"+(void 0).test_class_that_should_be_scoped,e}});
 "
 `;
 
@@ -1389,8 +1389,8 @@ Build \\"customBabelrc\\" to dist:
 193 B: custom-babelrc.js.br
 222 B: custom-babelrc.esm.js.gz
 185 B: custom-babelrc.esm.js.br
-324 B: custom-babelrc.umd.js.gz
-270 B: custom-babelrc.umd.js.br"
+309 B: custom-babelrc.umd.js.gz
+260 B: custom-babelrc.umd.js.br"
 `;
 
 exports[`fixtures build custom-babelrc with microbundle 2`] = `6`;
@@ -1408,7 +1408,7 @@ exports[`fixtures build custom-babelrc with microbundle 4`] = `
 `;
 
 exports[`fixtures build custom-babelrc with microbundle 5`] = `
-"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?t(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],t):t((e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).customBabelrc={})}(this,function(e){e.MyClass=class{constructor(){var e,t;t=[\\"foo\\",\\"bar\\"],(e=\\"myFields\\")in this?Object.defineProperty(this,e,{value:t,enumerable:!0,configurable:!0,writable:!0}):this[e]=t}foo(){try{return Promise.resolve(this.myFields.find(e=>\\"bar\\"===e))}catch(e){return Promise.reject(e)}}}});
+"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?t(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],t):t((e||self).customBabelrc={})}(this,function(e){e.MyClass=class{constructor(){var e,t;t=[\\"foo\\",\\"bar\\"],(e=\\"myFields\\")in this?Object.defineProperty(this,e,{value:t,enumerable:!0,configurable:!0,writable:!0}):this[e]=t}foo(){try{return Promise.resolve(this.myFields.find(e=>\\"bar\\"===e))}catch(e){return Promise.reject(e)}}}});
 //# sourceMappingURL=custom-babelrc.umd.js.map
 "
 `;
@@ -1437,8 +1437,8 @@ Build \\"customSource\\" to dist:
 138 B: custom-source.js.br
 188 B: custom-source.esm.js.gz
 139 B: custom-source.esm.js.br
-288 B: custom-source.umd.js.gz
-232 B: custom-source.umd.js.br"
+275 B: custom-source.umd.js.gz
+203 B: custom-source.umd.js.br"
 `;
 
 exports[`fixtures build custom-source with microbundle 2`] = `6`;
@@ -1456,7 +1456,7 @@ exports[`fixtures build custom-source with microbundle 4`] = `
 `;
 
 exports[`fixtures build custom-source with microbundle 5`] = `
-"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).customSource=r()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){try{var r=arguments,n=[].slice.call(r);return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
+"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e||self).customSource=r()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){try{var r=arguments,n=[].slice.call(r);return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
 //# sourceMappingURL=custom-source.umd.js.map
 "
 `;
@@ -1485,8 +1485,8 @@ Build \\"customSrc\\" to dist:
 138 B: custom-src.js.br
 188 B: custom-src.esm.js.gz
 139 B: custom-src.esm.js.br
-286 B: custom-src.umd.js.gz
-234 B: custom-src.umd.js.br"
+273 B: custom-src.umd.js.gz
+203 B: custom-src.umd.js.br"
 `;
 
 exports[`fixtures build custom-source-with-cwd with microbundle 2`] = `6`;
@@ -1504,7 +1504,7 @@ exports[`fixtures build custom-source-with-cwd with microbundle 4`] = `
 `;
 
 exports[`fixtures build custom-source-with-cwd with microbundle 5`] = `
-"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).customSrc=r()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){try{var r=arguments,n=[].slice.call(r);return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
+"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e||self).customSrc=r()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){try{var r=arguments,n=[].slice.call(r);return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
 //# sourceMappingURL=custom-src.umd.js.map
 "
 `;
@@ -1532,8 +1532,8 @@ Build \\"defaultNamed\\" to dist:
 46 B: default-named.js.br
 74 B: default-named.esm.js.gz
 62 B: default-named.esm.js.br
-182 B: default-named.umd.js.gz
-136 B: default-named.umd.js.br"
+169 B: default-named.umd.js.gz
+122 B: default-named.umd.js.br"
 `;
 
 exports[`fixtures build default-named with microbundle 2`] = `6`;
@@ -1551,7 +1551,7 @@ exports[`fixtures build default-named with microbundle 4`] = `
 `;
 
 exports[`fixtures build default-named with microbundle 5`] = `
-"!function(e,f){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?f(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],f):f((e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).defaultNamed={})}(this,function(e){e.default=function(){},e.foo=42});
+"!function(e,f){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?f(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],f):f((e||self).defaultNamed={})}(this,function(e){e.default=function(){},e.foo=42});
 //# sourceMappingURL=default-named.umd.js.map
 "
 `;
@@ -1646,8 +1646,8 @@ Build \\"esnextTs\\" to dist:
 883 B: esnext-ts.js.br
 990 B: esnext-ts.esm.js.gz
 881 B: esnext-ts.esm.js.br
-1064 B: esnext-ts.umd.js.gz
-945 B: esnext-ts.umd.js.br"
+1050 B: esnext-ts.umd.js.gz
+932 B: esnext-ts.umd.js.br"
 `;
 
 exports[`fixtures build esnext-ts with microbundle 2`] = `7`;
@@ -1665,7 +1665,7 @@ exports[`fixtures build esnext-ts with microbundle 4`] = `
 `;
 
 exports[`fixtures build esnext-ts with microbundle 5`] = `
-"!function(n,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=t():\\"function\\"==typeof define&&define.amd?define(t):(n=\\"undefined\\"!=typeof globalThis?globalThis:n||self).esnextTs=t()}(this,function(){function n(t,r,i){if(!t.s){if(i instanceof e){if(!i.s)return void(i.o=n.bind(null,t,r));1&r&&(r=i.s),i=i.v}if(i&&i.then)return void i.then(n.bind(null,t,r),n.bind(null,t,2));t.s=r,t.v=i;var o=t.o;o&&o(t)}}var t=function(){try{var t,o,u,f,h=[],c=!0,l=!1,a=i(function(){return function(i,f){try{var l=function(){t=function(n){var t;if(\\"undefined\\"!=typeof Symbol){if(Symbol.asyncIterator&&null!=(t=n[Symbol.asyncIterator]))return t.call(n);if(Symbol.iterator&&null!=(t=n[Symbol.iterator]))return t.call(n)}throw new TypeError(\\"Object is not async iterable\\")}([1,2]);var i=function(t,i,o){for(var u;;){var f=t();if(r(f)&&(f=f.v),!f)return h;if(f.then){u=0;break}var h=o();if(h&&h.then){if(!r(h)){u=1;break}h=h.s}if(i){var c=i();if(c&&c.then&&!r(c)){u=2;break}}}var l=new e,a=n.bind(null,l,2);return(0===u?f.then(s):1===u?h.then(v):c.then(d)).then(void 0,a),l;function v(e){h=e;do{if(i&&(c=i())&&c.then&&!r(c))return void c.then(d).then(void 0,a);if(!(f=t())||r(f)&&!f.v)return void n(l,1,h);if(f.then)return void f.then(s).then(void 0,a);r(h=o())&&(h=h.v)}while(!h||!h.then);h.then(v).then(void 0,a)}function s(t){t?(h=o())&&h.then?h.then(v).then(void 0,a):v(h):n(l,1,h)}function d(){(f=t())?f.then?f.then(s).then(void 0,a):s(f):n(l,1,h)}}(function(){return!!Promise.resolve(t.next()).then(function(n){return c=o.done,o=n,Promise.resolve(o.value).then(function(n){return u=n,!c})})},function(){return!!(c=!0)},function(){h.push(u)});if(i&&i.then)return i.then(function(){})}()}catch(n){return f(n)}return l&&l.then?l.then(void 0,f):l}(0,function(n){l=!0,f=n})},function(n,e){function r(t){if(n)throw e;return e}var o=i(function(){var n=function(){if(!c&&null!=t.return)return Promise.resolve(t.return()).then(function(){})}();if(n&&n.then)return n.then(function(){})},function(n,t){if(l)throw f;if(n)throw t;return t});return o&&o.then?o.then(r):r()});return Promise.resolve(a&&a.then?a.then(function(n){return h}):h)}catch(n){return Promise.reject(n)}},e=function(){function t(){}return t.prototype.then=function(e,r){var i=new t,o=this.s;if(o){var u=1&o?e:r;if(u){try{n(i,1,u(this.v))}catch(t){n(i,2,t)}return i}return this}return this.o=function(t){try{var o=t.v;1&t.s?n(i,1,e?e(o):o):r?n(i,1,r(o)):n(i,2,o)}catch(t){n(i,2,t)}},i},t}();function r(n){return n instanceof e&&1&n.s}function i(n,t){try{var e=n()}catch(n){return t(!0,n)}return e&&e.then?e.then(t.bind(null,!1),t.bind(null,!0)):t(!1,e)}return t().then(console.log),t});
+"!function(n,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=t():\\"function\\"==typeof define&&define.amd?define(t):(n||self).esnextTs=t()}(this,function(){function n(t,r,i){if(!t.s){if(i instanceof e){if(!i.s)return void(i.o=n.bind(null,t,r));1&r&&(r=i.s),i=i.v}if(i&&i.then)return void i.then(n.bind(null,t,r),n.bind(null,t,2));t.s=r,t.v=i;var o=t.o;o&&o(t)}}var t=function(){try{var t,o,u,f,h=[],c=!0,l=!1,a=i(function(){return function(i,f){try{var l=function(){t=function(n){var t;if(\\"undefined\\"!=typeof Symbol){if(Symbol.asyncIterator&&null!=(t=n[Symbol.asyncIterator]))return t.call(n);if(Symbol.iterator&&null!=(t=n[Symbol.iterator]))return t.call(n)}throw new TypeError(\\"Object is not async iterable\\")}([1,2]);var i=function(t,i,o){for(var u;;){var f=t();if(r(f)&&(f=f.v),!f)return h;if(f.then){u=0;break}var h=o();if(h&&h.then){if(!r(h)){u=1;break}h=h.s}if(i){var c=i();if(c&&c.then&&!r(c)){u=2;break}}}var l=new e,a=n.bind(null,l,2);return(0===u?f.then(s):1===u?h.then(v):c.then(d)).then(void 0,a),l;function v(e){h=e;do{if(i&&(c=i())&&c.then&&!r(c))return void c.then(d).then(void 0,a);if(!(f=t())||r(f)&&!f.v)return void n(l,1,h);if(f.then)return void f.then(s).then(void 0,a);r(h=o())&&(h=h.v)}while(!h||!h.then);h.then(v).then(void 0,a)}function s(t){t?(h=o())&&h.then?h.then(v).then(void 0,a):v(h):n(l,1,h)}function d(){(f=t())?f.then?f.then(s).then(void 0,a):s(f):n(l,1,h)}}(function(){return!!Promise.resolve(t.next()).then(function(n){return c=o.done,o=n,Promise.resolve(o.value).then(function(n){return u=n,!c})})},function(){return!!(c=!0)},function(){h.push(u)});if(i&&i.then)return i.then(function(){})}()}catch(n){return f(n)}return l&&l.then?l.then(void 0,f):l}(0,function(n){l=!0,f=n})},function(n,e){function r(t){if(n)throw e;return e}var o=i(function(){var n=function(){if(!c&&null!=t.return)return Promise.resolve(t.return()).then(function(){})}();if(n&&n.then)return n.then(function(){})},function(n,t){if(l)throw f;if(n)throw t;return t});return o&&o.then?o.then(r):r()});return Promise.resolve(a&&a.then?a.then(function(n){return h}):h)}catch(n){return Promise.reject(n)}},e=function(){function t(){}return t.prototype.then=function(e,r){var i=new t,o=this.s;if(o){var u=1&o?e:r;if(u){try{n(i,1,u(this.v))}catch(t){n(i,2,t)}return i}return this}return this.o=function(t){try{var o=t.v;1&t.s?n(i,1,e?e(o):o):r?n(i,1,r(o)):n(i,2,o)}catch(t){n(i,2,t)}},i},t}();function r(n){return n instanceof e&&1&n.s}function i(n,t){try{var e=n()}catch(n){return t(!0,n)}return e&&e.then?e.then(t.bind(null,!1),t.bind(null,!0)):t(!1,e)}return t().then(console.log),t});
 //# sourceMappingURL=esnext-ts.umd.js.map
 "
 `;
@@ -1697,8 +1697,8 @@ Build \\"jsx\\" to dist:
 179 B: jsx.js.br
 223 B: jsx.esm.js.gz
 193 B: jsx.esm.js.br
-311 B: jsx.umd.js.gz
-249 B: jsx.umd.js.br"
+297 B: jsx.umd.js.gz
+236 B: jsx.umd.js.br"
 `;
 
 exports[`fixtures build jsx with microbundle 2`] = `6`;
@@ -1716,7 +1716,7 @@ exports[`fixtures build jsx with microbundle 4`] = `
 `;
 
 exports[`fixtures build jsx with microbundle 5`] = `
-"!function(n,e){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=e():\\"function\\"==typeof define&&define.amd?define(e):(n=\\"undefined\\"!=typeof globalThis?globalThis:n||self).jsx=e()}(this,function(){var n=function(n,e){return{tag:n,props:e,children:[].slice.call(arguments,2)}},e=function(n){return n.children};return function(){function t(){}return t.prototype.render=function(){return n(\\"div\\",{id:\\"app\\"},n(\\"h1\\",null,\\"Hello, World!\\"),n(\\"p\\",null,\\"A JSX demo.\\"),n(e,null,n(\\"p\\",null,\\"Test fragment\\")))},t}()});
+"!function(n,e){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=e():\\"function\\"==typeof define&&define.amd?define(e):(n||self).jsx=e()}(this,function(){var n=function(n,e){return{tag:n,props:e,children:[].slice.call(arguments,2)}},e=function(n){return n.children};return function(){function t(){}return t.prototype.render=function(){return n(\\"div\\",{id:\\"app\\"},n(\\"h1\\",null,\\"Hello, World!\\"),n(\\"p\\",null,\\"A JSX demo.\\"),n(e,null,n(\\"p\\",null,\\"Test fragment\\")))},t}()});
 //# sourceMappingURL=jsx.umd.js.map
 "
 `;
@@ -1745,8 +1745,8 @@ Build \\"macroLib\\" to dist:
 33 B: macro-lib.js.br
 48 B: macro-lib.esm.js.gz
 32 B: macro-lib.esm.js.br
-171 B: macro-lib.umd.js.gz
-129 B: macro-lib.umd.js.br"
+156 B: macro-lib.umd.js.gz
+126 B: macro-lib.umd.js.br"
 `;
 
 exports[`fixtures build macro with microbundle 2`] = `6`;
@@ -1764,7 +1764,7 @@ exports[`fixtures build macro with microbundle 4`] = `
 `;
 
 exports[`fixtures build macro with microbundle 5`] = `
-"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=\\"name-macro\\":\\"function\\"==typeof define&&define.amd?define(function(){return\\"name-macro\\"}):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).macroLib=\\"name-macro\\"}(this);
+"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=\\"name-macro\\":\\"function\\"==typeof define&&define.amd?define(function(){return\\"name-macro\\"}):(e||self).macroLib=\\"name-macro\\"}(this);
 //# sourceMappingURL=macro-lib.umd.js.map
 "
 `;
@@ -1794,8 +1794,8 @@ Build \\"mangleJsonFile\\" to dist:
 89 B: mangle-json-file.js.br
 105 B: mangle-json-file.esm.js.gz
 91 B: mangle-json-file.esm.js.br
-211 B: mangle-json-file.umd.js.gz
-173 B: mangle-json-file.umd.js.br"
+196 B: mangle-json-file.umd.js.gz
+171 B: mangle-json-file.umd.js.br"
 `;
 
 exports[`fixtures build mangle-json-file with microbundle 2`] = `6`;
@@ -1813,7 +1813,7 @@ exports[`fixtures build mangle-json-file with microbundle 4`] = `
 `;
 
 exports[`fixtures build mangle-json-file with microbundle 5`] = `
-"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=o():\\"function\\"==typeof define&&define.amd?define(o):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).mangleJsonFile=o()}(this,function(){var e={prop1:1,__p2:2};return function(){return console.log(e.prop1),console.log(e.__p2),e}});
+"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=o():\\"function\\"==typeof define&&define.amd?define(o):(e||self).mangleJsonFile=o()}(this,function(){var e={prop1:1,__p2:2};return function(){return console.log(e.prop1),console.log(e.__p2),e}});
 //# sourceMappingURL=mangle-json-file.umd.js.map
 "
 `;
@@ -1842,8 +1842,8 @@ Build \\"minifyConfig\\" to dist:
 85 B: minify-config.js.br
 101 B: minify-config.esm.js.gz
 87 B: minify-config.esm.js.br
-205 B: minify-config.umd.js.gz
-153 B: minify-config.umd.js.br"
+189 B: minify-config.umd.js.gz
+140 B: minify-config.umd.js.br"
 `;
 
 exports[`fixtures build minify-config with microbundle 2`] = `6`;
@@ -1861,7 +1861,7 @@ exports[`fixtures build minify-config with microbundle 4`] = `
 `;
 
 exports[`fixtures build minify-config with microbundle 5`] = `
-"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=o():\\"function\\"==typeof define&&define.amd?define(o):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).minifyConfig=o()}(this,function(){var e={prop1:1,o:2};return function(){return console.log(e.prop1),console.log(e.o),e}});
+"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=o():\\"function\\"==typeof define&&define.amd?define(o):(e||self).minifyConfig=o()}(this,function(){var e={prop1:1,o:2};return function(){return console.log(e.prop1),console.log(e.o),e}});
 //# sourceMappingURL=minify-config.umd.js.map
 "
 `;
@@ -1891,8 +1891,8 @@ Build \\"minifyPathConfig\\" to dist:
 89 B: minify-path-config.js.br
 105 B: minify-path-config.esm.js.gz
 91 B: minify-path-config.esm.js.br
-213 B: minify-path-config.umd.js.gz
-166 B: minify-path-config.umd.js.br"
+198 B: minify-path-config.umd.js.gz
+152 B: minify-path-config.umd.js.br"
 `;
 
 exports[`fixtures build minify-path-config with microbundle 2`] = `6`;
@@ -1910,7 +1910,7 @@ exports[`fixtures build minify-path-config with microbundle 4`] = `
 `;
 
 exports[`fixtures build minify-path-config with microbundle 5`] = `
-"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=o():\\"function\\"==typeof define&&define.amd?define(o):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).minifyPathConfig=o()}(this,function(){var e={prop1:1,__p2:2};return function(){return console.log(e.prop1),console.log(e.__p2),e}});
+"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=o():\\"function\\"==typeof define&&define.amd?define(o):(e||self).minifyPathConfig=o()}(this,function(){var e={prop1:1,__p2:2};return function(){return console.log(e.prop1),console.log(e.__p2),e}});
 //# sourceMappingURL=minify-path-config.umd.js.map
 "
 `;
@@ -1938,8 +1938,8 @@ Build \\"minifyPathParentDir\\" to dist:
 89 B: minify-path-parent-dir.js.br
 105 B: minify-path-parent-dir.esm.js.gz
 91 B: minify-path-parent-dir.esm.js.br
-216 B: minify-path-parent-dir.umd.js.gz
-174 B: minify-path-parent-dir.umd.js.br"
+200 B: minify-path-parent-dir.umd.js.gz
+161 B: minify-path-parent-dir.umd.js.br"
 `;
 
 exports[`fixtures build minify-path-parent-dir-with-cwd with microbundle 2`] = `6`;
@@ -1957,7 +1957,7 @@ exports[`fixtures build minify-path-parent-dir-with-cwd with microbundle 4`] = `
 `;
 
 exports[`fixtures build minify-path-parent-dir-with-cwd with microbundle 5`] = `
-"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=o():\\"function\\"==typeof define&&define.amd?define(o):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).minifyPathParentDir=o()}(this,function(){var e={prop1:1,__p2:2};return function(){return console.log(e.prop1),console.log(e.__p2),e}});
+"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=o():\\"function\\"==typeof define&&define.amd?define(o):(e||self).minifyPathParentDir=o()}(this,function(){var e={prop1:1,__p2:2};return function(){return console.log(e.prop1),console.log(e.__p2),e}});
 //# sourceMappingURL=minify-path-parent-dir.umd.js.map
 "
 `;
@@ -2018,8 +2018,8 @@ Build \\"modernGenerators\\" to dist:
 99 B: modern-generators.modern.js.br
 233 B: modern-generators.esm.js.gz
 191 B: modern-generators.esm.js.br
-325 B: modern-generators.umd.js.gz
-274 B: modern-generators.umd.js.br"
+310 B: modern-generators.umd.js.gz
+257 B: modern-generators.umd.js.br"
 `;
 
 exports[`fixtures build modern-generators with microbundle 2`] = `8`;
@@ -2043,7 +2043,7 @@ exports[`fixtures build modern-generators with microbundle 5`] = `
 `;
 
 exports[`fixtures build modern-generators with microbundle 6`] = `
-"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).modernGenerators=n()}(this,function(){var e=regeneratorRuntime.mark(n);function n(){var n;return regeneratorRuntime.wrap(function(e){for(;;)switch(e.prev=e.next){case 0:n=0;case 1:return e.next=4,n++;case 4:e.next=1;break;case 6:case\\"end\\":return e.stop()}},e)}return function(){try{var e=n();return Promise.resolve([e.next().value,e.next().value])}catch(e){return Promise.reject(e)}}});
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e||self).modernGenerators=n()}(this,function(){var e=regeneratorRuntime.mark(n);function n(){var n;return regeneratorRuntime.wrap(function(e){for(;;)switch(e.prev=e.next){case 0:n=0;case 1:return e.next=4,n++;case 4:e.next=1;break;case 6:case\\"end\\":return e.stop()}},e)}return function(){try{var e=n();return Promise.resolve([e.next().value,e.next().value])}catch(e){return Promise.reject(e)}}});
 //# sourceMappingURL=modern-generators.umd.js.map
 "
 `;
@@ -2072,8 +2072,8 @@ Build \\"customNameAmd\\" to dist:
 138 B: name-custom-amd.js.br
 188 B: name-custom-amd.esm.js.gz
 139 B: name-custom-amd.esm.js.br
-292 B: name-custom-amd.umd.js.gz
-227 B: name-custom-amd.umd.js.br"
+277 B: name-custom-amd.umd.js.gz
+208 B: name-custom-amd.umd.js.br"
 `;
 
 exports[`fixtures build name-custom-amd with microbundle 2`] = `6`;
@@ -2091,7 +2091,7 @@ exports[`fixtures build name-custom-amd with microbundle 4`] = `
 `;
 
 exports[`fixtures build name-custom-amd with microbundle 5`] = `
-"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).customNameAmd=r()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){try{var r=arguments,n=[].slice.call(r);return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
+"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e||self).customNameAmd=r()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){try{var r=arguments,n=[].slice.call(r);return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
 //# sourceMappingURL=name-custom-amd.umd.js.map
 "
 `;
@@ -2120,8 +2120,8 @@ Build \\"nameCustomCli\\" to dist:
 138 B: name-custom.js.br
 188 B: name-custom.esm.js.gz
 139 B: name-custom.esm.js.br
-292 B: name-custom.umd.js.gz
-232 B: name-custom.umd.js.br"
+276 B: name-custom.umd.js.gz
+215 B: name-custom.umd.js.br"
 `;
 
 exports[`fixtures build name-custom-cli with microbundle 2`] = `6`;
@@ -2139,7 +2139,7 @@ exports[`fixtures build name-custom-cli with microbundle 4`] = `
 `;
 
 exports[`fixtures build name-custom-cli with microbundle 5`] = `
-"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).nameCustomCli=n()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,n){return e+n},0))}catch(e){return Promise.reject(e)}};return function(){try{var n=arguments,r=[].slice.call(n);return Promise.resolve(e.apply(void 0,r)).then(function(n){return Promise.resolve(e.apply(void 0,r)).then(function(e){return[n,e]})})}catch(e){return Promise.reject(e)}}});
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e||self).nameCustomCli=n()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,n){return e+n},0))}catch(e){return Promise.reject(e)}};return function(){try{var n=arguments,r=[].slice.call(n);return Promise.resolve(e.apply(void 0,r)).then(function(n){return Promise.resolve(e.apply(void 0,r)).then(function(e){return[n,e]})})}catch(e){return Promise.reject(e)}}});
 //# sourceMappingURL=name-custom.umd.js.map
 "
 `;
@@ -2167,8 +2167,8 @@ Build \\"noPkg\\" to dist:
 138 B: no-pkg.js.br
 188 B: no-pkg.esm.js.gz
 139 B: no-pkg.esm.js.br
-284 B: no-pkg.umd.js.gz
-227 B: no-pkg.umd.js.br"
+270 B: no-pkg.umd.js.gz
+216 B: no-pkg.umd.js.br"
 `;
 
 exports[`fixtures build no-pkg with microbundle 2`] = `6`;
@@ -2186,7 +2186,7 @@ exports[`fixtures build no-pkg with microbundle 4`] = `
 `;
 
 exports[`fixtures build no-pkg with microbundle 5`] = `
-"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).noPkg=n()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,n){return e+n},0))}catch(e){return Promise.reject(e)}};return function(){try{var n=arguments,r=[].slice.call(n);return Promise.resolve(e.apply(void 0,r)).then(function(n){return Promise.resolve(e.apply(void 0,r)).then(function(e){return[n,e]})})}catch(e){return Promise.reject(e)}}});
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e||self).noPkg=n()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,n){return e+n},0))}catch(e){return Promise.reject(e)}};return function(){try{var n=arguments,r=[].slice.call(n);return Promise.resolve(e.apply(void 0,r)).then(function(n){return Promise.resolve(e.apply(void 0,r)).then(function(e){return[n,e]})})}catch(e){return Promise.reject(e)}}});
 //# sourceMappingURL=no-pkg.umd.js.map
 "
 `;
@@ -2215,8 +2215,8 @@ Build \\"noPkgName\\" to dist:
 138 B: no-pkg-name.js.br
 188 B: no-pkg-name.esm.js.gz
 139 B: no-pkg-name.esm.js.br
-288 B: no-pkg-name.umd.js.gz
-229 B: no-pkg-name.umd.js.br"
+274 B: no-pkg-name.umd.js.gz
+219 B: no-pkg-name.umd.js.br"
 `;
 
 exports[`fixtures build no-pkg-name with microbundle 2`] = `6`;
@@ -2234,7 +2234,7 @@ exports[`fixtures build no-pkg-name with microbundle 4`] = `
 `;
 
 exports[`fixtures build no-pkg-name with microbundle 5`] = `
-"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).noPkgName=n()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,n){return e+n},0))}catch(e){return Promise.reject(e)}};return function(){try{var n=arguments,r=[].slice.call(n);return Promise.resolve(e.apply(void 0,r)).then(function(n){return Promise.resolve(e.apply(void 0,r)).then(function(e){return[n,e]})})}catch(e){return Promise.reject(e)}}});
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e||self).noPkgName=n()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,n){return e+n},0))}catch(e){return Promise.reject(e)}};return function(){try{var n=arguments,r=[].slice.call(n);return Promise.resolve(e.apply(void 0,r)).then(function(n){return Promise.resolve(e.apply(void 0,r)).then(function(e){return[n,e]})})}catch(e){return Promise.reject(e)}}});
 //# sourceMappingURL=no-pkg-name.umd.js.map
 "
 `;
@@ -2265,8 +2265,8 @@ Build \\"optionalChainingTs\\" to dist:
 88 B: optional-chaining-ts.js.br
 111 B: optional-chaining-ts.esm.js.gz
 97 B: optional-chaining-ts.esm.js.br
-226 B: optional-chaining-ts.umd.js.gz
-177 B: optional-chaining-ts.umd.js.br"
+210 B: optional-chaining-ts.umd.js.gz
+169 B: optional-chaining-ts.umd.js.br"
 `;
 
 exports[`fixtures build optional-chaining-ts with microbundle 2`] = `7`;
@@ -2293,7 +2293,7 @@ exports[`fixtures build optional-chaining-ts with microbundle 5`] = `
 `;
 
 exports[`fixtures build optional-chaining-ts with microbundle 6`] = `
-"!function(n,e){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?e(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],e):e((n=\\"undefined\\"!=typeof globalThis?globalThis:n||self).optionalChainingTs={})}(this,function(n){n.chain=function(n){var e,i;return null!=(e=null==(i=n.maybeVar)?void 0:i.thing)?e:void 0}});
+"!function(n,e){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?e(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],e):e((n||self).optionalChainingTs={})}(this,function(n){n.chain=function(n){var e,i;return null!=(e=null==(i=n.maybeVar)?void 0:i.thing)?e:void 0}});
 //# sourceMappingURL=optional-chaining-ts.umd.js.map
 "
 `;
@@ -2321,8 +2321,8 @@ Build \\"pretty\\" to dist:
 5.19 kB: pretty.js.br
 6.34 kB: pretty.esm.js.gz
 5.21 kB: pretty.esm.js.br
-6.48 kB: pretty.umd.js.gz
-5.37 kB: pretty.umd.js.br"
+6.46 kB: pretty.umd.js.gz
+5.31 kB: pretty.umd.js.br"
 `;
 
 exports[`fixtures build pretty with microbundle 2`] = `6`;
@@ -2340,7 +2340,7 @@ exports[`fixtures build pretty with microbundle 4`] = `
 `;
 
 exports[`fixtures build pretty with microbundle 5`] = `
-"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?n(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],n):n((e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).pretty={})}(this,function(e){e.allTheIpsum=\\"\\\\n\\\\nThere is immense joy in just watching - watching all the little creatures in nature. I'll go over the colors one more\\\\ntime that we use: Titanium white, Thalo green, Prussian blue, Van Dyke brown, Alizarin crimson, Sap green, Cad yellow,\\\\nand Permanent red. If you don't like it - change it. It's your world. Be brave. Sometimes you learn more from your\\\\nmistakes than you do from your masterpieces.\\\\n\\\\nTrees grow in all kinds of ways. They're not all perfectly straight. Not every limb is perfect. Now let's put some happy\\\\nlittle clouds in here. We have no limits to our world. We're only limited by our imagination. The first step to doing\\\\nanything is to believe you can do it. See it finished in your mind before you ever start. Even trees need a friend. We\\\\nall need friends. And that's when it becomes fun - you don't have to spend your time thinking about what's happening -\\\\nyou just let it happen.\\\\n\\\\nरिती संपादक बेंगलूर अन्तरराष्ट्रीयकरन शीघ्र भाषा चिदंश उद्योग विस्तरणक्षमता चिदंश एकएस तरहथा। प्रोत्साहित उपेक्ष बिन्दुओ\\\\nध्येय देने गुजरना ऎसाजीस निर्माण नवंबर लिए। एसेएवं उपलब्धता मुश्किले डाले। बहतर सहायता माध्यम भाषाओ समूह\\\\n\\\\n井待品亡写回横提和指生志考結。重特天県偏切運録広詳三人転者数代歳。秀天戦機広八型希金生作事国第。年米教止証車断級弘報安楽\\\\n銀必約現獲料切。点額講問課覧傷邸出送跡出懲。編米人験由社迷入解公著片法記択昇必崎掲清。摩出元自越食多県実間旅売主注理併間\\\\n話策。小政退時年福米越給新家入解美露方堀港朝。俊間髪物縦該高報見甲購形州日事。\\\\n\\\\n🌸🍂🌃🐧🍘🏧🍮 🌶👢🔗🐥🔼🎮 🐤🍲📆👧🎼🐒 💑🍖📴🐠🍼 🎱🔮🍦💳👹 💫🏮📅🍑📭🎎 🏭💿🏫🔢👚💩 👇🌄🌗🔵💦 🔺🔡🌍🐗🏀📫\\\\n📻🍵🐰🔜🕧 🌴🌞🕙🎨🎾🔊🏰 🎑🌆🔁🌂 🕐📣📉🌴🕠📢 🎀📖🎋🔱📒💰 🍅🐻🌃🌖. 🎁🕔👎🎷📀📞 🍁🔫🍀🌃📹 💈📂💶👕 🍡📰👛🐻\\\\n🍖🐽💫📼 🍆🎀💛👫🔹 🎷🕙🌱👸🕁🔝 🍸🔅👿🐡. 🐟🔐🏡🔅👾 🐱💱👺🍶 🎠🔆🎤🏥🌻🗾 👽🎯💈🏣🔊📴💆🏫 🔉🌉🍃🌻 🎅🔌🔻💣 🌸🍎🐀🌇\\\\n🗻👔📤💤🔶. 🍆👣🕕👦📦👑 🐍🐉🔶🕕 🍲👩🍍🌕📻👒📵 🔣🌋🌟👼 🔏📀🐆🍖🍮 🐁🌘🐻🏥🐡🔶🔘🏭 👡🔫🔗📊📻 🍂💧🌿📥🔚 📹💻🔌💠🌚\\\\n🐦💴🌎🌞🏤.\\\\n\\\\nThere is immense joy in just watching - watching all the little creatures in nature. I'll go over the colors one more\\\\ntime that we use: Titanium white, Thalo green, Prussian blue, Van Dyke brown, Alizarin crimson, Sap green, Cad yellow,\\\\nand Permanent red. If you don't like it - change it. It's your world. Be brave. Sometimes you learn more from your\\\\nmistakes than you do from your masterpieces. That's why I paint - because I can create the kind of world I want - and I\\\\ncan make this world as happy as I want it. I was blessed with a very steady hand; and it comes in very handy when you're\\\\ndoing these little delicate things. We'll paint one happy little tree right here. These things happen automatically. All\\\\nyou have to do is just let them happen.\\\\n\\\\n🐻🍘💀🐪 🕧🎂🕃🍵🏠 💎🌄🐐📘🐄 🍂🏤👊🍖 👆🍂📫👪🐈🕢👓 👯🕞🏉🍚🎆🔠🌵 🎭🎎💵📮📭 🔪💨📢📕 🐔📬👪🏄🐙🗽📤.\\\\n💛👴💧🎁👗💟👡💎 🎷🕡👮🗾🍷 🎪🍇🍩💰 📫🐗🎄🍍🎃 🎯🌴🐍🔉📰 👼👧🐢🕔🔷📞🍩 🔘👑🌆🌒🔣 🔆👺📴👾 🔝💑💸💒🏡🔸 🔟👞📷🔱👠\\\\n📵🏠📕🕝🐂👪 💐🎾🕁🗾👊📪. 🍉🏁👰🏡🕔💒🐯 🐟🍡📴🌿👱👢 📵💄🌊🌵🐫🍏 🎎🕠🍍💭💀👖 🎵💘🔗🍖 📧🌘🍅🕚📘🔮 👤🌾👿🐍🎽🌹\\\\n🎲🎎💅📪🐐🍢📈 🏣🐑👇👼🐄🍔 🍠📧🌊🕁🔛🐩. 🌺📊🍼🐁💼 🔈💬🌱🎑🔊🐙💲👩 🍇👞📎👻🌔 💑🕁🎲💤 🎮📃🕖📖 📻💬🔢💔🐇👬 🔨🌃📈🔞\\\\n🌒🎈👙🔥🐊 📭👍📢👊📟.\\\\n\\\\n出死問民同歴術荘面族上自。窃指写氷名続球投込光試事樹増。作合副者扶実権守安展感意環待質出。告供体企紙勢構込君奪属仕子業戦\\\\n浮私。長論攻士踊再連公雪地約政近第公。界地島命党浮国沼出問気混心未独院。朝原妙画岡性制領子金次問無浦妥混口時研。道記険健\\\\n集立根聖間前設集族山要本覧。変注再悩式付療場図験問県家界月止収文。\\\\n\\\\nलेकिन उसके संपादक उपलब्ध दिनांक प्रति सम्पर्क प्राधिकरन नाकर मुक्त कलइस वेबजाल वर्तमान समस्याओ देखने भोगोलिक केन्द्रिय\\\\nकिया खयालात विज्ञान ध्येय गटको साधन चिदंश पासपाई व्याख्या मार्गदर्शन संदेश जिवन प्रतिबध वार्तालाप किके विश्व खरिदने\\\\nहुआआदी तकनीकी संदेश सारांश असरकारक वार्तालाप चाहे पहोच। अतित पुर्णता केन्द्रिय\\\\n\\\\n👅💾🐂🔙 🐂🎠👶🐮🐛 👛💗💶🌿💒 🐐🌱🐶🌴🏤🐒 🔪🍡🎸🐛🍖 📗🎓🏊🕀🎿 🔅📋📥👳🔝 🐗👝🏄🐲 📂🎷🐎🏯💎🐹 📲🍍🏥🔂🕚🐉🎤\\\\n🌕🐴📐🎪💋. 💔👂🐗📷🎐 🌹📔💒📝👎📭 🔖🍶💺🕘 🔡💘🎪🔚🔯👉 💯🎉👠🎁🐌💵 👌🔉🎹🕒💕🍁 🏡🍢🔹🔷👀💦🏉👀 👑🐺🐁🏤\\\\n🎺🍁🐙🐮🌃🕢🐟 🍶🎃🕕🔦 🐧🔝💔💚🔫👍 🌉🔁🌄📺 👓🎳📧🌆💖🍋🕔. 🍥🔘🗼📟 🍹🔸🔰🕣🌍 🏡💽🍬👗👧 📩👬🌻🐐🌞🌎🐵🔛 🏆🌹🍰🔬📕\\\\n👋🎩🍓🌏👙 🎁🏃🎌🍳🔋👎📔 🐈🌽🔘💮 🏬🐷💿🕕. 📕👖📦📡 🎅🎺🏭🍗💜💷🐦 💻💚🐪🕠🔀 💰🍹💶🍶🎥📄 🌛👕🐲🐣🍷🎬 🐥🎯🔵🎹\\\\n🌿👌🐚🍛🏪 🌵📞💃📗👱👩 📟🐸🌺🐅👮 💚🐦💉💞🌛 🔼🔤👓🏡💩.\\\\n\\\\n\\\\nयधपि बाजार तकरीबन आंतरजाल प्राधिकरन लगती संदेश एसलिये बिन्दुओ प्रोत्साहित जानकारी ढांचामात्रुभाषा बाजार बदले प्रमान\\\\nअनुवाद विकेन्द्रित पसंद ढांचा हमारि जोवे उद्योग संस्थान और्४५० विकसित उदेश लेकिन सकती वार्तालाप लाभान्वित संदेश उदेश\\\\nपहोच। लचकनहि अनुवाद सुविधा एकत्रित कीने सक्षम भीयह अत्यंत लचकनहि निरपेक्ष कराना हमारि प्राप्त पुर्णता प्रतिबध्दता होगा\\\\nउन्हे जाएन खयालात पहोचाना\\\\n\\\\n散待望会窮縮囲前賀理格顔欧製暮景初子加。首稿覧析回未帯則号医間本取退埋帯品。右歳約幻病護指極講賞京応。野受移供頑特公却報\\\\n法利務水提士政駐物際。角媛分地昧況面日残金真福方雨入顔作化。最刊情感売校見強移本説注辞。経必好以小球生音明優去験見政感治\\\\n報付。講刊切記勝帯載豪著転読金止。金子森午模移言兆埠関価亡出目載。\\\\n\\\\nWork on one thing at a time. Don't get carried away - we have plenty of time. Everything is happy if you choose to make\\\\nit that way. Happy painting, God bless. You can create anything that makes you happy. Just make a decision and let it\\\\ngo. Nice little clouds playing around in the sky.You can do anything here - the only pre-requisite is that it makes you\\\\nhappy. I'm going to mix up a little color. We’ll use Van Dyke Brown, Permanent Red, and a little bit of Prussian Blue.\\\\nLet's make some happy little clouds in our world.\\\\n\\\\nपहेला गएआप स्वतंत्र प्राधिकरन सेऔर अनुकूल ब्रौशर बिन्दुओमे सदस्य गुजरना तकनिकल वैश्विक सकते बनाति चिदंश चाहे कुशलता\\\\nवर्तमान प्रोत्साहित देने विवरन पहोचाना विकेन्द्रियकरण अनुकूल विभाजनक्षमता औषधिक अन्य खरिदे दिये आवश्यक समस्याए कम्प्युटर\\\\nविनिमय अविरोधता लाभान्वित लाभो ढांचा\\\\n\\\\n抄聞調時得直決移警撃覧進聞滑公政央。日探劇票選伊追短青功書更将奈府成多。味治理育月漬安意散護良読京。芳豚大度面傾府山応著\\\\n器地捜志。止高棋戻管明証経処流自勝動続。装載聞視属王減通橋説主費事業情芸。追若得本臭稿事馬予治川劇覧記今竹犯破育食。参兆\\\\n徹括単写東家素講舞校食医咋存務代連子。球設国事検問周東集題聞供奈。\\\\n\\\\n🍊🌆📛🍛🌊🍡🍒 🔦🐟🐵🍚🌐🍛🐏 🔆💍📟🎧 🔐📤💺🐒 🔥🔬🐣💹🌻👚 🎰👯🎡🗻💯🐉🌗 🍐👣🐯🔖📚 💡📟👨🍮🍼💛📞 🕕🐁🌾🏧💻📷\\\\n💗🐢🏥🎵🐰🍉 🏥🔎💛💘🔧🍛🎿 🍟🌰🐴🏫🎀 🎷🌿🌴🏤🍢📳🍺 🐗👷🌳👦📩🌁 🐂🔜🔙📕. 🌎🍠📓📠🕡 🎽🔺🔱🌔📗🎤 🎫🍃👚🍤🐽🌰\\\\n🕠🌉📪🍒🐃💲 🎢🔯👶🔙🔚🕝 🍮📒🏉🏨🐝🌿 👔💫🏁🎺 🐸💞🌈🐸 📣🔯📅🐍🐴 🌑🌍🌛👀 🕂👟🐕📃🎇🔞 🍮🔏🍥👨 🐪📲🐐🎁 🍥🔁📑💮🌘.\\\\n🌏🎎🍛👯 🔈🎸💨🏧📚 🏪💼🎣🔚 🐤💳💁👓 👃🍆🕘🐋👬🐣 🕚🏃🌄🔷🌈🔖 💥💧🔴🌛🍁👦 💣🐐🕓🎠🕚🕞🏭 💨👓🏢🌓🔄. 📪🔜💹👤👂🐭\\\\n🕚🔎🐂🏂👍📻 👾💠🌕📻🎍 🐟🔬🏢💍 👓👠👤🎐💸👝 🔟💕🕛💊 🍩🌙👬🐘 🍪🔙📉💔🐝🕝 📭🕡🎼💈📇🔡 👓🍁🎾👯👨 🏇🍱🐢🌛\\\\n🎇🐩📴🎋🕁📎🎈 🐌👱📎🍹👆 👐🍐📗👽🐹💜 📭🌔🌅🍯👀.\\\\n\\\\n🔜🐰🏊🍃🐮 🔪🔐📇🐩 🐬👔🍙🍩💉 🏉👩👔🍞🍟🌂 🍺🕔🌖🔪🔩🍥 🎓🍒🌅🐘💛 🐔🐊📶🐊 👂📌👂🍺 💗🐳🎠📧🏭💧 🐝📅🍆🔞🏆\\\\n👇🔂🐺🔬🎯🔳🎐🎍 💖💅🐲🔭📔🏊🔋 🐨📫🕢🎁. 🐯💁🔘📰🐪 💥👭🍘🎴📣💂💄 🐏🔊🐚👔🎿🐙 🔕🐞💹📁 🔊👴👬👪 👠📱👃📍 🏢🐃🍯🍹🗻\\\\n🐩💮👲👠 🍏🎽📄🐋 🔣💉🔉📒💸🎭👎 💁🗾🔵🐪🍣 🍃🔝💥🔒👴. 📦🔟🔶💷🍥 🍚🕤👦🍻🔥🍹 👄🌜🐑🌀🐃🔪🕦 🌟🐶🍞🕥🌛 👮🐄🏬🎴👂💼📵\\\\n🌋📐🐲👥 🔒🏭🔭💿🎫🎄 💓🐓🎐🎁👔📟 💌🍇🎶👷🎬 🌌💀🎸💡 📔🐢💁🔊👘🐳🌞 🎩📝💟🍼💦🔄 🕒🍼🏧🎄🔃💐. 🎆🌜👗👿 🐁🌑💮👙🎌👞\\\\n🏫📙🌌🕙🐥 👓🌑💎💸📹📒 👋🐎🍡🎾👸🗽 📢📓🌍🏮📳🔈 👶🐷🐭🎿🔴🗾🏬 🌆🔈🍡💞💭🎨. \\"});
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?n(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],n):n((e||self).pretty={})}(this,function(e){e.allTheIpsum=\\"\\\\n\\\\nThere is immense joy in just watching - watching all the little creatures in nature. I'll go over the colors one more\\\\ntime that we use: Titanium white, Thalo green, Prussian blue, Van Dyke brown, Alizarin crimson, Sap green, Cad yellow,\\\\nand Permanent red. If you don't like it - change it. It's your world. Be brave. Sometimes you learn more from your\\\\nmistakes than you do from your masterpieces.\\\\n\\\\nTrees grow in all kinds of ways. They're not all perfectly straight. Not every limb is perfect. Now let's put some happy\\\\nlittle clouds in here. We have no limits to our world. We're only limited by our imagination. The first step to doing\\\\nanything is to believe you can do it. See it finished in your mind before you ever start. Even trees need a friend. We\\\\nall need friends. And that's when it becomes fun - you don't have to spend your time thinking about what's happening -\\\\nyou just let it happen.\\\\n\\\\nरिती संपादक बेंगलूर अन्तरराष्ट्रीयकरन शीघ्र भाषा चिदंश उद्योग विस्तरणक्षमता चिदंश एकएस तरहथा। प्रोत्साहित उपेक्ष बिन्दुओ\\\\nध्येय देने गुजरना ऎसाजीस निर्माण नवंबर लिए। एसेएवं उपलब्धता मुश्किले डाले। बहतर सहायता माध्यम भाषाओ समूह\\\\n\\\\n井待品亡写回横提和指生志考結。重特天県偏切運録広詳三人転者数代歳。秀天戦機広八型希金生作事国第。年米教止証車断級弘報安楽\\\\n銀必約現獲料切。点額講問課覧傷邸出送跡出懲。編米人験由社迷入解公著片法記択昇必崎掲清。摩出元自越食多県実間旅売主注理併間\\\\n話策。小政退時年福米越給新家入解美露方堀港朝。俊間髪物縦該高報見甲購形州日事。\\\\n\\\\n🌸🍂🌃🐧🍘🏧🍮 🌶👢🔗🐥🔼🎮 🐤🍲📆👧🎼🐒 💑🍖📴🐠🍼 🎱🔮🍦💳👹 💫🏮📅🍑📭🎎 🏭💿🏫🔢👚💩 👇🌄🌗🔵💦 🔺🔡🌍🐗🏀📫\\\\n📻🍵🐰🔜🕧 🌴🌞🕙🎨🎾🔊🏰 🎑🌆🔁🌂 🕐📣📉🌴🕠📢 🎀📖🎋🔱📒💰 🍅🐻🌃🌖. 🎁🕔👎🎷📀📞 🍁🔫🍀🌃📹 💈📂💶👕 🍡📰👛🐻\\\\n🍖🐽💫📼 🍆🎀💛👫🔹 🎷🕙🌱👸🕁🔝 🍸🔅👿🐡. 🐟🔐🏡🔅👾 🐱💱👺🍶 🎠🔆🎤🏥🌻🗾 👽🎯💈🏣🔊📴💆🏫 🔉🌉🍃🌻 🎅🔌🔻💣 🌸🍎🐀🌇\\\\n🗻👔📤💤🔶. 🍆👣🕕👦📦👑 🐍🐉🔶🕕 🍲👩🍍🌕📻👒📵 🔣🌋🌟👼 🔏📀🐆🍖🍮 🐁🌘🐻🏥🐡🔶🔘🏭 👡🔫🔗📊📻 🍂💧🌿📥🔚 📹💻🔌💠🌚\\\\n🐦💴🌎🌞🏤.\\\\n\\\\nThere is immense joy in just watching - watching all the little creatures in nature. I'll go over the colors one more\\\\ntime that we use: Titanium white, Thalo green, Prussian blue, Van Dyke brown, Alizarin crimson, Sap green, Cad yellow,\\\\nand Permanent red. If you don't like it - change it. It's your world. Be brave. Sometimes you learn more from your\\\\nmistakes than you do from your masterpieces. That's why I paint - because I can create the kind of world I want - and I\\\\ncan make this world as happy as I want it. I was blessed with a very steady hand; and it comes in very handy when you're\\\\ndoing these little delicate things. We'll paint one happy little tree right here. These things happen automatically. All\\\\nyou have to do is just let them happen.\\\\n\\\\n🐻🍘💀🐪 🕧🎂🕃🍵🏠 💎🌄🐐📘🐄 🍂🏤👊🍖 👆🍂📫👪🐈🕢👓 👯🕞🏉🍚🎆🔠🌵 🎭🎎💵📮📭 🔪💨📢📕 🐔📬👪🏄🐙🗽📤.\\\\n💛👴💧🎁👗💟👡💎 🎷🕡👮🗾🍷 🎪🍇🍩💰 📫🐗🎄🍍🎃 🎯🌴🐍🔉📰 👼👧🐢🕔🔷📞🍩 🔘👑🌆🌒🔣 🔆👺📴👾 🔝💑💸💒🏡🔸 🔟👞📷🔱👠\\\\n📵🏠📕🕝🐂👪 💐🎾🕁🗾👊📪. 🍉🏁👰🏡🕔💒🐯 🐟🍡📴🌿👱👢 📵💄🌊🌵🐫🍏 🎎🕠🍍💭💀👖 🎵💘🔗🍖 📧🌘🍅🕚📘🔮 👤🌾👿🐍🎽🌹\\\\n🎲🎎💅📪🐐🍢📈 🏣🐑👇👼🐄🍔 🍠📧🌊🕁🔛🐩. 🌺📊🍼🐁💼 🔈💬🌱🎑🔊🐙💲👩 🍇👞📎👻🌔 💑🕁🎲💤 🎮📃🕖📖 📻💬🔢💔🐇👬 🔨🌃📈🔞\\\\n🌒🎈👙🔥🐊 📭👍📢👊📟.\\\\n\\\\n出死問民同歴術荘面族上自。窃指写氷名続球投込光試事樹増。作合副者扶実権守安展感意環待質出。告供体企紙勢構込君奪属仕子業戦\\\\n浮私。長論攻士踊再連公雪地約政近第公。界地島命党浮国沼出問気混心未独院。朝原妙画岡性制領子金次問無浦妥混口時研。道記険健\\\\n集立根聖間前設集族山要本覧。変注再悩式付療場図験問県家界月止収文。\\\\n\\\\nलेकिन उसके संपादक उपलब्ध दिनांक प्रति सम्पर्क प्राधिकरन नाकर मुक्त कलइस वेबजाल वर्तमान समस्याओ देखने भोगोलिक केन्द्रिय\\\\nकिया खयालात विज्ञान ध्येय गटको साधन चिदंश पासपाई व्याख्या मार्गदर्शन संदेश जिवन प्रतिबध वार्तालाप किके विश्व खरिदने\\\\nहुआआदी तकनीकी संदेश सारांश असरकारक वार्तालाप चाहे पहोच। अतित पुर्णता केन्द्रिय\\\\n\\\\n👅💾🐂🔙 🐂🎠👶🐮🐛 👛💗💶🌿💒 🐐🌱🐶🌴🏤🐒 🔪🍡🎸🐛🍖 📗🎓🏊🕀🎿 🔅📋📥👳🔝 🐗👝🏄🐲 📂🎷🐎🏯💎🐹 📲🍍🏥🔂🕚🐉🎤\\\\n🌕🐴📐🎪💋. 💔👂🐗📷🎐 🌹📔💒📝👎📭 🔖🍶💺🕘 🔡💘🎪🔚🔯👉 💯🎉👠🎁🐌💵 👌🔉🎹🕒💕🍁 🏡🍢🔹🔷👀💦🏉👀 👑🐺🐁🏤\\\\n🎺🍁🐙🐮🌃🕢🐟 🍶🎃🕕🔦 🐧🔝💔💚🔫👍 🌉🔁🌄📺 👓🎳📧🌆💖🍋🕔. 🍥🔘🗼📟 🍹🔸🔰🕣🌍 🏡💽🍬👗👧 📩👬🌻🐐🌞🌎🐵🔛 🏆🌹🍰🔬📕\\\\n👋🎩🍓🌏👙 🎁🏃🎌🍳🔋👎📔 🐈🌽🔘💮 🏬🐷💿🕕. 📕👖📦📡 🎅🎺🏭🍗💜💷🐦 💻💚🐪🕠🔀 💰🍹💶🍶🎥📄 🌛👕🐲🐣🍷🎬 🐥🎯🔵🎹\\\\n🌿👌🐚🍛🏪 🌵📞💃📗👱👩 📟🐸🌺🐅👮 💚🐦💉💞🌛 🔼🔤👓🏡💩.\\\\n\\\\n\\\\nयधपि बाजार तकरीबन आंतरजाल प्राधिकरन लगती संदेश एसलिये बिन्दुओ प्रोत्साहित जानकारी ढांचामात्रुभाषा बाजार बदले प्रमान\\\\nअनुवाद विकेन्द्रित पसंद ढांचा हमारि जोवे उद्योग संस्थान और्४५० विकसित उदेश लेकिन सकती वार्तालाप लाभान्वित संदेश उदेश\\\\nपहोच। लचकनहि अनुवाद सुविधा एकत्रित कीने सक्षम भीयह अत्यंत लचकनहि निरपेक्ष कराना हमारि प्राप्त पुर्णता प्रतिबध्दता होगा\\\\nउन्हे जाएन खयालात पहोचाना\\\\n\\\\n散待望会窮縮囲前賀理格顔欧製暮景初子加。首稿覧析回未帯則号医間本取退埋帯品。右歳約幻病護指極講賞京応。野受移供頑特公却報\\\\n法利務水提士政駐物際。角媛分地昧況面日残金真福方雨入顔作化。最刊情感売校見強移本説注辞。経必好以小球生音明優去験見政感治\\\\n報付。講刊切記勝帯載豪著転読金止。金子森午模移言兆埠関価亡出目載。\\\\n\\\\nWork on one thing at a time. Don't get carried away - we have plenty of time. Everything is happy if you choose to make\\\\nit that way. Happy painting, God bless. You can create anything that makes you happy. Just make a decision and let it\\\\ngo. Nice little clouds playing around in the sky.You can do anything here - the only pre-requisite is that it makes you\\\\nhappy. I'm going to mix up a little color. We’ll use Van Dyke Brown, Permanent Red, and a little bit of Prussian Blue.\\\\nLet's make some happy little clouds in our world.\\\\n\\\\nपहेला गएआप स्वतंत्र प्राधिकरन सेऔर अनुकूल ब्रौशर बिन्दुओमे सदस्य गुजरना तकनिकल वैश्विक सकते बनाति चिदंश चाहे कुशलता\\\\nवर्तमान प्रोत्साहित देने विवरन पहोचाना विकेन्द्रियकरण अनुकूल विभाजनक्षमता औषधिक अन्य खरिदे दिये आवश्यक समस्याए कम्प्युटर\\\\nविनिमय अविरोधता लाभान्वित लाभो ढांचा\\\\n\\\\n抄聞調時得直決移警撃覧進聞滑公政央。日探劇票選伊追短青功書更将奈府成多。味治理育月漬安意散護良読京。芳豚大度面傾府山応著\\\\n器地捜志。止高棋戻管明証経処流自勝動続。装載聞視属王減通橋説主費事業情芸。追若得本臭稿事馬予治川劇覧記今竹犯破育食。参兆\\\\n徹括単写東家素講舞校食医咋存務代連子。球設国事検問周東集題聞供奈。\\\\n\\\\n🍊🌆📛🍛🌊🍡🍒 🔦🐟🐵🍚🌐🍛🐏 🔆💍📟🎧 🔐📤💺🐒 🔥🔬🐣💹🌻👚 🎰👯🎡🗻💯🐉🌗 🍐👣🐯🔖📚 💡📟👨🍮🍼💛📞 🕕🐁🌾🏧💻📷\\\\n💗🐢🏥🎵🐰🍉 🏥🔎💛💘🔧🍛🎿 🍟🌰🐴🏫🎀 🎷🌿🌴🏤🍢📳🍺 🐗👷🌳👦📩🌁 🐂🔜🔙📕. 🌎🍠📓📠🕡 🎽🔺🔱🌔📗🎤 🎫🍃👚🍤🐽🌰\\\\n🕠🌉📪🍒🐃💲 🎢🔯👶🔙🔚🕝 🍮📒🏉🏨🐝🌿 👔💫🏁🎺 🐸💞🌈🐸 📣🔯📅🐍🐴 🌑🌍🌛👀 🕂👟🐕📃🎇🔞 🍮🔏🍥👨 🐪📲🐐🎁 🍥🔁📑💮🌘.\\\\n🌏🎎🍛👯 🔈🎸💨🏧📚 🏪💼🎣🔚 🐤💳💁👓 👃🍆🕘🐋👬🐣 🕚🏃🌄🔷🌈🔖 💥💧🔴🌛🍁👦 💣🐐🕓🎠🕚🕞🏭 💨👓🏢🌓🔄. 📪🔜💹👤👂🐭\\\\n🕚🔎🐂🏂👍📻 👾💠🌕📻🎍 🐟🔬🏢💍 👓👠👤🎐💸👝 🔟💕🕛💊 🍩🌙👬🐘 🍪🔙📉💔🐝🕝 📭🕡🎼💈📇🔡 👓🍁🎾👯👨 🏇🍱🐢🌛\\\\n🎇🐩📴🎋🕁📎🎈 🐌👱📎🍹👆 👐🍐📗👽🐹💜 📭🌔🌅🍯👀.\\\\n\\\\n🔜🐰🏊🍃🐮 🔪🔐📇🐩 🐬👔🍙🍩💉 🏉👩👔🍞🍟🌂 🍺🕔🌖🔪🔩🍥 🎓🍒🌅🐘💛 🐔🐊📶🐊 👂📌👂🍺 💗🐳🎠📧🏭💧 🐝📅🍆🔞🏆\\\\n👇🔂🐺🔬🎯🔳🎐🎍 💖💅🐲🔭📔🏊🔋 🐨📫🕢🎁. 🐯💁🔘📰🐪 💥👭🍘🎴📣💂💄 🐏🔊🐚👔🎿🐙 🔕🐞💹📁 🔊👴👬👪 👠📱👃📍 🏢🐃🍯🍹🗻\\\\n🐩💮👲👠 🍏🎽📄🐋 🔣💉🔉📒💸🎭👎 💁🗾🔵🐪🍣 🍃🔝💥🔒👴. 📦🔟🔶💷🍥 🍚🕤👦🍻🔥🍹 👄🌜🐑🌀🐃🔪🕦 🌟🐶🍞🕥🌛 👮🐄🏬🎴👂💼📵\\\\n🌋📐🐲👥 🔒🏭🔭💿🎫🎄 💓🐓🎐🎁👔📟 💌🍇🎶👷🎬 🌌💀🎸💡 📔🐢💁🔊👘🐳🌞 🎩📝💟🍼💦🔄 🕒🍼🏧🎄🔃💐. 🎆🌜👗👿 🐁🌑💮👙🎌👞\\\\n🏫📙🌌🕙🐥 👓🌑💎💸📹📒 👋🐎🍡🎾👸🗽 📢📓🌍🏮📳🔈 👶🐷🐭🎿🔴🗾🏬 🌆🔈🍡💞💭🎨. \\"});
 //# sourceMappingURL=pretty.umd.js.map
 "
 `;
@@ -2368,8 +2368,8 @@ Build \\"pure\\" to dist:
 44 B: pure.js.br
 71 B: pure.esm.js.gz
 49 B: pure.esm.js.br
-182 B: pure.umd.js.gz
-143 B: pure.umd.js.br"
+167 B: pure.umd.js.gz
+125 B: pure.umd.js.br"
 `;
 
 exports[`fixtures build pure with microbundle 2`] = `6`;
@@ -2387,7 +2387,7 @@ exports[`fixtures build pure with microbundle 4`] = `
 `;
 
 exports[`fixtures build pure with microbundle 5`] = `
-"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?o(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],o):o((e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).pure={})}(this,function(e){e.foo=function(){return\\"hello world\\"}});
+"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?o(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],o):o((e||self).pure={})}(this,function(e){e.foo=function(){return\\"hello world\\"}});
 //# sourceMappingURL=pure.umd.js.map
 "
 `;
@@ -2415,8 +2415,8 @@ Build \\"raw\\" to dist:
 1160 B: raw.js.br
 1398 B: raw.esm.js.gz
 1169 B: raw.esm.js.br
-1515 B: raw.umd.js.gz
-1264 B: raw.umd.js.br"
+1500 B: raw.umd.js.gz
+1248 B: raw.umd.js.br"
 `;
 
 exports[`fixtures build raw with microbundle 2`] = `6`;
@@ -2434,7 +2434,7 @@ exports[`fixtures build raw with microbundle 4`] = `
 `;
 
 exports[`fixtures build raw with microbundle 5`] = `
-"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?t(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],t):t((e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).raw={})}(this,function(e){e.OneKilobyteOfBobRoss=\\"\\\\n\\\\tWe might as well make some Almighty mountains today as well, what the heck.\\\\n\\\\tIn your imagination you can go anywhere you want. Nice little fluffy clouds\\\\n\\\\tlaying around in the sky being lazy. You have to make those little noises or\\\\n\\\\tit won't work. Clouds are free they come and go as they please.\\\\n\\\\n\\\\tTrees grow in all kinds of ways. They're not all perfectly straight. Not\\\\n\\\\tevery limb is perfect. Now let's put some happy little clouds in here. We\\\\n\\\\thave no limits to our world. We're only limited by our imagination. The\\\\n\\\\tfirst step to doing anything is to believe you can do it. See it finished\\\\n\\\\tin your mind before you ever start. Even trees need a friend. We all need\\\\n\\\\tfriends. And that's when it becomes fun - you don't have to spend your\\\\n\\\\ttime thinking about what's happening - you just let it happen.\\\\n\\\\n\\\\tI thought today we would do a happy little picture. We don't have to be\\\\n\\\\tconcerned about it. We just have to let it fall where it will. I'm gonna\\\\n\\\\tstart with a little Alizarin crimson and a touch of Prussian blue Be so\\\\n\\\\tvery light. Be a gentle whisper. The only prerequisite is that it makes\\\\n\\\\tyou happy. If it makes you happy then it's good. This is truly an almighty\\\\n\\\\tmountain.\\\\n\\\\n\\\\tThat's why I paint - because I can create the kind of world I want - and I\\\\n\\\\tcan make this world as happy as I want it. I was blessed with a very steady\\\\n\\\\thand; and it comes in very handy when you're doing these little delicate\\\\n\\\\tthings. We'll paint one happy little tree right here. These things happen\\\\n\\\\tautomatically. All you have to do is just let them happen.\\\\n\\\\n\\\\tYou can do anything here - the only pre-requisite is that it makes you\\\\n\\\\thappy. I'm going to mix up a little color. We’ll use Van Dyke Brown,\\\\n\\\\tPermanent Red, and a little bit of Prussian Blue. Let's make some happy\\\\n\\\\tlittle clouds in our world.\\\\n\\\\n\\\\tWork on one thing at a time. Don't get carried away - we have plenty of\\\\n\\\\ttime. Everything is happy if you choose to make it that way. Happy\\\\n\\\\tpainting, God bless. You can create anything that makes you happy. Just\\\\n\\\\tmake a decision and let it go. Nice little clouds playing around in the\\\\n\\\\tsky.\\\\n\\\\n\\\\tAnytime you learn something your time and energy are not wasted. Van Dyke\\\\n\\\\tBrown is a very nice brown, it's almost like a chocolate brown. It's\\\\n\\\\timportant to me that you're happy. In nature, dead trees are just as normal\\\\n\\\\tas live trees. Painting should do one thing. It should put happiness in\\\\n\\\\tyour heart.\\\\n\\\\n\\\\tThere is immense joy in just watching - watching all the little creatures\\\\n\\\\tin nature. I'll go over the colors one more time that we use: Titanium\\\\n\\\\twhite, Thalo green, Prussian blue, Van Dyke brown, Alizarin crimson, Sap\\\\n\\\\tgreen, Cad yellow, and Permanent red. If you don't like it - change it.\\\\n\\\\tIt's your world. Be brave. Sometimes you learn more from your mistakes than\\\\n\\\\tyou do from your masterpieces.\\"});
+"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?t(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],t):t((e||self).raw={})}(this,function(e){e.OneKilobyteOfBobRoss=\\"\\\\n\\\\tWe might as well make some Almighty mountains today as well, what the heck.\\\\n\\\\tIn your imagination you can go anywhere you want. Nice little fluffy clouds\\\\n\\\\tlaying around in the sky being lazy. You have to make those little noises or\\\\n\\\\tit won't work. Clouds are free they come and go as they please.\\\\n\\\\n\\\\tTrees grow in all kinds of ways. They're not all perfectly straight. Not\\\\n\\\\tevery limb is perfect. Now let's put some happy little clouds in here. We\\\\n\\\\thave no limits to our world. We're only limited by our imagination. The\\\\n\\\\tfirst step to doing anything is to believe you can do it. See it finished\\\\n\\\\tin your mind before you ever start. Even trees need a friend. We all need\\\\n\\\\tfriends. And that's when it becomes fun - you don't have to spend your\\\\n\\\\ttime thinking about what's happening - you just let it happen.\\\\n\\\\n\\\\tI thought today we would do a happy little picture. We don't have to be\\\\n\\\\tconcerned about it. We just have to let it fall where it will. I'm gonna\\\\n\\\\tstart with a little Alizarin crimson and a touch of Prussian blue Be so\\\\n\\\\tvery light. Be a gentle whisper. The only prerequisite is that it makes\\\\n\\\\tyou happy. If it makes you happy then it's good. This is truly an almighty\\\\n\\\\tmountain.\\\\n\\\\n\\\\tThat's why I paint - because I can create the kind of world I want - and I\\\\n\\\\tcan make this world as happy as I want it. I was blessed with a very steady\\\\n\\\\thand; and it comes in very handy when you're doing these little delicate\\\\n\\\\tthings. We'll paint one happy little tree right here. These things happen\\\\n\\\\tautomatically. All you have to do is just let them happen.\\\\n\\\\n\\\\tYou can do anything here - the only pre-requisite is that it makes you\\\\n\\\\thappy. I'm going to mix up a little color. We’ll use Van Dyke Brown,\\\\n\\\\tPermanent Red, and a little bit of Prussian Blue. Let's make some happy\\\\n\\\\tlittle clouds in our world.\\\\n\\\\n\\\\tWork on one thing at a time. Don't get carried away - we have plenty of\\\\n\\\\ttime. Everything is happy if you choose to make it that way. Happy\\\\n\\\\tpainting, God bless. You can create anything that makes you happy. Just\\\\n\\\\tmake a decision and let it go. Nice little clouds playing around in the\\\\n\\\\tsky.\\\\n\\\\n\\\\tAnytime you learn something your time and energy are not wasted. Van Dyke\\\\n\\\\tBrown is a very nice brown, it's almost like a chocolate brown. It's\\\\n\\\\timportant to me that you're happy. In nature, dead trees are just as normal\\\\n\\\\tas live trees. Painting should do one thing. It should put happiness in\\\\n\\\\tyour heart.\\\\n\\\\n\\\\tThere is immense joy in just watching - watching all the little creatures\\\\n\\\\tin nature. I'll go over the colors one more time that we use: Titanium\\\\n\\\\twhite, Thalo green, Prussian blue, Van Dyke brown, Alizarin crimson, Sap\\\\n\\\\tgreen, Cad yellow, and Permanent red. If you don't like it - change it.\\\\n\\\\tIt's your world. Be brave. Sometimes you learn more from your mistakes than\\\\n\\\\tyou do from your masterpieces.\\"});
 //# sourceMappingURL=raw.umd.js.map
 "
 `;
@@ -2462,8 +2462,8 @@ Build \\"shebang\\" to dist:
 62 B: shebang.js.br
 89 B: shebang.esm.js.gz
 70 B: shebang.esm.js.br
-199 B: shebang.umd.js.gz
-160 B: shebang.umd.js.br"
+183 B: shebang.umd.js.gz
+145 B: shebang.umd.js.br"
 `;
 
 exports[`fixtures build shebang with microbundle 2`] = `6`;
@@ -2484,7 +2484,7 @@ exports.foo=function(){return\\"hello world\\"};
 
 exports[`fixtures build shebang with microbundle 5`] = `
 "#!/usr/bin/env node
-!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?o(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],o):o((e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).shebang={})}(this,function(e){e.foo=function(){return\\"hello world\\"}});
+!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?o(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],o):o((e||self).shebang={})}(this,function(e){e.foo=function(){return\\"hello world\\"}});
 //# sourceMappingURL=shebang.umd.js.map
 "
 `;
@@ -2516,8 +2516,8 @@ Build \\"tsDeclarations\\" to dist:
 33 B: index.js.br
 61 B: index.esm.js.gz
 45 B: index.esm.js.br
-186 B: index.umd.js.gz
-139 B: index.umd.js.br"
+171 B: index.umd.js.gz
+124 B: index.umd.js.br"
 `;
 
 exports[`fixtures build ts-declaration with microbundle 2`] = `6`;
@@ -2535,7 +2535,7 @@ exports[`fixtures build ts-declaration with microbundle 4`] = `
 `;
 
 exports[`fixtures build ts-declaration with microbundle 5`] = `
-"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?o(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],o):o((e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).tsDeclarations={})}(this,function(e){e.foo=function(){return 42}});
+"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?o(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],o):o((e||self).tsDeclarations={})}(this,function(e){e.foo=function(){return 42}});
 //# sourceMappingURL=index.umd.js.map
 "
 `;
@@ -2573,8 +2573,8 @@ Build \\"tsJsx\\" to dist:
 94 B: ts-jsx.js.br
 131 B: ts-jsx.esm.js.gz
 111 B: ts-jsx.esm.js.br
-232 B: ts-jsx.umd.js.gz
-193 B: ts-jsx.umd.js.br"
+219 B: ts-jsx.umd.js.gz
+176 B: ts-jsx.umd.js.br"
 `;
 
 exports[`fixtures build ts-jsx with microbundle 2`] = `7`;
@@ -2597,7 +2597,7 @@ exports[`fixtures build ts-jsx with microbundle 5`] = `
 `;
 
 exports[`fixtures build ts-jsx with microbundle 6`] = `
-"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?n(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],n):n((e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).tsJsx={})}(this,function(e){var n=function(e,n){return{tag:e,props:n,children:[].slice.call(arguments,2)}}(function(e){return e.children},null,\\"foo\\");e.foo=n});
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?n(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],n):n((e||self).tsJsx={})}(this,function(e){var n=function(e,n){return{tag:e,props:n,children:[].slice.call(arguments,2)}}(function(e){return e.children},null,\\"foo\\");e.foo=n});
 //# sourceMappingURL=ts-jsx.umd.js.map
 "
 `;
@@ -2630,8 +2630,8 @@ Build \\"tsMixedExports\\" to dist:
 89 B: ts-mixed-exports.js.br
 115 B: ts-mixed-exports.esm.js.gz
 100 B: ts-mixed-exports.esm.js.br
-228 B: ts-mixed-exports.umd.js.gz
-180 B: ts-mixed-exports.umd.js.br"
+212 B: ts-mixed-exports.umd.js.gz
+170 B: ts-mixed-exports.umd.js.br"
 `;
 
 exports[`fixtures build ts-mixed-exports with microbundle 2`] = `8`;
@@ -2667,7 +2667,7 @@ exports[`fixtures build ts-mixed-exports with microbundle 6`] = `
 `;
 
 exports[`fixtures build ts-mixed-exports with microbundle 7`] = `
-"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?n(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],n):n((e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).tsMixedExports={})}(this,function(e){var n=function(){function e(){}return e.prototype.drive=function(e){return!0},e}(),t=new n;e.Car=n,e.default=t});
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?n(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],n):n((e||self).tsMixedExports={})}(this,function(e){var n=function(){function e(){}return e.prototype.drive=function(e){return!0},e}(),t=new n;e.Car=n,e.default=t});
 //# sourceMappingURL=ts-mixed-exports.umd.js.map
 "
 `;
@@ -2700,8 +2700,8 @@ Build \\"tsModule\\" to dist:
 42 B: ts-module.js.br
 65 B: ts-module.esm.js.gz
 49 B: ts-module.esm.js.br
-181 B: ts-module.umd.js.gz
-143 B: ts-module.umd.js.br"
+167 B: ts-module.umd.js.gz
+127 B: ts-module.umd.js.br"
 `;
 
 exports[`fixtures build ts-module with microbundle 2`] = `8`;
@@ -2729,7 +2729,7 @@ exports[`fixtures build ts-module with microbundle 6`] = `
 `;
 
 exports[`fixtures build ts-module with microbundle 7`] = `
-"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?o(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],o):o((e=\\"undefined\\"!=typeof globalThis?globalThis:e||self).tsModule={})}(this,function(e){e.foobar=function(){return\\"foobar\\"}});
+"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?o(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],o):o((e||self).tsModule={})}(this,function(e){e.foobar=function(){return\\"foobar\\"}});
 //# sourceMappingURL=ts-module.umd.js.map
 "
 `;
