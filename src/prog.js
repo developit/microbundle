@@ -56,6 +56,7 @@ export default handler => {
 		.option('--name', 'Specify name exposed in UMD builds')
 		.option('--cwd', 'Use an alternative working directory', '.')
 		.option('--sourcemap', 'Generate source map')
+		.option('--css', 'Where to output CSS: "inline" or "external"', 'external')
 		.option(
 			'--css-modules',
 			'Turns on css-modules for all .css imports. Passing a string will override the scopeName. eg --css-modules="_[hash]"',
