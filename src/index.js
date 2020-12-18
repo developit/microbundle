@@ -582,9 +582,15 @@ function createConfig(options, entry, format, writeMeta) {
 						// So we remove the globalThis check, replacing it with `this||self` to match Rollup 1's output:
 						renderChunk(code, chunk, opts) {
 							if (opts.format === 'umd') {
+								// minified:
 								code = code.replace(
 									/([a-zA-Z$_]+)="undefined"!=typeof globalThis\?globalThis:(\1\|\|self)/,
 									'$2',
+								);
+								// unminified:
+								code = code.replace(
+									/(global *= *)typeof +globalThis *!== *['"]undefined['"] *\? *globalThis *: *(global *\|\| *self)/,
+									'$1$2',
 								);
 								return { code, map: null };
 							}
