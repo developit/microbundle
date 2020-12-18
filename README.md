@@ -220,6 +220,16 @@ To achieve the smallest possible bundle size, libraries often wish to rename int
 
 It's also possible to configure repeatable short names for each mangled property, so that every build of your library has the same output. **See the wiki for a [complete guide to property mangling in Microbundle](https://github.com/developit/microbundle/wiki/mangle.json).**
 
+### Defining build-time constants
+
+The `--define` option can be used to inject or replace build-time constants when bundling. In addition to injecting string or number constants, prefixing the define name with `@` allows injecting JavaScript expressions.
+
+| Build command | Source code | Output |
+|---------------|-------------|--------|
+`microbundle --define VERSION=2` | `console.log(VERSION)` | `console.log(2)`
+`microbundle --define API_KEY='abc123'` | `console.log(API_KEY)` | `console.log("abc123")`
+`microbundle --define @assign=Object.assign` | `assign(a, b)` | `Object.assign(a, b)`
+
 ### All CLI Options <a name="options"></a>
 
 ```
@@ -244,7 +254,7 @@ Options
 	--target           Specify your target environment (node or web)  (default web)
 	--external         Specify external dependencies, or 'none' (default peerDependencies and dependencies in package.json)
 	--globals          Specify globals dependencies, or 'none'
-	--define           Replace constants with hard-coded values
+	--define           Replace constants with hard-coded values (use @key=exp to replace an expression)
 	--alias            Map imports to different modules
 	--compress         Compress output using Terser
 	--no-compress      Disable output compressing
