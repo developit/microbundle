@@ -445,7 +445,7 @@ function createConfig(options, entry, format, writeMeta) {
 						modules: cssModulesConfig(options),
 						// only write out CSS for the first bundle (avoids pointless extra files):
 						inject: false,
-						extract: !!writeMeta,
+						extract: options.css !== 'inline',
 						minimize: options.compress,
 					}),
 					moduleAliases.length > 0 &&
