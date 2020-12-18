@@ -319,8 +319,8 @@ Build \\"basicCompressFalse\\" to dist:
 206 B: basic-compress-false.js.br
 258 B: basic-compress-false.esm.js.gz
 209 B: basic-compress-false.esm.js.br
-396 B: basic-compress-false.umd.js.gz
-319 B: basic-compress-false.umd.js.br"
+383 B: basic-compress-false.umd.js.gz
+305 B: basic-compress-false.umd.js.br"
 `;
 
 exports[`fixtures build basic-compress-false with microbundle 2`] = `6`;
@@ -391,7 +391,7 @@ exports[`fixtures build basic-compress-false with microbundle 5`] = `
 "(function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
-	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.basicCompressFalse = factory());
+	(global = global || self, global.basicCompressFalse = factory());
 }(this, (function () {
 	var two = function two() {
 	  try {
@@ -721,8 +721,8 @@ Build \\"basicNoCompress\\" to dist:
 206 B: basic-no-compress.js.br
 258 B: basic-no-compress.esm.js.gz
 209 B: basic-no-compress.esm.js.br
-392 B: basic-no-compress.umd.js.gz
-319 B: basic-no-compress.umd.js.br"
+381 B: basic-no-compress.umd.js.gz
+310 B: basic-no-compress.umd.js.br"
 `;
 
 exports[`fixtures build basic-no-compress with microbundle 2`] = `6`;
@@ -793,7 +793,7 @@ exports[`fixtures build basic-no-compress with microbundle 5`] = `
 "(function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
-	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.basicNoCompress = factory());
+	(global = global || self, global.basicNoCompress = factory());
 }(this, (function () {
 	var two = function two() {
 	  try {
