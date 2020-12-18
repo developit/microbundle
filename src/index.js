@@ -459,6 +459,8 @@ function createConfig(options, entry, format, writeMeta) {
 					commonjs({
 						// use a regex to make sure to include eventual hoisted packages
 						include: /\/node_modules\//,
+						esmExternals: false,
+						requireReturnsDefault: 'namespace',
 					}),
 					json(),
 					{
