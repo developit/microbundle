@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
-import microbundle from '.';
+import microbundle from './index';
 import prog from './prog';
 import { stdout } from './utils';
 import logError from './log-error';
 
 const run = opts => {
 	microbundle(opts)
-		.then(output => {
+		.then(({ output }) => {
 			if (output != null) stdout(output);
 			if (!opts.watch) process.exit(0);
 		})

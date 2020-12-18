@@ -1,18 +1,24 @@
-import fs from 'fs';
-import { promisify } from 'es6-promisify';
+import { promises as fs } from 'fs';
+import camelCase from 'camelcase';
 
-export const readFile = promisify(fs.readFile);
-// export const writeFile = promisify(fs.writeFile);
-export const stat = promisify(fs.stat);
-export const isDir = name =>
-	stat(name)
+export const readFile = fs.readFile;
+
+export const stat = fs.stat;
+
+export function isDir(name) {
+	return stat(name)
 		.then(stats => stats.isDirectory())
 		.catch(() => false);
-export const isFile = name =>
-	stat(name)
+}
+
+export function isFile(name) {
+	return stat(name)
 		.then(stats => stats.isFile())
 		.catch(() => false);
-export const stdout = console.log.bind(console); // eslint-disable-line no-console
+}
+
+// eslint-disable-next-line no-console
+export const stdout = console.log.bind(console);
 export const stderr = console.error.bind(console);
 
 export const isTruthy = obj => {
@@ -22,3 +28,18 @@ export const isTruthy = obj => {
 
 	return obj.constructor !== Object || Object.keys(obj).length > 0;
 };
+
+/** Remove a @scope/ prefix from a package name string */
+export const removeScope = name => name.replace(/^@.*\//, '');
+
+const INVALID_ES3_IDENT = /((^[^a-zA-Z]+)|[^\w.-])|([^a-zA-Z0-9]+$)/g;
+
+/**
+ * Turn a package name into a valid reasonably-unique variable name
+ * @param {string} name
+ */
+export function safeVariableName(name) {
+	const normalized = removeScope(name).toLowerCase();
+	const identifier = normalized.replace(INVALID_ES3_IDENT, '');
+	return camelCase(identifier);
+}

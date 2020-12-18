@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import { promisify } from 'es6-promisify';
+import { promisify } from 'util';
 import shellQuote from 'shell-quote';
 import _rimraf from 'rimraf';
 import { readFile } from '../src/utils';
@@ -49,6 +49,7 @@ export const buildDirectory = async fixtureDir => {
 	const dist = resolve(`${fixturePath}/dist`);
 	// clean up
 	await rimraf(dist);
+	await rimraf(resolve(`${fixturePath}/types`));
 	await rimraf(resolve(`${fixturePath}/.rts2_cache_cjs`));
 	await rimraf(resolve(`${fixturePath}/.rts2_cache_es`));
 	await rimraf(resolve(`${fixturePath}/.rts2_cache_umd`));
@@ -59,11 +60,11 @@ export const buildDirectory = async fixtureDir => {
 	process.chdir(resolve(fixturePath));
 
 	const parsedOpts = parseScript(script);
-	let output = '';
-	output = await microbundle({
+	let { output } = await microbundle({
 		...parsedOpts,
 		cwd: parsedOpts.cwd !== '.' ? parsedOpts.cwd : resolve(fixturePath),
 	});
+	output = output || '';
 
 	process.chdir(prevDir);
 

@@ -1,0 +1,6 @@
+{
+  "name": "basic-node-internals",
+  "scripts": {
+    "build": "microbundle --target=node -f cjs"
+  }
+}

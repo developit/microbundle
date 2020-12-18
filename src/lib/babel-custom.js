@@ -1,4 +1,3 @@
-import { createConfigItem } from '@babel/core';
 import { createBabelInputPluginFactory } from '@rollup/plugin-babel';
 import merge from 'lodash.merge';
 import transformFastRest from './transform-fast-rest';
@@ -8,7 +7,7 @@ const ESMODULES_TARGET = {
 	esmodules: true,
 };
 
-const mergeConfigItems = (type, ...configItemsToMerge) => {
+const mergeConfigItems = (babel, type, ...configItemsToMerge) => {
 	const mergedItems = [];
 
 	configItemsToMerge.forEach(configItemToMerge => {
@@ -24,7 +23,7 @@ const mergeConfigItems = (type, ...configItemsToMerge) => {
 				return;
 			}
 
-			mergedItems[itemToMergeWithIndex] = createConfigItem(
+			mergedItems[itemToMergeWithIndex] = babel.createConfigItem(
 				[
 					mergedItems[itemToMergeWithIndex].file.resolved,
 					merge(mergedItems[itemToMergeWithIndex].options, item.options),
@@ -39,15 +38,17 @@ const mergeConfigItems = (type, ...configItemsToMerge) => {
 	return mergedItems;
 };
 
-const createConfigItems = (type, items) => {
+const createConfigItems = (babel, type, items) => {
 	return items.map(item => {
 		let { name, value, ...options } = item;
 		value = value || [require.resolve(name), options];
-		return createConfigItem(value, { type });
+		return babel.createConfigItem(value, { type });
 	});
 };
 
-const presetEnvRegex = RegExp(/@babel\/(preset-)?env/);
+const environmentPreset = '@babel/preset-env';
+// capture both @babel/env & @babel/preset-env (https://babeljs.io/docs/en/presets#preset-shorthand)
+const presetEnvRegex = new RegExp(/@babel\/(preset-)?env/);
 
 export default () => {
 	return createBabelInputPluginFactory(babelCore => {
@@ -68,9 +69,13 @@ export default () => {
 				const isNodeTarget = targets && targets.node != null;
 
 				const defaultPlugins = createConfigItems(
+					babelCore,
 					'plugin',
 					[
 						{
+							name: '@babel/plugin-syntax-import-meta',
+						},
+						!customOptions.jsxImportSource && {
 							name: '@babel/plugin-transform-react-jsx',
 							pragma: customOptions.pragma || 'h',
 							pragmaFrag: customOptions.pragmaFrag || 'Fragment',
@@ -82,12 +87,13 @@ export default () => {
 							name: 'babel-plugin-transform-replace-expressions',
 							replace: customOptions.defines,
 						},
-						!customOptions.modern && {
-							name: 'babel-plugin-transform-async-to-promises',
-							inlineHelpers: true,
-							externalHelpers: false,
-							minify: true,
-						},
+						!customOptions.modern &&
+							!isNodeTarget && {
+								name: 'babel-plugin-transform-async-to-promises',
+								inlineHelpers: true,
+								externalHelpers: false,
+								minify: true,
+							},
 						!customOptions.modern &&
 							!isNodeTarget && {
 								value: [
@@ -104,10 +110,11 @@ export default () => {
 							name: '@babel/plugin-proposal-class-properties',
 							loose: true,
 						},
-						!customOptions.modern && {
-							name: '@babel/plugin-transform-regenerator',
-							async: false,
-						},
+						!customOptions.modern &&
+							!isNodeTarget && {
+								name: '@babel/plugin-transform-regenerator',
+								async: false,
+							},
 						{
 							name: 'babel-plugin-macros',
 						},
@@ -120,15 +127,11 @@ export default () => {
 					presetEnvRegex.test(preset.file.request),
 				);
 
-				const environmentPreset = customOptions.modern
-					? '@babel/preset-modules'
-					: '@babel/preset-env';
-
 				if (envIdx !== -1) {
 					const preset = babelOptions.presets[envIdx];
-					babelOptions.presets[envIdx] = createConfigItem(
+					babelOptions.presets[envIdx] = babelCore.createConfigItem(
 						[
-							environmentPreset,
+							require.resolve(environmentPreset),
 							Object.assign(
 								merge(
 									{
@@ -138,6 +141,7 @@ export default () => {
 									},
 									preset.options,
 									{
+										bugfixes: customOptions.modern,
 										modules: false,
 										exclude: merge(
 											['transform-async-to-generator', 'transform-regenerator'],
@@ -153,35 +157,48 @@ export default () => {
 						},
 					);
 				} else {
-					babelOptions.presets = createConfigItems('preset', [
-						{
-							name: environmentPreset,
-							targets: customOptions.modern
-								? ESMODULES_TARGET
-								: customOptions.targets,
-							modules: false,
-							loose: true,
-							useBuiltIns: false,
-							exclude: [
-								'transform-async-to-generator',
-								'transform-regenerator',
-							],
-						},
-					]);
+					babelOptions.presets = createConfigItems(
+						babelCore,
+						'preset',
+						[
+							{
+								name: environmentPreset,
+								targets: customOptions.modern
+									? ESMODULES_TARGET
+									: customOptions.targets,
+								modules: false,
+								loose: true,
+								useBuiltIns: false,
+								bugfixes: customOptions.modern,
+								exclude: [
+									'transform-async-to-generator',
+									'transform-regenerator',
+								],
+							},
+							customOptions.jsxImportSource && {
+								name: '@babel/preset-react',
+								runtime: 'automatic',
+								importSource: customOptions.jsxImportSource,
+							},
+						].filter(Boolean),
+					);
 				}
 
 				// Merge babelrc & our plugins together
 				babelOptions.plugins = mergeConfigItems(
+					babelCore,
 					'plugin',
 					defaultPlugins,
 					babelOptions.plugins || [],
 				);
 
-				babelOptions.generatorOpts = {
-					minified: customOptions.compress,
-					compact: customOptions.compress,
-					shouldPrintComment: comment => /[@#]__PURE__/.test(comment),
-				};
+				if (customOptions.compress) {
+					babelOptions.generatorOpts = {
+						minified: true,
+						compact: true,
+						shouldPrintComment: comment => /[@#]__PURE__/.test(comment),
+					};
+				}
 
 				return babelOptions;
 			},
