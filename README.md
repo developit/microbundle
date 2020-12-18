@@ -64,9 +64,9 @@ In addition to the above formats, Microbundle also outputs a `modern` bundle spe
 ```js
 // Our source, "src/make-dom.js":
 export default async function makeDom(tag, props, children) {
-  let el = document.createElement(tag);
-  el.append(...await children);
-  return Object.assign(el, props);
+	let el = document.createElement(tag);
+	el.append(...(await children));
+	return Object.assign(el, props);
 }
 ```
 
@@ -80,26 +80,25 @@ Compiling the above using Microbundle produces the following `modern` and `esm` 
 <tbody><tr valign="top"><td>
 
 ```js
-export default async function(e, t, a) {
-  let n = document.createElement(e);
-  n.append(...await a);
-  return Object.assign(n, t);
+export default async function (e, t, a) {
+	let n = document.createElement(e);
+	n.append(...(await a));
+	return Object.assign(n, t);
 }
 ```
 
 </td><td>
 
 ```js
-export default function(e, t, r) {
-  try {
-    var n = document.createElement(e);
-    return Promise.resolve(r).then(function(e) {
-      return n.append.apply(n, e),
-        Object.assign(n, t);
-    });
-  } catch (e) {
-    return Promise.reject(e);
-  }
+export default function (e, t, r) {
+	try {
+		var n = document.createElement(e);
+		return Promise.resolve(r).then(function (e) {
+			return n.append.apply(n, e), Object.assign(n, t);
+		});
+	} catch (e) {
+		return Promise.reject(e);
+	}
 }
 ```
 
@@ -109,12 +108,12 @@ export default function(e, t, r) {
 
 ```jsonc
 {
-  "main": "./dist/foo.umd.js",       // legacy UMD output (for Node & CDN use)
-  "module": "./dist/foo.module.js",  // legacy ES Modules output (for bundlers)
-  "exports": "./dist/foo.modern.js", // modern ES2017 output
-  "scripts": {
-    "build": "microbundle src/foo.js"
-  }
+	"main": "./dist/foo.umd.js", // legacy UMD output (for Node & CDN use)
+	"module": "./dist/foo.module.js", // legacy ES Modules output (for bundlers)
+	"exports": "./dist/foo.modern.js", // modern ES2017 output
+	"scripts": {
+		"build": "microbundle src/foo.js"
+	}
 }
 ```
 
@@ -122,15 +121,15 @@ The `"exports"` field can also be an object for packages with multiple entry mod
 
 ```jsonc
 {
-  "name": "foo",
-  "exports": {
-    ".": "./dist/foo.modern.js",       // import "foo" (the default)
-    "./lite": "./dist/lite.modern.js", // import "foo/lite"
-    "./full": "./dist/full.modern.js"  // import "foo"
-  },
-  "scripts": {
-    "build": "microbundle src/*.js"    // build foo.js, lite.js and full.js
-  }
+	"name": "foo",
+	"exports": {
+		".": "./dist/foo.modern.js", // import "foo" (the default)
+		"./lite": "./dist/lite.modern.js", // import "foo/lite"
+		"./full": "./dist/full.modern.js" // import "foo"
+	},
+	"scripts": {
+		"build": "microbundle src/*.js" // build foo.js, lite.js and full.js
+	}
 }
 ```
 
