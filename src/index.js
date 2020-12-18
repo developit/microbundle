@@ -314,7 +314,7 @@ function createConfig(options, entry, format, writeMeta) {
 	if (options.external === 'none') {
 		// bundle everything (external=[])
 	} else if (options.external) {
-    // CLI --external supports regular expressions:
+		// CLI --external supports regular expressions:
 		external = options.external
 			.split(',')
 			.map(ext => {
@@ -374,9 +374,7 @@ function createConfig(options, entry, format, writeMeta) {
 		`^(${external.map(escapeStringExternals).join('|')})($|/)`,
 	);
 	const externalTest =
-		external.length === 0
-			? id => false
-			: id => externalRegexList.some(regex => regex.test(id));
+		external.length === 0 ? id => false : id => externalPredicate.test(id);
 
 	function loadNameCache() {
 		try {
