@@ -574,7 +574,22 @@ function createConfig(options, entry, format, writeMeta) {
 							},
 						},
 					],
-					{
+					/** @type {import('rollup').Plugin} */
+					({
+						name: 'postprocessing',
+						// Rollup 2 injects globalThis, which is nice, but doesn't really make sense for Microbundle.
+						// Only ESM environments necessitate globalThis, and UMD bundles can't be properly loaded as ESM.
+						// So we remove the globalThis check, replacing it with `this||self` to match Rollup 1's output:
+						renderChunk(code, chunk, opts) {
+							if (opts.format === 'umd') {
+								code = code.replace(
+									/\(([a-zA-Z$_]+)="undefined"!=typeof globalThis\?globalThis:(\1\|\|self)/,
+									(str, id, g) => ' '.repeat(str.length - g.length) + g,
+								);
+								return { code, map: null };
+							}
+						},
+						// Grab size info before writing files to disk:
 						writeBundle(_, bundle) {
 							config._sizeInfo = Promise.all(
 								Object.values(bundle).map(({ code, fileName }) => {
@@ -584,7 +599,7 @@ function createConfig(options, entry, format, writeMeta) {
 								}),
 							).then(results => results.filter(Boolean).join('\n'));
 						},
-					},
+					}),
 				)
 				.filter(Boolean),
 		},
