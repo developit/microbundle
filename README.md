@@ -137,6 +137,10 @@ The `"exports"` field can also be an object for packages with multiple entry mod
 
 Microbundle includes two commands - `build` (the default) and `watch`. Neither require any options, but you can tailor things to suit your needs a bit if you like.
 
+> ℹ️ Microbundle automatically determines which dependencies to inline into bundles based on your `package.json`.
+>
+> Read more about [How Microbundle decides which dependencies to bundle](https://github.com/developit/microbundle/wiki/How-Microbundle-decides-which-dependencies-to-bundle), including some example configurations.
+
 ### `microbundle` / `microbundle build`
 
 Unless overridden via the command line, microbundle uses the `source` property in your `package.json` to locate the input file, and the `main` property for the output:
