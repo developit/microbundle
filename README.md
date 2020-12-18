@@ -163,16 +163,24 @@ Just point the input to a `.ts` file through either the cli or the `source` key 
 
 Microbundle will generally respect your TypeScript config defined in a `tsconfig.json` file with notable exceptions being the "[target](https://www.typescriptlang.org/tsconfig#target)" and "[module](https://www.typescriptlang.org/tsconfig#module)" settings. To ensure your TypeScript configuration matches the configuration that Microbundle uses internally it's strongly recommended that you set `"module": "ESNext"` and `"target": "ESNext"` in your `tsconfig.json`.
 
-### Using CSS Modules
+### CSS and CSS Modules
 
-By default any css file imported as `.module.css`, will be treated as a css-module. If you wish to treat all .css
-imports as a module, specify the cli flag `--css-modules true`. If you wish to disable all css-module behaviours set the
-flag to `false`.
+Importing CSS files is supported via `import "./foo.css"`. By default, generated CSS output is written to disk. The `--css inline` command line option will inline generated CSS into your bundles as a string, returning the CSS string from the import:
 
-The default scope name when css-modules is turned on will be, in watch mode `_[name]__[local]__[hash:base64:5]` and when
-you build `_[hash:base64:5]`. This can be overriden by specifying the flag, eg
-`--css-modules "_something_[hash:base64:7]"`. _Note:_ by setting this, it will be treated as a true, and thus, all .css
-imports will be scoped.
+```js
+// with the default external CSS:
+import './foo.css';  // generates a minified .css file in the output directory
+
+// with `microbundle --css inline`:
+import css from './foo.css';
+console.log(css);  // the generated minified stylesheet
+```
+
+**CSS Modules:** CSS files with names ending in `.module.css` are treated as a [CSS Modules](https://github.com/css-modules/css-modules).
+To instead treat imported `.css` files as modules, run Microbundle with `--css-modules true`. To disable CSS Modules for your project, pass `--no-css-modules` or `--css-modules false`.
+
+The default scope name for CSS Modules is`_[name]__[local]__[hash:base64:5]` in watch mode, and `_[hash:base64:5]` for production builds.
+This can be customized by passing the command line argument `--css-modules "[name]_[hash:base64:7]"`, using [these fields and naming conventions](https://github.com/webpack/loader-utils#interpolatename).
 
 | flag  | import                         |   is css module?   |
 | ----- | ------------------------------ | :----------------: |
@@ -265,6 +273,7 @@ Options
 	--jsx              A custom JSX pragma like React.createElement (default: h)
 	--jsxImportSource  Specify the automatic import source for JSX like preact
 	--tsconfig         Specify the path to a custom tsconfig.json
+	--css              Where to output CSS: "inline" or "external" (default: "external")
 	--css-modules      Configures .css to be treated as modules (default: null)
 	-h, --help         Displays this message
 
