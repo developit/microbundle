@@ -447,6 +447,7 @@ function createConfig(options, entry, format, writeMeta) {
 						inject: false,
 						extract: options.css !== 'inline',
 						minimize: options.compress,
+						sourceMap: options.sourcemap,
 					}),
 					moduleAliases.length > 0 &&
 						alias({
