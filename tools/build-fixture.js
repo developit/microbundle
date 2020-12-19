@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import { promisify } from 'es6-promisify';
+import { promisify } from 'util';
 import shellQuote from 'shell-quote';
 import _rimraf from 'rimraf';
 import { readFile } from '../src/utils';

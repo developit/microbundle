@@ -41,6 +41,7 @@
   "name": "foo",                   // your package name
   "source": "src/foo.js",          // your source code
   "main": "dist/foo.js",           // where to generate the CommonJS/Node bundle
+  "exports": "dist/foo.modern.js", // path to the modern output (see below)
   "module": "dist/foo.module.js",  // where to generate the ESM bundle
   "unpkg": "dist/foo.umd.js",      // where to generate the UMD bundle (also aliased as "umd:main")
   "scripts": {
@@ -58,7 +59,7 @@ Microbundle produces <code title="ECMAScript Modules (import / export)">esm</cod
 
 ## 🤖 Modern Mode <a name="modern"></a>
 
-In addition to the above formats, Microbundle also outputs a `modern` bundle specially designed to work in _all modern browsers_. This bundle preserves most modern JS features when compiling your code, but ensures the result runs in 90% of web browsers without needing to be transpiled. Specifically, it uses [preset-modules](https://github.com/babel/preset-modules) to target the set of browsers that support `<script type="module">` - that allows syntax like async/await, tagged templates, arrow functions, destructured and rest parameters, etc. The result is generally smaller and faster to execute than the `esm` bundle:
+In addition to the above formats, Microbundle also outputs a `modern` bundle specially designed to work in _all modern browsers_. This bundle preserves most modern JS features when compiling your code, but ensures the result runs in 95% of web browsers without needing to be transpiled. Specifically, it uses [preset-modules](https://github.com/babel/preset-modules) to target the set of browsers that support `<script type="module">` - that allows syntax like async/await, tagged templates, arrow functions, destructured and rest parameters, etc. The result is generally smaller and faster to execute than the `esm` bundle:
 
 ```js
 // Our source, "src/make-dom.js":
@@ -73,13 +74,13 @@ Compiling the above using Microbundle produces the following `modern` and `esm` 
 
 <table>
 <thead><tr>
-  <th align="left"><code>make-dom.modern.js</code> <sup>(123b)</sup></th>
-  <th align="left"><code>make-dom.module.js</code> <sup>(166b)</sup></th>
+  <th align="left"><code>make-dom.modern.js</code> <sup>(117b)</sup></th>
+  <th align="left"><code>make-dom.module.js</code> <sup>(194b)</sup></th>
 </tr></thead>
 <tbody><tr valign="top"><td>
 
 ```js
-export default async function(e, t, a) {
+export default async function (e, t, a) {
 	let n = document.createElement(e);
 	n.append(...(await a));
 	return Object.assign(n, t);
@@ -89,12 +90,11 @@ export default async function(e, t, a) {
 </td><td>
 
 ```js
-export default function(e, t, r) {
+export default function (e, t, r) {
 	try {
 		var n = document.createElement(e);
-		return Promise.resolve(r).then(function(e) {
-			n.append.apply(n, e);
-			return Object.assign(n, t);
+		return Promise.resolve(r).then(function (e) {
+			return n.append.apply(n, e), Object.assign(n, t);
 		});
 	} catch (e) {
 		return Promise.reject(e);
@@ -104,25 +104,42 @@ export default function(e, t, r) {
 
 </td></tbody></table>
 
-This is enabled by default - all you have to do is add the field to your `package.json`.
+**This is enabled by default.** All you have to do is add an `"exports"` field to your `package.json`:
 
-<details><summary>💁‍♂️ <em>How to point to modern code in a package.json is <a href="https://twitter.com/_developit/status/1263174528974364675">being discussed</a>. You might use the "module" field.</em></summary>
-
-```js
+```jsonc
 {
-  "main": "dist/foo.umd.js",              // legacy UMD bundle (for Node & CDN use)
-  "module": "dist/foo.modern.module.js",  // modern ES2017 bundle
-  "scripts": {
-    "build": "microbundle src/foo.js -f modern,umd"
-  }
+	"main": "./dist/foo.umd.js", // legacy UMD output (for Node & CDN use)
+	"module": "./dist/foo.module.js", // legacy ES Modules output (for bundlers)
+	"exports": "./dist/foo.modern.js", // modern ES2017 output
+	"scripts": {
+		"build": "microbundle src/foo.js"
+	}
 }
 ```
 
-</details>
+The `"exports"` field can also be an object for packages with multiple entry modules:
+
+```jsonc
+{
+	"name": "foo",
+	"exports": {
+		".": "./dist/foo.modern.js", // import "foo" (the default)
+		"./lite": "./dist/lite.modern.js", // import "foo/lite"
+		"./full": "./dist/full.modern.js" // import "foo"
+	},
+	"scripts": {
+		"build": "microbundle src/*.js" // build foo.js, lite.js and full.js
+	}
+}
+```
 
 ## 📦 Usage & Configuration <a name="usage"></a>
 
 Microbundle includes two commands - `build` (the default) and `watch`. Neither require any options, but you can tailor things to suit your needs a bit if you like.
+
+> ℹ️ Microbundle automatically determines which dependencies to inline into bundles based on your `package.json`.
+>
+> Read more about [How Microbundle decides which dependencies to bundle](https://github.com/developit/microbundle/wiki/How-Microbundle-decides-which-dependencies-to-bundle), including some example configurations.
 
 ### `microbundle` / `microbundle build`
 
@@ -150,16 +167,24 @@ Just point the input to a `.ts` file through either the cli or the `source` key 
 
 Microbundle will generally respect your TypeScript config defined in a `tsconfig.json` file with notable exceptions being the "[target](https://www.typescriptlang.org/tsconfig#target)" and "[module](https://www.typescriptlang.org/tsconfig#module)" settings. To ensure your TypeScript configuration matches the configuration that Microbundle uses internally it's strongly recommended that you set `"module": "ESNext"` and `"target": "ESNext"` in your `tsconfig.json`.
 
-### Using CSS Modules
+### CSS and CSS Modules
 
-By default any css file imported as `.module.css`, will be treated as a css-module. If you wish to treat all .css
-imports as a module, specify the cli flag `--css-modules true`. If you wish to disable all css-module behaviours set the
-flag to `false`.
+Importing CSS files is supported via `import "./foo.css"`. By default, generated CSS output is written to disk. The `--css inline` command line option will inline generated CSS into your bundles as a string, returning the CSS string from the import:
 
-The default scope name when css-modules is turned on will be, in watch mode `_[name]__[local]__[hash:base64:5]` and when
-you build `_[hash:base64:5]`. This can be overriden by specifying the flag, eg
-`--css-modules "_something_[hash:base64:7]"`. _Note:_ by setting this, it will be treated as a true, and thus, all .css
-imports will be scoped.
+```js
+// with the default external CSS:
+import './foo.css'; // generates a minified .css file in the output directory
+
+// with `microbundle --css inline`:
+import css from './foo.css';
+console.log(css); // the generated minified stylesheet
+```
+
+**CSS Modules:** CSS files with names ending in `.module.css` are treated as a [CSS Modules](https://github.com/css-modules/css-modules).
+To instead treat imported `.css` files as modules, run Microbundle with `--css-modules true`. To disable CSS Modules for your project, pass `--no-css-modules` or `--css-modules false`.
+
+The default scope name for CSS Modules is`_[name]__[local]__[hash:base64:5]` in watch mode, and `_[hash:base64:5]` for production builds.
+This can be customized by passing the command line argument `--css-modules "[name]_[hash:base64:7]"`, using [these fields and naming conventions](https://github.com/webpack/loader-utils#interpolatename).
 
 | flag  | import                         |   is css module?   |
 | ----- | ------------------------------ | :----------------: |
@@ -206,6 +231,16 @@ To achieve the smallest possible bundle size, libraries often wish to rename int
 
 It's also possible to configure repeatable short names for each mangled property, so that every build of your library has the same output. **See the wiki for a [complete guide to property mangling in Microbundle](https://github.com/developit/microbundle/wiki/mangle.json).**
 
+### Defining build-time constants
+
+The `--define` option can be used to inject or replace build-time constants when bundling. In addition to injecting string or number constants, prefixing the define name with `@` allows injecting JavaScript expressions.
+
+| Build command                                | Source code            | Output                  |
+| -------------------------------------------- | ---------------------- | ----------------------- |
+| `microbundle --define VERSION=2`             | `console.log(VERSION)` | `console.log(2)`        |
+| `microbundle --define API_KEY='abc123'`      | `console.log(API_KEY)` | `console.log("abc123")` |
+| `microbundle --define @assign=Object.assign` | `assign(a, b)`         | `Object.assign(a, b)`   |
+
 ### All CLI Options <a name="options"></a>
 
 ```
@@ -230,7 +265,7 @@ Options
 	--target           Specify your target environment (node or web)  (default web)
 	--external         Specify external dependencies, or 'none' (default peerDependencies and dependencies in package.json)
 	--globals          Specify globals dependencies, or 'none'
-	--define           Replace constants with hard-coded values
+	--define           Replace constants with hard-coded values (use @key=exp to replace an expression)
 	--alias            Map imports to different modules
 	--compress         Compress output using Terser
 	--no-compress      Disable output compressing
@@ -242,6 +277,7 @@ Options
 	--jsx              A custom JSX pragma like React.createElement (default: h)
 	--jsxImportSource  Specify the automatic import source for JSX like preact
 	--tsconfig         Specify the path to a custom tsconfig.json
+	--css              Where to output CSS: "inline" or "external" (default: "external")
 	--css-modules      Configures .css to be treated as modules (default: null)
 	-h, --help         Displays this message
 
