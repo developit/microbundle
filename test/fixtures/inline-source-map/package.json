@@ -1,0 +1,6 @@
+{
+  "name": "inline-source-map",
+  "scripts": {
+    "build": "microbundle --sourcemap inline"
+  }
+}
