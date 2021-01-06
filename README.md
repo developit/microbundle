@@ -173,11 +173,11 @@ Importing CSS files is supported via `import "./foo.css"`. By default, generated
 
 ```js
 // with the default external CSS:
-import './foo.css';  // generates a minified .css file in the output directory
+import './foo.css'; // generates a minified .css file in the output directory
 
 // with `microbundle --css inline`:
 import css from './foo.css';
-console.log(css);  // the generated minified stylesheet
+console.log(css); // the generated minified stylesheet
 ```
 
 **CSS Modules:** CSS files with names ending in `.module.css` are treated as a [CSS Modules](https://github.com/css-modules/css-modules).
@@ -235,11 +235,11 @@ It's also possible to configure repeatable short names for each mangled property
 
 The `--define` option can be used to inject or replace build-time constants when bundling. In addition to injecting string or number constants, prefixing the define name with `@` allows injecting JavaScript expressions.
 
-| Build command | Source code | Output |
-|---------------|-------------|--------|
-`microbundle --define VERSION=2` | `console.log(VERSION)` | `console.log(2)`
-`microbundle --define API_KEY='abc123'` | `console.log(API_KEY)` | `console.log("abc123")`
-`microbundle --define @assign=Object.assign` | `assign(a, b)` | `Object.assign(a, b)`
+| Build command                                | Source code            | Output                  |
+| -------------------------------------------- | ---------------------- | ----------------------- |
+| `microbundle --define VERSION=2`             | `console.log(VERSION)` | `console.log(2)`        |
+| `microbundle --define API_KEY='abc123'`      | `console.log(API_KEY)` | `console.log("abc123")` |
+| `microbundle --define @assign=Object.assign` | `assign(a, b)`         | `Object.assign(a, b)`   |
 
 ### All CLI Options <a name="options"></a>
 
@@ -259,7 +259,7 @@ Options
 	-v, --version      Displays current version
 	-i, --entry        Entry module(s)
 	-o, --output       Directory to place build files into
-	-f, --format       Only build specified formats (any of modern,es,cjs,umd or iife) (default modern,es,cjs,umd)
+	-f, --format       Only build specified formats (any of modern,esm,cjs,umd or iife) (default modern,esm,cjs,umd)
 	-w, --watch        Rebuilds on any change  (default false)
 	--pkg-main         Outputs files analog to package.json main entries  (default true)
 	--target           Specify your target environment (node or web)  (default web)
