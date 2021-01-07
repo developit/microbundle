@@ -38,15 +38,15 @@
 
 ```js
 {
-  "name": "foo",                   // your package name
-  "source": "src/foo.js",          // your source code
-  "main": "dist/foo.js",           // where to generate the CommonJS/Node bundle
-  "exports": "dist/foo.modern.js", // path to the modern output (see below)
-  "module": "dist/foo.module.js",  // where to generate the ESM bundle
-  "unpkg": "dist/foo.umd.js",      // where to generate the UMD bundle (also aliased as "umd:main")
+  "name": "foo",                     // your package name
+  "source": "src/foo.js",            // your source code
+  "main": "dist/foo.js",             // where to generate the CommonJS/Node bundle
+  "exports": "./dist/foo.modern.js", // path to the modern output (see below)
+  "module": "dist/foo.module.js",    // where to generate the ESM bundle
+  "unpkg": "dist/foo.umd.js",        // where to generate the UMD bundle (also aliased as "umd:main")
   "scripts": {
-    "build": "microbundle",        // compiles "source" to "main"/"module"/"unpkg"
-    "dev": "microbundle watch"     // re-build when source files change
+    "build": "microbundle",          // compiles "source" to "main"/"module"/"unpkg"
+    "dev": "microbundle watch"       // re-build when source files change
   }
 }
 ```
