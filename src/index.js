@@ -280,7 +280,10 @@ function getMain({ options, entry, format }) {
 		mainNoExtension,
 	);
 	mainsByFormat.modern = replaceName(
-		(pkg.syntax && pkg.syntax.esmodules) || pkg.esmodule || 'x.modern.js',
+		(typeof pkg.exports === 'string' && pkg.exports) ||
+			(pkg.syntax && pkg.syntax.esmodules) ||
+			pkg.esmodule ||
+			'x.modern.js',
 		mainNoExtension,
 	);
 	mainsByFormat.cjs = replaceName(pkg['cjs:main'] || 'x.js', mainNoExtension);
