@@ -400,6 +400,19 @@ function createConfig(options, entry, format, writeMeta) {
 	const absMain = resolve(options.cwd, getMain({ options, entry, format }));
 	const outputDir = dirname(absMain);
 	const outputEntryFileName = basename(absMain);
+	let tsconfigPath;
+	let tsconfigOptions = {};
+	let ts;
+	if (useTypescript) {
+		tsconfigPath = resolve(
+			options.tsconfig || resolve(options.cwd, 'tsconfig.json'),
+		);
+		ts = require(resolveFrom.silent(options.cwd, 'typescript') || 'typescript');
+		const tsconfigJSON = ts.readConfigFile(tsconfigPath, ts.sys.readFile)
+			.config;
+		tsconfigOptions = ts.parseJsonConfigFileContent(tsconfigJSON, ts.sys, './')
+			.options;
+	}
 
 	let config = {
 		/** @type {import('rollup').InputOptions} */
@@ -480,10 +493,7 @@ function createConfig(options, entry, format, writeMeta) {
 					},
 					(useTypescript || emitDeclaration) &&
 						typescript({
-							typescript: require(resolveFrom.silent(
-								options.cwd,
-								'typescript',
-							) || 'typescript'),
+							typescript: ts,
 							cacheRoot: `./node_modules/.cache/.rts2_cache_${format}`,
 							useTsconfigDeclarationDir: true,
 							tsconfigDefaults: {
@@ -494,6 +504,7 @@ function createConfig(options, entry, format, writeMeta) {
 									emitDeclarationOnly: options.generateTypes && !useTypescript,
 									declarationDir: getDeclarationDir({ options, pkg }),
 									jsx: 'preserve',
+									esModuleInterop: tsconfigOptions.esModuleInterop,
 									jsxFactory:
 										// TypeScript fails to resolve Fragments when jsxFactory
 										// is set, even when it's the same as the default value.
@@ -503,7 +514,7 @@ function createConfig(options, entry, format, writeMeta) {
 								},
 								files: options.entries,
 							},
-							tsconfig: options.tsconfig,
+							tsconfig: tsconfigPath,
 							tsconfigOverride: {
 								compilerOptions: {
 									module: 'ESNext',
@@ -624,7 +635,7 @@ function createConfig(options, entry, format, writeMeta) {
 			globals,
 			strict: options.strict === true,
 			freeze: false,
-			esModule: false,
+			esModule: useTypescript ? tsconfigOptions.esModuleInterop : false,
 			sourcemap: options.sourcemap,
 			get banner() {
 				return shebang[options.name];

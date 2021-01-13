@@ -2782,3 +2782,59 @@ exports[`fixtures build ts-module with microbundle 7`] = `
 //# sourceMappingURL=ts-module.umd.js.map
 "
 `;
+
+exports[`fixtures build ts-module-interop with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+ts-module-interop
+  dist
+    index.d.ts
+    ts-module.esm.js
+    ts-module.esm.js.map
+    ts-module.js
+    ts-module.js.map
+    ts-module.umd.js
+    ts-module.umd.js.map
+  node_modules
+  package.json
+  src
+    index.ts
+  tsconfig.json
+
+
+Build \\"tsModule\\" to dist:
+122 B: ts-module.js.gz
+91 B: ts-module.js.br
+87 B: ts-module.esm.js.gz
+73 B: ts-module.esm.js.br
+207 B: ts-module.umd.js.gz
+156 B: ts-module.umd.js.br"
+`;
+
+exports[`fixtures build ts-module-interop with microbundle 2`] = `7`;
+
+exports[`fixtures build ts-module-interop with microbundle 3`] = `
+"export default function foo(): string;
+export declare function hello(): string;
+"
+`;
+
+exports[`fixtures build ts-module-interop with microbundle 4`] = `
+"function r(){return\\"bar\\"}function t(){return\\"hello\\"}export default r;export{t as hello};
+//# sourceMappingURL=ts-module.esm.js.map
+"
+`;
+
+exports[`fixtures build ts-module-interop with microbundle 5`] = `
+"Object.defineProperty(exports,\\"__esModule\\",{value:!0}),exports.default=function(){return\\"bar\\"},exports.hello=function(){return\\"hello\\"};
+//# sourceMappingURL=ts-module.js.map
+"
+`;
+
+exports[`fixtures build ts-module-interop with microbundle 6`] = `
+"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?o(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],o):o((e||self).tsModule={})}(this,function(e){e.default=function(){return\\"bar\\"},e.hello=function(){return\\"hello\\"},Object.defineProperty(e,\\"__esModule\\",{value:!0})});
+//# sourceMappingURL=ts-module.umd.js.map
+"
+`;
