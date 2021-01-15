@@ -285,7 +285,7 @@ function getMain({ options, entry, format }) {
 		mainNoExtension,
 	);
 	mainsByFormat.modern = replaceName(
-		(pkg.exports && walk(exports.exports)) ||
+		(pkg.exports && walk(pkg.exports)) ||
 			(pkg.syntax && pkg.syntax.esmodules) ||
 			pkg.esmodule ||
 			'x.modern.js',
