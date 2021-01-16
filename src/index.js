@@ -400,18 +400,22 @@ function createConfig(options, entry, format, writeMeta) {
 	const absMain = resolve(options.cwd, getMain({ options, entry, format }));
 	const outputDir = dirname(absMain);
 	const outputEntryFileName = basename(absMain);
-	let tsconfigPath;
-	let tsconfigOptions = {};
 	let ts;
+	let tsconfigOptions = {};
 	if (useTypescript) {
-		tsconfigPath = resolve(
+		const tsconfigPath = resolve(
 			options.tsconfig || resolve(options.cwd, 'tsconfig.json'),
 		);
 		ts = require(resolveFrom.silent(options.cwd, 'typescript') || 'typescript');
-		const tsconfigJSON = ts.readConfigFile(tsconfigPath, ts.sys.readFile)
-			.config;
-		tsconfigOptions = ts.parseJsonConfigFileContent(tsconfigJSON, ts.sys, './')
-			.options;
+		if (fs.existsSync(tsconfigPath)) {
+			const tsconfigJSON = ts.readConfigFile(tsconfigPath, ts.sys.readFile)
+				.config;
+			tsconfigOptions = ts.parseJsonConfigFileContent(
+				tsconfigJSON,
+				ts.sys,
+				'./',
+			).options;
+		}
 	}
 
 	let config = {
@@ -513,7 +517,7 @@ function createConfig(options, entry, format, writeMeta) {
 								},
 								files: options.entries,
 							},
-							tsconfig: tsconfigPath,
+							tsconfig: options.tsconfig,
 							tsconfigOverride: {
 								compilerOptions: {
 									module: 'ESNext',
