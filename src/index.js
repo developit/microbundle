@@ -504,7 +504,6 @@ function createConfig(options, entry, format, writeMeta) {
 									emitDeclarationOnly: options.generateTypes && !useTypescript,
 									declarationDir: getDeclarationDir({ options, pkg }),
 									jsx: 'preserve',
-									esModuleInterop: !!tsconfigOptions.esModuleInterop,
 									jsxFactory:
 										// TypeScript fails to resolve Fragments when jsxFactory
 										// is set, even when it's the same as the default value.
