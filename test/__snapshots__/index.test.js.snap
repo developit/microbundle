@@ -2347,6 +2347,53 @@ exports[`fixtures build optional-chaining-ts with microbundle 6`] = `
 "
 `;
 
+exports[`fixtures build parameters-rest-closure with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+parameters-rest-closure
+  dist
+    parameters-rest-closure.esm.js
+    parameters-rest-closure.esm.js.map
+    parameters-rest-closure.js
+    parameters-rest-closure.js.map
+    parameters-rest-closure.umd.js
+    parameters-rest-closure.umd.js.map
+  package.json
+  src
+    index.js
+
+
+Build \\"parametersRestClosure\\" to dist:
+126 B: parameters-rest-closure.js.gz
+85 B: parameters-rest-closure.js.br
+131 B: parameters-rest-closure.esm.js.gz
+98 B: parameters-rest-closure.esm.js.br
+218 B: parameters-rest-closure.umd.js.gz
+155 B: parameters-rest-closure.umd.js.br"
+`;
+
+exports[`fixtures build parameters-rest-closure with microbundle 2`] = `6`;
+
+exports[`fixtures build parameters-rest-closure with microbundle 3`] = `
+"function n(n){var c=[].slice.call(arguments,1);return function(){n.apply(void 0,c)}}export{n as parametersRestWithClosure};
+//# sourceMappingURL=parameters-rest-closure.esm.js.map
+"
+`;
+
+exports[`fixtures build parameters-rest-closure with microbundle 4`] = `
+"exports.parametersRestWithClosure=function(e){var r=[].slice.call(arguments,1);return function(){e.apply(void 0,r)}};
+//# sourceMappingURL=parameters-rest-closure.js.map
+"
+`;
+
+exports[`fixtures build parameters-rest-closure with microbundle 5`] = `
+"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?t(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],t):t((e||self).parametersRestClosure={})}(this,function(e){e.parametersRestWithClosure=function(e){var t=[].slice.call(arguments,1);return function(){e.apply(void 0,t)}}});
+//# sourceMappingURL=parameters-rest-closure.umd.js.map
+"
+`;
+
 exports[`fixtures build pretty with microbundle 1`] = `
 "Used script: microbundle
 

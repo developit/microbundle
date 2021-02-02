@@ -43,7 +43,12 @@ export default function fastRestTransform({ template, types: t }) {
 					func.arrowFunctionToExpression();
 				}
 
-				if (binding.constant && binding.referencePaths.length === 1) {
+				if (
+					binding.constant &&
+					binding.referencePaths.length === 1 &&
+					// arguments access requires the same function scope
+					getParentFunction(binding.referencePaths[0], t) === func
+				) {
 					// one usage, never assigned - replace usage inline
 					binding.referencePaths[0].replaceWith(sliced);
 				} else {
@@ -87,4 +92,12 @@ export default function fastRestTransform({ template, types: t }) {
 			},
 		},
 	};
+}
+
+function getParentFunction(node, t) {
+	while ((node = node.parentPath)) {
+		if (t.isFunction(node)) {
+			return node;
+		}
+	}
 }
