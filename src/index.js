@@ -61,6 +61,8 @@ export default async function microbundle(inputOptions) {
 		console.log(
 			'Warning: inline sourcemaps should only be used for debugging purposes.',
 		);
+	} else if (options.sourcemap === 'false') {
+		options.sourcemap = false;
 	} else if (options.sourcemap !== false) {
 		options.sourcemap = true;
 	}
