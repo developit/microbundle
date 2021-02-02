@@ -3,3 +3,9 @@ export function parametersRestWithClosure(fn, ...args) {
 		fn(...args);
 	};
 }
+
+export function parametersRestWithInnerArrowFunction(fn, ...args) {
+	return () => {
+		fn(...args);
+	};
+}

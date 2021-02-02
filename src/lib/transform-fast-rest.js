@@ -46,8 +46,7 @@ export default function fastRestTransform({ template, types: t }) {
 				if (
 					binding.constant &&
 					binding.referencePaths.length === 1 &&
-					// arguments access requires the same function scope
-					getParentFunction(binding.referencePaths[0], t) === func
+					sameArgumentsObject(binding.referencePaths[0], func, t)
 				) {
 					// one usage, never assigned - replace usage inline
 					binding.referencePaths[0].replaceWith(sliced);
@@ -94,10 +93,16 @@ export default function fastRestTransform({ template, types: t }) {
 	};
 }
 
-function getParentFunction(node, t) {
+function sameArgumentsObject(node, func, t) {
 	while ((node = node.parentPath)) {
-		if (t.isFunction(node)) {
-			return node;
+		if (node === func) {
+			return true;
+		}
+
+		if (t.isFunction(node) && !t.isArrowFunctionExpression(node)) {
+			return false;
 		}
 	}
+
+	return false;
 }
