@@ -263,13 +263,15 @@ function getMain({ options, entry, format }) {
 
 	let mainNoExtension = options.output;
 	if (options.multipleEntries) {
-		let name = entry.match(/([\\/])index(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/)
+		let name = entry.match(
+			/([\\/])index(\.(umd|cjs|es|m))?\.(mjs|cjs|[tj]sx?)$/,
+		)
 			? mainNoExtension
 			: entry;
 		mainNoExtension = resolve(dirname(mainNoExtension), basename(name));
 	}
 	mainNoExtension = mainNoExtension.replace(
-		/(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/,
+		/(\.(umd|cjs|es|m))?\.(mjs|cjs|[tj]sx?)$/,
 		'',
 	);
 
@@ -285,7 +287,10 @@ function getMain({ options, entry, format }) {
 		(pkg.syntax && pkg.syntax.esmodules) || pkg.esmodule || 'x.modern.js',
 		mainNoExtension,
 	);
-	mainsByFormat.cjs = replaceName(pkg['cjs:main'] || 'x.js', mainNoExtension);
+	mainsByFormat.cjs = replaceName(
+		pkg['cjs:main'] || (pkg.type && pkg.type === 'module' ? 'x.cjs' : 'x.js'),
+		mainNoExtension,
+	);
 	mainsByFormat.umd = replaceName(
 		pkg['umd:main'] || pkg.unpkg || 'x.umd.js',
 		mainNoExtension,
