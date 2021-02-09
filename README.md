@@ -41,7 +41,7 @@
   "name": "foo",                   // your package name
   "source": "src/foo.js",          // your source code
   "main": "dist/foo.js",           // where to generate the CommonJS/Node bundle
-  "exports": "dist/foo.modern.js", // path to the modern output (see below)
+  "exports": "./dist/foo.modern.js", // path to the modern output (see below)
   "module": "dist/foo.module.js",  // where to generate the ESM bundle
   "unpkg": "dist/foo.umd.js",      // where to generate the UMD bundle (also aliased as "umd:main")
   "scripts": {
