@@ -204,7 +204,10 @@ Microbundle uses the fields from your `package.json` to figure out where it shou
   "main": "dist/foo.js",            // CommonJS bundle
   "umd:main": "dist/foo.umd.js",    // UMD bundle
   "module": "dist/foo.m.js",        // ES Modules bundle
-  "exports": "dist/foo.modern.js", // Modern ES Modules bundle
+  "exports": {
+    "require": "./dist/foo.js",  // CommonJS bundle
+    "default": "./dist/foo.modern.js", // Modern ES Modules bundle
+  }
   "types": "dist/foo.d.ts"          // TypeScript typings directory
 }
 ```
