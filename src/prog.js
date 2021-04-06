@@ -69,7 +69,6 @@ export default handler => {
 			'A custom JSX pragma like React.createElement (default: h)',
 		)
 		.option('--tsconfig', 'Specify the path to a custom tsconfig.json')
-		// https://github.com/lukeed/sade/issues/23
 		.option(
 			'--generateTypes',
 			'Whether or not to generate types , if `types` or `typings` is set in `package.json` then it will default to be `true`',
