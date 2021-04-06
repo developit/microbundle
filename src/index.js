@@ -366,8 +366,10 @@ function createConfig(options, entry, format, writeMeta) {
 			: () => resolve(options.cwd, 'mangle.json');
 
 	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
-	const emitDeclaration = !!(options.generateTypes || pkg.types || pkg.typings);
-
+	const emitDeclaration =
+		options.generateTypes == null
+			? !!(pkg.types || pkg.typings)
+			: options.generateTypes;
 	const escapeStringExternals = ext =>
 		ext instanceof RegExp ? ext.source : escapeStringRegexp(ext);
 	const externalPredicate = new RegExp(
