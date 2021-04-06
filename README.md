@@ -279,7 +279,7 @@ Options
 	--jsx              A custom JSX pragma like React.createElement (default: h)
 	--jsxImportSource  Specify the automatic import source for JSX like preact
 	--tsconfig         Specify the path to a custom tsconfig.json
-	--generate-types   Whether or not to generate types, if `types` or `typings` is set in `package.json` then it will default to be `true`
+	--generateTypes    Whether or not to generate types, if `types` or `typings` is set in `package.json` then it will default to be `true`
 	--css              Where to output CSS: "inline" or "external" (default: "external")
 	--css-modules      Configures .css to be treated as modules (default: null)
 	-h, --help         Displays this message
