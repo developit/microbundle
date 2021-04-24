@@ -2394,6 +2394,40 @@ exports[`fixtures build pretty with microbundle 5`] = `
 "
 `;
 
+exports[`fixtures build publish-config with microbundle 1`] = `
+"Used script: microbundle -f cjs
+
+Directory tree:
+
+publish-config
+  dist
+    bar.js
+    bar.js.map
+    foo.d.ts
+  node_modules
+  package.json
+  src
+    foo.ts
+
+
+Build \\"publishConfig\\" to dist:
+55 B: bar.js.gz
+33 B: bar.js.br"
+`;
+
+exports[`fixtures build publish-config with microbundle 2`] = `3`;
+
+exports[`fixtures build publish-config with microbundle 3`] = `
+"exports.foo=function(){return 42};
+//# sourceMappingURL=bar.js.map
+"
+`;
+
+exports[`fixtures build publish-config with microbundle 4`] = `
+"export declare function foo(): number;
+"
+`;
+
 exports[`fixtures build pure with microbundle 1`] = `
 "Used script: microbundle
 
