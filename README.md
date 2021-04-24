@@ -155,6 +155,21 @@ Unless overridden via the command line, microbundle uses the `source` property i
 }
 ```
 
+Config also can be overridded by the [`publishConfig`](https://docs.npmjs.com/cli/v7/configuring-npm/package-json#publishconfig) property in your `package.json`.
+
+```js
+{
+  "main": "src/index.ts",          // this would be used in the dev environment (e.g. Jest)
+  "publishConfig": {
+    "source": "src/index.js",      // input
+    "main": "dist/my-library.js",  // output
+  },
+  "scripts": {
+    "build": "microbundle"
+  }
+}
+```
+
 For UMD builds, microbundle will use a camelCase version of the `name` field in your `package.json` as export name. This can be customized using an `"amdName"` key in your `package.json` or the `--name` command line argument.
 
 ### `microbundle watch`
@@ -242,6 +257,8 @@ The `--define` option can be used to inject or replace build-time constants when
 `microbundle --define VERSION=2` | `console.log(VERSION)` | `console.log(2)`
 `microbundle --define API_KEY='abc123'` | `console.log(API_KEY)` | `console.log("abc123")`
 `microbundle --define @assign=Object.assign` | `assign(a, b)` | `Object.assign(a, b)`
+
+
 
 ### All CLI Options <a name="options"></a>
 
