@@ -192,19 +192,21 @@ By default Microbundle outputs multiple bundles, one bundle per format. A single
 microbundle -i lib/main.js -o dist/bundle.js --no-pkg-main -f umd
 ```
 
-### Building web workers as inline blobs
+### Building Module Workers
 
-Microbundle is able to detect and bundle workers when building with format `es`
-or `modern`. Consider the following example:
+Microbundle is able to detect and bundle Module Workers when generating bundles in the
+`es`, `umd` and `modern` formats. To use this feature, instantiate your Web Worker as follows:
 
 ```js
-const worker = new Worker('./worker.js', { type: 'module' });
+worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'module' });
+// or simply:
+worker = new Worker('./worker.js', { type: 'module' });
 ```
 
-And build it like this:
+... then add the `--workers` flag to your build command:
 
 ```bash
-microbundle --worker-loader
+microbundle --workers
 ```
 
 For more information see
