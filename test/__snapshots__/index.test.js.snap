@@ -2538,6 +2538,63 @@ exports[`fixtures build shebang with microbundle 5`] = `
 "
 `;
 
+exports[`fixtures build ts-custom-declaration with microbundle 1`] = `
+"Used script: microbundle --generateTypes false
+
+Directory tree:
+
+ts-custom-declaration
+  dist
+    index.esm.js
+    index.esm.js.map
+    index.js
+    index.js.map
+    index.umd.js
+    index.umd.js.map
+  package.json
+  src
+    index.js
+  tsconfig.json
+  types
+    index.d.ts
+
+
+Build \\"tsCustomDeclarations\\" to dist:
+55 B: index.js.gz
+33 B: index.js.br
+61 B: index.esm.js.gz
+45 B: index.esm.js.br
+175 B: index.umd.js.gz
+125 B: index.umd.js.br"
+`;
+
+exports[`fixtures build ts-custom-declaration with microbundle 2`] = `6`;
+
+exports[`fixtures build ts-custom-declaration with microbundle 3`] = `
+"function n(){return 42}export{n as foo};
+//# sourceMappingURL=index.esm.js.map
+"
+`;
+
+exports[`fixtures build ts-custom-declaration with microbundle 4`] = `
+"exports.foo=function(){return 42};
+//# sourceMappingURL=index.js.map
+"
+`;
+
+exports[`fixtures build ts-custom-declaration with microbundle 5`] = `
+"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?o(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],o):o((e||self).tsCustomDeclarations={})}(this,function(e){e.foo=function(){return 42}});
+//# sourceMappingURL=index.umd.js.map
+"
+`;
+
+exports[`fixtures build ts-custom-declaration with microbundle 6`] = `1`;
+
+exports[`fixtures build ts-custom-declaration with microbundle 7`] = `
+"export const foo: () => number;
+"
+`;
+
 exports[`fixtures build ts-declaration with microbundle 1`] = `
 "Used script: microbundle
 
