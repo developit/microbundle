@@ -143,17 +143,24 @@ Microbundle includes two commands - `build` (the default) and `watch`. Neither r
 
 ### `microbundle` / `microbundle build`
 
-Unless overridden via the command line, microbundle uses the `source` property in your `package.json` to locate the input file, and the `main` property for the output:
+Unless overridden via the command line, microbundle uses the `source` property in your `package.json` to locate the input file, and the `main`, `umd:main`, `module` and `exports` properties to figure out where it should place each generated bundle:
 
-```js
+
+```
 {
-  "source": "src/index.js",      // input
-  "main": "dist/my-library.js",  // output
-  "scripts": {
-    "build": "microbundle"
+  "source": "src/index.js",         // input
+  "main": "dist/foo.js",            // CommonJS output bundle
+  "umd:main": "dist/foo.umd.js",    // UMD output bundle
+  "module": "dist/foo.m.js",        // ES Modules output bundle 
+  "exports": {
+    "require": "./dist/foo.js",  // CommonJS output bundle
+    "default": "./dist/foo.modern.js", // Modern ES Modules output bundle
   }
+  "types": "dist/foo.d.ts"          // TypeScript typings directory
 }
 ```
+
+When deciding which bundle to use, Node.js 12+ and webpack 5+ will prefer the `exports` property, while older Node.js releases use the `main` property, and other bundlers prefer the `module` field. For more information about the meaning of the different properties, refer to the [Node.js documentation](https://nodejs.org/api/packages.html#packages_package_entry_points).
 
 For UMD builds, microbundle will use a camelCase version of the `name` field in your `package.json` as export name. This can be customized using an `"amdName"` key in your `package.json` or the `--name` command line argument.
 
@@ -196,20 +203,6 @@ This can be customized by passing the command line argument `--css-modules "[nam
 | false | import './my-file.module.css'; |        :x:         |
 | true  | import './my-file.css';        | :white_check_mark: |
 | true  | import './my-file.module.css'; | :white_check_mark: |
-
-### Specifying builds in `package.json`
-
-Microbundle uses the fields from your `package.json` to figure out where it should place each generated bundle:
-
-```
-{
-  "main": "dist/foo.js",            // CommonJS bundle
-  "umd:main": "dist/foo.umd.js",    // UMD bundle
-  "module": "dist/foo.m.js",        // ES Modules bundle
-  "esmodule": "dist/foo.modern.js", // Modern bundle
-  "types": "dist/foo.d.ts"          // TypeScript typings directory
-}
-```
 
 ### Building a single bundle with a fixed output name
 
