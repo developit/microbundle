@@ -1,5 +1,5 @@
 ---
-'microbundle': minor
+'microbundle': patch
 ---
 
-Enable config overriding by the publishConfig field
+Add support for configuration overrides using the `publishConfig` package.json field.
