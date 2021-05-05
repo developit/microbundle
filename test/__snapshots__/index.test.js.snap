@@ -3018,7 +3018,7 @@ exports[`fixtures build ts-module with microbundle 7`] = `
 `;
 
 exports[`fixtures build worker-loader with microbundle 1`] = `
-"Used script: microbundle -f modern,es --worker-loader
+"Used script: microbundle -f modern,es --workers
 
 Directory tree:
 
