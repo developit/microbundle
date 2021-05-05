@@ -2347,6 +2347,53 @@ exports[`fixtures build optional-chaining-ts with microbundle 6`] = `
 "
 `;
 
+exports[`fixtures build parameters-rest-closure with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+parameters-rest-closure
+  dist
+    parameters-rest-closure.esm.js
+    parameters-rest-closure.esm.js.map
+    parameters-rest-closure.js
+    parameters-rest-closure.js.map
+    parameters-rest-closure.umd.js
+    parameters-rest-closure.umd.js.map
+  package.json
+  src
+    index.js
+
+
+Build \\"parametersRestClosure\\" to dist:
+157 B: parameters-rest-closure.js.gz
+115 B: parameters-rest-closure.js.br
+165 B: parameters-rest-closure.esm.js.gz
+124 B: parameters-rest-closure.esm.js.br
+247 B: parameters-rest-closure.umd.js.gz
+189 B: parameters-rest-closure.umd.js.br"
+`;
+
+exports[`fixtures build parameters-rest-closure with microbundle 2`] = `6`;
+
+exports[`fixtures build parameters-rest-closure with microbundle 3`] = `
+"function n(n){var c=[].slice.call(arguments,1);return function(){n.apply(void 0,c)}}function c(n){var c=arguments;return function(){n.apply(void 0,[].slice.call(c,1))}}export{n as parametersRestWithClosure,c as parametersRestWithInnerArrowFunction};
+//# sourceMappingURL=parameters-rest-closure.esm.js.map
+"
+`;
+
+exports[`fixtures build parameters-rest-closure with microbundle 4`] = `
+"exports.parametersRestWithClosure=function(r){var t=[].slice.call(arguments,1);return function(){r.apply(void 0,t)}},exports.parametersRestWithInnerArrowFunction=function(r){var t=arguments;return function(){r.apply(void 0,[].slice.call(t,1))}};
+//# sourceMappingURL=parameters-rest-closure.js.map
+"
+`;
+
+exports[`fixtures build parameters-rest-closure with microbundle 5`] = `
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?n(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],n):n((e||self).parametersRestClosure={})}(this,function(e){e.parametersRestWithClosure=function(e){var n=[].slice.call(arguments,1);return function(){e.apply(void 0,n)}},e.parametersRestWithInnerArrowFunction=function(e){var n=arguments;return function(){e.apply(void 0,[].slice.call(n,1))}}});
+//# sourceMappingURL=parameters-rest-closure.umd.js.map
+"
+`;
+
 exports[`fixtures build pretty with microbundle 1`] = `
 "Used script: microbundle
 
@@ -2569,6 +2616,63 @@ exports[`fixtures build shebang with microbundle 5`] = `
 "#!/usr/bin/env node
 !function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?o(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],o):o((e||self).shebang={})}(this,function(e){e.foo=function(){return\\"hello world\\"}});
 //# sourceMappingURL=shebang.umd.js.map
+"
+`;
+
+exports[`fixtures build ts-custom-declaration with microbundle 1`] = `
+"Used script: microbundle --generateTypes false
+
+Directory tree:
+
+ts-custom-declaration
+  dist
+    index.esm.js
+    index.esm.js.map
+    index.js
+    index.js.map
+    index.umd.js
+    index.umd.js.map
+  package.json
+  src
+    index.js
+  tsconfig.json
+  types
+    index.d.ts
+
+
+Build \\"tsCustomDeclarations\\" to dist:
+55 B: index.js.gz
+33 B: index.js.br
+61 B: index.esm.js.gz
+45 B: index.esm.js.br
+175 B: index.umd.js.gz
+125 B: index.umd.js.br"
+`;
+
+exports[`fixtures build ts-custom-declaration with microbundle 2`] = `6`;
+
+exports[`fixtures build ts-custom-declaration with microbundle 3`] = `
+"function n(){return 42}export{n as foo};
+//# sourceMappingURL=index.esm.js.map
+"
+`;
+
+exports[`fixtures build ts-custom-declaration with microbundle 4`] = `
+"exports.foo=function(){return 42};
+//# sourceMappingURL=index.js.map
+"
+`;
+
+exports[`fixtures build ts-custom-declaration with microbundle 5`] = `
+"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?o(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],o):o((e||self).tsCustomDeclarations={})}(this,function(e){e.foo=function(){return 42}});
+//# sourceMappingURL=index.umd.js.map
+"
+`;
+
+exports[`fixtures build ts-custom-declaration with microbundle 6`] = `1`;
+
+exports[`fixtures build ts-custom-declaration with microbundle 7`] = `
+"export const foo: () => number;
 "
 `;
 
