@@ -56,7 +56,11 @@ export default handler => {
 		.option('--name', 'Specify name exposed in UMD builds')
 		.option('--cwd', 'Use an alternative working directory', '.')
 		.option('--sourcemap', 'Generate source map', true)
-		.option('--workers', 'Bundle module workers - see https://git.io/J3oSF', false)
+		.option(
+			'--workers',
+			'Bundle module workers - see https://git.io/J3oSF',
+			false,
+		)
 		.option(
 			'--css-modules',
 			'Turns on css-modules for all .css imports. Passing a string will override the scopeName. eg --css-modules="_[hash]"',
