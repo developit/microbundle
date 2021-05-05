@@ -367,7 +367,7 @@ function createConfig(options, entry, format, writeMeta) {
 			: () => resolve(options.cwd, 'mangle.json');
 
 	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
-	const useWorkerLoader = options['worker-loader'] !== false;
+	const useWorkerLoader = options.workers !== false;
 
 	const escapeStringExternals = ext =>
 		ext instanceof RegExp ? ext.source : escapeStringRegexp(ext);
