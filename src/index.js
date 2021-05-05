@@ -44,7 +44,10 @@ export default async function microbundle(inputOptions) {
 	const cwd = options.cwd;
 
 	const { hasPackageJson, pkg } = await getConfigFromPkgJson(cwd);
-	options.pkg = pkg;
+	options.pkg = {
+		...pkg,
+		...pkg.publishConfig,
+	};
 
 	const { finalName, pkgName } = getName({
 		name: options.name,
@@ -371,8 +374,10 @@ function createConfig(options, entry, format, writeMeta) {
 			: () => resolve(options.cwd, 'mangle.json');
 
 	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
-	const emitDeclaration = !!(options.generateTypes || pkg.types || pkg.typings);
-
+	const emitDeclaration =
+		options.generateTypes == null
+			? !!(pkg.types || pkg.typings)
+			: options.generateTypes;
 	const escapeStringExternals = ext =>
 		ext instanceof RegExp ? ext.source : escapeStringRegexp(ext);
 	const externalPredicate = new RegExp(

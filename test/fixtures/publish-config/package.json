@@ -1,0 +1,11 @@
+{
+  "name": "publish-config",
+  "main": "src/foo.ts",
+  "publishConfig": {
+    "source": "src/foo.ts",
+    "main": "dist/bar.js"
+  },
+  "scripts": {
+    "build": "microbundle -f cjs"
+  }
+}
