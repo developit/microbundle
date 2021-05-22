@@ -62,7 +62,7 @@ export default async function microbundle(inputOptions) {
 			'Warning: inline sourcemaps should only be used for debugging purposes.',
 		);
 	} else if (options.sourcemap !== false) {
-		options.sourcemap = true;
+		options.sourcemap = options.sourcemap !== 'false';
 	}
 
 	options.input = await getInput({
