@@ -295,7 +295,7 @@ Options
 	-v, --version      Displays current version
 	-i, --entry        Entry module(s)
 	-o, --output       Directory to place build files into
-	-f, --format       Only build specified formats (any of modern,es,cjs,umd or iife) (default modern,es,cjs,umd)
+	-f, --format       Only build specified formats (any of modern,esm,cjs,umd or iife) (default modern,esm,cjs,umd)
 	-w, --watch        Rebuilds on any change  (default false)
 	--pkg-main         Outputs files analog to package.json main entries  (default true)
 	--target           Specify your target environment (node or web)  (default web)
