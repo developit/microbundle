@@ -133,9 +133,7 @@ export default async function microbundle(inputOptions) {
 	const sourceExist = options.input.length > 0;
 	const banner = sourceExist
 		? blue(`Build "${options.name}" to ${targetDir}:`)
-		: red(
-				`[!] Error: Can't resolve '${options.pkg.source}' in '${options.cwd}'`,
-		  );
+		: red(`Error: No entry module found for "${options.name}"`);
 	return {
 		output: `${banner}\n   ${out.join('\n   ')}`,
 	};
