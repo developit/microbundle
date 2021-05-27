@@ -458,7 +458,7 @@ function createConfig(options, entry, format, writeMeta) {
 						// only write out CSS for the first bundle (avoids pointless extra files):
 						inject: false,
 						extract:
-              !!writeMeta &&
+							!!writeMeta &&
 							options.css !== 'inline' &&
 							options.output.replace(
 								/(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/,
