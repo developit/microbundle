@@ -1,5 +1,25 @@
 # microbundle
 
+## 0.13.1
+
+### Patch Changes
+
+- [`54402ac`](https://github.com/developit/microbundle/commit/54402ac43cc2f7ccb85fe5df2e9828c7f24091a0) [#830](https://github.com/developit/microbundle/pull/830) Thanks [@JounQin](https://github.com/JounQin)! - fix: add generateTypes cli option, check false value correctly
+
+* [`edcd777`](https://github.com/developit/microbundle/commit/edcd777cfaedfdb436c62b5dcb3cff6291268e4c) [#823](https://github.com/developit/microbundle/pull/823) Thanks [@rschristian](https://github.com/rschristian)! - Ensures ambient type declaration for CSS Modules is included in the published bundle
+
+- [`d87a5dc`](https://github.com/developit/microbundle/commit/d87a5dc286a1edba92ca3ec5b534807688c90854) Thanks [@developit](https://github.com/developit)! - - Fix `--sourcemap=false` to match `--no-sourcemap` and actually turn sourcemaps off.
+
+* [`6f1a20f`](https://github.com/developit/microbundle/commit/6f1a20fa17467176f9bc1acc2b0f78784d28d110) [#777](https://github.com/developit/microbundle/pull/777) Thanks [@rschristian](https://github.com/rschristian)! - Fixing a bug that would cause a CSS file to be generated to match each JS build output
+
+- [`25b73d2`](https://github.com/developit/microbundle/commit/25b73d22caeac7cf74b0533401318a5becc29c11) [#834](https://github.com/developit/microbundle/pull/834) Thanks [@cometkim](https://github.com/cometkim)! - Add support for configuration overrides using the `publishConfig` package.json field.
+
+* [`0a4cddf`](https://github.com/developit/microbundle/commit/0a4cddf98ab54c41f0b2ece1d626e459f73c9997) [#842](https://github.com/developit/microbundle/pull/842) Thanks [@ForsakenHarmony](https://github.com/ForsakenHarmony)! - fix default extension to cjs for package.json "type":"module"
+
+- [`4f7fbc4`](https://github.com/developit/microbundle/commit/4f7fbc4a0b9e03b9c33d10b21c66b8ddef7524a7) Thanks [@developit](https://github.com/developit)! - Fix `transform-fast-rest` to support referencing `...rest` params from within closures.
+
+* [`0c91795`](https://github.com/developit/microbundle/commit/0c917959570c788929766c6f4cd55f3b49433920) [#841](https://github.com/developit/microbundle/pull/841) Thanks [@rschristian](https://github.com/rschristian)! - Ensures JS format is not included in CSS filename output
+
 ## 0.13.0
 
 ### Minor Changes
