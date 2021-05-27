@@ -43,7 +43,11 @@ export default function fastRestTransform({ template, types: t }) {
 					func.arrowFunctionToExpression();
 				}
 
-				if (binding.constant && binding.referencePaths.length === 1) {
+				if (
+					binding.constant &&
+					binding.referencePaths.length === 1 &&
+					sameArgumentsObject(binding.referencePaths[0], func, t)
+				) {
 					// one usage, never assigned - replace usage inline
 					binding.referencePaths[0].replaceWith(sliced);
 				} else {
@@ -87,4 +91,18 @@ export default function fastRestTransform({ template, types: t }) {
 			},
 		},
 	};
+}
+
+function sameArgumentsObject(node, func, t) {
+	while ((node = node.parentPath)) {
+		if (node === func) {
+			return true;
+		}
+
+		if (t.isFunction(node) && !t.isArrowFunctionExpression(node)) {
+			return false;
+		}
+	}
+
+	return false;
 }

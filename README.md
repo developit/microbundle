@@ -36,17 +36,18 @@
 
 2️⃣ **Set up** your `package.json`:
 
-```js
+```jsonc
 {
-  "name": "foo",                   // your package name
-  "source": "src/foo.js",          // your source code
-  "main": "dist/foo.js",           // where to generate the CommonJS/Node bundle
-  "exports": "dist/foo.modern.js", // path to the modern output (see below)
-  "module": "dist/foo.module.js",  // where to generate the ESM bundle
-  "unpkg": "dist/foo.umd.js",      // where to generate the UMD bundle (also aliased as "umd:main")
+  "name": "foo",                     // your package name
+  "type": "module",
+  "source": "src/foo.js",            // your source code
+  "exports": "./dist/foo.modern.js", // where to generate the modern bundle (see below)
+  "main": "./dist/foo.cjs",          // where to generate the CommonJS bundle
+  "module": "./dist/foo.module.js",  // where to generate the ESM bundle
+  "unpkg": "./dist/foo.umd.js",      // where to generate the UMD bundle (also aliased as "umd:main")
   "scripts": {
-    "build": "microbundle",        // compiles "source" to "main"/"module"/"unpkg"
-    "dev": "microbundle watch"     // re-build when source files change
+    "build": "microbundle",          // compiles "source" to "main"/"module"/"unpkg"
+    "dev": "microbundle watch"       // re-build when source files change
   }
 }
 ```
@@ -55,11 +56,18 @@
 
 ## 💽 Output Formats <a name="formats"></a>
 
-Microbundle produces <code title="ECMAScript Modules (import / export)">esm</code>, <code title="CommonJS (Node-style module.exports)">cjs</code>, <code title="Universal Module Definition (works everywhere)">umd</code> bundles with your code compiled to syntax that works pretty much everywhere. While it's possible to customize the browser or Node versions you wish to support using a [browserslist configuration](https://github.com/browserslist/browserslist#browserslist-), the default setting is optimal and strongly recommended.
+Microbundle produces <code title="ECMAScript Modules (import / export)">esm</code>, <code title="CommonJS (Node-style module.exports)">cjs</code>, <code title="Universal Module Definition (works everywhere)">umd</code> bundles with your code compiled to syntax that works pretty much everywhere.
+While it's possible to customize the browser or Node versions you wish to support using a [browserslist configuration](https://github.com/browserslist/browserslist#browserslist-), the default setting is optimal and strongly recommended.
 
 ## 🤖 Modern Mode <a name="modern"></a>
 
-In addition to the above formats, Microbundle also outputs a `modern` bundle specially designed to work in _all modern browsers_. This bundle preserves most modern JS features when compiling your code, but ensures the result runs in 95% of web browsers without needing to be transpiled. Specifically, it uses [preset-modules](https://github.com/babel/preset-modules) to target the set of browsers that support `<script type="module">` - that allows syntax like async/await, tagged templates, arrow functions, destructured and rest parameters, etc. The result is generally smaller and faster to execute than the `esm` bundle:
+In addition to the above formats, Microbundle also outputs a `modern` bundle specially designed to work in _all modern browsers_.
+This bundle preserves most modern JS features when compiling your code, but ensures the result runs in 95% of web browsers without needing to be transpiled.
+Specifically, it uses Babel's ["bugfixes" mode](https://babeljs.io/blog/2020/03/16/7.9.0#babelpreset-envs-bugfixes-option-11083httpsgithubcombabelbabelpull11083)
+(previously known as [preset-modules](https://github.com/babel/preset-modules)) to target the set of browsers that support `<script type="module">` - that allows syntax like async/await, tagged templates, arrow functions, destructured and rest parameters, etc.
+The result is generally smaller and faster to execute than the plain `esm` bundle.
+
+Take the following source code for example:
 
 ```js
 // Our source, "src/make-dom.js":
@@ -135,31 +143,79 @@ The `"exports"` field can also be an object for packages with multiple entry mod
 
 ## 📦 Usage & Configuration <a name="usage"></a>
 
-Microbundle includes two commands - `build` (the default) and `watch`. Neither require any options, but you can tailor things to suit your needs a bit if you like.
+Microbundle includes two commands - `build` (the default) and `watch`.
+Neither require any options, but you can tailor things to suit your needs a bit if you like.
+
+- **`microbundle`** – bundles your code once and exits. (alias: `microbundle build`)
+- **`microbundle watch`** – bundles your code, then re-bundles when files change.
 
 > ℹ️ Microbundle automatically determines which dependencies to inline into bundles based on your `package.json`.
 >
 > Read more about [How Microbundle decides which dependencies to bundle](https://github.com/developit/microbundle/wiki/How-Microbundle-decides-which-dependencies-to-bundle), including some example configurations.
 
-### `microbundle` / `microbundle build`
+### Specifying filenames in package.json
 
-Unless overridden via the command line, microbundle uses the `source` property in your `package.json` to locate the input file, and the `main` property for the output:
+Unless overridden via the command line, microbundle uses the `source` property in your `package.json` to determine which of your JavaScript files to start bundling from (your "entry module").
+The filenames and paths for generated bundles in each format are defined by the `main`, `umd:main`, `module` and `exports` properties in your `package.json`.
 
-```js
+```jsonc
 {
-  "source": "src/index.js",      // input
-  "main": "dist/my-library.js",  // output
+  "source": "src/index.js",            // input
+  "main": "dist/foo.js",               // CommonJS output bundle
+  "umd:main": "dist/foo.umd.js",       // UMD output bundle
+  "module": "dist/foo.m.js",           // ES Modules output bundle 
+  "exports": {
+    "require": "./dist/foo.js",        // CommonJS output bundle
+    "default": "./dist/foo.modern.js", // Modern ES Modules output bundle
+  },
+  "types": "dist/foo.d.ts"             // TypeScript typings directory
+}
+```
+
+When deciding which bundle to use, Node.js 12+ and webpack 5+ will prefer the `exports` property, while older Node.js releases use the `main` property, and other bundlers prefer the `module` field.
+For more information about the meaning of the different properties, refer to the [Node.js documentation](https://nodejs.org/api/packages.html#packages_package_entry_points).
+
+For UMD builds, microbundle will use a camelCase version of the `name` field in your `package.json` as export name.
+Alternatively, this can be explicitly by adding an `"amdName"` key in your `package.json`, or passing the `--name` command line argument.
+
+### Usage with `{"type":"module"}` in `package.json`
+
+Node.js 12.16+ adds a new "ES Module package", which can be enabled by adding `{"type":"module"}` to your package.json.
+This property [changes the default source type](https://nodejs.org/api/packages.html#packages_determining_module_system) of `.js` files to be ES Modules instead of CommonJS.
+When using `{"type":"module"}`, the file extension for CommonJS bundles generated by Microbundle must be changed to `.cjs`:
+
+```jsonc
+{
+  "type": "module",
+  "module": "dist/foo.js",  // ES Module bundle
+  "main": "dist/foo.cjs",   // CommonJS bundle
+}
+```
+
+### Additional Configuration Options
+
+Config also can be overridded by the [`publishConfig`](https://docs.npmjs.com/cli/v7/configuring-npm/package-json#publishconfig) property in your `package.json`.
+
+```jsonc
+{
+  "main": "src/index.ts",          // this would be used in the dev environment (e.g. Jest)
+  "publishConfig": {
+    "source": "src/index.js",      // input
+    "main": "dist/my-library.js",  // output
+  },
   "scripts": {
     "build": "microbundle"
   }
 }
 ```
 
-For UMD builds, microbundle will use a camelCase version of the `name` field in your `package.json` as export name. This can be customized using an `"amdName"` key in your `package.json` or the `--name` command line argument.
+### Building a single bundle with fixed output name
 
-### `microbundle watch`
+By default Microbundle outputs multiple bundles, one bundle per format. A single bundle with a fixed output name can be built like this:
 
-Acts just like `microbundle build`, but watches your source files and rebuilds on any change.
+```bash
+microbundle -i lib/main.js -o dist/bundle.js --no-pkg-main -f umd
+```
 
 ### Using with TypeScript
 
@@ -167,17 +223,19 @@ Just point the input to a `.ts` file through either the cli or the `source` key 
 
 Microbundle will generally respect your TypeScript config defined in a `tsconfig.json` file with notable exceptions being the "[target](https://www.typescriptlang.org/tsconfig#target)" and "[module](https://www.typescriptlang.org/tsconfig#module)" settings. To ensure your TypeScript configuration matches the configuration that Microbundle uses internally it's strongly recommended that you set `"module": "ESNext"` and `"target": "ESNext"` in your `tsconfig.json`.
 
+If you're using TypeScript with CSS Modules, you will want to set `"include": ["node_modules/microbundle/index.d.ts"]` in your `tsconfig.json` to tell TypeScript how to handle your CSS Module imports.
+
 ### CSS and CSS Modules
 
 Importing CSS files is supported via `import "./foo.css"`. By default, generated CSS output is written to disk. The `--css inline` command line option will inline generated CSS into your bundles as a string, returning the CSS string from the import:
 
 ```js
 // with the default external CSS:
-import './foo.css';  // generates a minified .css file in the output directory
+import './foo.css'; // generates a minified .css file in the output directory
 
 // with `microbundle --css inline`:
 import css from './foo.css';
-console.log(css);  // the generated minified stylesheet
+console.log(css); // the generated minified stylesheet
 ```
 
 **CSS Modules:** CSS files with names ending in `.module.css` are treated as a [CSS Modules](https://github.com/css-modules/css-modules).
@@ -195,33 +253,11 @@ This can be customized by passing the command line argument `--css-modules "[nam
 | true  | import './my-file.css';        | :white_check_mark: |
 | true  | import './my-file.module.css'; | :white_check_mark: |
 
-### Specifying builds in `package.json`
-
-Microbundle uses the fields from your `package.json` to figure out where it should place each generated bundle:
-
-```
-{
-  "main": "dist/foo.js",            // CommonJS bundle
-  "umd:main": "dist/foo.umd.js",    // UMD bundle
-  "module": "dist/foo.m.js",        // ES Modules bundle
-  "esmodule": "dist/foo.modern.js", // Modern bundle
-  "types": "dist/foo.d.ts"          // TypeScript typings directory
-}
-```
-
-### Building a single bundle with a fixed output name
-
-By default Microbundle outputs multiple bundles, one bundle per format. A single bundle with a fixed output name can be built like this:
-
-```bash
-microbundle -i lib/main.js -o dist/bundle.js --no-pkg-main -f umd
-```
-
 ### Mangling Properties
 
 To achieve the smallest possible bundle size, libraries often wish to rename internal object properties or class members to smaller names - transforming `this._internalIdValue` to `this._i`. Microbundle doesn't do this by default, however it can be enabled by creating a `mangle.json` file (or a `"mangle"` property in your package.json). Within that file, you can specify a regular expression pattern to control which properties should be mangled. For example: to mangle all property names beginning an underscore:
 
-```json
+```jsonc
 {
 	"mangle": {
 		"regex": "^_"
@@ -235,11 +271,11 @@ It's also possible to configure repeatable short names for each mangled property
 
 The `--define` option can be used to inject or replace build-time constants when bundling. In addition to injecting string or number constants, prefixing the define name with `@` allows injecting JavaScript expressions.
 
-| Build command | Source code | Output |
-|---------------|-------------|--------|
-`microbundle --define VERSION=2` | `console.log(VERSION)` | `console.log(2)`
-`microbundle --define API_KEY='abc123'` | `console.log(API_KEY)` | `console.log("abc123")`
-`microbundle --define @assign=Object.assign` | `assign(a, b)` | `Object.assign(a, b)`
+| Build command                                | Source code            | Output                  |
+| -------------------------------------------- | ---------------------- | ----------------------- |
+| `microbundle --define VERSION=2`             | `console.log(VERSION)` | `console.log(2)`        |
+| `microbundle --define API_KEY='abc123'`      | `console.log(API_KEY)` | `console.log("abc123")` |
+| `microbundle --define @assign=Object.assign` | `assign(a, b)`         | `Object.assign(a, b)`   |
 
 ### All CLI Options <a name="options"></a>
 
@@ -259,7 +295,7 @@ Options
 	-v, --version      Displays current version
 	-i, --entry        Entry module(s)
 	-o, --output       Directory to place build files into
-	-f, --format       Only build specified formats (any of modern,es,cjs,umd or iife) (default modern,es,cjs,umd)
+	-f, --format       Only build specified formats (any of modern,esm,cjs,umd or iife) (default modern,esm,cjs,umd)
 	-w, --watch        Rebuilds on any change  (default false)
 	--pkg-main         Outputs files analog to package.json main entries  (default true)
 	--target           Specify your target environment (node or web)  (default web)
@@ -277,6 +313,7 @@ Options
 	--jsx              A custom JSX pragma like React.createElement (default: h)
 	--jsxImportSource  Specify the automatic import source for JSX like preact
 	--tsconfig         Specify the path to a custom tsconfig.json
+	--generateTypes    Whether or not to generate types, if `types` or `typings` is set in `package.json` then it will default to be `true`
 	--css              Where to output CSS: "inline" or "external" (default: "external")
 	--css-modules      Configures .css to be treated as modules (default: null)
 	-h, --help         Displays this message

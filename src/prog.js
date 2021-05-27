@@ -6,7 +6,7 @@ const toArray = val => (Array.isArray(val) ? val : val == null ? [] : [val]);
 export default handler => {
 	const ENABLE_MODERN = process.env.MICROBUNDLE_MODERN !== 'false';
 
-	const DEFAULT_FORMATS = ENABLE_MODERN ? 'modern,es,cjs,umd' : 'es,cjs,umd';
+	const DEFAULT_FORMATS = ENABLE_MODERN ? 'modern,esm,cjs,umd' : 'esm,cjs,umd';
 
 	const cmd = type => (str, opts) => {
 		opts.watch = opts.watch || type === 'watch';
@@ -69,6 +69,10 @@ export default handler => {
 			'A custom JSX pragma like React.createElement (default: h)',
 		)
 		.option('--tsconfig', 'Specify the path to a custom tsconfig.json')
+		.option(
+			'--generateTypes',
+			'Whether or not to generate types , if `types` or `typings` is set in `package.json` then it will default to be `true`',
+		)
 		.example('microbundle build --tsconfig tsconfig.build.json');
 
 	prog
@@ -89,5 +93,6 @@ export default handler => {
 				i: ['entry', 'entries', 'e'],
 				w: ['watch'],
 			},
+			boolean: ['generateTypes'],
 		});
 };

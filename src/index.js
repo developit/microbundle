@@ -44,7 +44,10 @@ export default async function microbundle(inputOptions) {
 	const cwd = options.cwd;
 
 	const { hasPackageJson, pkg } = await getConfigFromPkgJson(cwd);
-	options.pkg = pkg;
+	options.pkg = {
+		...pkg,
+		...pkg.publishConfig,
+	};
 
 	const { finalName, pkgName } = getName({
 		name: options.name,
@@ -61,6 +64,8 @@ export default async function microbundle(inputOptions) {
 		console.log(
 			'Warning: inline sourcemaps should only be used for debugging purposes.',
 		);
+	} else if (options.sourcemap === 'false') {
+		options.sourcemap = false;
 	} else if (options.sourcemap !== false) {
 		options.sourcemap = true;
 	}
@@ -261,13 +266,15 @@ function getMain({ options, entry, format }) {
 
 	let mainNoExtension = options.output;
 	if (options.multipleEntries) {
-		let name = entry.match(/([\\/])index(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/)
+		let name = entry.match(
+			/([\\/])index(\.(umd|cjs|es|m))?\.(mjs|cjs|[tj]sx?)$/,
+		)
 			? mainNoExtension
 			: entry;
 		mainNoExtension = resolve(dirname(mainNoExtension), basename(name));
 	}
 	mainNoExtension = mainNoExtension.replace(
-		/(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/,
+		/(\.(umd|cjs|es|m))?\.(mjs|cjs|[tj]sx?)$/,
 		'',
 	);
 
@@ -283,7 +290,10 @@ function getMain({ options, entry, format }) {
 		(pkg.syntax && pkg.syntax.esmodules) || pkg.esmodule || 'x.modern.js',
 		mainNoExtension,
 	);
-	mainsByFormat.cjs = replaceName(pkg['cjs:main'] || 'x.js', mainNoExtension);
+	mainsByFormat.cjs = replaceName(
+		pkg['cjs:main'] || (pkg.type && pkg.type === 'module' ? 'x.cjs' : 'x.js'),
+		mainNoExtension,
+	);
 	mainsByFormat.umd = replaceName(
 		pkg['umd:main'] || pkg.unpkg || 'x.umd.js',
 		mainNoExtension,
@@ -364,8 +374,10 @@ function createConfig(options, entry, format, writeMeta) {
 			: () => resolve(options.cwd, 'mangle.json');
 
 	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
-	const emitDeclaration = !!(options.generateTypes || pkg.types || pkg.typings);
-
+	const emitDeclaration =
+		options.generateTypes == null
+			? !!(pkg.types || pkg.typings)
+			: options.generateTypes;
 	const escapeStringExternals = ext =>
 		ext instanceof RegExp ? ext.source : escapeStringRegexp(ext);
 	const externalPredicate = new RegExp(
@@ -445,7 +457,13 @@ function createConfig(options, entry, format, writeMeta) {
 						modules: cssModulesConfig(options),
 						// only write out CSS for the first bundle (avoids pointless extra files):
 						inject: false,
-						extract: !!writeMeta && options.css !== 'inline',
+						extract:
+              !!writeMeta &&
+							options.css !== 'inline' &&
+							options.output.replace(
+								/(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/,
+								'.css',
+							),
 						minimize: options.compress,
 						sourceMap: options.sourcemap && options.css !== 'inline',
 					}),

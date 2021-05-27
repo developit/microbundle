@@ -67,7 +67,8 @@
 	],
 	"files": [
 		"src",
-		"dist"
+		"dist",
+		"index.d.ts"
 	],
 	"author": "Jason Miller <jason@developit.ca> (http://jasonformat.com)",
 	"license": "MIT",
