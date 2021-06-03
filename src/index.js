@@ -256,6 +256,11 @@ function replaceName(filename, name) {
 	);
 }
 
+function walk(exports) {
+	if (typeof exports === 'string') return exports;
+	return walk(exports['.'] || exports.import || exports.module);
+}
+
 function getMain({ options, entry, format }) {
 	const { pkg } = options;
 	const pkgMain = options['pkg-main'];
@@ -287,7 +292,10 @@ function getMain({ options, entry, format }) {
 		mainNoExtension,
 	);
 	mainsByFormat.modern = replaceName(
-		(pkg.syntax && pkg.syntax.esmodules) || pkg.esmodule || 'x.modern.js',
+		(pkg.exports && walk(pkg.exports)) ||
+			(pkg.syntax && pkg.syntax.esmodules) ||
+			pkg.esmodule ||
+			'x.modern.js',
 		mainNoExtension,
 	);
 	mainsByFormat.cjs = replaceName(
