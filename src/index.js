@@ -2,7 +2,7 @@ import fs from 'fs';
 import { resolve, relative, dirname, basename, extname } from 'path';
 import camelCase from 'camelcase';
 import escapeStringRegexp from 'escape-string-regexp';
-import { blue } from 'kleur';
+import { blue, red } from 'kleur';
 import { map, series } from 'asyncro';
 import glob from 'tiny-glob/sync';
 import autoprefixer from 'autoprefixer';
@@ -130,7 +130,10 @@ export default async function microbundle(inputOptions) {
 	);
 
 	const targetDir = relative(cwd, dirname(options.output)) || '.';
-	const banner = blue(`Build "${options.name}" to ${targetDir}:`);
+	const sourceExist = options.input.length > 0;
+	const banner = sourceExist
+		? blue(`Build "${options.name}" to ${targetDir}:`)
+		: red(`Error: No entry module found for "${options.name}"`);
 	return {
 		output: `${banner}\n   ${out.join('\n   ')}`,
 	};
