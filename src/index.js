@@ -8,6 +8,7 @@ import glob from 'tiny-glob/sync';
 import autoprefixer from 'autoprefixer';
 import { rollup, watch } from 'rollup';
 import builtinModules from 'builtin-modules';
+import { rollupImportMapPlugin as importMap } from 'rollup-plugin-import-map';
 import resolveFrom from 'resolve-from';
 import commonjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
@@ -462,6 +463,9 @@ function createConfig(options, entry, format, writeMeta) {
 
 			plugins: []
 				.concat(
+					(modern || format === 'es') &&
+						options['import-map'] &&
+						importMap(options['import-map']),
 					postcss({
 						plugins: [autoprefixer()],
 						autoModules: shouldCssModules(options),

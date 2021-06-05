@@ -1,0 +1,5 @@
+{
+	"imports": {
+		"web-vitals": "https://unpkg.com/web-vitals?module"
+	}
+}

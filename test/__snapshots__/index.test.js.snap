@@ -1679,6 +1679,33 @@ exports[`fixtures build esnext-ts with microbundle 6`] = `
 "
 `;
 
+exports[`fixtures build import-map with microbundle 1`] = `
+"Used script: microbundle -f modern --import-map import-map.json
+
+Directory tree:
+
+import-map
+  dist
+    import-map.modern.js
+    import-map.modern.js.map
+  import-map.json
+  index.js
+  package.json
+
+
+Build \\"importMap\\" to dist:
+119 B: import-map.modern.js.gz
+100 B: import-map.modern.js.br"
+`;
+
+exports[`fixtures build import-map with microbundle 2`] = `2`;
+
+exports[`fixtures build import-map with microbundle 3`] = `
+"import{getCLS as o,getFID as l,getLCP as e}from\\"https://unpkg.com/web-vitals?module\\";o(console.log),l(console.log),e(console.log);
+//# sourceMappingURL=import-map.modern.js.map
+"
+`;
+
 exports[`fixtures build inline-source-map with microbundle 1`] = `
 "Used script: microbundle --sourcemap inline
 

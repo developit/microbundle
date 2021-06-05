@@ -1,0 +1,6 @@
+{
+  "name": "import-map",
+  "scripts": {
+    "build": "microbundle -f modern --import-map import-map.json"
+  }
+}
