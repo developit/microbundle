@@ -21,6 +21,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - name: install npm@latest
+        run: npm i -g npm@latest --registry=https://registry.npmjs.org
       - name: npm install, build, and test
         run: |
           npm install
