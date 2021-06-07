@@ -1,5 +1,13 @@
 # microbundle
 
+## 0.13.2
+
+### Patch Changes
+
+- [`e3f1933`](https://github.com/developit/microbundle/commit/e3f1933773fd17bb1d97de0dad94d899acee7598) [#847](https://github.com/developit/microbundle/pull/847) Thanks [@developit](https://github.com/developit)! - - Upgrade to Terser [5.7](https://github.com/terser/terser/blob/master/CHANGELOG.md#v570) to re-enable support for `reduce_funcs:false` in `mangle.json` configuration.
+
+* [`86371f0`](https://github.com/developit/microbundle/commit/86371f0db6386089c66cd474a7121d9dbee4c0cf) [#784](https://github.com/developit/microbundle/pull/784) Thanks [@rschristian](https://github.com/rschristian)! - Allows users to customize the modern output's filename using "exports" like they can with "esmodules"
+
 ## 0.13.1
 
 ### Patch Changes
