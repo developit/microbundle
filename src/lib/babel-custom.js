@@ -196,7 +196,7 @@ export default () => {
 					babelOptions.generatorOpts = {
 						minified: true,
 						compact: true,
-						shouldPrintComment: comment => /[@#]__PURE__/.test(comment),
+						shouldPrintComment: comment => /[@#]__[A-Z]+__/.test(comment),
 					};
 				}
 

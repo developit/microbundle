@@ -2619,6 +2619,54 @@ exports[`fixtures build shebang with microbundle 5`] = `
 "
 `;
 
+exports[`fixtures build terser-annotations with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+terser-annotations
+  dist
+    terser-annotations.esm.js
+    terser-annotations.esm.js.map
+    terser-annotations.js
+    terser-annotations.js.map
+    terser-annotations.umd.js
+    terser-annotations.umd.js.map
+  mangle.json
+  package.json
+  src
+    index.js
+
+
+Build \\"terserAnnotations\\" to dist:
+112 B: terser-annotations.js.gz
+86 B: terser-annotations.js.br
+117 B: terser-annotations.esm.js.gz
+88 B: terser-annotations.esm.js.br
+200 B: terser-annotations.umd.js.gz
+159 B: terser-annotations.umd.js.br"
+`;
+
+exports[`fixtures build terser-annotations with microbundle 2`] = `6`;
+
+exports[`fixtures build terser-annotations with microbundle 3`] = `
+"function shouldBePreserved(e,n){return e-n}function main(e,n){return{inlined:function(e,n){return e+n}(e,n),preserved:shouldBePreserved(e,n)}}export default main;
+//# sourceMappingURL=terser-annotations.esm.js.map
+"
+`;
+
+exports[`fixtures build terser-annotations with microbundle 4`] = `
+"function shouldBePreserved(e,r){return e-r}module.exports=function(e,r){return{inlined:function(e,r){return e+r}(e,r),preserved:shouldBePreserved(e,r)}};
+//# sourceMappingURL=terser-annotations.js.map
+"
+`;
+
+exports[`fixtures build terser-annotations with microbundle 5`] = `
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e||self).terserAnnotations=n()}(this,function(){function shouldBePreserved(e,n){return e-n}return function(e,n){return{inlined:function(e,n){return e+n}(e,n),preserved:shouldBePreserved(e,n)}}});
+//# sourceMappingURL=terser-annotations.umd.js.map
+"
+`;
+
 exports[`fixtures build ts-custom-declaration with microbundle 1`] = `
 "Used script: microbundle --generateTypes false
 
