@@ -1,5 +1,11 @@
 # microbundle
 
+## 0.13.3
+
+### Patch Changes
+
+- [`3534815`](https://github.com/developit/microbundle/commit/3534815ddabecc080cdec42cd1f6009a81a48ec9) [#848](https://github.com/developit/microbundle/pull/848) Thanks [@developit](https://github.com/developit)! - Bugfix: preserve Terser annotations like `/*@__NOINLINE__*/` during Babel pass
+
 ## 0.13.2
 
 ### Patch Changes
