@@ -133,7 +133,7 @@ The `"exports"` field can also be an object for packages with multiple entry mod
 	"exports": {
 		".": "./dist/foo.modern.js", // import "foo" (the default)
 		"./lite": "./dist/lite.modern.js", // import "foo/lite"
-		"./full": "./dist/full.modern.js" // import "foo"
+		"./full": "./dist/full.modern.js" // import "foo/full"
 	},
 	"scripts": {
 		"build": "microbundle src/*.js" // build foo.js, lite.js and full.js
