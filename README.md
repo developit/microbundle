@@ -350,6 +350,10 @@ Here's what's coming up for Microbundle:
 - [goober](https://github.com/cristianbote/goober) Less than 1KB css-in-js alternative with a familiar API.
 - [react-model](https://github.com/byte-fe/react-model) The next generation state management library for React
 
+## 👀 Examples
+
+- [react-ui-typescript-microbundle](examples/react-ui-typescript-storybook) A React UI library created with Typescript, styled-components, styled-system & Storybook
+
 ## 🥂 License
 
 [MIT](https://oss.ninja/mit/developit/)
