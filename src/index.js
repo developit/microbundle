@@ -581,7 +581,9 @@ function createConfig(options, entry, format, writeMeta) {
 									// unsafe_arrows: true,
 									passes: 10,
 								},
-								minifyOptions.compress || {},
+								typeof minifyOptions.compress === 'boolean'
+									? minifyOptions.compress
+									: minifyOptions.compress || {},
 							),
 							format: {
 								// By default, Terser wraps function arguments in extra parens to trigger eager parsing.
@@ -593,7 +595,10 @@ function createConfig(options, entry, format, writeMeta) {
 							module: modern,
 							ecma: modern ? 2017 : 5,
 							toplevel: modern || format === 'cjs' || format === 'es',
-							mangle: Object.assign({}, minifyOptions.mangle || {}),
+							mangle:
+								typeof minifyOptions.mangle === 'boolean'
+									? minifyOptions.mangle
+									: Object.assign({}, minifyOptions.mangle || {}),
 							nameCache,
 						}),
 						nameCache && {
