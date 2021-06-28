@@ -1,5 +1,11 @@
 # microbundle
 
+## 0.13.4
+
+### Patch Changes
+
+- [`b1a6374`](https://github.com/developit/microbundle/commit/b1a637486234a2ae784ccf0c512321e2d3efef7c) [#858](https://github.com/developit/microbundle/pull/858) Thanks [@bouchenoiremarc](https://github.com/bouchenoiremarc)! - - Allow the minify options `compress` and `mangle` to be set as booleans
+
 ## 0.13.3
 
 ### Patch Changes
