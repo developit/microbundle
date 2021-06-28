@@ -1,5 +1,8 @@
 // Normalize Terser options from microbundle's relaxed JSON format (mutates argument in-place)
 export function normalizeMinifyOptions(minifyOptions) {
+	// ignore normalization if "mangle" is a boolean:
+	if (typeof minifyOptions.mangle === 'boolean') return;
+
 	const mangle = minifyOptions.mangle || (minifyOptions.mangle = {});
 	let properties = mangle.properties;
 
