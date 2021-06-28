@@ -1915,6 +1915,54 @@ exports[`fixtures build minify-config with microbundle 5`] = `
 "
 `;
 
+exports[`fixtures build minify-config-boolean with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+minify-config-boolean
+  dist
+    minify-config-boolean.esm.js
+    minify-config-boolean.esm.js.map
+    minify-config-boolean.js
+    minify-config-boolean.js.map
+    minify-config-boolean.umd.js
+    minify-config-boolean.umd.js.map
+  package.json
+  src
+    index.js
+    two.js
+
+
+Build \\"minifyConfigBoolean\\" to dist:
+107 B: minify-config-boolean.js.gz
+84 B: minify-config-boolean.js.br
+114 B: minify-config-boolean.esm.js.gz
+90 B: minify-config-boolean.esm.js.br
+216 B: minify-config-boolean.umd.js.gz
+159 B: minify-config-boolean.umd.js.br"
+`;
+
+exports[`fixtures build minify-config-boolean with microbundle 2`] = `6`;
+
+exports[`fixtures build minify-config-boolean with microbundle 3`] = `
+"var two={prop1:1,_prop2:2};function index(){return console.log(two.prop1),console.log(two._prop2),two}export default index;
+//# sourceMappingURL=minify-config-boolean.esm.js.map
+"
+`;
+
+exports[`fixtures build minify-config-boolean with microbundle 4`] = `
+"var two={prop1:1,_prop2:2};module.exports=function(){return console.log(two.prop1),console.log(two._prop2),two};
+//# sourceMappingURL=minify-config-boolean.js.map
+"
+`;
+
+exports[`fixtures build minify-config-boolean with microbundle 5`] = `
+"!function(global,factory){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=factory():\\"function\\"==typeof define&&define.amd?define(factory):(global||self).minifyConfigBoolean=factory()}(this,function(){var two={prop1:1,_prop2:2};return function(){return console.log(two.prop1),console.log(two._prop2),two}});
+//# sourceMappingURL=minify-config-boolean.umd.js.map
+"
+`;
+
 exports[`fixtures build minify-path-config with microbundle 1`] = `
 "Used script: microbundle
 
