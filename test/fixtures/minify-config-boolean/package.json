@@ -1,0 +1,7 @@
+{
+  "name": "minify-config-boolean",
+  "minify": {
+    "compress": true,
+    "mangle": false
+  }
+}
