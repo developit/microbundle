@@ -260,6 +260,7 @@ function replaceName(filename, name) {
 }
 
 function walk(exports) {
+	if (!exports) return null;
 	if (typeof exports === 'string') return exports;
 	return walk(exports['.'] || exports.import || exports.module);
 }
