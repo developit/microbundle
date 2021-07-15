@@ -2,7 +2,7 @@
 	"name": "ts-custom-declarations",
 	"main": "dist/index.js",
 	"types": "types/index.d.ts",
-	"source": "src/index.js",
+	"source": "src/index.ts",
   "scripts": {
     "build": "microbundle --generateTypes false"
   }

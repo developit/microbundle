@@ -2728,9 +2728,10 @@ ts-custom-declaration
     index.js.map
     index.umd.js
     index.umd.js.map
+  node_modules
   package.json
   src
-    index.js
+    index.ts
   tsconfig.json
   types
     index.d.ts
