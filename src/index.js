@@ -518,10 +518,10 @@ function createConfig(options, entry, format, writeMeta) {
 							tsconfigDefaults: {
 								compilerOptions: {
 									sourceMap: options.sourcemap,
-									declaration: emitDeclaration,
+									declaration: options.generateTypes !== false,
 									allowJs: true,
 									emitDeclarationOnly: options.generateTypes && !useTypescript,
-									...(emitDeclaration && {
+									...(options.generateTypes !== false && {
 										declarationDir: getDeclarationDir({ options, pkg }),
 									}),
 									jsx: 'preserve',
