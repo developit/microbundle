@@ -57,7 +57,11 @@ export default handler => {
 		.option('--cwd', 'Use an alternative working directory', '.')
 		.option('--sourcemap', 'Generate source map')
 		.option('--css', 'Where to output CSS: "inline" or "external"', 'external')
-		.option('--worker-loader', 'Generate inline worker blobs', false)
+		.option(
+			'--workers',
+			'Bundle module workers - see https://git.io/J3oSF',
+			false,
+		)
 		.option(
 			'--css-modules',
 			'Turns on css-modules for all .css imports. Passing a string will override the scopeName. eg --css-modules="_[hash]"',
