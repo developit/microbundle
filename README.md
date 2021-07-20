@@ -253,19 +253,21 @@ This can be customized by passing the command line argument `--css-modules "[nam
 | true  | import './my-file.css';        | :white_check_mark: |
 | true  | import './my-file.module.css'; | :white_check_mark: |
 
-### Building web workers as inline blobs
+### Building Module Workers
 
-Microbundle is able to detect and bundle workers when building with format `es`
-or `modern`. Consider the following example:
+Microbundle is able to detect and bundle Module Workers when generating bundles in the
+`es`, `umd` and `modern` formats. To use this feature, instantiate your Web Worker as follows:
 
 ```js
-const worker = new Worker('./worker.js', { type: 'module' });
+worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'module' });
+// or simply:
+worker = new Worker('./worker.js', { type: 'module' });
 ```
 
-And build it like this:
+... then add the `--workers` flag to your build command:
 
 ```bash
-microbundle --worker-loader
+microbundle --workers
 ```
 
 For more information see
