@@ -390,7 +390,7 @@ function createConfig(options, entry, format, writeMeta) {
 		options.generateTypes == null
 			? !!(pkg.types || pkg.typings)
 			: options.generateTypes;
-	const useWorkerLoader = options['worker-loader'] !== false;
+	const useWorkerLoader = options.workers !== false;
 
 	const escapeStringExternals = ext =>
 		ext instanceof RegExp ? ext.source : escapeStringRegexp(ext);
