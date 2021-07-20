@@ -3016,3 +3016,63 @@ exports[`fixtures build ts-module with microbundle 7`] = `
 //# sourceMappingURL=ts-module.umd.js.map
 "
 `;
+
+exports[`fixtures build worker-loader with microbundle 1`] = `
+"Used script: microbundle -f modern,es --workers
+
+Directory tree:
+
+worker-loader
+  dist
+    worker-35b22e56.js
+    worker-35b22e56.js.map
+    worker-7e1b9921.js
+    worker-7e1b9921.js.map
+    worker-loader.esm.js
+    worker-loader.esm.js.map
+    worker-loader.modern.js
+    worker-loader.modern.js.map
+  package-lock.json
+  package.json
+  src
+    bar.js
+    index.js
+    worker.js
+
+
+Build \\"workerLoader\\" to dist:
+140 B: worker-loader.modern.js.gz
+112 B: worker-loader.modern.js.br
+63 B: worker-7e1b9921.js.gz
+54 B: worker-7e1b9921.js.br
+150 B: worker-loader.esm.js.gz
+123 B: worker-loader.esm.js.br
+81 B: worker-35b22e56.js.gz
+66 B: worker-35b22e56.js.br"
+`;
+
+exports[`fixtures build worker-loader with microbundle 2`] = `8`;
+
+exports[`fixtures build worker-loader with microbundle 3`] = `
+"self.onmessage=function(e){return self.postMessage(e.data+\\"bar\\")};
+//# sourceMappingURL=worker-35b22e56.js.map
+"
+`;
+
+exports[`fixtures build worker-loader with microbundle 4`] = `
+"self.onmessage=s=>self.postMessage(s.data+\\"bar\\");
+//# sourceMappingURL=worker-7e1b9921.js.map
+"
+`;
+
+exports[`fixtures build worker-loader with microbundle 5`] = `
+"var e=new Worker(new URL(\\"worker-35b22e56.js\\",import.meta.url),{type:\\"module\\"});e.onmessage=function(e){return\\"foobar\\"===e.data},e.postMessage(\\"foo\\");
+//# sourceMappingURL=worker-loader.esm.js.map
+"
+`;
+
+exports[`fixtures build worker-loader with microbundle 6`] = `
+"const e=new Worker(new URL(\\"worker-7e1b9921.js\\",import.meta.url),{type:\\"module\\"});e.onmessage=e=>\\"foobar\\"===e.data,e.postMessage(\\"foo\\");
+//# sourceMappingURL=worker-loader.modern.js.map
+"
+`;
