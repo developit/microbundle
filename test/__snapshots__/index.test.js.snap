@@ -3016,3 +3016,279 @@ exports[`fixtures build ts-module with microbundle 7`] = `
 //# sourceMappingURL=ts-module.umd.js.map
 "
 `;
+
+exports[`fixtures build worker-loader with microbundle 1`] = `
+"Used script: microbundle -f modern,es --worker-loader
+
+Directory tree:
+
+worker-loader
+  dist
+    worker-35b22e56.js
+    worker-35b22e56.js.map
+    worker-7e1b9921.js
+    worker-7e1b9921.js.map
+    worker-loader.esm.js
+    worker-loader.esm.js.map
+    worker-loader.modern.js
+    worker-loader.modern.js.map
+  node_modules
+    @surma
+      rollup-plugin-off-main-thread
+        CODEOWNERS
+        CONTRIBUTING
+        CONTRIBUTORS
+        Dockerfile
+        LICENSE
+        README.md
+        index.js
+        karma.conf.js
+        loader.ejs
+        package.json
+        renovate.json
+        run_tests.js
+        tests
+          amd-function-name.test.js
+          asset-in-worker.test.js
+          dynamic-import.test.js
+          fixtures
+            amd-function-name
+              a.js
+              build
+                runner.html
+              config.json
+              entry.js
+            assets-in-worker
+              build
+                assets
+                  my-asset-620b911b.bin
+                runner.html
+              entry.js
+              rollup.config.js
+              worker.js
+            dynamic-import
+              a.js
+              build
+                runner.html
+              entry.js
+            empty.js
+            import-meta
+              a.js
+              build
+                runner.html
+              entry.js
+            import-meta-worker
+              a.js
+              build
+                runner.html
+              entry.js
+            import-worker-url
+              a.js
+              b.js
+              build
+                runner.html
+              entry.js
+              worker.js
+            import-worker-url-custom-scheme
+              a.js
+              b.js
+              build
+                runner.html
+              config.json
+              entry.js
+              worker.js
+            module-worker
+              a.js
+              b.js
+              build
+                runner.html
+              entry.js
+              rollup.config.js
+              worker.js
+            more-workers
+              a.js
+              b.js
+              build
+                runner.html
+              entry.js
+              worker_a.js
+              worker_b.js
+            public-path
+              a.js
+              build
+                runner.html
+              config.json
+              entry.js
+            simple-bundle
+              a.js
+              build
+                runner.html
+              entry.js
+            single-default
+              a.js
+              build
+                runner.html
+              entry.js
+            url-import-meta-worker
+              a.js
+              b.js
+              build
+                runner.html
+              entry.js
+              worker.js
+            worker
+              a.js
+              b.js
+              build
+                runner.html
+              entry.js
+              worker.js
+          import-meta-worker.test.js
+          import-meta.test.js
+          import-worker-url-custom-scheme.test.js
+          import-worker-url.test.js
+          module-worker.test.js
+          more-workers.test.js
+          public-path.test.js
+          simple-bundle.test.js
+          single-default.test.js
+          url-import-meta-worker.test.js
+          worker.test.js
+    ejs
+      LICENSE
+      README.md
+      ejs.js
+      ejs.min.js
+      jakefile.js
+      lib
+        ejs.js
+        utils.js
+      package.json
+      postinstall.js
+    json5
+      CHANGELOG.md
+      LICENSE.md
+      README.md
+      dist
+        index.js
+        index.min.js
+        index.min.mjs
+        index.mjs
+      lib
+        cli.js
+        index.d.ts
+        index.js
+        parse.d.ts
+        parse.js
+        register.js
+        require.js
+        stringify.d.ts
+        stringify.js
+        unicode.d.ts
+        unicode.js
+        util.d.ts
+        util.js
+      package.json
+    magic-string
+      CHANGELOG.md
+      LICENSE
+      README.md
+      dist
+        magic-string.cjs.js
+        magic-string.cjs.js.map
+        magic-string.es.js
+        magic-string.es.js.map
+        magic-string.umd.js
+        magic-string.umd.js.map
+      index.d.ts
+      package.json
+    minimist
+      LICENSE
+      example
+        parse.js
+      index.js
+      package.json
+      readme.markdown
+      test
+        all_bool.js
+        bool.js
+        dash.js
+        default_bool.js
+        dotted.js
+        kv_short.js
+        long.js
+        num.js
+        parse.js
+        parse_modified.js
+        proto.js
+        short.js
+        stop_early.js
+        unknown.js
+        whitespace.js
+    sourcemap-codec
+      CHANGELOG.md
+      LICENSE
+      README.md
+      dist
+        sourcemap-codec.es.js
+        sourcemap-codec.es.js.map
+        sourcemap-codec.umd.js
+        sourcemap-codec.umd.js.map
+        types
+          sourcemap-codec.d.ts
+      package.json
+    tippex
+      CHANGELOG.md
+      README.md
+      dist
+        tippex.es.js
+        tippex.es.js.map
+        tippex.umd.js
+        tippex.umd.js.map
+      package.json
+      src
+        index.js
+  package-lock.json
+  package.json
+  src
+    bar.js
+    index.js
+    worker.js
+
+
+Build \\"workerLoader\\" to dist:
+140 B: worker-loader.modern.js.gz
+112 B: worker-loader.modern.js.br
+63 B: worker-7e1b9921.js.gz
+54 B: worker-7e1b9921.js.br
+150 B: worker-loader.esm.js.gz
+123 B: worker-loader.esm.js.br
+81 B: worker-35b22e56.js.gz
+66 B: worker-35b22e56.js.br"
+`;
+
+exports[`fixtures build worker-loader with microbundle 2`] = `8`;
+
+exports[`fixtures build worker-loader with microbundle 3`] = `
+"self.onmessage=function(e){return self.postMessage(e.data+\\"bar\\")};
+//# sourceMappingURL=worker-35b22e56.js.map
+"
+`;
+
+exports[`fixtures build worker-loader with microbundle 4`] = `
+"self.onmessage=s=>self.postMessage(s.data+\\"bar\\");
+//# sourceMappingURL=worker-7e1b9921.js.map
+"
+`;
+
+exports[`fixtures build worker-loader with microbundle 5`] = `
+"var e=new Worker(new URL(\\"worker-35b22e56.js\\",import.meta.url),{type:\\"module\\"});e.onmessage=function(e){return\\"foobar\\"===e.data},e.postMessage(\\"foo\\");
+//# sourceMappingURL=worker-loader.esm.js.map
+"
+`;
+
+exports[`fixtures build worker-loader with microbundle 6`] = `
+"const e=new Worker(new URL(\\"worker-7e1b9921.js\\",import.meta.url),{type:\\"module\\"});e.onmessage=e=>\\"foobar\\"===e.data,e.postMessage(\\"foo\\");
+//# sourceMappingURL=worker-loader.modern.js.map
+"
+`;

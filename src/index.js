@@ -18,6 +18,7 @@ import alias from '@rollup/plugin-alias';
 import postcss from 'rollup-plugin-postcss';
 import typescript from 'rollup-plugin-typescript2';
 import json from '@rollup/plugin-json';
+import OMT from '@surma/rollup-plugin-off-main-thread';
 import logError from './log-error';
 import { isDir, isFile, stdout, isTruthy, removeScope } from './utils';
 import { getSizeInfo } from './lib/compressed-size';
@@ -389,6 +390,8 @@ function createConfig(options, entry, format, writeMeta) {
 		options.generateTypes == null
 			? !!(pkg.types || pkg.typings)
 			: options.generateTypes;
+	const useWorkerLoader = options['worker-loader'] !== false;
+
 	const escapeStringExternals = ext =>
 		ext instanceof RegExp ? ext.source : escapeStringRegexp(ext);
 	const externalPredicate = new RegExp(
@@ -427,7 +430,7 @@ function createConfig(options, entry, format, writeMeta) {
 	let config = {
 		/** @type {import('rollup').InputOptions} */
 		inputOptions: {
-			// disable Rollup's cache for the modern build to prevent re-use of legacy transpiled modules:
+			// disable Rollup's cache for modern builds to prevent re-use of legacy transpiled modules:
 			cache,
 			input: entry,
 			external: id => {
@@ -616,6 +619,9 @@ function createConfig(options, entry, format, writeMeta) {
 							},
 						},
 					],
+					// NOTE: OMT only works with amd and esm
+					// Source: https://github.com/surma/rollup-plugin-off-main-thread#config
+					useWorkerLoader && (format === 'es' || modern) && OMT(),
 					/** @type {import('rollup').Plugin} */
 					({
 						name: 'postprocessing',
