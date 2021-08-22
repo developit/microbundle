@@ -397,9 +397,13 @@ function createConfig(options, entry, format, writeMeta) {
 	const externalTest =
 		external.length === 0 ? id => false : id => externalPredicate.test(id);
 
+	let endsWithNewLine = false;
+
 	function loadNameCache() {
 		try {
-			nameCache = JSON.parse(fs.readFileSync(getNameCachePath(), 'utf8'));
+			const data = fs.readFileSync(getNameCachePath(), 'utf8');
+			endsWithNewLine = data.endsWith('\n');
+			nameCache = JSON.parse(data);
 			// mangle.json can contain a "minify" field, same format as the pkg.mangle:
 			if (nameCache.minify) {
 				minifyOptions = Object.assign(
@@ -609,7 +613,11 @@ function createConfig(options, entry, format, writeMeta) {
 								if (writeMeta && nameCache) {
 									fs.writeFile(
 										getNameCachePath(),
-										JSON.stringify(nameCache, null, 2),
+										JSON.stringify(
+											endsWithNewLine ? `${nameCache}\r\n` : nameCache,
+											null,
+											2,
+										),
 										() => {},
 									);
 								}
