@@ -29,6 +29,7 @@ import {
 } from './lib/option-normalization';
 import { getConfigFromPkgJson, getName } from './lib/package-info';
 import { shouldCssModules, cssModulesConfig } from './lib/css-modules';
+import { EOL } from 'os';
 
 // Extensions to use when resolving modules
 const EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs'];
@@ -402,7 +403,7 @@ function createConfig(options, entry, format, writeMeta) {
 	function loadNameCache() {
 		try {
 			const data = fs.readFileSync(getNameCachePath(), 'utf8');
-			endsWithNewLine = data.endsWith('\n');
+			endsWithNewLine = data.endsWith(EOL);
 			nameCache = JSON.parse(data);
 			// mangle.json can contain a "minify" field, same format as the pkg.mangle:
 			if (nameCache.minify) {
@@ -614,7 +615,7 @@ function createConfig(options, entry, format, writeMeta) {
 									fs.writeFile(
 										getNameCachePath(),
 										JSON.stringify(
-											endsWithNewLine ? `${nameCache}\r\n` : nameCache,
+											endsWithNewLine ? `${nameCache}${EOL}` : nameCache,
 											null,
 											2,
 										),
