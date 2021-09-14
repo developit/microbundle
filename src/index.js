@@ -133,8 +133,8 @@ export default async function microbundle(inputOptions) {
 	const targetDir = relative(cwd, dirname(options.output)) || '.';
 	const sourceExist = options.input.length > 0;
 	const banner = sourceExist
-		? blue(`Build "${options.name}" to ${targetDir}:`)
-		: red(`Error: No entry module found for "${options.name}"`);
+		? blue(`Build "${options.pkg.name}" to ${targetDir}:`)
+		: red(`Error: No entry module found for "${options.pkg.name}"`);
 	return {
 		output: `${banner}\n   ${out.join('\n   ')}`,
 	};

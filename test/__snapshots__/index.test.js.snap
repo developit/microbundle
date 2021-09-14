@@ -17,7 +17,7 @@ alias
     index.js
 
 
-Build \\"aliasMapping\\" to dist:
+Build \\"alias-mapping\\" to dist:
 62 B: alias-mapping.js.gz
 46 B: alias-mapping.js.br
 62 B: alias-mapping.esm.js.gz
@@ -62,7 +62,7 @@ alias-external
     index.js
 
 
-Build \\"aliasExternal\\" to dist:
+Build \\"alias-external\\" to dist:
 37 B: alias-external.js.gz
 21 B: alias-external.js.br
 37 B: alias-external.esm.js.gz
@@ -112,7 +112,7 @@ async-iife-ts
   tsconfig.json
 
 
-Build \\"asyncIifeTs\\" to dist:
+Build \\"async-iife-ts\\" to dist:
 70 B: async-iife-ts.js.gz
 55 B: async-iife-ts.js.br
 70 B: async-iife-ts.esm.js.gz
@@ -164,7 +164,7 @@ async-ts
   tsconfig.json
 
 
-Build \\"asyncTs\\" to dist:
+Build \\"async-ts\\" to dist:
 117 B: async-ts.js.gz
 91 B: async-ts.js.br
 128 B: async-ts.esm.js.gz
@@ -219,7 +219,7 @@ basic
     two.js
 
 
-Build \\"basicLib\\" to dist:
+Build \\"basic-lib\\" to dist:
 187 B: basic-lib.js.gz
 138 B: basic-lib.js.br
 188 B: basic-lib.esm.js.gz
@@ -266,7 +266,7 @@ basic-babelrc
     index.js
 
 
-Build \\"basicBabelrc\\" to dist:
+Build \\"basic-babelrc\\" to dist:
 122 B: basic-babelrc.js.gz
 91 B: basic-babelrc.js.br
 122 B: basic-babelrc.esm.js.gz
@@ -314,7 +314,7 @@ basic-compress-false
     two.js
 
 
-Build \\"basicCompressFalse\\" to dist:
+Build \\"basic-compress-false\\" to dist:
 260 B: basic-compress-false.js.gz
 206 B: basic-compress-false.js.br
 258 B: basic-compress-false.esm.js.gz
@@ -446,7 +446,7 @@ basic-css
     two.css
 
 
-Build \\"basicCss\\" to dist:
+Build \\"basic-css\\" to dist:
 107 B: basic-css.js.gz
 60 B: basic-css.js.br
 109 B: basic-css.esm.js.gz
@@ -499,7 +499,7 @@ basic-dashed-external
     two.js
 
 
-Build \\"basicDashedExternal\\" to dist:
+Build \\"basic-dashed-external\\" to dist:
 276 B: basic-dashed-external.js.gz
 212 B: basic-dashed-external.js.br
 214 B: basic-dashed-external.esm.js.gz
@@ -547,7 +547,7 @@ basic-flow
     index.js
 
 
-Build \\"basicLibFlow\\" to dist:
+Build \\"basic-lib-flow\\" to dist:
 57 B: basic-lib-flow.js.gz
 43 B: basic-lib-flow.js.br
 56 B: basic-lib-flow.esm.js.gz
@@ -595,7 +595,7 @@ basic-json
     two.json
 
 
-Build \\"basicJson\\" to dist:
+Build \\"basic-json\\" to dist:
 93 B: basic-json.js.gz
 65 B: basic-json.js.br
 92 B: basic-json.esm.js.gz
@@ -648,7 +648,7 @@ basic-multi-source
   package.json
 
 
-Build \\"basicMultiSource\\" to dist:
+Build \\"basic-multi-source\\" to dist:
 43 B: a.js.gz
 27 B: a.js.br
 43 B: a.esm.js.gz
@@ -720,7 +720,7 @@ basic-no-compress
     two.js
 
 
-Build \\"basicNoCompress\\" to dist:
+Build \\"basic-no-compress\\" to dist:
 260 B: basic-no-compress.js.gz
 206 B: basic-no-compress.js.br
 258 B: basic-no-compress.esm.js.gz
@@ -846,7 +846,7 @@ basic-no-pkg-main
     two.js
 
 
-Build \\"basicNoPkgMain\\" to dist:
+Build \\"basic-no-pkg-main\\" to dist:
 187 B: basic-no-pkg-main.js.gz
 138 B: basic-no-pkg-main.js.br
 188 B: basic-no-pkg-main.js.gz
@@ -877,7 +877,7 @@ basic-node-internals
     index.js
 
 
-Build \\"basicNodeInternals\\" to dist:
+Build \\"basic-node-internals\\" to dist:
 191 B: basic-node-internals.js.gz
 149 B: basic-node-internals.js.br"
 `;
@@ -927,7 +927,7 @@ basic-ts
   tsconfig.json
 
 
-Build \\"basicLibTs\\" to dist:
+Build \\"basic-lib-ts\\" to dist:
 118 B: basic-lib-ts.js.gz
 94 B: basic-lib-ts.js.br
 118 B: basic-lib-ts.esm.js.gz
@@ -994,7 +994,7 @@ basic-tsx
   tsconfig.json
 
 
-Build \\"basicLibTsx\\" to dist:
+Build \\"basic-lib-tsx\\" to dist:
 213 B: basic-lib-tsx.js.gz
 164 B: basic-lib-tsx.js.br
 218 B: basic-lib-tsx.esm.js.gz
@@ -1100,7 +1100,7 @@ class-decorators-ts
   tsconfig.json
 
 
-Build \\"classDecoratorsTs\\" to dist:
+Build \\"class-decorators-ts\\" to dist:
 348 B: class-decorators-ts.js.gz
 288 B: class-decorators-ts.js.br
 348 B: class-decorators-ts.esm.js.gz
@@ -1158,7 +1158,7 @@ class-properties
     index.js
 
 
-Build \\"classProperties\\" to dist:
+Build \\"class-properties\\" to dist:
 93 B: class-properties.js.gz
 79 B: class-properties.js.br
 96 B: class-properties.esm.js.gz
@@ -1205,7 +1205,7 @@ css-modules--false
     not_scoped.module.css
 
 
-Build \\"cssModulesFalse\\" to dist:
+Build \\"css-modules--false\\" to dist:
 49 B: css-modules--false.js.gz
 23 B: css-modules--false.js.br
 52 B: css-modules--false.esm.js.gz
@@ -1251,7 +1251,7 @@ css-modules--null
     scoped.module.css
 
 
-Build \\"cssModulesNull\\" to dist:
+Build \\"css-modules--null\\" to dist:
 110 B: css-modules--null.js.gz
 72 B: css-modules--null.js.br
 112 B: css-modules--null.esm.js.gz
@@ -1297,7 +1297,7 @@ css-modules--string
     scoped.module.css
 
 
-Build \\"cssModulesString\\" to dist:
+Build \\"css-modules--string\\" to dist:
 166 B: css-modules--string.js.gz
 118 B: css-modules--string.js.br
 168 B: css-modules--string.esm.js.gz
@@ -1343,7 +1343,7 @@ css-modules--true
     scoped.module.css
 
 
-Build \\"cssModulesTrue\\" to dist:
+Build \\"css-modules--true\\" to dist:
 139 B: css-modules--true.js.gz
 94 B: css-modules--true.js.br
 141 B: css-modules--true.esm.js.gz
@@ -1389,7 +1389,7 @@ custom-babelrc
     index.js
 
 
-Build \\"customBabelrc\\" to dist:
+Build \\"custom-babelrc\\" to dist:
 218 B: custom-babelrc.js.gz
 193 B: custom-babelrc.js.br
 222 B: custom-babelrc.esm.js.gz
@@ -1437,7 +1437,7 @@ custom-source
     two.js
 
 
-Build \\"customSource\\" to dist:
+Build \\"custom-source\\" to dist:
 187 B: custom-source.js.gz
 138 B: custom-source.js.br
 188 B: custom-source.esm.js.gz
@@ -1485,7 +1485,7 @@ custom-source
     two.js
 
 
-Build \\"customSrc\\" to dist:
+Build \\"custom-src\\" to dist:
 187 B: custom-src.js.gz
 138 B: custom-src.js.br
 188 B: custom-src.esm.js.gz
@@ -1532,7 +1532,7 @@ default-named
     index.js
 
 
-Build \\"defaultNamed\\" to dist:
+Build \\"default-named\\" to dist:
 60 B: default-named.js.gz
 46 B: default-named.js.br
 74 B: default-named.esm.js.gz
@@ -1613,7 +1613,7 @@ define-expression
   package.json
 
 
-Build \\"defineExpression\\" to dist:
+Build \\"define-expression\\" to dist:
 56 B: define-expression.esm.js.gz
 40 B: define-expression.esm.js.br"
 `;
@@ -1646,7 +1646,7 @@ esnext-ts
   tsconfig.json
 
 
-Build \\"esnextTs\\" to dist:
+Build \\"esnext-ts\\" to dist:
 1007 B: esnext-ts.js.gz
 898 B: esnext-ts.js.br
 1008 B: esnext-ts.esm.js.gz
@@ -1696,7 +1696,7 @@ inline-source-map
     two.js
 
 
-Build \\"inlineSourceMap\\" to dist:
+Build \\"inline-source-map\\" to dist:
 187 B: inline-source-map.js.gz
 138 B: inline-source-map.js.br
 188 B: inline-source-map.esm.js.gz
@@ -1791,7 +1791,7 @@ macro
     macro.js
 
 
-Build \\"macroLib\\" to dist:
+Build \\"macro-lib\\" to dist:
 49 B: macro-lib.js.gz
 33 B: macro-lib.js.br
 48 B: macro-lib.esm.js.gz
@@ -1840,7 +1840,7 @@ mangle-json-file
     two.js
 
 
-Build \\"mangleJsonFile\\" to dist:
+Build \\"mangle-json-file\\" to dist:
 103 B: mangle-json-file.js.gz
 89 B: mangle-json-file.js.br
 105 B: mangle-json-file.esm.js.gz
@@ -1888,7 +1888,7 @@ minify-config
     two.js
 
 
-Build \\"minifyConfig\\" to dist:
+Build \\"minify-config\\" to dist:
 99 B: minify-config.js.gz
 85 B: minify-config.js.br
 101 B: minify-config.esm.js.gz
@@ -1936,7 +1936,7 @@ minify-config-boolean
     two.js
 
 
-Build \\"minifyConfigBoolean\\" to dist:
+Build \\"minify-config-boolean\\" to dist:
 107 B: minify-config-boolean.js.gz
 84 B: minify-config-boolean.js.br
 114 B: minify-config-boolean.esm.js.gz
@@ -1985,7 +1985,7 @@ minify-path-config
     two.js
 
 
-Build \\"minifyPathConfig\\" to dist:
+Build \\"minify-path-config\\" to dist:
 103 B: minify-path-config.js.gz
 89 B: minify-path-config.js.br
 105 B: minify-path-config.esm.js.gz
@@ -2032,7 +2032,7 @@ minify-path-parent-dir
   two.js
 
 
-Build \\"minifyPathParentDir\\" to dist:
+Build \\"minify-path-parent-dir\\" to dist:
 103 B: minify-path-parent-dir.js.gz
 89 B: minify-path-parent-dir.js.br
 105 B: minify-path-parent-dir.esm.js.gz
@@ -2076,7 +2076,7 @@ modern
     two.js
 
 
-Build \\"modernLib\\" to dist:
+Build \\"modern-lib\\" to dist:
 113 B: modern-lib.modern.js.gz
 92 B: modern-lib.modern.js.br"
 `;
@@ -2110,7 +2110,7 @@ modern-generators
     two.js
 
 
-Build \\"modernGenerators\\" to dist:
+Build \\"modern-generators\\" to dist:
 248 B: modern-generators.js.gz
 201 B: modern-generators.js.br
 118 B: modern-generators.modern.js.gz
@@ -2166,7 +2166,7 @@ name-custom-amd
     two.js
 
 
-Build \\"customNameAmd\\" to dist:
+Build \\"name-custom-amd\\" to dist:
 187 B: name-custom-amd.js.gz
 138 B: name-custom-amd.js.br
 188 B: name-custom-amd.esm.js.gz
@@ -2214,7 +2214,7 @@ name-custom-cli
     two.js
 
 
-Build \\"nameCustomCli\\" to dist:
+Build \\"name-custom\\" to dist:
 187 B: name-custom.js.gz
 138 B: name-custom.js.br
 188 B: name-custom.esm.js.gz
@@ -2261,7 +2261,7 @@ no-pkg
     two.js
 
 
-Build \\"noPkg\\" to dist:
+Build \\"no-pkg\\" to dist:
 187 B: no-pkg.js.gz
 138 B: no-pkg.js.br
 188 B: no-pkg.esm.js.gz
@@ -2309,7 +2309,7 @@ no-pkg-name
     two.js
 
 
-Build \\"noPkgName\\" to dist:
+Build \\"no-pkg-name\\" to dist:
 187 B: no-pkg-name.js.gz
 138 B: no-pkg-name.js.br
 188 B: no-pkg-name.esm.js.gz
@@ -2359,7 +2359,7 @@ optional-chaining-ts
   tsconfig.json
 
 
-Build \\"optionalChainingTs\\" to dist:
+Build \\"optional-chaining-ts\\" to dist:
 109 B: optional-chaining-ts.js.gz
 88 B: optional-chaining-ts.js.br
 111 B: optional-chaining-ts.esm.js.gz
@@ -2415,7 +2415,7 @@ parameters-rest-closure
     index.js
 
 
-Build \\"parametersRestClosure\\" to dist:
+Build \\"parameters-rest-closure\\" to dist:
 157 B: parameters-rest-closure.js.gz
 115 B: parameters-rest-closure.js.br
 165 B: parameters-rest-closure.esm.js.gz
@@ -2507,7 +2507,7 @@ publish-config
     foo.ts
 
 
-Build \\"publishConfig\\" to dist:
+Build \\"publish-config\\" to dist:
 55 B: bar.js.gz
 33 B: bar.js.br"
 `;
@@ -2688,7 +2688,7 @@ terser-annotations
     index.js
 
 
-Build \\"terserAnnotations\\" to dist:
+Build \\"terser-annotations\\" to dist:
 133 B: terser-annotations.js.gz
 104 B: terser-annotations.js.br
 138 B: terser-annotations.esm.js.gz
@@ -2739,7 +2739,7 @@ ts-custom-declaration
     index.d.ts
 
 
-Build \\"tsCustomDeclarations\\" to dist:
+Build \\"ts-custom-declarations\\" to dist:
 55 B: index.js.gz
 33 B: index.js.br
 61 B: index.esm.js.gz
@@ -2797,7 +2797,7 @@ ts-declaration
     index.d.ts
 
 
-Build \\"tsDeclarations\\" to dist:
+Build \\"ts-declarations\\" to dist:
 55 B: index.js.gz
 33 B: index.js.br
 61 B: index.esm.js.gz
@@ -2854,7 +2854,7 @@ ts-jsx
   tsconfig.json
 
 
-Build \\"tsJsx\\" to dist:
+Build \\"ts-jsx\\" to dist:
 130 B: ts-jsx.js.gz
 94 B: ts-jsx.js.br
 131 B: ts-jsx.esm.js.gz
@@ -2911,7 +2911,7 @@ ts-mixed-exports
   tsconfig.json
 
 
-Build \\"tsMixedExports\\" to dist:
+Build \\"ts-mixed-exports\\" to dist:
 130 B: ts-mixed-exports.js.gz
 104 B: ts-mixed-exports.js.br
 134 B: ts-mixed-exports.esm.js.gz
@@ -2981,7 +2981,7 @@ ts-module
   tsconfig.json
 
 
-Build \\"tsModule\\" to dist:
+Build \\"ts-module\\" to dist:
 59 B: ts-module.js.gz
 42 B: ts-module.js.br
 65 B: ts-module.esm.js.gz
@@ -3043,7 +3043,7 @@ worker-loader
     worker.js
 
 
-Build \\"workerLoader\\" to dist:
+Build \\"worker-loader\\" to dist:
 140 B: worker-loader.modern.js.gz
 112 B: worker-loader.modern.js.br
 63 B: worker-7e1b9921.js.gz
