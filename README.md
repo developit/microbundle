@@ -166,7 +166,7 @@ The filenames and paths for generated bundles in each format are defined by the 
   "module": "dist/foo.m.js",           // ES Modules output bundle 
   "exports": {
     "require": "./dist/foo.js",        // CommonJS output bundle
-    "default": "./dist/foo.modern.js", // Modern ES Modules output bundle
+    "import": "./dist/foo.modern.js", // Modern ES Modules output bundle
   },
   "types": "dist/foo.d.ts"             // TypeScript typings directory
 }
