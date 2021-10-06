@@ -487,9 +487,7 @@ function createConfig(options, entry, format, writeMeta) {
 					nodeResolve({
 						mainFields: ['module', 'jsnext', 'main'],
 						browser: options.target !== 'node',
-						exportConditions: [
-							options.target === 'node' ? 'node' : 'browser'
-						],
+						exportConditions: [options.target === 'node' ? 'node' : 'browser'],
 						// defaults + .jsx
 						extensions: ['.mjs', '.js', '.jsx', '.json', '.node'],
 						preferBuiltins: options.target === 'node',
