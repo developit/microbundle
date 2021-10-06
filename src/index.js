@@ -524,10 +524,12 @@ function createConfig(options, entry, format, writeMeta) {
 							tsconfigDefaults: {
 								compilerOptions: {
 									sourceMap: options.sourcemap,
-									declaration: true,
+									declaration: options.generateTypes !== false,
 									allowJs: true,
 									emitDeclarationOnly: options.generateTypes && !useTypescript,
-									declarationDir: getDeclarationDir({ options, pkg }),
+									...(options.generateTypes !== false && {
+										declarationDir: getDeclarationDir({ options, pkg }),
+									}),
 									jsx: 'preserve',
 									jsxFactory:
 										// TypeScript fails to resolve Fragments when jsxFactory
