@@ -223,6 +223,8 @@ Just point the input to a `.ts` file through either the cli or the `source` key 
 
 Microbundle will generally respect your TypeScript config defined in a `tsconfig.json` file with notable exceptions being the "[target](https://www.typescriptlang.org/tsconfig#target)" and "[module](https://www.typescriptlang.org/tsconfig#module)" settings. To ensure your TypeScript configuration matches the configuration that Microbundle uses internally it's strongly recommended that you set `"module": "ESNext"` and `"target": "ESNext"` in your `tsconfig.json`.
 
+To ensure Microbundle does not process extraneous files, by default it only includes your entry point. If you want to include other files for compilation, such as ambient declarations, make sure to add either "[files](https://www.typescriptlang.org/tsconfig#files)" or "[include](https://www.typescriptlang.org/tsconfig#include)" into your `tsconfig.json`.
+
 If you're using TypeScript with CSS Modules, you will want to set `"include": ["node_modules/microbundle/index.d.ts"]` in your `tsconfig.json` to tell TypeScript how to handle your CSS Module imports.
 
 ### CSS and CSS Modules
