@@ -1,0 +1,6 @@
+{
+  "name": "worker-loader",
+  "scripts": {
+    "build": "microbundle -f modern,es --workers"
+  }
+}
