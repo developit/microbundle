@@ -259,10 +259,12 @@ function replaceName(filename, name) {
 	);
 }
 
-function walk(exports) {
+function walk(exports, includeDefault) {
 	if (!exports) return null;
 	if (typeof exports === 'string') return exports;
-	return walk(exports['.'] || exports.import || exports.module);
+	let p = exports['.'] || exports.import || exports.module;
+	if (!p && includeDefault) p = exports.default;
+	return walk(p, includeDefault);
 }
 
 function getMain({ options, entry, format }) {
@@ -296,7 +298,7 @@ function getMain({ options, entry, format }) {
 		mainNoExtension,
 	);
 	mainsByFormat.modern = replaceName(
-		(pkg.exports && walk(pkg.exports)) ||
+		(pkg.exports && walk(pkg.exports, pkg.type === 'module')) ||
 			(pkg.syntax && pkg.syntax.esmodules) ||
 			pkg.esmodule ||
 			'x.modern.js',
