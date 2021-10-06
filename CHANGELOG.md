@@ -1,5 +1,23 @@
 # microbundle
 
+## 0.14.0
+
+### Minor Changes
+
+- [`1b61029`](https://github.com/developit/microbundle/commit/1b6102966440bd7000e0e457f8c0b7eeb7e05593) [#867](https://github.com/developit/microbundle/pull/867) Thanks [@bouchenoiremarc](https://github.com/bouchenoiremarc)! - - Add support for Module Workers with a new `--workers` flag
+
+### Patch Changes
+
+- [`5e93a0e`](https://github.com/developit/microbundle/commit/5e93a0e4cc28ea8f080a08e3a8530b6bfdf25f42) [#853](https://github.com/developit/microbundle/pull/853) Thanks [@developit](https://github.com/developit)! - Fix crash when traversing `"exports"` objects (#852)
+
+* [`96b85da`](https://github.com/developit/microbundle/commit/96b85da1e32b4ffbef9d83387ff399d8b3ee3852) [#887](https://github.com/developit/microbundle/pull/887) Thanks [@developit](https://github.com/developit)! - When using `--target node`, resolve "node" conditional Package Export keys, otherwise resolve "browser" keys.
+
+- [`5d0465b`](https://github.com/developit/microbundle/commit/5d0465b39bccff31673d351fc9d29cb4c470407d) [#875](https://github.com/developit/microbundle/pull/875) Thanks [@dwightjack](https://github.com/dwightjack)! - Preserve terser annotations in compressed bundle
+
+* [`b1a6374`](https://github.com/developit/microbundle/commit/b1a637486234a2ae784ccf0c512321e2d3efef7c) [#858](https://github.com/developit/microbundle/pull/858) Thanks [@bouchenoiremarc](https://github.com/bouchenoiremarc)! - - Allow the minify options `compress` and `mangle` to be set as booleans
+
+- [`2980336`](https://github.com/developit/microbundle/commit/29803364fe54cc1a7a8543d61e694c90b4cdce6a) [#865](https://github.com/developit/microbundle/pull/865) Thanks [@rschristian](https://github.com/rschristian)! - Expands generateTypes flag to support libs with TS entrypoints
+
 ## 0.13.3
 
 ### Patch Changes
