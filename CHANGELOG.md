@@ -1,5 +1,13 @@
 # microbundle
 
+## 0.14.1
+
+### Patch Changes
+
+- [`2a0ca88`](https://github.com/developit/microbundle/commit/2a0ca8843f34c3773bb41eb3f8f571fb6b2b2d52) [#882](https://github.com/developit/microbundle/pull/882) Thanks [@MiKr13](https://github.com/MiKr13)! - feat: :sparkles: Closes #497: preserve trailing newline in mangle.json
+
+* [`26f382a`](https://github.com/developit/microbundle/commit/26f382a989e86fdcc5149f73f7b6c9d314a4bf37) [#895](https://github.com/developit/microbundle/pull/895) Thanks [@rschristian](https://github.com/rschristian)! - Completion message shows pkg's actual name, rather than safe name
+
 ## 0.14.0
 
 ### Minor Changes
