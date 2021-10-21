@@ -46,39 +46,40 @@ export default handler => {
 		.option('--target', 'Specify your target environment (node or web)', 'web')
 		.option('--external', `Specify external dependencies, or 'none'`)
 		.option('--globals', `Specify globals dependencies, or 'none'`)
-		.example('microbundle --globals react=React,jquery=$')
+		.example('--globals react=React,jquery=$')
 		.option('--define', 'Replace constants with hard-coded values')
-		.example('microbundle --define API_KEY=1234')
+		.example('--define API_KEY=1234')
 		.option('--alias', `Map imports to different modules`)
-		.example('microbundle --alias react=preact')
+		.example('--alias react=preact')
 		.option('--compress', 'Compress output using Terser', null)
 		.option('--strict', 'Enforce undefined global context and add "use strict"')
 		.option('--name', 'Specify name exposed in UMD builds')
 		.option('--cwd', 'Use an alternative working directory', '.')
 		.option('--sourcemap', 'Generate source map')
-		.option('--css', 'Where to output CSS: "inline" or "external"', 'external')
+		.example("watch --no-sourcemap # don't generate sourcemaps")
+		.option('--raw', 'Show raw byte size', false)
+		.option('--jsx', 'A custom JSX pragma like React.createElement', 'h')
 		.option(
-			'--workers',
-			'Bundle module workers - see https://git.io/J3oSF',
-			false,
+			'--jsxImportSource',
+			'Declares the module specifier to be used for importing jsx factory functions',
 		)
+		.option('--tsconfig', 'Specify the path to a custom tsconfig.json')
+		.example('build --tsconfig tsconfig.build.json')
+		.option(
+			'--generateTypes',
+			'Whether or not to generate types , if `types` or `typings` is set in `package.json` then it will default to be `true`',
+		)
+		.option('--css', 'Where to output CSS: "inline" or "external"', 'external')
 		.option(
 			'--css-modules',
 			'Turns on css-modules for all .css imports. Passing a string will override the scopeName. eg --css-modules="_[hash]"',
 			null,
 		)
-		.example("microbundle --no-sourcemap # don't generate sourcemaps")
-		.option('--raw', 'Show raw byte size', false)
 		.option(
-			'--jsx',
-			'A custom JSX pragma like React.createElement (default: h)',
-		)
-		.option('--tsconfig', 'Specify the path to a custom tsconfig.json')
-		.option(
-			'--generateTypes',
-			'Whether or not to generate types , if `types` or `typings` is set in `package.json` then it will default to be `true`',
-		)
-		.example('microbundle build --tsconfig tsconfig.build.json');
+			'--workers',
+			'Bundle module workers - see https://git.io/J3oSF',
+			false,
+		);
 
 	prog
 		.command('build [...entries]', '', { default: true })
