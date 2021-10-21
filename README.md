@@ -38,16 +38,19 @@
 
 ```jsonc
 {
-  "name": "foo",                     // your package name
+  "name": "foo",                      // your package name
   "type": "module",
-  "source": "src/foo.js",            // your source code
-  "exports": "./dist/foo.modern.js", // where to generate the modern bundle (see below)
-  "main": "./dist/foo.cjs",          // where to generate the CommonJS bundle
-  "module": "./dist/foo.module.js",  // where to generate the ESM bundle
-  "unpkg": "./dist/foo.umd.js",      // where to generate the UMD bundle (also aliased as "umd:main")
+  "source": "src/foo.js",             // your source code
+  "exports": {
+    "require": "./dist/foo.cjs",      // used for require() in Node 12+
+    "default": "./dist/foo.modern.js" // where to generate the modern bundle (see below)
+  },
+  "main": "./dist/foo.cjs",           // where to generate the CommonJS bundle
+  "module": "./dist/foo.module.js",   // where to generate the ESM bundle
+  "unpkg": "./dist/foo.umd.js",       // where to generate the UMD bundle (also aliased as "umd:main")
   "scripts": {
-    "build": "microbundle",          // compiles "source" to "main"/"module"/"unpkg"
-    "dev": "microbundle watch"       // re-build when source files change
+    "build": "microbundle",           // compiles "source" to "main"/"module"/"unpkg"
+    "dev": "microbundle watch"        // re-build when source files change
   }
 }
 ```
