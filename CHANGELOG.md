@@ -1,5 +1,11 @@
 # microbundle
 
+## 0.14.2
+
+### Patch Changes
+
+- [`dd0bdde`](https://github.com/developit/microbundle/commit/dd0bdde9c6ae7d0690fa73aead1c1744ae3b086a) [#904](https://github.com/developit/microbundle/pull/904) Thanks [@rschristian](https://github.com/rschristian)! - Added missing CLI doc for 'jsxImportSource' and correcting the Examples section of the '--help' output
+
 ## 0.14.1
 
 ### Patch Changes
