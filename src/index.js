@@ -680,6 +680,8 @@ function createConfig(options, entry, format, writeMeta) {
 			strict: options.strict === true,
 			freeze: false,
 			esModule: false,
+			generatedCode: modern ? 'es2015' : 'es5',
+			externalLiveBindings: false,
 			sourcemap: options.sourcemap,
 			get banner() {
 				return shebang[options.name];
