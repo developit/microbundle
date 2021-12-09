@@ -680,7 +680,8 @@ function createConfig(options, entry, format, writeMeta) {
 			strict: options.strict === true,
 			freeze: false,
 			esModule: false,
-			generatedCode: modern ? 'es2015' : 'es5',
+			// @TODO: enable this when updating to the latest Rollup:
+			//generatedCode: modern ? 'es2015' : 'es5',
 			externalLiveBindings: false,
 			sourcemap: options.sourcemap,
 			get banner() {
