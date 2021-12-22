@@ -43,3 +43,5 @@ export function safeVariableName(name) {
 	const identifier = normalized.replace(INVALID_ES3_IDENT, '');
 	return camelCase(identifier);
 }
+
+export const EXTENSION = /(\.(umd|cjs|es|m))?\.([cm]?[tj]sx?)$/;

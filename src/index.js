@@ -20,7 +20,14 @@ import typescript from 'rollup-plugin-typescript2';
 import json from '@rollup/plugin-json';
 import OMT from '@surma/rollup-plugin-off-main-thread';
 import logError from './log-error';
-import { isDir, isFile, stdout, isTruthy, removeScope } from './utils';
+import {
+	EXTENSION,
+	isDir,
+	isFile,
+	isTruthy,
+	stdout,
+	removeScope,
+} from './utils';
 import { getSizeInfo } from './lib/compressed-size';
 import { normalizeMinifyOptions } from './lib/terser';
 import {
@@ -279,17 +286,12 @@ function getMain({ options, entry, format }) {
 
 	let mainNoExtension = options.output;
 	if (options.multipleEntries) {
-		let name = entry.match(
-			/([\\/])index(\.(umd|cjs|es|m))?\.(mjs|cjs|[tj]sx?)$/,
-		)
+		let name = entry.match(new RegExp(/([\\/])index/.source + EXTENSION.source))
 			? mainNoExtension
 			: entry;
 		mainNoExtension = resolve(dirname(mainNoExtension), basename(name));
 	}
-	mainNoExtension = mainNoExtension.replace(
-		/(\.(umd|cjs|es|m))?\.(mjs|cjs|[tj]sx?)$/,
-		'',
-	);
+	mainNoExtension = mainNoExtension.replace(EXTENSION, '');
 
 	const mainsByFormat = {};
 
@@ -482,10 +484,7 @@ function createConfig(options, entry, format, writeMeta) {
 						extract:
 							!!writeMeta &&
 							options.css !== 'inline' &&
-							options.output.replace(
-								/(\.(umd|cjs|es|m))?\.(mjs|[tj]sx?)$/,
-								'.css',
-							),
+							options.output.replace(EXTENSION, '.css'),
 						minimize: options.compress,
 						sourceMap: options.sourcemap && options.css !== 'inline',
 					}),
