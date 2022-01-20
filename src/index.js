@@ -621,15 +621,10 @@ function createConfig(options, entry, format, writeMeta) {
 							// after hook
 							writeBundle() {
 								if (writeMeta && nameCache) {
-									fs.writeFile(
-										getNameCachePath(),
-										JSON.stringify(
-											endsWithNewLine ? `${nameCache}${EOL}` : nameCache,
-											null,
-											2,
-										),
-										() => {},
-									);
+									let filename = getNameCachePath();
+									let json = JSON.stringify(nameCache, null, 2);
+									if (endsWithNewLine) json += EOL;
+									fs.writeFile(filename, json, () => {});
 								}
 							},
 						},
