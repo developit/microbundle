@@ -1,0 +1,152 @@
+function replaceName(filename, name) {
+	return resolve(
+		dirname(filename),
+		name + basename(filename).replace(/^[^.]+/, ''),
+	);
+}
+
+/**
+ * @param {any} exports - package.json "exports" field value
+ * @param {string} exportPath - the export to look up (eg: '.', './a', './b/c')
+ * @param {string[]} conditions - conditional export keys to use (note: unlike in resolution, order here *does* define precedence!)
+ * @param {RegExp|string} [defaultPattern] - only use (resolved) default export filenames that match this pattern
+ * @param {string} [condition] - (internal) the nearest condition key on the stack
+ */
+function walk(exports, exportPath, conditions, defaultPattern, condition) {
+	if (!exports) return;
+	if (typeof exports === 'string') {
+		if (
+			condition === 'default' &&
+			defaultPattern &&
+			!exports.match(defaultPattern)
+		) {
+			return;
+		}
+		return exports;
+	}
+	if (Array.isArray(exports)) {
+		for (const map of exports) {
+			const r = walk(map, exportPath, conditions, defaultPattern, condition);
+			if (r) return r;
+		}
+		return;
+	}
+	const map = exports[exportPath];
+	if (map) {
+		const r = walk(map, exportPath, conditions, defaultPattern, condition);
+		if (r) return r;
+	}
+	for (const condition of conditions) {
+		const map = exports[condition];
+		if (!map) continue;
+		const r = walk(map, exportPath, conditions, defaultPattern, condition);
+		if (r) return r;
+	}
+	// return walk(exports['.'] || exports.import || exports.module);
+}
+
+function getMain({ options, entry, format }) {
+	const { pkg } = options;
+	const pkgMain = options['pkg-main'];
+
+	if (!pkgMain) {
+		return options.output;
+	}
+
+	// package.json export name (see https://nodejs.org/api/packages.html#packages_subpath_exports)
+	let exportPath = '.';
+	let mainNoExtension = options.output;
+	if (options.multipleEntries) {
+		const commonDir = options.entries
+			.reduce((acc, entry) => {
+				entry = dirname(entry).split(sep);
+				if (!acc) return entry;
+				if (entry.length < acc.length) acc.length = entry.length;
+				let last = entry.length - 1;
+				while (entry[last] !== acc[last]) {
+					last--;
+					acc.pop();
+				}
+				return acc;
+			}, undefined)
+			.join(sep);
+		console.log('>>>>>', { first: options.entries[0], commonDir });
+
+		const isMainEntry = entry.match(
+			/([\\/])index(\.(umd|cjs|es|m))?\.(mjs|cjs|[tj]sx?)$/,
+		);
+		let name = isMainEntry ? mainNoExtension : entry;
+		mainNoExtension = resolve(dirname(mainNoExtension), basename(name));
+		if (!isMainEntry) {
+			exportPath =
+				'./' +
+				posix.relative(commonDir, entry.replace(/\.([mc]js|[tj]sx?)$/g, ''));
+		}
+	}
+	mainNoExtension = mainNoExtension.replace(
+		/(\.(umd|cjs|es|m))?\.(mjs|cjs|[tj]sx?)$/,
+		'',
+	);
+
+	const mainsByFormat = {};
+
+	const MJS = pkg.type === 'module' ? /\.m?js$/i : /\.mjs$/i;
+	const CJS = pkg.type === 'module' ? /\.cjs$/i : /\.js$/i;
+	const UMD = /[.-]umd\.c?js$/i;
+	const CONDITIONS_MJS = ['import', 'module', 'default'];
+	const CONDITIONS_MODERN = ['modern', 'esmodules', ...CONDITIONS_MJS];
+	const CONDITIONS_CJS = ['require', 'default'];
+	const CONDITIONS_UMD = ['umd', 'default'];
+
+	mainsByFormat.modern =
+		walk(pkg.exports, exportPath, CONDITIONS_MODERN, MJS) ||
+		(pkg.syntax && pkg.syntax.esmodules) ||
+		pkg.esmodule ||
+		replaceName('x.modern.js', mainNoExtension);
+
+	mainsByFormat.es = walk(pkg.exports, exportPath, CONDITIONS_MJS, MJS);
+	if (!mainsByFormat.es || mainsByFormat.es === mainsByFormat.modern) {
+		mainsByFormat.es =
+			pkg.module && !pkg.module.match(/src\//)
+				? pkg.module
+				: pkg['jsnext:main'] || replaceName('x.esm.js', mainNoExtension);
+	}
+
+	mainsByFormat.umd =
+		walk(pkg.exports, exportPath, CONDITIONS_UMD, UMD) ||
+		pkg['umd:main'] ||
+		pkg.unpkg ||
+		replaceName('x.umd.js', mainNoExtension);
+
+	mainsByFormat.cjs = walk(pkg.exports, exportPath, CONDITIONS_CJS, CJS);
+	if (!mainsByFormat.cjs || mainsByFormat.cjs === mainsByFormat.umd) {
+		mainsByFormat.cjs =
+			pkg['cjs:main'] ||
+			replaceName(pkg.type === 'module' ? 'x.cjs' : 'x.js', mainNoExtension);
+	}
+
+	if (pkg.type === 'module') {
+		let errors = [];
+		let filenames = [];
+		if (mainsByFormat.cjs.endsWith('.js')) {
+			errors.push('CommonJS');
+			filenames.push(`  "cjs:main": "${mainsByFormat.cjs}",`);
+		}
+		if (mainsByFormat.umd.endsWith('.js')) {
+			errors.push('CommonJS');
+			const field = pkg['umd:main'] ? 'umd:main' : 'unpkg';
+			filenames.push(`  "${field}": "${mainsByFormat.umd}",`);
+		}
+		if (errors.length) {
+			const warning =
+				`Warning: A package.json with {"type":"module"} should use .cjs file extensions for` +
+				` ${errors.join(' and ')} filename${errors.length == 1 ? '' : 's'}:` +
+				`\n${filenames.join('\n')}`;
+			stderr(yellow(warning));
+		}
+	}
+
+	console.log('>> MAIN: ', format, entry, exportPath, mainsByFormat[format]);
+
+	return mainsByFormat[format] || mainsByFormat.cjs;
+}

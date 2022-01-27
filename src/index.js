@@ -2,7 +2,7 @@ import fs from 'fs';
 import { resolve, relative, dirname, basename, extname } from 'path';
 import camelCase from 'camelcase';
 import escapeStringRegexp from 'escape-string-regexp';
-import { blue } from 'kleur';
+import { blue, yellow } from 'kleur';
 import { map, series } from 'asyncro';
 import glob from 'tiny-glob/sync';
 import autoprefixer from 'autoprefixer';
@@ -19,7 +19,7 @@ import postcss from 'rollup-plugin-postcss';
 import typescript from 'rollup-plugin-typescript2';
 import json from '@rollup/plugin-json';
 import logError from './log-error';
-import { isDir, isFile, stdout, isTruthy, removeScope } from './utils';
+import { isDir, isFile, stdout, isTruthy, removeScope, stderr } from './utils';
 import { getSizeInfo } from './lib/compressed-size';
 import { normalizeMinifyOptions } from './lib/terser';
 import {
@@ -29,6 +29,7 @@ import {
 } from './lib/option-normalization';
 import { getConfigFromPkgJson, getName } from './lib/package-info';
 import { shouldCssModules, cssModulesConfig } from './lib/css-modules';
+import { computeEntries } from './lib/compute-entries';
 
 // Extensions to use when resolving modules
 const EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs'];
@@ -61,8 +62,10 @@ export default async function microbundle(inputOptions) {
 	options.pkg.name = pkgName;
 
 	if (options.sourcemap === 'inline') {
-		console.log(
-			'Warning: inline sourcemaps should only be used for debugging purposes.',
+		stderr(
+			yellow(
+				'Warning: inline sourcemaps should only be used for debugging purposes.',
+			),
 		);
 	} else if (options.sourcemap === 'false') {
 		options.sourcemap = false;
@@ -249,67 +252,6 @@ async function getEntries({ input, cwd }) {
 	return entries;
 }
 
-function replaceName(filename, name) {
-	return resolve(
-		dirname(filename),
-		name + basename(filename).replace(/^[^.]+/, ''),
-	);
-}
-
-function walk(exports) {
-	if (typeof exports === 'string') return exports;
-	return walk(exports['.'] || exports.import || exports.module);
-}
-
-function getMain({ options, entry, format }) {
-	const { pkg } = options;
-	const pkgMain = options['pkg-main'];
-
-	if (!pkgMain) {
-		return options.output;
-	}
-
-	let mainNoExtension = options.output;
-	if (options.multipleEntries) {
-		let name = entry.match(
-			/([\\/])index(\.(umd|cjs|es|m))?\.(mjs|cjs|[tj]sx?)$/,
-		)
-			? mainNoExtension
-			: entry;
-		mainNoExtension = resolve(dirname(mainNoExtension), basename(name));
-	}
-	mainNoExtension = mainNoExtension.replace(
-		/(\.(umd|cjs|es|m))?\.(mjs|cjs|[tj]sx?)$/,
-		'',
-	);
-
-	const mainsByFormat = {};
-
-	mainsByFormat.es = replaceName(
-		pkg.module && !pkg.module.match(/src\//)
-			? pkg.module
-			: pkg['jsnext:main'] || 'x.esm.js',
-		mainNoExtension,
-	);
-	mainsByFormat.modern = replaceName(
-		(pkg.exports && walk(pkg.exports)) ||
-			(pkg.syntax && pkg.syntax.esmodules) ||
-			pkg.esmodule ||
-			'x.modern.js',
-		mainNoExtension,
-	);
-	mainsByFormat.cjs = replaceName(
-		pkg['cjs:main'] || (pkg.type && pkg.type === 'module' ? 'x.cjs' : 'x.js'),
-		mainNoExtension,
-	);
-	mainsByFormat.umd = replaceName(
-		pkg['umd:main'] || pkg.unpkg || 'x.umd.js',
-		mainNoExtension,
-	);
-
-	return mainsByFormat[format] || mainsByFormat.cjs;
-}
-
 // shebang cache map because the transform only gets run once
 const shebang = {};
 
@@ -417,7 +359,13 @@ function createConfig(options, entry, format, writeMeta) {
 	let cache;
 	if (modern) cache = false;
 
-	const absMain = resolve(options.cwd, getMain({ options, entry, format }));
+	const entries = computeEntries({
+		...options,
+		entry,
+		format,
+	});
+	const absMain = resolve('.', options.cwd, entries[format] || entries.cjs);
+	console.log(entries[format], absMain);
 	const outputDir = dirname(absMain);
 	const outputEntryFileName = basename(absMain);
 

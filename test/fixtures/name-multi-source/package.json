@@ -1,0 +1,20 @@
+{
+  "name": "name-multi-source",
+  "main": "./dist/a.js",
+  "module": "./dist/a.mjs",
+  "umd:main": "./dist/a.umd.js",
+  "exports": {
+    ".": {
+      "import": "./dist/a.mjs",
+      "default": "./dist/a.js"
+    },
+    "./b": {
+      "import": "./dist/b.mjs",
+      "default": "./dist/b.js"
+    }
+  },
+  "source": [
+    "./a.js",
+    "./b.js"
+  ]
+}

@@ -2193,6 +2193,77 @@ exports[`fixtures build name-custom-cli with microbundle 5`] = `
 "
 `;
 
+exports[`fixtures build name-multi-source with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+name-multi-source
+  a.js
+  b.js
+  dist
+    a.js
+    a.js.map
+    a.mjs
+    a.mjs.map
+    a.umd.js
+    a.umd.js.map
+    b.js
+    b.js.map
+    b.mjs
+    b.mjs.map
+    b.umd.js
+    b.umd.js.map
+  package.json
+
+
+Build \\"nameMultiSource\\" to dist:
+43 B: a.js.gz
+27 B: a.js.br
+43 B: a.mjs.gz
+27 B: a.mjs.br
+99 B: a.umd.js.gz
+84 B: a.umd.js.br
+43 B: b.js.gz
+27 B: b.js.br
+43 B: b.mjs.gz
+27 B: b.mjs.br
+99 B: b.umd.js.gz
+79 B: b.umd.js.br"
+`;
+
+exports[`fixtures build name-multi-source with microbundle 2`] = `12`;
+
+exports[`fixtures build name-multi-source with microbundle 3`] = `
+"console.log(\\"i am a\\");
+//# sourceMappingURL=a.js.map
+"
+`;
+
+exports[`fixtures build name-multi-source with microbundle 4`] = `
+"console.log(\\"i am b\\");
+//# sourceMappingURL=a.mjs.map
+"
+`;
+
+exports[`fixtures build name-multi-source with microbundle 5`] = `
+"!function(n){\\"function\\"==typeof define&&define.amd?define(n):n()}(function(){console.log(\\"i am b\\")});
+//# sourceMappingURL=a.umd.js.map
+"
+`;
+
+exports[`fixtures build name-multi-source with microbundle 6`] = `
+"console.log(\\"i am b\\");
+//# sourceMappingURL=b.js.map
+"
+`;
+
+exports[`fixtures build name-multi-source with microbundle 7`] = `
+"console.log(\\"i am b\\");
+//# sourceMappingURL=b.mjs.map
+"
+`;
+
 exports[`fixtures build no-pkg with microbundle 1`] = `
 "Used script: microbundle
 
