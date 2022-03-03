@@ -536,12 +536,8 @@ function createConfig(options, entry, format, writeMeta) {
 										declarationDir: getDeclarationDir({ options, pkg }),
 									}),
 									jsx: 'preserve',
-									jsxFactory:
-										// TypeScript fails to resolve Fragments when jsxFactory
-										// is set, even when it's the same as the default value.
-										options.jsx === 'React.createElement'
-											? undefined
-											: options.jsx || 'h',
+									jsxFactory: options.jsx,
+									jsxFragmentFactory: options.jsxFragment,
 								},
 								files: options.entries,
 							},
@@ -578,8 +574,8 @@ function createConfig(options, entry, format, writeMeta) {
 							modern,
 							compress: options.compress !== false,
 							targets: options.target === 'node' ? { node: '8' } : undefined,
-							pragma: options.jsx || 'h',
-							pragmaFrag: options.jsxFragment || 'Fragment',
+							pragma: options.jsx,
+							pragmaFrag: options.jsxFragment,
 							typescript: !!useTypescript,
 							jsxImportSource: options.jsxImportSource || false,
 						},

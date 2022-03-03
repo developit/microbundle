@@ -60,6 +60,11 @@ export default handler => {
 		.option('--raw', 'Show raw byte size', false)
 		.option('--jsx', 'A custom JSX pragma like React.createElement', 'h')
 		.option(
+			'--jsxFragment',
+			'A custom JSX fragment pragma like React.Fragment',
+			'Fragment',
+		)
+		.option(
 			'--jsxImportSource',
 			'Declares the module specifier to be used for importing jsx factory functions',
 		)

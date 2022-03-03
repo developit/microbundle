@@ -335,6 +335,7 @@ Options
 	--sourcemap        Generate source map  (default true)
 	--raw              Show raw byte size  (default false)
 	--jsx              A custom JSX pragma like React.createElement (default: h)
+	--jsxFragment      A custom JSX fragment pragma like React.Fragment (default: Fragment)
 	--jsxImportSource  Declares the module specifier to be used for importing jsx factory functions
 	--tsconfig         Specify the path to a custom tsconfig.json
 	--generateTypes    Whether or not to generate types, if `types` or `typings` is set in `package.json` then it will default to be `true`
