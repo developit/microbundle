@@ -328,7 +328,7 @@ Options
 	--globals          Specify globals dependencies, or 'none'
 	--define           Replace constants with hard-coded values (use @key=exp to replace an expression)
 	--alias            Map imports to different modules
-	--compress         Compress output using Terser
+	--no-compress      Disable compression (uses Terser to compress by default)
 	--strict           Enforce undefined global context and add "use strict"
 	--name             Specify name exposed in UMD and IIFE builds
 	--cwd              Use an alternative working directory  (default .)
