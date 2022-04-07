@@ -177,9 +177,11 @@ function doWatch(options, cwd, steps) {
 					}
 				}
 				if (e.code === 'END') {
-					options._sizeInfo.then(text => {
-						stdout(`Wrote ${text.trim()}`);
-					});
+					if (options._sizeInfo) {
+						options._sizeInfo.then(text => {
+							stdout(`Wrote ${text.trim()}`);
+						});
+					}
 					if (typeof onBuild === 'function') {
 						onBuild(e);
 					}
