@@ -177,7 +177,6 @@ function doWatch(options, cwd, steps) {
 					}
 				}
 				if (e.code === 'END') {
-					// fix NPE
 					if (options._sizeInfo) {
 						options._sizeInfo.then(text => {
 							stdout(`Wrote ${text.trim()}`);
