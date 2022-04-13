@@ -90,7 +90,7 @@
 		"@rollup/plugin-node-resolve": "^11.0.1",
 		"@surma/rollup-plugin-off-main-thread": "^2.2.3",
 		"asyncro": "^3.0.0",
-		"autoprefixer": "^10.1.0",
+		"autoprefixer": "^10.4.4",
 		"babel-plugin-macros": "^3.1.0",
 		"babel-plugin-transform-async-to-promises": "^0.8.18",
 		"babel-plugin-transform-replace-expressions": "^0.2.0",
