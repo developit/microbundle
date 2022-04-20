@@ -13,7 +13,7 @@ export default handler => {
 
 		opts.entries = toArray(str || opts.entry).concat(opts._);
 
-		if (opts.compress != null) {
+		if (typeof opts.compress !== 'undefined') {
 			// Convert `--compress true/false/1/0` to booleans:
 			if (typeof opts.compress !== 'boolean') {
 				opts.compress = opts.compress !== 'false' && opts.compress !== '0';
@@ -51,7 +51,11 @@ export default handler => {
 		.example('--define API_KEY=1234')
 		.option('--alias', `Map imports to different modules`)
 		.example('--alias react=preact')
-		.option('--compress', 'Compress output using Terser', null)
+		.option(
+			'--compress',
+			'Compress output using Terser (default true when --target is web, false when --target is node)',
+		)
+		.example('build --target web --no-compress')
 		.option('--strict', 'Enforce undefined global context and add "use strict"')
 		.option('--name', 'Specify name exposed in UMD builds')
 		.option('--cwd', 'Use an alternative working directory', '.')
