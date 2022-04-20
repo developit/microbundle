@@ -522,6 +522,7 @@ function createConfig(options, entry, format, writeMeta) {
 					},
 					(useTypescript || emitDeclaration) &&
 						typescript({
+							cwd: options.cwd,
 							typescript: require(resolveFrom.silent(
 								options.cwd,
 								'typescript',
