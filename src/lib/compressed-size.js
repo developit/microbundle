@@ -11,7 +11,7 @@ function getPadLeft(str, width, char = ' ') {
 function formatSize(size, filename, type, raw) {
 	const pretty = raw ? `${size} B` : prettyBytes(size);
 	const color = size < 5000 ? green : size > 40000 ? red : yellow;
-	const indent = getPadLeft(pretty, type === 'br' ? 13 : 10);
+	const indent = getPadLeft(pretty, 13);
 	return `${indent}${color(pretty)}: ${white(basename(filename))}.${type}`;
 }
 

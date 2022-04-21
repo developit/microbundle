@@ -144,7 +144,7 @@ export default async function microbundle(inputOptions) {
 		? blue(`Build "${options.pkg.name}" to ${targetDir}:`)
 		: red(`Error: No entry module found for "${options.pkg.name}"`);
 	return {
-		output: `${banner}\n   ${out.join('\n   ')}`,
+		output: `${banner}\n${out.join('\n')}`,
 	};
 }
 
