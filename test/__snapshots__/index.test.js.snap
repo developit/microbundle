@@ -3020,6 +3020,55 @@ exports[`fixtures build ts-module with microbundle 7`] = `
 "
 `;
 
+exports[`fixtures build visualizer with microbundle 1`] = `
+"Used script: microbundle --visualize
+
+Directory tree:
+
+visualizer
+  dist
+    visualizer.esm.js
+    visualizer.esm.js.map
+    visualizer.js
+    visualizer.js.map
+    visualizer.umd.js
+    visualizer.umd.js.map
+  package.json
+  src
+    index.js
+  stats.html
+
+
+Build \\"visualizer\\" to dist:
+148 B: visualizer.js.gz
+107 B: visualizer.js.br
+79 B: visualizer.esm.js.gz
+64 B: visualizer.esm.js.br
+231 B: visualizer.umd.js.gz
+195 B: visualizer.umd.js.br"
+`;
+
+exports[`fixtures build visualizer with microbundle 2`] = `6`;
+
+exports[`fixtures build visualizer with microbundle 3`] = `
+"import a from\\"camelcase\\";var o=a(\\"foo-bar\\");export default o;
+//# sourceMappingURL=visualizer.esm.js.map
+"
+`;
+
+exports[`fixtures build visualizer with microbundle 4`] = `
+"function e(e){return e&&\\"object\\"==typeof e&&\\"default\\"in e?e:{default:e}}var t=/*#__PURE__*/e(require(\\"camelcase\\")).default(\\"foo-bar\\");module.exports=t;
+//# sourceMappingURL=visualizer.js.map
+"
+`;
+
+exports[`fixtures build visualizer with microbundle 5`] = `
+"!function(e,f){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=f(require(\\"camelcase\\")):\\"function\\"==typeof define&&define.amd?define([\\"camelcase\\"],f):(e||self).visualizer=f(e.camelcase)}(this,function(e){function f(e){return e&&\\"object\\"==typeof e&&\\"default\\"in e?e:{default:e}}/*#__PURE__*/
+return f(e).default(\\"foo-bar\\")});
+//# sourceMappingURL=visualizer.umd.js.map
+"
+`;
+
 exports[`fixtures build worker-loader with microbundle 1`] = `
 "Used script: microbundle -f modern,es --workers
 

@@ -88,6 +88,11 @@ export default handler => {
 			'--workers',
 			'Bundle module workers - see https://git.io/J3oSF',
 			false,
+		)
+		.option(
+			'--visualize',
+			'Generate bundle makeup visualization (stats.html)',
+			false,
 		);
 
 	prog

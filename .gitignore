@@ -12,3 +12,4 @@ yarn.lock
 .idea
 .rts2*
 sizes.csv
+test/fixtures/visualizer/stats.html
