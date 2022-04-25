@@ -7,7 +7,7 @@ Directory tree:
 
 alias
   dist
-    alias-mapping.esm.js
+    alias-mapping.esm.mjs
     alias-mapping.js
     alias-mapping.umd.js
   package.json
@@ -20,8 +20,8 @@ alias
 Build \\"alias-mapping\\" to dist:
 62 B: alias-mapping.js.gz
 46 B: alias-mapping.js.br
-62 B: alias-mapping.esm.js.gz
-46 B: alias-mapping.esm.js.br
+62 B: alias-mapping.esm.mjs.gz
+46 B: alias-mapping.esm.mjs.br
 118 B: alias-mapping.umd.js.gz
 83 B: alias-mapping.umd.js.br"
 `;
@@ -50,8 +50,8 @@ Directory tree:
 
 alias-external
   dist
-    alias-external.esm.js
-    alias-external.esm.js.map
+    alias-external.esm.mjs
+    alias-external.esm.mjs.map
     alias-external.js
     alias-external.js.map
     alias-external.umd.js
@@ -65,8 +65,8 @@ alias-external
 Build \\"alias-external\\" to dist:
 37 B: alias-external.js.gz
 21 B: alias-external.js.br
-37 B: alias-external.esm.js.gz
-21 B: alias-external.esm.js.br
+37 B: alias-external.esm.mjs.gz
+21 B: alias-external.esm.mjs.br
 93 B: alias-external.umd.js.gz
 89 B: alias-external.umd.js.br"
 `;
@@ -75,7 +75,7 @@ exports[`fixtures build alias-external with microbundle 2`] = `6`;
 
 exports[`fixtures build alias-external with microbundle 3`] = `
 "console.log(42);
-//# sourceMappingURL=alias-external.esm.js.map
+//# sourceMappingURL=alias-external.esm.mjs.map
 "
 `;
 
@@ -98,8 +98,8 @@ Directory tree:
 
 async-iife-ts
   dist
-    async-iife-ts.esm.js
-    async-iife-ts.esm.js.map
+    async-iife-ts.esm.mjs
+    async-iife-ts.esm.mjs.map
     async-iife-ts.js
     async-iife-ts.js.map
     async-iife-ts.umd.js
@@ -115,8 +115,8 @@ async-iife-ts
 Build \\"async-iife-ts\\" to dist:
 70 B: async-iife-ts.js.gz
 55 B: async-iife-ts.js.br
-70 B: async-iife-ts.esm.js.gz
-55 B: async-iife-ts.esm.js.br
+70 B: async-iife-ts.esm.mjs.gz
+55 B: async-iife-ts.esm.mjs.br
 125 B: async-iife-ts.umd.js.gz
 95 B: async-iife-ts.umd.js.br"
 `;
@@ -125,7 +125,7 @@ exports[`fixtures build async-iife-ts with microbundle 2`] = `7`;
 
 exports[`fixtures build async-iife-ts with microbundle 3`] = `
 "try{console.log(\\"foo\\")}catch(o){Promise.reject(o)}
-//# sourceMappingURL=async-iife-ts.esm.js.map
+//# sourceMappingURL=async-iife-ts.esm.mjs.map
 "
 `;
 
@@ -150,8 +150,8 @@ Directory tree:
 
 async-ts
   dist
-    async-ts.esm.js
-    async-ts.esm.js.map
+    async-ts.esm.mjs
+    async-ts.esm.mjs.map
     async-ts.js
     async-ts.js.map
     async-ts.umd.js
@@ -167,8 +167,8 @@ async-ts
 Build \\"async-ts\\" to dist:
 117 B: async-ts.js.gz
 91 B: async-ts.js.br
-128 B: async-ts.esm.js.gz
-108 B: async-ts.esm.js.br
+128 B: async-ts.esm.mjs.gz
+108 B: async-ts.esm.mjs.br
 217 B: async-ts.umd.js.gz
 164 B: async-ts.umd.js.br"
 `;
@@ -177,7 +177,7 @@ exports[`fixtures build async-ts with microbundle 2`] = `7`;
 
 exports[`fixtures build async-ts with microbundle 3`] = `
 "var o=/*#__PURE__*/function(){function o(){}return o.prototype.foo=function(){return Promise.resolve()},o}();export{o as MyClass};
-//# sourceMappingURL=async-ts.esm.js.map
+//# sourceMappingURL=async-ts.esm.mjs.map
 "
 `;
 
@@ -207,8 +207,8 @@ Directory tree:
 
 basic
   dist
-    basic-lib.esm.js
-    basic-lib.esm.js.map
+    basic-lib.esm.mjs
+    basic-lib.esm.mjs.map
     basic-lib.js
     basic-lib.js.map
     basic-lib.umd.js
@@ -222,8 +222,8 @@ basic
 Build \\"basic-lib\\" to dist:
 187 B: basic-lib.js.gz
 138 B: basic-lib.js.br
-188 B: basic-lib.esm.js.gz
-139 B: basic-lib.esm.js.br
+188 B: basic-lib.esm.mjs.gz
+139 B: basic-lib.esm.mjs.br
 273 B: basic-lib.umd.js.gz
 211 B: basic-lib.umd.js.br"
 `;
@@ -232,7 +232,7 @@ exports[`fixtures build basic with microbundle 2`] = `6`;
 
 exports[`fixtures build basic with microbundle 3`] = `
 "var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
-//# sourceMappingURL=basic-lib.esm.js.map
+//# sourceMappingURL=basic-lib.esm.mjs.map
 "
 `;
 
@@ -255,8 +255,8 @@ Directory tree:
 
 basic-babelrc
   dist
-    basic-babelrc.esm.js
-    basic-babelrc.esm.js.map
+    basic-babelrc.esm.mjs
+    basic-babelrc.esm.mjs.map
     basic-babelrc.js
     basic-babelrc.js.map
     basic-babelrc.umd.js
@@ -269,8 +269,8 @@ basic-babelrc
 Build \\"basic-babelrc\\" to dist:
 122 B: basic-babelrc.js.gz
 91 B: basic-babelrc.js.br
-122 B: basic-babelrc.esm.js.gz
-91 B: basic-babelrc.esm.js.br
+122 B: basic-babelrc.esm.mjs.gz
+91 B: basic-babelrc.esm.mjs.br
 158 B: basic-babelrc.umd.js.gz
 121 B: basic-babelrc.umd.js.br"
 `;
@@ -279,7 +279,7 @@ exports[`fixtures build basic-babelrc with microbundle 2`] = `6`;
 
 exports[`fixtures build basic-babelrc with microbundle 3`] = `
 "function r(r){return void 0===r&&(r=function(r){throw new Error(\\"required!\\")}()),!0===r||function(r){throw new Error(\\"Falsey!\\")}()}r(!0),r(!1);
-//# sourceMappingURL=basic-babelrc.esm.js.map
+//# sourceMappingURL=basic-babelrc.esm.mjs.map
 "
 `;
 
@@ -302,8 +302,8 @@ Directory tree:
 
 basic-compress-false
   dist
-    basic-compress-false.esm.js
-    basic-compress-false.esm.js.map
+    basic-compress-false.esm.mjs
+    basic-compress-false.esm.mjs.map
     basic-compress-false.js
     basic-compress-false.js.map
     basic-compress-false.umd.js
@@ -317,8 +317,8 @@ basic-compress-false
 Build \\"basic-compress-false\\" to dist:
 260 B: basic-compress-false.js.gz
 206 B: basic-compress-false.js.br
-258 B: basic-compress-false.esm.js.gz
-209 B: basic-compress-false.esm.js.br
+258 B: basic-compress-false.esm.mjs.gz
+209 B: basic-compress-false.esm.mjs.br
 383 B: basic-compress-false.umd.js.gz
 305 B: basic-compress-false.umd.js.br"
 `;
@@ -352,7 +352,7 @@ var index = (function () {
 });
 
 export default index;
-//# sourceMappingURL=basic-compress-false.esm.js.map
+//# sourceMappingURL=basic-compress-false.esm.mjs.map
 "
 `;
 
@@ -434,8 +434,8 @@ basic-css
   dist
     basic-css.css
     basic-css.css.map
-    basic-css.esm.js
-    basic-css.esm.js.map
+    basic-css.esm.mjs
+    basic-css.esm.mjs.map
     basic-css.js
     basic-css.js.map
     basic-css.umd.js
@@ -449,8 +449,8 @@ basic-css
 Build \\"basic-css\\" to dist:
 107 B: basic-css.js.gz
 60 B: basic-css.js.br
-109 B: basic-css.esm.js.gz
-67 B: basic-css.esm.js.br
+109 B: basic-css.esm.mjs.gz
+67 B: basic-css.esm.mjs.br
 195 B: basic-css.umd.js.gz
 138 B: basic-css.umd.js.br"
 `;
@@ -464,7 +464,7 @@ exports[`fixtures build basic-css with microbundle 3`] = `
 
 exports[`fixtures build basic-css with microbundle 4`] = `
 "function e(){var e=document.createElement(\\"div\\");return e.className=\\"testing\\",e}export default e;
-//# sourceMappingURL=basic-css.esm.js.map
+//# sourceMappingURL=basic-css.esm.mjs.map
 "
 `;
 
@@ -487,8 +487,8 @@ Directory tree:
 
 basic-dashed-external
   dist
-    basic-dashed-external.esm.js
-    basic-dashed-external.esm.js.map
+    basic-dashed-external.esm.mjs
+    basic-dashed-external.esm.mjs.map
     basic-dashed-external.js
     basic-dashed-external.js.map
     basic-dashed-external.umd.js
@@ -502,8 +502,8 @@ basic-dashed-external
 Build \\"basic-dashed-external\\" to dist:
 276 B: basic-dashed-external.js.gz
 212 B: basic-dashed-external.js.br
-214 B: basic-dashed-external.esm.js.gz
-164 B: basic-dashed-external.esm.js.br
+214 B: basic-dashed-external.esm.mjs.gz
+164 B: basic-dashed-external.esm.mjs.br
 357 B: basic-dashed-external.umd.js.gz
 285 B: basic-dashed-external.umd.js.br"
 `;
@@ -512,7 +512,7 @@ exports[`fixtures build basic-dashed-external with microbundle 2`] = `6`;
 
 exports[`fixtures build basic-dashed-external with microbundle 3`] = `
 "import r from\\"tiny-glob\\";var e=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};console.log(r);export default function(){try{var r=arguments,t=[].slice.call(r);return Promise.resolve(e.apply(void 0,t)).then(function(r){return Promise.resolve(e.apply(void 0,t)).then(function(e){return[r,e]})})}catch(r){return Promise.reject(r)}}
-//# sourceMappingURL=basic-dashed-external.esm.js.map
+//# sourceMappingURL=basic-dashed-external.esm.mjs.map
 "
 `;
 
@@ -535,8 +535,8 @@ Directory tree:
 
 basic-flow
   dist
-    basic-lib-flow.esm.js
-    basic-lib-flow.esm.js.map
+    basic-lib-flow.esm.mjs
+    basic-lib-flow.esm.mjs.map
     basic-lib-flow.js
     basic-lib-flow.js.map
     basic-lib-flow.umd.js
@@ -550,8 +550,8 @@ basic-flow
 Build \\"basic-lib-flow\\" to dist:
 57 B: basic-lib-flow.js.gz
 43 B: basic-lib-flow.js.br
-56 B: basic-lib-flow.esm.js.gz
-42 B: basic-lib-flow.esm.js.br
+56 B: basic-lib-flow.esm.mjs.gz
+42 B: basic-lib-flow.esm.mjs.br
 171 B: basic-lib-flow.umd.js.gz
 132 B: basic-lib-flow.umd.js.br"
 `;
@@ -560,7 +560,7 @@ exports[`fixtures build basic-flow with microbundle 2`] = `6`;
 
 exports[`fixtures build basic-flow with microbundle 3`] = `
 "export default[\\"banana\\",\\"raspberry\\"];
-//# sourceMappingURL=basic-lib-flow.esm.js.map
+//# sourceMappingURL=basic-lib-flow.esm.mjs.map
 "
 `;
 
@@ -583,8 +583,8 @@ Directory tree:
 
 basic-json
   dist
-    basic-json.esm.js
-    basic-json.esm.js.map
+    basic-json.esm.mjs
+    basic-json.esm.mjs.map
     basic-json.js
     basic-json.js.map
     basic-json.umd.js
@@ -598,8 +598,8 @@ basic-json
 Build \\"basic-json\\" to dist:
 93 B: basic-json.js.gz
 65 B: basic-json.js.br
-92 B: basic-json.esm.js.gz
-64 B: basic-json.esm.js.br
+92 B: basic-json.esm.mjs.gz
+64 B: basic-json.esm.mjs.br
 180 B: basic-json.umd.js.gz
 129 B: basic-json.umd.js.br"
 `;
@@ -608,7 +608,7 @@ exports[`fixtures build basic-json with microbundle 2`] = `6`;
 
 exports[`fixtures build basic-json with microbundle 3`] = `
 "var e={test:\\"true\\"};export default function(){return Promise.resolve(e)}
-//# sourceMappingURL=basic-json.esm.js.map
+//# sourceMappingURL=basic-json.esm.mjs.map
 "
 `;
 
@@ -633,14 +633,14 @@ basic-multi-source
   a.js
   b.js
   dist
-    a.esm.js
-    a.esm.js.map
+    a.esm.mjs
+    a.esm.mjs.map
     a.js
     a.js.map
     a.umd.js
     a.umd.js.map
-    b.esm.js
-    b.esm.js.map
+    b.esm.mjs
+    b.esm.mjs.map
     b.js
     b.js.map
     b.umd.js
@@ -651,14 +651,14 @@ basic-multi-source
 Build \\"basic-multi-source\\" to dist:
 43 B: a.js.gz
 27 B: a.js.br
-43 B: a.esm.js.gz
-27 B: a.esm.js.br
+43 B: a.esm.mjs.gz
+27 B: a.esm.mjs.br
 99 B: a.umd.js.gz
 84 B: a.umd.js.br
 43 B: b.js.gz
 27 B: b.js.br
-43 B: b.esm.js.gz
-27 B: b.esm.js.br
+43 B: b.esm.mjs.gz
+27 B: b.esm.mjs.br
 99 B: b.umd.js.gz
 79 B: b.umd.js.br"
 `;
@@ -667,7 +667,7 @@ exports[`fixtures build basic-multi-source with microbundle 2`] = `12`;
 
 exports[`fixtures build basic-multi-source with microbundle 3`] = `
 "console.log(\\"i am a\\");
-//# sourceMappingURL=a.esm.js.map
+//# sourceMappingURL=a.esm.mjs.map
 "
 `;
 
@@ -685,7 +685,7 @@ exports[`fixtures build basic-multi-source with microbundle 5`] = `
 
 exports[`fixtures build basic-multi-source with microbundle 6`] = `
 "console.log(\\"i am b\\");
-//# sourceMappingURL=b.esm.js.map
+//# sourceMappingURL=b.esm.mjs.map
 "
 `;
 
@@ -708,8 +708,8 @@ Directory tree:
 
 basic-no-compress
   dist
-    basic-no-compress.esm.js
-    basic-no-compress.esm.js.map
+    basic-no-compress.esm.mjs
+    basic-no-compress.esm.mjs.map
     basic-no-compress.js
     basic-no-compress.js.map
     basic-no-compress.umd.js
@@ -723,8 +723,8 @@ basic-no-compress
 Build \\"basic-no-compress\\" to dist:
 260 B: basic-no-compress.js.gz
 206 B: basic-no-compress.js.br
-258 B: basic-no-compress.esm.js.gz
-209 B: basic-no-compress.esm.js.br
+258 B: basic-no-compress.esm.mjs.gz
+209 B: basic-no-compress.esm.mjs.br
 381 B: basic-no-compress.umd.js.gz
 310 B: basic-no-compress.umd.js.br"
 `;
@@ -758,7 +758,7 @@ var index = (function () {
 });
 
 export default index;
-//# sourceMappingURL=basic-no-compress.esm.js.map
+//# sourceMappingURL=basic-no-compress.esm.mjs.map
 "
 `;
 
@@ -911,8 +911,8 @@ Directory tree:
 
 basic-ts
   dist
-    basic-lib-ts.esm.js
-    basic-lib-ts.esm.js.map
+    basic-lib-ts.esm.mjs
+    basic-lib-ts.esm.mjs.map
     basic-lib-ts.js
     basic-lib-ts.js.map
     basic-lib-ts.umd.js
@@ -930,8 +930,8 @@ basic-ts
 Build \\"basic-lib-ts\\" to dist:
 118 B: basic-lib-ts.js.gz
 94 B: basic-lib-ts.js.br
-118 B: basic-lib-ts.esm.js.gz
-97 B: basic-lib-ts.esm.js.br
+118 B: basic-lib-ts.esm.mjs.gz
+97 B: basic-lib-ts.esm.mjs.br
 201 B: basic-lib-ts.umd.js.gz
 150 B: basic-lib-ts.umd.js.br"
 `;
@@ -940,7 +940,7 @@ exports[`fixtures build basic-ts with microbundle 2`] = `8`;
 
 exports[`fixtures build basic-ts with microbundle 3`] = `
 "var n=new(/*#__PURE__*/function(){function n(){}return n.prototype.drive=function(n){return!0},n}());export default n;
-//# sourceMappingURL=basic-lib-ts.esm.js.map
+//# sourceMappingURL=basic-lib-ts.esm.mjs.map
 "
 `;
 
@@ -980,8 +980,8 @@ Directory tree:
 
 basic-tsx
   dist
-    basic-lib-tsx.esm.js
-    basic-lib-tsx.esm.js.map
+    basic-lib-tsx.esm.mjs
+    basic-lib-tsx.esm.mjs.map
     basic-lib-tsx.js
     basic-lib-tsx.js.map
     basic-lib-tsx.umd.js
@@ -997,8 +997,8 @@ basic-tsx
 Build \\"basic-lib-tsx\\" to dist:
 213 B: basic-lib-tsx.js.gz
 164 B: basic-lib-tsx.js.br
-218 B: basic-lib-tsx.esm.js.gz
-172 B: basic-lib-tsx.esm.js.br
+218 B: basic-lib-tsx.esm.mjs.gz
+172 B: basic-lib-tsx.esm.mjs.br
 298 B: basic-lib-tsx.umd.js.gz
 232 B: basic-lib-tsx.umd.js.br"
 `;
@@ -1007,7 +1007,7 @@ exports[`fixtures build basic-tsx with microbundle 2`] = `7`;
 
 exports[`fixtures build basic-tsx with microbundle 3`] = `
 "var n=function(n,r){return{tag:n,props:r,children:[].slice.call(arguments,2)}},r=/*#__PURE__*/function(){function r(){}return r.prototype.render=function(){return n(\\"div\\",{id:\\"app\\"},n(\\"h1\\",null,\\"Hello, World!\\"),n(\\"p\\",null,\\"A JSX demo.\\"))},r}();export default r;
-//# sourceMappingURL=basic-lib-tsx.esm.js.map
+//# sourceMappingURL=basic-lib-tsx.esm.mjs.map
 "
 `;
 
@@ -1038,8 +1038,8 @@ Directory tree:
 
 basic
   dist
-    basic.esm.js
-    basic.esm.js.map
+    basic.esm.mjs
+    basic.esm.mjs.map
     basic.js
     basic.js.map
     basic.umd.js
@@ -1053,8 +1053,8 @@ basic
 Build \\"basic\\" to dist:
 187 B: basic.js.gz
 138 B: basic.js.br
-188 B: basic.esm.js.gz
-139 B: basic.esm.js.br
+188 B: basic.esm.mjs.gz
+139 B: basic.esm.mjs.br
 269 B: basic.umd.js.gz
 198 B: basic.umd.js.br"
 `;
@@ -1063,7 +1063,7 @@ exports[`fixtures build basic-with-cwd with microbundle 2`] = `6`;
 
 exports[`fixtures build basic-with-cwd with microbundle 3`] = `
 "var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
-//# sourceMappingURL=basic.esm.js.map
+//# sourceMappingURL=basic.esm.mjs.map
 "
 `;
 
@@ -1086,8 +1086,8 @@ Directory tree:
 
 class-decorators-ts
   dist
-    class-decorators-ts.esm.js
-    class-decorators-ts.esm.js.map
+    class-decorators-ts.esm.mjs
+    class-decorators-ts.esm.mjs.map
     class-decorators-ts.js
     class-decorators-ts.js.map
     class-decorators-ts.umd.js
@@ -1103,8 +1103,8 @@ class-decorators-ts
 Build \\"class-decorators-ts\\" to dist:
 348 B: class-decorators-ts.js.gz
 288 B: class-decorators-ts.js.br
-348 B: class-decorators-ts.esm.js.gz
-288 B: class-decorators-ts.esm.js.br
+348 B: class-decorators-ts.esm.mjs.gz
+288 B: class-decorators-ts.esm.mjs.br
 415 B: class-decorators-ts.umd.js.gz
 353 B: class-decorators-ts.umd.js.br"
 `;
@@ -1113,7 +1113,7 @@ exports[`fixtures build class-decorators-ts with microbundle 2`] = `7`;
 
 exports[`fixtures build class-decorators-ts with microbundle 3`] = `
 "var e=/*#__PURE__*/function(){function e(e){this.greeting=e}return e.prototype.greet=function(){return\\"Hello, \\"+this.greeting},e}(),t=new(e=function(e,t,r,n){var o,c=arguments.length,l=c<3?t:null===n?n=Object.getOwnPropertyDescriptor(t,r):n;if(\\"object\\"==typeof Reflect&&\\"function\\"==typeof Reflect.decorate)l=Reflect.decorate(e,t,r,n);else for(var f=e.length-1;f>=0;f--)(o=e[f])&&(l=(c<3?o(l):c>3?o(t,r,l):o(t,r))||l);return c>3&&l&&Object.defineProperty(t,r,l),l}([function(e){Object.seal(e),Object.seal(e.prototype)}],e))(\\"Hello World\\");export default t;
-//# sourceMappingURL=class-decorators-ts.esm.js.map
+//# sourceMappingURL=class-decorators-ts.esm.mjs.map
 "
 `;
 
@@ -1147,8 +1147,8 @@ Directory tree:
 
 class-properties
   dist
-    class-properties.esm.js
-    class-properties.esm.js.map
+    class-properties.esm.mjs
+    class-properties.esm.mjs.map
     class-properties.js
     class-properties.js.map
     class-properties.umd.js
@@ -1161,8 +1161,8 @@ class-properties
 Build \\"class-properties\\" to dist:
 93 B: class-properties.js.gz
 79 B: class-properties.js.br
-96 B: class-properties.esm.js.gz
-85 B: class-properties.esm.js.br
+96 B: class-properties.esm.mjs.gz
+85 B: class-properties.esm.mjs.br
 197 B: class-properties.umd.js.gz
 150 B: class-properties.umd.js.br"
 `;
@@ -1171,7 +1171,7 @@ exports[`fixtures build class-properties with microbundle 2`] = `6`;
 
 exports[`fixtures build class-properties with microbundle 3`] = `
 "var a=function(){this.baz=3};a.bar=2;var r=new a;export default r;export{a as Foo};
-//# sourceMappingURL=class-properties.esm.js.map
+//# sourceMappingURL=class-properties.esm.mjs.map
 "
 `;
 
@@ -1195,7 +1195,7 @@ Directory tree:
 css-modules--false
   dist
     css-modules--false.css
-    css-modules--false.esm.js
+    css-modules--false.esm.mjs
     css-modules--false.js
     css-modules--false.umd.js
   package.json
@@ -1208,8 +1208,8 @@ css-modules--false
 Build \\"css-modules--false\\" to dist:
 49 B: css-modules--false.js.gz
 23 B: css-modules--false.js.br
-52 B: css-modules--false.esm.js.gz
-36 B: css-modules--false.esm.js.br
+52 B: css-modules--false.esm.mjs.gz
+36 B: css-modules--false.esm.mjs.br
 156 B: css-modules--false.umd.js.gz
 109 B: css-modules--false.umd.js.br"
 `;
@@ -1241,7 +1241,7 @@ Directory tree:
 css-modules--null
   dist
     css-modules--null.css
-    css-modules--null.esm.js
+    css-modules--null.esm.mjs
     css-modules--null.js
     css-modules--null.umd.js
   package.json
@@ -1254,8 +1254,8 @@ css-modules--null
 Build \\"css-modules--null\\" to dist:
 110 B: css-modules--null.js.gz
 72 B: css-modules--null.js.br
-112 B: css-modules--null.esm.js.gz
-77 B: css-modules--null.esm.js.br
+112 B: css-modules--null.esm.mjs.gz
+77 B: css-modules--null.esm.mjs.br
 200 B: css-modules--null.umd.js.gz
 140 B: css-modules--null.umd.js.br"
 `;
@@ -1287,7 +1287,7 @@ Directory tree:
 css-modules--string
   dist
     css-modules--string.css
-    css-modules--string.esm.js
+    css-modules--string.esm.mjs
     css-modules--string.js
     css-modules--string.umd.js
   package.json
@@ -1300,8 +1300,8 @@ css-modules--string
 Build \\"css-modules--string\\" to dist:
 166 B: css-modules--string.js.gz
 118 B: css-modules--string.js.br
-168 B: css-modules--string.esm.js.gz
-122 B: css-modules--string.esm.js.br
+168 B: css-modules--string.esm.mjs.gz
+122 B: css-modules--string.esm.mjs.br
 263 B: css-modules--string.umd.js.gz
 192 B: css-modules--string.umd.js.br"
 `;
@@ -1333,7 +1333,7 @@ Directory tree:
 css-modules--true
   dist
     css-modules--true.css
-    css-modules--true.esm.js
+    css-modules--true.esm.mjs
     css-modules--true.js
     css-modules--true.umd.js
   package.json
@@ -1346,8 +1346,8 @@ css-modules--true
 Build \\"css-modules--true\\" to dist:
 139 B: css-modules--true.js.gz
 94 B: css-modules--true.js.br
-141 B: css-modules--true.esm.js.gz
-108 B: css-modules--true.esm.js.br
+141 B: css-modules--true.esm.mjs.gz
+108 B: css-modules--true.esm.mjs.br
 230 B: css-modules--true.umd.js.gz
 165 B: css-modules--true.umd.js.br"
 `;
@@ -1378,8 +1378,8 @@ Directory tree:
 
 custom-babelrc
   dist
-    custom-babelrc.esm.js
-    custom-babelrc.esm.js.map
+    custom-babelrc.esm.mjs
+    custom-babelrc.esm.mjs.map
     custom-babelrc.js
     custom-babelrc.js.map
     custom-babelrc.umd.js
@@ -1392,8 +1392,8 @@ custom-babelrc
 Build \\"custom-babelrc\\" to dist:
 218 B: custom-babelrc.js.gz
 193 B: custom-babelrc.js.br
-222 B: custom-babelrc.esm.js.gz
-185 B: custom-babelrc.esm.js.br
+222 B: custom-babelrc.esm.mjs.gz
+185 B: custom-babelrc.esm.mjs.br
 309 B: custom-babelrc.umd.js.gz
 260 B: custom-babelrc.umd.js.br"
 `;
@@ -1402,7 +1402,7 @@ exports[`fixtures build custom-babelrc with microbundle 2`] = `6`;
 
 exports[`fixtures build custom-babelrc with microbundle 3`] = `
 "class e{constructor(){var e,r;r=[\\"foo\\",\\"bar\\"],(e=\\"myFields\\")in this?Object.defineProperty(this,e,{value:r,enumerable:!0,configurable:!0,writable:!0}):this[e]=r}foo(){try{return Promise.resolve(this.myFields.find(e=>\\"bar\\"===e))}catch(e){return Promise.reject(e)}}}export{e as MyClass};
-//# sourceMappingURL=custom-babelrc.esm.js.map
+//# sourceMappingURL=custom-babelrc.esm.mjs.map
 "
 `;
 
@@ -1425,8 +1425,8 @@ Directory tree:
 
 custom-source
   dist
-    custom-source.esm.js
-    custom-source.esm.js.map
+    custom-source.esm.mjs
+    custom-source.esm.mjs.map
     custom-source.js
     custom-source.js.map
     custom-source.umd.js
@@ -1440,8 +1440,8 @@ custom-source
 Build \\"custom-source\\" to dist:
 187 B: custom-source.js.gz
 138 B: custom-source.js.br
-188 B: custom-source.esm.js.gz
-139 B: custom-source.esm.js.br
+188 B: custom-source.esm.mjs.gz
+139 B: custom-source.esm.mjs.br
 275 B: custom-source.umd.js.gz
 203 B: custom-source.umd.js.br"
 `;
@@ -1450,7 +1450,7 @@ exports[`fixtures build custom-source with microbundle 2`] = `6`;
 
 exports[`fixtures build custom-source with microbundle 3`] = `
 "var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
-//# sourceMappingURL=custom-source.esm.js.map
+//# sourceMappingURL=custom-source.esm.mjs.map
 "
 `;
 
@@ -1473,8 +1473,8 @@ Directory tree:
 
 custom-source
   dist
-    custom-src.esm.js
-    custom-src.esm.js.map
+    custom-src.esm.mjs
+    custom-src.esm.mjs.map
     custom-src.js
     custom-src.js.map
     custom-src.umd.js
@@ -1488,8 +1488,8 @@ custom-source
 Build \\"custom-src\\" to dist:
 187 B: custom-src.js.gz
 138 B: custom-src.js.br
-188 B: custom-src.esm.js.gz
-139 B: custom-src.esm.js.br
+188 B: custom-src.esm.mjs.gz
+139 B: custom-src.esm.mjs.br
 273 B: custom-src.umd.js.gz
 203 B: custom-src.umd.js.br"
 `;
@@ -1498,7 +1498,7 @@ exports[`fixtures build custom-source-with-cwd with microbundle 2`] = `6`;
 
 exports[`fixtures build custom-source-with-cwd with microbundle 3`] = `
 "var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
-//# sourceMappingURL=custom-src.esm.js.map
+//# sourceMappingURL=custom-src.esm.mjs.map
 "
 `;
 
@@ -1521,8 +1521,8 @@ Directory tree:
 
 default-named
   dist
-    default-named.esm.js
-    default-named.esm.js.map
+    default-named.esm.mjs
+    default-named.esm.mjs.map
     default-named.js
     default-named.js.map
     default-named.umd.js
@@ -1535,8 +1535,8 @@ default-named
 Build \\"default-named\\" to dist:
 60 B: default-named.js.gz
 46 B: default-named.js.br
-74 B: default-named.esm.js.gz
-62 B: default-named.esm.js.br
+74 B: default-named.esm.mjs.gz
+62 B: default-named.esm.mjs.br
 169 B: default-named.umd.js.gz
 122 B: default-named.umd.js.br"
 `;
@@ -1545,7 +1545,7 @@ exports[`fixtures build default-named with microbundle 2`] = `6`;
 
 exports[`fixtures build default-named with microbundle 3`] = `
 "var t=42;function e(){}export default e;export{t as foo};
-//# sourceMappingURL=default-named.esm.js.map
+//# sourceMappingURL=default-named.esm.mjs.map
 "
 `;
 
@@ -1568,7 +1568,7 @@ Directory tree:
 
 define
   dist
-    define.esm.js
+    define.esm.mjs
     define.js
     define.umd.js
   index.js
@@ -1578,8 +1578,8 @@ define
 Build \\"define\\" to dist:
 55 B: define.js.gz
 37 B: define.js.br
-55 B: define.esm.js.gz
-37 B: define.esm.js.br
+55 B: define.esm.mjs.gz
+37 B: define.esm.mjs.br
 108 B: define.umd.js.gz
 78 B: define.umd.js.br"
 `;
@@ -1608,14 +1608,14 @@ Directory tree:
 
 define-expression
   dist
-    define-expression.esm.js
+    define-expression.esm.mjs
   index.js
   package.json
 
 
 Build \\"define-expression\\" to dist:
-56 B: define-expression.esm.js.gz
-40 B: define-expression.esm.js.br"
+56 B: define-expression.esm.mjs.gz
+40 B: define-expression.esm.mjs.br"
 `;
 
 exports[`fixtures build define-expression with microbundle 2`] = `1`;
@@ -1632,8 +1632,8 @@ Directory tree:
 
 esnext-ts
   dist
-    esnext-ts.esm.js
-    esnext-ts.esm.js.map
+    esnext-ts.esm.mjs
+    esnext-ts.esm.mjs.map
     esnext-ts.js
     esnext-ts.js.map
     esnext-ts.umd.js
@@ -1649,8 +1649,8 @@ esnext-ts
 Build \\"esnext-ts\\" to dist:
 1007 B: esnext-ts.js.gz
 898 B: esnext-ts.js.br
-1008 B: esnext-ts.esm.js.gz
-898 B: esnext-ts.esm.js.br
+1008 B: esnext-ts.esm.mjs.gz
+898 B: esnext-ts.esm.mjs.br
 1068 B: esnext-ts.umd.js.gz
 950 B: esnext-ts.umd.js.br"
 `;
@@ -1659,7 +1659,7 @@ exports[`fixtures build esnext-ts with microbundle 2`] = `7`;
 
 exports[`fixtures build esnext-ts with microbundle 3`] = `
 "function n(t,e,i){if(!t.s){if(i instanceof r){if(!i.s)return void(i.o=n.bind(null,t,e));1&e&&(e=i.s),i=i.v}if(i&&i.then)return void i.then(n.bind(null,t,e),n.bind(null,t,2));t.s=e,t.v=i;var o=t.o;o&&o(t)}}var t=function(){try{var t,o,u,f,h=[],c=!0,v=!1,a=i(function(){return function(i,f){try{var v=function(){t=function(n){var t;if(\\"undefined\\"!=typeof Symbol){if(Symbol.asyncIterator&&null!=(t=n[Symbol.asyncIterator]))return t.call(n);if(Symbol.iterator&&null!=(t=n[Symbol.iterator]))return t.call(n)}throw new TypeError(\\"Object is not async iterable\\")}([1,2]);var i=function(t,i,o){for(var u;;){var f=t();if(e(f)&&(f=f.v),!f)return h;if(f.then){u=0;break}var h=o();if(h&&h.then){if(!e(h)){u=1;break}h=h.s}if(i){var c=i();if(c&&c.then&&!e(c)){u=2;break}}}var v=new r,a=n.bind(null,v,2);return(0===u?f.then(s):1===u?h.then(l):c.then(d)).then(void 0,a),v;function l(r){h=r;do{if(i&&(c=i())&&c.then&&!e(c))return void c.then(d).then(void 0,a);if(!(f=t())||e(f)&&!f.v)return void n(v,1,h);if(f.then)return void f.then(s).then(void 0,a);e(h=o())&&(h=h.v)}while(!h||!h.then);h.then(l).then(void 0,a)}function s(t){t?(h=o())&&h.then?h.then(l).then(void 0,a):l(h):n(v,1,h)}function d(){(f=t())?f.then?f.then(s).then(void 0,a):s(f):n(v,1,h)}}(function(){return!!Promise.resolve(t.next()).then(function(n){return c=o.done,o=n,Promise.resolve(o.value).then(function(n){return u=n,!c})})},function(){return!!(c=!0)},function(){h.push(u)});if(i&&i.then)return i.then(function(){})}()}catch(n){return f(n)}return v&&v.then?v.then(void 0,f):v}(0,function(n){v=!0,f=n})},function(n,r){function e(t){if(n)throw r;return r}var o=i(function(){var n=function(){if(!c&&null!=t.return)return Promise.resolve(t.return()).then(function(){})}();if(n&&n.then)return n.then(function(){})},function(n,t){if(v)throw f;if(n)throw t;return t});return o&&o.then?o.then(e):e()});return Promise.resolve(a&&a.then?a.then(function(n){return h}):h)}catch(n){return Promise.reject(n)}},r=/*#__PURE__*/function(){function t(){}return t.prototype.then=function(r,e){var i=new t,o=this.s;if(o){var u=1&o?r:e;if(u){try{n(i,1,u(this.v))}catch(t){n(i,2,t)}return i}return this}return this.o=function(t){try{var o=t.v;1&t.s?n(i,1,r?r(o):o):e?n(i,1,e(o)):n(i,2,o)}catch(t){n(i,2,t)}},i},t}();function e(n){return n instanceof r&&1&n.s}function i(n,t){try{var r=n()}catch(n){return t(!0,n)}return r&&r.then?r.then(t.bind(null,!1),t.bind(null,!0)):t(!1,r)}t().then(console.log);export default t;
-//# sourceMappingURL=esnext-ts.esm.js.map
+//# sourceMappingURL=esnext-ts.esm.mjs.map
 "
 `;
 
@@ -1687,7 +1687,7 @@ Directory tree:
 
 inline-source-map
   dist
-    inline-source-map.esm.js
+    inline-source-map.esm.mjs
     inline-source-map.js
     inline-source-map.umd.js
   package.json
@@ -1699,8 +1699,8 @@ inline-source-map
 Build \\"inline-source-map\\" to dist:
 187 B: inline-source-map.js.gz
 138 B: inline-source-map.js.br
-188 B: inline-source-map.esm.js.gz
-139 B: inline-source-map.esm.js.br
+188 B: inline-source-map.esm.mjs.gz
+139 B: inline-source-map.esm.mjs.br
 278 B: inline-source-map.umd.js.gz
 217 B: inline-source-map.umd.js.br"
 `;
@@ -1709,7 +1709,7 @@ exports[`fixtures build inline-source-map with microbundle 2`] = `3`;
 
 exports[`fixtures build inline-source-map with microbundle 3`] = `
 "var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5saW5lLXNvdXJjZS1tYXAuZXNtLmpzIiwic291cmNlcyI6WyIuLi9zcmMvdHdvLmpzIiwiLi4vc3JjL2luZGV4LmpzIl0sInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBhc3luYyBmdW5jdGlvbiB0d28oLi4uYXJncykge1xuXHRyZXR1cm4gYXJncy5yZWR1Y2UoKHRvdGFsLCB2YWx1ZSkgPT4gdG90YWwgKyB2YWx1ZSwgMCk7XG59XG4iLCJpbXBvcnQgeyB0d28gfSBmcm9tICcuL3R3byc7XG5cbmV4cG9ydCBkZWZhdWx0IGFzeW5jIGZ1bmN0aW9uKC4uLmFyZ3MpIHtcblx0cmV0dXJuIFthd2FpdCB0d28oLi4uYXJncyksIGF3YWl0IHR3byguLi5hcmdzKV07XG59XG4iXSwibmFtZXMiOlsidHdvIiwicmVkdWNlIiwidG90YWwiLCJ2YWx1ZSIsImFyZ3MiXSwibWFwcGluZ3MiOiJJQUFzQkEsaUNBQ3JCLHVCQUFPLGlCQUFLQyxPQUFPLFNBQUNDLEVBQU9DLFVBQVVELEVBQVFDLEdBQU8sSUFEckQsa0ZDRWlDQywwQ0FDbEJKLGVBQU9JLDRDQUFhSixlQUFPSSxxQkFBekMsTUFBTyxVQURSIn0=
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5saW5lLXNvdXJjZS1tYXAuZXNtLm1qcyIsInNvdXJjZXMiOlsiLi4vc3JjL3R3by5qcyIsIi4uL3NyYy9pbmRleC5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgYXN5bmMgZnVuY3Rpb24gdHdvKC4uLmFyZ3MpIHtcblx0cmV0dXJuIGFyZ3MucmVkdWNlKCh0b3RhbCwgdmFsdWUpID0+IHRvdGFsICsgdmFsdWUsIDApO1xufVxuIiwiaW1wb3J0IHsgdHdvIH0gZnJvbSAnLi90d28nO1xuXG5leHBvcnQgZGVmYXVsdCBhc3luYyBmdW5jdGlvbiguLi5hcmdzKSB7XG5cdHJldHVybiBbYXdhaXQgdHdvKC4uLmFyZ3MpLCBhd2FpdCB0d28oLi4uYXJncyldO1xufVxuIl0sIm5hbWVzIjpbInR3byIsInJlZHVjZSIsInRvdGFsIiwidmFsdWUiLCJhcmdzIl0sIm1hcHBpbmdzIjoiSUFBc0JBLGlDQUNyQix1QkFBTyxpQkFBS0MsT0FBTyxTQUFDQyxFQUFPQyxVQUFVRCxFQUFRQyxHQUFPLElBRHJELGtGQ0VpQ0MsMENBQ2xCSixlQUFPSSw0Q0FBYUosZUFBT0kscUJBQXpDLE1BQU8sVUFEUiJ9
 "
 `;
 
@@ -1732,8 +1732,8 @@ Directory tree:
 
 jsx
   dist
-    jsx.esm.js
-    jsx.esm.js.map
+    jsx.esm.mjs
+    jsx.esm.mjs.map
     jsx.js
     jsx.js.map
     jsx.umd.js
@@ -1745,8 +1745,8 @@ jsx
 Build \\"jsx\\" to dist:
 239 B: jsx.js.gz
 195 B: jsx.js.br
-237 B: jsx.esm.js.gz
-201 B: jsx.esm.js.br
+237 B: jsx.esm.mjs.gz
+201 B: jsx.esm.mjs.br
 313 B: jsx.umd.js.gz
 248 B: jsx.umd.js.br"
 `;
@@ -1755,7 +1755,7 @@ exports[`fixtures build jsx with microbundle 2`] = `6`;
 
 exports[`fixtures build jsx with microbundle 3`] = `
 "var n=function(n,r){return{tag:n,props:r,children:[].slice.call(arguments,2)}},r=function(n){return n.children},l=/*#__PURE__*/function(){function l(){}return l.prototype.render=function(){return n(\\"div\\",{id:\\"app\\"},n(\\"h1\\",null,\\"Hello, World!\\"),n(\\"p\\",null,\\"A JSX demo.\\"),n(r,null,n(\\"p\\",null,\\"Test fragment\\")))},l}();export default l;
-//# sourceMappingURL=jsx.esm.js.map
+//# sourceMappingURL=jsx.esm.mjs.map
 "
 `;
 
@@ -1779,8 +1779,8 @@ Directory tree:
 
 macro
   dist
-    macro-lib.esm.js
-    macro-lib.esm.js.map
+    macro-lib.esm.mjs
+    macro-lib.esm.mjs.map
     macro-lib.js
     macro-lib.js.map
     macro-lib.umd.js
@@ -1794,8 +1794,8 @@ macro
 Build \\"macro-lib\\" to dist:
 49 B: macro-lib.js.gz
 33 B: macro-lib.js.br
-48 B: macro-lib.esm.js.gz
-32 B: macro-lib.esm.js.br
+48 B: macro-lib.esm.mjs.gz
+32 B: macro-lib.esm.mjs.br
 156 B: macro-lib.umd.js.gz
 126 B: macro-lib.umd.js.br"
 `;
@@ -1804,7 +1804,7 @@ exports[`fixtures build macro with microbundle 2`] = `6`;
 
 exports[`fixtures build macro with microbundle 3`] = `
 "export default\\"name-macro\\";
-//# sourceMappingURL=macro-lib.esm.js.map
+//# sourceMappingURL=macro-lib.esm.mjs.map
 "
 `;
 
@@ -1827,8 +1827,8 @@ Directory tree:
 
 mangle-json-file
   dist
-    mangle-json-file.esm.js
-    mangle-json-file.esm.js.map
+    mangle-json-file.esm.mjs
+    mangle-json-file.esm.mjs.map
     mangle-json-file.js
     mangle-json-file.js.map
     mangle-json-file.umd.js
@@ -1843,8 +1843,8 @@ mangle-json-file
 Build \\"mangle-json-file\\" to dist:
 103 B: mangle-json-file.js.gz
 89 B: mangle-json-file.js.br
-105 B: mangle-json-file.esm.js.gz
-91 B: mangle-json-file.esm.js.br
+105 B: mangle-json-file.esm.mjs.gz
+91 B: mangle-json-file.esm.mjs.br
 196 B: mangle-json-file.umd.js.gz
 171 B: mangle-json-file.umd.js.br"
 `;
@@ -1853,7 +1853,7 @@ exports[`fixtures build mangle-json-file with microbundle 2`] = `6`;
 
 exports[`fixtures build mangle-json-file with microbundle 3`] = `
 "var o={prop1:1,__p2:2};function r(){return console.log(o.prop1),console.log(o.__p2),o}export default r;
-//# sourceMappingURL=mangle-json-file.esm.js.map
+//# sourceMappingURL=mangle-json-file.esm.mjs.map
 "
 `;
 
@@ -1876,8 +1876,8 @@ Directory tree:
 
 minify-config
   dist
-    minify-config.esm.js
-    minify-config.esm.js.map
+    minify-config.esm.mjs
+    minify-config.esm.mjs.map
     minify-config.js
     minify-config.js.map
     minify-config.umd.js
@@ -1891,8 +1891,8 @@ minify-config
 Build \\"minify-config\\" to dist:
 99 B: minify-config.js.gz
 85 B: minify-config.js.br
-101 B: minify-config.esm.js.gz
-87 B: minify-config.esm.js.br
+101 B: minify-config.esm.mjs.gz
+87 B: minify-config.esm.mjs.br
 189 B: minify-config.umd.js.gz
 140 B: minify-config.umd.js.br"
 `;
@@ -1901,7 +1901,7 @@ exports[`fixtures build minify-config with microbundle 2`] = `6`;
 
 exports[`fixtures build minify-config with microbundle 3`] = `
 "var o={prop1:1,o:2};function r(){return console.log(o.prop1),console.log(o.o),o}export default r;
-//# sourceMappingURL=minify-config.esm.js.map
+//# sourceMappingURL=minify-config.esm.mjs.map
 "
 `;
 
@@ -1924,8 +1924,8 @@ Directory tree:
 
 minify-config-boolean
   dist
-    minify-config-boolean.esm.js
-    minify-config-boolean.esm.js.map
+    minify-config-boolean.esm.mjs
+    minify-config-boolean.esm.mjs.map
     minify-config-boolean.js
     minify-config-boolean.js.map
     minify-config-boolean.umd.js
@@ -1939,8 +1939,8 @@ minify-config-boolean
 Build \\"minify-config-boolean\\" to dist:
 107 B: minify-config-boolean.js.gz
 84 B: minify-config-boolean.js.br
-114 B: minify-config-boolean.esm.js.gz
-90 B: minify-config-boolean.esm.js.br
+114 B: minify-config-boolean.esm.mjs.gz
+90 B: minify-config-boolean.esm.mjs.br
 216 B: minify-config-boolean.umd.js.gz
 159 B: minify-config-boolean.umd.js.br"
 `;
@@ -1949,7 +1949,7 @@ exports[`fixtures build minify-config-boolean with microbundle 2`] = `6`;
 
 exports[`fixtures build minify-config-boolean with microbundle 3`] = `
 "var two={prop1:1,_prop2:2};function index(){return console.log(two.prop1),console.log(two._prop2),two}export default index;
-//# sourceMappingURL=minify-config-boolean.esm.js.map
+//# sourceMappingURL=minify-config-boolean.esm.mjs.map
 "
 `;
 
@@ -1972,8 +1972,8 @@ Directory tree:
 
 minify-path-config
   dist
-    minify-path-config.esm.js
-    minify-path-config.esm.js.map
+    minify-path-config.esm.mjs
+    minify-path-config.esm.mjs.map
     minify-path-config.js
     minify-path-config.js.map
     minify-path-config.umd.js
@@ -1988,8 +1988,8 @@ minify-path-config
 Build \\"minify-path-config\\" to dist:
 103 B: minify-path-config.js.gz
 89 B: minify-path-config.js.br
-105 B: minify-path-config.esm.js.gz
-91 B: minify-path-config.esm.js.br
+105 B: minify-path-config.esm.mjs.gz
+91 B: minify-path-config.esm.mjs.br
 198 B: minify-path-config.umd.js.gz
 152 B: minify-path-config.umd.js.br"
 `;
@@ -1998,7 +1998,7 @@ exports[`fixtures build minify-path-config with microbundle 2`] = `6`;
 
 exports[`fixtures build minify-path-config with microbundle 3`] = `
 "var o={prop1:1,__p2:2};function r(){return console.log(o.prop1),console.log(o.__p2),o}export default r;
-//# sourceMappingURL=minify-path-config.esm.js.map
+//# sourceMappingURL=minify-path-config.esm.mjs.map
 "
 `;
 
@@ -2021,8 +2021,8 @@ Directory tree:
 
 minify-path-parent-dir
   dist
-    minify-path-parent-dir.esm.js
-    minify-path-parent-dir.esm.js.map
+    minify-path-parent-dir.esm.mjs
+    minify-path-parent-dir.esm.mjs.map
     minify-path-parent-dir.js
     minify-path-parent-dir.js.map
     minify-path-parent-dir.umd.js
@@ -2035,8 +2035,8 @@ minify-path-parent-dir
 Build \\"minify-path-parent-dir\\" to dist:
 103 B: minify-path-parent-dir.js.gz
 89 B: minify-path-parent-dir.js.br
-105 B: minify-path-parent-dir.esm.js.gz
-91 B: minify-path-parent-dir.esm.js.br
+105 B: minify-path-parent-dir.esm.mjs.gz
+91 B: minify-path-parent-dir.esm.mjs.br
 200 B: minify-path-parent-dir.umd.js.gz
 161 B: minify-path-parent-dir.umd.js.br"
 `;
@@ -2045,7 +2045,7 @@ exports[`fixtures build minify-path-parent-dir-with-cwd with microbundle 2`] = `
 
 exports[`fixtures build minify-path-parent-dir-with-cwd with microbundle 3`] = `
 "var o={prop1:1,__p2:2};function r(){return console.log(o.prop1),console.log(o.__p2),o}export default r;
-//# sourceMappingURL=minify-path-parent-dir.esm.js.map
+//# sourceMappingURL=minify-path-parent-dir.esm.mjs.map
 "
 `;
 
@@ -2068,8 +2068,8 @@ Directory tree:
 
 modern
   dist
-    modern-lib.modern.js
-    modern-lib.modern.js.map
+    modern-lib.modern.mjs
+    modern-lib.modern.mjs.map
   package.json
   src
     index.js
@@ -2077,15 +2077,15 @@ modern
 
 
 Build \\"modern-lib\\" to dist:
-113 B: modern-lib.modern.js.gz
-92 B: modern-lib.modern.js.br"
+113 B: modern-lib.modern.mjs.gz
+92 B: modern-lib.modern.mjs.br"
 `;
 
 exports[`fixtures build modern with microbundle 2`] = `2`;
 
 exports[`fixtures build modern with microbundle 3`] = `
 "async function n(...n){return n.reduce((n,t)=>n+t,0)}async function t(...t){return[await n(...t),await n(...t)]}export default t;
-//# sourceMappingURL=modern-lib.modern.js.map
+//# sourceMappingURL=modern-lib.modern.mjs.map
 "
 `;
 
@@ -2096,12 +2096,12 @@ Directory tree:
 
 modern-generators
   dist
-    modern-generators.esm.js
-    modern-generators.esm.js.map
+    modern-generators.esm.mjs
+    modern-generators.esm.mjs.map
     modern-generators.js
     modern-generators.js.map
-    modern-generators.modern.js
-    modern-generators.modern.js.map
+    modern-generators.modern.mjs
+    modern-generators.modern.mjs.map
     modern-generators.umd.js
     modern-generators.umd.js.map
   package.json
@@ -2113,10 +2113,10 @@ modern-generators
 Build \\"modern-generators\\" to dist:
 248 B: modern-generators.js.gz
 201 B: modern-generators.js.br
-118 B: modern-generators.modern.js.gz
-99 B: modern-generators.modern.js.br
-247 B: modern-generators.esm.js.gz
-218 B: modern-generators.esm.js.br
+118 B: modern-generators.modern.mjs.gz
+99 B: modern-generators.modern.mjs.br
+247 B: modern-generators.esm.mjs.gz
+218 B: modern-generators.esm.mjs.br
 326 B: modern-generators.umd.js.gz
 267 B: modern-generators.umd.js.br"
 `;
@@ -2125,7 +2125,7 @@ exports[`fixtures build modern-generators with microbundle 2`] = `8`;
 
 exports[`fixtures build modern-generators with microbundle 3`] = `
 "var e=/*#__PURE__*/regeneratorRuntime.mark(r);function r(){var r;return regeneratorRuntime.wrap(function(e){for(;;)switch(e.prev=e.next){case 0:r=0;case 1:return e.next=4,r++;case 4:e.next=1;break;case 6:case\\"end\\":return e.stop()}},e)}export default function(){try{var e=r();return Promise.resolve([e.next().value,e.next().value])}catch(e){return Promise.reject(e)}}
-//# sourceMappingURL=modern-generators.esm.js.map
+//# sourceMappingURL=modern-generators.esm.mjs.map
 "
 `;
 
@@ -2137,7 +2137,7 @@ exports[`fixtures build modern-generators with microbundle 4`] = `
 
 exports[`fixtures build modern-generators with microbundle 5`] = `
 "async function e(){const e=function*(){let e=0;for(;;)yield e++}();return[e.next().value,e.next().value]}export default e;
-//# sourceMappingURL=modern-generators.modern.js.map
+//# sourceMappingURL=modern-generators.modern.mjs.map
 "
 `;
 
@@ -2154,8 +2154,8 @@ Directory tree:
 
 name-custom-amd
   dist
-    name-custom-amd.esm.js
-    name-custom-amd.esm.js.map
+    name-custom-amd.esm.mjs
+    name-custom-amd.esm.mjs.map
     name-custom-amd.js
     name-custom-amd.js.map
     name-custom-amd.umd.js
@@ -2169,8 +2169,8 @@ name-custom-amd
 Build \\"name-custom-amd\\" to dist:
 187 B: name-custom-amd.js.gz
 138 B: name-custom-amd.js.br
-188 B: name-custom-amd.esm.js.gz
-139 B: name-custom-amd.esm.js.br
+188 B: name-custom-amd.esm.mjs.gz
+139 B: name-custom-amd.esm.mjs.br
 277 B: name-custom-amd.umd.js.gz
 208 B: name-custom-amd.umd.js.br"
 `;
@@ -2179,7 +2179,7 @@ exports[`fixtures build name-custom-amd with microbundle 2`] = `6`;
 
 exports[`fixtures build name-custom-amd with microbundle 3`] = `
 "var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
-//# sourceMappingURL=name-custom-amd.esm.js.map
+//# sourceMappingURL=name-custom-amd.esm.mjs.map
 "
 `;
 
@@ -2202,8 +2202,8 @@ Directory tree:
 
 name-custom-cli
   dist
-    name-custom.esm.js
-    name-custom.esm.js.map
+    name-custom.esm.mjs
+    name-custom.esm.mjs.map
     name-custom.js
     name-custom.js.map
     name-custom.umd.js
@@ -2217,8 +2217,8 @@ name-custom-cli
 Build \\"name-custom\\" to dist:
 187 B: name-custom.js.gz
 138 B: name-custom.js.br
-188 B: name-custom.esm.js.gz
-139 B: name-custom.esm.js.br
+188 B: name-custom.esm.mjs.gz
+139 B: name-custom.esm.mjs.br
 276 B: name-custom.umd.js.gz
 215 B: name-custom.umd.js.br"
 `;
@@ -2227,7 +2227,7 @@ exports[`fixtures build name-custom-cli with microbundle 2`] = `6`;
 
 exports[`fixtures build name-custom-cli with microbundle 3`] = `
 "var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
-//# sourceMappingURL=name-custom.esm.js.map
+//# sourceMappingURL=name-custom.esm.mjs.map
 "
 `;
 
@@ -2250,8 +2250,8 @@ Directory tree:
 
 no-pkg
   dist
-    no-pkg.esm.js
-    no-pkg.esm.js.map
+    no-pkg.esm.mjs
+    no-pkg.esm.mjs.map
     no-pkg.js
     no-pkg.js.map
     no-pkg.umd.js
@@ -2264,8 +2264,8 @@ no-pkg
 Build \\"no-pkg\\" to dist:
 187 B: no-pkg.js.gz
 138 B: no-pkg.js.br
-188 B: no-pkg.esm.js.gz
-139 B: no-pkg.esm.js.br
+188 B: no-pkg.esm.mjs.gz
+139 B: no-pkg.esm.mjs.br
 270 B: no-pkg.umd.js.gz
 216 B: no-pkg.umd.js.br"
 `;
@@ -2274,7 +2274,7 @@ exports[`fixtures build no-pkg with microbundle 2`] = `6`;
 
 exports[`fixtures build no-pkg with microbundle 3`] = `
 "var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
-//# sourceMappingURL=no-pkg.esm.js.map
+//# sourceMappingURL=no-pkg.esm.mjs.map
 "
 `;
 
@@ -2297,8 +2297,8 @@ Directory tree:
 
 no-pkg-name
   dist
-    no-pkg-name.esm.js
-    no-pkg-name.esm.js.map
+    no-pkg-name.esm.mjs
+    no-pkg-name.esm.mjs.map
     no-pkg-name.js
     no-pkg-name.js.map
     no-pkg-name.umd.js
@@ -2312,8 +2312,8 @@ no-pkg-name
 Build \\"no-pkg-name\\" to dist:
 187 B: no-pkg-name.js.gz
 138 B: no-pkg-name.js.br
-188 B: no-pkg-name.esm.js.gz
-139 B: no-pkg-name.esm.js.br
+188 B: no-pkg-name.esm.mjs.gz
+139 B: no-pkg-name.esm.mjs.br
 274 B: no-pkg-name.umd.js.gz
 219 B: no-pkg-name.umd.js.br"
 `;
@@ -2322,7 +2322,7 @@ exports[`fixtures build no-pkg-name with microbundle 2`] = `6`;
 
 exports[`fixtures build no-pkg-name with microbundle 3`] = `
 "var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
-//# sourceMappingURL=no-pkg-name.esm.js.map
+//# sourceMappingURL=no-pkg-name.esm.mjs.map
 "
 `;
 
@@ -2346,8 +2346,8 @@ Directory tree:
 optional-chaining-ts
   dist
     index.d.ts
-    optional-chaining-ts.esm.js
-    optional-chaining-ts.esm.js.map
+    optional-chaining-ts.esm.mjs
+    optional-chaining-ts.esm.mjs.map
     optional-chaining-ts.js
     optional-chaining-ts.js.map
     optional-chaining-ts.umd.js
@@ -2362,8 +2362,8 @@ optional-chaining-ts
 Build \\"optional-chaining-ts\\" to dist:
 109 B: optional-chaining-ts.js.gz
 88 B: optional-chaining-ts.js.br
-111 B: optional-chaining-ts.esm.js.gz
-97 B: optional-chaining-ts.esm.js.br
+111 B: optional-chaining-ts.esm.mjs.gz
+97 B: optional-chaining-ts.esm.mjs.br
 210 B: optional-chaining-ts.umd.js.gz
 169 B: optional-chaining-ts.umd.js.br"
 `;
@@ -2381,7 +2381,7 @@ exports[`fixtures build optional-chaining-ts with microbundle 3`] = `
 
 exports[`fixtures build optional-chaining-ts with microbundle 4`] = `
 "function n(n){var r,i;return null!=(r=null==(i=n.maybeVar)?void 0:i.thing)?r:void 0}export{n as chain};
-//# sourceMappingURL=optional-chaining-ts.esm.js.map
+//# sourceMappingURL=optional-chaining-ts.esm.mjs.map
 "
 `;
 
@@ -2404,8 +2404,8 @@ Directory tree:
 
 parameters-rest-closure
   dist
-    parameters-rest-closure.esm.js
-    parameters-rest-closure.esm.js.map
+    parameters-rest-closure.esm.mjs
+    parameters-rest-closure.esm.mjs.map
     parameters-rest-closure.js
     parameters-rest-closure.js.map
     parameters-rest-closure.umd.js
@@ -2418,8 +2418,8 @@ parameters-rest-closure
 Build \\"parameters-rest-closure\\" to dist:
 157 B: parameters-rest-closure.js.gz
 115 B: parameters-rest-closure.js.br
-165 B: parameters-rest-closure.esm.js.gz
-124 B: parameters-rest-closure.esm.js.br
+165 B: parameters-rest-closure.esm.mjs.gz
+124 B: parameters-rest-closure.esm.mjs.br
 247 B: parameters-rest-closure.umd.js.gz
 189 B: parameters-rest-closure.umd.js.br"
 `;
@@ -2428,7 +2428,7 @@ exports[`fixtures build parameters-rest-closure with microbundle 2`] = `6`;
 
 exports[`fixtures build parameters-rest-closure with microbundle 3`] = `
 "function n(n){var c=[].slice.call(arguments,1);return function(){n.apply(void 0,c)}}function c(n){var c=arguments;return function(){n.apply(void 0,[].slice.call(c,1))}}export{n as parametersRestWithClosure,c as parametersRestWithInnerArrowFunction};
-//# sourceMappingURL=parameters-rest-closure.esm.js.map
+//# sourceMappingURL=parameters-rest-closure.esm.mjs.map
 "
 `;
 
@@ -2451,8 +2451,8 @@ Directory tree:
 
 pretty
   dist
-    pretty.esm.js
-    pretty.esm.js.map
+    pretty.esm.mjs
+    pretty.esm.mjs.map
     pretty.js
     pretty.js.map
     pretty.umd.js
@@ -2465,8 +2465,8 @@ pretty
 Build \\"pretty\\" to dist:
 6.33 kB: pretty.js.gz
 5.19 kB: pretty.js.br
-6.34 kB: pretty.esm.js.gz
-5.21 kB: pretty.esm.js.br
+6.34 kB: pretty.esm.mjs.gz
+5.21 kB: pretty.esm.mjs.br
 6.46 kB: pretty.umd.js.gz
 5.31 kB: pretty.umd.js.br"
 `;
@@ -2475,7 +2475,7 @@ exports[`fixtures build pretty with microbundle 2`] = `6`;
 
 exports[`fixtures build pretty with microbundle 3`] = `
 "var n=\\"\\\\n\\\\nThere is immense joy in just watching - watching all the little creatures in nature. I'll go over the colors one more\\\\ntime that we use: Titanium white, Thalo green, Prussian blue, Van Dyke brown, Alizarin crimson, Sap green, Cad yellow,\\\\nand Permanent red. If you don't like it - change it. It's your world. Be brave. Sometimes you learn more from your\\\\nmistakes than you do from your masterpieces.\\\\n\\\\nTrees grow in all kinds of ways. They're not all perfectly straight. Not every limb is perfect. Now let's put some happy\\\\nlittle clouds in here. We have no limits to our world. We're only limited by our imagination. The first step to doing\\\\nanything is to believe you can do it. See it finished in your mind before you ever start. Even trees need a friend. We\\\\nall need friends. And that's when it becomes fun - you don't have to spend your time thinking about what's happening -\\\\nyou just let it happen.\\\\n\\\\nरिती संपादक बेंगलूर अन्तरराष्ट्रीयकरन शीघ्र भाषा चिदंश उद्योग विस्तरणक्षमता चिदंश एकएस तरहथा। प्रोत्साहित उपेक्ष बिन्दुओ\\\\nध्येय देने गुजरना ऎसाजीस निर्माण नवंबर लिए। एसेएवं उपलब्धता मुश्किले डाले। बहतर सहायता माध्यम भाषाओ समूह\\\\n\\\\n井待品亡写回横提和指生志考結。重特天県偏切運録広詳三人転者数代歳。秀天戦機広八型希金生作事国第。年米教止証車断級弘報安楽\\\\n銀必約現獲料切。点額講問課覧傷邸出送跡出懲。編米人験由社迷入解公著片法記択昇必崎掲清。摩出元自越食多県実間旅売主注理併間\\\\n話策。小政退時年福米越給新家入解美露方堀港朝。俊間髪物縦該高報見甲購形州日事。\\\\n\\\\n🌸🍂🌃🐧🍘🏧🍮 🌶👢🔗🐥🔼🎮 🐤🍲📆👧🎼🐒 💑🍖📴🐠🍼 🎱🔮🍦💳👹 💫🏮📅🍑📭🎎 🏭💿🏫🔢👚💩 👇🌄🌗🔵💦 🔺🔡🌍🐗🏀📫\\\\n📻🍵🐰🔜🕧 🌴🌞🕙🎨🎾🔊🏰 🎑🌆🔁🌂 🕐📣📉🌴🕠📢 🎀📖🎋🔱📒💰 🍅🐻🌃🌖. 🎁🕔👎🎷📀📞 🍁🔫🍀🌃📹 💈📂💶👕 🍡📰👛🐻\\\\n🍖🐽💫📼 🍆🎀💛👫🔹 🎷🕙🌱👸🕁🔝 🍸🔅👿🐡. 🐟🔐🏡🔅👾 🐱💱👺🍶 🎠🔆🎤🏥🌻🗾 👽🎯💈🏣🔊📴💆🏫 🔉🌉🍃🌻 🎅🔌🔻💣 🌸🍎🐀🌇\\\\n🗻👔📤💤🔶. 🍆👣🕕👦📦👑 🐍🐉🔶🕕 🍲👩🍍🌕📻👒📵 🔣🌋🌟👼 🔏📀🐆🍖🍮 🐁🌘🐻🏥🐡🔶🔘🏭 👡🔫🔗📊📻 🍂💧🌿📥🔚 📹💻🔌💠🌚\\\\n🐦💴🌎🌞🏤.\\\\n\\\\nThere is immense joy in just watching - watching all the little creatures in nature. I'll go over the colors one more\\\\ntime that we use: Titanium white, Thalo green, Prussian blue, Van Dyke brown, Alizarin crimson, Sap green, Cad yellow,\\\\nand Permanent red. If you don't like it - change it. It's your world. Be brave. Sometimes you learn more from your\\\\nmistakes than you do from your masterpieces. That's why I paint - because I can create the kind of world I want - and I\\\\ncan make this world as happy as I want it. I was blessed with a very steady hand; and it comes in very handy when you're\\\\ndoing these little delicate things. We'll paint one happy little tree right here. These things happen automatically. All\\\\nyou have to do is just let them happen.\\\\n\\\\n🐻🍘💀🐪 🕧🎂🕃🍵🏠 💎🌄🐐📘🐄 🍂🏤👊🍖 👆🍂📫👪🐈🕢👓 👯🕞🏉🍚🎆🔠🌵 🎭🎎💵📮📭 🔪💨📢📕 🐔📬👪🏄🐙🗽📤.\\\\n💛👴💧🎁👗💟👡💎 🎷🕡👮🗾🍷 🎪🍇🍩💰 📫🐗🎄🍍🎃 🎯🌴🐍🔉📰 👼👧🐢🕔🔷📞🍩 🔘👑🌆🌒🔣 🔆👺📴👾 🔝💑💸💒🏡🔸 🔟👞📷🔱👠\\\\n📵🏠📕🕝🐂👪 💐🎾🕁🗾👊📪. 🍉🏁👰🏡🕔💒🐯 🐟🍡📴🌿👱👢 📵💄🌊🌵🐫🍏 🎎🕠🍍💭💀👖 🎵💘🔗🍖 📧🌘🍅🕚📘🔮 👤🌾👿🐍🎽🌹\\\\n🎲🎎💅📪🐐🍢📈 🏣🐑👇👼🐄🍔 🍠📧🌊🕁🔛🐩. 🌺📊🍼🐁💼 🔈💬🌱🎑🔊🐙💲👩 🍇👞📎👻🌔 💑🕁🎲💤 🎮📃🕖📖 📻💬🔢💔🐇👬 🔨🌃📈🔞\\\\n🌒🎈👙🔥🐊 📭👍📢👊📟.\\\\n\\\\n出死問民同歴術荘面族上自。窃指写氷名続球投込光試事樹増。作合副者扶実権守安展感意環待質出。告供体企紙勢構込君奪属仕子業戦\\\\n浮私。長論攻士踊再連公雪地約政近第公。界地島命党浮国沼出問気混心未独院。朝原妙画岡性制領子金次問無浦妥混口時研。道記険健\\\\n集立根聖間前設集族山要本覧。変注再悩式付療場図験問県家界月止収文。\\\\n\\\\nलेकिन उसके संपादक उपलब्ध दिनांक प्रति सम्पर्क प्राधिकरन नाकर मुक्त कलइस वेबजाल वर्तमान समस्याओ देखने भोगोलिक केन्द्रिय\\\\nकिया खयालात विज्ञान ध्येय गटको साधन चिदंश पासपाई व्याख्या मार्गदर्शन संदेश जिवन प्रतिबध वार्तालाप किके विश्व खरिदने\\\\nहुआआदी तकनीकी संदेश सारांश असरकारक वार्तालाप चाहे पहोच। अतित पुर्णता केन्द्रिय\\\\n\\\\n👅💾🐂🔙 🐂🎠👶🐮🐛 👛💗💶🌿💒 🐐🌱🐶🌴🏤🐒 🔪🍡🎸🐛🍖 📗🎓🏊🕀🎿 🔅📋📥👳🔝 🐗👝🏄🐲 📂🎷🐎🏯💎🐹 📲🍍🏥🔂🕚🐉🎤\\\\n🌕🐴📐🎪💋. 💔👂🐗📷🎐 🌹📔💒📝👎📭 🔖🍶💺🕘 🔡💘🎪🔚🔯👉 💯🎉👠🎁🐌💵 👌🔉🎹🕒💕🍁 🏡🍢🔹🔷👀💦🏉👀 👑🐺🐁🏤\\\\n🎺🍁🐙🐮🌃🕢🐟 🍶🎃🕕🔦 🐧🔝💔💚🔫👍 🌉🔁🌄📺 👓🎳📧🌆💖🍋🕔. 🍥🔘🗼📟 🍹🔸🔰🕣🌍 🏡💽🍬👗👧 📩👬🌻🐐🌞🌎🐵🔛 🏆🌹🍰🔬📕\\\\n👋🎩🍓🌏👙 🎁🏃🎌🍳🔋👎📔 🐈🌽🔘💮 🏬🐷💿🕕. 📕👖📦📡 🎅🎺🏭🍗💜💷🐦 💻💚🐪🕠🔀 💰🍹💶🍶🎥📄 🌛👕🐲🐣🍷🎬 🐥🎯🔵🎹\\\\n🌿👌🐚🍛🏪 🌵📞💃📗👱👩 📟🐸🌺🐅👮 💚🐦💉💞🌛 🔼🔤👓🏡💩.\\\\n\\\\n\\\\nयधपि बाजार तकरीबन आंतरजाल प्राधिकरन लगती संदेश एसलिये बिन्दुओ प्रोत्साहित जानकारी ढांचामात्रुभाषा बाजार बदले प्रमान\\\\nअनुवाद विकेन्द्रित पसंद ढांचा हमारि जोवे उद्योग संस्थान और्४५० विकसित उदेश लेकिन सकती वार्तालाप लाभान्वित संदेश उदेश\\\\nपहोच। लचकनहि अनुवाद सुविधा एकत्रित कीने सक्षम भीयह अत्यंत लचकनहि निरपेक्ष कराना हमारि प्राप्त पुर्णता प्रतिबध्दता होगा\\\\nउन्हे जाएन खयालात पहोचाना\\\\n\\\\n散待望会窮縮囲前賀理格顔欧製暮景初子加。首稿覧析回未帯則号医間本取退埋帯品。右歳約幻病護指極講賞京応。野受移供頑特公却報\\\\n法利務水提士政駐物際。角媛分地昧況面日残金真福方雨入顔作化。最刊情感売校見強移本説注辞。経必好以小球生音明優去験見政感治\\\\n報付。講刊切記勝帯載豪著転読金止。金子森午模移言兆埠関価亡出目載。\\\\n\\\\nWork on one thing at a time. Don't get carried away - we have plenty of time. Everything is happy if you choose to make\\\\nit that way. Happy painting, God bless. You can create anything that makes you happy. Just make a decision and let it\\\\ngo. Nice little clouds playing around in the sky.You can do anything here - the only pre-requisite is that it makes you\\\\nhappy. I'm going to mix up a little color. We’ll use Van Dyke Brown, Permanent Red, and a little bit of Prussian Blue.\\\\nLet's make some happy little clouds in our world.\\\\n\\\\nपहेला गएआप स्वतंत्र प्राधिकरन सेऔर अनुकूल ब्रौशर बिन्दुओमे सदस्य गुजरना तकनिकल वैश्विक सकते बनाति चिदंश चाहे कुशलता\\\\nवर्तमान प्रोत्साहित देने विवरन पहोचाना विकेन्द्रियकरण अनुकूल विभाजनक्षमता औषधिक अन्य खरिदे दिये आवश्यक समस्याए कम्प्युटर\\\\nविनिमय अविरोधता लाभान्वित लाभो ढांचा\\\\n\\\\n抄聞調時得直決移警撃覧進聞滑公政央。日探劇票選伊追短青功書更将奈府成多。味治理育月漬安意散護良読京。芳豚大度面傾府山応著\\\\n器地捜志。止高棋戻管明証経処流自勝動続。装載聞視属王減通橋説主費事業情芸。追若得本臭稿事馬予治川劇覧記今竹犯破育食。参兆\\\\n徹括単写東家素講舞校食医咋存務代連子。球設国事検問周東集題聞供奈。\\\\n\\\\n🍊🌆📛🍛🌊🍡🍒 🔦🐟🐵🍚🌐🍛🐏 🔆💍📟🎧 🔐📤💺🐒 🔥🔬🐣💹🌻👚 🎰👯🎡🗻💯🐉🌗 🍐👣🐯🔖📚 💡📟👨🍮🍼💛📞 🕕🐁🌾🏧💻📷\\\\n💗🐢🏥🎵🐰🍉 🏥🔎💛💘🔧🍛🎿 🍟🌰🐴🏫🎀 🎷🌿🌴🏤🍢📳🍺 🐗👷🌳👦📩🌁 🐂🔜🔙📕. 🌎🍠📓📠🕡 🎽🔺🔱🌔📗🎤 🎫🍃👚🍤🐽🌰\\\\n🕠🌉📪🍒🐃💲 🎢🔯👶🔙🔚🕝 🍮📒🏉🏨🐝🌿 👔💫🏁🎺 🐸💞🌈🐸 📣🔯📅🐍🐴 🌑🌍🌛👀 🕂👟🐕📃🎇🔞 🍮🔏🍥👨 🐪📲🐐🎁 🍥🔁📑💮🌘.\\\\n🌏🎎🍛👯 🔈🎸💨🏧📚 🏪💼🎣🔚 🐤💳💁👓 👃🍆🕘🐋👬🐣 🕚🏃🌄🔷🌈🔖 💥💧🔴🌛🍁👦 💣🐐🕓🎠🕚🕞🏭 💨👓🏢🌓🔄. 📪🔜💹👤👂🐭\\\\n🕚🔎🐂🏂👍📻 👾💠🌕📻🎍 🐟🔬🏢💍 👓👠👤🎐💸👝 🔟💕🕛💊 🍩🌙👬🐘 🍪🔙📉💔🐝🕝 📭🕡🎼💈📇🔡 👓🍁🎾👯👨 🏇🍱🐢🌛\\\\n🎇🐩📴🎋🕁📎🎈 🐌👱📎🍹👆 👐🍐📗👽🐹💜 📭🌔🌅🍯👀.\\\\n\\\\n🔜🐰🏊🍃🐮 🔪🔐📇🐩 🐬👔🍙🍩💉 🏉👩👔🍞🍟🌂 🍺🕔🌖🔪🔩🍥 🎓🍒🌅🐘💛 🐔🐊📶🐊 👂📌👂🍺 💗🐳🎠📧🏭💧 🐝📅🍆🔞🏆\\\\n👇🔂🐺🔬🎯🔳🎐🎍 💖💅🐲🔭📔🏊🔋 🐨📫🕢🎁. 🐯💁🔘📰🐪 💥👭🍘🎴📣💂💄 🐏🔊🐚👔🎿🐙 🔕🐞💹📁 🔊👴👬👪 👠📱👃📍 🏢🐃🍯🍹🗻\\\\n🐩💮👲👠 🍏🎽📄🐋 🔣💉🔉📒💸🎭👎 💁🗾🔵🐪🍣 🍃🔝💥🔒👴. 📦🔟🔶💷🍥 🍚🕤👦🍻🔥🍹 👄🌜🐑🌀🐃🔪🕦 🌟🐶🍞🕥🌛 👮🐄🏬🎴👂💼📵\\\\n🌋📐🐲👥 🔒🏭🔭💿🎫🎄 💓🐓🎐🎁👔📟 💌🍇🎶👷🎬 🌌💀🎸💡 📔🐢💁🔊👘🐳🌞 🎩📝💟🍼💦🔄 🕒🍼🏧🎄🔃💐. 🎆🌜👗👿 🐁🌑💮👙🎌👞\\\\n🏫📙🌌🕙🐥 👓🌑💎💸📹📒 👋🐎🍡🎾👸🗽 📢📓🌍🏮📳🔈 👶🐷🐭🎿🔴🗾🏬 🌆🔈🍡💞💭🎨. \\";export{n as allTheIpsum};
-//# sourceMappingURL=pretty.esm.js.map
+//# sourceMappingURL=pretty.esm.mjs.map
 "
 `;
 
@@ -2532,8 +2532,8 @@ Directory tree:
 
 pure
   dist
-    pure.esm.js
-    pure.esm.js.map
+    pure.esm.mjs
+    pure.esm.mjs.map
     pure.js
     pure.js.map
     pure.umd.js
@@ -2546,8 +2546,8 @@ pure
 Build \\"pure\\" to dist:
 65 B: pure.js.gz
 44 B: pure.js.br
-71 B: pure.esm.js.gz
-49 B: pure.esm.js.br
+71 B: pure.esm.mjs.gz
+49 B: pure.esm.mjs.br
 167 B: pure.umd.js.gz
 125 B: pure.umd.js.br"
 `;
@@ -2556,7 +2556,7 @@ exports[`fixtures build pure with microbundle 2`] = `6`;
 
 exports[`fixtures build pure with microbundle 3`] = `
 "function o(){return\\"hello world\\"}export{o as foo};
-//# sourceMappingURL=pure.esm.js.map
+//# sourceMappingURL=pure.esm.mjs.map
 "
 `;
 
@@ -2579,8 +2579,8 @@ Directory tree:
 
 raw
   dist
-    raw.esm.js
-    raw.esm.js.map
+    raw.esm.mjs
+    raw.esm.mjs.map
     raw.js
     raw.js.map
     raw.umd.js
@@ -2593,8 +2593,8 @@ raw
 Build \\"raw\\" to dist:
 1389 B: raw.js.gz
 1160 B: raw.js.br
-1398 B: raw.esm.js.gz
-1169 B: raw.esm.js.br
+1398 B: raw.esm.mjs.gz
+1169 B: raw.esm.mjs.br
 1500 B: raw.umd.js.gz
 1248 B: raw.umd.js.br"
 `;
@@ -2603,7 +2603,7 @@ exports[`fixtures build raw with microbundle 2`] = `6`;
 
 exports[`fixtures build raw with microbundle 3`] = `
 "var e=\\"\\\\n\\\\tWe might as well make some Almighty mountains today as well, what the heck.\\\\n\\\\tIn your imagination you can go anywhere you want. Nice little fluffy clouds\\\\n\\\\tlaying around in the sky being lazy. You have to make those little noises or\\\\n\\\\tit won't work. Clouds are free they come and go as they please.\\\\n\\\\n\\\\tTrees grow in all kinds of ways. They're not all perfectly straight. Not\\\\n\\\\tevery limb is perfect. Now let's put some happy little clouds in here. We\\\\n\\\\thave no limits to our world. We're only limited by our imagination. The\\\\n\\\\tfirst step to doing anything is to believe you can do it. See it finished\\\\n\\\\tin your mind before you ever start. Even trees need a friend. We all need\\\\n\\\\tfriends. And that's when it becomes fun - you don't have to spend your\\\\n\\\\ttime thinking about what's happening - you just let it happen.\\\\n\\\\n\\\\tI thought today we would do a happy little picture. We don't have to be\\\\n\\\\tconcerned about it. We just have to let it fall where it will. I'm gonna\\\\n\\\\tstart with a little Alizarin crimson and a touch of Prussian blue Be so\\\\n\\\\tvery light. Be a gentle whisper. The only prerequisite is that it makes\\\\n\\\\tyou happy. If it makes you happy then it's good. This is truly an almighty\\\\n\\\\tmountain.\\\\n\\\\n\\\\tThat's why I paint - because I can create the kind of world I want - and I\\\\n\\\\tcan make this world as happy as I want it. I was blessed with a very steady\\\\n\\\\thand; and it comes in very handy when you're doing these little delicate\\\\n\\\\tthings. We'll paint one happy little tree right here. These things happen\\\\n\\\\tautomatically. All you have to do is just let them happen.\\\\n\\\\n\\\\tYou can do anything here - the only pre-requisite is that it makes you\\\\n\\\\thappy. I'm going to mix up a little color. We’ll use Van Dyke Brown,\\\\n\\\\tPermanent Red, and a little bit of Prussian Blue. Let's make some happy\\\\n\\\\tlittle clouds in our world.\\\\n\\\\n\\\\tWork on one thing at a time. Don't get carried away - we have plenty of\\\\n\\\\ttime. Everything is happy if you choose to make it that way. Happy\\\\n\\\\tpainting, God bless. You can create anything that makes you happy. Just\\\\n\\\\tmake a decision and let it go. Nice little clouds playing around in the\\\\n\\\\tsky.\\\\n\\\\n\\\\tAnytime you learn something your time and energy are not wasted. Van Dyke\\\\n\\\\tBrown is a very nice brown, it's almost like a chocolate brown. It's\\\\n\\\\timportant to me that you're happy. In nature, dead trees are just as normal\\\\n\\\\tas live trees. Painting should do one thing. It should put happiness in\\\\n\\\\tyour heart.\\\\n\\\\n\\\\tThere is immense joy in just watching - watching all the little creatures\\\\n\\\\tin nature. I'll go over the colors one more time that we use: Titanium\\\\n\\\\twhite, Thalo green, Prussian blue, Van Dyke brown, Alizarin crimson, Sap\\\\n\\\\tgreen, Cad yellow, and Permanent red. If you don't like it - change it.\\\\n\\\\tIt's your world. Be brave. Sometimes you learn more from your mistakes than\\\\n\\\\tyou do from your masterpieces.\\";export{e as OneKilobyteOfBobRoss};
-//# sourceMappingURL=raw.esm.js.map
+//# sourceMappingURL=raw.esm.mjs.map
 "
 `;
 
@@ -2626,8 +2626,8 @@ Directory tree:
 
 shebang
   dist
-    shebang.esm.js
-    shebang.esm.js.map
+    shebang.esm.mjs
+    shebang.esm.mjs.map
     shebang.js
     shebang.js.map
     shebang.umd.js
@@ -2640,8 +2640,8 @@ shebang
 Build \\"shebang\\" to dist:
 85 B: shebang.js.gz
 62 B: shebang.js.br
-89 B: shebang.esm.js.gz
-70 B: shebang.esm.js.br
+89 B: shebang.esm.mjs.gz
+70 B: shebang.esm.mjs.br
 183 B: shebang.umd.js.gz
 145 B: shebang.umd.js.br"
 `;
@@ -2651,7 +2651,7 @@ exports[`fixtures build shebang with microbundle 2`] = `6`;
 exports[`fixtures build shebang with microbundle 3`] = `
 "#!/usr/bin/env node
 function o(){return\\"hello world\\"}export{o as foo};
-//# sourceMappingURL=shebang.esm.js.map
+//# sourceMappingURL=shebang.esm.mjs.map
 "
 `;
 
@@ -2676,8 +2676,8 @@ Directory tree:
 
 terser-annotations
   dist
-    terser-annotations.esm.js
-    terser-annotations.esm.js.map
+    terser-annotations.esm.mjs
+    terser-annotations.esm.mjs.map
     terser-annotations.js
     terser-annotations.js.map
     terser-annotations.umd.js
@@ -2691,8 +2691,8 @@ terser-annotations
 Build \\"terser-annotations\\" to dist:
 133 B: terser-annotations.js.gz
 104 B: terser-annotations.js.br
-138 B: terser-annotations.esm.js.gz
-97 B: terser-annotations.esm.js.br
+138 B: terser-annotations.esm.mjs.gz
+97 B: terser-annotations.esm.mjs.br
 224 B: terser-annotations.umd.js.gz
 169 B: terser-annotations.umd.js.br"
 `;
@@ -2701,7 +2701,7 @@ exports[`fixtures build terser-annotations with microbundle 2`] = `6`;
 
 exports[`fixtures build terser-annotations with microbundle 3`] = `
 "function shouldBePreserved(e,n){return e-n}function main(e,n){return{inlined:/*@__INLINE__*/function(e,n){return e+n}(e,n),preserved:/*@__NOINLINE__*/shouldBePreserved(e,n)}}export default main;
-//# sourceMappingURL=terser-annotations.esm.js.map
+//# sourceMappingURL=terser-annotations.esm.mjs.map
 "
 `;
 
@@ -2724,8 +2724,8 @@ Directory tree:
 
 ts-custom-declaration
   dist
-    index.esm.js
-    index.esm.js.map
+    index.esm.mjs
+    index.esm.mjs.map
     index.js
     index.js.map
     index.umd.js
@@ -2742,8 +2742,8 @@ ts-custom-declaration
 Build \\"ts-custom-declarations\\" to dist:
 55 B: index.js.gz
 33 B: index.js.br
-61 B: index.esm.js.gz
-45 B: index.esm.js.br
+61 B: index.esm.mjs.gz
+45 B: index.esm.mjs.br
 175 B: index.umd.js.gz
 125 B: index.umd.js.br"
 `;
@@ -2752,7 +2752,7 @@ exports[`fixtures build ts-custom-declaration with microbundle 2`] = `6`;
 
 exports[`fixtures build ts-custom-declaration with microbundle 3`] = `
 "function n(){return 42}export{n as foo};
-//# sourceMappingURL=index.esm.js.map
+//# sourceMappingURL=index.esm.mjs.map
 "
 `;
 
@@ -2782,8 +2782,8 @@ Directory tree:
 
 ts-declaration
   dist
-    index.esm.js
-    index.esm.js.map
+    index.esm.mjs
+    index.esm.mjs.map
     index.js
     index.js.map
     index.umd.js
@@ -2800,8 +2800,8 @@ ts-declaration
 Build \\"ts-declarations\\" to dist:
 55 B: index.js.gz
 33 B: index.js.br
-61 B: index.esm.js.gz
-45 B: index.esm.js.br
+61 B: index.esm.mjs.gz
+45 B: index.esm.mjs.br
 171 B: index.umd.js.gz
 124 B: index.umd.js.br"
 `;
@@ -2810,7 +2810,7 @@ exports[`fixtures build ts-declaration with microbundle 2`] = `6`;
 
 exports[`fixtures build ts-declaration with microbundle 3`] = `
 "function n(){return 42}export{n as foo};
-//# sourceMappingURL=index.esm.js.map
+//# sourceMappingURL=index.esm.mjs.map
 "
 `;
 
@@ -2841,8 +2841,8 @@ Directory tree:
 ts-jsx
   dist
     index.d.ts
-    ts-jsx.esm.js
-    ts-jsx.esm.js.map
+    ts-jsx.esm.mjs
+    ts-jsx.esm.mjs.map
     ts-jsx.js
     ts-jsx.js.map
     ts-jsx.umd.js
@@ -2857,8 +2857,8 @@ ts-jsx
 Build \\"ts-jsx\\" to dist:
 130 B: ts-jsx.js.gz
 94 B: ts-jsx.js.br
-131 B: ts-jsx.esm.js.gz
-111 B: ts-jsx.esm.js.br
+131 B: ts-jsx.esm.mjs.gz
+111 B: ts-jsx.esm.mjs.br
 219 B: ts-jsx.umd.js.gz
 176 B: ts-jsx.umd.js.br"
 `;
@@ -2872,7 +2872,7 @@ exports[`fixtures build ts-jsx with microbundle 3`] = `
 
 exports[`fixtures build ts-jsx with microbundle 4`] = `
 "var n=function(n,r){return{tag:n,props:r,children:[].slice.call(arguments,2)}}(function(n){return n.children},null,\\"foo\\");export{n as foo};
-//# sourceMappingURL=ts-jsx.esm.js.map
+//# sourceMappingURL=ts-jsx.esm.mjs.map
 "
 `;
 
@@ -2897,8 +2897,8 @@ ts-mixed-exports
   dist
     car.d.ts
     index.d.ts
-    ts-mixed-exports.esm.js
-    ts-mixed-exports.esm.js.map
+    ts-mixed-exports.esm.mjs
+    ts-mixed-exports.esm.mjs.map
     ts-mixed-exports.js
     ts-mixed-exports.js.map
     ts-mixed-exports.umd.js
@@ -2914,8 +2914,8 @@ ts-mixed-exports
 Build \\"ts-mixed-exports\\" to dist:
 130 B: ts-mixed-exports.js.gz
 104 B: ts-mixed-exports.js.br
-134 B: ts-mixed-exports.esm.js.gz
-118 B: ts-mixed-exports.esm.js.br
+134 B: ts-mixed-exports.esm.mjs.gz
+118 B: ts-mixed-exports.esm.mjs.br
 228 B: ts-mixed-exports.umd.js.gz
 185 B: ts-mixed-exports.umd.js.br"
 `;
@@ -2942,7 +2942,7 @@ export default Ferrari;
 
 exports[`fixtures build ts-mixed-exports with microbundle 5`] = `
 "var t=/*#__PURE__*/function(){function t(){}return t.prototype.drive=function(t){return!0},t}(),n=new t;export default n;export{t as Car};
-//# sourceMappingURL=ts-mixed-exports.esm.js.map
+//# sourceMappingURL=ts-mixed-exports.esm.mjs.map
 "
 `;
 
@@ -2967,8 +2967,8 @@ ts-module
   dist
     foo.d.ts
     index.d.ts
-    ts-module.esm.js
-    ts-module.esm.js.map
+    ts-module.esm.mjs
+    ts-module.esm.mjs.map
     ts-module.js
     ts-module.js.map
     ts-module.umd.js
@@ -2984,8 +2984,8 @@ ts-module
 Build \\"ts-module\\" to dist:
 59 B: ts-module.js.gz
 42 B: ts-module.js.br
-65 B: ts-module.esm.js.gz
-49 B: ts-module.esm.js.br
+65 B: ts-module.esm.mjs.gz
+49 B: ts-module.esm.mjs.br
 167 B: ts-module.umd.js.gz
 127 B: ts-module.umd.js.br"
 `;
@@ -3004,7 +3004,7 @@ exports[`fixtures build ts-module with microbundle 4`] = `
 
 exports[`fixtures build ts-module with microbundle 5`] = `
 "function o(){return\\"foobar\\"}export{o as foobar};
-//# sourceMappingURL=ts-module.esm.js.map
+//# sourceMappingURL=ts-module.esm.mjs.map
 "
 `;
 
@@ -3080,10 +3080,10 @@ worker-loader
     worker-35b22e56.js.map
     worker-7e1b9921.js
     worker-7e1b9921.js.map
-    worker-loader.esm.js
-    worker-loader.esm.js.map
-    worker-loader.modern.js
-    worker-loader.modern.js.map
+    worker-loader.esm.mjs
+    worker-loader.esm.mjs.map
+    worker-loader.modern.mjs
+    worker-loader.modern.mjs.map
   package-lock.json
   package.json
   src
@@ -3093,12 +3093,12 @@ worker-loader
 
 
 Build \\"worker-loader\\" to dist:
-140 B: worker-loader.modern.js.gz
-112 B: worker-loader.modern.js.br
+140 B: worker-loader.modern.mjs.gz
+112 B: worker-loader.modern.mjs.br
 63 B: worker-7e1b9921.js.gz
 54 B: worker-7e1b9921.js.br
-150 B: worker-loader.esm.js.gz
-123 B: worker-loader.esm.js.br
+150 B: worker-loader.esm.mjs.gz
+123 B: worker-loader.esm.mjs.br
 81 B: worker-35b22e56.js.gz
 66 B: worker-35b22e56.js.br"
 `;
@@ -3119,12 +3119,12 @@ exports[`fixtures build worker-loader with microbundle 4`] = `
 
 exports[`fixtures build worker-loader with microbundle 5`] = `
 "var e=new Worker(new URL(\\"worker-35b22e56.js\\",import.meta.url),{type:\\"module\\"});e.onmessage=function(e){return\\"foobar\\"===e.data},e.postMessage(\\"foo\\");
-//# sourceMappingURL=worker-loader.esm.js.map
+//# sourceMappingURL=worker-loader.esm.mjs.map
 "
 `;
 
 exports[`fixtures build worker-loader with microbundle 6`] = `
 "const e=new Worker(new URL(\\"worker-7e1b9921.js\\",import.meta.url),{type:\\"module\\"});e.onmessage=e=>\\"foobar\\"===e.data,e.postMessage(\\"foo\\");
-//# sourceMappingURL=worker-loader.modern.js.map
+//# sourceMappingURL=worker-loader.modern.mjs.map
 "
 `;

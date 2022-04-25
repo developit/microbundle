@@ -120,8 +120,8 @@ export default function (e, t, r) {
 ```jsonc
 {
 	"main": "./dist/foo.umd.js", // legacy UMD output (for Node & CDN use)
-	"module": "./dist/foo.module.js", // legacy ES Modules output (for bundlers)
-	"exports": "./dist/foo.modern.js", // modern ES2017 output
+	"module": "./dist/foo.module.mjs", // legacy ES Modules output (for bundlers)
+	"exports": "./dist/foo.modern.mjs", // modern ES2017 output
 	"scripts": {
 		"build": "microbundle src/foo.js"
 	}
@@ -134,9 +134,9 @@ The `"exports"` field can also be an object for packages with multiple entry mod
 {
 	"name": "foo",
 	"exports": {
-		".": "./dist/foo.modern.js", // import "foo" (the default)
-		"./lite": "./dist/lite.modern.js", // import "foo/lite"
-		"./full": "./dist/full.modern.js" // import "foo/full"
+		".": "./dist/foo.modern.mjs", // import "foo" (the default)
+		"./lite": "./dist/lite.modern.mjs", // import "foo/lite"
+		"./full": "./dist/full.modern.mjs" // import "foo/full"
 	},
 	"scripts": {
 		"build": "microbundle src/*.js" // build foo.js, lite.js and full.js
@@ -163,15 +163,15 @@ The filenames and paths for generated bundles in each format are defined by the 
 
 ```jsonc
 {
-  "source": "src/index.js",            // input
-  "main": "dist/foo.js",               // CommonJS output bundle
-  "umd:main": "dist/foo.umd.js",       // UMD output bundle
-  "module": "dist/foo.m.js",           // ES Modules output bundle 
+  "source": "src/index.js",             // input
+  "main": "dist/foo.js",                // CommonJS output bundle
+  "umd:main": "dist/foo.umd.js",        // UMD output bundle
+  "module": "dist/foo.mjs",           // ES Modules output bundle
   "exports": {
-    "require": "./dist/foo.js",        // CommonJS output bundle
-    "default": "./dist/foo.modern.js", // Modern ES Modules output bundle
+    "require": "./dist/foo.js",         // CommonJS output bundle
+    "default": "./dist/foo.modern.mjs", // Modern ES Modules output bundle
   },
-  "types": "dist/foo.d.ts"             // TypeScript typings directory
+  "types": "dist/foo.d.ts"              // TypeScript typings directory
 }
 ```
 

@@ -2,7 +2,7 @@ import fs from 'fs';
 import { resolve, relative, dirname, basename, extname } from 'path';
 import camelCase from 'camelcase';
 import escapeStringRegexp from 'escape-string-regexp';
-import { blue, red } from 'kleur';
+import { blue, yellow, red } from 'kleur';
 import { map, series } from 'asyncro';
 import glob from 'tiny-glob/sync';
 import autoprefixer from 'autoprefixer';
@@ -282,6 +282,7 @@ function walk(exports, includeDefault) {
 function getMain({ options, entry, format }) {
 	const { pkg } = options;
 	const pkgMain = options['pkg-main'];
+	const pkgTypeModule = pkg.type === 'module';
 
 	if (!pkgMain) {
 		return options.output;
@@ -301,18 +302,23 @@ function getMain({ options, entry, format }) {
 	mainsByFormat.es = replaceName(
 		pkg.module && !pkg.module.match(/src\//)
 			? pkg.module
-			: pkg['jsnext:main'] || 'x.esm.js',
+			: pkg['jsnext:main'] || pkgTypeModule
+			? 'x.esm.js'
+			: 'x.esm.mjs',
 		mainNoExtension,
 	);
+
 	mainsByFormat.modern = replaceName(
-		(pkg.exports && walk(pkg.exports, pkg.type === 'module')) ||
+		(pkg.exports && walk(pkg.exports, pkgTypeModule)) ||
 			(pkg.syntax && pkg.syntax.esmodules) ||
 			pkg.esmodule ||
-			'x.modern.js',
+			pkgTypeModule
+			? 'x.modern.js'
+			: 'x.modern.mjs',
 		mainNoExtension,
 	);
 	mainsByFormat.cjs = replaceName(
-		pkg['cjs:main'] || (pkg.type && pkg.type === 'module' ? 'x.cjs' : 'x.js'),
+		pkg['cjs:main'] || (pkgTypeModule ? 'x.cjs' : 'x.js'),
 		mainNoExtension,
 	);
 	mainsByFormat.umd = replaceName(
@@ -439,6 +445,15 @@ function createConfig(options, entry, format, writeMeta) {
 	const absMain = resolve(options.cwd, getMain({ options, entry, format }));
 	const outputDir = dirname(absMain);
 	const outputEntryFileName = basename(absMain);
+
+	// Warn about the (somewhat) breaking change in #950
+	if (format === 'es' && !pkg.module && outputEntryFileName.endsWith('.mjs')) {
+		stdout(
+			yellow(
+				'Warning: your package.json does not specify {"type":"module"}. Microbundle assumes this is a CommonJS package and is generating ES Modules with the ".mjs" file extension.',
+			),
+		);
+	}
 
 	let config = {
 		/** @type {import('rollup').InputOptions} */
