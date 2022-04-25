@@ -278,6 +278,10 @@ microbundle --workers
 For more information see
 [@surma/rollup-plugin-off-main-thread](https://github.com/surma/rollup-plugin-off-main-thread#config).
 
+### Visualize Bundle Makeup
+
+Use the `--visualize` flag to generate a `stats.html` file at build time, showing the makeup of your bundle. Uses [rollup-plugin-visualizer](https://www.npmjs.com/package/rollup-plugin-visualizer).
+
 ### Mangling Properties
 
 To achieve the smallest possible bundle size, libraries often wish to rename internal object properties or class members to smaller names - transforming `this._internalIdValue` to `this._i`. Microbundle doesn't do this by default, however it can be enabled by creating a `mangle.json` file (or a `"mangle"` property in your package.json). Within that file, you can specify a regular expression pattern to control which properties should be mangled. For example: to mangle all property names beginning an underscore:
@@ -342,6 +346,7 @@ Options
 	--css              Where to output CSS: "inline" or "external" (default "external")
 	--css-modules      Configures .css to be treated as modules (default null)
 	--workers          Bundle module workers - see https://git.io/J3oSF  (default false)
+	--visualize        Generate bundle makeup visualization (stats.html)
 	-h, --help         Displays this message
 
 Examples

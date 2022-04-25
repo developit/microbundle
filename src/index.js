@@ -14,6 +14,7 @@ import babel from '@rollup/plugin-babel';
 import customBabel from './lib/babel-custom';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
+import { visualizer } from 'rollup-plugin-visualizer';
 import alias from '@rollup/plugin-alias';
 import postcss from 'rollup-plugin-postcss';
 import typescript from 'rollup-plugin-typescript2';
@@ -628,6 +629,7 @@ function createConfig(options, entry, format, writeMeta) {
 							},
 						},
 					],
+					options.visualize && visualizer(),
 					// NOTE: OMT only works with amd and esm
 					// Source: https://github.com/surma/rollup-plugin-off-main-thread#config
 					useWorkerLoader && (format === 'es' || modern) && OMT(),

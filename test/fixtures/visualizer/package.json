@@ -1,0 +1,10 @@
+{
+  "name": "visualizer",
+  "scripts": {
+    "prebuild": "rimraf ./stats.html",
+    "build": "microbundle --visualize"
+  },
+  "peerDependencies": {
+    "camelcase": "*"
+  }
+}
