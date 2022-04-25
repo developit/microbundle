@@ -2,7 +2,7 @@ import fs from 'fs';
 import { resolve, relative, dirname, basename, extname } from 'path';
 import camelCase from 'camelcase';
 import escapeStringRegexp from 'escape-string-regexp';
-import { blue, red } from 'kleur';
+import { blue, yellow, red } from 'kleur';
 import { map, series } from 'asyncro';
 import glob from 'tiny-glob/sync';
 import autoprefixer from 'autoprefixer';
@@ -306,6 +306,7 @@ function getMain({ options, entry, format }) {
 			: 'x.esm.mjs',
 		mainNoExtension,
 	);
+
 	mainsByFormat.modern = replaceName(
 		(pkg.exports && walk(pkg.exports, pkgTypeModule)) ||
 			(pkg.syntax && pkg.syntax.esmodules) ||
@@ -443,6 +444,15 @@ function createConfig(options, entry, format, writeMeta) {
 	const absMain = resolve(options.cwd, getMain({ options, entry, format }));
 	const outputDir = dirname(absMain);
 	const outputEntryFileName = basename(absMain);
+
+	// Warn about the (somewhat) breaking change in #950
+	if (format === 'es' && !pkg.module && outputEntryFileName.endsWith('.mjs')) {
+		stdout(
+			yellow(
+				'Warning: If "module" is not specified in your package.json, Microbundle will now output the ESM format with ".mjs" as the file extension in CJS packages. If this is not the desired behavior, please specify "module".',
+			),
+		);
+	}
 
 	let config = {
 		/** @type {import('rollup').InputOptions} */
