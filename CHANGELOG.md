@@ -1,5 +1,31 @@
 # microbundle
 
+## 0.15.0
+
+### Minor Changes
+
+- [`6f6e080`](https://github.com/developit/microbundle/commit/6f6e080f3b9ec9a223d79d24eb6e6c8dd5d72cf7) [#950](https://github.com/developit/microbundle/pull/950) Thanks [@rschristian](https://github.com/rschristian)! - Microbundle will now output ESM using `.mjs` as the file extension when the package type is CJS
+
+* [`242754f`](https://github.com/developit/microbundle/commit/242754f43cce1c25a6c475be64bbd2a525eb7cf0) [#949](https://github.com/developit/microbundle/pull/949) Thanks [@rschristian](https://github.com/rschristian)! - Add --visualize flag to generate build output stats
+
+### Patch Changes
+
+- [`c4532cc`](https://github.com/developit/microbundle/commit/c4532cc9ccd846e6bc8176414ddf2c0fc22af1f1) [#940](https://github.com/developit/microbundle/pull/940) Thanks [@rschristian](https://github.com/rschristian)! - Adds information about `--compress` flag's default value w/ different targets
+
+* [`b51b855`](https://github.com/developit/microbundle/commit/b51b855794866f3e6a0ef7dfc5672d5c1c717831) [#935](https://github.com/developit/microbundle/pull/935) Thanks [@mycoin](https://github.com/mycoin)! - Don't attempt to write build stats in watch mode when there has been a build error/sizeInfo is `undefined`
+
+- [`1d0e305`](https://github.com/developit/microbundle/commit/1d0e305d89ad010793c57fc451991a79907e1f3f) [#941](https://github.com/developit/microbundle/pull/941) Thanks [@rschristian](https://github.com/rschristian)! - Ensures TS plugin will begin its search for a 'tsconfig.json' in the set cwd
+
+* [`f04c85a`](https://github.com/developit/microbundle/commit/f04c85a1885a28a16c767665a1d5f17b13834406) [#926](https://github.com/developit/microbundle/pull/926) Thanks [@developit](https://github.com/developit)! - Fix mangle.json being overwritten with `[object Object]`
+
+- [`ecb0b02`](https://github.com/developit/microbundle/commit/ecb0b022912397bcf98550c1a783e9e0534f33e5) [#947](https://github.com/developit/microbundle/pull/947) Thanks [@rschristian](https://github.com/rschristian)! - Ensures hoisted node_modules are excluded from babel
+
+* [`392d63e`](https://github.com/developit/microbundle/commit/392d63ef437f25403c03826f77790722d0234b58) [#919](https://github.com/developit/microbundle/pull/919) Thanks [@rschristian](https://github.com/rschristian)! - Fixes CSS output from being overwritten when also generating .cjs
+
+- [`fb0a437`](https://github.com/developit/microbundle/commit/fb0a43780a7462f4876955c3412638e51a7adb97) [#930](https://github.com/developit/microbundle/pull/930) Thanks [@rschristian](https://github.com/rschristian)! - Documenting --jsxFragment flag
+
+* [`8223eba`](https://github.com/developit/microbundle/commit/8223ebaee8d750e9757b9ddbfef6384fa00f22ac) [#948](https://github.com/developit/microbundle/pull/948) Thanks [@rschristian](https://github.com/rschristian)! - Corrects formatting in build completion message w/ dynamic import is used
+
 ## 0.14.2
 
 ### Patch Changes
