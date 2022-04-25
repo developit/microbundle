@@ -3027,8 +3027,8 @@ Directory tree:
 
 visualizer
   dist
-    visualizer.esm.js
-    visualizer.esm.js.map
+    visualizer.esm.mjs
+    visualizer.esm.mjs.map
     visualizer.js
     visualizer.js.map
     visualizer.umd.js
@@ -3042,8 +3042,8 @@ visualizer
 Build \\"visualizer\\" to dist:
 148 B: visualizer.js.gz
 107 B: visualizer.js.br
-79 B: visualizer.esm.js.gz
-64 B: visualizer.esm.js.br
+79 B: visualizer.esm.mjs.gz
+64 B: visualizer.esm.mjs.br
 231 B: visualizer.umd.js.gz
 195 B: visualizer.umd.js.br"
 `;
@@ -3052,7 +3052,7 @@ exports[`fixtures build visualizer with microbundle 2`] = `6`;
 
 exports[`fixtures build visualizer with microbundle 3`] = `
 "import a from\\"camelcase\\";var o=a(\\"foo-bar\\");export default o;
-//# sourceMappingURL=visualizer.esm.js.map
+//# sourceMappingURL=visualizer.esm.mjs.map
 "
 `;
 
