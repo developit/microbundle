@@ -120,7 +120,7 @@ export default function (e, t, r) {
 ```jsonc
 {
 	"main": "./dist/foo.umd.js", // legacy UMD output (for Node & CDN use)
-	"module": "./dist/foo.module.js", // legacy ES Modules output (for bundlers)
+	"module": "./dist/foo.module.mjs", // legacy ES Modules output (for bundlers)
 	"exports": "./dist/foo.modern.mjs", // modern ES2017 output
 	"scripts": {
 		"build": "microbundle src/foo.js"
