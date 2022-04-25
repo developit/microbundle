@@ -281,6 +281,7 @@ function walk(exports, includeDefault) {
 function getMain({ options, entry, format }) {
 	const { pkg } = options;
 	const pkgMain = options['pkg-main'];
+	const pkgTypeModule = pkg.type === 'module';
 
 	if (!pkgMain) {
 		return options.output;
@@ -300,18 +301,22 @@ function getMain({ options, entry, format }) {
 	mainsByFormat.es = replaceName(
 		pkg.module && !pkg.module.match(/src\//)
 			? pkg.module
-			: pkg['jsnext:main'] || 'x.esm.js',
+			: pkg['jsnext:main'] || pkgTypeModule
+			? 'x.esm.js'
+			: 'x.esm.mjs',
 		mainNoExtension,
 	);
 	mainsByFormat.modern = replaceName(
-		(pkg.exports && walk(pkg.exports, pkg.type === 'module')) ||
+		(pkg.exports && walk(pkg.exports, pkgTypeModule)) ||
 			(pkg.syntax && pkg.syntax.esmodules) ||
 			pkg.esmodule ||
-			'x.modern.js',
+			pkgTypeModule
+			? 'x.modern.js'
+			: 'x.modern.mjs',
 		mainNoExtension,
 	);
 	mainsByFormat.cjs = replaceName(
-		pkg['cjs:main'] || (pkg.type && pkg.type === 'module' ? 'x.cjs' : 'x.js'),
+		pkg['cjs:main'] || (pkgTypeModule ? 'x.cjs' : 'x.js'),
 		mainNoExtension,
 	);
 	mainsByFormat.umd = replaceName(
