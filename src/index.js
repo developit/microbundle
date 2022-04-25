@@ -449,7 +449,7 @@ function createConfig(options, entry, format, writeMeta) {
 	if (format === 'es' && !pkg.module && outputEntryFileName.endsWith('.mjs')) {
 		stdout(
 			yellow(
-				'Warning: If "module" is not specified in your package.json, Microbundle will now output the ESM format with ".mjs" as the file extension in CJS packages. If this is not the desired behavior, please specify "module".',
+				'Warning: your package.json does not specify {"type":"module"}. Microbundle assumes this is a CommonJS package and is generating ES Modules with the ".mjs" file extension.',
 			),
 		);
 	}
