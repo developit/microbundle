@@ -86,7 +86,7 @@ export default handler => {
 		)
 		.option(
 			'--workers',
-			'Bundle module workers - see https://git.io/J3oSF',
+			'Bundle module workers - see https://github.com/surma/rollup-plugin-off-main-thread#auto-bundling',
 			false,
 		)
 		.option(
