@@ -179,7 +179,7 @@ When deciding which bundle to use, Node.js 12+ and webpack 5+ will prefer the `e
 For more information about the meaning of the different properties, refer to the [Node.js documentation](https://nodejs.org/api/packages.html#packages_package_entry_points).
 
 For UMD builds, microbundle will use a camelCase version of the `name` field in your `package.json` as export name.
-Alternatively, this can be explicitly by adding an `"amdName"` key in your `package.json`, or passing the `--name` command line argument.
+Alternatively, this can be explicitly set by adding an `"amdName"` key in your `package.json`, or passing the `--name` command line argument.
 
 ### Usage with `{"type":"module"}` in `package.json`
 
