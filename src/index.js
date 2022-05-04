@@ -593,7 +593,7 @@ function createConfig(options, entry, format, writeMeta) {
 							defines,
 							modern,
 							compress: options.compress !== false,
-							targets: options.target === 'node' ? { node: '8' } : undefined,
+							targets: options.target === 'node' ? { node: '12' } : undefined,
 							pragma: options.jsx,
 							pragmaFrag: options.jsxFragment,
 							typescript: !!useTypescript,
