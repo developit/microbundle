@@ -347,7 +347,7 @@ function createConfig(options, entry, format, writeMeta) {
 	// We want to silence rollup warnings for node builtins as we rollup-node-resolve threats them as externals anyway
 	// @see https://github.com/rollup/plugins/tree/master/packages/node-resolve/#resolving-built-ins-like-fs
 	if (options.target === 'node') {
-		external = external.concat(builtinModules);
+		external = [/node:.*/].concat(builtinModules);
 	}
 
 	const peerDeps = Object.keys(pkg.peerDependencies || {});
