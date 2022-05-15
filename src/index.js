@@ -111,12 +111,7 @@ export default async function microbundle(inputOptions) {
 	for (let i = 0; i < options.entries.length; i++) {
 		for (let j = 0; j < formats.length; j++) {
 			steps.push(
-				createConfig(
-					options,
-					options.entries[i],
-					formats[j],
-					i === 0 && j === 0,
-				),
+				createConfig(options, options.entries[i], formats[j], j === 0),
 			);
 		}
 	}
@@ -333,6 +328,7 @@ function getMain({ options, entry, format }) {
 const shebang = {};
 
 function createConfig(options, entry, format, writeMeta) {
+	const entryFileName = basename(entry, extname(entry));
 	let { pkg } = options;
 
 	/** @type {(string|RegExp)[]} */
@@ -502,7 +498,7 @@ function createConfig(options, entry, format, writeMeta) {
 						extract:
 							!!writeMeta &&
 							options.css !== 'inline' &&
-							options.output.replace(EXTENSION, '.css'),
+							resolve(outputDir, `${entryFileName}.css`),
 						minimize: options.compress,
 						sourceMap: options.sourcemap && options.css !== 'inline',
 					}),
