@@ -2240,6 +2240,87 @@ exports[`fixtures build modern-generators with microbundle 6`] = `
 "
 `;
 
+exports[`fixtures build multi-source-mangle-json-file with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+multi-source-mangle-json-file
+  dist
+    a.esm.mjs
+    a.esm.mjs.map
+    a.js
+    a.js.map
+    a.umd.js
+    a.umd.js.map
+    b.esm.mjs
+    b.esm.mjs.map
+    b.js
+    b.js.map
+    b.umd.js
+    b.umd.js.map
+  mangle.json
+  package.json
+  src
+    a.js
+    a_prop.js
+    b.js
+    b_prop.js
+
+
+Build \\"multi-source-mangle-json-file\\" to dist:
+110 B: a.js.gz
+76 B: a.js.br
+112 B: a.esm.mjs.gz
+84 B: a.esm.mjs.br
+212 B: a.umd.js.gz
+173 B: a.umd.js.br
+107 B: b.js.gz
+95 B: b.js.br
+110 B: b.esm.mjs.gz
+100 B: b.esm.mjs.br
+209 B: b.umd.js.gz
+170 B: b.umd.js.br"
+`;
+
+exports[`fixtures build multi-source-mangle-json-file with microbundle 2`] = `12`;
+
+exports[`fixtures build multi-source-mangle-json-file with microbundle 3`] = `
+"var o={prop1:1,__p2:2,o:4};function p(){return console.log(o.prop1),console.log(o.__p2),console.log(o.o),o}export default p;
+//# sourceMappingURL=a.esm.mjs.map
+"
+`;
+
+exports[`fixtures build multi-source-mangle-json-file with microbundle 4`] = `
+"var o={prop1:1,__p2:2,o:4};module.exports=function(){return console.log(o.prop1),console.log(o.__p2),console.log(o.o),o};
+//# sourceMappingURL=a.js.map
+"
+`;
+
+exports[`fixtures build multi-source-mangle-json-file with microbundle 5`] = `
+"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=o():\\"function\\"==typeof define&&define.amd?define(o):(e||self).multiSourceMangleJsonFile=o()}(this,function(){var e={prop1:1,__p2:2,o:4};return function(){return console.log(e.prop1),console.log(e.__p2),console.log(e.o),e}});
+//# sourceMappingURL=a.umd.js.map
+"
+`;
+
+exports[`fixtures build multi-source-mangle-json-file with microbundle 6`] = `
+"var o={prop1:1,__p2:2,p:3};function p(){return console.log(o.prop1),console.log(o.__p2),o}export default p;
+//# sourceMappingURL=b.esm.mjs.map
+"
+`;
+
+exports[`fixtures build multi-source-mangle-json-file with microbundle 7`] = `
+"var o={prop1:1,__p2:2,p:3};module.exports=function(){return console.log(o.prop1),console.log(o.__p2),o};
+//# sourceMappingURL=b.js.map
+"
+`;
+
+exports[`fixtures build multi-source-mangle-json-file with microbundle 8`] = `
+"!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=o():\\"function\\"==typeof define&&define.amd?define(o):(e||self).multiSourceMangleJsonFile=o()}(this,function(){var e={prop1:1,__p2:2,p:3};return function(){return console.log(e.prop1),console.log(e.__p2),e}});
+//# sourceMappingURL=b.umd.js.map
+"
+`;
+
 exports[`fixtures build name-custom-amd with microbundle 1`] = `
 "Used script: microbundle
 

@@ -1,0 +1,7 @@
+{
+  "name": "multi-source-mangle-json-file",
+  "source":[
+    "./src/a.js",
+    "./src/b.js"
+  ]
+}

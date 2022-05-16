@@ -386,15 +386,15 @@ function createConfig(options, entry, format, writeMeta) {
 
 	// let rollupName = safeVariableName(basename(entry).replace(/\.js$/, ''));
 
-	let nameCache = {};
-	const bareNameCache = nameCache;
 	// Support "minify" field and legacy "mangle" field via package.json:
 	const rawMinifyValue = options.pkg.minify || options.pkg.mangle || {};
-	let minifyOptions = typeof rawMinifyValue === 'string' ? {} : rawMinifyValue;
 	const getNameCachePath =
 		typeof rawMinifyValue === 'string'
 			? () => resolve(options.cwd, rawMinifyValue)
 			: () => resolve(options.cwd, 'mangle.json');
+	let minifyOptions = typeof rawMinifyValue === 'string' ? {} : rawMinifyValue;
+	let endsWithNewLine = false;
+	let terserOptions = {};
 
 	const useTypescript = extname(entry) === '.ts' || extname(entry) === '.tsx';
 	const emitDeclaration =
@@ -410,29 +410,6 @@ function createConfig(options, entry, format, writeMeta) {
 	);
 	const externalTest =
 		external.length === 0 ? id => false : id => externalPredicate.test(id);
-
-	let endsWithNewLine = false;
-
-	function loadNameCache() {
-		try {
-			const data = fs.readFileSync(getNameCachePath(), 'utf8');
-			endsWithNewLine = data.endsWith(EOL);
-			nameCache = JSON.parse(data);
-			// mangle.json can contain a "minify" field, same format as the pkg.mangle:
-			if (nameCache.minify) {
-				minifyOptions = Object.assign(
-					{},
-					minifyOptions || {},
-					nameCache.minify,
-				);
-			}
-		} catch (e) {}
-	}
-	loadNameCache();
-
-	normalizeMinifyOptions(minifyOptions);
-
-	if (nameCache === bareNameCache) nameCache = null;
 
 	/** @type {false | import('rollup').RollupCache} */
 	let cache;
@@ -597,43 +574,79 @@ function createConfig(options, entry, format, writeMeta) {
 						},
 					}),
 					options.compress !== false && [
-						terser({
-							compress: Object.assign(
-								{
-									keep_infinity: true,
-									pure_getters: true,
-									// Ideally we'd just get Terser to respect existing Arrow functions...
-									// unsafe_arrows: true,
-									passes: 10,
-								},
-								typeof minifyOptions.compress === 'boolean'
-									? minifyOptions.compress
-									: minifyOptions.compress || {},
-							),
-							format: {
-								// By default, Terser wraps function arguments in extra parens to trigger eager parsing.
-								// Whether this is a good idea is way too specific to guess, so we optimize for size by default:
-								wrap_func_args: false,
-								comments: /^\s*([@#]__[A-Z]+__\s*$|@cc_on)/,
-								preserve_annotations: true,
-							},
-							module: modern,
-							ecma: modern ? 2017 : 5,
-							toplevel: modern || format === 'cjs' || format === 'es',
-							mangle:
-								typeof minifyOptions.mangle === 'boolean'
-									? minifyOptions.mangle
-									: Object.assign({}, minifyOptions.mangle || {}),
-							nameCache,
-						}),
-						nameCache && {
+						terser(terserOptions),
+						{
 							// before hook
-							options: loadNameCache,
+							options() {
+								let nameCache = {};
+								const bareNameCache = nameCache;
+
+								function loadNameCache() {
+									try {
+										const data = fs.readFileSync(getNameCachePath(), 'utf8');
+										endsWithNewLine = data.endsWith(EOL);
+										nameCache = JSON.parse(data);
+										// mangle.json can contain a "minify" field, same format as the pkg.mangle:
+										if (nameCache.minify) {
+											minifyOptions = Object.assign(
+												{},
+												minifyOptions || {},
+												nameCache.minify,
+											);
+										}
+									} catch (e) {}
+								}
+								loadNameCache();
+
+								normalizeMinifyOptions(minifyOptions);
+
+								if (nameCache === bareNameCache) nameCache = null;
+
+								Object.entries({
+									compress: Object.assign(
+										{
+											keep_infinity: true,
+											pure_getters: true,
+											// Ideally we'd just get Terser to respect existing Arrow functions...
+											// unsafe_arrows: true,
+											passes: 10,
+										},
+										typeof minifyOptions.compress === 'boolean'
+											? minifyOptions.compress
+											: minifyOptions.compress || {},
+									),
+									format: {
+										// By default, Terser wraps function arguments in extra parens to trigger eager parsing.
+										// Whether this is a good idea is way too specific to guess, so we optimize for size by default:
+										wrap_func_args: false,
+										comments: /^\s*([@#]__[A-Z]+__\s*$|@cc_on)/,
+										preserve_annotations: true,
+									},
+									module: modern,
+									ecma: modern ? 2017 : 5,
+									toplevel: modern || format === 'cjs' || format === 'es',
+									mangle:
+										typeof minifyOptions.mangle === 'boolean'
+											? minifyOptions.mangle
+											: Object.assign({}, minifyOptions.mangle || {}),
+									nameCache,
+								}).forEach(([key, value]) => {
+									terserOptions[key] = value;
+								});
+							},
 							// after hook
 							writeBundle() {
-								if (writeMeta && nameCache) {
+								if (writeMeta && terserOptions.nameCache) {
+									try {
+										if (
+											terserOptions.nameCache.minify.mangle.properties.regex
+										) {
+											terserOptions.nameCache.minify.mangle.properties.regex =
+												terserOptions.nameCache.minify.mangle.properties.regex.source;
+										}
+									} catch (error) {}
 									let filename = getNameCachePath();
-									let json = JSON.stringify(nameCache, null, 2);
+									let json = JSON.stringify(terserOptions.nameCache, null, 2);
 									if (endsWithNewLine) json += EOL;
 									fs.writeFile(filename, json, () => {});
 								}

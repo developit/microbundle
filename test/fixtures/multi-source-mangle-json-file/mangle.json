@@ -8,9 +8,10 @@
     }
   },
   "props": {
-    "cname": 6,
     "props": {
-      "$_prop2": "__p2"
+      "$_prop2": "__p2",
+      "$_prop4": "o",
+      "$_prop3": "p"
     }
   }
 }
