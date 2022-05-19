@@ -1,0 +1,10 @@
+{
+  "name": "custom-outputs-alt",
+  "cjs:main": "dist/custom-outputs-alt.cjsmain.js",
+  "unpkg": "dist/custom-outputs-alt.unpkg.js",
+  "jsnext:main": "dist/custom-outputs-alt.jsnextmain.mjs",
+  "esmodule": "dist/custom-outputs-alt.esmodule.mjs",
+  "scripts": {
+    "build": "microbundle -f modern,es,umd,cjs"
+  }
+}
