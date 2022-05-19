@@ -261,7 +261,7 @@ This can be customized by passing the command line argument `--css-modules "[nam
 ### Building Module Workers
 
 Microbundle is able to detect and bundle Module Workers when generating bundles in the
-`es` and `modern` formats. To use this feature, instantiate your Web Worker as follows:
+`esm` and `modern` formats. To use this feature, instantiate your Web Worker as follows:
 
 ```js
 worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'module' });
