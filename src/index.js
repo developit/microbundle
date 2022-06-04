@@ -497,7 +497,7 @@ function createConfig(options, entry, format, writeMeta) {
 						extract:
 							!!writeMeta &&
 							options.css !== 'inline' &&
-							absMain.replace(EXTENSION, `.css`),
+							absMain.replace(EXTENSION, '.css'),
 						minimize: options.compress,
 						sourceMap: options.sourcemap && options.css !== 'inline',
 					}),

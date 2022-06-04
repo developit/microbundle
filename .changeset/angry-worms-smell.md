@@ -2,4 +2,4 @@
 'microbundle': patch
 ---
 
-Fix css compilation problems when multiple entries
+Fix for when multiple entries reference different CSS, only the CSS referenced by the first entry will be packaged
