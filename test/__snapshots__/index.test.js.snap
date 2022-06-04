@@ -701,6 +701,99 @@ exports[`fixtures build basic-multi-source with microbundle 8`] = `
 "
 `;
 
+exports[`fixtures build basic-multi-source-css with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+basic-multi-source-css
+  a.css
+  a.js
+  b.css
+  b.js
+  dist
+    a.css
+    a.css.map
+    a.esm.mjs
+    a.esm.mjs.map
+    a.js
+    a.js.map
+    a.umd.js
+    a.umd.js.map
+    b.css
+    b.css.map
+    b.esm.mjs
+    b.esm.mjs.map
+    b.js
+    b.js.map
+    b.umd.js
+    b.umd.js.map
+  package.json
+
+
+Build \\"basic-multi-source-css\\" to dist:
+104 B: a.js.gz
+61 B: a.js.br
+105 B: a.esm.mjs.gz
+67 B: a.esm.mjs.br
+201 B: a.umd.js.gz
+133 B: a.umd.js.br
+104 B: b.js.gz
+61 B: b.js.br
+106 B: b.esm.mjs.gz
+67 B: b.esm.mjs.br
+201 B: b.umd.js.gz
+134 B: b.umd.js.br"
+`;
+
+exports[`fixtures build basic-multi-source-css with microbundle 2`] = `16`;
+
+exports[`fixtures build basic-multi-source-css with microbundle 3`] = `
+".a{display:flex;color:green;background:pink}
+/*# sourceMappingURL=a.css.map */"
+`;
+
+exports[`fixtures build basic-multi-source-css with microbundle 4`] = `
+"function e(){var e=document.createElement(\\"div\\");return e.className=\\"a\\",e}export default e;
+//# sourceMappingURL=a.esm.mjs.map
+"
+`;
+
+exports[`fixtures build basic-multi-source-css with microbundle 5`] = `
+"module.exports=function(){var e=document.createElement(\\"div\\");return e.className=\\"a\\",e};
+//# sourceMappingURL=a.js.map
+"
+`;
+
+exports[`fixtures build basic-multi-source-css with microbundle 6`] = `
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e||self).basicMultiSourceCss=n()}(this,function(){return function(){var e=document.createElement(\\"div\\");return e.className=\\"a\\",e}});
+//# sourceMappingURL=a.umd.js.map
+"
+`;
+
+exports[`fixtures build basic-multi-source-css with microbundle 7`] = `
+".b{display:flex;color:red;background:#00f}
+/*# sourceMappingURL=b.css.map */"
+`;
+
+exports[`fixtures build basic-multi-source-css with microbundle 8`] = `
+"function e(){var e=document.createElement(\\"div\\");return e.className=\\"b\\",e}export default e;
+//# sourceMappingURL=b.esm.mjs.map
+"
+`;
+
+exports[`fixtures build basic-multi-source-css with microbundle 9`] = `
+"module.exports=function(){var e=document.createElement(\\"div\\");return e.className=\\"b\\",e};
+//# sourceMappingURL=b.js.map
+"
+`;
+
+exports[`fixtures build basic-multi-source-css with microbundle 10`] = `
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e||self).basicMultiSourceCss=n()}(this,function(){return function(){var e=document.createElement(\\"div\\");return e.className=\\"b\\",e}});
+//# sourceMappingURL=b.umd.js.map
+"
+`;
+
 exports[`fixtures build basic-no-compress with microbundle 1`] = `
 "Used script: microbundle --no-compress
 
