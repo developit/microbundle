@@ -701,17 +701,6 @@ exports[`fixtures build basic-multi-source with microbundle 8`] = `
 "
 `;
 
-exports[`fixtures build basic-multi-source-css with microbundle 1`] = `
-"Used script: microbundle
-
-Directory tree:
-
-basic-multi-source-css
-
-
-Error: No entry module found for \\"basic-multi-source-css\\""
-`;
-
 exports[`fixtures build basic-no-compress with microbundle 1`] = `
 "Used script: microbundle --no-compress
 
