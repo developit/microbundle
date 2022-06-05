@@ -7,6 +7,16 @@ const ESMODULES_TARGET = {
 	esmodules: true,
 };
 
+// silence Babel 7.13+ loose-with-assumptions warnings
+const _warn = console.warn;
+console.warn = function (m) {
+	if (/the "loose: true" option/.test(m)) {
+		return;
+	}
+	// eslint-disable-next-line prefer-rest-params
+	return _warn.apply(this, arguments);
+};
+
 const mergeConfigItems = (babel, type, ...configItemsToMerge) => {
 	const mergedItems = [];
 
@@ -144,7 +154,11 @@ export default () => {
 										bugfixes: customOptions.modern,
 										modules: false,
 										exclude: merge(
-											['transform-async-to-generator', 'transform-regenerator'],
+											[
+												'transform-async-to-generator',
+												'transform-regenerator',
+												'@babel/plugin-transform-regenerator',
+											],
 											(preset.options && preset.options.exclude) || [],
 										),
 									},
@@ -173,6 +187,7 @@ export default () => {
 								exclude: [
 									'transform-async-to-generator',
 									'transform-regenerator',
+									'@babel/plugin-transform-regenerator',
 								],
 							},
 							customOptions.jsxImportSource && {

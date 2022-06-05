@@ -70,6 +70,7 @@ export default async function microbundle(inputOptions) {
 	options.pkg.name = pkgName;
 
 	if (options.sourcemap === 'inline') {
+		// eslint-disable-next-line no-console
 		console.log(
 			'Warning: inline sourcemaps should only be used for debugging purposes.',
 		);
@@ -442,6 +443,9 @@ function createConfig(options, entry, format, writeMeta) {
 	let config = {
 		/** @type {import('rollup').InputOptions} */
 		inputOptions: {
+			// read up to 100 files from disk concurrently: (avoid EMFILE by capping)
+			maxParallelFileReads: 100,
+
 			// disable Rollup's cache for modern builds to prevent re-use of legacy transpiled modules:
 			cache,
 			input: entry,
@@ -509,6 +513,7 @@ function createConfig(options, entry, format, writeMeta) {
 						include: /\/node_modules\//,
 						esmExternals: false,
 						requireReturnsDefault: 'namespace',
+						sourceMap: false,
 					}),
 					json(),
 					{
