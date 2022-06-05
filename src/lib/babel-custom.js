@@ -215,6 +215,30 @@ export default () => {
 					};
 				}
 
+				babelOptions.assumptions = {
+					arrayLikeIsIterable: true,
+					constantReexports: true,
+					constantSuper: true,
+					enumerableModuleMeta: true,
+					ignoreFunctionLength: true,
+					ignoreToPrimitiveHint: true,
+					iterableIsArray: true,
+					mutableTemplateObject: true,
+					noClassCalls: true,
+					noDocumentAll: true,
+					noIncompleteNsImportDetection: true,
+					noNewArrows: true,
+					objectRestNoSymbols: true,
+					privateFieldsAsProperties: true,
+					pureGetters: true,
+					setClassMethods: true,
+					setComputedProperties: true,
+					setPublicClassFields: true,
+					setSpreadProperties: true,
+					skipForOfIteratorClosing: true,
+					superIsCallableConstructor: true,
+				};
+
 				return babelOptions;
 			},
 		};
