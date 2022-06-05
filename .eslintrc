@@ -11,6 +11,7 @@
     "brace-style": "off",
     "comma-dangle": ["warn", "always-multiline"],
     "indent": "off",
+    "new-cap": "off",
     "require-atomic-updates": "off"
   },
   "settings": {
