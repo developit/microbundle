@@ -685,7 +685,6 @@ function createConfig(options, entry, format, writeMeta) {
 			globals,
 			strict: options.strict === true,
 			freeze: false,
-			esModule: false,
 			sourcemap: options.sourcemap,
 			get banner() {
 				return shebang[options.name];
@@ -696,6 +695,14 @@ function createConfig(options, entry, format, writeMeta) {
 			dir: outputDir,
 			entryFileNames: outputEntryFileName,
 			exports: 'auto',
+			esModule: format !== 'es',
+			externalLiveBindings: format !== 'es',
+			generatedCode: {
+				preset: 'es5',
+				reservedNamesAsProps: false,
+				objectShorthand: false,
+				constBindings: false,
+			},
 		},
 	};
 
