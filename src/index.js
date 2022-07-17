@@ -40,6 +40,15 @@ import { getConfigFromPkgJson, getName } from './lib/package-info';
 import { shouldCssModules, cssModulesConfig } from './lib/css-modules';
 import { EOL } from 'os';
 
+const swc = (() => {
+	try {
+		require('@swc/core');
+		return require('rollup-plugin-swc3').default;
+	} catch (e) {
+		return null;
+	}
+})();
+
 // Extensions to use when resolving modules
 const EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs'];
 
@@ -531,6 +540,14 @@ function createConfig(options, entry, format, writeMeta) {
 							map: null,
 						}),
 					},
+					swc &&
+						swc({
+							sourceMaps: true,
+							jsc: {
+								target: 'es2018',
+							},
+						}),
+					!swc &&
 					(useTypescript || emitDeclaration) &&
 						typescript({
 							cwd: options.cwd,
@@ -564,6 +581,7 @@ function createConfig(options, entry, format, writeMeta) {
 							},
 						}),
 					// if defines is not set, we shouldn't run babel through node_modules
+					!swc &&
 					isTruthy(defines) &&
 						babel({
 							babelHelpers: 'bundled',
@@ -578,6 +596,7 @@ function createConfig(options, entry, format, writeMeta) {
 								],
 							],
 						}),
+					!swc &&
 					customBabel()({
 						babelHelpers: 'bundled',
 						extensions: EXTENSIONS,
