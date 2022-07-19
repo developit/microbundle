@@ -5,6 +5,19 @@
 	"main": "dist/microbundle.js",
 	"source": "src/index.js",
 	"bin": "dist/cli.js",
+	"repository": "developit/microbundle",
+  "keywords": [
+		"bundle",
+		"rollup",
+		"micro library"
+	],
+	"files": [
+		"src",
+		"dist",
+		"index.d.ts"
+	],
+	"author": "Jason Miller <jason@developit.ca> (http://jasonformat.com)",
+	"license": "MIT",
 	"scripts": {
 		"build": "npm run -s build:babel && npm run -s build:self",
 		"build:babel": "babel-node src/cli.js --target=node --format cjs src/{cli,index}.js",
@@ -18,7 +31,6 @@
 		"changeset": "changeset",
 		"release": "npm run -s prepare && npm test && changeset publish"
 	},
-	"repository": "developit/microbundle",
 	"prettier": {
 		"singleQuote": true,
 		"trailingComma": "all",
@@ -55,23 +67,6 @@
 			"pre-commit": "lint-staged"
 		}
 	},
-	"greenkeeper": {
-		"lockfiles": {
-			"outOfRangeUpdatesOnly": true
-		}
-	},
-	"keywords": [
-		"bundle",
-		"rollup",
-		"micro library"
-	],
-	"files": [
-		"src",
-		"dist",
-		"index.d.ts"
-	],
-	"author": "Jason Miller <jason@developit.ca> (http://jasonformat.com)",
-	"license": "MIT",
 	"dependencies": {
 		"@babel/core": "^7.12.10",
 		"@babel/plugin-proposal-class-properties": "7.12.1",
@@ -139,7 +134,6 @@
 		"regenerator-runtime": "^0.13.7",
 		"rimraf": "^3.0.2",
 		"shell-quote": "^1.7.2",
-		"strip-ansi": "^6.0.0",
-		"travis-size-report": "^1.1.0"
+		"strip-ansi": "^6.0.0"
 	}
 }

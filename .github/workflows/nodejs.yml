@@ -21,29 +21,18 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: install npm@latest
-        run: npm i -g npm@latest --registry=https://registry.npmjs.org
-      - name: npm install, build, and test
-        run: |
-          npm install
-          npm test
-      - name: sizereport
-        run: ./node_modules/.bin/sizereport --config
-
-# Could add this for canary versions
-#  publish-gpr:
-#    needs: build
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v1
-#      - uses: actions/setup-node@v1
-#        with:
-#          node-version: 12
-#          registry-url: https://npm.pkg.github.com/
-#          scope: '@preact'
-#      - run: |
-#          npm install
-#          npm config set registry https://npm.pkg.github.com/
-#          npm publish
-#        env:
-#          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Cache node modules
+        uses: actions/cache@v1
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          # This uses the same name as the build-action so we can share the caches.
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - run: npm ci --ignore-scripts
+      - name: npm build and test
+        run: npm test
