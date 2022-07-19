@@ -33,6 +33,6 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-      - run: npm ci
+      - run: npm ci --ignore-scripts
       - name: npm build and test
         run: npm test
