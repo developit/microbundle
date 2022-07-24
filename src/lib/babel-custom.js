@@ -110,6 +110,10 @@ export default () => {
 							name: '@babel/plugin-proposal-class-properties',
 							loose: true,
 						},
+						{
+							name: '@babel/plugin-proposal-private-property-in-object',
+							loose: true,
+						},
 						!customOptions.modern &&
 							!isNodeTarget && {
 								name: '@babel/plugin-transform-regenerator',
@@ -144,7 +148,11 @@ export default () => {
 										bugfixes: customOptions.modern,
 										modules: false,
 										exclude: merge(
-											['transform-async-to-generator', 'transform-regenerator'],
+											[
+												'transform-async-to-generator',
+												'transform-regenerator',
+												'@babel/plugin-transform-regenerator',
+											],
 											(preset.options && preset.options.exclude) || [],
 										),
 									},
@@ -173,6 +181,7 @@ export default () => {
 								exclude: [
 									'transform-async-to-generator',
 									'transform-regenerator',
+									'@babel/plugin-transform-regenerator',
 								],
 							},
 							customOptions.jsxImportSource && {

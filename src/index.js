@@ -520,6 +520,7 @@ function createConfig(options, entry, format, writeMeta) {
 						include: /\/node_modules\//,
 						esmExternals: false,
 						requireReturnsDefault: 'namespace',
+						sourceMap: false,
 					}),
 					json(),
 					{
