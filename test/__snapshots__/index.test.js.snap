@@ -222,8 +222,8 @@ basic
 Build \\"basic-lib\\" to dist:
 187 B: basic-lib.js.gz
 138 B: basic-lib.js.br
-188 B: basic-lib.esm.mjs.gz
-139 B: basic-lib.esm.mjs.br
+193 B: basic-lib.esm.mjs.gz
+148 B: basic-lib.esm.mjs.br
 273 B: basic-lib.umd.js.gz
 211 B: basic-lib.umd.js.br"
 `;
@@ -231,7 +231,7 @@ Build \\"basic-lib\\" to dist:
 exports[`fixtures build basic with microbundle 2`] = `6`;
 
 exports[`fixtures build basic with microbundle 3`] = `
-"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}},e=function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};export{e as default};
 //# sourceMappingURL=basic-lib.esm.mjs.map
 "
 `;
@@ -317,9 +317,9 @@ basic-compress-false
 Build \\"basic-compress-false\\" to dist:
 260 B: basic-compress-false.js.gz
 206 B: basic-compress-false.js.br
-258 B: basic-compress-false.esm.mjs.gz
-209 B: basic-compress-false.esm.mjs.br
-383 B: basic-compress-false.umd.js.gz
+263 B: basic-compress-false.esm.mjs.gz
+212 B: basic-compress-false.esm.mjs.br
+384 B: basic-compress-false.umd.js.gz
 305 B: basic-compress-false.umd.js.br"
 `;
 
@@ -351,7 +351,7 @@ var index = (function () {
   }
 });
 
-export default index;
+export { index as default };
 //# sourceMappingURL=basic-compress-false.esm.mjs.map
 "
 `;
@@ -392,7 +392,7 @@ exports[`fixtures build basic-compress-false with microbundle 5`] = `
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
 	(global = global || self, global.basicCompressFalse = factory());
-}(this, (function () {
+})(this, (function () {
 	var two = function two() {
 	  try {
 	    var _arguments2 = arguments;
@@ -420,7 +420,7 @@ exports[`fixtures build basic-compress-false with microbundle 5`] = `
 
 	return index;
 
-})));
+}));
 //# sourceMappingURL=basic-compress-false.umd.js.map
 "
 `;
@@ -449,8 +449,8 @@ basic-css
 Build \\"basic-css\\" to dist:
 107 B: basic-css.js.gz
 60 B: basic-css.js.br
-109 B: basic-css.esm.mjs.gz
-67 B: basic-css.esm.mjs.br
+111 B: basic-css.esm.mjs.gz
+75 B: basic-css.esm.mjs.br
 195 B: basic-css.umd.js.gz
 138 B: basic-css.umd.js.br"
 `;
@@ -458,12 +458,12 @@ Build \\"basic-css\\" to dist:
 exports[`fixtures build basic-css with microbundle 2`] = `8`;
 
 exports[`fixtures build basic-css with microbundle 3`] = `
-".testing{display:flex;color:red;background:#00f}
+".testing{background:blue;color:red;display:flex}
 /*# sourceMappingURL=basic-css.css.map */"
 `;
 
 exports[`fixtures build basic-css with microbundle 4`] = `
-"function e(){var e=document.createElement(\\"div\\");return e.className=\\"testing\\",e}export default e;
+"function e(){var e=document.createElement(\\"div\\");return e.className=\\"testing\\",e}export{e as default};
 //# sourceMappingURL=basic-css.esm.mjs.map
 "
 `;
@@ -502,8 +502,8 @@ basic-dashed-external
 Build \\"basic-dashed-external\\" to dist:
 276 B: basic-dashed-external.js.gz
 212 B: basic-dashed-external.js.br
-214 B: basic-dashed-external.esm.mjs.gz
-164 B: basic-dashed-external.esm.mjs.br
+220 B: basic-dashed-external.esm.mjs.gz
+173 B: basic-dashed-external.esm.mjs.br
 357 B: basic-dashed-external.umd.js.gz
 285 B: basic-dashed-external.umd.js.br"
 `;
@@ -511,7 +511,7 @@ Build \\"basic-dashed-external\\" to dist:
 exports[`fixtures build basic-dashed-external with microbundle 2`] = `6`;
 
 exports[`fixtures build basic-dashed-external with microbundle 3`] = `
-"import r from\\"tiny-glob\\";var e=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};console.log(r);export default function(){try{var r=arguments,t=[].slice.call(r);return Promise.resolve(e.apply(void 0,t)).then(function(r){return Promise.resolve(e.apply(void 0,t)).then(function(e){return[r,e]})})}catch(r){return Promise.reject(r)}}
+"import r from\\"tiny-glob\\";var e=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};console.log(r);var t=function(){try{var r=arguments,t=[].slice.call(r);return Promise.resolve(e.apply(void 0,t)).then(function(r){return Promise.resolve(e.apply(void 0,t)).then(function(e){return[r,e]})})}catch(r){return Promise.reject(r)}};export{t as default};
 //# sourceMappingURL=basic-dashed-external.esm.mjs.map
 "
 `;
@@ -550,8 +550,8 @@ basic-flow
 Build \\"basic-lib-flow\\" to dist:
 57 B: basic-lib-flow.js.gz
 43 B: basic-lib-flow.js.br
-56 B: basic-lib-flow.esm.mjs.gz
-42 B: basic-lib-flow.esm.mjs.br
+69 B: basic-lib-flow.esm.mjs.gz
+51 B: basic-lib-flow.esm.mjs.br
 171 B: basic-lib-flow.umd.js.gz
 132 B: basic-lib-flow.umd.js.br"
 `;
@@ -559,7 +559,7 @@ Build \\"basic-lib-flow\\" to dist:
 exports[`fixtures build basic-flow with microbundle 2`] = `6`;
 
 exports[`fixtures build basic-flow with microbundle 3`] = `
-"export default[\\"banana\\",\\"raspberry\\"];
+"var a=[\\"banana\\",\\"raspberry\\"];export{a as default};
 //# sourceMappingURL=basic-lib-flow.esm.mjs.map
 "
 `;
@@ -598,8 +598,8 @@ basic-json
 Build \\"basic-json\\" to dist:
 93 B: basic-json.js.gz
 65 B: basic-json.js.br
-92 B: basic-json.esm.mjs.gz
-64 B: basic-json.esm.mjs.br
+97 B: basic-json.esm.mjs.gz
+77 B: basic-json.esm.mjs.br
 180 B: basic-json.umd.js.gz
 129 B: basic-json.umd.js.br"
 `;
@@ -607,7 +607,7 @@ Build \\"basic-json\\" to dist:
 exports[`fixtures build basic-json with microbundle 2`] = `6`;
 
 exports[`fixtures build basic-json with microbundle 3`] = `
-"var e={test:\\"true\\"};export default function(){return Promise.resolve(e)}
+"var e={test:\\"true\\"},r=function(){return Promise.resolve(e)};export{r as default};
 //# sourceMappingURL=basic-json.esm.mjs.map
 "
 `;
@@ -734,14 +734,14 @@ basic-multi-source-css
 Build \\"basic-multi-source-css\\" to dist:
 104 B: a.js.gz
 61 B: a.js.br
-105 B: a.esm.mjs.gz
-67 B: a.esm.mjs.br
+108 B: a.esm.mjs.gz
+73 B: a.esm.mjs.br
 201 B: a.umd.js.gz
 133 B: a.umd.js.br
 104 B: b.js.gz
 61 B: b.js.br
-106 B: b.esm.mjs.gz
-67 B: b.esm.mjs.br
+108 B: b.esm.mjs.gz
+76 B: b.esm.mjs.br
 201 B: b.umd.js.gz
 134 B: b.umd.js.br"
 `;
@@ -749,12 +749,12 @@ Build \\"basic-multi-source-css\\" to dist:
 exports[`fixtures build basic-multi-source-css with microbundle 2`] = `16`;
 
 exports[`fixtures build basic-multi-source-css with microbundle 3`] = `
-".a{display:flex;color:green;background:pink}
+".a{background:pink;color:green;display:flex}
 /*# sourceMappingURL=a.css.map */"
 `;
 
 exports[`fixtures build basic-multi-source-css with microbundle 4`] = `
-"function e(){var e=document.createElement(\\"div\\");return e.className=\\"a\\",e}export default e;
+"function e(){var e=document.createElement(\\"div\\");return e.className=\\"a\\",e}export{e as default};
 //# sourceMappingURL=a.esm.mjs.map
 "
 `;
@@ -772,12 +772,12 @@ exports[`fixtures build basic-multi-source-css with microbundle 6`] = `
 `;
 
 exports[`fixtures build basic-multi-source-css with microbundle 7`] = `
-".b{display:flex;color:red;background:#00f}
+".b{background:blue;color:red;display:flex}
 /*# sourceMappingURL=b.css.map */"
 `;
 
 exports[`fixtures build basic-multi-source-css with microbundle 8`] = `
-"function e(){var e=document.createElement(\\"div\\");return e.className=\\"b\\",e}export default e;
+"function e(){var e=document.createElement(\\"div\\");return e.className=\\"b\\",e}export{e as default};
 //# sourceMappingURL=b.esm.mjs.map
 "
 `;
@@ -816,10 +816,10 @@ basic-no-compress
 Build \\"basic-no-compress\\" to dist:
 260 B: basic-no-compress.js.gz
 206 B: basic-no-compress.js.br
-258 B: basic-no-compress.esm.mjs.gz
-209 B: basic-no-compress.esm.mjs.br
+263 B: basic-no-compress.esm.mjs.gz
+212 B: basic-no-compress.esm.mjs.br
 381 B: basic-no-compress.umd.js.gz
-310 B: basic-no-compress.umd.js.br"
+324 B: basic-no-compress.umd.js.br"
 `;
 
 exports[`fixtures build basic-no-compress with microbundle 2`] = `6`;
@@ -850,7 +850,7 @@ var index = (function () {
   }
 });
 
-export default index;
+export { index as default };
 //# sourceMappingURL=basic-no-compress.esm.mjs.map
 "
 `;
@@ -891,7 +891,7 @@ exports[`fixtures build basic-no-compress with microbundle 5`] = `
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
 	(global = global || self, global.basicNoCompress = factory());
-}(this, (function () {
+})(this, (function () {
 	var two = function two() {
 	  try {
 	    var _arguments2 = arguments;
@@ -919,7 +919,7 @@ exports[`fixtures build basic-no-compress with microbundle 5`] = `
 
 	return index;
 
-})));
+}));
 //# sourceMappingURL=basic-no-compress.umd.js.map
 "
 `;
@@ -942,8 +942,8 @@ basic-no-pkg-main
 Build \\"basic-no-pkg-main\\" to dist:
 187 B: basic-no-pkg-main.js.gz
 138 B: basic-no-pkg-main.js.br
-188 B: basic-no-pkg-main.js.gz
-139 B: basic-no-pkg-main.js.br
+193 B: basic-no-pkg-main.js.gz
+148 B: basic-no-pkg-main.js.br
 278 B: basic-no-pkg-main.js.gz
 229 B: basic-no-pkg-main.js.br"
 `;
@@ -1023,8 +1023,8 @@ basic-ts
 Build \\"basic-lib-ts\\" to dist:
 118 B: basic-lib-ts.js.gz
 94 B: basic-lib-ts.js.br
-118 B: basic-lib-ts.esm.mjs.gz
-97 B: basic-lib-ts.esm.mjs.br
+122 B: basic-lib-ts.esm.mjs.gz
+87 B: basic-lib-ts.esm.mjs.br
 201 B: basic-lib-ts.umd.js.gz
 150 B: basic-lib-ts.umd.js.br"
 `;
@@ -1032,7 +1032,7 @@ Build \\"basic-lib-ts\\" to dist:
 exports[`fixtures build basic-ts with microbundle 2`] = `8`;
 
 exports[`fixtures build basic-ts with microbundle 3`] = `
-"var n=new(/*#__PURE__*/function(){function n(){}return n.prototype.drive=function(n){return!0},n}());export default n;
+"var n=new(/*#__PURE__*/function(){function n(){}return n.prototype.drive=function(n){return!0},n}());export{n as default};
 //# sourceMappingURL=basic-lib-ts.esm.mjs.map
 "
 `;
@@ -1090,8 +1090,8 @@ basic-tsx
 Build \\"basic-lib-tsx\\" to dist:
 213 B: basic-lib-tsx.js.gz
 164 B: basic-lib-tsx.js.br
-218 B: basic-lib-tsx.esm.mjs.gz
-172 B: basic-lib-tsx.esm.mjs.br
+220 B: basic-lib-tsx.esm.mjs.gz
+182 B: basic-lib-tsx.esm.mjs.br
 298 B: basic-lib-tsx.umd.js.gz
 232 B: basic-lib-tsx.umd.js.br"
 `;
@@ -1099,7 +1099,7 @@ Build \\"basic-lib-tsx\\" to dist:
 exports[`fixtures build basic-tsx with microbundle 2`] = `7`;
 
 exports[`fixtures build basic-tsx with microbundle 3`] = `
-"var n=function(n,r){return{tag:n,props:r,children:[].slice.call(arguments,2)}},r=/*#__PURE__*/function(){function r(){}return r.prototype.render=function(){return n(\\"div\\",{id:\\"app\\"},n(\\"h1\\",null,\\"Hello, World!\\"),n(\\"p\\",null,\\"A JSX demo.\\"))},r}();export default r;
+"var n=function(n,r){return{tag:n,props:r,children:[].slice.call(arguments,2)}},r=/*#__PURE__*/function(){function r(){}return r.prototype.render=function(){return n(\\"div\\",{id:\\"app\\"},n(\\"h1\\",null,\\"Hello, World!\\"),n(\\"p\\",null,\\"A JSX demo.\\"))},r}();export{r as default};
 //# sourceMappingURL=basic-lib-tsx.esm.mjs.map
 "
 `;
@@ -1146,8 +1146,8 @@ basic
 Build \\"basic\\" to dist:
 187 B: basic.js.gz
 138 B: basic.js.br
-188 B: basic.esm.mjs.gz
-139 B: basic.esm.mjs.br
+193 B: basic.esm.mjs.gz
+148 B: basic.esm.mjs.br
 269 B: basic.umd.js.gz
 198 B: basic.umd.js.br"
 `;
@@ -1155,7 +1155,7 @@ Build \\"basic\\" to dist:
 exports[`fixtures build basic-with-cwd with microbundle 2`] = `6`;
 
 exports[`fixtures build basic-with-cwd with microbundle 3`] = `
-"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}},e=function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};export{e as default};
 //# sourceMappingURL=basic.esm.mjs.map
 "
 `;
@@ -1194,30 +1194,30 @@ class-decorators-ts
 
 
 Build \\"class-decorators-ts\\" to dist:
-348 B: class-decorators-ts.js.gz
-288 B: class-decorators-ts.js.br
-348 B: class-decorators-ts.esm.mjs.gz
-288 B: class-decorators-ts.esm.mjs.br
-415 B: class-decorators-ts.umd.js.gz
-353 B: class-decorators-ts.umd.js.br"
+356 B: class-decorators-ts.js.gz
+296 B: class-decorators-ts.js.br
+359 B: class-decorators-ts.esm.mjs.gz
+315 B: class-decorators-ts.esm.mjs.br
+423 B: class-decorators-ts.umd.js.gz
+362 B: class-decorators-ts.umd.js.br"
 `;
 
 exports[`fixtures build class-decorators-ts with microbundle 2`] = `7`;
 
 exports[`fixtures build class-decorators-ts with microbundle 3`] = `
-"var e=/*#__PURE__*/function(){function e(e){this.greeting=e}return e.prototype.greet=function(){return\\"Hello, \\"+this.greeting},e}(),t=new(e=function(e,t,r,n){var o,c=arguments.length,l=c<3?t:null===n?n=Object.getOwnPropertyDescriptor(t,r):n;if(\\"object\\"==typeof Reflect&&\\"function\\"==typeof Reflect.decorate)l=Reflect.decorate(e,t,r,n);else for(var f=e.length-1;f>=0;f--)(o=e[f])&&(l=(c<3?o(l):c>3?o(t,r,l):o(t,r))||l);return c>3&&l&&Object.defineProperty(t,r,l),l}([function(e){Object.seal(e),Object.seal(e.prototype)}],e))(\\"Hello World\\");export default t;
+"var e=/*#__PURE__*/function(){function e(e){this.greeting=void 0,this.greeting=e}return e.prototype.greet=function(){return\\"Hello, \\"+this.greeting},e}(),t=new(e=function(e,t,r,n){var o,c=arguments.length,i=c<3?t:null===n?n=Object.getOwnPropertyDescriptor(t,r):n;if(\\"object\\"==typeof Reflect&&\\"function\\"==typeof Reflect.decorate)i=Reflect.decorate(e,t,r,n);else for(var l=e.length-1;l>=0;l--)(o=e[l])&&(i=(c<3?o(i):c>3?o(t,r,i):o(t,r))||i);return c>3&&i&&Object.defineProperty(t,r,i),i}([function(e){Object.seal(e),Object.seal(e.prototype)}],e))(\\"Hello World\\");export{t as default};
 //# sourceMappingURL=class-decorators-ts.esm.mjs.map
 "
 `;
 
 exports[`fixtures build class-decorators-ts with microbundle 4`] = `
-"var e=/*#__PURE__*/function(){function e(e){this.greeting=e}return e.prototype.greet=function(){return\\"Hello, \\"+this.greeting},e}(),t=new(e=function(e,t,r,o){var n,c=arguments.length,l=c<3?t:null===o?o=Object.getOwnPropertyDescriptor(t,r):o;if(\\"object\\"==typeof Reflect&&\\"function\\"==typeof Reflect.decorate)l=Reflect.decorate(e,t,r,o);else for(var f=e.length-1;f>=0;f--)(n=e[f])&&(l=(c<3?n(l):c>3?n(t,r,l):n(t,r))||l);return c>3&&l&&Object.defineProperty(t,r,l),l}([function(e){Object.seal(e),Object.seal(e.prototype)}],e))(\\"Hello World\\");module.exports=t;
+"var e=/*#__PURE__*/function(){function e(e){this.greeting=void 0,this.greeting=e}return e.prototype.greet=function(){return\\"Hello, \\"+this.greeting},e}(),t=new(e=function(e,t,r,o){var n,c=arguments.length,i=c<3?t:null===o?o=Object.getOwnPropertyDescriptor(t,r):o;if(\\"object\\"==typeof Reflect&&\\"function\\"==typeof Reflect.decorate)i=Reflect.decorate(e,t,r,o);else for(var l=e.length-1;l>=0;l--)(n=e[l])&&(i=(c<3?n(i):c>3?n(t,r,i):n(t,r))||i);return c>3&&i&&Object.defineProperty(t,r,i),i}([function(e){Object.seal(e),Object.seal(e.prototype)}],e))(\\"Hello World\\");module.exports=t;
 //# sourceMappingURL=class-decorators-ts.js.map
 "
 `;
 
 exports[`fixtures build class-decorators-ts with microbundle 5`] = `
-"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=t():\\"function\\"==typeof define&&define.amd?define(t):(e||self).classDecoratorsTs=t()}(this,function(){var e=/*#__PURE__*/function(){function e(e){this.greeting=e}return e.prototype.greet=function(){return\\"Hello, \\"+this.greeting},e}();return new(e=function(e,t,o,n){var r,f=arguments.length,i=f<3?t:null===n?n=Object.getOwnPropertyDescriptor(t,o):n;if(\\"object\\"==typeof Reflect&&\\"function\\"==typeof Reflect.decorate)i=Reflect.decorate(e,t,o,n);else for(var c=e.length-1;c>=0;c--)(r=e[c])&&(i=(f<3?r(i):f>3?r(t,o,i):r(t,o))||i);return f>3&&i&&Object.defineProperty(t,o,i),i}([function(e){Object.seal(e),Object.seal(e.prototype)}],e))(\\"Hello World\\")});
+"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=t():\\"function\\"==typeof define&&define.amd?define(t):(e||self).classDecoratorsTs=t()}(this,function(){var e=/*#__PURE__*/function(){function e(e){this.greeting=void 0,this.greeting=e}return e.prototype.greet=function(){return\\"Hello, \\"+this.greeting},e}();return e=function(e,t,o,n){var r,f=arguments.length,i=f<3?t:null===n?n=Object.getOwnPropertyDescriptor(t,o):n;if(\\"object\\"==typeof Reflect&&\\"function\\"==typeof Reflect.decorate)i=Reflect.decorate(e,t,o,n);else for(var c=e.length-1;c>=0;c--)(r=e[c])&&(i=(f<3?r(i):f>3?r(t,o,i):r(t,o))||i);return f>3&&i&&Object.defineProperty(t,o,i),i}([function(e){Object.seal(e),Object.seal(e.prototype)}],e),new e(\\"Hello World\\")});
 //# sourceMappingURL=class-decorators-ts.umd.js.map
 "
 `;
@@ -1254,8 +1254,8 @@ class-properties
 Build \\"class-properties\\" to dist:
 93 B: class-properties.js.gz
 79 B: class-properties.js.br
-96 B: class-properties.esm.mjs.gz
-85 B: class-properties.esm.mjs.br
+95 B: class-properties.esm.mjs.gz
+84 B: class-properties.esm.mjs.br
 197 B: class-properties.umd.js.gz
 150 B: class-properties.umd.js.br"
 `;
@@ -1263,7 +1263,7 @@ Build \\"class-properties\\" to dist:
 exports[`fixtures build class-properties with microbundle 2`] = `6`;
 
 exports[`fixtures build class-properties with microbundle 3`] = `
-"var a=function(){this.baz=3};a.bar=2;var r=new a;export default r;export{a as Foo};
+"var a=function(){this.baz=3};a.bar=2;var r=new a;export{a as Foo,r as default};
 //# sourceMappingURL=class-properties.esm.mjs.map
 "
 `;
@@ -1301,18 +1301,18 @@ css-modules--false
 Build \\"css-modules--false\\" to dist:
 49 B: css-modules--false.js.gz
 23 B: css-modules--false.js.br
-52 B: css-modules--false.esm.mjs.gz
-36 B: css-modules--false.esm.mjs.br
+56 B: css-modules--false.esm.mjs.gz
+40 B: css-modules--false.esm.mjs.br
 156 B: css-modules--false.umd.js.gz
 109 B: css-modules--false.umd.js.br"
 `;
 
 exports[`fixtures build css-modules--false with microbundle 2`] = `4`;
 
-exports[`fixtures build css-modules--false with microbundle 3`] = `"body{display:flex;color:red;background:#00f}.test_class_that_shouldnt_be_scoped{background-color:#00f}.not_scoped_class{color:pink}"`;
+exports[`fixtures build css-modules--false with microbundle 3`] = `"body{background:blue;color:red;display:flex}.test_class_that_shouldnt_be_scoped{background-color:blue}.not_scoped_class{color:pink}"`;
 
 exports[`fixtures build css-modules--false with microbundle 4`] = `
-"function t(){}export default t;
+"function t(){}export{t as default};
 "
 `;
 
@@ -1346,29 +1346,29 @@ css-modules--null
 
 Build \\"css-modules--null\\" to dist:
 110 B: css-modules--null.js.gz
-72 B: css-modules--null.js.br
-112 B: css-modules--null.esm.mjs.gz
-77 B: css-modules--null.esm.mjs.br
+69 B: css-modules--null.js.br
+114 B: css-modules--null.esm.mjs.gz
+70 B: css-modules--null.esm.mjs.br
 200 B: css-modules--null.umd.js.gz
-140 B: css-modules--null.umd.js.br"
+139 B: css-modules--null.umd.js.br"
 `;
 
 exports[`fixtures build css-modules--null with microbundle 2`] = `4`;
 
-exports[`fixtures build css-modules--null with microbundle 3`] = `"body{display:flex;color:red;background:#00f}.test_class_that_shouldnt_be_scoped{background-color:#00f}._2kWDE{color:pink}"`;
+exports[`fixtures build css-modules--null with microbundle 3`] = `"body{background:blue;color:red;display:flex}.test_class_that_shouldnt_be_scoped{background-color:blue}._-qmAn{color:pink}"`;
 
 exports[`fixtures build css-modules--null with microbundle 4`] = `
-"function e(){var e=document.createElement(\\"div\\");return e.className=\\"_2kWDE\\",e}export default e;
+"function e(){var e=document.createElement(\\"div\\");return e.className=\\"_-qmAn\\",e}export{e as default};
 "
 `;
 
 exports[`fixtures build css-modules--null with microbundle 5`] = `
-"module.exports=function(){var e=document.createElement(\\"div\\");return e.className=\\"_2kWDE\\",e};
+"module.exports=function(){var e=document.createElement(\\"div\\");return e.className=\\"_-qmAn\\",e};
 "
 `;
 
 exports[`fixtures build css-modules--null with microbundle 6`] = `
-"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e||self).cssModulesNull=n()}(this,function(){return function(){var e=document.createElement(\\"div\\");return e.className=\\"_2kWDE\\",e}});
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e||self).cssModulesNull=n()}(this,function(){return function(){var e=document.createElement(\\"div\\");return e.className=\\"_-qmAn\\",e}});
 "
 `;
 
@@ -1391,30 +1391,30 @@ css-modules--string
 
 
 Build \\"css-modules--string\\" to dist:
-166 B: css-modules--string.js.gz
-118 B: css-modules--string.js.br
-168 B: css-modules--string.esm.mjs.gz
-122 B: css-modules--string.esm.mjs.br
-263 B: css-modules--string.umd.js.gz
-192 B: css-modules--string.umd.js.br"
+145 B: css-modules--string.js.gz
+95 B: css-modules--string.js.br
+149 B: css-modules--string.esm.mjs.gz
+112 B: css-modules--string.esm.mjs.br
+238 B: css-modules--string.umd.js.gz
+168 B: css-modules--string.umd.js.br"
 `;
 
 exports[`fixtures build css-modules--string with microbundle 2`] = `4`;
 
-exports[`fixtures build css-modules--string with microbundle 3`] = `"body{display:flex;color:red;background:#00f}._contains_this_81567d0efc15a456670452d3277e1a68{background-color:#00f}._contains_this_0a8c24df242c2cd708036873307aea94{color:pink}"`;
+exports[`fixtures build css-modules--string with microbundle 3`] = `"body{background:blue;color:red;display:flex}._contains_this_911e75fe428eec11{background-color:blue}._contains_this_faa9809ffc07a201{color:pink}"`;
 
 exports[`fixtures build css-modules--string with microbundle 4`] = `
-"function a(){var a=document.createElement(\\"div\\");return a.className=\\"_contains_this_0a8c24df242c2cd708036873307aea94 _contains_this_81567d0efc15a456670452d3277e1a68\\",a}export default a;
+"function e(){var e=document.createElement(\\"div\\");return e.className=\\"_contains_this_faa9809ffc07a201 _contains_this_911e75fe428eec11\\",e}export{e as default};
 "
 `;
 
 exports[`fixtures build css-modules--string with microbundle 5`] = `
-"module.exports=function(){var e=document.createElement(\\"div\\");return e.className=\\"_contains_this_0a8c24df242c2cd708036873307aea94 _contains_this_81567d0efc15a456670452d3277e1a68\\",e};
+"module.exports=function(){var e=document.createElement(\\"div\\");return e.className=\\"_contains_this_faa9809ffc07a201 _contains_this_911e75fe428eec11\\",e};
 "
 `;
 
 exports[`fixtures build css-modules--string with microbundle 6`] = `
-"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e||self).cssModulesString=n()}(this,function(){return function(){var e=document.createElement(\\"div\\");return e.className=\\"_contains_this_0a8c24df242c2cd708036873307aea94 _contains_this_81567d0efc15a456670452d3277e1a68\\",e}});
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e||self).cssModulesString=n()}(this,function(){return function(){var e=document.createElement(\\"div\\");return e.className=\\"_contains_this_faa9809ffc07a201 _contains_this_911e75fe428eec11\\",e}});
 "
 `;
 
@@ -1437,30 +1437,30 @@ css-modules--true
 
 
 Build \\"css-modules--true\\" to dist:
-139 B: css-modules--true.js.gz
-94 B: css-modules--true.js.br
-141 B: css-modules--true.esm.mjs.gz
-108 B: css-modules--true.esm.mjs.br
-230 B: css-modules--true.umd.js.gz
-165 B: css-modules--true.umd.js.br"
+138 B: css-modules--true.js.gz
+93 B: css-modules--true.js.br
+143 B: css-modules--true.esm.mjs.gz
+99 B: css-modules--true.esm.mjs.br
+228 B: css-modules--true.umd.js.gz
+162 B: css-modules--true.umd.js.br"
 `;
 
 exports[`fixtures build css-modules--true with microbundle 2`] = `4`;
 
-exports[`fixtures build css-modules--true with microbundle 3`] = `"body{display:flex;color:red;background:#00f}.test_class_that_should_be_scoped{background-color:#00f}._2kWDE{color:pink}"`;
+exports[`fixtures build css-modules--true with microbundle 3`] = `"body{background:blue;color:red;display:flex}.test_class_that_should_be_scoped{background-color:blue}._-qmAn{color:pink}"`;
 
 exports[`fixtures build css-modules--true with microbundle 4`] = `
-"function e(){var e=document.createElement(\\"div\\");return e.className=\\"_2kWDE \\"+(void 0).test_class_that_should_be_scoped,e}export default e;
+"function e(){var e=document.createElement(\\"div\\");return e.className=\\"_-qmAn \\"+(void 0).test_class_that_should_be_scoped,e}export{e as default};
 "
 `;
 
 exports[`fixtures build css-modules--true with microbundle 5`] = `
-"module.exports=function(){var e=document.createElement(\\"div\\");return e.className=\\"_2kWDE \\"+(void 0).test_class_that_should_be_scoped,e};
+"module.exports=function(){var e=document.createElement(\\"div\\");return e.className=\\"_-qmAn \\"+(void 0).test_class_that_should_be_scoped,e};
 "
 `;
 
 exports[`fixtures build css-modules--true with microbundle 6`] = `
-"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=t():\\"function\\"==typeof define&&define.amd?define(t):(e||self).cssModulesTrue=t()}(this,function(){return function(){var e=document.createElement(\\"div\\");return e.className=\\"_2kWDE \\"+(void 0).test_class_that_should_be_scoped,e}});
+"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=t():\\"function\\"==typeof define&&define.amd?define(t):(e||self).cssModulesTrue=t()}(this,function(){return function(){var e=document.createElement(\\"div\\");return e.className=\\"_-qmAn \\"+(void 0).test_class_that_should_be_scoped,e}});
 "
 `;
 
@@ -1533,8 +1533,8 @@ custom-source
 Build \\"custom-source\\" to dist:
 187 B: custom-source.js.gz
 138 B: custom-source.js.br
-188 B: custom-source.esm.mjs.gz
-139 B: custom-source.esm.mjs.br
+193 B: custom-source.esm.mjs.gz
+148 B: custom-source.esm.mjs.br
 275 B: custom-source.umd.js.gz
 203 B: custom-source.umd.js.br"
 `;
@@ -1542,7 +1542,7 @@ Build \\"custom-source\\" to dist:
 exports[`fixtures build custom-source with microbundle 2`] = `6`;
 
 exports[`fixtures build custom-source with microbundle 3`] = `
-"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}},e=function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};export{e as default};
 //# sourceMappingURL=custom-source.esm.mjs.map
 "
 `;
@@ -1581,8 +1581,8 @@ custom-source
 Build \\"custom-src\\" to dist:
 187 B: custom-src.js.gz
 138 B: custom-src.js.br
-188 B: custom-src.esm.mjs.gz
-139 B: custom-src.esm.mjs.br
+193 B: custom-src.esm.mjs.gz
+148 B: custom-src.esm.mjs.br
 273 B: custom-src.umd.js.gz
 203 B: custom-src.umd.js.br"
 `;
@@ -1590,7 +1590,7 @@ Build \\"custom-src\\" to dist:
 exports[`fixtures build custom-source-with-cwd with microbundle 2`] = `6`;
 
 exports[`fixtures build custom-source-with-cwd with microbundle 3`] = `
-"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}},e=function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};export{e as default};
 //# sourceMappingURL=custom-src.esm.mjs.map
 "
 `;
@@ -1628,8 +1628,8 @@ default-named
 Build \\"default-named\\" to dist:
 60 B: default-named.js.gz
 46 B: default-named.js.br
-74 B: default-named.esm.mjs.gz
-62 B: default-named.esm.mjs.br
+71 B: default-named.esm.mjs.gz
+58 B: default-named.esm.mjs.br
 169 B: default-named.umd.js.gz
 122 B: default-named.umd.js.br"
 `;
@@ -1637,7 +1637,7 @@ Build \\"default-named\\" to dist:
 exports[`fixtures build default-named with microbundle 2`] = `6`;
 
 exports[`fixtures build default-named with microbundle 3`] = `
-"var t=42;function e(){}export default e;export{t as foo};
+"var a=42;function t(){}export{t as default,a as foo};
 //# sourceMappingURL=default-named.esm.mjs.map
 "
 `;
@@ -1740,30 +1740,30 @@ esnext-ts
 
 
 Build \\"esnext-ts\\" to dist:
-1010 B: esnext-ts.js.gz
-899 B: esnext-ts.js.br
-1011 B: esnext-ts.esm.mjs.gz
-896 B: esnext-ts.esm.mjs.br
-1072 B: esnext-ts.umd.js.gz
-959 B: esnext-ts.umd.js.br"
+1180 B: esnext-ts.js.gz
+1055 B: esnext-ts.js.br
+1184 B: esnext-ts.esm.mjs.gz
+1059 B: esnext-ts.esm.mjs.br
+1240 B: esnext-ts.umd.js.gz
+1112 B: esnext-ts.umd.js.br"
 `;
 
 exports[`fixtures build esnext-ts with microbundle 2`] = `7`;
 
 exports[`fixtures build esnext-ts with microbundle 3`] = `
-"function n(t,e,i){if(!t.s){if(i instanceof r){if(!i.s)return void(i.o=n.bind(null,t,e));1&e&&(e=i.s),i=i.v}if(i&&i.then)return void i.then(n.bind(null,t,e),n.bind(null,t,2));t.s=e,t.v=i;var o=t.o;o&&o(t)}}var t=function(){try{var t,o,u,f,h=[],c=!0,v=!1,l=i(function(){return function(i,f){try{var v=function(){t=function(n){var t;if(\\"undefined\\"!=typeof Symbol){if(Symbol.asyncIterator&&null!=(t=n[Symbol.asyncIterator]))return t.call(n);if(Symbol.iterator&&null!=(t=n[Symbol.iterator]))return t.call(n)}throw new TypeError(\\"Object is not async iterable\\")}([1,2]);var i=function(t,i,o){for(var u;;){var f=t();if(e(f)&&(f=f.v),!f)return h;if(f.then){u=0;break}var h=o();if(h&&h.then){if(!e(h)){u=1;break}h=h.s}if(i){var c=i();if(c&&c.then&&!e(c)){u=2;break}}}var v=new r,l=n.bind(null,v,2);return(0===u?f.then(s):1===u?h.then(a):c.then(d)).then(void 0,l),v;function a(r){h=r;do{if(i&&(c=i())&&c.then&&!e(c))return void c.then(d).then(void 0,l);if(!(f=t())||e(f)&&!f.v)return void n(v,1,h);if(f.then)return void f.then(s).then(void 0,l);e(h=o())&&(h=h.v)}while(!h||!h.then);h.then(a).then(void 0,l)}function s(t){t?(h=o())&&h.then?h.then(a).then(void 0,l):a(h):n(v,1,h)}function d(){(f=t())?f.then?f.then(s).then(void 0,l):s(f):n(v,1,h)}}(function(){return Promise.resolve(t.next()).then(function(n){return c=o.done,o=n,Promise.resolve(o.value).then(function(n){return u=n,!c})})},function(){return!!(c=!0)},function(){h.push(u)});if(i&&i.then)return i.then(function(){})}()}catch(n){return f(n)}return v&&v.then?v.then(void 0,f):v}(0,function(n){v=!0,f=n})},function(n,r){function e(t){if(n)throw r;return r}var o=i(function(){var n=function(){if(!c&&null!=t.return)return Promise.resolve(t.return()).then(function(){})}();if(n&&n.then)return n.then(function(){})},function(n,t){if(v)throw f;if(n)throw t;return t});return o&&o.then?o.then(e):e()});return Promise.resolve(l&&l.then?l.then(function(n){return h}):h)}catch(n){return Promise.reject(n)}};const r=/*#__PURE__*/function(){function t(){}return t.prototype.then=function(r,e){const i=new t,o=this.s;if(o){const t=1&o?r:e;if(t){try{n(i,1,t(this.v))}catch(t){n(i,2,t)}return i}return this}return this.o=function(t){try{const o=t.v;1&t.s?n(i,1,r?r(o):o):e?n(i,1,e(o)):n(i,2,o)}catch(t){n(i,2,t)}},i},t}();function e(n){return n instanceof r&&1&n.s}function i(n,t){try{var r=n()}catch(n){return t(!0,n)}return r&&r.then?r.then(t.bind(null,!1),t.bind(null,!0)):t(!1,r)}t().then(console.log);export default t;
+"function n(t){function r(n){if(Object(n)!==n)return Promise.reject(new TypeError(n+\\" is not an object.\\"));var t=n.done;return Promise.resolve(n.value).then(function(n){return{value:n,done:t}})}return n=function(n){this.s=n,this.n=n.next},n.prototype={s:null,n:null,next:function(){return r(this.n.apply(this.s,arguments))},return:function(n){var t=this.s.return;return void 0===t?Promise.resolve({value:n,done:!0}):r(t.apply(this.s,arguments))},throw:function(n){var t=this.s.return;return void 0===t?Promise.reject(n):r(t.apply(this.s,arguments))}},new n(t)}function t(n,r,i){if(!n.s){if(i instanceof e){if(!i.s)return void(i.o=t.bind(null,n,r));1&r&&(r=i.s),i=i.v}if(i&&i.then)return void i.then(t.bind(null,n,r),t.bind(null,n,2));n.s=r,n.v=i;var o=n.o;o&&o(n)}}var r=function(){try{var r,u,f,c=[],h=!1,s=!1,a=o(function(){return function(o,f){try{var s=function(){r=function(t){var r,e,i,o=2;for(\\"undefined\\"!=typeof Symbol&&(e=Symbol.asyncIterator,i=Symbol.iterator);o--;){if(e&&null!=(r=t[e]))return r.call(t);if(i&&null!=(r=t[i]))return new n(r.call(t));e=\\"@@asyncIterator\\",i=\\"@@iterator\\"}throw new TypeError(\\"Object is not async iterable\\")}([1,2]);var o=function(n,r,o){for(var u;;){var f=n();if(i(f)&&(f=f.v),!f)return c;if(f.then){u=0;break}var c=o();if(c&&c.then){if(!i(c)){u=1;break}c=c.s}if(r){var h=r();if(h&&h.then&&!i(h)){u=2;break}}}var s=new e,a=t.bind(null,s,2);return(0===u?f.then(l):1===u?c.then(v):h.then(d)).then(void 0,a),s;function v(e){c=e;do{if(r&&(h=r())&&h.then&&!i(h))return void h.then(d).then(void 0,a);if(!(f=n())||i(f)&&!f.v)return void t(s,1,c);if(f.then)return void f.then(l).then(void 0,a);i(c=o())&&(c=c.v)}while(!c||!c.then);c.then(v).then(void 0,a)}function l(n){n?(c=o())&&c.then?c.then(v).then(void 0,a):v(c):t(s,1,c)}function d(){(f=n())?f.then?f.then(l).then(void 0,a):l(f):t(s,1,c)}}(function(){return Promise.resolve(r.next()).then(function(n){return h=!(u=n).done})},function(){return!!(h=!1)},function(){c.push(u.value)});if(o&&o.then)return o.then(function(){})}()}catch(n){return f(n)}return s&&s.then?s.then(void 0,f):s}(0,function(n){s=!0,f=n})},function(n,t){function e(r){if(n)throw t;return t}var i=o(function(){var n=function(){if(h&&null!=r.return)return Promise.resolve(r.return()).then(function(){})}();if(n&&n.then)return n.then(function(){})},function(n,t){if(s)throw f;if(n)throw t;return t});return i&&i.then?i.then(e):e()});return Promise.resolve(a&&a.then?a.then(function(n){return c}):c)}catch(n){return Promise.reject(n)}};const e=/*#__PURE__*/function(){function n(){}return n.prototype.then=function(r,e){const i=new n,o=this.s;if(o){const n=1&o?r:e;if(n){try{t(i,1,n(this.v))}catch(n){t(i,2,n)}return i}return this}return this.o=function(n){try{const o=n.v;1&n.s?t(i,1,r?r(o):o):e?t(i,1,e(o)):t(i,2,o)}catch(n){t(i,2,n)}},i},n}();function i(n){return n instanceof e&&1&n.s}function o(n,t){try{var r=n()}catch(n){return t(!0,n)}return r&&r.then?r.then(t.bind(null,!1),t.bind(null,!0)):t(!1,r)}r().then(console.log);export{r as default};
 //# sourceMappingURL=esnext-ts.esm.mjs.map
 "
 `;
 
 exports[`fixtures build esnext-ts with microbundle 4`] = `
-"function n(t,e,i){if(!t.s){if(i instanceof r){if(!i.s)return void(i.o=n.bind(null,t,e));1&e&&(e=i.s),i=i.v}if(i&&i.then)return void i.then(n.bind(null,t,e),n.bind(null,t,2));t.s=e,t.v=i;var o=t.o;o&&o(t)}}var t=function(){try{var t,o,u,f,h=[],c=!0,v=!1,l=i(function(){return function(i,f){try{var v=function(){t=function(n){var t;if(\\"undefined\\"!=typeof Symbol){if(Symbol.asyncIterator&&null!=(t=n[Symbol.asyncIterator]))return t.call(n);if(Symbol.iterator&&null!=(t=n[Symbol.iterator]))return t.call(n)}throw new TypeError(\\"Object is not async iterable\\")}([1,2]);var i=function(t,i,o){for(var u;;){var f=t();if(e(f)&&(f=f.v),!f)return h;if(f.then){u=0;break}var h=o();if(h&&h.then){if(!e(h)){u=1;break}h=h.s}if(i){var c=i();if(c&&c.then&&!e(c)){u=2;break}}}var v=new r,l=n.bind(null,v,2);return(0===u?f.then(s):1===u?h.then(a):c.then(d)).then(void 0,l),v;function a(r){h=r;do{if(i&&(c=i())&&c.then&&!e(c))return void c.then(d).then(void 0,l);if(!(f=t())||e(f)&&!f.v)return void n(v,1,h);if(f.then)return void f.then(s).then(void 0,l);e(h=o())&&(h=h.v)}while(!h||!h.then);h.then(a).then(void 0,l)}function s(t){t?(h=o())&&h.then?h.then(a).then(void 0,l):a(h):n(v,1,h)}function d(){(f=t())?f.then?f.then(s).then(void 0,l):s(f):n(v,1,h)}}(function(){return Promise.resolve(t.next()).then(function(n){return c=o.done,o=n,Promise.resolve(o.value).then(function(n){return u=n,!c})})},function(){return!!(c=!0)},function(){h.push(u)});if(i&&i.then)return i.then(function(){})}()}catch(n){return f(n)}return v&&v.then?v.then(void 0,f):v}(0,function(n){v=!0,f=n})},function(n,r){function e(t){if(n)throw r;return r}var o=i(function(){var n=function(){if(!c&&null!=t.return)return Promise.resolve(t.return()).then(function(){})}();if(n&&n.then)return n.then(function(){})},function(n,t){if(v)throw f;if(n)throw t;return t});return o&&o.then?o.then(e):e()});return Promise.resolve(l&&l.then?l.then(function(n){return h}):h)}catch(n){return Promise.reject(n)}};const r=/*#__PURE__*/function(){function t(){}return t.prototype.then=function(r,e){const i=new t,o=this.s;if(o){const t=1&o?r:e;if(t){try{n(i,1,t(this.v))}catch(t){n(i,2,t)}return i}return this}return this.o=function(t){try{const o=t.v;1&t.s?n(i,1,r?r(o):o):e?n(i,1,e(o)):n(i,2,o)}catch(t){n(i,2,t)}},i},t}();function e(n){return n instanceof r&&1&n.s}function i(n,t){try{var r=n()}catch(n){return t(!0,n)}return r&&r.then?r.then(t.bind(null,!1),t.bind(null,!0)):t(!1,r)}t().then(console.log),module.exports=t;
+"function n(t){function r(n){if(Object(n)!==n)return Promise.reject(new TypeError(n+\\" is not an object.\\"));var t=n.done;return Promise.resolve(n.value).then(function(n){return{value:n,done:t}})}return n=function(n){this.s=n,this.n=n.next},n.prototype={s:null,n:null,next:function(){return r(this.n.apply(this.s,arguments))},return:function(n){var t=this.s.return;return void 0===t?Promise.resolve({value:n,done:!0}):r(t.apply(this.s,arguments))},throw:function(n){var t=this.s.return;return void 0===t?Promise.reject(n):r(t.apply(this.s,arguments))}},new n(t)}function t(n,r,i){if(!n.s){if(i instanceof e){if(!i.s)return void(i.o=t.bind(null,n,r));1&r&&(r=i.s),i=i.v}if(i&&i.then)return void i.then(t.bind(null,n,r),t.bind(null,n,2));n.s=r,n.v=i;var o=n.o;o&&o(n)}}var r=function(){try{var r,u,f,c=[],h=!1,s=!1,v=o(function(){return function(o,f){try{var s=function(){r=function(t){var r,e,i,o=2;for(\\"undefined\\"!=typeof Symbol&&(e=Symbol.asyncIterator,i=Symbol.iterator);o--;){if(e&&null!=(r=t[e]))return r.call(t);if(i&&null!=(r=t[i]))return new n(r.call(t));e=\\"@@asyncIterator\\",i=\\"@@iterator\\"}throw new TypeError(\\"Object is not async iterable\\")}([1,2]);var o=function(n,r,o){for(var u;;){var f=n();if(i(f)&&(f=f.v),!f)return c;if(f.then){u=0;break}var c=o();if(c&&c.then){if(!i(c)){u=1;break}c=c.s}if(r){var h=r();if(h&&h.then&&!i(h)){u=2;break}}}var s=new e,v=t.bind(null,s,2);return(0===u?f.then(a):1===u?c.then(l):h.then(d)).then(void 0,v),s;function l(e){c=e;do{if(r&&(h=r())&&h.then&&!i(h))return void h.then(d).then(void 0,v);if(!(f=n())||i(f)&&!f.v)return void t(s,1,c);if(f.then)return void f.then(a).then(void 0,v);i(c=o())&&(c=c.v)}while(!c||!c.then);c.then(l).then(void 0,v)}function a(n){n?(c=o())&&c.then?c.then(l).then(void 0,v):l(c):t(s,1,c)}function d(){(f=n())?f.then?f.then(a).then(void 0,v):a(f):t(s,1,c)}}(function(){return Promise.resolve(r.next()).then(function(n){return h=!(u=n).done})},function(){return!!(h=!1)},function(){c.push(u.value)});if(o&&o.then)return o.then(function(){})}()}catch(n){return f(n)}return s&&s.then?s.then(void 0,f):s}(0,function(n){s=!0,f=n})},function(n,t){function e(r){if(n)throw t;return t}var i=o(function(){var n=function(){if(h&&null!=r.return)return Promise.resolve(r.return()).then(function(){})}();if(n&&n.then)return n.then(function(){})},function(n,t){if(s)throw f;if(n)throw t;return t});return i&&i.then?i.then(e):e()});return Promise.resolve(v&&v.then?v.then(function(n){return c}):c)}catch(n){return Promise.reject(n)}};const e=/*#__PURE__*/function(){function n(){}return n.prototype.then=function(r,e){const i=new n,o=this.s;if(o){const n=1&o?r:e;if(n){try{t(i,1,n(this.v))}catch(n){t(i,2,n)}return i}return this}return this.o=function(n){try{const o=n.v;1&n.s?t(i,1,r?r(o):o):e?t(i,1,e(o)):t(i,2,o)}catch(n){t(i,2,n)}},i},n}();function i(n){return n instanceof e&&1&n.s}function o(n,t){try{var r=n()}catch(n){return t(!0,n)}return r&&r.then?r.then(t.bind(null,!1),t.bind(null,!0)):t(!1,r)}r().then(console.log),module.exports=r;
 //# sourceMappingURL=esnext-ts.js.map
 "
 `;
 
 exports[`fixtures build esnext-ts with microbundle 5`] = `
-"!function(n,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=t():\\"function\\"==typeof define&&define.amd?define(t):(n||self).esnextTs=t()}(this,function(){function n(t,r,i){if(!t.s){if(i instanceof e){if(!i.s)return void(i.o=n.bind(null,t,r));1&r&&(r=i.s),i=i.v}if(i&&i.then)return void i.then(n.bind(null,t,r),n.bind(null,t,2));t.s=r,t.v=i;var o=t.o;o&&o(t)}}var t=function(){try{var t,o,u,f,c=[],h=!0,l=!1,s=i(function(){return function(i,f){try{var l=function(){t=function(n){var t;if(\\"undefined\\"!=typeof Symbol){if(Symbol.asyncIterator&&null!=(t=n[Symbol.asyncIterator]))return t.call(n);if(Symbol.iterator&&null!=(t=n[Symbol.iterator]))return t.call(n)}throw new TypeError(\\"Object is not async iterable\\")}([1,2]);var i=function(t,i,o){for(var u;;){var f=t();if(r(f)&&(f=f.v),!f)return c;if(f.then){u=0;break}var c=o();if(c&&c.then){if(!r(c)){u=1;break}c=c.s}if(i){var h=i();if(h&&h.then&&!r(h)){u=2;break}}}var l=new e,s=n.bind(null,l,2);return(0===u?f.then(v):1===u?c.then(a):h.then(d)).then(void 0,s),l;function a(e){c=e;do{if(i&&(h=i())&&h.then&&!r(h))return void h.then(d).then(void 0,s);if(!(f=t())||r(f)&&!f.v)return void n(l,1,c);if(f.then)return void f.then(v).then(void 0,s);r(c=o())&&(c=c.v)}while(!c||!c.then);c.then(a).then(void 0,s)}function v(t){t?(c=o())&&c.then?c.then(a).then(void 0,s):a(c):n(l,1,c)}function d(){(f=t())?f.then?f.then(v).then(void 0,s):v(f):n(l,1,c)}}(function(){return Promise.resolve(t.next()).then(function(n){return h=o.done,o=n,Promise.resolve(o.value).then(function(n){return u=n,!h})})},function(){return!!(h=!0)},function(){c.push(u)});if(i&&i.then)return i.then(function(){})}()}catch(n){return f(n)}return l&&l.then?l.then(void 0,f):l}(0,function(n){l=!0,f=n})},function(n,e){function r(t){if(n)throw e;return e}var o=i(function(){var n=function(){if(!h&&null!=t.return)return Promise.resolve(t.return()).then(function(){})}();if(n&&n.then)return n.then(function(){})},function(n,t){if(l)throw f;if(n)throw t;return t});return o&&o.then?o.then(r):r()});return Promise.resolve(s&&s.then?s.then(function(n){return c}):c)}catch(n){return Promise.reject(n)}};const e=/*#__PURE__*/function(){function t(){}return t.prototype.then=function(e,r){const i=new t,o=this.s;if(o){const t=1&o?e:r;if(t){try{n(i,1,t(this.v))}catch(t){n(i,2,t)}return i}return this}return this.o=function(t){try{const o=t.v;1&t.s?n(i,1,e?e(o):o):r?n(i,1,r(o)):n(i,2,o)}catch(t){n(i,2,t)}},i},t}();function r(n){return n instanceof e&&1&n.s}function i(n,t){try{var e=n()}catch(n){return t(!0,n)}return e&&e.then?e.then(t.bind(null,!1),t.bind(null,!0)):t(!1,e)}return t().then(console.log),t});
+"!function(n,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=t():\\"function\\"==typeof define&&define.amd?define(t):(n||self).esnextTs=t()}(this,function(){function n(t){function e(n){if(Object(n)!==n)return Promise.reject(new TypeError(n+\\" is not an object.\\"));var t=n.done;return Promise.resolve(n.value).then(function(n){return{value:n,done:t}})}return n=function(n){this.s=n,this.n=n.next},n.prototype={s:null,n:null,next:function(){return e(this.n.apply(this.s,arguments))},return:function(n){var t=this.s.return;return void 0===t?Promise.resolve({value:n,done:!0}):e(t.apply(this.s,arguments))},throw:function(n){var t=this.s.return;return void 0===t?Promise.reject(n):e(t.apply(this.s,arguments))}},new n(t)}function t(n,e,i){if(!n.s){if(i instanceof r){if(!i.s)return void(i.o=t.bind(null,n,e));1&e&&(e=i.s),i=i.v}if(i&&i.then)return void i.then(t.bind(null,n,e),t.bind(null,n,2));n.s=e,n.v=i;var o=n.o;o&&o(n)}}var e=function(){try{var e,u,f,c=[],h=!1,s=!1,l=o(function(){return function(o,f){try{var s=function(){e=function(t){var e,r,i,o=2;for(\\"undefined\\"!=typeof Symbol&&(r=Symbol.asyncIterator,i=Symbol.iterator);o--;){if(r&&null!=(e=t[r]))return e.call(t);if(i&&null!=(e=t[i]))return new n(e.call(t));r=\\"@@asyncIterator\\",i=\\"@@iterator\\"}throw new TypeError(\\"Object is not async iterable\\")}([1,2]);var o=function(n,e,o){for(var u;;){var f=n();if(i(f)&&(f=f.v),!f)return c;if(f.then){u=0;break}var c=o();if(c&&c.then){if(!i(c)){u=1;break}c=c.s}if(e){var h=e();if(h&&h.then&&!i(h)){u=2;break}}}var s=new r,l=t.bind(null,s,2);return(0===u?f.then(v):1===u?c.then(a):h.then(d)).then(void 0,l),s;function a(r){c=r;do{if(e&&(h=e())&&h.then&&!i(h))return void h.then(d).then(void 0,l);if(!(f=n())||i(f)&&!f.v)return void t(s,1,c);if(f.then)return void f.then(v).then(void 0,l);i(c=o())&&(c=c.v)}while(!c||!c.then);c.then(a).then(void 0,l)}function v(n){n?(c=o())&&c.then?c.then(a).then(void 0,l):a(c):t(s,1,c)}function d(){(f=n())?f.then?f.then(v).then(void 0,l):v(f):t(s,1,c)}}(function(){return Promise.resolve(e.next()).then(function(n){return h=!(u=n).done})},function(){return!!(h=!1)},function(){c.push(u.value)});if(o&&o.then)return o.then(function(){})}()}catch(n){return f(n)}return s&&s.then?s.then(void 0,f):s}(0,function(n){s=!0,f=n})},function(n,t){function r(e){if(n)throw t;return t}var i=o(function(){var n=function(){if(h&&null!=e.return)return Promise.resolve(e.return()).then(function(){})}();if(n&&n.then)return n.then(function(){})},function(n,t){if(s)throw f;if(n)throw t;return t});return i&&i.then?i.then(r):r()});return Promise.resolve(l&&l.then?l.then(function(n){return c}):c)}catch(n){return Promise.reject(n)}};const r=/*#__PURE__*/function(){function n(){}return n.prototype.then=function(e,r){const i=new n,o=this.s;if(o){const n=1&o?e:r;if(n){try{t(i,1,n(this.v))}catch(n){t(i,2,n)}return i}return this}return this.o=function(n){try{const o=n.v;1&n.s?t(i,1,e?e(o):o):r?t(i,1,r(o)):t(i,2,o)}catch(n){t(i,2,n)}},i},n}();function i(n){return n instanceof r&&1&n.s}function o(n,t){try{var e=n()}catch(n){return t(!0,n)}return e&&e.then?e.then(t.bind(null,!1),t.bind(null,!0)):t(!1,e)}return e().then(console.log),e});
 //# sourceMappingURL=esnext-ts.umd.js.map
 "
 `;
@@ -1792,8 +1792,8 @@ inline-source-map
 Build \\"inline-source-map\\" to dist:
 187 B: inline-source-map.js.gz
 138 B: inline-source-map.js.br
-188 B: inline-source-map.esm.mjs.gz
-139 B: inline-source-map.esm.mjs.br
+193 B: inline-source-map.esm.mjs.gz
+148 B: inline-source-map.esm.mjs.br
 278 B: inline-source-map.umd.js.gz
 217 B: inline-source-map.umd.js.br"
 `;
@@ -1801,20 +1801,20 @@ Build \\"inline-source-map\\" to dist:
 exports[`fixtures build inline-source-map with microbundle 2`] = `3`;
 
 exports[`fixtures build inline-source-map with microbundle 3`] = `
-"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5saW5lLXNvdXJjZS1tYXAuZXNtLm1qcyIsInNvdXJjZXMiOlsiLi4vc3JjL3R3by5qcyIsIi4uL3NyYy9pbmRleC5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgYXN5bmMgZnVuY3Rpb24gdHdvKC4uLmFyZ3MpIHtcblx0cmV0dXJuIGFyZ3MucmVkdWNlKCh0b3RhbCwgdmFsdWUpID0+IHRvdGFsICsgdmFsdWUsIDApO1xufVxuIiwiaW1wb3J0IHsgdHdvIH0gZnJvbSAnLi90d28nO1xuXG5leHBvcnQgZGVmYXVsdCBhc3luYyBmdW5jdGlvbiguLi5hcmdzKSB7XG5cdHJldHVybiBbYXdhaXQgdHdvKC4uLmFyZ3MpLCBhd2FpdCB0d28oLi4uYXJncyldO1xufVxuIl0sIm5hbWVzIjpbInR3byIsInJlZHVjZSIsInRvdGFsIiwidmFsdWUiLCJhcmdzIl0sIm1hcHBpbmdzIjoiSUFBc0JBLGlDQUNyQix1QkFBTyxpQkFBS0MsT0FBTyxTQUFDQyxFQUFPQyxVQUFVRCxFQUFRQyxHQUFPLElBRHJELGtGQ0VpQ0MsMENBQ2xCSixlQUFPSSw0Q0FBYUosZUFBT0kscUJBQXpDLE1BQU8sVUFEUiJ9
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}},e=function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};export{e as default};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5saW5lLXNvdXJjZS1tYXAuZXNtLm1qcyIsInNvdXJjZXMiOlsiLi4vc3JjL3R3by5qcyIsIi4uL3NyYy9pbmRleC5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgYXN5bmMgZnVuY3Rpb24gdHdvKC4uLmFyZ3MpIHtcclxuXHRyZXR1cm4gYXJncy5yZWR1Y2UoKHRvdGFsLCB2YWx1ZSkgPT4gdG90YWwgKyB2YWx1ZSwgMCk7XHJcbn1cclxuIiwiaW1wb3J0IHsgdHdvIH0gZnJvbSAnLi90d28nO1xyXG5cclxuZXhwb3J0IGRlZmF1bHQgYXN5bmMgZnVuY3Rpb24oLi4uYXJncykge1xyXG5cdHJldHVybiBbYXdhaXQgdHdvKC4uLmFyZ3MpLCBhd2FpdCB0d28oLi4uYXJncyldO1xyXG59XHJcbiJdLCJuYW1lcyI6WyJ0d28iLCJQcm9taXNlIiwicmVzb2x2ZSIsInNsaWNlIiwiY2FsbCIsIl9hcmd1bWVudHMyIiwicmVkdWNlIiwidG90YWwiLCJ2YWx1ZSIsImUiLCJyZWplY3QiLCJpbmRleCIsImFyZ3MiLCJhcHBseSIsInRoZW4iLCJfdHdvIiwiX3R3bzIiXSwibWFwcGluZ3MiOiJBQUFzQkEsSUFBQUEsYUFBdEIsb0JBQ0MsT0FBT0MsUUFBQUMsUUFBQSxHQUFBQyxNQUFBQyxLQUFBQyxHQUFLQyxPQUFPLFNBQUNDLEVBQU9DLEdBQVIsU0FBMEJBLENBQTFCLEVBQWlDLEdBRHJELENBQUEsTUFBQUMsR0FBQSxPQUFBUixRQUFBUyxPQUFBRCxFQUFBLENBQUEsRUNFQUUsaUJBQWlDQyxJQUFBQSxFQUFBQSxVQUFBQSxFQUNsQlosR0FBQUEsTUFBQUEsS0FBQUEsR0FBQUEsT0FBQUEsUUFBQUEsUUFBQUEsRUFBQWEsV0FBQSxFQUFPRCxJQURpQkUsS0FBQSxTQUFBQyxHQUFBLE9BQUFkLFFBQUFDLFFBQ0pGLEVBQUdhLFdBQUlELEVBQUFBLElBQXpDRSxLQUFBLFNBQUFFLEdBQUEsTUFBTyxDQUQrQkQsRUFBQUMsRUFBQSxFQUFBLEVBQXZDLENBQUEsTUFBQVAsR0FBQSxPQUFBUixRQUFBUyxPQUFBRCxFQUFBLENBQUEifQ==
 "
 `;
 
 exports[`fixtures build inline-source-map with microbundle 4`] = `
 "var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};module.exports=function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5saW5lLXNvdXJjZS1tYXAuanMiLCJzb3VyY2VzIjpbIi4uL3NyYy90d28uanMiLCIuLi9zcmMvaW5kZXguanMiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGFzeW5jIGZ1bmN0aW9uIHR3byguLi5hcmdzKSB7XG5cdHJldHVybiBhcmdzLnJlZHVjZSgodG90YWwsIHZhbHVlKSA9PiB0b3RhbCArIHZhbHVlLCAwKTtcbn1cbiIsImltcG9ydCB7IHR3byB9IGZyb20gJy4vdHdvJztcblxuZXhwb3J0IGRlZmF1bHQgYXN5bmMgZnVuY3Rpb24oLi4uYXJncykge1xuXHRyZXR1cm4gW2F3YWl0IHR3byguLi5hcmdzKSwgYXdhaXQgdHdvKC4uLmFyZ3MpXTtcbn1cbiJdLCJuYW1lcyI6WyJ0d28iLCJyZWR1Y2UiLCJ0b3RhbCIsInZhbHVlIiwiYXJncyJdLCJtYXBwaW5ncyI6IklBQXNCQSxpQ0FDckIsdUJBQU8saUJBQUtDLE9BQU8sU0FBQ0MsRUFBT0MsVUFBVUQsRUFBUUMsR0FBTyxJQURyRCxrRkNFaUNDLDBDQUNsQkosZUFBT0ksNENBQWFKLGVBQU9JLHFCQUF6QyxNQUFPLFVBRFIifQ==
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5saW5lLXNvdXJjZS1tYXAuanMiLCJzb3VyY2VzIjpbIi4uL3NyYy90d28uanMiLCIuLi9zcmMvaW5kZXguanMiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGFzeW5jIGZ1bmN0aW9uIHR3byguLi5hcmdzKSB7XHJcblx0cmV0dXJuIGFyZ3MucmVkdWNlKCh0b3RhbCwgdmFsdWUpID0+IHRvdGFsICsgdmFsdWUsIDApO1xyXG59XHJcbiIsImltcG9ydCB7IHR3byB9IGZyb20gJy4vdHdvJztcclxuXHJcbmV4cG9ydCBkZWZhdWx0IGFzeW5jIGZ1bmN0aW9uKC4uLmFyZ3MpIHtcclxuXHRyZXR1cm4gW2F3YWl0IHR3byguLi5hcmdzKSwgYXdhaXQgdHdvKC4uLmFyZ3MpXTtcclxufVxyXG4iXSwibmFtZXMiOlsidHdvIiwiUHJvbWlzZSIsInJlc29sdmUiLCJzbGljZSIsImNhbGwiLCJfYXJndW1lbnRzMiIsInJlZHVjZSIsInRvdGFsIiwidmFsdWUiLCJlIiwicmVqZWN0IiwiYXJncyIsImFwcGx5IiwidGhlbiIsIl90d28iLCJfdHdvMiJdLCJtYXBwaW5ncyI6IkFBQXNCQSxJQUFBQSxhQUF0QixvQkFDQyxPQUFPQyxRQUFBQyxRQUFBLEdBQUFDLE1BQUFDLEtBQUFDLEdBQUtDLE9BQU8sU0FBQ0MsRUFBT0MsR0FBUixTQUEwQkEsQ0FBMUIsRUFBaUMsR0FEckQsQ0FBQSxNQUFBQyxHQUFBLE9BQUFSLFFBQUFTLE9BQUFELEVBQUEsQ0FBQSxnQ0NFaUNFLElBQUFBLEVBQUFBLFVBQUFBLEVBQ2xCWCxHQUFBQSxNQUFBQSxLQUFBQSxHQUFBQSxPQUFBQSxRQUFBQSxRQUFBQSxFQUFBWSxXQUFBLEVBQU9ELElBRGlCRSxLQUFBLFNBQUFDLEdBQUEsT0FBQWIsUUFBQUMsUUFDSkYsRUFBR1ksV0FBSUQsRUFBQUEsSUFBekNFLEtBQUEsU0FBQUUsR0FBQSxNQUFPLENBRCtCRCxFQUFBQyxFQUFBLEVBQUEsRUFBdkMsQ0FBQSxNQUFBTixHQUFBLE9BQUFSLFFBQUFTLE9BQUFELEVBQUEsQ0FBQSJ9
 "
 `;
 
 exports[`fixtures build inline-source-map with microbundle 5`] = `
 "!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e||self).inlineSourceMap=n()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,n){return e+n},0))}catch(e){return Promise.reject(e)}};return function(){try{var n=arguments,r=[].slice.call(n);return Promise.resolve(e.apply(void 0,r)).then(function(n){return Promise.resolve(e.apply(void 0,r)).then(function(e){return[n,e]})})}catch(e){return Promise.reject(e)}}});
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5saW5lLXNvdXJjZS1tYXAudW1kLmpzIiwic291cmNlcyI6WyIuLi9zcmMvdHdvLmpzIiwiLi4vc3JjL2luZGV4LmpzIl0sInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBhc3luYyBmdW5jdGlvbiB0d28oLi4uYXJncykge1xuXHRyZXR1cm4gYXJncy5yZWR1Y2UoKHRvdGFsLCB2YWx1ZSkgPT4gdG90YWwgKyB2YWx1ZSwgMCk7XG59XG4iLCJpbXBvcnQgeyB0d28gfSBmcm9tICcuL3R3byc7XG5cbmV4cG9ydCBkZWZhdWx0IGFzeW5jIGZ1bmN0aW9uKC4uLmFyZ3MpIHtcblx0cmV0dXJuIFthd2FpdCB0d28oLi4uYXJncyksIGF3YWl0IHR3byguLi5hcmdzKV07XG59XG4iXSwibmFtZXMiOlsidHdvIiwicmVkdWNlIiwidG90YWwiLCJ2YWx1ZSIsImFyZ3MiXSwibWFwcGluZ3MiOiJzT0FBc0JBLGlDQUNyQix1QkFBTyxpQkFBS0MsT0FBTyxTQUFDQyxFQUFPQyxVQUFVRCxFQUFRQyxHQUFPLElBRHJELDBFQ0VpQ0MsMENBQ2xCSixlQUFPSSw0Q0FBYUosZUFBT0kscUJBQXpDLE1BQU8sVUFEUiJ9
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5saW5lLXNvdXJjZS1tYXAudW1kLmpzIiwic291cmNlcyI6WyIuLi9zcmMvdHdvLmpzIiwiLi4vc3JjL2luZGV4LmpzIl0sInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBhc3luYyBmdW5jdGlvbiB0d28oLi4uYXJncykge1xyXG5cdHJldHVybiBhcmdzLnJlZHVjZSgodG90YWwsIHZhbHVlKSA9PiB0b3RhbCArIHZhbHVlLCAwKTtcclxufVxyXG4iLCJpbXBvcnQgeyB0d28gfSBmcm9tICcuL3R3byc7XHJcblxyXG5leHBvcnQgZGVmYXVsdCBhc3luYyBmdW5jdGlvbiguLi5hcmdzKSB7XHJcblx0cmV0dXJuIFthd2FpdCB0d28oLi4uYXJncyksIGF3YWl0IHR3byguLi5hcmdzKV07XHJcbn1cclxuIl0sIm5hbWVzIjpbInR3byIsIlByb21pc2UiLCJyZXNvbHZlIiwic2xpY2UiLCJjYWxsIiwiX2FyZ3VtZW50czIiLCJyZWR1Y2UiLCJ0b3RhbCIsInZhbHVlIiwiZSIsInJlamVjdCIsImFyZ3MiLCJhcHBseSIsInRoZW4iLCJfdHdvIiwiX3R3bzIiXSwibWFwcGluZ3MiOiJrT0FBc0JBLElBQUFBLGFBQXRCLG9CQUNDLE9BQU9DLFFBQUFDLFFBQUEsR0FBQUMsTUFBQUMsS0FBQUMsR0FBS0MsT0FBTyxTQUFDQyxFQUFPQyxHQUFSLFNBQTBCQSxDQUExQixFQUFpQyxHQURyRCxDQUFBLE1BQUFDLEdBQUEsT0FBQVIsUUFBQVMsT0FBQUQsRUFBQSxDQUFBLHdCQ0VpQ0UsSUFBQUEsRUFBQUEsVUFBQUEsRUFDbEJYLEdBQUFBLE1BQUFBLEtBQUFBLEdBQUFBLE9BQUFBLFFBQUFBLFFBQUFBLEVBQUFZLFdBQUEsRUFBT0QsSUFEaUJFLEtBQUEsU0FBQUMsR0FBQSxPQUFBYixRQUFBQyxRQUNKRixFQUFHWSxXQUFJRCxFQUFBQSxJQUF6Q0UsS0FBQSxTQUFBRSxHQUFBLE1BQU8sQ0FEK0JELEVBQUFDLEVBQUEsRUFBQSxFQUF2QyxDQUFBLE1BQUFOLEdBQUEsT0FBQVIsUUFBQVMsT0FBQUQsRUFBQSxDQUFBIn0=
 "
 `;
 
@@ -1838,8 +1838,8 @@ jsx
 Build \\"jsx\\" to dist:
 239 B: jsx.js.gz
 195 B: jsx.js.br
-237 B: jsx.esm.mjs.gz
-201 B: jsx.esm.mjs.br
+240 B: jsx.esm.mjs.gz
+202 B: jsx.esm.mjs.br
 313 B: jsx.umd.js.gz
 248 B: jsx.umd.js.br"
 `;
@@ -1847,7 +1847,7 @@ Build \\"jsx\\" to dist:
 exports[`fixtures build jsx with microbundle 2`] = `6`;
 
 exports[`fixtures build jsx with microbundle 3`] = `
-"var n=function(n,r){return{tag:n,props:r,children:[].slice.call(arguments,2)}},r=function(n){return n.children},l=/*#__PURE__*/function(){function l(){}return l.prototype.render=function(){return n(\\"div\\",{id:\\"app\\"},n(\\"h1\\",null,\\"Hello, World!\\"),n(\\"p\\",null,\\"A JSX demo.\\"),n(r,null,n(\\"p\\",null,\\"Test fragment\\")))},l}();export default l;
+"var n=function(n,r){return{tag:n,props:r,children:[].slice.call(arguments,2)}},r=function(n){return n.children},l=/*#__PURE__*/function(){function l(){}return l.prototype.render=function(){return n(\\"div\\",{id:\\"app\\"},n(\\"h1\\",null,\\"Hello, World!\\"),n(\\"p\\",null,\\"A JSX demo.\\"),n(r,null,n(\\"p\\",null,\\"Test fragment\\")))},l}();export{l as default};
 //# sourceMappingURL=jsx.esm.mjs.map
 "
 `;
@@ -1887,8 +1887,8 @@ macro
 Build \\"macro-lib\\" to dist:
 49 B: macro-lib.js.gz
 33 B: macro-lib.js.br
-48 B: macro-lib.esm.mjs.gz
-32 B: macro-lib.esm.mjs.br
+61 B: macro-lib.esm.mjs.gz
+45 B: macro-lib.esm.mjs.br
 156 B: macro-lib.umd.js.gz
 126 B: macro-lib.umd.js.br"
 `;
@@ -1896,7 +1896,7 @@ Build \\"macro-lib\\" to dist:
 exports[`fixtures build macro with microbundle 2`] = `6`;
 
 exports[`fixtures build macro with microbundle 3`] = `
-"export default\\"name-macro\\";
+"var a=\\"name-macro\\";export{a as default};
 //# sourceMappingURL=macro-lib.esm.mjs.map
 "
 `;
@@ -1936,8 +1936,8 @@ mangle-json-file
 Build \\"mangle-json-file\\" to dist:
 103 B: mangle-json-file.js.gz
 89 B: mangle-json-file.js.br
-105 B: mangle-json-file.esm.mjs.gz
-91 B: mangle-json-file.esm.mjs.br
+108 B: mangle-json-file.esm.mjs.gz
+79 B: mangle-json-file.esm.mjs.br
 196 B: mangle-json-file.umd.js.gz
 171 B: mangle-json-file.umd.js.br"
 `;
@@ -1945,7 +1945,7 @@ Build \\"mangle-json-file\\" to dist:
 exports[`fixtures build mangle-json-file with microbundle 2`] = `6`;
 
 exports[`fixtures build mangle-json-file with microbundle 3`] = `
-"var o={prop1:1,__p2:2};function r(){return console.log(o.prop1),console.log(o.__p2),o}export default r;
+"var o={prop1:1,__p2:2};function r(){return console.log(o.prop1),console.log(o.__p2),o}export{r as default};
 //# sourceMappingURL=mangle-json-file.esm.mjs.map
 "
 `;
@@ -1984,8 +1984,8 @@ minify-config
 Build \\"minify-config\\" to dist:
 99 B: minify-config.js.gz
 85 B: minify-config.js.br
-101 B: minify-config.esm.mjs.gz
-87 B: minify-config.esm.mjs.br
+103 B: minify-config.esm.mjs.gz
+76 B: minify-config.esm.mjs.br
 189 B: minify-config.umd.js.gz
 140 B: minify-config.umd.js.br"
 `;
@@ -1993,7 +1993,7 @@ Build \\"minify-config\\" to dist:
 exports[`fixtures build minify-config with microbundle 2`] = `6`;
 
 exports[`fixtures build minify-config with microbundle 3`] = `
-"var o={prop1:1,o:2};function r(){return console.log(o.prop1),console.log(o.o),o}export default r;
+"var o={prop1:1,o:2};function r(){return console.log(o.prop1),console.log(o.o),o}export{r as default};
 //# sourceMappingURL=minify-config.esm.mjs.map
 "
 `;
@@ -2032,8 +2032,8 @@ minify-config-boolean
 Build \\"minify-config-boolean\\" to dist:
 107 B: minify-config-boolean.js.gz
 84 B: minify-config-boolean.js.br
-114 B: minify-config-boolean.esm.mjs.gz
-90 B: minify-config-boolean.esm.mjs.br
+117 B: minify-config-boolean.esm.mjs.gz
+92 B: minify-config-boolean.esm.mjs.br
 216 B: minify-config-boolean.umd.js.gz
 159 B: minify-config-boolean.umd.js.br"
 `;
@@ -2041,7 +2041,7 @@ Build \\"minify-config-boolean\\" to dist:
 exports[`fixtures build minify-config-boolean with microbundle 2`] = `6`;
 
 exports[`fixtures build minify-config-boolean with microbundle 3`] = `
-"var two={prop1:1,_prop2:2};function index(){return console.log(two.prop1),console.log(two._prop2),two}export default index;
+"var two={prop1:1,_prop2:2};function index(){return console.log(two.prop1),console.log(two._prop2),two}export{index as default};
 //# sourceMappingURL=minify-config-boolean.esm.mjs.map
 "
 `;
@@ -2081,8 +2081,8 @@ minify-path-config
 Build \\"minify-path-config\\" to dist:
 103 B: minify-path-config.js.gz
 89 B: minify-path-config.js.br
-105 B: minify-path-config.esm.mjs.gz
-91 B: minify-path-config.esm.mjs.br
+108 B: minify-path-config.esm.mjs.gz
+79 B: minify-path-config.esm.mjs.br
 198 B: minify-path-config.umd.js.gz
 152 B: minify-path-config.umd.js.br"
 `;
@@ -2090,7 +2090,7 @@ Build \\"minify-path-config\\" to dist:
 exports[`fixtures build minify-path-config with microbundle 2`] = `6`;
 
 exports[`fixtures build minify-path-config with microbundle 3`] = `
-"var o={prop1:1,__p2:2};function r(){return console.log(o.prop1),console.log(o.__p2),o}export default r;
+"var o={prop1:1,__p2:2};function r(){return console.log(o.prop1),console.log(o.__p2),o}export{r as default};
 //# sourceMappingURL=minify-path-config.esm.mjs.map
 "
 `;
@@ -2128,8 +2128,8 @@ minify-path-parent-dir
 Build \\"minify-path-parent-dir\\" to dist:
 103 B: minify-path-parent-dir.js.gz
 89 B: minify-path-parent-dir.js.br
-105 B: minify-path-parent-dir.esm.mjs.gz
-91 B: minify-path-parent-dir.esm.mjs.br
+108 B: minify-path-parent-dir.esm.mjs.gz
+79 B: minify-path-parent-dir.esm.mjs.br
 200 B: minify-path-parent-dir.umd.js.gz
 161 B: minify-path-parent-dir.umd.js.br"
 `;
@@ -2137,7 +2137,7 @@ Build \\"minify-path-parent-dir\\" to dist:
 exports[`fixtures build minify-path-parent-dir-with-cwd with microbundle 2`] = `6`;
 
 exports[`fixtures build minify-path-parent-dir-with-cwd with microbundle 3`] = `
-"var o={prop1:1,__p2:2};function r(){return console.log(o.prop1),console.log(o.__p2),o}export default r;
+"var o={prop1:1,__p2:2};function r(){return console.log(o.prop1),console.log(o.__p2),o}export{r as default};
 //# sourceMappingURL=minify-path-parent-dir.esm.mjs.map
 "
 `;
@@ -2170,14 +2170,14 @@ modern
 
 
 Build \\"modern-lib\\" to dist:
-113 B: modern-lib.modern.mjs.gz
-92 B: modern-lib.modern.mjs.br"
+116 B: modern-lib.modern.mjs.gz
+99 B: modern-lib.modern.mjs.br"
 `;
 
 exports[`fixtures build modern with microbundle 2`] = `2`;
 
 exports[`fixtures build modern with microbundle 3`] = `
-"async function n(...n){return n.reduce((n,t)=>n+t,0)}async function t(...t){return[await n(...t),await n(...t)]}export default t;
+"async function a(...a){return a.reduce((a,n)=>a+n,0)}async function n(...n){return[await a(...n),await a(...n)]}export{n as default};
 //# sourceMappingURL=modern-lib.modern.mjs.map
 "
 `;
@@ -2204,38 +2204,38 @@ modern-generators
 
 
 Build \\"modern-generators\\" to dist:
-248 B: modern-generators.js.gz
-201 B: modern-generators.js.br
-118 B: modern-generators.modern.mjs.gz
+2.49 kB: modern-generators.js.gz
+2.26 kB: modern-generators.js.br
+120 B: modern-generators.modern.mjs.gz
 99 B: modern-generators.modern.mjs.br
-247 B: modern-generators.esm.mjs.gz
-218 B: modern-generators.esm.mjs.br
-326 B: modern-generators.umd.js.gz
-267 B: modern-generators.umd.js.br"
+2.49 kB: modern-generators.esm.mjs.gz
+2.27 kB: modern-generators.esm.mjs.br
+2.55 kB: modern-generators.umd.js.gz
+2.31 kB: modern-generators.umd.js.br"
 `;
 
 exports[`fixtures build modern-generators with microbundle 2`] = `8`;
 
 exports[`fixtures build modern-generators with microbundle 3`] = `
-"var e=/*#__PURE__*/regeneratorRuntime.mark(r);function r(){var r;return regeneratorRuntime.wrap(function(e){for(;;)switch(e.prev=e.next){case 0:r=0;case 1:return e.next=4,r++;case 4:e.next=1;break;case 6:case\\"end\\":return e.stop()}},e)}export default function(){try{var e=r();return Promise.resolve([e.next().value,e.next().value])}catch(e){return Promise.reject(e)}}
+"function t(){t=function(){return r};var r={},e=Object.prototype,n=e.hasOwnProperty,o=\\"function\\"==typeof Symbol?Symbol:{},i=o.iterator||\\"@@iterator\\",a=o.asyncIterator||\\"@@asyncIterator\\",c=o.toStringTag||\\"@@toStringTag\\";function u(t,r,e){return Object.defineProperty(t,r,{value:e,enumerable:!0,configurable:!0,writable:!0}),t[r]}try{u({},\\"\\")}catch(t){u=function(t,r,e){return t[r]=e}}function h(t,r,e,n){var o=Object.create((r&&r.prototype instanceof l?r:l).prototype),i=new _(n||[]);return o._invoke=function(t,r,e){var n=\\"suspendedStart\\";return function(o,i){if(\\"executing\\"===n)throw new Error(\\"Generator is already running\\");if(\\"completed\\"===n){if(\\"throw\\"===o)throw i;return{value:void 0,done:!0}}for(e.method=o,e.arg=i;;){var a=e.delegate;if(a){var c=L(a,e);if(c){if(c===s)continue;return c}}if(\\"next\\"===e.method)e.sent=e._sent=e.arg;else if(\\"throw\\"===e.method){if(\\"suspendedStart\\"===n)throw n=\\"completed\\",e.arg;e.dispatchException(e.arg)}else\\"return\\"===e.method&&e.abrupt(\\"return\\",e.arg);n=\\"executing\\";var u=f(t,r,e);if(\\"normal\\"===u.type){if(n=e.done?\\"completed\\":\\"suspendedYield\\",u.arg===s)continue;return{value:u.arg,done:e.done}}\\"throw\\"===u.type&&(n=\\"completed\\",e.method=\\"throw\\",e.arg=u.arg)}}}(t,e,i),o}function f(t,r,e){try{return{type:\\"normal\\",arg:t.call(r,e)}}catch(t){return{type:\\"throw\\",arg:t}}}r.wrap=h;var s={};function l(){}function p(){}function v(){}var y={};u(y,i,function(){return this});var d=Object.getPrototypeOf,g=d&&d(d(j([])));g&&g!==e&&n.call(g,i)&&(y=g);var m=v.prototype=l.prototype=Object.create(y);function w(t){[\\"next\\",\\"throw\\",\\"return\\"].forEach(function(r){u(t,r,function(t){return this._invoke(r,t)})})}function x(t,r){function e(o,i,a,c){var u=f(t[o],t,i);if(\\"throw\\"!==u.type){var h=u.arg,s=h.value;return s&&\\"object\\"==typeof s&&n.call(s,\\"__await\\")?r.resolve(s.__await).then(function(t){e(\\"next\\",t,a,c)},function(t){e(\\"throw\\",t,a,c)}):r.resolve(s).then(function(t){h.value=t,a(h)},function(t){return e(\\"throw\\",t,a,c)})}c(u.arg)}var o;this._invoke=function(t,n){function i(){return new r(function(r,o){e(t,n,r,o)})}return o=o?o.then(i,i):i()}}function L(t,r){var e=t.iterator[r.method];if(void 0===e){if(r.delegate=null,\\"throw\\"===r.method){if(t.iterator.return&&(r.method=\\"return\\",r.arg=void 0,L(t,r),\\"throw\\"===r.method))return s;r.method=\\"throw\\",r.arg=new TypeError(\\"The iterator does not provide a 'throw' method\\")}return s}var n=f(e,t.iterator,r.arg);if(\\"throw\\"===n.type)return r.method=\\"throw\\",r.arg=n.arg,r.delegate=null,s;var o=n.arg;return o?o.done?(r[t.resultName]=o.value,r.next=t.nextLoc,\\"return\\"!==r.method&&(r.method=\\"next\\",r.arg=void 0),r.delegate=null,s):o:(r.method=\\"throw\\",r.arg=new TypeError(\\"iterator result is not an object\\"),r.delegate=null,s)}function b(t){var r={tryLoc:t[0]};1 in t&&(r.catchLoc=t[1]),2 in t&&(r.finallyLoc=t[2],r.afterLoc=t[3]),this.tryEntries.push(r)}function E(t){var r=t.completion||{};r.type=\\"normal\\",delete r.arg,t.completion=r}function _(t){this.tryEntries=[{tryLoc:\\"root\\"}],t.forEach(b,this),this.reset(!0)}function j(t){if(t){var r=t[i];if(r)return r.call(t);if(\\"function\\"==typeof t.next)return t;if(!isNaN(t.length)){var e=-1,o=function r(){for(;++e<t.length;)if(n.call(t,e))return r.value=t[e],r.done=!1,r;return r.value=void 0,r.done=!0,r};return o.next=o}}return{next:O}}function O(){return{value:void 0,done:!0}}return p.prototype=v,u(m,\\"constructor\\",v),u(v,\\"constructor\\",p),p.displayName=u(v,c,\\"GeneratorFunction\\"),r.isGeneratorFunction=function(t){var r=\\"function\\"==typeof t&&t.constructor;return!!r&&(r===p||\\"GeneratorFunction\\"===(r.displayName||r.name))},r.mark=function(t){return Object.setPrototypeOf?Object.setPrototypeOf(t,v):(t.__proto__=v,u(t,c,\\"GeneratorFunction\\")),t.prototype=Object.create(m),t},r.awrap=function(t){return{__await:t}},w(x.prototype),u(x.prototype,a,function(){return this}),r.AsyncIterator=x,r.async=function(t,e,n,o,i){void 0===i&&(i=Promise);var a=new x(h(t,e,n,o),i);return r.isGeneratorFunction(e)?a:a.next().then(function(t){return t.done?t.value:a.next()})},w(m),u(m,c,\\"Generator\\"),u(m,i,function(){return this}),u(m,\\"toString\\",function(){return\\"[object Generator]\\"}),r.keys=function(t){var r=[];for(var e in t)r.push(e);return r.reverse(),function e(){for(;r.length;){var n=r.pop();if(n in t)return e.value=n,e.done=!1,e}return e.done=!0,e}},r.values=j,_.prototype={constructor:_,reset:function(t){if(this.prev=0,this.next=0,this.sent=this._sent=void 0,this.done=!1,this.delegate=null,this.method=\\"next\\",this.arg=void 0,this.tryEntries.forEach(E),!t)for(var r in this)\\"t\\"===r.charAt(0)&&n.call(this,r)&&!isNaN(+r.slice(1))&&(this[r]=void 0)},stop:function(){this.done=!0;var t=this.tryEntries[0].completion;if(\\"throw\\"===t.type)throw t.arg;return this.rval},dispatchException:function(t){if(this.done)throw t;var r=this;function e(e,n){return a.type=\\"throw\\",a.arg=t,r.next=e,n&&(r.method=\\"next\\",r.arg=void 0),!!n}for(var o=this.tryEntries.length-1;o>=0;--o){var i=this.tryEntries[o],a=i.completion;if(\\"root\\"===i.tryLoc)return e(\\"end\\");if(i.tryLoc<=this.prev){var c=n.call(i,\\"catchLoc\\"),u=n.call(i,\\"finallyLoc\\");if(c&&u){if(this.prev<i.catchLoc)return e(i.catchLoc,!0);if(this.prev<i.finallyLoc)return e(i.finallyLoc)}else if(c){if(this.prev<i.catchLoc)return e(i.catchLoc,!0)}else{if(!u)throw new Error(\\"try statement without catch or finally\\");if(this.prev<i.finallyLoc)return e(i.finallyLoc)}}}},abrupt:function(t,r){for(var e=this.tryEntries.length-1;e>=0;--e){var o=this.tryEntries[e];if(o.tryLoc<=this.prev&&n.call(o,\\"finallyLoc\\")&&this.prev<o.finallyLoc){var i=o;break}}i&&(\\"break\\"===t||\\"continue\\"===t)&&i.tryLoc<=r&&r<=i.finallyLoc&&(i=null);var a=i?i.completion:{};return a.type=t,a.arg=r,i?(this.method=\\"next\\",this.next=i.finallyLoc,s):this.complete(a)},complete:function(t,r){if(\\"throw\\"===t.type)throw t.arg;return\\"break\\"===t.type||\\"continue\\"===t.type?this.next=t.arg:\\"return\\"===t.type?(this.rval=this.arg=t.arg,this.method=\\"return\\",this.next=\\"end\\"):\\"normal\\"===t.type&&r&&(this.next=r),s},finish:function(t){for(var r=this.tryEntries.length-1;r>=0;--r){var e=this.tryEntries[r];if(e.finallyLoc===t)return this.complete(e.completion,e.afterLoc),E(e),s}},catch:function(t){for(var r=this.tryEntries.length-1;r>=0;--r){var e=this.tryEntries[r];if(e.tryLoc===t){var n=e.completion;if(\\"throw\\"===n.type){var o=n.arg;E(e)}return o}}throw new Error(\\"illegal catch attempt\\")},delegateYield:function(t,r,e){return this.delegate={iterator:j(t),resultName:r,nextLoc:e},\\"next\\"===this.method&&(this.arg=void 0),s}},r}var r=/*#__PURE__*/t().mark(e);function e(){var e;return t().wrap(function(t){for(;;)switch(t.prev=t.next){case 0:e=0;case 1:return t.next=4,e++;case 4:t.next=1;break;case 6:case\\"end\\":return t.stop()}},r)}var n=function(){try{var t=e();return Promise.resolve([t.next().value,t.next().value])}catch(t){return Promise.reject(t)}};export{n as default};
 //# sourceMappingURL=modern-generators.esm.mjs.map
 "
 `;
 
 exports[`fixtures build modern-generators with microbundle 4`] = `
-"var e=/*#__PURE__*/regeneratorRuntime.mark(r);function r(){var r;return regeneratorRuntime.wrap(function(e){for(;;)switch(e.prev=e.next){case 0:r=0;case 1:return e.next=4,r++;case 4:e.next=1;break;case 6:case\\"end\\":return e.stop()}},e)}module.exports=function(){try{var e=r();return Promise.resolve([e.next().value,e.next().value])}catch(e){return Promise.reject(e)}};
+"function t(){t=function(){return r};var r={},e=Object.prototype,n=e.hasOwnProperty,o=\\"function\\"==typeof Symbol?Symbol:{},i=o.iterator||\\"@@iterator\\",a=o.asyncIterator||\\"@@asyncIterator\\",c=o.toStringTag||\\"@@toStringTag\\";function u(t,r,e){return Object.defineProperty(t,r,{value:e,enumerable:!0,configurable:!0,writable:!0}),t[r]}try{u({},\\"\\")}catch(t){u=function(t,r,e){return t[r]=e}}function h(t,r,e,n){var o=Object.create((r&&r.prototype instanceof l?r:l).prototype),i=new _(n||[]);return o._invoke=function(t,r,e){var n=\\"suspendedStart\\";return function(o,i){if(\\"executing\\"===n)throw new Error(\\"Generator is already running\\");if(\\"completed\\"===n){if(\\"throw\\"===o)throw i;return{value:void 0,done:!0}}for(e.method=o,e.arg=i;;){var a=e.delegate;if(a){var c=L(a,e);if(c){if(c===s)continue;return c}}if(\\"next\\"===e.method)e.sent=e._sent=e.arg;else if(\\"throw\\"===e.method){if(\\"suspendedStart\\"===n)throw n=\\"completed\\",e.arg;e.dispatchException(e.arg)}else\\"return\\"===e.method&&e.abrupt(\\"return\\",e.arg);n=\\"executing\\";var u=f(t,r,e);if(\\"normal\\"===u.type){if(n=e.done?\\"completed\\":\\"suspendedYield\\",u.arg===s)continue;return{value:u.arg,done:e.done}}\\"throw\\"===u.type&&(n=\\"completed\\",e.method=\\"throw\\",e.arg=u.arg)}}}(t,e,i),o}function f(t,r,e){try{return{type:\\"normal\\",arg:t.call(r,e)}}catch(t){return{type:\\"throw\\",arg:t}}}r.wrap=h;var s={};function l(){}function p(){}function v(){}var y={};u(y,i,function(){return this});var d=Object.getPrototypeOf,g=d&&d(d(j([])));g&&g!==e&&n.call(g,i)&&(y=g);var m=v.prototype=l.prototype=Object.create(y);function w(t){[\\"next\\",\\"throw\\",\\"return\\"].forEach(function(r){u(t,r,function(t){return this._invoke(r,t)})})}function x(t,r){function e(o,i,a,c){var u=f(t[o],t,i);if(\\"throw\\"!==u.type){var h=u.arg,s=h.value;return s&&\\"object\\"==typeof s&&n.call(s,\\"__await\\")?r.resolve(s.__await).then(function(t){e(\\"next\\",t,a,c)},function(t){e(\\"throw\\",t,a,c)}):r.resolve(s).then(function(t){h.value=t,a(h)},function(t){return e(\\"throw\\",t,a,c)})}c(u.arg)}var o;this._invoke=function(t,n){function i(){return new r(function(r,o){e(t,n,r,o)})}return o=o?o.then(i,i):i()}}function L(t,r){var e=t.iterator[r.method];if(void 0===e){if(r.delegate=null,\\"throw\\"===r.method){if(t.iterator.return&&(r.method=\\"return\\",r.arg=void 0,L(t,r),\\"throw\\"===r.method))return s;r.method=\\"throw\\",r.arg=new TypeError(\\"The iterator does not provide a 'throw' method\\")}return s}var n=f(e,t.iterator,r.arg);if(\\"throw\\"===n.type)return r.method=\\"throw\\",r.arg=n.arg,r.delegate=null,s;var o=n.arg;return o?o.done?(r[t.resultName]=o.value,r.next=t.nextLoc,\\"return\\"!==r.method&&(r.method=\\"next\\",r.arg=void 0),r.delegate=null,s):o:(r.method=\\"throw\\",r.arg=new TypeError(\\"iterator result is not an object\\"),r.delegate=null,s)}function b(t){var r={tryLoc:t[0]};1 in t&&(r.catchLoc=t[1]),2 in t&&(r.finallyLoc=t[2],r.afterLoc=t[3]),this.tryEntries.push(r)}function E(t){var r=t.completion||{};r.type=\\"normal\\",delete r.arg,t.completion=r}function _(t){this.tryEntries=[{tryLoc:\\"root\\"}],t.forEach(b,this),this.reset(!0)}function j(t){if(t){var r=t[i];if(r)return r.call(t);if(\\"function\\"==typeof t.next)return t;if(!isNaN(t.length)){var e=-1,o=function r(){for(;++e<t.length;)if(n.call(t,e))return r.value=t[e],r.done=!1,r;return r.value=void 0,r.done=!0,r};return o.next=o}}return{next:O}}function O(){return{value:void 0,done:!0}}return p.prototype=v,u(m,\\"constructor\\",v),u(v,\\"constructor\\",p),p.displayName=u(v,c,\\"GeneratorFunction\\"),r.isGeneratorFunction=function(t){var r=\\"function\\"==typeof t&&t.constructor;return!!r&&(r===p||\\"GeneratorFunction\\"===(r.displayName||r.name))},r.mark=function(t){return Object.setPrototypeOf?Object.setPrototypeOf(t,v):(t.__proto__=v,u(t,c,\\"GeneratorFunction\\")),t.prototype=Object.create(m),t},r.awrap=function(t){return{__await:t}},w(x.prototype),u(x.prototype,a,function(){return this}),r.AsyncIterator=x,r.async=function(t,e,n,o,i){void 0===i&&(i=Promise);var a=new x(h(t,e,n,o),i);return r.isGeneratorFunction(e)?a:a.next().then(function(t){return t.done?t.value:a.next()})},w(m),u(m,c,\\"Generator\\"),u(m,i,function(){return this}),u(m,\\"toString\\",function(){return\\"[object Generator]\\"}),r.keys=function(t){var r=[];for(var e in t)r.push(e);return r.reverse(),function e(){for(;r.length;){var n=r.pop();if(n in t)return e.value=n,e.done=!1,e}return e.done=!0,e}},r.values=j,_.prototype={constructor:_,reset:function(t){if(this.prev=0,this.next=0,this.sent=this._sent=void 0,this.done=!1,this.delegate=null,this.method=\\"next\\",this.arg=void 0,this.tryEntries.forEach(E),!t)for(var r in this)\\"t\\"===r.charAt(0)&&n.call(this,r)&&!isNaN(+r.slice(1))&&(this[r]=void 0)},stop:function(){this.done=!0;var t=this.tryEntries[0].completion;if(\\"throw\\"===t.type)throw t.arg;return this.rval},dispatchException:function(t){if(this.done)throw t;var r=this;function e(e,n){return a.type=\\"throw\\",a.arg=t,r.next=e,n&&(r.method=\\"next\\",r.arg=void 0),!!n}for(var o=this.tryEntries.length-1;o>=0;--o){var i=this.tryEntries[o],a=i.completion;if(\\"root\\"===i.tryLoc)return e(\\"end\\");if(i.tryLoc<=this.prev){var c=n.call(i,\\"catchLoc\\"),u=n.call(i,\\"finallyLoc\\");if(c&&u){if(this.prev<i.catchLoc)return e(i.catchLoc,!0);if(this.prev<i.finallyLoc)return e(i.finallyLoc)}else if(c){if(this.prev<i.catchLoc)return e(i.catchLoc,!0)}else{if(!u)throw new Error(\\"try statement without catch or finally\\");if(this.prev<i.finallyLoc)return e(i.finallyLoc)}}}},abrupt:function(t,r){for(var e=this.tryEntries.length-1;e>=0;--e){var o=this.tryEntries[e];if(o.tryLoc<=this.prev&&n.call(o,\\"finallyLoc\\")&&this.prev<o.finallyLoc){var i=o;break}}i&&(\\"break\\"===t||\\"continue\\"===t)&&i.tryLoc<=r&&r<=i.finallyLoc&&(i=null);var a=i?i.completion:{};return a.type=t,a.arg=r,i?(this.method=\\"next\\",this.next=i.finallyLoc,s):this.complete(a)},complete:function(t,r){if(\\"throw\\"===t.type)throw t.arg;return\\"break\\"===t.type||\\"continue\\"===t.type?this.next=t.arg:\\"return\\"===t.type?(this.rval=this.arg=t.arg,this.method=\\"return\\",this.next=\\"end\\"):\\"normal\\"===t.type&&r&&(this.next=r),s},finish:function(t){for(var r=this.tryEntries.length-1;r>=0;--r){var e=this.tryEntries[r];if(e.finallyLoc===t)return this.complete(e.completion,e.afterLoc),E(e),s}},catch:function(t){for(var r=this.tryEntries.length-1;r>=0;--r){var e=this.tryEntries[r];if(e.tryLoc===t){var n=e.completion;if(\\"throw\\"===n.type){var o=n.arg;E(e)}return o}}throw new Error(\\"illegal catch attempt\\")},delegateYield:function(t,r,e){return this.delegate={iterator:j(t),resultName:r,nextLoc:e},\\"next\\"===this.method&&(this.arg=void 0),s}},r}var r=/*#__PURE__*/t().mark(e);function e(){var e;return t().wrap(function(t){for(;;)switch(t.prev=t.next){case 0:e=0;case 1:return t.next=4,e++;case 4:t.next=1;break;case 6:case\\"end\\":return t.stop()}},r)}module.exports=function(){try{var t=e();return Promise.resolve([t.next().value,t.next().value])}catch(t){return Promise.reject(t)}};
 //# sourceMappingURL=modern-generators.js.map
 "
 `;
 
 exports[`fixtures build modern-generators with microbundle 5`] = `
-"async function e(){const e=function*(){let e=0;for(;;)yield e++}();return[e.next().value,e.next().value]}export default e;
+"async function e(){const e=function*(){let e=0;for(;;)yield e++}();return[e.next().value,e.next().value]}export{e as default};
 //# sourceMappingURL=modern-generators.modern.mjs.map
 "
 `;
 
 exports[`fixtures build modern-generators with microbundle 6`] = `
-"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e||self).modernGenerators=n()}(this,function(){var e=/*#__PURE__*/regeneratorRuntime.mark(n);function n(){var n;return regeneratorRuntime.wrap(function(e){for(;;)switch(e.prev=e.next){case 0:n=0;case 1:return e.next=4,n++;case 4:e.next=1;break;case 6:case\\"end\\":return e.stop()}},e)}return function(){try{var e=n();return Promise.resolve([e.next().value,e.next().value])}catch(e){return Promise.reject(e)}}});
+"!function(t,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(t||self).modernGenerators=r()}(this,function(){function t(){t=function(){return r};var r={},e=Object.prototype,n=e.hasOwnProperty,o=\\"function\\"==typeof Symbol?Symbol:{},i=o.iterator||\\"@@iterator\\",a=o.asyncIterator||\\"@@asyncIterator\\",c=o.toStringTag||\\"@@toStringTag\\";function u(t,r,e){return Object.defineProperty(t,r,{value:e,enumerable:!0,configurable:!0,writable:!0}),t[r]}try{u({},\\"\\")}catch(t){u=function(t,r,e){return t[r]=e}}function f(t,r,e,n){var o=Object.create((r&&r.prototype instanceof l?r:l).prototype),i=new _(n||[]);return o._invoke=function(t,r,e){var n=\\"suspendedStart\\";return function(o,i){if(\\"executing\\"===n)throw new Error(\\"Generator is already running\\");if(\\"completed\\"===n){if(\\"throw\\"===o)throw i;return{value:void 0,done:!0}}for(e.method=o,e.arg=i;;){var a=e.delegate;if(a){var c=L(a,e);if(c){if(c===s)continue;return c}}if(\\"next\\"===e.method)e.sent=e._sent=e.arg;else if(\\"throw\\"===e.method){if(\\"suspendedStart\\"===n)throw n=\\"completed\\",e.arg;e.dispatchException(e.arg)}else\\"return\\"===e.method&&e.abrupt(\\"return\\",e.arg);n=\\"executing\\";var u=h(t,r,e);if(\\"normal\\"===u.type){if(n=e.done?\\"completed\\":\\"suspendedYield\\",u.arg===s)continue;return{value:u.arg,done:e.done}}\\"throw\\"===u.type&&(n=\\"completed\\",e.method=\\"throw\\",e.arg=u.arg)}}}(t,e,i),o}function h(t,r,e){try{return{type:\\"normal\\",arg:t.call(r,e)}}catch(t){return{type:\\"throw\\",arg:t}}}r.wrap=f;var s={};function l(){}function p(){}function d(){}var v={};u(v,i,function(){return this});var y=Object.getPrototypeOf,g=y&&y(y(j([])));g&&g!==e&&n.call(g,i)&&(v=g);var m=d.prototype=l.prototype=Object.create(v);function w(t){[\\"next\\",\\"throw\\",\\"return\\"].forEach(function(r){u(t,r,function(t){return this._invoke(r,t)})})}function x(t,r){function e(o,i,a,c){var u=h(t[o],t,i);if(\\"throw\\"!==u.type){var f=u.arg,s=f.value;return s&&\\"object\\"==typeof s&&n.call(s,\\"__await\\")?r.resolve(s.__await).then(function(t){e(\\"next\\",t,a,c)},function(t){e(\\"throw\\",t,a,c)}):r.resolve(s).then(function(t){f.value=t,a(f)},function(t){return e(\\"throw\\",t,a,c)})}c(u.arg)}var o;this._invoke=function(t,n){function i(){return new r(function(r,o){e(t,n,r,o)})}return o=o?o.then(i,i):i()}}function L(t,r){var e=t.iterator[r.method];if(void 0===e){if(r.delegate=null,\\"throw\\"===r.method){if(t.iterator.return&&(r.method=\\"return\\",r.arg=void 0,L(t,r),\\"throw\\"===r.method))return s;r.method=\\"throw\\",r.arg=new TypeError(\\"The iterator does not provide a 'throw' method\\")}return s}var n=h(e,t.iterator,r.arg);if(\\"throw\\"===n.type)return r.method=\\"throw\\",r.arg=n.arg,r.delegate=null,s;var o=n.arg;return o?o.done?(r[t.resultName]=o.value,r.next=t.nextLoc,\\"return\\"!==r.method&&(r.method=\\"next\\",r.arg=void 0),r.delegate=null,s):o:(r.method=\\"throw\\",r.arg=new TypeError(\\"iterator result is not an object\\"),r.delegate=null,s)}function b(t){var r={tryLoc:t[0]};1 in t&&(r.catchLoc=t[1]),2 in t&&(r.finallyLoc=t[2],r.afterLoc=t[3]),this.tryEntries.push(r)}function E(t){var r=t.completion||{};r.type=\\"normal\\",delete r.arg,t.completion=r}function _(t){this.tryEntries=[{tryLoc:\\"root\\"}],t.forEach(b,this),this.reset(!0)}function j(t){if(t){var r=t[i];if(r)return r.call(t);if(\\"function\\"==typeof t.next)return t;if(!isNaN(t.length)){var e=-1,o=function r(){for(;++e<t.length;)if(n.call(t,e))return r.value=t[e],r.done=!1,r;return r.value=void 0,r.done=!0,r};return o.next=o}}return{next:O}}function O(){return{value:void 0,done:!0}}return p.prototype=d,u(m,\\"constructor\\",d),u(d,\\"constructor\\",p),p.displayName=u(d,c,\\"GeneratorFunction\\"),r.isGeneratorFunction=function(t){var r=\\"function\\"==typeof t&&t.constructor;return!!r&&(r===p||\\"GeneratorFunction\\"===(r.displayName||r.name))},r.mark=function(t){return Object.setPrototypeOf?Object.setPrototypeOf(t,d):(t.__proto__=d,u(t,c,\\"GeneratorFunction\\")),t.prototype=Object.create(m),t},r.awrap=function(t){return{__await:t}},w(x.prototype),u(x.prototype,a,function(){return this}),r.AsyncIterator=x,r.async=function(t,e,n,o,i){void 0===i&&(i=Promise);var a=new x(f(t,e,n,o),i);return r.isGeneratorFunction(e)?a:a.next().then(function(t){return t.done?t.value:a.next()})},w(m),u(m,c,\\"Generator\\"),u(m,i,function(){return this}),u(m,\\"toString\\",function(){return\\"[object Generator]\\"}),r.keys=function(t){var r=[];for(var e in t)r.push(e);return r.reverse(),function e(){for(;r.length;){var n=r.pop();if(n in t)return e.value=n,e.done=!1,e}return e.done=!0,e}},r.values=j,_.prototype={constructor:_,reset:function(t){if(this.prev=0,this.next=0,this.sent=this._sent=void 0,this.done=!1,this.delegate=null,this.method=\\"next\\",this.arg=void 0,this.tryEntries.forEach(E),!t)for(var r in this)\\"t\\"===r.charAt(0)&&n.call(this,r)&&!isNaN(+r.slice(1))&&(this[r]=void 0)},stop:function(){this.done=!0;var t=this.tryEntries[0].completion;if(\\"throw\\"===t.type)throw t.arg;return this.rval},dispatchException:function(t){if(this.done)throw t;var r=this;function e(e,n){return a.type=\\"throw\\",a.arg=t,r.next=e,n&&(r.method=\\"next\\",r.arg=void 0),!!n}for(var o=this.tryEntries.length-1;o>=0;--o){var i=this.tryEntries[o],a=i.completion;if(\\"root\\"===i.tryLoc)return e(\\"end\\");if(i.tryLoc<=this.prev){var c=n.call(i,\\"catchLoc\\"),u=n.call(i,\\"finallyLoc\\");if(c&&u){if(this.prev<i.catchLoc)return e(i.catchLoc,!0);if(this.prev<i.finallyLoc)return e(i.finallyLoc)}else if(c){if(this.prev<i.catchLoc)return e(i.catchLoc,!0)}else{if(!u)throw new Error(\\"try statement without catch or finally\\");if(this.prev<i.finallyLoc)return e(i.finallyLoc)}}}},abrupt:function(t,r){for(var e=this.tryEntries.length-1;e>=0;--e){var o=this.tryEntries[e];if(o.tryLoc<=this.prev&&n.call(o,\\"finallyLoc\\")&&this.prev<o.finallyLoc){var i=o;break}}i&&(\\"break\\"===t||\\"continue\\"===t)&&i.tryLoc<=r&&r<=i.finallyLoc&&(i=null);var a=i?i.completion:{};return a.type=t,a.arg=r,i?(this.method=\\"next\\",this.next=i.finallyLoc,s):this.complete(a)},complete:function(t,r){if(\\"throw\\"===t.type)throw t.arg;return\\"break\\"===t.type||\\"continue\\"===t.type?this.next=t.arg:\\"return\\"===t.type?(this.rval=this.arg=t.arg,this.method=\\"return\\",this.next=\\"end\\"):\\"normal\\"===t.type&&r&&(this.next=r),s},finish:function(t){for(var r=this.tryEntries.length-1;r>=0;--r){var e=this.tryEntries[r];if(e.finallyLoc===t)return this.complete(e.completion,e.afterLoc),E(e),s}},catch:function(t){for(var r=this.tryEntries.length-1;r>=0;--r){var e=this.tryEntries[r];if(e.tryLoc===t){var n=e.completion;if(\\"throw\\"===n.type){var o=n.arg;E(e)}return o}}throw new Error(\\"illegal catch attempt\\")},delegateYield:function(t,r,e){return this.delegate={iterator:j(t),resultName:r,nextLoc:e},\\"next\\"===this.method&&(this.arg=void 0),s}},r}var r=/*#__PURE__*/t().mark(e);function e(){var e;return t().wrap(function(t){for(;;)switch(t.prev=t.next){case 0:e=0;case 1:return t.next=4,e++;case 4:t.next=1;break;case 6:case\\"end\\":return t.stop()}},r)}return function(){try{var t=e();return Promise.resolve([t.next().value,t.next().value])}catch(t){return Promise.reject(t)}}});
 //# sourceMappingURL=modern-generators.umd.js.map
 "
 `;
@@ -2262,8 +2262,8 @@ name-custom-amd
 Build \\"name-custom-amd\\" to dist:
 187 B: name-custom-amd.js.gz
 138 B: name-custom-amd.js.br
-188 B: name-custom-amd.esm.mjs.gz
-139 B: name-custom-amd.esm.mjs.br
+193 B: name-custom-amd.esm.mjs.gz
+148 B: name-custom-amd.esm.mjs.br
 277 B: name-custom-amd.umd.js.gz
 208 B: name-custom-amd.umd.js.br"
 `;
@@ -2271,7 +2271,7 @@ Build \\"name-custom-amd\\" to dist:
 exports[`fixtures build name-custom-amd with microbundle 2`] = `6`;
 
 exports[`fixtures build name-custom-amd with microbundle 3`] = `
-"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}},e=function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};export{e as default};
 //# sourceMappingURL=name-custom-amd.esm.mjs.map
 "
 `;
@@ -2310,8 +2310,8 @@ name-custom-cli
 Build \\"name-custom\\" to dist:
 187 B: name-custom.js.gz
 138 B: name-custom.js.br
-188 B: name-custom.esm.mjs.gz
-139 B: name-custom.esm.mjs.br
+193 B: name-custom.esm.mjs.gz
+148 B: name-custom.esm.mjs.br
 276 B: name-custom.umd.js.gz
 215 B: name-custom.umd.js.br"
 `;
@@ -2319,7 +2319,7 @@ Build \\"name-custom\\" to dist:
 exports[`fixtures build name-custom-cli with microbundle 2`] = `6`;
 
 exports[`fixtures build name-custom-cli with microbundle 3`] = `
-"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}},e=function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};export{e as default};
 //# sourceMappingURL=name-custom.esm.mjs.map
 "
 `;
@@ -2357,8 +2357,8 @@ no-pkg
 Build \\"no-pkg\\" to dist:
 187 B: no-pkg.js.gz
 138 B: no-pkg.js.br
-188 B: no-pkg.esm.mjs.gz
-139 B: no-pkg.esm.mjs.br
+193 B: no-pkg.esm.mjs.gz
+148 B: no-pkg.esm.mjs.br
 270 B: no-pkg.umd.js.gz
 216 B: no-pkg.umd.js.br"
 `;
@@ -2366,7 +2366,7 @@ Build \\"no-pkg\\" to dist:
 exports[`fixtures build no-pkg with microbundle 2`] = `6`;
 
 exports[`fixtures build no-pkg with microbundle 3`] = `
-"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}},e=function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};export{e as default};
 //# sourceMappingURL=no-pkg.esm.mjs.map
 "
 `;
@@ -2405,8 +2405,8 @@ no-pkg-name
 Build \\"no-pkg-name\\" to dist:
 187 B: no-pkg-name.js.gz
 138 B: no-pkg-name.js.br
-188 B: no-pkg-name.esm.mjs.gz
-139 B: no-pkg-name.esm.mjs.br
+193 B: no-pkg-name.esm.mjs.gz
+148 B: no-pkg-name.esm.mjs.br
 274 B: no-pkg-name.umd.js.gz
 219 B: no-pkg-name.umd.js.br"
 `;
@@ -2414,7 +2414,7 @@ Build \\"no-pkg-name\\" to dist:
 exports[`fixtures build no-pkg-name with microbundle 2`] = `6`;
 
 exports[`fixtures build no-pkg-name with microbundle 3`] = `
-"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}},e=function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};export{e as default};
 //# sourceMappingURL=no-pkg-name.esm.mjs.map
 "
 `;
@@ -2782,30 +2782,30 @@ terser-annotations
 
 
 Build \\"terser-annotations\\" to dist:
-133 B: terser-annotations.js.gz
-104 B: terser-annotations.js.br
-138 B: terser-annotations.esm.mjs.gz
-97 B: terser-annotations.esm.mjs.br
-224 B: terser-annotations.umd.js.gz
-169 B: terser-annotations.umd.js.br"
+144 B: terser-annotations.js.gz
+105 B: terser-annotations.js.br
+153 B: terser-annotations.esm.mjs.gz
+112 B: terser-annotations.esm.mjs.br
+231 B: terser-annotations.umd.js.gz
+186 B: terser-annotations.umd.js.br"
 `;
 
 exports[`fixtures build terser-annotations with microbundle 2`] = `6`;
 
 exports[`fixtures build terser-annotations with microbundle 3`] = `
-"function shouldBePreserved(e,n){return e-n}function main(e,n){return{inlined:/*@__INLINE__*/function(e,n){return e+n}(e,n),preserved:/*@__NOINLINE__*/shouldBePreserved(e,n)}}export default main;
+"function shouldBePreserved(e,r){return e-r}function main(e,r){var n=/*@__INLINE__*/function(e,r){return e+r}(e,r);return{inlined:n,preserved:/*@__NOINLINE__*/shouldBePreserved(e,r)}}export{main as default};
 //# sourceMappingURL=terser-annotations.esm.mjs.map
 "
 `;
 
 exports[`fixtures build terser-annotations with microbundle 4`] = `
-"function shouldBePreserved(e,r){return e-r}module.exports=function(e,r){return{inlined:/*@__INLINE__*/function(e,r){return e+r}(e,r),preserved:/*@__NOINLINE__*/shouldBePreserved(e,r)}};
+"function shouldBePreserved(e,r){return e-r}module.exports=function(e,r){var n=/*@__INLINE__*/function(e,r){return e+r}(e,r);return{inlined:n,preserved:/*@__NOINLINE__*/shouldBePreserved(e,r)}};
 //# sourceMappingURL=terser-annotations.js.map
 "
 `;
 
 exports[`fixtures build terser-annotations with microbundle 5`] = `
-"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e||self).terserAnnotations=n()}(this,function(){function shouldBePreserved(e,n){return e-n}return function(e,n){return{inlined:/*@__INLINE__*/function(e,n){return e+n}(e,n),preserved:/*@__NOINLINE__*/shouldBePreserved(e,n)}}});
+"!function(e,n){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=n():\\"function\\"==typeof define&&define.amd?define(n):(e||self).terserAnnotations=n()}(this,function(){function shouldBePreserved(e,n){return e-n}return function(e,n){var o=/*@__INLINE__*/function(e,n){return e+n}(e,n);return{inlined:o,preserved:/*@__NOINLINE__*/shouldBePreserved(e,n)}}});
 //# sourceMappingURL=terser-annotations.umd.js.map
 "
 `;
@@ -3007,8 +3007,8 @@ ts-mixed-exports
 Build \\"ts-mixed-exports\\" to dist:
 130 B: ts-mixed-exports.js.gz
 104 B: ts-mixed-exports.js.br
-134 B: ts-mixed-exports.esm.mjs.gz
-118 B: ts-mixed-exports.esm.mjs.br
+132 B: ts-mixed-exports.esm.mjs.gz
+106 B: ts-mixed-exports.esm.mjs.br
 228 B: ts-mixed-exports.umd.js.gz
 185 B: ts-mixed-exports.umd.js.br"
 `;
@@ -3034,7 +3034,7 @@ export default Ferrari;
 `;
 
 exports[`fixtures build ts-mixed-exports with microbundle 5`] = `
-"var t=/*#__PURE__*/function(){function t(){}return t.prototype.drive=function(t){return!0},t}(),n=new t;export default n;export{t as Car};
+"var n=/*#__PURE__*/function(){function n(){}return n.prototype.drive=function(n){return!0},n}(),t=new n;export{n as Car,t as default};
 //# sourceMappingURL=ts-mixed-exports.esm.mjs.map
 "
 `;
@@ -3135,8 +3135,8 @@ visualizer
 Build \\"visualizer\\" to dist:
 148 B: visualizer.js.gz
 107 B: visualizer.js.br
-79 B: visualizer.esm.mjs.gz
-64 B: visualizer.esm.mjs.br
+84 B: visualizer.esm.mjs.gz
+65 B: visualizer.esm.mjs.br
 231 B: visualizer.umd.js.gz
 195 B: visualizer.umd.js.br"
 `;
@@ -3144,7 +3144,7 @@ Build \\"visualizer\\" to dist:
 exports[`fixtures build visualizer with microbundle 2`] = `6`;
 
 exports[`fixtures build visualizer with microbundle 3`] = `
-"import a from\\"camelcase\\";var o=a(\\"foo-bar\\");export default o;
+"import a from\\"camelcase\\";var o=a(\\"foo-bar\\");export{o as default};
 //# sourceMappingURL=visualizer.esm.mjs.map
 "
 `;
