@@ -1,5 +1,21 @@
 # microbundle
 
+## 0.15.1
+
+### Patch Changes
+
+- [`cebafa1`](https://github.com/developit/microbundle/commit/cebafa121953a771f010b3cfd250a83bfc754e2c) [#961](https://github.com/developit/microbundle/pull/961) Thanks [@zyrong](https://github.com/zyrong)! - Fix for when multiple entries reference different CSS, only the CSS referenced by the first entry will be packaged
+
+* [`9a4e2b2`](https://github.com/developit/microbundle/commit/9a4e2b2096d3824661738edb142b4658cf3d9d0b) [#954](https://github.com/developit/microbundle/pull/954) Thanks [@rschristian](https://github.com/rschristian)! - Bumps Node target to v12
+
+- [`4ad4b76`](https://github.com/developit/microbundle/commit/4ad4b768f0ef6f434b753c4a42cdcfe85d01c404) [#967](https://github.com/developit/microbundle/pull/967) Thanks [@agilgur5](https://github.com/agilgur5)! - deps: upgrade rpt2 to latest v0.32.0 to fix monorepos
+
+* [`6018e58`](https://github.com/developit/microbundle/commit/6018e586b91125233026ca977a97b72bb6082ec6) [#956](https://github.com/developit/microbundle/pull/956) Thanks [@rschristian](https://github.com/rschristian)! - Silences warnings when using Node builtins with the 'node:...' protocol on imports. Warnings related to bare usage of these builtins were already silenced.
+
+- [`88241dd`](https://github.com/developit/microbundle/commit/88241ddf8fc3ac18cfc1ca8ced99a413f8d2b488) [#968](https://github.com/developit/microbundle/pull/968) Thanks [@PeterBurner](https://github.com/PeterBurner)! - deps: upgrade babel-plugin-transform-async-to-promises to latest v0.8.18 to fix #565
+
+* [`e72377a`](https://github.com/developit/microbundle/commit/e72377a001cc5925ff25aadbe26fdb96a0dab3a4) [#964](https://github.com/developit/microbundle/pull/964) Thanks [@rschristian](https://github.com/rschristian)! - Fixes filename generation for es & modern outputs. Both 'jsnext:main' and 'esmodule' were incorrectly ignored.
+
 ## 0.15.0
 
 ### Minor Changes

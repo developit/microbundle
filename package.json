@@ -1,12 +1,12 @@
 {
 	"name": "microbundle",
-	"version": "0.15.0",
+	"version": "0.15.1",
 	"description": "Zero-configuration bundler for tiny JS libs, powered by Rollup.",
 	"main": "dist/microbundle.js",
 	"source": "src/index.js",
 	"bin": "dist/cli.js",
 	"repository": "developit/microbundle",
-  "keywords": [
+	"keywords": [
 		"bundle",
 		"rollup",
 		"micro library"
