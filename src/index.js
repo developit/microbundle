@@ -297,9 +297,7 @@ function getMain({ options, entry, format }) {
 	mainsByFormat.es = replaceName(
 		pkg.module && !pkg.module.match(/src\//)
 			? pkg.module
-			: pkg['jsnext:main'] || pkgTypeModule
-			? 'x.esm.js'
-			: 'x.esm.mjs',
+			: pkg['jsnext:main'] || (pkgTypeModule ? 'x.esm.js' : 'x.esm.mjs'),
 		mainNoExtension,
 	);
 
@@ -307,9 +305,7 @@ function getMain({ options, entry, format }) {
 		(pkg.exports && walk(pkg.exports, pkgTypeModule)) ||
 			(pkg.syntax && pkg.syntax.esmodules) ||
 			pkg.esmodule ||
-			pkgTypeModule
-			? 'x.modern.js'
-			: 'x.modern.mjs',
+			(pkgTypeModule ? 'x.modern.js' : 'x.modern.mjs'),
 		mainNoExtension,
 	);
 	mainsByFormat.cjs = replaceName(
