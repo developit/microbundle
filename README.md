@@ -42,7 +42,6 @@
   "type": "module",
   "source": "src/foo.js",             // your source code
   "exports": {
-    "types": "./dist/foo.d.ts",       // optional; only needed if authoring in TypeScript
     "require": "./dist/foo.cjs",      // used for require() in Node 12+
     "default": "./dist/foo.modern.js" // where to generate the modern bundle (see below)
   },
