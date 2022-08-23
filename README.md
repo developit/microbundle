@@ -42,6 +42,7 @@
   "type": "module",
   "source": "src/foo.js",             // your source code
   "exports": {
+    "types": "./dist/foo.d.ts",       // optional; only needed if authoring in TypeScript
     "require": "./dist/foo.cjs",      // used for require() in Node 12+
     "default": "./dist/foo.modern.js" // where to generate the modern bundle (see below)
   },
@@ -166,12 +167,13 @@ The filenames and paths for generated bundles in each format are defined by the 
   "source": "src/index.js",             // input
   "main": "dist/foo.js",                // CommonJS output bundle
   "umd:main": "dist/foo.umd.js",        // UMD output bundle
-  "module": "dist/foo.mjs",           // ES Modules output bundle
+  "module": "dist/foo.mjs",             // ES Modules output bundle
   "exports": {
+    "types": "./dist/foo.d.ts",         // TypeScript typings for NodeNext modules
     "require": "./dist/foo.js",         // CommonJS output bundle
     "default": "./dist/foo.modern.mjs", // Modern ES Modules output bundle
   },
-  "types": "dist/foo.d.ts"              // TypeScript typings directory
+  "types": "dist/foo.d.ts"              // TypeScript typings
 }
 ```
 
@@ -229,6 +231,8 @@ Microbundle will generally respect your TypeScript config defined in a `tsconfig
 To ensure Microbundle does not process extraneous files, by default it only includes your entry point. If you want to include other files for compilation, such as ambient declarations, make sure to add either "[files](https://www.typescriptlang.org/tsconfig#files)" or "[include](https://www.typescriptlang.org/tsconfig#include)" into your `tsconfig.json`.
 
 If you're using TypeScript with CSS Modules, you will want to set `"include": ["node_modules/microbundle/index.d.ts"]` in your `tsconfig.json` to tell TypeScript how to handle your CSS Module imports.
+
+To ensure that your module's `.d.ts` type info is visible to other TypeScript projects that use [`moduleResolution: 'NodeNext'`](https://www.typescriptlang.org/docs/handbook/esm-node.html), add a [`types` key](https://www.typescriptlang.org/docs/handbook/esm-node.html#packagejson-exports-imports-and-self-referencing) to your `package.json`'s corresponding `exports` mapping.
 
 ### CSS and CSS Modules
 
