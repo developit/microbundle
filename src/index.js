@@ -473,7 +473,7 @@ function createConfig(options, entry, format, writeMeta) {
 							`\n ↳ to depend on a module via import/require, install it to "dependencies".`,
 					);
 					return;
-				}
+				} else if (warning.code === 'THIS_IS_UNDEFINED') return;
 
 				warn(warning);
 			},
