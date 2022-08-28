@@ -686,7 +686,7 @@ function createConfig(options, entry, format, writeMeta) {
 				// use Rollup's most optimal tree-shaking: (drops unused getter reads)
 				preset: 'smallest',
 				// preserve side-effect-only imports:
-				moduleSideEffects: true
+				moduleSideEffects: true,
 			},
 			generatedCode: modern ? 'es2015' : 'es5',
 			// turn off live bindings support (exports.* getters for re-exports)
