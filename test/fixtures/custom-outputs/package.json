@@ -1,0 +1,10 @@
+{
+  "name": "custom-outputs",
+  "main": "dist/custom-outputs.js",
+  "umd:main": "dist/custom-outputs.umdx.js",
+  "module": "dist/custom-outputs.modulex.mjs",
+  "exports": "./dist/custom-outputs.exportsx.mjs",
+  "scripts": {
+    "build": "microbundle -f modern,es,umd,cjs"
+  }
+}

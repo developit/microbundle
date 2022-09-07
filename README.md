@@ -166,12 +166,13 @@ The filenames and paths for generated bundles in each format are defined by the 
   "source": "src/index.js",             // input
   "main": "dist/foo.js",                // CommonJS output bundle
   "umd:main": "dist/foo.umd.js",        // UMD output bundle
-  "module": "dist/foo.mjs",           // ES Modules output bundle
+  "module": "dist/foo.mjs",             // ES Modules output bundle
   "exports": {
+    "types": "./dist/foo.d.ts",         // TypeScript typings for NodeNext modules
     "require": "./dist/foo.js",         // CommonJS output bundle
     "default": "./dist/foo.modern.mjs", // Modern ES Modules output bundle
   },
-  "types": "dist/foo.d.ts"              // TypeScript typings directory
+  "types": "dist/foo.d.ts"              // TypeScript typings
 }
 ```
 
@@ -229,6 +230,8 @@ Microbundle will generally respect your TypeScript config defined in a `tsconfig
 To ensure Microbundle does not process extraneous files, by default it only includes your entry point. If you want to include other files for compilation, such as ambient declarations, make sure to add either "[files](https://www.typescriptlang.org/tsconfig#files)" or "[include](https://www.typescriptlang.org/tsconfig#include)" into your `tsconfig.json`.
 
 If you're using TypeScript with CSS Modules, you will want to set `"include": ["node_modules/microbundle/index.d.ts"]` in your `tsconfig.json` to tell TypeScript how to handle your CSS Module imports.
+
+To ensure that your module's `.d.ts` type info is visible to other TypeScript projects that use [`moduleResolution: 'NodeNext'`](https://www.typescriptlang.org/docs/handbook/esm-node.html), add a [`types` key](https://www.typescriptlang.org/docs/handbook/esm-node.html#packagejson-exports-imports-and-self-referencing) to your `package.json`'s corresponding `exports` mapping.
 
 ### CSS and CSS Modules
 
@@ -379,8 +382,11 @@ Here's what's coming up for Microbundle:
 - [routex.js](https://github.com/alexhoma/routex.js) A dynamic routing library for Next.js.
 - [hooked-form](https://github.com/JoviDeCroock/hooked-form) A lightweight form-management library for React.
 - [goober](https://github.com/cristianbote/goober) Less than 1KB css-in-js alternative with a familiar API.
-- [react-model](https://github.com/byte-fe/react-model) The next generation state management library for React
-- [Teaful](https://github.com/teafuljs/teaful) Tiny, easy and powerful (P)React state management
+- [react-model](https://github.com/byte-fe/react-model) The next generation state management library for React.
+- [Teaful](https://github.com/teafuljs/teaful) Tiny, easy and powerful (P)React state management.
+- [@studio-freight/lenis](https://github.com/studio-freight/lenis) Tiny, Performant, Vanilla JS, Smooth Scroll library.
+- [@studio-freight/tempus](https://github.com/studio-freight/tempus) One rAF to rule them all.
+- [@studio-freight/hamo](https://github.com/studio-freight/hamo) Collection of React hooks.
 
 
 ## 🥂 License

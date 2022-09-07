@@ -1511,6 +1511,122 @@ exports[`fixtures build custom-babelrc with microbundle 5`] = `
 "
 `;
 
+exports[`fixtures build custom-outputs with microbundle 1`] = `
+"Used script: microbundle -f modern,es,umd,cjs
+
+Directory tree:
+
+custom-outputs
+  dist
+    custom-outputs.exportsx.mjs
+    custom-outputs.exportsx.mjs.map
+    custom-outputs.js
+    custom-outputs.js.map
+    custom-outputs.modulex.mjs
+    custom-outputs.modulex.mjs.map
+    custom-outputs.umdx.js
+    custom-outputs.umdx.js.map
+  package.json
+  src
+    index.js
+    two.js
+
+
+Build \\"custom-outputs\\" to dist:
+187 B: custom-outputs.js.gz
+138 B: custom-outputs.js.br
+113 B: custom-outputs.exportsx.mjs.gz
+92 B: custom-outputs.exportsx.mjs.br
+188 B: custom-outputs.modulex.mjs.gz
+139 B: custom-outputs.modulex.mjs.br
+273 B: custom-outputs.umdx.js.gz
+203 B: custom-outputs.umdx.js.br"
+`;
+
+exports[`fixtures build custom-outputs with microbundle 2`] = `8`;
+
+exports[`fixtures build custom-outputs with microbundle 3`] = `
+"async function n(...n){return n.reduce((n,t)=>n+t,0)}async function t(...t){return[await n(...t),await n(...t)]}export default t;
+//# sourceMappingURL=custom-outputs.exportsx.mjs.map
+"
+`;
+
+exports[`fixtures build custom-outputs with microbundle 4`] = `
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};module.exports=function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};
+//# sourceMappingURL=custom-outputs.js.map
+"
+`;
+
+exports[`fixtures build custom-outputs with microbundle 5`] = `
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
+//# sourceMappingURL=custom-outputs.modulex.mjs.map
+"
+`;
+
+exports[`fixtures build custom-outputs with microbundle 6`] = `
+"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=t():\\"function\\"==typeof define&&define.amd?define(t):(e||self).customOutputs=t()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,t){return e+t},0))}catch(e){return Promise.reject(e)}};return function(){try{var t=arguments,r=[].slice.call(t);return Promise.resolve(e.apply(void 0,r)).then(function(t){return Promise.resolve(e.apply(void 0,r)).then(function(e){return[t,e]})})}catch(e){return Promise.reject(e)}}});
+//# sourceMappingURL=custom-outputs.umdx.js.map
+"
+`;
+
+exports[`fixtures build custom-outputs-alt with microbundle 1`] = `
+"Used script: microbundle -f modern,es,umd,cjs
+
+Directory tree:
+
+custom-outputs-alt
+  dist
+    custom-outputs-alt.cjsmain.js
+    custom-outputs-alt.cjsmain.js.map
+    custom-outputs-alt.esmodule.mjs
+    custom-outputs-alt.esmodule.mjs.map
+    custom-outputs-alt.jsnextmain.mjs
+    custom-outputs-alt.jsnextmain.mjs.map
+    custom-outputs-alt.unpkg.js
+    custom-outputs-alt.unpkg.js.map
+  package.json
+  src
+    index.js
+    two.js
+
+
+Build \\"custom-outputs-alt\\" to dist:
+187 B: custom-outputs-alt.cjsmain.js.gz
+138 B: custom-outputs-alt.cjsmain.js.br
+113 B: custom-outputs-alt.esmodule.mjs.gz
+92 B: custom-outputs-alt.esmodule.mjs.br
+188 B: custom-outputs-alt.jsnextmain.mjs.gz
+139 B: custom-outputs-alt.jsnextmain.mjs.br
+277 B: custom-outputs-alt.unpkg.js.gz
+226 B: custom-outputs-alt.unpkg.js.br"
+`;
+
+exports[`fixtures build custom-outputs-alt with microbundle 2`] = `8`;
+
+exports[`fixtures build custom-outputs-alt with microbundle 3`] = `
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};module.exports=function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};
+//# sourceMappingURL=custom-outputs-alt.cjsmain.js.map
+"
+`;
+
+exports[`fixtures build custom-outputs-alt with microbundle 4`] = `
+"async function n(...n){return n.reduce((n,t)=>n+t,0)}async function t(...t){return[await n(...t),await n(...t)]}export default t;
+//# sourceMappingURL=custom-outputs-alt.esmodule.mjs.map
+"
+`;
+
+exports[`fixtures build custom-outputs-alt with microbundle 5`] = `
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
+//# sourceMappingURL=custom-outputs-alt.jsnextmain.mjs.map
+"
+`;
+
+exports[`fixtures build custom-outputs-alt with microbundle 6`] = `
+"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=t():\\"function\\"==typeof define&&define.amd?define(t):(e||self).customOutputsAlt=t()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,t){return e+t},0))}catch(e){return Promise.reject(e)}};return function(){try{var t=arguments,r=[].slice.call(t);return Promise.resolve(e.apply(void 0,r)).then(function(t){return Promise.resolve(e.apply(void 0,r)).then(function(e){return[t,e]})})}catch(e){return Promise.reject(e)}}});
+//# sourceMappingURL=custom-outputs-alt.unpkg.js.map
+"
+`;
+
 exports[`fixtures build custom-source with microbundle 1`] = `
 "Used script: microbundle
 
