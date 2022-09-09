@@ -3,5 +3,6 @@
     "mangle": {
       "keep_fnames": true
     }
-  }
+  },
+  "props": {}
 }
