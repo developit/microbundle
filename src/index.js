@@ -417,9 +417,11 @@ function createConfig(options, entry, format, writeMeta) {
 
 	let endsWithNewLine = false;
 
+	let nameCacheIndentTabs = false;
 	function loadNameCache() {
 		try {
 			const data = fs.readFileSync(getNameCachePath(), 'utf8');
+			nameCacheIndentTabs = /^\t+/gm.test(data);
 			endsWithNewLine = data.endsWith(EOL);
 			nameCache = JSON.parse(data);
 			// mangle.json can contain a "minify" field, same format as the pkg.mangle:
@@ -482,7 +484,7 @@ function createConfig(options, entry, format, writeMeta) {
 							`\n ↳ to depend on a module via import/require, install it to "dependencies".`,
 					);
 					return;
-				}
+				} else if (warning.code === 'THIS_IS_UNDEFINED') return;
 
 				warn(warning);
 			},
@@ -647,7 +649,11 @@ function createConfig(options, entry, format, writeMeta) {
 							writeBundle() {
 								if (writeMeta && nameCache) {
 									let filename = getNameCachePath();
-									let json = JSON.stringify(nameCache, null, 2);
+									let json = JSON.stringify(
+										nameCache,
+										null,
+										nameCacheIndentTabs ? '\t' : 2,
+									);
 									if (endsWithNewLine) json += EOL;
 									fs.writeFile(filename, json, () => {});
 								}
