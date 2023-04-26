@@ -387,7 +387,7 @@ Here's what's coming up for Microbundle:
 - [@studio-freight/lenis](https://github.com/studio-freight/lenis) Tiny, Performant, Vanilla JS, Smooth Scroll library.
 - [@studio-freight/tempus](https://github.com/studio-freight/tempus) One rAF to rule them all.
 - [@studio-freight/hamo](https://github.com/studio-freight/hamo) Collection of React hooks.
-
+- [glTF Transform](https://github.com/donmccurdy/glTF-Transform) Library for working with .gltf and .glb 3D models.
 
 ## 🥂 License
 
