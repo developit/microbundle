@@ -39,6 +39,7 @@ import {
 import { getConfigFromPkgJson, getName } from './lib/package-info';
 import { shouldCssModules, cssModulesConfig } from './lib/css-modules';
 import { EOL } from 'os';
+import MagicString from 'magic-string';
 
 // Extensions to use when resolving modules
 const EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs'];
@@ -653,17 +654,21 @@ function createConfig(options, entry, format, writeMeta) {
 						// So we remove the globalThis check, replacing it with `this||self` to match Rollup 1's output:
 						renderChunk(code, chunk, opts) {
 							if (opts.format === 'umd') {
+								const s = new MagicString(code);
 								// minified:
-								code = code.replace(
+								s.replace(
 									/([a-zA-Z$_]+)="undefined"!=typeof globalThis\?globalThis:(\1\|\|self)/,
 									'$2',
 								);
 								// unminified:
-								code = code.replace(
+								s.replace(
 									/(global *= *)typeof +globalThis *!== *['"]undefined['"] *\? *globalThis *: *(global *\|\| *self)/,
 									'$1$2',
 								);
-								return { code, map: null };
+								return {
+									code: s.toString(),
+									map: s.generateMap({ hires: true }),
+								};
 							}
 						},
 						// Grab size info before writing files to disk:
