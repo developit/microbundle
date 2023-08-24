@@ -33,9 +33,9 @@ export function cssModulesConfig(options) {
 }
 
 /**
- * This is done because if you use the cli default property, you get a primiatve "null" or "false",
+ * This is done because if you use the cli default property, you get a primitive "null" or "false",
  * but when using the cli arguments, you always get back strings. This method aims at correcting those
- * for both realms. So that both realms _convert_ into primatives.
+ * for both realms. So that both realms _convert_ into primitives.
  */
 function processCssmodulesArgument(options) {
 	if (options['css-modules'] === 'true' || options['css-modules'] === true)
