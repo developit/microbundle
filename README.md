@@ -389,6 +389,7 @@ Here's what's coming up for Microbundle:
 - [@studio-freight/hamo](https://github.com/studio-freight/hamo) Collection of React hooks.
 - [glTF Transform](https://github.com/donmccurdy/glTF-Transform) Library for working with .gltf and .glb 3D models.
 - [eta](https://github.com/eta-dev/eta) Lightweight, powerful, pluggable embedded JS template engine
+- [swup](https://github.com/swup/swup) Page transition library for server-rendered websites.
 
 ## 🥂 License
 
