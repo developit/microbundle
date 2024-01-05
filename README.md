@@ -11,16 +11,16 @@
 
 <p align="center">
   <strong>Guide → </strong>
-  <a href="#setup">Setup</a> ✯
-  <a href="#formats">Formats</a> ✯
-  <a href="#modern">Modern Mode</a> ✯
-  <a href="#usage">Usage &amp; Configuration</a> ✯
-  <a href="#options">All Options</a>
+  <a href="#-installation--setup--">Setup</a> ✯
+  <a href="#-output-formats-">Formats</a> ✯
+  <a href="#-modern-mode-">Modern Mode</a> ✯
+  <a href="#-usage--configuration-">Usage &amp; Configuration</a> ✯
+  <a href="#all-cli-options-">All Options</a>
 </p>
 
 ---
 
-## ✨ Features <a name="features"></a>
+## ✨ Features
 
 - **One dependency** to bundle your library using only a `package.json`
 - Support for ESnext & async/await _(via [Babel] & [async-to-promises])_
@@ -30,7 +30,7 @@
 - 0 configuration TypeScript support
 - Built-in Terser compression & gzipped bundle size tracking
 
-## 🔧 Installation & Setup <a name="setup"></a> <a name="installation"></a>
+## 🔧 Installation & Setup
 
 1️⃣ **Install** by running: `npm i -D microbundle`
 
@@ -57,12 +57,12 @@
 
 3️⃣ **Try it out** by running `npm run build`.
 
-## 💽 Output Formats <a name="formats"></a>
+## 💽 Output Formats
 
 Microbundle produces <code title="ECMAScript Modules (import / export)">esm</code>, <code title="CommonJS (Node-style module.exports)">cjs</code>, <code title="Universal Module Definition (works everywhere)">umd</code> bundles with your code compiled to syntax that works pretty much everywhere.
 While it's possible to customize the browser or Node versions you wish to support using a [browserslist configuration](https://github.com/browserslist/browserslist#browserslist-), the default setting is optimal and strongly recommended.
 
-## 🤖 Modern Mode <a name="modern"></a>
+## 🤖 Modern Mode
 
 In addition to the above formats, Microbundle also outputs a `modern` bundle specially designed to work in _all modern browsers_.
 This bundle preserves most modern JS features when compiling your code, but ensures the result runs in 95% of web browsers without needing to be transpiled.
@@ -144,7 +144,7 @@ The `"exports"` field can also be an object for packages with multiple entry mod
 }
 ```
 
-## 📦 Usage & Configuration <a name="usage"></a>
+## 📦 Usage & Configuration
 
 Microbundle includes two commands - `build` (the default) and `watch`.
 Neither require any options, but you can tailor things to suit your needs a bit if you like.
@@ -309,7 +309,7 @@ The `--define` option can be used to inject or replace build-time constants when
 | `microbundle --define API_KEY='abc123'`      | `console.log(API_KEY)` | `console.log("abc123")` |
 | `microbundle --define @assign=Object.assign` | `assign(a, b)`         | `Object.assign(a, b)`   |
 
-### All CLI Options <a name="options"></a>
+### All CLI Options
 
 ```
 Usage
