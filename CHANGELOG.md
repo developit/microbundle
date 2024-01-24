@@ -1,5 +1,13 @@
 # microbundle
 
+## 0.15.2
+
+### Patch Changes
+
+- [`22187fb`](https://github.com/developit/microbundle/commit/22187fba8a2d404a9f3dc5db357e243cd45e8479) [#999](https://github.com/developit/microbundle/pull/999) Thanks [@marvinhagemeister](https://github.com/marvinhagemeister)! - Fix indentation style in `mangle.json` not preserved
+
+* [`bb8713c`](https://github.com/developit/microbundle/commit/bb8713c74706f466672b3109552c7d3e675b5325) [#991](https://github.com/developit/microbundle/pull/991) Thanks [@rschristian](https://github.com/rschristian)! - Silence Rollup's noisy (and usually harmless) `The 'this' keyword is equivalent to 'undefined' at the top level of an ES module, and has been rewritten.` warnings
+
 ## 0.15.1
 
 ### Patch Changes
