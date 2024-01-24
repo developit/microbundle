@@ -481,6 +481,7 @@ function createConfig(options, entry, format, writeMeta) {
 			},
 
 			treeshake: {
+				annotations: options.compress,
 				propertyReadSideEffects: false,
 			},
 
