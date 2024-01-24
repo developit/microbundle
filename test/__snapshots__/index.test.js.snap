@@ -17,7 +17,7 @@ alias
     index.js
 
 
-Build \\"alias-mapping\\" to dist:
+Built \\"alias-mapping\\":
 62 B: alias-mapping.js.gz
 46 B: alias-mapping.js.br
 62 B: alias-mapping.esm.mjs.gz
@@ -62,7 +62,7 @@ alias-external
     index.js
 
 
-Build \\"alias-external\\" to dist:
+Built \\"alias-external\\":
 37 B: alias-external.js.gz
 21 B: alias-external.js.br
 37 B: alias-external.esm.mjs.gz
@@ -112,7 +112,7 @@ async-iife-ts
   tsconfig.json
 
 
-Build \\"async-iife-ts\\" to dist:
+Built \\"async-iife-ts\\":
 70 B: async-iife-ts.js.gz
 55 B: async-iife-ts.js.br
 70 B: async-iife-ts.esm.mjs.gz
@@ -164,7 +164,7 @@ async-ts
   tsconfig.json
 
 
-Build \\"async-ts\\" to dist:
+Built \\"async-ts\\":
 117 B: async-ts.js.gz
 91 B: async-ts.js.br
 128 B: async-ts.esm.mjs.gz
@@ -219,7 +219,7 @@ basic
     two.js
 
 
-Build \\"basic-lib\\" to dist:
+Built \\"basic-lib\\":
 187 B: basic-lib.js.gz
 138 B: basic-lib.js.br
 188 B: basic-lib.esm.mjs.gz
@@ -266,7 +266,7 @@ basic-babelrc
     index.js
 
 
-Build \\"basic-babelrc\\" to dist:
+Built \\"basic-babelrc\\":
 122 B: basic-babelrc.js.gz
 91 B: basic-babelrc.js.br
 122 B: basic-babelrc.esm.mjs.gz
@@ -314,7 +314,7 @@ basic-compress-false
     two.js
 
 
-Build \\"basic-compress-false\\" to dist:
+Built \\"basic-compress-false\\":
 260 B: basic-compress-false.js.gz
 206 B: basic-compress-false.js.br
 258 B: basic-compress-false.esm.mjs.gz
@@ -446,7 +446,7 @@ basic-css
     two.css
 
 
-Build \\"basic-css\\" to dist:
+Built \\"basic-css\\":
 107 B: basic-css.js.gz
 60 B: basic-css.js.br
 109 B: basic-css.esm.mjs.gz
@@ -499,7 +499,7 @@ basic-dashed-external
     two.js
 
 
-Build \\"basic-dashed-external\\" to dist:
+Built \\"basic-dashed-external\\":
 276 B: basic-dashed-external.js.gz
 212 B: basic-dashed-external.js.br
 214 B: basic-dashed-external.esm.mjs.gz
@@ -547,7 +547,7 @@ basic-flow
     index.js
 
 
-Build \\"basic-lib-flow\\" to dist:
+Built \\"basic-lib-flow\\":
 57 B: basic-lib-flow.js.gz
 43 B: basic-lib-flow.js.br
 56 B: basic-lib-flow.esm.mjs.gz
@@ -595,7 +595,7 @@ basic-json
     two.json
 
 
-Build \\"basic-json\\" to dist:
+Built \\"basic-json\\":
 93 B: basic-json.js.gz
 65 B: basic-json.js.br
 92 B: basic-json.esm.mjs.gz
@@ -648,7 +648,7 @@ basic-multi-source
   package.json
 
 
-Build \\"basic-multi-source\\" to dist:
+Built \\"basic-multi-source\\":
 43 B: a.js.gz
 27 B: a.js.br
 43 B: a.esm.mjs.gz
@@ -731,7 +731,7 @@ basic-multi-source-css
   package.json
 
 
-Build \\"basic-multi-source-css\\" to dist:
+Built \\"basic-multi-source-css\\":
 104 B: a.js.gz
 61 B: a.js.br
 105 B: a.esm.mjs.gz
@@ -813,7 +813,7 @@ basic-no-compress
     two.js
 
 
-Build \\"basic-no-compress\\" to dist:
+Built \\"basic-no-compress\\":
 260 B: basic-no-compress.js.gz
 206 B: basic-no-compress.js.br
 258 B: basic-no-compress.esm.mjs.gz
@@ -939,7 +939,7 @@ basic-no-pkg-main
     two.js
 
 
-Build \\"basic-no-pkg-main\\" to dist:
+Built \\"basic-no-pkg-main\\":
 187 B: basic-no-pkg-main.js.gz
 138 B: basic-no-pkg-main.js.br
 188 B: basic-no-pkg-main.js.gz
@@ -970,7 +970,7 @@ basic-node-internals
     index.js
 
 
-Build \\"basic-node-internals\\" to dist:
+Built \\"basic-node-internals\\":
 191 B: basic-node-internals.js.gz
 149 B: basic-node-internals.js.br"
 `;
@@ -1020,7 +1020,7 @@ basic-ts
   tsconfig.json
 
 
-Build \\"basic-lib-ts\\" to dist:
+Built \\"basic-lib-ts\\":
 118 B: basic-lib-ts.js.gz
 94 B: basic-lib-ts.js.br
 118 B: basic-lib-ts.esm.mjs.gz
@@ -1087,7 +1087,7 @@ basic-tsx
   tsconfig.json
 
 
-Build \\"basic-lib-tsx\\" to dist:
+Built \\"basic-lib-tsx\\":
 213 B: basic-lib-tsx.js.gz
 164 B: basic-lib-tsx.js.br
 218 B: basic-lib-tsx.esm.mjs.gz
@@ -1143,7 +1143,7 @@ basic
     two.js
 
 
-Build \\"basic\\" to dist:
+Built \\"basic\\":
 187 B: basic.js.gz
 138 B: basic.js.br
 188 B: basic.esm.mjs.gz
@@ -1193,7 +1193,7 @@ class-decorators-ts
   tsconfig.json
 
 
-Build \\"class-decorators-ts\\" to dist:
+Built \\"class-decorators-ts\\":
 348 B: class-decorators-ts.js.gz
 288 B: class-decorators-ts.js.br
 348 B: class-decorators-ts.esm.mjs.gz
@@ -1251,7 +1251,7 @@ class-properties
     index.js
 
 
-Build \\"class-properties\\" to dist:
+Built \\"class-properties\\":
 93 B: class-properties.js.gz
 79 B: class-properties.js.br
 96 B: class-properties.esm.mjs.gz
@@ -1298,7 +1298,7 @@ css-modules--false
     not_scoped.module.css
 
 
-Build \\"css-modules--false\\" to dist:
+Built \\"css-modules--false\\":
 49 B: css-modules--false.js.gz
 23 B: css-modules--false.js.br
 52 B: css-modules--false.esm.mjs.gz
@@ -1344,7 +1344,7 @@ css-modules--null
     scoped.module.css
 
 
-Build \\"css-modules--null\\" to dist:
+Built \\"css-modules--null\\":
 110 B: css-modules--null.js.gz
 72 B: css-modules--null.js.br
 112 B: css-modules--null.esm.mjs.gz
@@ -1390,7 +1390,7 @@ css-modules--string
     scoped.module.css
 
 
-Build \\"css-modules--string\\" to dist:
+Built \\"css-modules--string\\":
 166 B: css-modules--string.js.gz
 118 B: css-modules--string.js.br
 168 B: css-modules--string.esm.mjs.gz
@@ -1436,7 +1436,7 @@ css-modules--true
     scoped.module.css
 
 
-Build \\"css-modules--true\\" to dist:
+Built \\"css-modules--true\\":
 139 B: css-modules--true.js.gz
 94 B: css-modules--true.js.br
 141 B: css-modules--true.esm.mjs.gz
@@ -1482,7 +1482,7 @@ custom-babelrc
     index.js
 
 
-Build \\"custom-babelrc\\" to dist:
+Built \\"custom-babelrc\\":
 218 B: custom-babelrc.js.gz
 193 B: custom-babelrc.js.br
 222 B: custom-babelrc.esm.mjs.gz
@@ -1518,54 +1518,54 @@ Directory tree:
 
 custom-outputs
   dist
-    custom-outputs.exportsx.mjs
-    custom-outputs.exportsx.mjs.map
-    custom-outputs.js
-    custom-outputs.js.map
-    custom-outputs.modulex.mjs
-    custom-outputs.modulex.mjs.map
-    custom-outputs.umdx.js
-    custom-outputs.umdx.js.map
+    custom-exports.mjs
+    custom-exports.mjs.map
+    custom-main.js
+    custom-main.js.map
+    custom-module.js
+    custom-module.js.map
+    custom-umd.js
+    custom-umd.js.map
   package.json
   src
     index.js
     two.js
 
 
-Build \\"custom-outputs\\" to dist:
-187 B: custom-outputs.js.gz
-138 B: custom-outputs.js.br
-113 B: custom-outputs.exportsx.mjs.gz
-92 B: custom-outputs.exportsx.mjs.br
-188 B: custom-outputs.modulex.mjs.gz
-139 B: custom-outputs.modulex.mjs.br
-273 B: custom-outputs.umdx.js.gz
-203 B: custom-outputs.umdx.js.br"
+Built \\"custom-outputs\\":
+187 B: custom-main.js.gz
+138 B: custom-main.js.br
+113 B: custom-exports.mjs.gz
+92 B: custom-exports.mjs.br
+188 B: custom-module.js.gz
+139 B: custom-module.js.br
+273 B: custom-umd.js.gz
+203 B: custom-umd.js.br"
 `;
 
 exports[`fixtures build custom-outputs with microbundle 2`] = `8`;
 
 exports[`fixtures build custom-outputs with microbundle 3`] = `
 "async function n(...n){return n.reduce((n,t)=>n+t,0)}async function t(...t){return[await n(...t),await n(...t)]}export default t;
-//# sourceMappingURL=custom-outputs.exportsx.mjs.map
+//# sourceMappingURL=custom-exports.mjs.map
 "
 `;
 
 exports[`fixtures build custom-outputs with microbundle 4`] = `
 "var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};module.exports=function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};
-//# sourceMappingURL=custom-outputs.js.map
+//# sourceMappingURL=custom-main.js.map
 "
 `;
 
 exports[`fixtures build custom-outputs with microbundle 5`] = `
 "var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
-//# sourceMappingURL=custom-outputs.modulex.mjs.map
+//# sourceMappingURL=custom-module.js.map
 "
 `;
 
 exports[`fixtures build custom-outputs with microbundle 6`] = `
 "!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=t():\\"function\\"==typeof define&&define.amd?define(t):(e||self).customOutputs=t()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,t){return e+t},0))}catch(e){return Promise.reject(e)}};return function(){try{var t=arguments,r=[].slice.call(t);return Promise.resolve(e.apply(void 0,r)).then(function(t){return Promise.resolve(e.apply(void 0,r)).then(function(e){return[t,e]})})}catch(e){return Promise.reject(e)}}});
-//# sourceMappingURL=custom-outputs.umdx.js.map
+//# sourceMappingURL=custom-umd.js.map
 "
 `;
 
@@ -1590,7 +1590,7 @@ custom-outputs-alt
     two.js
 
 
-Build \\"custom-outputs-alt\\" to dist:
+Built \\"custom-outputs-alt\\":
 187 B: custom-outputs-alt.cjsmain.js.gz
 138 B: custom-outputs-alt.cjsmain.js.br
 113 B: custom-outputs-alt.esmodule.mjs.gz
@@ -1646,7 +1646,7 @@ custom-source
     two.js
 
 
-Build \\"custom-source\\" to dist:
+Built \\"custom-source\\":
 187 B: custom-source.js.gz
 138 B: custom-source.js.br
 188 B: custom-source.esm.mjs.gz
@@ -1694,7 +1694,7 @@ custom-source
     two.js
 
 
-Build \\"custom-src\\" to dist:
+Built \\"custom-src\\":
 187 B: custom-src.js.gz
 138 B: custom-src.js.br
 188 B: custom-src.esm.mjs.gz
@@ -1741,7 +1741,7 @@ default-named
     index.js
 
 
-Build \\"default-named\\" to dist:
+Built \\"default-named\\":
 60 B: default-named.js.gz
 46 B: default-named.js.br
 74 B: default-named.esm.mjs.gz
@@ -1784,7 +1784,7 @@ define
   package.json
 
 
-Build \\"define\\" to dist:
+Built \\"define\\":
 55 B: define.js.gz
 37 B: define.js.br
 55 B: define.esm.mjs.gz
@@ -1822,7 +1822,7 @@ define-expression
   package.json
 
 
-Build \\"define-expression\\" to dist:
+Built \\"define-expression\\":
 56 B: define-expression.esm.mjs.gz
 40 B: define-expression.esm.mjs.br"
 `;
@@ -1855,7 +1855,7 @@ esnext-ts
   tsconfig.json
 
 
-Build \\"esnext-ts\\" to dist:
+Built \\"esnext-ts\\":
 1010 B: esnext-ts.js.gz
 899 B: esnext-ts.js.br
 1011 B: esnext-ts.esm.mjs.gz
@@ -1905,7 +1905,7 @@ inline-source-map
     two.js
 
 
-Build \\"inline-source-map\\" to dist:
+Built \\"inline-source-map\\":
 187 B: inline-source-map.js.gz
 138 B: inline-source-map.js.br
 188 B: inline-source-map.esm.mjs.gz
@@ -1951,7 +1951,7 @@ jsx
   package.json
 
 
-Build \\"jsx\\" to dist:
+Built \\"jsx\\":
 239 B: jsx.js.gz
 195 B: jsx.js.br
 237 B: jsx.esm.mjs.gz
@@ -2000,7 +2000,7 @@ macro
     macro.js
 
 
-Build \\"macro-lib\\" to dist:
+Built \\"macro-lib\\":
 49 B: macro-lib.js.gz
 33 B: macro-lib.js.br
 48 B: macro-lib.esm.mjs.gz
@@ -2049,7 +2049,7 @@ mangle-json-file
     two.js
 
 
-Build \\"mangle-json-file\\" to dist:
+Built \\"mangle-json-file\\":
 103 B: mangle-json-file.js.gz
 89 B: mangle-json-file.js.br
 105 B: mangle-json-file.esm.mjs.gz
@@ -2097,7 +2097,7 @@ minify-config
     two.js
 
 
-Build \\"minify-config\\" to dist:
+Built \\"minify-config\\":
 99 B: minify-config.js.gz
 85 B: minify-config.js.br
 101 B: minify-config.esm.mjs.gz
@@ -2145,7 +2145,7 @@ minify-config-boolean
     two.js
 
 
-Build \\"minify-config-boolean\\" to dist:
+Built \\"minify-config-boolean\\":
 107 B: minify-config-boolean.js.gz
 84 B: minify-config-boolean.js.br
 114 B: minify-config-boolean.esm.mjs.gz
@@ -2194,7 +2194,7 @@ minify-path-config
     two.js
 
 
-Build \\"minify-path-config\\" to dist:
+Built \\"minify-path-config\\":
 103 B: minify-path-config.js.gz
 89 B: minify-path-config.js.br
 105 B: minify-path-config.esm.mjs.gz
@@ -2241,7 +2241,7 @@ minify-path-parent-dir
   two.js
 
 
-Build \\"minify-path-parent-dir\\" to dist:
+Built \\"minify-path-parent-dir\\":
 103 B: minify-path-parent-dir.js.gz
 89 B: minify-path-parent-dir.js.br
 105 B: minify-path-parent-dir.esm.mjs.gz
@@ -2285,7 +2285,7 @@ modern
     two.js
 
 
-Build \\"modern-lib\\" to dist:
+Built \\"modern-lib\\":
 113 B: modern-lib.modern.mjs.gz
 92 B: modern-lib.modern.mjs.br"
 `;
@@ -2319,7 +2319,7 @@ modern-generators
     two.js
 
 
-Build \\"modern-generators\\" to dist:
+Built \\"modern-generators\\":
 248 B: modern-generators.js.gz
 201 B: modern-generators.js.br
 118 B: modern-generators.modern.mjs.gz
@@ -2375,7 +2375,7 @@ name-custom-amd
     two.js
 
 
-Build \\"name-custom-amd\\" to dist:
+Built \\"name-custom-amd\\":
 187 B: name-custom-amd.js.gz
 138 B: name-custom-amd.js.br
 188 B: name-custom-amd.esm.mjs.gz
@@ -2423,7 +2423,7 @@ name-custom-cli
     two.js
 
 
-Build \\"name-custom\\" to dist:
+Built \\"name-custom\\":
 187 B: name-custom.js.gz
 138 B: name-custom.js.br
 188 B: name-custom.esm.mjs.gz
@@ -2470,7 +2470,7 @@ no-pkg
     two.js
 
 
-Build \\"no-pkg\\" to dist:
+Built \\"no-pkg\\":
 187 B: no-pkg.js.gz
 138 B: no-pkg.js.br
 188 B: no-pkg.esm.mjs.gz
@@ -2518,7 +2518,7 @@ no-pkg-name
     two.js
 
 
-Build \\"no-pkg-name\\" to dist:
+Built \\"no-pkg-name\\":
 187 B: no-pkg-name.js.gz
 138 B: no-pkg-name.js.br
 188 B: no-pkg-name.esm.mjs.gz
@@ -2568,7 +2568,7 @@ optional-chaining-ts
   tsconfig.json
 
 
-Build \\"optional-chaining-ts\\" to dist:
+Built \\"optional-chaining-ts\\":
 109 B: optional-chaining-ts.js.gz
 88 B: optional-chaining-ts.js.br
 111 B: optional-chaining-ts.esm.mjs.gz
@@ -2624,7 +2624,7 @@ parameters-rest-closure
     index.js
 
 
-Build \\"parameters-rest-closure\\" to dist:
+Built \\"parameters-rest-closure\\":
 157 B: parameters-rest-closure.js.gz
 115 B: parameters-rest-closure.js.br
 165 B: parameters-rest-closure.esm.mjs.gz
@@ -2671,7 +2671,7 @@ pretty
     index.js
 
 
-Build \\"pretty\\" to dist:
+Built \\"pretty\\":
 6.33 kB: pretty.js.gz
 5.19 kB: pretty.js.br
 6.34 kB: pretty.esm.mjs.gz
@@ -2716,7 +2716,7 @@ publish-config
     foo.ts
 
 
-Build \\"publish-config\\" to dist:
+Built \\"publish-config\\":
 55 B: bar.js.gz
 33 B: bar.js.br"
 `;
@@ -2752,7 +2752,7 @@ pure
     index.js
 
 
-Build \\"pure\\" to dist:
+Built \\"pure\\":
 65 B: pure.js.gz
 44 B: pure.js.br
 71 B: pure.esm.mjs.gz
@@ -2799,7 +2799,7 @@ raw
     index.js
 
 
-Build \\"raw\\" to dist:
+Built \\"raw\\":
 1389 B: raw.js.gz
 1160 B: raw.js.br
 1398 B: raw.esm.mjs.gz
@@ -2846,7 +2846,7 @@ shebang
     index.js
 
 
-Build \\"shebang\\" to dist:
+Built \\"shebang\\":
 85 B: shebang.js.gz
 62 B: shebang.js.br
 89 B: shebang.esm.mjs.gz
@@ -2878,6 +2878,53 @@ exports[`fixtures build shebang with microbundle 5`] = `
 "
 `;
 
+exports[`fixtures build split-output-directories with microbundle 1`] = `
+"Used script: microbundle -f cjs,es,umd,modern
+
+Directory tree:
+
+split-output-directories
+  build
+    exports.mjs
+    exports.mjs.map
+    main.js
+    main.js.map
+  dist
+    split-output-directories.esm.mjs
+    split-output-directories.esm.mjs.map
+    split-output-directories.umd.js
+    split-output-directories.umd.js.map
+  package.json
+  src
+    index.js
+    two.js
+
+
+Built \\"split-output-directories\\":
+187 B: main.js.gz
+138 B: main.js.br
+188 B: split-output-directories.esm.mjs.gz
+139 B: split-output-directories.esm.mjs.br
+281 B: split-output-directories.umd.js.gz
+207 B: split-output-directories.umd.js.br
+113 B: exports.mjs.gz
+92 B: exports.mjs.br"
+`;
+
+exports[`fixtures build split-output-directories with microbundle 2`] = `4`;
+
+exports[`fixtures build split-output-directories with microbundle 3`] = `
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
+//# sourceMappingURL=split-output-directories.esm.mjs.map
+"
+`;
+
+exports[`fixtures build split-output-directories with microbundle 4`] = `
+"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e||self).splitOutputDirectories=r()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){try{var r=arguments,t=[].slice.call(r);return Promise.resolve(e.apply(void 0,t)).then(function(r){return Promise.resolve(e.apply(void 0,t)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
+//# sourceMappingURL=split-output-directories.umd.js.map
+"
+`;
+
 exports[`fixtures build terser-annotations with microbundle 1`] = `
 "Used script: microbundle
 
@@ -2897,7 +2944,7 @@ terser-annotations
     index.js
 
 
-Build \\"terser-annotations\\" to dist:
+Built \\"terser-annotations\\":
 133 B: terser-annotations.js.gz
 104 B: terser-annotations.js.br
 138 B: terser-annotations.esm.mjs.gz
@@ -2933,12 +2980,12 @@ Directory tree:
 
 ts-custom-declaration
   dist
-    index.esm.mjs
-    index.esm.mjs.map
     index.js
     index.js.map
-    index.umd.js
-    index.umd.js.map
+    ts-custom-declarations.esm.mjs
+    ts-custom-declarations.esm.mjs.map
+    ts-custom-declarations.umd.js
+    ts-custom-declarations.umd.js.map
   node_modules
   package.json
   src
@@ -2948,32 +2995,32 @@ ts-custom-declaration
     index.d.ts
 
 
-Build \\"ts-custom-declarations\\" to dist:
+Built \\"ts-custom-declarations\\":
 55 B: index.js.gz
 33 B: index.js.br
-61 B: index.esm.mjs.gz
-45 B: index.esm.mjs.br
-175 B: index.umd.js.gz
-125 B: index.umd.js.br"
+61 B: ts-custom-declarations.esm.mjs.gz
+45 B: ts-custom-declarations.esm.mjs.br
+175 B: ts-custom-declarations.umd.js.gz
+125 B: ts-custom-declarations.umd.js.br"
 `;
 
 exports[`fixtures build ts-custom-declaration with microbundle 2`] = `6`;
 
 exports[`fixtures build ts-custom-declaration with microbundle 3`] = `
-"function n(){return 42}export{n as foo};
-//# sourceMappingURL=index.esm.mjs.map
-"
-`;
-
-exports[`fixtures build ts-custom-declaration with microbundle 4`] = `
 "exports.foo=function(){return 42};
 //# sourceMappingURL=index.js.map
 "
 `;
 
+exports[`fixtures build ts-custom-declaration with microbundle 4`] = `
+"function n(){return 42}export{n as foo};
+//# sourceMappingURL=ts-custom-declarations.esm.mjs.map
+"
+`;
+
 exports[`fixtures build ts-custom-declaration with microbundle 5`] = `
 "!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?o(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],o):o((e||self).tsCustomDeclarations={})}(this,function(e){e.foo=function(){return 42}});
-//# sourceMappingURL=index.umd.js.map
+//# sourceMappingURL=ts-custom-declarations.umd.js.map
 "
 `;
 
@@ -2991,12 +3038,12 @@ Directory tree:
 
 ts-declaration
   dist
-    index.esm.mjs
-    index.esm.mjs.map
     index.js
     index.js.map
-    index.umd.js
-    index.umd.js.map
+    ts-declarations.esm.mjs
+    ts-declarations.esm.mjs.map
+    ts-declarations.umd.js
+    ts-declarations.umd.js.map
   node_modules
   package.json
   src
@@ -3006,32 +3053,32 @@ ts-declaration
     index.d.ts
 
 
-Build \\"ts-declarations\\" to dist:
+Built \\"ts-declarations\\":
 55 B: index.js.gz
 33 B: index.js.br
-61 B: index.esm.mjs.gz
-45 B: index.esm.mjs.br
-171 B: index.umd.js.gz
-124 B: index.umd.js.br"
+61 B: ts-declarations.esm.mjs.gz
+45 B: ts-declarations.esm.mjs.br
+171 B: ts-declarations.umd.js.gz
+124 B: ts-declarations.umd.js.br"
 `;
 
 exports[`fixtures build ts-declaration with microbundle 2`] = `6`;
 
 exports[`fixtures build ts-declaration with microbundle 3`] = `
-"function n(){return 42}export{n as foo};
-//# sourceMappingURL=index.esm.mjs.map
-"
-`;
-
-exports[`fixtures build ts-declaration with microbundle 4`] = `
 "exports.foo=function(){return 42};
 //# sourceMappingURL=index.js.map
 "
 `;
 
+exports[`fixtures build ts-declaration with microbundle 4`] = `
+"function n(){return 42}export{n as foo};
+//# sourceMappingURL=ts-declarations.esm.mjs.map
+"
+`;
+
 exports[`fixtures build ts-declaration with microbundle 5`] = `
 "!function(e,o){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?o(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],o):o((e||self).tsDeclarations={})}(this,function(e){e.foo=function(){return 42}});
-//# sourceMappingURL=index.umd.js.map
+//# sourceMappingURL=ts-declarations.umd.js.map
 "
 `;
 
@@ -3063,7 +3110,7 @@ ts-jsx
   tsconfig.json
 
 
-Build \\"ts-jsx\\" to dist:
+Built \\"ts-jsx\\":
 130 B: ts-jsx.js.gz
 94 B: ts-jsx.js.br
 131 B: ts-jsx.esm.mjs.gz
@@ -3120,7 +3167,7 @@ ts-mixed-exports
   tsconfig.json
 
 
-Build \\"ts-mixed-exports\\" to dist:
+Built \\"ts-mixed-exports\\":
 130 B: ts-mixed-exports.js.gz
 104 B: ts-mixed-exports.js.br
 134 B: ts-mixed-exports.esm.mjs.gz
@@ -3190,7 +3237,7 @@ ts-module
   tsconfig.json
 
 
-Build \\"ts-module\\" to dist:
+Built \\"ts-module\\":
 59 B: ts-module.js.gz
 42 B: ts-module.js.br
 65 B: ts-module.esm.mjs.gz
@@ -3248,7 +3295,7 @@ visualizer
   stats.html
 
 
-Build \\"visualizer\\" to dist:
+Built \\"visualizer\\":
 148 B: visualizer.js.gz
 107 B: visualizer.js.br
 79 B: visualizer.esm.mjs.gz
@@ -3301,7 +3348,7 @@ worker-loader
     worker.js
 
 
-Build \\"worker-loader\\" to dist:
+Built \\"worker-loader\\":
 140 B: worker-loader.modern.mjs.gz
 112 B: worker-loader.modern.mjs.br
 63 B: worker-7e1b9921.js.gz

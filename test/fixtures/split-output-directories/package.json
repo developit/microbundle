@@ -1,0 +1,8 @@
+{
+  "name": "split-output-directories",
+  "main": "./build/main.js",
+  "exports": "./build/exports.mjs",
+  "scripts": {
+    "build": "microbundle -f cjs,es,umd,modern"
+  }
+}
