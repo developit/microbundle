@@ -68,7 +68,7 @@
 		}
 	},
 	"dependencies": {
-		"@babel/core": "^7.12.10",
+		"@babel/core": "^7.24.4",
 		"@babel/plugin-proposal-class-properties": "7.12.1",
 		"@babel/plugin-syntax-import-meta": "^7.10.4",
 		"@babel/plugin-syntax-jsx": "^7.12.1",
