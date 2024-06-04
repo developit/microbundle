@@ -593,6 +593,21 @@ function createConfig(options, entry, format, writeMeta) {
 							jsxImportSource: options.jsxImportSource || false,
 						},
 					}),
+					/** @type {import('rollup').Plugin} */
+					({
+						name: 'export-default-simplify',
+						renderChunk(code, chunk, options) {
+							let out = code.replace(
+								/([};\n])export\s*\{\s*([a-zA-Z0-9_$]+)\s+as\s+default\s*\};/,
+								(s, before, name) => {
+									return `${before}export default ${name};`;
+								},
+							);
+							if (out !== code) {
+								return { code: out, map: null };
+							}
+						},
+					}),
 					options.compress !== false && [
 						terser({
 							compress: Object.assign(
@@ -698,6 +713,7 @@ function createConfig(options, entry, format, writeMeta) {
 			dir: outputDir,
 			entryFileNames: outputEntryFileName,
 			exports: 'auto',
+			interop: 'compat',
 		},
 	};
 
