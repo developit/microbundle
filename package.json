@@ -20,7 +20,7 @@
 	"license": "MIT",
 	"scripts": {
 		"build": "npm run -s build:babel && npm run -s build:self",
-		"build:babel": "babel-node src/cli.js --target=node --format cjs src/{cli,index}.js",
+		"build:babel": "babel-node -- src/cli.js --target=node --format cjs src/{cli,index}.js",
 		"build:self": "node dist/cli.js --target=node --format cjs src/{cli,index}.js",
 		"prepare": "npm run -s build",
 		"prepare:babel": "babel src/*.js -d dist && npm t",
@@ -113,7 +113,7 @@
 	},
 	"devDependencies": {
 		"@babel/cli": "^7.24.6",
-		"@babel/node": "7.12.10",
+		"@babel/node": "7.24.6",
 		"@babel/plugin-proposal-throw-expressions": "^7.24.6",
 		"@changesets/changelog-github": "^0.2.7",
 		"@changesets/cli": "^2.12.0",
