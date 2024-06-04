@@ -25,7 +25,7 @@
 		"prepare": "npm run -s build",
 		"prepare:babel": "babel src/*.js -d dist && npm t",
 		"lint": "eslint src",
-		"test": "npm run -s build && cross-env BABEL_ENV=test jest",
+		"test": "npm run -s lint && npm run -s build && cross-env BABEL_ENV=test jest",
 		"jest": "cross-env BABEL_ENV=test jest",
 		"format": "prettier --write \"{*,{src,test}/**/*}.+(js|css)\"",
 		"changeset": "changeset",
