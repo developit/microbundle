@@ -451,8 +451,6 @@ function createConfig(options, entry, format, writeMeta) {
 	let config = {
 		/** @type {import('rollup').InputOptions} */
 		inputOptions: {
-			// read up to 100 files from disk concurrently: (avoid EMFILE by capping)
-			maxParallelFileReads: 100,
 			// disable Rollup's cache for modern builds to prevent re-use of legacy transpiled modules:
 			cache,
 			input: entry,
@@ -715,6 +713,7 @@ function createConfig(options, entry, format, writeMeta) {
 			dir: outputDir,
 			entryFileNames: outputEntryFileName,
 			exports: 'auto',
+			interop: 'compat',
 		},
 	};
 

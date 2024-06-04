@@ -3284,10 +3284,10 @@ Directory tree:
 
 worker-loader
   dist
-    worker-35b22e56.js
-    worker-35b22e56.js.map
-    worker-7e1b9921.js
-    worker-7e1b9921.js.map
+    worker-Cu81xkfV.js
+    worker-Cu81xkfV.js.map
+    worker-Cz62PrSm.js
+    worker-Cz62PrSm.js.map
     worker-loader.esm.mjs
     worker-loader.esm.mjs.map
     worker-loader.modern.mjs
@@ -3301,38 +3301,38 @@ worker-loader
 
 
 Build \\"worker-loader\\" to dist:
-140 B: worker-loader.modern.mjs.gz
-112 B: worker-loader.modern.mjs.br
-63 B: worker-7e1b9921.js.gz
-54 B: worker-7e1b9921.js.br
-150 B: worker-loader.esm.mjs.gz
-123 B: worker-loader.esm.mjs.br
-81 B: worker-35b22e56.js.gz
-66 B: worker-35b22e56.js.br"
+141 B: worker-loader.modern.mjs.gz
+117 B: worker-loader.modern.mjs.br
+63 B: worker-Cz62PrSm.js.gz
+54 B: worker-Cz62PrSm.js.br
+149 B: worker-loader.esm.mjs.gz
+142 B: worker-loader.esm.mjs.br
+81 B: worker-Cu81xkfV.js.gz
+66 B: worker-Cu81xkfV.js.br"
 `;
 
 exports[`fixtures build worker-loader with microbundle 2`] = `8`;
 
 exports[`fixtures build worker-loader with microbundle 3`] = `
 "self.onmessage=function(e){return self.postMessage(e.data+\\"bar\\")};
-//# sourceMappingURL=worker-35b22e56.js.map
+//# sourceMappingURL=worker-Cu81xkfV.js.map
 "
 `;
 
 exports[`fixtures build worker-loader with microbundle 4`] = `
 "self.onmessage=s=>self.postMessage(s.data+\\"bar\\");
-//# sourceMappingURL=worker-7e1b9921.js.map
+//# sourceMappingURL=worker-Cz62PrSm.js.map
 "
 `;
 
 exports[`fixtures build worker-loader with microbundle 5`] = `
-"var e=new Worker(new URL(\\"worker-35b22e56.js\\",import.meta.url),{type:\\"module\\"});e.onmessage=function(e){return\\"foobar\\"===e.data},e.postMessage(\\"foo\\");
+"var e=new Worker(new URL(\\"worker-Cu81xkfV.js\\",import.meta.url),{type:\\"module\\"});e.onmessage=function(e){return\\"foobar\\"===e.data},e.postMessage(\\"foo\\");
 //# sourceMappingURL=worker-loader.esm.mjs.map
 "
 `;
 
 exports[`fixtures build worker-loader with microbundle 6`] = `
-"const e=new Worker(new URL(\\"worker-7e1b9921.js\\",import.meta.url),{type:\\"module\\"});e.onmessage=e=>\\"foobar\\"===e.data,e.postMessage(\\"foo\\");
+"const e=new Worker(new URL(\\"worker-Cz62PrSm.js\\",import.meta.url),{type:\\"module\\"});e.onmessage=e=>\\"foobar\\"===e.data,e.postMessage(\\"foo\\");
 //# sourceMappingURL=worker-loader.modern.mjs.map
 "
 `;

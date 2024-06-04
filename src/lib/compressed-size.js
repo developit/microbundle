@@ -18,6 +18,7 @@ function formatSize(size, filename, type, raw) {
 export async function getSizeInfo(code, filename, raw) {
 	raw = raw || code.length < 5000;
 
+	code = code.replace(/\n\/\/#\ssourceMappingURL=.*$/m, '');
 	const [gzip, brotli] = await Promise.all([
 		gzipSize(code).catch(() => null),
 		brotliSize(code).catch(() => null),
