@@ -74,7 +74,7 @@
 		"@babel/plugin-transform-class-properties": "7.24.6",
 		"@babel/plugin-transform-flow-strip-types": "^7.24.6",
 		"@babel/plugin-transform-react-jsx": "^7.24.6",
-		"@babel/plugin-transform-regenerator": "7.17.9",
+		"@babel/plugin-transform-regenerator": "7.24.6",
 		"@babel/preset-env": "^7.24.6",
 		"@babel/preset-flow": "^7.24.6",
 		"@babel/preset-react": "^7.24.6",
