@@ -451,6 +451,8 @@ function createConfig(options, entry, format, writeMeta) {
 	let config = {
 		/** @type {import('rollup').InputOptions} */
 		inputOptions: {
+			// read up to 100 files from disk concurrently: (avoid EMFILE by capping)
+			maxParallelFileReads: 100,
 			// disable Rollup's cache for modern builds to prevent re-use of legacy transpiled modules:
 			cache,
 			input: entry,
@@ -591,6 +593,21 @@ function createConfig(options, entry, format, writeMeta) {
 							pragmaFrag: options.jsxFragment,
 							typescript: !!useTypescript,
 							jsxImportSource: options.jsxImportSource || false,
+						},
+					}),
+					/** @type {import('rollup').Plugin} */
+					({
+						name: 'export-default-simplify',
+						renderChunk(code, chunk, options) {
+							let out = code.replace(
+								/([};\n])export\s*\{\s*([a-zA-Z0-9_$]+)\s+as\s+default\s*\};/,
+								(s, before, name) => {
+									return `${before}export default ${name};`;
+								},
+							);
+							if (out !== code) {
+								return { code: out, map: null };
+							}
 						},
 					}),
 					options.compress !== false && [

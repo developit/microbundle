@@ -7,6 +7,16 @@ const ESMODULES_TARGET = {
 	esmodules: true,
 };
 
+// silence Babel 7.13+ loose-with-assumptions warnings
+const _warn = console.warn;
+console.warn = function (m) {
+	if (/the "loose: true" option/.test(m)) {
+		return;
+	}
+	// eslint-disable-next-line prefer-rest-params
+	return _warn.apply(this, arguments);
+};
+
 const mergeConfigItems = (babel, type, ...configItemsToMerge) => {
 	const mergedItems = [];
 
@@ -107,7 +117,7 @@ export default () => {
 								],
 							},
 						{
-							name: '@babel/plugin-proposal-class-properties',
+							name: '@babel/plugin-transform-class-properties',
 							loose: true,
 						},
 						!customOptions.modern &&
@@ -199,6 +209,31 @@ export default () => {
 						shouldPrintComment: comment => /[@#]__[A-Z]+__/.test(comment),
 					};
 				}
+
+				babelOptions.assumptions = {
+					arrayLikeIsIterable: true,
+					constantReexports: true,
+					constantSuper: true,
+					enumerableModuleMeta: true,
+					ignoreFunctionLength: true,
+					ignoreToPrimitiveHint: true,
+					iterableIsArray: true,
+					mutableTemplateObject: true,
+					noClassCalls: true,
+					noDocumentAll: true,
+					noIncompleteNsImportDetection: true,
+					noNewArrows: true,
+					noUninitializedPrivateFieldAccess: true,
+					objectRestNoSymbols: true,
+					privateFieldsAsProperties: true,
+					pureGetters: true,
+					setClassMethods: true,
+					setComputedProperties: true,
+					setPublicClassFields: true,
+					setSpreadProperties: true,
+					skipForOfIteratorClosing: true,
+					superIsCallableConstructor: true,
+				};
 
 				return babelOptions;
 			},
