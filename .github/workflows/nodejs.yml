@@ -3,9 +3,8 @@ name: Node CI
 on:
   pull_request: {}
   push:
-    branches-ignore:
-      - trying.tmp
-      - staging.tmp
+    branches:
+      - master
 
 jobs:
   build:
