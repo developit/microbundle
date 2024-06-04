@@ -15,15 +15,7 @@ alias
     constants-debug.js
     constants.js
     index.js
-
-
-Build \\"alias-mapping\\" to dist:
-62 B: alias-mapping.js.gz
-46 B: alias-mapping.js.br
-62 B: alias-mapping.esm.mjs.gz
-46 B: alias-mapping.esm.mjs.br
-118 B: alias-mapping.umd.js.gz
-83 B: alias-mapping.umd.js.br"
+"
 `;
 
 exports[`fixtures build alias with microbundle 2`] = `3`;
@@ -60,15 +52,7 @@ alias-external
   src
     colossal-glob.js
     index.js
-
-
-Build \\"alias-external\\" to dist:
-37 B: alias-external.js.gz
-21 B: alias-external.js.br
-37 B: alias-external.esm.mjs.gz
-21 B: alias-external.esm.mjs.br
-93 B: alias-external.umd.js.gz
-89 B: alias-external.umd.js.br"
+"
 `;
 
 exports[`fixtures build alias-external with microbundle 2`] = `6`;
@@ -110,15 +94,7 @@ async-iife-ts
   src
     index.ts
   tsconfig.json
-
-
-Build \\"async-iife-ts\\" to dist:
-70 B: async-iife-ts.js.gz
-55 B: async-iife-ts.js.br
-70 B: async-iife-ts.esm.mjs.gz
-55 B: async-iife-ts.esm.mjs.br
-125 B: async-iife-ts.umd.js.gz
-95 B: async-iife-ts.umd.js.br"
+"
 `;
 
 exports[`fixtures build async-iife-ts with microbundle 2`] = `7`;
@@ -162,15 +138,7 @@ async-ts
   src
     index.ts
   tsconfig.json
-
-
-Build \\"async-ts\\" to dist:
-117 B: async-ts.js.gz
-91 B: async-ts.js.br
-128 B: async-ts.esm.mjs.gz
-108 B: async-ts.esm.mjs.br
-217 B: async-ts.umd.js.gz
-164 B: async-ts.umd.js.br"
+"
 `;
 
 exports[`fixtures build async-ts with microbundle 2`] = `7`;
@@ -217,15 +185,7 @@ basic
   src
     index.js
     two.js
-
-
-Build \\"basic-lib\\" to dist:
-187 B: basic-lib.js.gz
-138 B: basic-lib.js.br
-188 B: basic-lib.esm.mjs.gz
-139 B: basic-lib.esm.mjs.br
-273 B: basic-lib.umd.js.gz
-211 B: basic-lib.umd.js.br"
+"
 `;
 
 exports[`fixtures build basic with microbundle 2`] = `6`;
@@ -264,15 +224,7 @@ basic-babelrc
   package.json
   src
     index.js
-
-
-Build \\"basic-babelrc\\" to dist:
-122 B: basic-babelrc.js.gz
-91 B: basic-babelrc.js.br
-122 B: basic-babelrc.esm.mjs.gz
-91 B: basic-babelrc.esm.mjs.br
-158 B: basic-babelrc.umd.js.gz
-121 B: basic-babelrc.umd.js.br"
+"
 `;
 
 exports[`fixtures build basic-babelrc with microbundle 2`] = `6`;
@@ -312,15 +264,7 @@ basic-compress-false
   src
     index.js
     two.js
-
-
-Build \\"basic-compress-false\\" to dist:
-260 B: basic-compress-false.js.gz
-206 B: basic-compress-false.js.br
-258 B: basic-compress-false.esm.mjs.gz
-209 B: basic-compress-false.esm.mjs.br
-383 B: basic-compress-false.umd.js.gz
-305 B: basic-compress-false.umd.js.br"
+"
 `;
 
 exports[`fixtures build basic-compress-false with microbundle 2`] = `6`;
@@ -444,15 +388,7 @@ basic-css
   src
     index.js
     two.css
-
-
-Build \\"basic-css\\" to dist:
-107 B: basic-css.js.gz
-60 B: basic-css.js.br
-109 B: basic-css.esm.mjs.gz
-67 B: basic-css.esm.mjs.br
-195 B: basic-css.umd.js.gz
-138 B: basic-css.umd.js.br"
+"
 `;
 
 exports[`fixtures build basic-css with microbundle 2`] = `8`;
@@ -497,15 +433,7 @@ basic-dashed-external
   src
     index.js
     two.js
-
-
-Build \\"basic-dashed-external\\" to dist:
-276 B: basic-dashed-external.js.gz
-212 B: basic-dashed-external.js.br
-214 B: basic-dashed-external.esm.mjs.gz
-164 B: basic-dashed-external.esm.mjs.br
-357 B: basic-dashed-external.umd.js.gz
-285 B: basic-dashed-external.umd.js.br"
+"
 `;
 
 exports[`fixtures build basic-dashed-external with microbundle 2`] = `6`;
@@ -545,15 +473,7 @@ basic-flow
   src
     fruits.js
     index.js
-
-
-Build \\"basic-lib-flow\\" to dist:
-57 B: basic-lib-flow.js.gz
-43 B: basic-lib-flow.js.br
-56 B: basic-lib-flow.esm.mjs.gz
-42 B: basic-lib-flow.esm.mjs.br
-171 B: basic-lib-flow.umd.js.gz
-132 B: basic-lib-flow.umd.js.br"
+"
 `;
 
 exports[`fixtures build basic-flow with microbundle 2`] = `6`;
@@ -593,15 +513,7 @@ basic-json
   src
     index.js
     two.json
-
-
-Build \\"basic-json\\" to dist:
-93 B: basic-json.js.gz
-65 B: basic-json.js.br
-92 B: basic-json.esm.mjs.gz
-64 B: basic-json.esm.mjs.br
-180 B: basic-json.umd.js.gz
-129 B: basic-json.umd.js.br"
+"
 `;
 
 exports[`fixtures build basic-json with microbundle 2`] = `6`;
@@ -646,21 +558,7 @@ basic-multi-source
     b.umd.js
     b.umd.js.map
   package.json
-
-
-Build \\"basic-multi-source\\" to dist:
-43 B: a.js.gz
-27 B: a.js.br
-43 B: a.esm.mjs.gz
-27 B: a.esm.mjs.br
-99 B: a.umd.js.gz
-84 B: a.umd.js.br
-43 B: b.js.gz
-27 B: b.js.br
-43 B: b.esm.mjs.gz
-27 B: b.esm.mjs.br
-99 B: b.umd.js.gz
-79 B: b.umd.js.br"
+"
 `;
 
 exports[`fixtures build basic-multi-source with microbundle 2`] = `12`;
@@ -729,21 +627,7 @@ basic-multi-source-css
     b.umd.js
     b.umd.js.map
   package.json
-
-
-Build \\"basic-multi-source-css\\" to dist:
-104 B: a.js.gz
-61 B: a.js.br
-105 B: a.esm.mjs.gz
-67 B: a.esm.mjs.br
-201 B: a.umd.js.gz
-133 B: a.umd.js.br
-104 B: b.js.gz
-61 B: b.js.br
-106 B: b.esm.mjs.gz
-67 B: b.esm.mjs.br
-201 B: b.umd.js.gz
-134 B: b.umd.js.br"
+"
 `;
 
 exports[`fixtures build basic-multi-source-css with microbundle 2`] = `16`;
@@ -811,15 +695,7 @@ basic-no-compress
   src
     index.js
     two.js
-
-
-Build \\"basic-no-compress\\" to dist:
-260 B: basic-no-compress.js.gz
-206 B: basic-no-compress.js.br
-258 B: basic-no-compress.esm.mjs.gz
-209 B: basic-no-compress.esm.mjs.br
-381 B: basic-no-compress.umd.js.gz
-310 B: basic-no-compress.umd.js.br"
+"
 `;
 
 exports[`fixtures build basic-no-compress with microbundle 2`] = `6`;
@@ -937,15 +813,7 @@ basic-no-pkg-main
   src
     index.js
     two.js
-
-
-Build \\"basic-no-pkg-main\\" to dist:
-187 B: basic-no-pkg-main.js.gz
-138 B: basic-no-pkg-main.js.br
-188 B: basic-no-pkg-main.js.gz
-139 B: basic-no-pkg-main.js.br
-278 B: basic-no-pkg-main.js.gz
-229 B: basic-no-pkg-main.js.br"
+"
 `;
 
 exports[`fixtures build basic-no-pkg-main with microbundle 2`] = `2`;
@@ -968,11 +836,7 @@ basic-node-internals
   package.json
   src
     index.js
-
-
-Build \\"basic-node-internals\\" to dist:
-191 B: basic-node-internals.js.gz
-149 B: basic-node-internals.js.br"
+"
 `;
 
 exports[`fixtures build basic-node-internals with microbundle 2`] = `2`;
@@ -1018,15 +882,7 @@ basic-ts
     car.ts
     index.ts
   tsconfig.json
-
-
-Build \\"basic-lib-ts\\" to dist:
-118 B: basic-lib-ts.js.gz
-94 B: basic-lib-ts.js.br
-118 B: basic-lib-ts.esm.mjs.gz
-97 B: basic-lib-ts.esm.mjs.br
-201 B: basic-lib-ts.umd.js.gz
-150 B: basic-lib-ts.umd.js.br"
+"
 `;
 
 exports[`fixtures build basic-ts with microbundle 2`] = `8`;
@@ -1085,15 +941,7 @@ basic-tsx
   src
     index.tsx
   tsconfig.json
-
-
-Build \\"basic-lib-tsx\\" to dist:
-213 B: basic-lib-tsx.js.gz
-164 B: basic-lib-tsx.js.br
-218 B: basic-lib-tsx.esm.mjs.gz
-172 B: basic-lib-tsx.esm.mjs.br
-298 B: basic-lib-tsx.umd.js.gz
-232 B: basic-lib-tsx.umd.js.br"
+"
 `;
 
 exports[`fixtures build basic-tsx with microbundle 2`] = `7`;
@@ -1141,15 +989,7 @@ basic
   src
     index.js
     two.js
-
-
-Build \\"basic\\" to dist:
-187 B: basic.js.gz
-138 B: basic.js.br
-188 B: basic.esm.mjs.gz
-139 B: basic.esm.mjs.br
-269 B: basic.umd.js.gz
-198 B: basic.umd.js.br"
+"
 `;
 
 exports[`fixtures build basic-with-cwd with microbundle 2`] = `6`;
@@ -1191,15 +1031,7 @@ class-decorators-ts
   src
     index.ts
   tsconfig.json
-
-
-Build \\"class-decorators-ts\\" to dist:
-348 B: class-decorators-ts.js.gz
-288 B: class-decorators-ts.js.br
-348 B: class-decorators-ts.esm.mjs.gz
-288 B: class-decorators-ts.esm.mjs.br
-415 B: class-decorators-ts.umd.js.gz
-353 B: class-decorators-ts.umd.js.br"
+"
 `;
 
 exports[`fixtures build class-decorators-ts with microbundle 2`] = `7`;
@@ -1249,15 +1081,7 @@ class-properties
   package.json
   src
     index.js
-
-
-Build \\"class-properties\\" to dist:
-93 B: class-properties.js.gz
-79 B: class-properties.js.br
-96 B: class-properties.esm.mjs.gz
-85 B: class-properties.esm.mjs.br
-197 B: class-properties.umd.js.gz
-150 B: class-properties.umd.js.br"
+"
 `;
 
 exports[`fixtures build class-properties with microbundle 2`] = `6`;
@@ -1296,15 +1120,7 @@ css-modules--false
     index.js
     not_scoped.css
     not_scoped.module.css
-
-
-Build \\"css-modules--false\\" to dist:
-49 B: css-modules--false.js.gz
-23 B: css-modules--false.js.br
-52 B: css-modules--false.esm.mjs.gz
-36 B: css-modules--false.esm.mjs.br
-156 B: css-modules--false.umd.js.gz
-109 B: css-modules--false.umd.js.br"
+"
 `;
 
 exports[`fixtures build css-modules--false with microbundle 2`] = `4`;
@@ -1342,15 +1158,7 @@ css-modules--null
     index.js
     not_scoped.css
     scoped.module.css
-
-
-Build \\"css-modules--null\\" to dist:
-110 B: css-modules--null.js.gz
-72 B: css-modules--null.js.br
-112 B: css-modules--null.esm.mjs.gz
-77 B: css-modules--null.esm.mjs.br
-200 B: css-modules--null.umd.js.gz
-140 B: css-modules--null.umd.js.br"
+"
 `;
 
 exports[`fixtures build css-modules--null with microbundle 2`] = `4`;
@@ -1388,15 +1196,7 @@ css-modules--string
     index.js
     scoped.css
     scoped.module.css
-
-
-Build \\"css-modules--string\\" to dist:
-166 B: css-modules--string.js.gz
-118 B: css-modules--string.js.br
-168 B: css-modules--string.esm.mjs.gz
-122 B: css-modules--string.esm.mjs.br
-263 B: css-modules--string.umd.js.gz
-192 B: css-modules--string.umd.js.br"
+"
 `;
 
 exports[`fixtures build css-modules--string with microbundle 2`] = `4`;
@@ -1434,15 +1234,7 @@ css-modules--true
     index.js
     scoped.css
     scoped.module.css
-
-
-Build \\"css-modules--true\\" to dist:
-139 B: css-modules--true.js.gz
-94 B: css-modules--true.js.br
-141 B: css-modules--true.esm.mjs.gz
-108 B: css-modules--true.esm.mjs.br
-230 B: css-modules--true.umd.js.gz
-165 B: css-modules--true.umd.js.br"
+"
 `;
 
 exports[`fixtures build css-modules--true with microbundle 2`] = `4`;
@@ -1480,15 +1272,7 @@ custom-babelrc
   package.json
   src
     index.js
-
-
-Build \\"custom-babelrc\\" to dist:
-218 B: custom-babelrc.js.gz
-193 B: custom-babelrc.js.br
-222 B: custom-babelrc.esm.mjs.gz
-185 B: custom-babelrc.esm.mjs.br
-309 B: custom-babelrc.umd.js.gz
-260 B: custom-babelrc.umd.js.br"
+"
 `;
 
 exports[`fixtures build custom-babelrc with microbundle 2`] = `6`;
@@ -1530,17 +1314,7 @@ custom-outputs
   src
     index.js
     two.js
-
-
-Build \\"custom-outputs\\" to dist:
-187 B: custom-outputs.js.gz
-138 B: custom-outputs.js.br
-113 B: custom-outputs.exportsx.mjs.gz
-92 B: custom-outputs.exportsx.mjs.br
-188 B: custom-outputs.modulex.mjs.gz
-139 B: custom-outputs.modulex.mjs.br
-273 B: custom-outputs.umdx.js.gz
-203 B: custom-outputs.umdx.js.br"
+"
 `;
 
 exports[`fixtures build custom-outputs with microbundle 2`] = `8`;
@@ -1588,17 +1362,7 @@ custom-outputs-alt
   src
     index.js
     two.js
-
-
-Build \\"custom-outputs-alt\\" to dist:
-187 B: custom-outputs-alt.cjsmain.js.gz
-138 B: custom-outputs-alt.cjsmain.js.br
-113 B: custom-outputs-alt.esmodule.mjs.gz
-92 B: custom-outputs-alt.esmodule.mjs.br
-188 B: custom-outputs-alt.jsnextmain.mjs.gz
-139 B: custom-outputs-alt.jsnextmain.mjs.br
-277 B: custom-outputs-alt.unpkg.js.gz
-226 B: custom-outputs-alt.unpkg.js.br"
+"
 `;
 
 exports[`fixtures build custom-outputs-alt with microbundle 2`] = `8`;
@@ -1644,15 +1408,7 @@ custom-source
   src
     custom-source.js
     two.js
-
-
-Build \\"custom-source\\" to dist:
-187 B: custom-source.js.gz
-138 B: custom-source.js.br
-188 B: custom-source.esm.mjs.gz
-139 B: custom-source.esm.mjs.br
-275 B: custom-source.umd.js.gz
-203 B: custom-source.umd.js.br"
+"
 `;
 
 exports[`fixtures build custom-source with microbundle 2`] = `6`;
@@ -1692,15 +1448,7 @@ custom-source
   src
     custom-source.js
     two.js
-
-
-Build \\"custom-src\\" to dist:
-187 B: custom-src.js.gz
-138 B: custom-src.js.br
-188 B: custom-src.esm.mjs.gz
-139 B: custom-src.esm.mjs.br
-273 B: custom-src.umd.js.gz
-203 B: custom-src.umd.js.br"
+"
 `;
 
 exports[`fixtures build custom-source-with-cwd with microbundle 2`] = `6`;
@@ -1739,15 +1487,7 @@ default-named
   package.json
   src
     index.js
-
-
-Build \\"default-named\\" to dist:
-60 B: default-named.js.gz
-46 B: default-named.js.br
-74 B: default-named.esm.mjs.gz
-62 B: default-named.esm.mjs.br
-169 B: default-named.umd.js.gz
-122 B: default-named.umd.js.br"
+"
 `;
 
 exports[`fixtures build default-named with microbundle 2`] = `6`;
@@ -1782,15 +1522,7 @@ define
     define.umd.js
   index.js
   package.json
-
-
-Build \\"define\\" to dist:
-55 B: define.js.gz
-37 B: define.js.br
-55 B: define.esm.mjs.gz
-37 B: define.esm.mjs.br
-108 B: define.umd.js.gz
-78 B: define.umd.js.br"
+"
 `;
 
 exports[`fixtures build define with microbundle 2`] = `3`;
@@ -1820,11 +1552,7 @@ define-expression
     define-expression.esm.mjs
   index.js
   package.json
-
-
-Build \\"define-expression\\" to dist:
-56 B: define-expression.esm.mjs.gz
-40 B: define-expression.esm.mjs.br"
+"
 `;
 
 exports[`fixtures build define-expression with microbundle 2`] = `1`;
@@ -1853,15 +1581,7 @@ esnext-ts
   src
     index.ts
   tsconfig.json
-
-
-Build \\"esnext-ts\\" to dist:
-1010 B: esnext-ts.js.gz
-899 B: esnext-ts.js.br
-1011 B: esnext-ts.esm.mjs.gz
-896 B: esnext-ts.esm.mjs.br
-1072 B: esnext-ts.umd.js.gz
-959 B: esnext-ts.umd.js.br"
+"
 `;
 
 exports[`fixtures build esnext-ts with microbundle 2`] = `7`;
@@ -1903,15 +1623,7 @@ inline-source-map
   src
     index.js
     two.js
-
-
-Build \\"inline-source-map\\" to dist:
-187 B: inline-source-map.js.gz
-138 B: inline-source-map.js.br
-188 B: inline-source-map.esm.mjs.gz
-139 B: inline-source-map.esm.mjs.br
-278 B: inline-source-map.umd.js.gz
-217 B: inline-source-map.umd.js.br"
+"
 `;
 
 exports[`fixtures build inline-source-map with microbundle 2`] = `3`;
@@ -1949,15 +1661,7 @@ jsx
     jsx.umd.js.map
   index.js
   package.json
-
-
-Build \\"jsx\\" to dist:
-239 B: jsx.js.gz
-195 B: jsx.js.br
-237 B: jsx.esm.mjs.gz
-201 B: jsx.esm.mjs.br
-313 B: jsx.umd.js.gz
-248 B: jsx.umd.js.br"
+"
 `;
 
 exports[`fixtures build jsx with microbundle 2`] = `6`;
@@ -1998,15 +1702,7 @@ macro
   src
     index.js
     macro.js
-
-
-Build \\"macro-lib\\" to dist:
-49 B: macro-lib.js.gz
-33 B: macro-lib.js.br
-48 B: macro-lib.esm.mjs.gz
-32 B: macro-lib.esm.mjs.br
-156 B: macro-lib.umd.js.gz
-126 B: macro-lib.umd.js.br"
+"
 `;
 
 exports[`fixtures build macro with microbundle 2`] = `6`;
@@ -2047,15 +1743,7 @@ mangle-json-file
   src
     index.js
     two.js
-
-
-Build \\"mangle-json-file\\" to dist:
-103 B: mangle-json-file.js.gz
-89 B: mangle-json-file.js.br
-105 B: mangle-json-file.esm.mjs.gz
-91 B: mangle-json-file.esm.mjs.br
-196 B: mangle-json-file.umd.js.gz
-171 B: mangle-json-file.umd.js.br"
+"
 `;
 
 exports[`fixtures build mangle-json-file with microbundle 2`] = `6`;
@@ -2095,15 +1783,7 @@ minify-config
   src
     index.js
     two.js
-
-
-Build \\"minify-config\\" to dist:
-99 B: minify-config.js.gz
-85 B: minify-config.js.br
-101 B: minify-config.esm.mjs.gz
-87 B: minify-config.esm.mjs.br
-189 B: minify-config.umd.js.gz
-140 B: minify-config.umd.js.br"
+"
 `;
 
 exports[`fixtures build minify-config with microbundle 2`] = `6`;
@@ -2143,15 +1823,7 @@ minify-config-boolean
   src
     index.js
     two.js
-
-
-Build \\"minify-config-boolean\\" to dist:
-107 B: minify-config-boolean.js.gz
-84 B: minify-config-boolean.js.br
-114 B: minify-config-boolean.esm.mjs.gz
-90 B: minify-config-boolean.esm.mjs.br
-216 B: minify-config-boolean.umd.js.gz
-159 B: minify-config-boolean.umd.js.br"
+"
 `;
 
 exports[`fixtures build minify-config-boolean with microbundle 2`] = `6`;
@@ -2192,15 +1864,7 @@ minify-path-config
   src
     index.js
     two.js
-
-
-Build \\"minify-path-config\\" to dist:
-103 B: minify-path-config.js.gz
-89 B: minify-path-config.js.br
-105 B: minify-path-config.esm.mjs.gz
-91 B: minify-path-config.esm.mjs.br
-198 B: minify-path-config.umd.js.gz
-152 B: minify-path-config.umd.js.br"
+"
 `;
 
 exports[`fixtures build minify-path-config with microbundle 2`] = `6`;
@@ -2239,15 +1903,7 @@ minify-path-parent-dir
   index.js
   package.json
   two.js
-
-
-Build \\"minify-path-parent-dir\\" to dist:
-103 B: minify-path-parent-dir.js.gz
-89 B: minify-path-parent-dir.js.br
-105 B: minify-path-parent-dir.esm.mjs.gz
-91 B: minify-path-parent-dir.esm.mjs.br
-200 B: minify-path-parent-dir.umd.js.gz
-161 B: minify-path-parent-dir.umd.js.br"
+"
 `;
 
 exports[`fixtures build minify-path-parent-dir-with-cwd with microbundle 2`] = `6`;
@@ -2283,11 +1939,7 @@ modern
   src
     index.js
     two.js
-
-
-Build \\"modern-lib\\" to dist:
-113 B: modern-lib.modern.mjs.gz
-92 B: modern-lib.modern.mjs.br"
+"
 `;
 
 exports[`fixtures build modern with microbundle 2`] = `2`;
@@ -2317,17 +1969,7 @@ modern-generators
   src
     index.js
     two.js
-
-
-Build \\"modern-generators\\" to dist:
-248 B: modern-generators.js.gz
-201 B: modern-generators.js.br
-118 B: modern-generators.modern.mjs.gz
-99 B: modern-generators.modern.mjs.br
-247 B: modern-generators.esm.mjs.gz
-218 B: modern-generators.esm.mjs.br
-326 B: modern-generators.umd.js.gz
-267 B: modern-generators.umd.js.br"
+"
 `;
 
 exports[`fixtures build modern-generators with microbundle 2`] = `8`;
@@ -2373,15 +2015,7 @@ name-custom-amd
   src
     index.js
     two.js
-
-
-Build \\"name-custom-amd\\" to dist:
-187 B: name-custom-amd.js.gz
-138 B: name-custom-amd.js.br
-188 B: name-custom-amd.esm.mjs.gz
-139 B: name-custom-amd.esm.mjs.br
-277 B: name-custom-amd.umd.js.gz
-208 B: name-custom-amd.umd.js.br"
+"
 `;
 
 exports[`fixtures build name-custom-amd with microbundle 2`] = `6`;
@@ -2421,15 +2055,7 @@ name-custom-cli
   src
     index.js
     two.js
-
-
-Build \\"name-custom\\" to dist:
-187 B: name-custom.js.gz
-138 B: name-custom.js.br
-188 B: name-custom.esm.mjs.gz
-139 B: name-custom.esm.mjs.br
-276 B: name-custom.umd.js.gz
-215 B: name-custom.umd.js.br"
+"
 `;
 
 exports[`fixtures build name-custom-cli with microbundle 2`] = `6`;
@@ -2468,15 +2094,7 @@ no-pkg
   src
     index.js
     two.js
-
-
-Build \\"no-pkg\\" to dist:
-187 B: no-pkg.js.gz
-138 B: no-pkg.js.br
-188 B: no-pkg.esm.mjs.gz
-139 B: no-pkg.esm.mjs.br
-270 B: no-pkg.umd.js.gz
-216 B: no-pkg.umd.js.br"
+"
 `;
 
 exports[`fixtures build no-pkg with microbundle 2`] = `6`;
@@ -2516,15 +2134,7 @@ no-pkg-name
   src
     index.js
     two.js
-
-
-Build \\"no-pkg-name\\" to dist:
-187 B: no-pkg-name.js.gz
-138 B: no-pkg-name.js.br
-188 B: no-pkg-name.esm.mjs.gz
-139 B: no-pkg-name.esm.mjs.br
-274 B: no-pkg-name.umd.js.gz
-219 B: no-pkg-name.umd.js.br"
+"
 `;
 
 exports[`fixtures build no-pkg-name with microbundle 2`] = `6`;
@@ -2566,15 +2176,7 @@ optional-chaining-ts
   src
     index.ts
   tsconfig.json
-
-
-Build \\"optional-chaining-ts\\" to dist:
-109 B: optional-chaining-ts.js.gz
-88 B: optional-chaining-ts.js.br
-111 B: optional-chaining-ts.esm.mjs.gz
-97 B: optional-chaining-ts.esm.mjs.br
-210 B: optional-chaining-ts.umd.js.gz
-169 B: optional-chaining-ts.umd.js.br"
+"
 `;
 
 exports[`fixtures build optional-chaining-ts with microbundle 2`] = `7`;
@@ -2622,15 +2224,7 @@ parameters-rest-closure
   package.json
   src
     index.js
-
-
-Build \\"parameters-rest-closure\\" to dist:
-157 B: parameters-rest-closure.js.gz
-115 B: parameters-rest-closure.js.br
-165 B: parameters-rest-closure.esm.mjs.gz
-124 B: parameters-rest-closure.esm.mjs.br
-247 B: parameters-rest-closure.umd.js.gz
-189 B: parameters-rest-closure.umd.js.br"
+"
 `;
 
 exports[`fixtures build parameters-rest-closure with microbundle 2`] = `6`;
@@ -2669,15 +2263,7 @@ pretty
   package.json
   src
     index.js
-
-
-Build \\"pretty\\" to dist:
-6.33 kB: pretty.js.gz
-5.19 kB: pretty.js.br
-6.34 kB: pretty.esm.mjs.gz
-5.21 kB: pretty.esm.mjs.br
-6.46 kB: pretty.umd.js.gz
-5.31 kB: pretty.umd.js.br"
+"
 `;
 
 exports[`fixtures build pretty with microbundle 2`] = `6`;
@@ -2714,11 +2300,7 @@ publish-config
   package.json
   src
     foo.ts
-
-
-Build \\"publish-config\\" to dist:
-55 B: bar.js.gz
-33 B: bar.js.br"
+"
 `;
 
 exports[`fixtures build publish-config with microbundle 2`] = `3`;
@@ -2750,15 +2332,7 @@ pure
   package.json
   src
     index.js
-
-
-Build \\"pure\\" to dist:
-65 B: pure.js.gz
-44 B: pure.js.br
-71 B: pure.esm.mjs.gz
-49 B: pure.esm.mjs.br
-167 B: pure.umd.js.gz
-125 B: pure.umd.js.br"
+"
 `;
 
 exports[`fixtures build pure with microbundle 2`] = `6`;
@@ -2797,15 +2371,7 @@ raw
   package.json
   src
     index.js
-
-
-Build \\"raw\\" to dist:
-1389 B: raw.js.gz
-1160 B: raw.js.br
-1398 B: raw.esm.mjs.gz
-1169 B: raw.esm.mjs.br
-1500 B: raw.umd.js.gz
-1248 B: raw.umd.js.br"
+"
 `;
 
 exports[`fixtures build raw with microbundle 2`] = `6`;
@@ -2844,15 +2410,7 @@ shebang
   package.json
   src
     index.js
-
-
-Build \\"shebang\\" to dist:
-85 B: shebang.js.gz
-62 B: shebang.js.br
-89 B: shebang.esm.mjs.gz
-70 B: shebang.esm.mjs.br
-183 B: shebang.umd.js.gz
-145 B: shebang.umd.js.br"
+"
 `;
 
 exports[`fixtures build shebang with microbundle 2`] = `6`;
@@ -2895,15 +2453,7 @@ terser-annotations
   package.json
   src
     index.js
-
-
-Build \\"terser-annotations\\" to dist:
-133 B: terser-annotations.js.gz
-104 B: terser-annotations.js.br
-138 B: terser-annotations.esm.mjs.gz
-97 B: terser-annotations.esm.mjs.br
-224 B: terser-annotations.umd.js.gz
-169 B: terser-annotations.umd.js.br"
+"
 `;
 
 exports[`fixtures build terser-annotations with microbundle 2`] = `6`;
@@ -2946,15 +2496,7 @@ ts-custom-declaration
   tsconfig.json
   types
     index.d.ts
-
-
-Build \\"ts-custom-declarations\\" to dist:
-55 B: index.js.gz
-33 B: index.js.br
-61 B: index.esm.mjs.gz
-45 B: index.esm.mjs.br
-175 B: index.umd.js.gz
-125 B: index.umd.js.br"
+"
 `;
 
 exports[`fixtures build ts-custom-declaration with microbundle 2`] = `6`;
@@ -3004,15 +2546,7 @@ ts-declaration
   tsconfig.json
   types
     index.d.ts
-
-
-Build \\"ts-declarations\\" to dist:
-55 B: index.js.gz
-33 B: index.js.br
-61 B: index.esm.mjs.gz
-45 B: index.esm.mjs.br
-171 B: index.umd.js.gz
-124 B: index.umd.js.br"
+"
 `;
 
 exports[`fixtures build ts-declaration with microbundle 2`] = `6`;
@@ -3061,15 +2595,7 @@ ts-jsx
   src
     index.tsx
   tsconfig.json
-
-
-Build \\"ts-jsx\\" to dist:
-130 B: ts-jsx.js.gz
-94 B: ts-jsx.js.br
-131 B: ts-jsx.esm.mjs.gz
-111 B: ts-jsx.esm.mjs.br
-219 B: ts-jsx.umd.js.gz
-176 B: ts-jsx.umd.js.br"
+"
 `;
 
 exports[`fixtures build ts-jsx with microbundle 2`] = `7`;
@@ -3118,15 +2644,7 @@ ts-mixed-exports
     car.ts
     index.ts
   tsconfig.json
-
-
-Build \\"ts-mixed-exports\\" to dist:
-130 B: ts-mixed-exports.js.gz
-104 B: ts-mixed-exports.js.br
-134 B: ts-mixed-exports.esm.mjs.gz
-118 B: ts-mixed-exports.esm.mjs.br
-228 B: ts-mixed-exports.umd.js.gz
-185 B: ts-mixed-exports.umd.js.br"
+"
 `;
 
 exports[`fixtures build ts-mixed-exports with microbundle 2`] = `8`;
@@ -3188,15 +2706,7 @@ ts-module
     foo.ts
     index.ts
   tsconfig.json
-
-
-Build \\"ts-module\\" to dist:
-59 B: ts-module.js.gz
-42 B: ts-module.js.br
-65 B: ts-module.esm.mjs.gz
-49 B: ts-module.esm.mjs.br
-167 B: ts-module.umd.js.gz
-127 B: ts-module.umd.js.br"
+"
 `;
 
 exports[`fixtures build ts-module with microbundle 2`] = `8`;
@@ -3246,15 +2756,7 @@ visualizer
   src
     index.js
   stats.html
-
-
-Build \\"visualizer\\" to dist:
-148 B: visualizer.js.gz
-107 B: visualizer.js.br
-79 B: visualizer.esm.mjs.gz
-64 B: visualizer.esm.mjs.br
-231 B: visualizer.umd.js.gz
-195 B: visualizer.umd.js.br"
+"
 `;
 
 exports[`fixtures build visualizer with microbundle 2`] = `6`;
@@ -3299,17 +2801,7 @@ worker-loader
     bar.js
     index.js
     worker.js
-
-
-Build \\"worker-loader\\" to dist:
-140 B: worker-loader.modern.mjs.gz
-112 B: worker-loader.modern.mjs.br
-63 B: worker-7e1b9921.js.gz
-54 B: worker-7e1b9921.js.br
-150 B: worker-loader.esm.mjs.gz
-123 B: worker-loader.esm.mjs.br
-81 B: worker-35b22e56.js.gz
-66 B: worker-35b22e56.js.br"
+"
 `;
 
 exports[`fixtures build worker-loader with microbundle 2`] = `8`;
