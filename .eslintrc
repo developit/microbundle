@@ -1,6 +1,5 @@
 {
   "extends": [
-    "eslint-config-developit",
     "prettier",
     "plugin:prettier/recommended"
   ],
