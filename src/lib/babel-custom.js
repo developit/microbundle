@@ -7,16 +7,6 @@ const ESMODULES_TARGET = {
 	esmodules: true,
 };
 
-// silence Babel 7.13+ loose-with-assumptions warnings
-const _warn = console.warn;
-console.warn = function (m) {
-	if (/the "loose: true" option/.test(m)) {
-		return;
-	}
-	// eslint-disable-next-line prefer-rest-params
-	return _warn.apply(this, arguments);
-};
-
 const mergeConfigItems = (babel, type, ...configItemsToMerge) => {
 	const mergedItems = [];
 
@@ -116,9 +106,20 @@ export default () => {
 									'transform-fast-rest',
 								],
 							},
+						// The following 3 plugins have `loose: false` as we instead use the
+						// associated `assumptions`. Enabling `loose` causes some issues with other
+						// class features plugins, so we replace it with the assumptions.
 						{
 							name: '@babel/plugin-transform-class-properties',
-							loose: true,
+							loose: false,
+						},
+						{
+							name: '@babel/plugin-transform-private-property-in-object',
+							loose: false,
+						},
+						{
+							name: '@babel/plugin-transform-private-methods',
+							loose: false,
 						},
 						!customOptions.modern &&
 							!isNodeTarget && {
