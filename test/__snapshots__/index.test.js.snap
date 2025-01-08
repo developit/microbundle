@@ -1193,30 +1193,30 @@ class-decorators-ts
 
 
 Build \\"class-decorators-ts\\" to dist:
-370 B: class-decorators-ts.js.gz
-311 B: class-decorators-ts.js.br
-367 B: class-decorators-ts.esm.mjs.gz
-302 B: class-decorators-ts.esm.mjs.br
-435 B: class-decorators-ts.umd.js.gz
-380 B: class-decorators-ts.umd.js.br"
+348 B: class-decorators-ts.js.gz
+288 B: class-decorators-ts.js.br
+348 B: class-decorators-ts.esm.mjs.gz
+288 B: class-decorators-ts.esm.mjs.br
+414 B: class-decorators-ts.umd.js.gz
+374 B: class-decorators-ts.umd.js.br"
 `;
 
 exports[`fixtures build class-decorators-ts with microbundle 2`] = `7`;
 
 exports[`fixtures build class-decorators-ts with microbundle 3`] = `
-"\\"function\\"==typeof SuppressedError&&SuppressedError;var e=/*#__PURE__*/function(){function e(e){this.greeting=e}return e.prototype.greet=function(){return\\"Hello, \\"+this.greeting},e}(),t=new(e=function(e,t,r,o){var n,c=arguments.length,f=c<3?t:null===o?o=Object.getOwnPropertyDescriptor(t,r):o;if(\\"object\\"==typeof Reflect&&\\"function\\"==typeof Reflect.decorate)f=Reflect.decorate(e,t,r,o);else for(var l=e.length-1;l>=0;l--)(n=e[l])&&(f=(c<3?n(f):c>3?n(t,r,f):n(t,r))||f);return c>3&&f&&Object.defineProperty(t,r,f),f}([function(e){Object.seal(e),Object.seal(e.prototype)}],e))(\\"Hello World\\");export default t;
+"var e=/*#__PURE__*/function(){function e(e){this.greeting=e}return e.prototype.greet=function(){return\\"Hello, \\"+this.greeting},e}(),t=new(e=function(e,t,r,n){var o,c=arguments.length,l=c<3?t:null===n?n=Object.getOwnPropertyDescriptor(t,r):n;if(\\"object\\"==typeof Reflect&&\\"function\\"==typeof Reflect.decorate)l=Reflect.decorate(e,t,r,n);else for(var f=e.length-1;f>=0;f--)(o=e[f])&&(l=(c<3?o(l):c>3?o(t,r,l):o(t,r))||l);return c>3&&l&&Object.defineProperty(t,r,l),l}([function(e){Object.seal(e),Object.seal(e.prototype)}],e))(\\"Hello World\\");export default t;
 //# sourceMappingURL=class-decorators-ts.esm.mjs.map
 "
 `;
 
 exports[`fixtures build class-decorators-ts with microbundle 4`] = `
-"\\"function\\"==typeof SuppressedError&&SuppressedError;var e=/*#__PURE__*/function(){function e(e){this.greeting=e}return e.prototype.greet=function(){return\\"Hello, \\"+this.greeting},e}(),t=new(e=function(e,t,r,o){var n,c=arguments.length,f=c<3?t:null===o?o=Object.getOwnPropertyDescriptor(t,r):o;if(\\"object\\"==typeof Reflect&&\\"function\\"==typeof Reflect.decorate)f=Reflect.decorate(e,t,r,o);else for(var l=e.length-1;l>=0;l--)(n=e[l])&&(f=(c<3?n(f):c>3?n(t,r,f):n(t,r))||f);return c>3&&f&&Object.defineProperty(t,r,f),f}([function(e){Object.seal(e),Object.seal(e.prototype)}],e))(\\"Hello World\\");module.exports=t;
+"var e=/*#__PURE__*/function(){function e(e){this.greeting=e}return e.prototype.greet=function(){return\\"Hello, \\"+this.greeting},e}(),t=new(e=function(e,t,r,o){var n,c=arguments.length,l=c<3?t:null===o?o=Object.getOwnPropertyDescriptor(t,r):o;if(\\"object\\"==typeof Reflect&&\\"function\\"==typeof Reflect.decorate)l=Reflect.decorate(e,t,r,o);else for(var f=e.length-1;f>=0;f--)(n=e[f])&&(l=(c<3?n(l):c>3?n(t,r,l):n(t,r))||l);return c>3&&l&&Object.defineProperty(t,r,l),l}([function(e){Object.seal(e),Object.seal(e.prototype)}],e))(\\"Hello World\\");module.exports=t;
 //# sourceMappingURL=class-decorators-ts.js.map
 "
 `;
 
 exports[`fixtures build class-decorators-ts with microbundle 5`] = `
-"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=t():\\"function\\"==typeof define&&define.amd?define(t):(e||self).classDecoratorsTs=t()}(this,function(){\\"function\\"==typeof SuppressedError&&SuppressedError;var e=/*#__PURE__*/function(){function e(e){this.greeting=e}return e.prototype.greet=function(){return\\"Hello, \\"+this.greeting},e}();return e=function(e,t,o,n){var r,f=arguments.length,i=f<3?t:null===n?n=Object.getOwnPropertyDescriptor(t,o):n;if(\\"object\\"==typeof Reflect&&\\"function\\"==typeof Reflect.decorate)i=Reflect.decorate(e,t,o,n);else for(var c=e.length-1;c>=0;c--)(r=e[c])&&(i=(f<3?r(i):f>3?r(t,o,i):r(t,o))||i);return f>3&&i&&Object.defineProperty(t,o,i),i}([function(e){Object.seal(e),Object.seal(e.prototype)}],e),new e(\\"Hello World\\")});
+"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=t():\\"function\\"==typeof define&&define.amd?define(t):(e||self).classDecoratorsTs=t()}(this,function(){var e=/*#__PURE__*/function(){function e(e){this.greeting=e}return e.prototype.greet=function(){return\\"Hello, \\"+this.greeting},e}();return e=function(e,t,o,n){var r,f=arguments.length,i=f<3?t:null===n?n=Object.getOwnPropertyDescriptor(t,o):n;if(\\"object\\"==typeof Reflect&&\\"function\\"==typeof Reflect.decorate)i=Reflect.decorate(e,t,o,n);else for(var c=e.length-1;c>=0;c--)(r=e[c])&&(i=(f<3?r(i):f>3?r(t,o,i):r(t,o))||i);return f>3&&i&&Object.defineProperty(t,o,i),i}([function(e){Object.seal(e),Object.seal(e.prototype)}],e),new e(\\"Hello World\\")});
 //# sourceMappingURL=class-decorators-ts.umd.js.map
 "
 `;
