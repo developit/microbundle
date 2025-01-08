@@ -600,15 +600,17 @@ function createConfig(options, entry, format, writeMeta) {
 					({
 						name: 'export-default-simplify',
 						renderChunk(code, chunk, options) {
-							let out = code.replace(
+							const s = new MagicString(code);
+							s.replace(
 								/([};\n])export\s*\{\s*([a-zA-Z0-9_$]+)\s+as\s+default\s*\};/,
 								(s, before, name) => {
 									return `${before}export default ${name};`;
 								},
 							);
-							if (out !== code) {
-								return { code: out, map: null };
-							}
+							return {
+								code: s.toString(),
+								map: s.generateMap({ hires: true }),
+							};
 						},
 					}),
 					options.compress !== false && [
