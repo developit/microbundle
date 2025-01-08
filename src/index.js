@@ -619,6 +619,11 @@ function createConfig(options, entry, format, writeMeta) {
 								{
 									keep_infinity: true,
 									pure_getters: true,
+									global_defs: {
+										// tslib helper for `using` & `await using` that otherwise
+										// wouldn't be fully removed when unused
+										SuppressedError: 'undefined',
+									},
 									// Ideally we'd just get Terser to respect existing Arrow functions...
 									// unsafe_arrows: true,
 									passes: 10,
