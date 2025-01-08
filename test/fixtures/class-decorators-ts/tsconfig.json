@@ -1,5 +1,6 @@
 {
 	"compilerOptions": {
+		"moduleResolution": "node",
 		"experimentalDecorators": true,
 		"baseUrl": "."
 	},
