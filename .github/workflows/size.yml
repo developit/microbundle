@@ -16,3 +16,12 @@ jobs:
           pattern: 'dist/!(*.js.map)'
           build-script: build
           repo-token: '${{ secrets.GITHUB_TOKEN }}'
+
+      - name: compressed-size-action
+        uses: preactjs/compressed-size-action@v2
+        with:
+          pattern: 'test/fixtures/**/dist/!(*.map)'
+          # We're using this to report size differences, not test, so update snapshots if they fail.
+          # The CI can catch the test failures instead.
+          build-script: 'test -- -u'
+          repo-token: '${{ secrets.GITHUB_TOKEN }}'
