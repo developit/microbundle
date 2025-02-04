@@ -39,6 +39,7 @@ import {
 import { getConfigFromPkgJson, getName } from './lib/package-info';
 import { shouldCssModules, cssModulesConfig } from './lib/css-modules';
 import { EOL } from 'os';
+import MagicString from 'magic-string';
 
 // Extensions to use when resolving modules
 const EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs'];
@@ -653,17 +654,36 @@ function createConfig(options, entry, format, writeMeta) {
 						// So we remove the globalThis check, replacing it with `this||self` to match Rollup 1's output:
 						renderChunk(code, chunk, opts) {
 							if (opts.format === 'umd') {
-								// minified:
-								code = code.replace(
+								// Can swap this out with MagicString.replace() when we bump it:
+								// https://github.com/developit/microbundle/blob/f815a01cb63d90b9f847a4dcad2a64e6b2f8596f/src/index.js#L657-L671
+								const s = new MagicString(code);
+
+								const minified = code.match(
 									/([a-zA-Z$_]+)="undefined"!=typeof globalThis\?globalThis:(\1\|\|self)/,
-									'$2',
 								);
-								// unminified:
-								code = code.replace(
+								if (minified) {
+									s.overwrite(
+										minified.index,
+										minified.index + minified[0].length,
+										minified[2],
+									);
+								}
+
+								const unminified = code.match(
 									/(global *= *)typeof +globalThis *!== *['"]undefined['"] *\? *globalThis *: *(global *\|\| *self)/,
-									'$1$2',
 								);
-								return { code, map: null };
+								if (unminified) {
+									s.overwrite(
+										unminified.index,
+										unminified.index + unminified[0].length,
+										unminified[1] + unminified[2],
+									);
+								}
+
+								return {
+									code: s.toString(),
+									map: s.generateMap({ hires: true }),
+								};
 							}
 						},
 						// Grab size info before writing files to disk:
