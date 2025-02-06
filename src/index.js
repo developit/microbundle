@@ -707,6 +707,17 @@ function createConfig(options, entry, format, writeMeta) {
 			globals,
 			strict: options.strict === true,
 			freeze: false,
+			compact: true,
+			// @todo: enable this when we update to the latest Rollup
+			//treeshake: {
+			//	// use Rollup's most optimal tree-shaking: (drops unused getter reads)
+			//	preset: 'smallest',
+			//	// preserve side-effect-only imports:
+			//	moduleSideEffects: true,
+			//},
+			generatedCode: modern ? 'es2015' : 'es5',
+			// turn off live bindings support (exports.* getters for re-exports)
+			externalLiveBindings: false,
 			esModule: false,
 			sourcemap: options.sourcemap,
 			get banner() {
