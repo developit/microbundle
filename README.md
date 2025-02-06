@@ -390,6 +390,10 @@ Here's what's coming up for Microbundle:
 - [eta](https://github.com/eta-dev/eta) Lightweight, powerful, pluggable embedded JS template engine
 - [swup](https://github.com/swup/swup) Page transition library for server-rendered websites.
 
+## 👀 Examples
+
+- [react-ui-typescript-microbundle](examples/react-ui-typescript-storybook) A React UI library created with Typescript, styled-components, styled-system & Storybook
+
 ## 🥂 License
 
 [MIT](https://oss.ninja/mit/developit/)
