@@ -91,7 +91,6 @@ export default async function microbundle(inputOptions) {
 	options.output = await getOutput({
 		cwd,
 		output: options.output,
-		pkgMain: options.pkg.main,
 		pkgName: options.pkg.name,
 	});
 
@@ -135,10 +134,9 @@ export default async function microbundle(inputOptions) {
 		}),
 	);
 
-	const targetDir = relative(cwd, dirname(options.output)) || '.';
 	const sourceExist = options.input.length > 0;
 	const banner = sourceExist
-		? blue(`Build "${options.pkg.name}" to ${targetDir}:`)
+		? blue(`Built "${options.pkg.name}":`)
 		: red(`Error: No entry module found for "${options.pkg.name}"`);
 	return {
 		output: `${banner}\n${out.join('\n')}`,
@@ -224,8 +222,8 @@ async function getInput({ entries, cwd, source, module }) {
 	return input;
 }
 
-async function getOutput({ cwd, output, pkgMain, pkgName }) {
-	let main = resolve(cwd, output || pkgMain || 'dist');
+async function getOutput({ cwd, output, pkgName }) {
+	let main = resolve(cwd, output || 'dist');
 	if (!main.match(/\.[a-z]+$/) || (await isDir(main))) {
 		main = resolve(main, `${removeScope(pkgName)}.js`);
 	}
@@ -260,13 +258,6 @@ async function getEntries({ input, cwd }) {
 	return entries;
 }
 
-function replaceName(filename, name) {
-	return resolve(
-		dirname(filename),
-		name + basename(filename).replace(/^[^.]+/, ''),
-	);
-}
-
 function walk(exports, includeDefault) {
 	if (!exports) return null;
 	if (typeof exports === 'string') return exports;
@@ -279,43 +270,44 @@ function getMain({ options, entry, format }) {
 	const { pkg } = options;
 	const pkgMain = options['pkg-main'];
 	const pkgTypeModule = pkg.type === 'module';
+	let multipleEntries = options.multipleEntries;
 
 	if (!pkgMain) {
 		return options.output;
 	}
 
-	let mainNoExtension = options.output;
-	if (options.multipleEntries) {
+	let defaultOutput = options.output;
+	if (multipleEntries) {
 		let name = entry.match(new RegExp(/([\\/])index/.source + EXTENSION.source))
-			? mainNoExtension
+			? defaultOutput
 			: entry;
-		mainNoExtension = resolve(dirname(mainNoExtension), basename(name));
+		defaultOutput = resolve(dirname(defaultOutput), basename(name));
 	}
-	mainNoExtension = mainNoExtension.replace(EXTENSION, '');
+	const defaultOutputNoExtension = defaultOutput.replace(EXTENSION, '');
 
 	const mainsByFormat = {};
 
-	mainsByFormat.es = replaceName(
-		pkg.module && !pkg.module.match(/src\//)
-			? pkg.module
-			: pkg['jsnext:main'] || (pkgTypeModule ? 'x.esm.js' : 'x.esm.mjs'),
-		mainNoExtension,
+	mainsByFormat.es = resolve(
+		(!multipleEntries &&
+			(pkg.module && !pkg.module.match(/src\//)
+				? pkg.module
+				: pkg['jsnext:main'])) ||
+			`${defaultOutputNoExtension}.esm.${pkgTypeModule ? 'js' : 'mjs'}`,
 	);
-
-	mainsByFormat.modern = replaceName(
-		(pkg.exports && walk(pkg.exports, pkgTypeModule)) ||
-			(pkg.syntax && pkg.syntax.esmodules) ||
-			pkg.esmodule ||
-			(pkgTypeModule ? 'x.modern.js' : 'x.modern.mjs'),
-		mainNoExtension,
+	mainsByFormat.modern = resolve(
+		(!multipleEntries &&
+			((pkg.exports && walk(pkg.exports, pkgTypeModule)) ||
+				(pkg.syntax && pkg.syntax.esmodules) ||
+				pkg.esmodule)) ||
+			`${defaultOutputNoExtension}.modern.${pkgTypeModule ? 'js' : 'mjs'}`,
 	);
-	mainsByFormat.cjs = replaceName(
-		pkg['cjs:main'] || (pkgTypeModule ? 'x.cjs' : 'x.js'),
-		mainNoExtension,
+	mainsByFormat.cjs = resolve(
+		(!multipleEntries && (pkg['cjs:main'] || pkg.main)) ||
+			`${defaultOutputNoExtension}.${pkgTypeModule ? 'cjs' : 'js'}`,
 	);
-	mainsByFormat.umd = replaceName(
-		pkg['umd:main'] || pkg.unpkg || 'x.umd.js',
-		mainNoExtension,
+	mainsByFormat.umd = resolve(
+		(!multipleEntries && (pkg['umd:main'] || pkg.unpkg)) ||
+			`${defaultOutputNoExtension}.umd.js`,
 	);
 
 	return mainsByFormat[format] || mainsByFormat.cjs;
