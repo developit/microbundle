@@ -72,6 +72,7 @@ export default async function microbundle(inputOptions) {
 	options.pkg.name = pkgName;
 
 	if (options.sourcemap === 'inline') {
+		// eslint-disable-next-line no-console
 		console.log(
 			'Warning: inline sourcemaps should only be used for debugging purposes.',
 		);
@@ -548,9 +549,16 @@ function createConfig(options, entry, format, writeMeta) {
 									...(options.generateTypes !== false && {
 										declarationDir: getDeclarationDir({ options, pkg }),
 									}),
-									jsx: 'preserve',
-									jsxFactory: options.jsx,
-									jsxFragmentFactory: options.jsxFragment,
+									...(options.jsxImportSource
+										? {
+												jsx: 'react-jsx',
+												jsxImportSource: options.jsxImportSource,
+										  }
+										: {
+												jsx: 'preserve',
+												jsxFactory: options.jsx,
+												jsxFragmentFactory: options.jsxFragment,
+										  }),
 								},
 								files: options.entries,
 							},
@@ -645,6 +653,7 @@ function createConfig(options, entry, format, writeMeta) {
 					options.visualize && visualizer(),
 					// NOTE: OMT only works with amd and esm
 					// Source: https://github.com/surma/rollup-plugin-off-main-thread#config
+					// eslint-disable-next-line new-cap
 					useWorkerLoader && (format === 'es' || modern) && OMT(),
 					/** @type {import('rollup').Plugin} */
 					({
