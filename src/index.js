@@ -386,6 +386,7 @@ function createConfig(options, entry, format, writeMeta) {
 	}
 
 	const modern = format === 'modern' || format === 'debug';
+	const shouldCompress = options.compress !== false && format !== 'debug';
 
 	// let rollupName = safeVariableName(basename(entry).replace(/\.js$/, ''));
 
@@ -504,7 +505,7 @@ function createConfig(options, entry, format, writeMeta) {
 							!!writeMeta &&
 							options.css !== 'inline' &&
 							absMain.replace(EXTENSION, '.css'),
-						minimize: options.compress,
+						minimize: shouldCompress,
 						sourceMap: options.sourcemap && options.css !== 'inline',
 					}),
 					moduleAliases.length > 0 &&
@@ -593,7 +594,7 @@ function createConfig(options, entry, format, writeMeta) {
 						custom: {
 							defines,
 							modern,
-							compress: options.compress !== false && format !== 'debug',
+							compress: shouldCompress,
 							targets: options.target === 'node' ? { node: '12' } : undefined,
 							pragma: options.jsx,
 							pragmaFrag: options.jsxFragment,
@@ -601,55 +602,54 @@ function createConfig(options, entry, format, writeMeta) {
 							jsxImportSource: options.jsxImportSource || false,
 						},
 					}),
-					options.compress !== false &&
-						format !== 'debug' && [
-							terser({
-								compress: Object.assign(
-									{
-										keep_infinity: true,
-										pure_getters: true,
-										// Ideally we'd just get Terser to respect existing Arrow functions...
-										// unsafe_arrows: true,
-										passes: 10,
-									},
-									typeof minifyOptions.compress === 'boolean'
-										? minifyOptions.compress
-										: minifyOptions.compress || {},
-								),
-								format: {
-									// By default, Terser wraps function arguments in extra parens to trigger eager parsing.
-									// Whether this is a good idea is way too specific to guess, so we optimize for size by default:
-									wrap_func_args: false,
-									comments: /^\s*([@#]__[A-Z]+__\s*$|@cc_on)/,
-									preserve_annotations: true,
+					shouldCompress && [
+						terser({
+							compress: Object.assign(
+								{
+									keep_infinity: true,
+									pure_getters: true,
+									// Ideally we'd just get Terser to respect existing Arrow functions...
+									// unsafe_arrows: true,
+									passes: 10,
 								},
-								module: modern,
-								ecma: modern ? 2017 : 5,
-								toplevel: modern || format === 'cjs' || format === 'es',
-								mangle:
-									typeof minifyOptions.mangle === 'boolean'
-										? minifyOptions.mangle
-										: Object.assign({}, minifyOptions.mangle || {}),
-								nameCache,
-							}),
-							nameCache && {
-								// before hook
-								options: loadNameCache,
-								// after hook
-								writeBundle() {
-									if (writeMeta && nameCache) {
-										let filename = getNameCachePath();
-										let json = JSON.stringify(
-											nameCache,
-											null,
-											nameCacheIndentTabs ? '\t' : 2,
-										);
-										if (endsWithNewLine) json += EOL;
-										fs.writeFile(filename, json, () => {});
-									}
-								},
+								typeof minifyOptions.compress === 'boolean'
+									? minifyOptions.compress
+									: minifyOptions.compress || {},
+							),
+							format: {
+								// By default, Terser wraps function arguments in extra parens to trigger eager parsing.
+								// Whether this is a good idea is way too specific to guess, so we optimize for size by default:
+								wrap_func_args: false,
+								comments: /^\s*([@#]__[A-Z]+__\s*$|@cc_on)/,
+								preserve_annotations: true,
 							},
-						],
+							module: modern,
+							ecma: modern ? 2017 : 5,
+							toplevel: modern || format === 'cjs' || format === 'es',
+							mangle:
+								typeof minifyOptions.mangle === 'boolean'
+									? minifyOptions.mangle
+									: Object.assign({}, minifyOptions.mangle || {}),
+							nameCache,
+						}),
+						nameCache && {
+							// before hook
+							options: loadNameCache,
+							// after hook
+							writeBundle() {
+								if (writeMeta && nameCache) {
+									let filename = getNameCachePath();
+									let json = JSON.stringify(
+										nameCache,
+										null,
+										nameCacheIndentTabs ? '\t' : 2,
+									);
+									if (endsWithNewLine) json += EOL;
+									fs.writeFile(filename, json, () => {});
+								}
+							},
+						},
+					],
 					options.visualize && visualizer(),
 					// NOTE: OMT only works with amd and esm
 					// Source: https://github.com/surma/rollup-plugin-off-main-thread#config
