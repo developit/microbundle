@@ -80,6 +80,7 @@ npm run jest -- test/index.test.js
 - **cjs** - CommonJS for Node.js
 - **umd** - Universal Module Definition for CDNs and older environments
 - **iife** - Immediately Invoked Function Expression
+- **debug** - Unminified modern ES2017+ build for debugging (automatically included when `debug` field exists in package.json)
 
 ### Key Subdirectories
 
@@ -125,6 +126,14 @@ npm run jest -- test/index.test.js
 - Bundles Web Workers via @surma/rollup-plugin-off-main-thread
 - Only works with es/modern formats
 - Enable with --workers flag
+
+**Debug Format** (src/index.js:109-112, 326, 391, 607-608):
+
+- Automatically included when `debug` field is present in package.json
+- Uses modern ES2017+ compilation (same as modern format)
+- Skips Terser compression/minification for readable debugging output
+- Preserves variable names, whitespace, and code structure
+- Output file specified by `debug` field (e.g., `"debug": "dist/my-lib.debug.js"`)
 
 ### Testing Structure
 

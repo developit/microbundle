@@ -1723,6 +1723,91 @@ exports[`fixtures build custom-source-with-cwd with microbundle 5`] = `
 "
 `;
 
+exports[`fixtures build debug with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+debug
+  dist
+    debug-lib.debug.js
+    debug-lib.debug.js.map
+    debug-lib.esm.mjs
+    debug-lib.esm.mjs.map
+    debug-lib.js
+    debug-lib.js.map
+    debug-lib.umd.js
+    debug-lib.umd.js.map
+  package.json
+  src
+    index.js
+
+
+Build \\"debug-lib\\" to dist:
+328 B: debug-lib.js.gz
+275 B: debug-lib.js.br
+332 B: debug-lib.esm.mjs.gz
+279 B: debug-lib.esm.mjs.br
+415 B: debug-lib.umd.js.gz
+343 B: debug-lib.umd.js.br
+385 B: debug-lib.debug.js.gz
+320 B: debug-lib.debug.js.br"
+`;
+
+exports[`fixtures build debug with microbundle 2`] = `8`;
+
+exports[`fixtures build debug with microbundle 3`] = `
+"// Test debug format with meaningful variable names and modern syntax
+async function fetchUserData(userId) {
+  const response = await fetch(\`/api/users/\${userId}\`);
+  const userData = await response.json();
+  return userData;
+}
+const createGreeting = (name, age) => {
+  const greeting = \`Hello, \${name}! You are \${age} years old.\`;
+  return greeting;
+};
+class UserManager {
+  constructor(initialUsers = []) {
+    this.users = initialUsers;
+    this.count = initialUsers.length;
+  }
+
+  addUser(user) {
+    this.users.push(user);
+    this.count++;
+  }
+
+  async loadUsers() {
+    const allUsers = await Promise.all(this.users.map(u => fetchUserData(u.id)));
+    return allUsers;
+  }
+
+}
+
+export { UserManager, createGreeting, fetchUserData };
+//# sourceMappingURL=debug-lib.debug.js.map
+"
+`;
+
+exports[`fixtures build debug with microbundle 4`] = `
+"var r=function(r){try{return Promise.resolve(fetch(\\"/api/users/\\"+r)).then(function(r){return Promise.resolve(r.json())})}catch(r){return Promise.reject(r)}},e=function(r,e){return\\"Hello, \\"+r+\\"! You are \\"+e+\\" years old.\\"},t=/*#__PURE__*/function(){function e(r){void 0===r&&(r=[]),this.users=r,this.count=r.length}var t=e.prototype;return t.addUser=function(r){this.users.push(r),this.count++},t.loadUsers=function(){try{return Promise.resolve(Promise.all(this.users.map(function(e){return r(e.id)})))}catch(r){return Promise.reject(r)}},e}();export{t as UserManager,e as createGreeting,r as fetchUserData};
+//# sourceMappingURL=debug-lib.esm.mjs.map
+"
+`;
+
+exports[`fixtures build debug with microbundle 5`] = `
+"var e=function(e){try{return Promise.resolve(fetch(\\"/api/users/\\"+e)).then(function(e){return Promise.resolve(e.json())})}catch(e){return Promise.reject(e)}};exports.UserManager=/*#__PURE__*/function(){function r(e){void 0===e&&(e=[]),this.users=e,this.count=e.length}var t=r.prototype;return t.addUser=function(e){this.users.push(e),this.count++},t.loadUsers=function(){try{return Promise.resolve(Promise.all(this.users.map(function(r){return e(r.id)})))}catch(e){return Promise.reject(e)}},r}(),exports.createGreeting=function(e,r){return\\"Hello, \\"+e+\\"! You are \\"+r+\\" years old.\\"},exports.fetchUserData=e;
+//# sourceMappingURL=debug-lib.js.map
+"
+`;
+
+exports[`fixtures build debug with microbundle 6`] = `
+"!function(e,t){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?t(exports):\\"function\\"==typeof define&&define.amd?define([\\"exports\\"],t):t((e||self).debugLib={})}(this,function(e){var t=function(e){try{return Promise.resolve(fetch(\\"/api/users/\\"+e)).then(function(e){return Promise.resolve(e.json())})}catch(e){return Promise.reject(e)}};e.UserManager=/*#__PURE__*/function(){function e(e){void 0===e&&(e=[]),this.users=e,this.count=e.length}var r=e.prototype;return r.addUser=function(e){this.users.push(e),this.count++},r.loadUsers=function(){try{return Promise.resolve(Promise.all(this.users.map(function(e){return t(e.id)})))}catch(e){return Promise.reject(e)}},e}(),e.createGreeting=function(e,t){return\\"Hello, \\"+e+\\"! You are \\"+t+\\" years old.\\"},e.fetchUserData=t});
+//# sourceMappingURL=debug-lib.umd.js.map
+"
+`;
+
 exports[`fixtures build default-named with microbundle 1`] = `
 "Used script: microbundle
 
