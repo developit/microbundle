@@ -26,6 +26,45 @@ Microbundle is a zero-configuration bundler for tiny JavaScript libraries, power
 - `npm run lint` - Run ESLint on src directory
 - `npm run format` - Format all JS and CSS files with Prettier
 
+### Changesets and Versioning
+
+This project uses [@changesets/cli](https://github.com/changesets/changesets) to track notable changes and generate changelogs.
+
+#### Creating a Changeset
+
+When making a change that should be documented in the changelog:
+
+```bash
+npm run changeset
+```
+
+This will:
+
+1. Prompt you to select the type of change (major, minor, or patch)
+2. Ask you to describe the change
+3. Create a markdown file in `.changeset/` with a randomly generated name
+
+#### Changeset Configuration
+
+- **Changelog Format**: Uses `@changesets/changelog-github` to generate GitHub-flavored changelogs
+- **Base Branch**: `master` (configured in .changeset/config.json:10)
+- **Access**: Public (for npm publishing)
+- **Commit Mode**: Changesets are not automatically committed (commit: false)
+
+#### Changeset File Format
+
+Changeset files in `.changeset/` follow this format:
+
+```markdown
+---
+"microbundle": patch
+---
+
+Description of the change
+```
+
+The version bump type can be: `major`, `minor`, or `patch`
+
 ### Running Tests
 
 Individual tests can be run with Jest's standard CLI options:
