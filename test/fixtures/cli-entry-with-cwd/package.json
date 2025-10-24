@@ -1,0 +1,6 @@
+{
+  "name": "cli-entry-with-cwd",
+  "scripts": {
+    "build": "microbundle src/one.js --cwd ./cli-entry"
+  }
+}
