@@ -34,7 +34,7 @@ export default handler => {
 		.option('--output, -o', 'Directory to place build files into')
 		.option(
 			'--format, -f',
-			`Only build specified formats (any of ${DEFAULT_FORMATS} or iife)`,
+			`Only build specified formats (any of ${DEFAULT_FORMATS}, debug, or iife)`,
 			DEFAULT_FORMATS,
 		)
 		.option('--watch, -w', 'Rebuilds on any change', false)

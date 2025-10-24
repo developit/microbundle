@@ -40,6 +40,7 @@ import { getConfigFromPkgJson, getName } from './lib/package-info';
 import { shouldCssModules, cssModulesConfig } from './lib/css-modules';
 import { EOL } from 'os';
 import MagicString from 'magic-string';
+import prettier from 'prettier';
 
 // Extensions to use when resolving modules
 const EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs'];
@@ -105,6 +106,12 @@ export default async function microbundle(inputOptions) {
 	let formats = (options.format || options.formats).split(',');
 	// de-dupe formats and convert "esm" to "es":
 	formats = Array.from(new Set(formats.map(f => (f === 'esm' ? 'es' : f))));
+
+	// add debug format if pkg.debug is present and not already in the list:
+	if (options.pkg.debug && !formats.includes('debug')) {
+		formats.push('debug');
+	}
+
 	// always compile cjs first if it's there:
 	formats.sort((a, b) => (a === 'cjs' ? -1 : a > b ? 1 : 0));
 
@@ -317,6 +324,7 @@ function getMain({ options, entry, format }) {
 		pkg['umd:main'] || pkg.unpkg || 'x.umd.js',
 		mainNoExtension,
 	);
+	mainsByFormat.debug = replaceName(pkg.debug || 'x.debug.js', mainNoExtension);
 
 	return mainsByFormat[format] || mainsByFormat.cjs;
 }
@@ -378,7 +386,8 @@ function createConfig(options, entry, format, writeMeta) {
 		);
 	}
 
-	const modern = format === 'modern';
+	const modern = format === 'modern' || format === 'debug';
+	const shouldCompress = options.compress !== false && format !== 'debug';
 
 	// let rollupName = safeVariableName(basename(entry).replace(/\.js$/, ''));
 
@@ -497,7 +506,7 @@ function createConfig(options, entry, format, writeMeta) {
 							!!writeMeta &&
 							options.css !== 'inline' &&
 							absMain.replace(EXTENSION, '.css'),
-						minimize: options.compress,
+						minimize: shouldCompress,
 						sourceMap: options.sourcemap && options.css !== 'inline',
 					}),
 					moduleAliases.length > 0 &&
@@ -586,7 +595,7 @@ function createConfig(options, entry, format, writeMeta) {
 						custom: {
 							defines,
 							modern,
-							compress: options.compress !== false,
+							compress: shouldCompress,
 							targets: options.target === 'node' ? { node: '12' } : undefined,
 							pragma: options.jsx,
 							pragmaFrag: options.jsxFragment,
@@ -594,7 +603,7 @@ function createConfig(options, entry, format, writeMeta) {
 							jsxImportSource: options.jsxImportSource || false,
 						},
 					}),
-					options.compress !== false && [
+					shouldCompress && [
 						terser({
 							compress: Object.assign(
 								{
@@ -652,7 +661,19 @@ function createConfig(options, entry, format, writeMeta) {
 						// Rollup 2 injects globalThis, which is nice, but doesn't really make sense for Microbundle.
 						// Only ESM environments necessitate globalThis, and UMD bundles can't be properly loaded as ESM.
 						// So we remove the globalThis check, replacing it with `this||self` to match Rollup 1's output:
-						renderChunk(code, chunk, opts) {
+						async renderChunk(code, chunk, opts) {
+							// Format debug builds with Prettier for better readability
+							if (format === 'debug') {
+								const formatted = prettier.format(code, {
+									parser: 'babel',
+									...pkg.prettier,
+								});
+								return {
+									code: formatted,
+									map: null,
+								};
+							}
+
 							if (opts.format === 'umd') {
 								// Can swap this out with MagicString.replace() when we bump it:
 								// https://github.com/developit/microbundle/blob/f815a01cb63d90b9f847a4dcad2a64e6b2f8596f/src/index.js#L657-L671

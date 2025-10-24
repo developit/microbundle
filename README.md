@@ -14,6 +14,7 @@
   <a href="#setup">Setup</a> ✯
   <a href="#formats">Formats</a> ✯
   <a href="#modern">Modern Mode</a> ✯
+  <a href="#debug">Debug Mode</a> ✯
   <a href="#usage">Usage &amp; Configuration</a> ✯
   <a href="#options">All Options</a>
 </p>
@@ -144,6 +145,36 @@ The `"exports"` field can also be an object for packages with multiple entry mod
 }
 ```
 
+## 🐛 Debug Mode <a name="debug"></a>
+
+Microbundle can generate an **unminified debug build** to help with debugging your library. This is useful when you need to step through your bundled code or investigate issues in production builds.
+
+To enable debug mode, simply add a `"debug"` field to your `package.json`:
+
+```jsonc
+{
+	"name": "foo",
+	"source": "src/index.js",
+	"main": "./dist/foo.js",
+	"module": "./dist/foo.module.js",
+	"debug": "./dist/foo.debug.js", // 👈 Add this field
+	"scripts": {
+		"build": "microbundle"
+	}
+}
+```
+
+When the `debug` field is present, Microbundle will automatically generate an additional unminified bundle with:
+
+- **Modern ES2017+ syntax** (same as the `modern` format - async/await, arrow functions, etc.)
+- **No minification** - readable code with preserved variable names
+- **Preserved comments** - your code comments remain in the output
+- **Proper formatting** - whitespace and indentation maintained
+
+This makes it much easier to debug issues in your library code without needing to map back through source maps.
+
+> 💡 **Tip**: The debug build is automatically included when the `debug` field exists - no need to modify the `--format` flag.
+
 ## 📦 Usage & Configuration <a name="usage"></a>
 
 Microbundle includes two commands - `build` (the default) and `watch`.
@@ -172,7 +203,8 @@ The filenames and paths for generated bundles in each format are defined by the 
     "require": "./dist/foo.js",         // CommonJS output bundle
     "default": "./dist/foo.modern.mjs", // Modern ES Modules output bundle
   },
-  "types": "dist/foo.d.ts"              // TypeScript typings
+  "types": "dist/foo.d.ts",             // TypeScript typings
+	"debug": "dist/foo.debug.js"          // Unminified modern bundle for debugging (optional)
 }
 ```
 

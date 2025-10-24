@@ -1,0 +1,7 @@
+{
+	"name": "debug-lib",
+	"debug": "dist/debug-lib.debug.js",
+	"scripts": {
+		"build": "microbundle"
+	}
+}
