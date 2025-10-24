@@ -1280,6 +1280,54 @@ exports[`fixtures build class-properties with microbundle 5`] = `
 "
 `;
 
+exports[`fixtures build cli-entry-with-cwd with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+cli-entry
+  dist
+    cli-entry.esm.mjs
+    cli-entry.esm.mjs.map
+    cli-entry.js
+    cli-entry.js.map
+    cli-entry.umd.js
+    cli-entry.umd.js.map
+  package.json
+  src
+    one.js
+    two.js
+
+
+Build \\"cli-entry\\" to dist:
+187 B: cli-entry.js.gz
+138 B: cli-entry.js.br
+188 B: cli-entry.esm.mjs.gz
+139 B: cli-entry.esm.mjs.br
+272 B: cli-entry.umd.js.gz
+202 B: cli-entry.umd.js.br"
+`;
+
+exports[`fixtures build cli-entry-with-cwd with microbundle 2`] = `6`;
+
+exports[`fixtures build cli-entry-with-cwd with microbundle 3`] = `
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};export default function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}}
+//# sourceMappingURL=cli-entry.esm.mjs.map
+"
+`;
+
+exports[`fixtures build cli-entry-with-cwd with microbundle 4`] = `
+"var r=function(){try{var r=arguments;return Promise.resolve([].slice.call(r).reduce(function(r,e){return r+e},0))}catch(r){return Promise.reject(r)}};module.exports=function(){try{var e=arguments,t=[].slice.call(e);return Promise.resolve(r.apply(void 0,t)).then(function(e){return Promise.resolve(r.apply(void 0,t)).then(function(r){return[e,r]})})}catch(r){return Promise.reject(r)}};
+//# sourceMappingURL=cli-entry.js.map
+"
+`;
+
+exports[`fixtures build cli-entry-with-cwd with microbundle 5`] = `
+"!function(e,r){\\"object\\"==typeof exports&&\\"undefined\\"!=typeof module?module.exports=r():\\"function\\"==typeof define&&define.amd?define(r):(e||self).cliEntry=r()}(this,function(){var e=function(){try{var e=arguments;return Promise.resolve([].slice.call(e).reduce(function(e,r){return e+r},0))}catch(e){return Promise.reject(e)}};return function(){try{var r=arguments,n=[].slice.call(r);return Promise.resolve(e.apply(void 0,n)).then(function(r){return Promise.resolve(e.apply(void 0,n)).then(function(e){return[r,e]})})}catch(e){return Promise.reject(e)}}});
+//# sourceMappingURL=cli-entry.umd.js.map
+"
+`;
+
 exports[`fixtures build css-modules--false with microbundle 1`] = `
 "Used script: microbundle --no-sourcemap --css-modules false
 

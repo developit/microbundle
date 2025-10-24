@@ -218,7 +218,7 @@ async function getInput({ entries, cwd, source, module }) {
 						(await jsOrTs(cwd, 'index')) ||
 						module,
 		)
-		.map(file => glob(file))
+		.map(file => glob(file, { cwd }))
 		.forEach(file => input.push(...file));
 
 	return input;
