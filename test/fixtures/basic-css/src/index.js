@@ -1,6 +1,6 @@
 import './two.css';
 
-export default function() {
+export default function () {
 	const el = document.createElement('div');
 	el.className = 'testing';
 	return el;
