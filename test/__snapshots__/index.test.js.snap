@@ -1750,8 +1750,8 @@ Build \\"debug-lib\\" to dist:
 279 B: debug-lib.esm.mjs.br
 415 B: debug-lib.umd.js.gz
 343 B: debug-lib.umd.js.br
-385 B: debug-lib.debug.js.gz
-320 B: debug-lib.debug.js.br"
+389 B: debug-lib.debug.js.gz
+323 B: debug-lib.debug.js.br"
 `;
 
 exports[`fixtures build debug with microbundle 2`] = `8`;
@@ -1779,10 +1779,11 @@ class UserManager {
   }
 
   async loadUsers() {
-    const allUsers = await Promise.all(this.users.map(u => fetchUserData(u.id)));
+    const allUsers = await Promise.all(
+      this.users.map((u) => fetchUserData(u.id))
+    );
     return allUsers;
   }
-
 }
 
 export { UserManager, createGreeting, fetchUserData };

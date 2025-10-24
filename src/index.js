@@ -40,6 +40,7 @@ import { getConfigFromPkgJson, getName } from './lib/package-info';
 import { shouldCssModules, cssModulesConfig } from './lib/css-modules';
 import { EOL } from 'os';
 import MagicString from 'magic-string';
+import prettier from 'prettier';
 
 // Extensions to use when resolving modules
 const EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs'];
@@ -660,7 +661,19 @@ function createConfig(options, entry, format, writeMeta) {
 						// Rollup 2 injects globalThis, which is nice, but doesn't really make sense for Microbundle.
 						// Only ESM environments necessitate globalThis, and UMD bundles can't be properly loaded as ESM.
 						// So we remove the globalThis check, replacing it with `this||self` to match Rollup 1's output:
-						renderChunk(code, chunk, opts) {
+						async renderChunk(code, chunk, opts) {
+							// Format debug builds with Prettier for better readability
+							if (format === 'debug') {
+								const formatted = prettier.format(code, {
+									parser: 'babel',
+									...pkg.prettier,
+								});
+								return {
+									code: formatted,
+									map: null,
+								};
+							}
+
 							if (opts.format === 'umd') {
 								// Can swap this out with MagicString.replace() when we bump it:
 								// https://github.com/developit/microbundle/blob/f815a01cb63d90b9f847a4dcad2a64e6b2f8596f/src/index.js#L657-L671
