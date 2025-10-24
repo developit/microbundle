@@ -106,9 +106,20 @@ export default () => {
 									'transform-fast-rest',
 								],
 							},
+						// The following 3 plugins have `loose: false` as we instead use the
+						// associated `assumptions`. Enabling `loose` causes some issues with other
+						// class features plugins, so we replace it with the assumptions.
 						{
-							name: '@babel/plugin-proposal-class-properties',
-							loose: true,
+							name: '@babel/plugin-transform-class-properties',
+							loose: false,
+						},
+						{
+							name: '@babel/plugin-transform-private-property-in-object',
+							loose: false,
+						},
+						{
+							name: '@babel/plugin-transform-private-methods',
+							loose: false,
 						},
 						!customOptions.modern &&
 							!isNodeTarget && {
@@ -199,6 +210,31 @@ export default () => {
 						shouldPrintComment: comment => /[@#]__[A-Z]+__/.test(comment),
 					};
 				}
+
+				babelOptions.assumptions = {
+					arrayLikeIsIterable: true,
+					constantReexports: true,
+					constantSuper: true,
+					enumerableModuleMeta: true,
+					ignoreFunctionLength: true,
+					ignoreToPrimitiveHint: true,
+					iterableIsArray: true,
+					mutableTemplateObject: true,
+					noClassCalls: true,
+					noDocumentAll: true,
+					noIncompleteNsImportDetection: true,
+					noNewArrows: true,
+					noUninitializedPrivateFieldAccess: true,
+					objectRestNoSymbols: true,
+					privateFieldsAsProperties: true,
+					pureGetters: true,
+					setClassMethods: true,
+					setComputedProperties: true,
+					setPublicClassFields: true,
+					setSpreadProperties: true,
+					skipForOfIteratorClosing: true,
+					superIsCallableConstructor: true,
+				};
 
 				return babelOptions;
 			},

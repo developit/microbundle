@@ -452,6 +452,8 @@ function createConfig(options, entry, format, writeMeta) {
 	let config = {
 		/** @type {import('rollup').InputOptions} */
 		inputOptions: {
+			// read up to 100 files from disk concurrently: (avoid EMFILE by capping)
+			maxParallelFileReads: 100,
 			// disable Rollup's cache for modern builds to prevent re-use of legacy transpiled modules:
 			cache,
 			input: entry,
@@ -594,12 +596,34 @@ function createConfig(options, entry, format, writeMeta) {
 							jsxImportSource: options.jsxImportSource || false,
 						},
 					}),
+					/** @type {import('rollup').Plugin} */
+					({
+						name: 'export-default-simplify',
+						renderChunk(code, chunk, options) {
+							const s = new MagicString(code);
+							s.replace(
+								/([};\n])export\s*\{\s*([a-zA-Z0-9_$]+)\s+as\s+default\s*\};/,
+								(s, before, name) => {
+									return `${before}export default ${name};`;
+								},
+							);
+							return {
+								code: s.toString(),
+								map: s.generateMap({ hires: true }),
+							};
+						},
+					}),
 					options.compress !== false && [
 						terser({
 							compress: Object.assign(
 								{
 									keep_infinity: true,
 									pure_getters: true,
+									global_defs: {
+										// tslib helper for `using` & `await using` that otherwise
+										// wouldn't be fully removed when unused
+										SuppressedError: 'undefined',
+									},
 									// Ideally we'd just get Terser to respect existing Arrow functions...
 									// unsafe_arrows: true,
 									passes: 10,
