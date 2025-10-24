@@ -1,6 +1,7 @@
 import { resolve } from 'path';
 import fs from 'fs-extra';
 import dirTree from 'directory-tree';
+import { strip } from './lib/util';
 import { buildDirectory, getBuildScript } from '../tools/build-fixture';
 
 const FIXTURES_DIR = `${__dirname}/fixtures`;
@@ -42,7 +43,7 @@ describe('fixtures', () => {
 
 			await sleep(1);
 
-			await buildDirectory(fixtureDir);
+			const output = await buildDirectory(fixtureDir);
 
 			await sleep(1);
 
@@ -53,6 +54,7 @@ describe('fixtures', () => {
 					`Used script: ${await getBuildScript(fixturePath, DEFAULT_SCRIPT)}`,
 					'Directory tree:',
 					printedDir,
+					strip(output),
 				].join('\n\n'),
 			).toMatchSnapshot();
 
