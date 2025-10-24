@@ -56,6 +56,10 @@ export const buildDirectory = async fixtureDir => {
 	await rimraf(resolve(`${fixturePath}/.rts2_cache_es`));
 	await rimraf(resolve(`${fixturePath}/.rts2_cache_umd`));
 
+	// Now that dirs have been cleared, reset the fixturePath back to the parent dir
+	if (fixtureDir.endsWith('-with-cwd')) {
+		fixturePath = resolve(FIXTURES_DIR, fixtureDir);
+	}
 	const script = await getBuildScript(fixturePath, DEFAULT_SCRIPT);
 
 	const prevDir = process.cwd();
