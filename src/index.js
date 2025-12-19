@@ -233,6 +233,14 @@ async function getOutput({ cwd, output, pkgMain, pkgName }) {
 }
 
 function getDeclarationDir({ options, pkg }) {
+	try {
+		const tsconfig = JSON.parse(fs.readFileSync(options.tsconfig || "tsconfig.json", 'utf-8'))
+
+		if (tsconfig && tsconfig.compilerOptions && tsconfig.compilerOptions.declaration === false) {
+			return undefined;
+		}
+	} catch(err) {}
+
 	const { cwd, output } = options;
 
 	let result = output;
