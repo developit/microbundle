@@ -6,6 +6,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Microbundle is a zero-configuration bundler for tiny JavaScript libraries, powered by Rollup. It takes source code and produces multiple output formats (modern ES modules, CommonJS, UMD) with minimal setup.
 
+## Quick Reference
+
+```bash
+npm run build      # Full build (Babel + self-build)
+npm test           # Lint + build + tests
+npm run jest       # Tests only
+npm run lint       # ESLint
+npm run format     # Prettier
+npm run changeset  # Create changelog entry
+npm run release    # Publish (prepare + test + changeset publish)
+```
+
 ## Development Commands
 
 ### Building
@@ -28,42 +40,12 @@ Microbundle is a zero-configuration bundler for tiny JavaScript libraries, power
 
 ### Changesets and Versioning
 
-This project uses [@changesets/cli](https://github.com/changesets/changesets) to track notable changes and generate changelogs.
+This project uses [@changesets/cli](https://github.com/changesets/changesets) for changelog management.
 
-#### Creating a Changeset
-
-When making a change that should be documented in the changelog:
-
-```bash
-npm run changeset
-```
-
-This will:
-
-1. Prompt you to select the type of change (major, minor, or patch)
-2. Ask you to describe the change
-3. Create a markdown file in `.changeset/` with a randomly generated name
-
-#### Changeset Configuration
-
-- **Changelog Format**: Uses `@changesets/changelog-github` to generate GitHub-flavored changelogs
-- **Base Branch**: `master` (configured in .changeset/config.json:10)
-- **Access**: Public (for npm publishing)
-- **Commit Mode**: Changesets are not automatically committed (commit: false)
-
-#### Changeset File Format
-
-Changeset files in `.changeset/` follow this format:
-
-```markdown
----
-"microbundle": patch
----
-
-Description of the change
-```
-
-The version bump type can be: `major`, `minor`, or `patch`
+- `npm run changeset` - Create a new changeset (prompts for type: major/minor/patch)
+- `npm run release` - Full release: prepare + test + changeset publish
+- Base branch: `master`
+- Changesets are not auto-committed
 
 ### Running Tests
 
@@ -73,6 +55,16 @@ Individual tests can be run with Jest's standard CLI options:
 npm run jest -- --testNamePattern="build shebang"
 npm run jest -- test/index.test.js
 ```
+
+## Code Style
+
+This project uses Prettier with:
+- **Tabs** for indentation (not spaces)
+- **Single quotes** for strings
+- **Trailing commas** in multi-line structures
+- **No parens** around single arrow function parameters
+
+ESLint extends `eslint-config-developit` with Prettier integration.
 
 ## Architecture
 
@@ -84,24 +76,24 @@ npm run jest -- test/index.test.js
 
 ### Core Build Flow
 
-1. **Input Resolution** (`getInput()` in src/index.js:205)
+1. **Input Resolution** (`getInput()` in src/index.js)
 
    - Resolves entry files from CLI args, `source` field in package.json, or defaults (src/index.js, index.js)
    - Supports glob patterns for multiple entries
    - Handles TypeScript (.ts/.tsx) and JavaScript files
 
-2. **Output Resolution** (`getOutput()` in src/index.js:227)
+2. **Output Resolution** (`getOutput()` in src/index.js)
 
    - Determines output location from CLI args or package.json `main` field
    - Defaults to dist/ directory
 
-3. **Format Generation** (`getMain()` in src/index.js:278)
+3. **Format Generation** (`getMain()` in src/index.js)
 
    - Maps each format (modern, es, cjs, umd) to appropriate output filenames
    - Reads from package.json fields: `module`, `main`, `exports`, `unpkg`, etc.
    - Respects `{"type":"module"}` for ES Module packages
 
-4. **Configuration Creation** (`createConfig()` in src/index.js:327)
+4. **Configuration Creation** (`createConfig()` in src/index.js)
 
    - Creates Rollup configuration for each entry/format combination
    - Configures plugins: Babel, TypeScript, PostCSS, Terser, etc.
@@ -130,37 +122,35 @@ npm run jest -- test/index.test.js
 - **css-modules.js** - CSS Modules configuration logic
 - **compressed-size.js** - Calculates gzipped/brotli bundle sizes
 - **option-normalization.js** - Parses CLI arguments (--alias, --define, etc.)
+- **transform-fast-rest.js** - Babel plugin for optimized rest/spread transforms
+- **\_\_entry\_\_.js** - Entry point wrapper for worker builds
 
 **test/fixtures/** - Integration test fixtures (each subdirectory is a test case with package.json and source)
 
 ### External Dependencies Handling
 
-- **Externals** (src/index.js:331-357): By default, `dependencies` and `peerDependencies` are external (not bundled)
-- **Bundled**: `devDependencies` are bundled into the output
+- By default, `dependencies` and `peerDependencies` are external (not bundled)
+- `devDependencies` are bundled into the output
 - Override with `--external` flag or `--external none` to bundle everything
 
 ### Special Features
 
-**TypeScript Support** (src/index.js:533-564):
-
+**TypeScript Support:**
 - Automatically detected by .ts/.tsx file extension
 - Uses rollup-plugin-typescript2
 - Generates declaration files when `types` or `typings` is set in package.json
 - Respects tsconfig.json with overrides for `module: "ESNext"` and `target: "esnext"`
 
-**CSS Handling** (src/index.js:490-502):
-
+**CSS Handling:**
 - PostCSS with autoprefixer
 - CSS Modules support (files ending in .module.css or via --css-modules flag)
 - Output modes: external (default) or inline
 
-**Property Mangling** (src/index.js:385-433):
-
+**Property Mangling:**
 - Reads from `mangle.json` or package.json `mangle`/`minify` field
 - Name cache persisted across builds for consistent output
 
-**Worker Support** (src/index.js:648):
-
+**Worker Support:**
 - Bundles Web Workers via @surma/rollup-plugin-off-main-thread
 - Only works with es/modern formats
 - Enable with --workers flag
@@ -182,17 +172,17 @@ npm run jest -- test/index.test.js
 
 ### Adding Rollup Plugins
 
-Add to the plugins array in src/index.js:488-701, typically with conditional logic and `.filter(Boolean)` to remove falsy entries
+Add to the plugins array in `createConfig()` in src/index.js, typically with conditional logic and `.filter(Boolean)` to remove falsy entries.
 
 ### Debugging Builds
 
 - Use `--no-compress` to disable minification
-- Check rollup warnings in `onwarn` handler (src/index.js:469-482)
-- Modern format disables Rollup cache (src/index.js:437) to prevent legacy transpilation leaking
+- Check rollup warnings in `onwarn` handler in src/index.js
+- Modern format disables Rollup cache to prevent legacy transpilation leaking
 
 ## Important Notes
 
 - The build is "self-hosted": microbundle builds itself (see build:self script)
-- CJS format always builds first to populate cache for other formats (src/index.js:109)
+- CJS format always builds first to populate cache for other formats
 - Modern format uses Babel's bugfixes mode to target browsers with `<script type="module">` support
-- Shebang lines are extracted and re-added to preserve them (src/index.js:524-531, 712-713)
+- Shebang lines are extracted and re-added to preserve them in CLI scripts
