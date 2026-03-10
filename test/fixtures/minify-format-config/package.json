@@ -1,0 +1,10 @@
+{
+  "name": "minify-format-config",
+  "minify": {
+    "format": {
+      "ascii_only": true,
+      "quote_style": 1,
+      "safari10": true
+    }
+  }
+}

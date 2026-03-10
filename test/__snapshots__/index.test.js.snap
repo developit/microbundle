@@ -2174,6 +2174,53 @@ exports[`fixtures build minify-config-boolean with microbundle 5`] = `
 "
 `;
 
+exports[`fixtures build minify-format-config with microbundle 1`] = `
+"Used script: microbundle
+
+Directory tree:
+
+minify-format-config
+  dist
+    minify-format-config.esm.mjs
+    minify-format-config.esm.mjs.map
+    minify-format-config.js
+    minify-format-config.js.map
+    minify-format-config.umd.js
+    minify-format-config.umd.js.map
+  package.json
+  src
+    index.js
+
+
+Build \\"minify-format-config\\" to dist:
+99 B: minify-format-config.js.gz
+82 B: minify-format-config.js.br
+102 B: minify-format-config.esm.mjs.gz
+82 B: minify-format-config.esm.mjs.br
+212 B: minify-format-config.umd.js.gz
+170 B: minify-format-config.umd.js.br"
+`;
+
+exports[`fixtures build minify-format-config with microbundle 2`] = `6`;
+
+exports[`fixtures build minify-format-config with microbundle 3`] = `
+"function o(o,e){return o+e}console.log('\\\\u4f60\\\\u597d\\\\ud83d\\\\udc4b');export default o;
+//# sourceMappingURL=minify-format-config.esm.mjs.map
+"
+`;
+
+exports[`fixtures build minify-format-config with microbundle 4`] = `
+"console.log('\\\\u4f60\\\\u597d\\\\ud83d\\\\udc4b'),module.exports=function(o,e){return o+e};
+//# sourceMappingURL=minify-format-config.js.map
+"
+`;
+
+exports[`fixtures build minify-format-config with microbundle 5`] = `
+"!function(e,n){'object'==typeof exports&&'undefined'!=typeof module?module.exports=n():'function'==typeof define&&define.amd?define(n):(e='undefined'!=typeof globalThis?globalThis:e||self).minifyFormatConfig=n()}(this,function(){return console.log('\\\\u4f60\\\\u597d\\\\ud83d\\\\udc4b'),function(e,n){return e+n}});
+//# sourceMappingURL=minify-format-config.umd.js.map
+"
+`;
+
 exports[`fixtures build minify-path-config with microbundle 1`] = `
 "Used script: microbundle
 

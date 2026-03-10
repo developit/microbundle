@@ -608,13 +608,18 @@ function createConfig(options, entry, format, writeMeta) {
 									? minifyOptions.compress
 									: minifyOptions.compress || {},
 							),
-							format: {
-								// By default, Terser wraps function arguments in extra parens to trigger eager parsing.
-								// Whether this is a good idea is way too specific to guess, so we optimize for size by default:
-								wrap_func_args: false,
-								comments: /^\s*([@#]__[A-Z]+__\s*$|@cc_on)/,
-								preserve_annotations: true,
-							},
+							format: Object.assign(
+								{
+									// By default, Terser wraps function arguments in extra parens to trigger eager parsing.
+									// Whether this is a good idea is way too specific to guess, so we optimize for size by default:
+									wrap_func_args: false,
+									comments: /^\s*([@#]__[A-Z]+__\s*$|@cc_on)/,
+									preserve_annotations: true,
+								},
+								typeof minifyOptions.format === 'boolean'
+									? minifyOptions.format
+									: minifyOptions.format || {},
+							),
 							module: modern,
 							ecma: modern ? 2017 : 5,
 							toplevel: modern || format === 'cjs' || format === 'es',
