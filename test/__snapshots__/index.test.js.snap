@@ -1810,6 +1810,30 @@ exports[`fixtures build define with microbundle 5`] = `
 "
 `;
 
+exports[`fixtures build define-equals with microbundle 1`] = `
+"Used script: microbundle --no-sourcemap -f cjs --define \\"TOKEN='abc==',URL='https://example.test/?key=value=tail',@IS_EQUAL=(1===1),@INCREMENT=(value=>value+1)\\"
+
+Directory tree:
+
+define-equals
+  dist
+    define-equals.js
+  index.js
+  package.json
+
+
+Build \\"define-equals\\" to dist:
+112 B: define-equals.js.gz
+91 B: define-equals.js.br"
+`;
+
+exports[`fixtures build define-equals with microbundle 2`] = `1`;
+
+exports[`fixtures build define-equals with microbundle 3`] = `
+"module.exports={token:\\"abc==\\",url:\\"https://example.test/?key=value=tail\\",equal:!0,incremented:3};
+"
+`;
+
 exports[`fixtures build define-expression with microbundle 1`] = `
 "Used script: microbundle -f esm --no-sourcemap --define @Object.freeze=Object
 
