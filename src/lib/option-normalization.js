@@ -29,7 +29,11 @@ export function toReplacementExpression(value, name) {
 export function parseMappingArgument(globalStrings, processValue) {
 	const globals = {};
 	globalStrings.split(',').forEach(globalString => {
-		let [key, value] = globalString.split('=');
+		const separator = globalString.indexOf('=');
+		let key =
+			separator === -1 ? globalString : globalString.slice(0, separator);
+		let value =
+			separator === -1 ? undefined : globalString.slice(separator + 1);
 		if (processValue) {
 			const r = processValue(value, key);
 			if (r !== undefined) {

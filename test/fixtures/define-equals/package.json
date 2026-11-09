@@ -1,0 +1,6 @@
+{
+  "name": "define-equals",
+  "scripts": {
+    "build": "microbundle --no-sourcemap -f cjs --define \"TOKEN='abc==',URL='https://example.test/?key=value=tail',@IS_EQUAL=(1===1),@INCREMENT=(value=>value+1)\""
+  }
+}
